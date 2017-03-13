@@ -4,7 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
-var App = require('./app/src/js/App');
+var App = require('./src/js/App');
 var ReactDOMServer = require('react-dom/server');
 var React = require('react');
 var fs = require('fs');
@@ -18,7 +18,7 @@ app.use('/app', function(req, res){
   const html = ReactDOMServer.renderToString(
       <App/>
     );
-    fs.readFile('./app/public/index.html', 'utf8', function (err, file) {
+    fs.readFile('./public/index.html', 'utf8', function (err, file) {
       if (err) {
         return console.log(err);
       }
