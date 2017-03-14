@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/App.css';
+// import '../css/App.css';
 
 class App extends Component {
   render() {
@@ -13,4 +13,4 @@ class App extends Component {
   }
 }
 
-module.exports = App;
+export default App;

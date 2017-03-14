@@ -1,46 +1,85 @@
 var express = require('express');
-var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
 var React = require('react');
 var fs = require('fs');
-
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackConfiguration = require('./config/webpack.config.prod');
-var ReactDOMServer = require('react-dom/server');
-var isomorphicWebpack = require('isomorphic-webpack');
+var { renderToString } = require('react-dom/server');
+var { createIsomorphicWebpack } = require('isomorphic-webpack');
+
 var compiler = webpack(webpackConfiguration);
+var App = require('./src/js/App');
+
+app.use(webpackDevMiddleware(compiler, {
+  noInfo: false,
+  publicPath: '/static',
+  quiet: false,
+  stats: {
+    assets: false,
+    chunkModules: false,
+    chunks: false,
+    colors: true,
+    hash: false,
+    timings: false,
+    version: false
+  }
+}));
+
+const {
+  createCompilationPromise,
+  evalBundleCode
+} = createIsomorphicWebpack(webpackConfiguration, {
+  useCompilationPromise: true
+});
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(webpackDevMiddleware(compiler));
-isomorphicWebpack.createIsomorphicWebpack(webpackConfiguration);
 
+app.use(async(req, res, next) => {
+  await(createCompilationPromise);
+  next();
+})
 
-var routesAreInitialized;
+const renderFullPage = (body) => {
+  const html = renderToString(<App/>);
 
-compiler.plugin('done', () => {
-  if (routesAreInitialized) { return; }
-  routesAreInitialized = true;
-
-  app.use('/app', function(req, res){
-    const html = ReactDOMServer.renderToString(require('./src/js/App').default);
-
-    fs.readFile('./build/index.html', 'utf8', function (err, file) {
-      if (err) {
-        return console.log(err);
-      }
-      const document = file.replace(/<div id="root"><\/div>/, `<div id="root">${html}</div>`);
-      res.send(document);
-    });
+  fs.readFile('./build/index.html', 'utf8', function (err, file) {
+    if (err) {
+      return console.log(err);
+    }
+    return file.replace(/<div id="root"><\/div>/, `<div id="root">${html}</div>`);
   });
+};
 
-});
+app.get('/', (req, res) => {
+  const requestUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+  const app = renderToString(evalBundleCode(requestUrl).default);
+  res.send(renderFullPage(app));
+})
+// compiler.plugin('done', () => {
+//   if (routesAreInitialized) { return; }
+//   routesAreInitialized = true;
+//
+  //   const html = ReactDOMServer.renderToString(require('./src/js/App').default);
+  //
+  //   fs.readFile('./build/index.html', 'utf8', function (err, file) {
+  //     if (err) {
+  //       return console.log(err);
+  //     }
+  //     const document = file.replace(/<div id="root"><\/div>/, `<div id="root">${html}</div>`);
+  //     res.send(document);
+  //   });
+  // });
+//
+// });
 
 
 // catch 404 and forward to error handler
