@@ -8,7 +8,8 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
-var nodeExternals = require('webpack-node-externals');
+
+
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -80,7 +81,7 @@ module.exports = {
       'react-native': 'react-native-web'
     }
   },
-
+  
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
@@ -126,7 +127,7 @@ module.exports = {
         include: paths.appSrc,
         loader: 'babel',
         query: {
-
+          
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
@@ -160,7 +161,7 @@ module.exports = {
       // Remember to add the new extension(s) to the "url" loader exclusion list.
     ]
   },
-
+  
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
@@ -206,7 +207,5 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty'
-  },
-  target: 'node', // in order to ignore built-in modules like path, fs, etc.
-  externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
+  }
 };
