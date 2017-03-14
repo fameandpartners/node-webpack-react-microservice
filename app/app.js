@@ -4,28 +4,44 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
-var App = require('./app/src/js/App');
-var ReactDOMServer = require('react-dom/server');
 var React = require('react');
 var fs = require('fs');
+
+var webpack = require('webpack');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var webpackConfiguration = require('./config/webpack.config.prod');
+var ReactDOMServer = require('react-dom/server');
+var isomorphicWebpack = require('isomorphic-webpack');
+var compiler = webpack(webpackConfiguration);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(webpackDevMiddleware(compiler));
+isomorphicWebpack.createIsomorphicWebpack(webpackConfiguration);
 
-app.use('/app', function(req, res){
-  const html = ReactDOMServer.renderToString(
-      <App/>
-    );
-    fs.readFile('./app/public/index.html', 'utf8', function (err, file) {
+
+var routesAreInitialized;
+
+compiler.plugin('done', () => {
+  if (routesAreInitialized) { return; }
+  routesAreInitialized = true;
+
+  app.use('/app', function(req, res){
+    const html = ReactDOMServer.renderToString(require('./src/js/App').default);
+
+    fs.readFile('./build/index.html', 'utf8', function (err, file) {
       if (err) {
         return console.log(err);
       }
       const document = file.replace(/<div id="root"><\/div>/, `<div id="root">${html}</div>`);
       res.send(document);
     });
+  });
+
 });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
