@@ -10,10 +10,12 @@ const app = express();
 app.use(express.static('./build'))
 const { render, template } = require("rapscallion");
 
+// Components
 var Head = require('./src/js/Head');
-var App = require('./src/js/App');
+var startup = require('./src/js/startup/app');
 var Footer = require('./src/js/Footer');
 
+// Middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,21 +24,23 @@ app.use(cookieParser());
 app.get('/app', function(req, res){
   fs.readFile('./build/asset-manifest.json', 'utf8', function (err, assetManifest) {
     if (err) return err;
+    const { props } = req.body;
     const assets = JSON.parse(assetManifest);
     const responseRenderer = template`
       <html>
         ${render(<Head/>)}
         <body>
-          ${render(<App store={{}}/>)}
+          <div class='root'>
+            ${startup({props, shouldReturnComponent: true})}
+          </div>
           ${render(<Footer/>)}
-          <script>
-          // Expose initial state to client store bootstrap code.
-          // TODO: Attach checksum to the component's root element.
-          // document.querySelector("#id-for-component-root")")
-          // Bootstrap your application here...
-          </script>
           <link rel="stylesheet" href=${assets["main.css"]} />
-          <script async defer src=${assets["main.js"]} />
+          <script src=${assets["main.js"]}></script>
+          <script>
+            var startup = require('./startup/app');
+            var payload = {}; // we can fill the hash here
+            startup(payload);
+          </script>
         </body>
       </html>
     `;
