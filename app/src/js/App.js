@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import '../css/App.css';
 
 class App extends Component {
+  componentDidMount(){
+    console.warn('Called on client not server', window);
+  }
+
   render() {
     return (
       <div className="App">
