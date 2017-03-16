@@ -20,19 +20,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.get('/app', function(req, res){
+app.post('/app', function(req, res){
   fs.readFile('./build/asset-manifest.json', 'utf8', function (err, assetManifest) {
     if (err) return err;
-    const props = JSON.stringify(req.body);
+    const props = req.body;
     const assets = JSON.parse(assetManifest);
     const responseRenderer = template`
       <html>
         ${render(<Head/>)}
         <body>
           <div id='root'>
-            ${render(<App props={props} />)}
+            ${render(<App {...req.body} />)}
           </div>
-          <script>window.__data = ${props}</script>
+          <script>window.__data = ${JSON.stringify(props)}</script>
           <link rel="stylesheet" href=${assets["main.css"]} />
           <script src=${assets["main.js"]}></script>
         </body>
