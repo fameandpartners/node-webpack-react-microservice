@@ -7,7 +7,7 @@
     "build": "node scripts/build.js",
     "test": "NODE_ENV='production' mocha --compilers js:babel-register",
     "server": "NODE_ENV='development' babel-node ./server.js",
-    "production": "NODE_ENV='production' nodemon server.js --exec babel-node"
+    "production": "node scripts/build.js && NODE_ENV='production' nodemon server.js --exec babel-node"
   },
   "keywords": [
     "react",
