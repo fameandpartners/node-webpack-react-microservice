@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Header from './components/shared/Header';
 import Footer from './Footer';
-import '../css/App.css';
+import '../css/reset.css';
+import '../css/components/App.css';
 
 class App extends Component {
   handleClick(){
@@ -12,6 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header />
         <div className="App-header">
           <h2>Welcome to {this.props.example}</h2>
           <button onClick={this.handleClick}>Click here to see if JS working</button>
