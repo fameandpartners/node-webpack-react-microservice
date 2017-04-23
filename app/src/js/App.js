@@ -6,7 +6,7 @@ import '../css/components/App.css';
 
 class App extends Component {
   handleClick() {
-    alert('javascript working');
+    console.warn('javascript working');
   }
   componentDidMount() {
     console.log('Mounting Node', this.props);

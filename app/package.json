@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "NODE_ENV='production' mocha --compilers js:babel-register",
+    "test": "NODE_ENV='production' mocha --compilers js:babel-register --require ./src/lib/testNullCompiler.js",
     "production": "node scripts/build.js && NODE_ENV='production' nodemon server.js --exec babel-node"
   },
   "keywords": [

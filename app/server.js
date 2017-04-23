@@ -7,12 +7,12 @@ import csshook from 'css-modules-require-hook/preset';
 import fs from 'fs';
 
 const app = express();
-app.use(express.static('./build'))
+app.use(express.static('./build'));
 const { render, template } = require('rapscallion');
 
 // Components
-var Head = require('./src/js/Head');
-var App = require('./src/js/App');
+const Head = require('./src/js/Head');
+const App = require('./src/js/App');
 
 // Middleware
 app.use(logger('dev'));
@@ -20,21 +20,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.post('/app', function(req, res){
-  fs.readFile('./build/asset-manifest.json', 'utf8', function (err, assetManifest) {
+app.get('/app', (req, res) => {
+  fs.readFile('./build/asset-manifest.json', 'utf8', (err, assetManifest) => {
     if (err) return err;
     const props = req.body;
     const assets = JSON.parse(assetManifest);
     const responseRenderer = template`
       <html>
-        ${render(<Head/>)}
+        ${render(<Head />)}
         <body>
           <div id='root'>
             ${render(<App {...req.body} />)}
           </div>
           <script>window.__data = ${JSON.stringify(props)}</script>
-          <link rel="stylesheet" href=${assets["main.css"]} />
-          <script src=${assets["main.js"]}></script>
+          <link rel="stylesheet" href=${assets['main.css']} />
+          <script src=${assets['main.js']}></script>
         </body>
       </html>
     `;

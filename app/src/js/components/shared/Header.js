@@ -1,12 +1,8 @@
 import React from 'react';
-import logo from '../../../img/fame-logo.svg';
 import '../../../css/components/Header.css';
 
 const Header = () => (
   <header className="Header">
-    <object className="Header-logo" data={logo} type="image/svg+xml">
-      { /* <img src="yourfallback.jpg" /> */}
-    </object>
     <nav>
       <ul>
         <li><a href="#link1">Link 1</a></li>
