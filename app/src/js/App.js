@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Header from './components/shared/Header';
 import Footer from './Footer';
 import '../css/reset.css';
 import '../css/components/App.css';
 
 class App extends Component {
-  handleClick(){
+  handleClick() {
     alert('javascript working');
   }
-  componentDidMount(){
+  componentDidMount() {
     console.log('Mounting Node', this.props);
   }
   render() {
@@ -26,7 +26,11 @@ class App extends Component {
 }
 
 App.defaultProps = {
-  example: 'Fame and Partners'
-}
+  example: 'Node Site',
+};
+
+App.propTypes = {
+  example: PropTypes.string,
+};
 
 export default App;

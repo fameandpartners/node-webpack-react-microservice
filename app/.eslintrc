@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "airbnb",
+  ],
+  "rules": {
+    # These are overwritten rules that have been annoying
+    "react/jsx-filename-extension": [0],
+    "react/no-unescaped-entities": [0],
+    "no-return-assign": [0],
+    "class-methods-use-this": [0],
+    "jsx-a11y/no-static-element-interactions": [1],
+    "react/sort-comp": [1, {
+      order: [
+        "constructor",
+        "static-methods",
+        "everything-else",
+        "lifecycle",
+        "render"
+      ],
+    }]
+  }
+}
