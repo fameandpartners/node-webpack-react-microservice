@@ -11,6 +11,9 @@ class App extends Component {
   componentDidMount() {
     console.log('Mounting Node', this.props);
   }
+  sampleTest() {
+    return true;
+  }
   render() {
     return (
       <div className="App">

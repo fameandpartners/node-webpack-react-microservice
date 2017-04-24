@@ -2,6 +2,9 @@
   "extends": [
     "airbnb",
   ],
+  "env": {
+    "jest": true
+  },
   "rules": {
     # These are overwritten rules that have been annoying
     "react/jsx-filename-extension": [0],
