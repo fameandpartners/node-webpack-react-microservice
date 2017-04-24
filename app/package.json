@@ -5,9 +5,12 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "jest": "node scripts/test.js --env=jsdom",
+    "test": "node scripts/test.js --env=jsdom",
+    "test:once": "CI=true yarn test -- --coverage",
     "server_test": "NODE_ENV='production' mocha --compilers js:babel-register --require ./src/lib/testNullCompiler.js && jest --coverage",
-    "production": "node scripts/build.js && NODE_ENV='production' nodemon server.js --exec babel-node"
+    "production": "node scripts/build.js && NODE_ENV='production' nodemon server.js --exec babel-node",
+    "precommit": "yarn test:once",
+    "prepush": "yarn test:once"
   },
   "keywords": [
     "react",
@@ -89,6 +92,7 @@
     "fs-extra": "0.30.0",
     "html-webpack-plugin": "2.24.0",
     "http-proxy-middleware": "0.17.3",
+    "husky": "^0.13.3",
     "isomorphic-webpack": "^2.0.2",
     "jest": "^19.0.2",
     "json-loader": "0.5.4",
