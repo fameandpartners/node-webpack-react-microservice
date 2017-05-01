@@ -1,18 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import Header from './components/shared/Header';
 import Footer from './Footer';
-import '../css/reset.css';
-import '../css/components/App.css';
+import '../css/reset.scss';
+import '../css/components/App.scss';
 
 class App extends Component {
   handleClick() {
     console.warn('javascript working');
   }
-  componentDidMount() {
-    console.log('Mounting Node', this.props);
-  }
   sampleTest() {
     return true;
+  }
+  componentDidMount() {
+    console.warn('Mounting Node', this.props);
   }
   render() {
     return (

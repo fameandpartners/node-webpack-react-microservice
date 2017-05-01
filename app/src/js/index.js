@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import '../css/index.css';
+import '../css/index.scss';
 // const AppStore = require('./stores/AppStore'); // TODO: Bring Redux in
 // const {Provider} = require('react-redux'); // TODO: Bring Redux in
 
