@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
+    "test": "node scripts/test.js --env=jsdom --notify",
     "test:once": "CI=true yarn test -- --coverage",
     "server_test": "NODE_ENV='production' mocha --compilers js:babel-register --require ./src/lib/testNullCompiler.js && jest --coverage",
     "production": "node scripts/build.js && NODE_ENV='production' nodemon server.js --exec babel-node",
