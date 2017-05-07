@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Header from './components/shared/Header';
 import Footer from './Footer';
+
 import '../css/reset.scss';
 import '../css/components/App.scss';
 

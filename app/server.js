@@ -1,9 +1,9 @@
+import 'ignore-styles';
 import express from 'express';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import React from 'react';
-import csshook from 'css-modules-require-hook/preset';
 import fs from 'fs';
 
 const app = express();
