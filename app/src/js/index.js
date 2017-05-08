@@ -1,13 +1,19 @@
-/* eslint-disable */
+/* global document */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './App';
 import '../css/index.scss';
-// const AppStore = require('./stores/AppStore'); // TODO: Bring Redux in
-// const {Provider} = require('react-redux'); // TODO: Bring Redux in
 
+// Store
+import AppStore from './stores/AppStore';
+
+// eslint-disable-next-line
+const hydrated = (typeof window === 'object') ? window.__data : {};
+const store = AppStore(hydrated);
+
+const component = <Provider store={store}><App {...hydrated} /></Provider>;
 ReactDOM.render(
-  // const component = <Provider store={AppStore}><App {...props} /></Provider>; // TODO: Redux
-  <App props={window.__data}/>,
-  document.getElementById('root')
+  component,
+  document.getElementById('root'),
 );

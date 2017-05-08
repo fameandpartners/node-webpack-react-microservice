@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+
+// App Components
 import Header from './components/shared/Header';
 import Footer from './Footer';
 
+// Global Styles
 import '../css/reset.scss';
 import '../css/components/App.scss';
 
