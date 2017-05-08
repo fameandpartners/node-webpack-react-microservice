@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 
 export const $$initialState = Immutable.fromJS({
-  defaultData: [],
+  defaultValue: [],
 });
 
 export default function AppReducer($$state = $$initialState, action = null) {

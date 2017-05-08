@@ -24,7 +24,7 @@ app.get('/app', (req, res) => {
   fs.readFile('./build/asset-manifest.json', 'utf8', (err, assetManifest) => {
     if (err) return err;
     // const props = req.body;
-    const props = { someStore: 'ahahhah' };
+    const props = { $$appState: { defaultValue: ['injected'] } };
     const assets = JSON.parse(assetManifest);
     const responseRenderer = template`
       <html>
