@@ -48,4 +48,4 @@ app.get('/app', (req, res) => {
 
 app.listen(8001);
 console.log('Go to http://localhost:8001');
-export default app;
+module.exports = app;
