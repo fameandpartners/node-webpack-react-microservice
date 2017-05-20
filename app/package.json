@@ -119,5 +119,6 @@
     "webpack-dev-server": "^2.4.1",
     "webpack-manifest-plugin": "1.1.0",
     "whatwg-fetch": "2.0.2"
-  }
+  },
+  "engines" : { "node" : "7.6.0" }
 }
