@@ -31,7 +31,7 @@ app.get('/app', (req, res) => {
         ${render(React.createElement(Head))}
         <body>
             <div id='root'>
-              ${render(React.createElement(App, { ...props }))}
+              ${render(React.createElement(App, props))}
             </div>
           <script>
             window.__data = ${JSON.stringify(props)};
