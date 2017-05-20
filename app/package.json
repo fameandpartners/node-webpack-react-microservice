@@ -8,7 +8,7 @@
     "test": "node scripts/test.js --env=jsdom --notify",
     "test:once": "CI=true yarn test -- --coverage",
     "server_test": "NODE_ENV='production' mocha --compilers js:babel-register --require ./src/lib/testNullCompiler.js && jest --coverage",
-    "production": "node scripts/build.js && NODE_ENV='production' babel-node server.js",
+    "production": "node scripts/build.js && NODE_ENV='production' node server.js --exec babel-node",
     "precommit": "yarn test:once",
     "prepush": "yarn test:once"
   },
