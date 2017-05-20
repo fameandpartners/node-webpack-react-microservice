@@ -28,10 +28,10 @@ app.get('/app', (req, res) => {
     const assets = JSON.parse(assetManifest);
     const responseRenderer = template`
       <html>
-        ${render(<Head />)}
+        ${render(React.createElement(Head))}
         <body>
             <div id='root'>
-              ${render(<App {...props} />)}
+              ${render(React.createElement(App, { ...props }))}
             </div>
           <script>
             window.__data = ${JSON.stringify(props)};
