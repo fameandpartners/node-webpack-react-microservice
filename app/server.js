@@ -1,10 +1,10 @@
-import 'ignore-styles';
-import express from 'express';
-import logger from 'morgan';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
-import React from 'react';
-import fs from 'fs';
+require('ignore-styles');
+const express = require('express');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const React = require('react');
+const fs = require('fs');
 
 const app = express();
 app.use(express.static('./build'));
