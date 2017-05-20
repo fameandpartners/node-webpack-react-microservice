@@ -8,7 +8,7 @@
     "test": "node scripts/test.js --env=jsdom --notify",
     "test:once": "CI=true yarn test -- --coverage",
     "server_test": "NODE_ENV='production' mocha --compilers js:babel-register --require ./src/lib/testNullCompiler.js && jest --coverage",
-    "start": "node scripts/build.js && NODE_ENV='production' babel-node server.js",
+    "production": "node scripts/build.js && NODE_ENV='production' babel-node server.js",
     "precommit": "yarn test:once",
     "prepush": "yarn test:once"
   },
@@ -59,7 +59,7 @@
     "immutable": "^3.8.1",
     "lodash": "^4.17.4",
     "morgan": "^1.8.1",
-    "node-sass": "^4.5.3",
+    "node-sass": "3.x",
     "rapscallion": "^2.1.7",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
