@@ -1,4 +1,7 @@
+// only ES5 is allowed in this file
 require('ignore-styles');
+require('babel-register');
+
 const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -46,6 +49,12 @@ app.get('/app', (req, res) => {
   });
 });
 
-app.listen(8001);
+app.get('*', (req, res) => {
+  res.send('Howdy!');
+});
+
+app.listen(process.env.PORT || 8001);
+console.log('');
+console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
 module.exports = app;
