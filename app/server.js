@@ -7,17 +7,28 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const React = require('react');
+const Promise = require('bluebird');
 const fs = require('fs');
+const redis = require('redis');
+const { render, template, setCacheStrategy } = require('rapscallion');
 
-const app = express();
-app.use(express.static('./build'));
-const { render, template } = require('rapscallion');
 
 // Components
 const Head = require('./src/js/Head');
 const App = require('./src/js/App');
 
+// Set up Express + Redis
+const app = express();
+const redisClient = redis.createClient();
+const redisGet = Promise.promisify(redisClient.get, { context: redisClient });
+const redisSet = Promise.promisify(redisClient.set, { context: redisClient });
+setCacheStrategy({ // Global Singleton for Rapscallion
+  get: key => redisGet(key).then(val => (val && JSON.parse(val)) || null),
+  set: (key, val) => redisSet(key, JSON.stringify(val)),
+});
+
 // Middleware
+app.use(express.static('./build'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -46,6 +57,7 @@ app.get('/app', (req, res) => {
     `;
 
     responseRenderer.toStream().pipe(res);
+    return null;
   });
 });
 

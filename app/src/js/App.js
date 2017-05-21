@@ -20,7 +20,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="App" cacheKey="App">
         <Header />
         <div className="App-header">
           <h2>Welcome to {this.props.example}</h2>
