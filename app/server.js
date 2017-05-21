@@ -1,15 +1,15 @@
-// only ES5 is allowed in this file
 require('ignore-styles');
 require('babel-register');
 
 const express = require('express');
 const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const React = require('react');
 const Promise = require('bluebird');
 const fs = require('fs');
 const redis = require('redis');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const helmet = require('helmet');
 const { render, template, setCacheStrategy } = require('rapscallion');
 
 
@@ -28,6 +28,7 @@ setCacheStrategy({ // Global Singleton for Rapscallion
 });
 
 // Middleware
+app.use(helmet());
 app.use(express.static('./build'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
