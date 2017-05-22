@@ -17,6 +17,9 @@ const { render, template, setCacheStrategy } = require('rapscallion');
 const Head = require('./src/js/Head');
 const App = require('./src/js/App');
 
+// Static Image asset path
+const ASSET_PATH = process.env.ASSET_PATH || '';
+
 // Set up Express + Redis
 const app = express();
 const redisClient = redis.createClient({
@@ -55,8 +58,8 @@ app.get('/app', (req, res) => {
           <script>
             window.__data = ${JSON.stringify(props)};
           </script>
-          <link rel="stylesheet" href=${assets['main.css']} />
-          <script src=${assets['main.js']}></script>
+          <link rel="stylesheet" href=${ASSET_PATH + assets['main.css']} />
+          <script src=${ASSET_PATH + assets['main.js']}></script>
         </body>
       </html>
     `;
