@@ -19,7 +19,10 @@ const App = require('./src/js/App');
 
 // Set up Express + Redis
 const app = express();
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({
+  host: process.env.REDIS_HOST || '127.0.0.1',
+  port: process.env.REDIS_PORT || 6379,
+});
 const redisGet = Promise.promisify(redisClient.get, { context: redisClient });
 const redisSet = Promise.promisify(redisClient.set, { context: redisClient });
 setCacheStrategy({ // Global Singleton for Rapscallion
@@ -36,6 +39,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.get('/app', (req, res) => {
+  res.header('Content-Type', 'text/html');
   fs.readFile('./build/asset-manifest.json', 'utf8', (err, assetManifest) => {
     if (err) return err;
     // const props = req.body;
