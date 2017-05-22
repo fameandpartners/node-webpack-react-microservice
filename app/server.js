@@ -69,10 +69,6 @@ app.get('/app', (req, res) => {
   });
 });
 
-app.get('*', (req, res) => {
-  res.send('Howdy!');
-});
-
 app.listen(process.env.PORT || 8001);
 console.log('');
 console.log('Launched Successfully');
