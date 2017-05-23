@@ -155,6 +155,10 @@ module.exports = {
         },
         {
           loader: 'sass-loader',
+          options: {
+            data: '@import "variables";',
+            includePaths: [paths.cssSrc],
+          },
         }],
       },
       // "file" loader for svg

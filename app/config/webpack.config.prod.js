@@ -149,7 +149,13 @@ module.exports = {
                 },
               },
             },
-            { loader: 'sass-loader' },
+            {
+              loader: 'sass-loader',
+              options: {
+                data: '@import "variables";',
+                includePaths: [paths.cssSrc],
+              },
+            },
           ],
                 // use style-loader in development
           fallback: 'style-loader',

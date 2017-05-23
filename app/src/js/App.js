@@ -5,7 +5,9 @@ import Header from './components/shared/Header';
 import Footer from './Footer';
 
 // Global Styles
+import '../css/global/variables.scss';
 import '../css/reset.scss';
+import '../css/helpers.scss';
 import '../css/components/App.scss';
 
 class App extends Component {
@@ -21,12 +23,16 @@ class App extends Component {
   render() {
     return (
       <div className="App" cacheKey="App">
-        <Header />
-        <div className="App-header">
-          <h2>Welcome to {this.props.example}</h2>
-          <button onClick={this.handleClick}>Click here to see if JS working</button>
+        <div className="App__main">
+          <Header />
+          <div className="App__content">
+            <h2>Welcome to {this.props.example}</h2>
+            <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     );
   }
