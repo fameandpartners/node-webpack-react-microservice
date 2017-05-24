@@ -4,17 +4,34 @@
   text-align: center;
 }
 
-.App-header {
+.App__content {
   background-color: #222;
   padding: 20px;
   color: white;
 }
 
-.App-intro {
-  font-size: large;
+.App__main {
+  transition: 350ms transform ease-in-out;
+  transform: translateX(0%);
+  &--open {
+    transform: translateX(10%);
+  }
+  &--open .App__blanket{
+    z-index: 1;
+    visibility: visible;
+    opacity: 0.3;
+  }
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App__blanket {
+  position: absolute;
+  z-index: -1;
+  transition: 300ms opacity ease-in-out;
+  visibility: hidden;
+  background: blue;
+  opacity: 0;
+}
+
+.App-intro {
+  font-size: large;
 }

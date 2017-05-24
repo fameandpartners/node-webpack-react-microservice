@@ -1,30 +1,47 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import autoBind from 'react-autobind';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+// Actions
+import * as AppActions from '../../actions/AppActions';
+
+// CSS
 import '../../../css/components/Header.scss';
 
 // Components
 import Hamburger from './Hamburger';
 
+function stateToProps(state) {
+  // Which part of the Redux global state does our component want to receive as props?
+  return {
+    sideMenuOpen: state.$$appState.get('sideMenuOpen'),
+  };
+}
+
+function dispatchToProps(dispatch) {
+  const actions = bindActionCreators(AppActions, dispatch);
+  return {
+    activateSideMenu: actions.activateSideMenu,
+  };
+}
+
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-    };
     autoBind(this);
   }
 
   handleClick() {
-    console.log('clicking', this.state.isOpen);
-    this.setState({ isOpen: !this.state.isOpen });
+    const { activateSideMenu, sideMenuOpen } = this.props;
+    activateSideMenu({ sideMenuOpen: !sideMenuOpen });
   }
 
   render() {
-    const { isOpen } = this.state;
     return (
       <header className="Header width--full">
         <nav>
-          <Hamburger isOpen={isOpen} handleClick={this.handleClick} />
+          <Hamburger isOpen={false} handleClick={this.handleClick} />
           <ul>
             <li><a href="#link1">Link 1</a></li>
             <li><a href="#link2">Link 2</a></li>
@@ -36,4 +53,13 @@ class Header extends Component {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  sideMenuOpen: PropTypes.bool,
+  activateSideMenu: PropTypes.func.isRequired,
+};
+
+Header.defaultProps = {
+  sideMenuOpen: false,
+};
+
+export default connect(stateToProps, dispatchToProps)(Header);

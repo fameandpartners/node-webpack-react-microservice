@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import '../../../css/components/Hamburger.scss';
 
-const Hamburger = ({ isOpen, handleClick }) => (
+const Hamburger = ({ className, isOpen, handleClick }) => (
   <div
     role="menu"
-    className={`Hamburger ${isOpen ? 'Hamburger--is-open' : ''}`}
+    className={`Hamburger ${className} ${isOpen ? 'Hamburger--is-open' : ''}`}
     onClick={handleClick}
   >
     <span />
@@ -15,10 +15,12 @@ const Hamburger = ({ isOpen, handleClick }) => (
   );
 
 Hamburger.propTypes = {
+  className: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,
 };
 Hamburger.defaultProps = {
+  className: '',
   isOpen: false,
 };
 export default Hamburger;
