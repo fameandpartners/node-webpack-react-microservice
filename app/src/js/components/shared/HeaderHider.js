@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import raf from 'raf';
 import autoBind from 'react-autobind';
-import shouldUpdate from '../../lib/HeaderHiderShouldUpdate';
+import shouldUpdate from '../../libs/HeaderHiderShouldUpdate';
 import window from '../../polyfills/windowPolyfill';
-import noop from '../../lib/noop';
+import noop from '../../libs/noop';
 // CSS
 import '../../../css/components/HeaderHider.scss';
 

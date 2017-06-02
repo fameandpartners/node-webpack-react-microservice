@@ -1,8 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Actions
 import * as AppActions from '../../actions/AppActions';
@@ -25,7 +28,6 @@ function dispatchToProps(dispatch) {
     activateSideMenu: actions.activateSideMenu,
   };
 }
-
 
 class AppMain extends Component {
   constructor(props) {
@@ -53,6 +55,8 @@ class AppMain extends Component {
 
   render() {
     const { sideMenuOpen, example } = this.props;
+    console.log('breakpoints', this.props.breakpoints);
+    console.log('winWidth', this.props.winWidth);
     return (
       <Motion
         style={{
@@ -205,6 +209,9 @@ AppMain.propTypes = {
   sideMenuOpen: PropTypes.bool,
   example: PropTypes.string,
   activateSideMenu: PropTypes.func.isRequired,
+  // Decorator Props
+  breakpoints: PropTypes.string.isRequired,
+  winWidth: PropTypes.number.isRequired,
 };
 
 AppMain.defaultProps = {
@@ -212,4 +219,4 @@ AppMain.defaultProps = {
   sideMenuOpen: false,
 };
 
-export default connect(stateToProps, dispatchToProps)(AppMain);
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AppMain));
