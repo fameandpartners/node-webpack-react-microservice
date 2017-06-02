@@ -12,6 +12,7 @@ import * as AppActions from '../../actions/AppActions';
 
 // App Components
 import HeaderHider from '../shared/HeaderHider';
+import MobileHeader from '../shared/MobileHeader';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 
@@ -54,9 +55,7 @@ class AppMain extends Component {
   }
 
   render() {
-    const { sideMenuOpen, example } = this.props;
-    console.log('breakpoints', this.props.breakpoints);
-    console.log('winWidth', this.props.winWidth);
+    const { breakpoint, sideMenuOpen, example } = this.props;
     return (
       <Motion
         style={{
@@ -79,51 +78,34 @@ class AppMain extends Component {
                 visibility: x !== 0 ? 'visible' : 'hidden',
               }}
             />
-            <HeaderHider>
+            { breakpoint === 'mobile' || breakpoint === 'tablet' ?
+              <HeaderHider>
+                <MobileHeader />
+              </HeaderHider>
+              :
               <Header />
-            </HeaderHider>
-            <div className="App__content">
-              <h2>Welcome to {example}</h2>
-            </div>
-            <div className="App__content">
-              <h2>Welcome to {example}</h2>
-            </div>
-            <div className="App__content">
-              <h2>Welcome to {example}</h2>
-            </div>
-            <div className="App__content">
-              <h2>Welcome to {example}</h2>
-            </div>
-            <div className="App__content">
-              <h2>Welcome to {example}</h2>
-            </div>
-            <div className="App__content">
-              <h2>Welcome to {example}</h2>
-            </div>
-            <div className="App__content">
-              <h2>Welcome to {example}</h2>
-            </div>
+            }
             <div className="grid-3_xs-1">
-              <div className="col">grid-3_xs-1</div>
-              <div className="col">grid-3_xs-1</div>
-              <div className="col">grid-3_xs-1</div>
-              <div className="col">grid-3_xs-1</div>
-              <div className="col">grid-3_xs-1</div>
-              <div className="col">grid-3_xs-1</div>
-              <div className="col">grid-3_xs-1</div>
-              <div className="col">grid-3_xs-1</div>
-              <div className="col">grid-3_xs-1</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
             </div>
             <div className="grid-12_md-4_xs-2">
-              <div className="col">grid-12_md-4_xs-2</div>
-              <div className="col">grid-12_md-4_xs-2</div>
-              <div className="col">grid-12_md-4_xs-2</div>
-              <div className="col">grid-12_md-4_xs-2</div>
-              <div className="col">grid-12_md-4_xs-2</div>
-              <div className="col">grid-12_md-4_xs-2</div>
-              <div className="col">grid-12_md-4_xs-2</div>
-              <div className="col">grid-12_md-4_xs-2</div>
-              <div className="col">grid-12_md-4_xs-2</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
+              <div className="col">...</div>
             </div>
             <div className="App__content">
               <h2>Welcome to {example}</h2>
@@ -210,8 +192,8 @@ AppMain.propTypes = {
   example: PropTypes.string,
   activateSideMenu: PropTypes.func.isRequired,
   // Decorator Props
-  breakpoints: PropTypes.string.isRequired,
-  winWidth: PropTypes.number.isRequired,
+  breakpoint: PropTypes.string.isRequired,
+  // winWidth: PropTypes.number.isRequired,
 };
 
 AppMain.defaultProps = {
