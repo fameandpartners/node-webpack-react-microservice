@@ -80,45 +80,46 @@ class AppMain extends Component {
             </HeaderHider>
             <div className="App__content">
               <h2>Welcome to {example}</h2>
-              <button onClick={this.handleClick}>
-              More updates! Click here to see if JS working
-            </button>
             </div>
             <div className="App__content">
               <h2>Welcome to {example}</h2>
-              <button onClick={this.handleClick}>
-              More updates! Click here to see if JS working
-            </button>
             </div>
             <div className="App__content">
               <h2>Welcome to {example}</h2>
-              <button onClick={this.handleClick}>
-              More updates! Click here to see if JS working
-            </button>
             </div>
             <div className="App__content">
               <h2>Welcome to {example}</h2>
-              <button onClick={this.handleClick}>
-              More updates! Click here to see if JS working
-            </button>
             </div>
             <div className="App__content">
               <h2>Welcome to {example}</h2>
-              <button onClick={this.handleClick}>
-              More updates! Click here to see if JS working
-            </button>
             </div>
             <div className="App__content">
               <h2>Welcome to {example}</h2>
-              <button onClick={this.handleClick}>
-              More updates! Click here to see if JS working
-            </button>
             </div>
             <div className="App__content">
               <h2>Welcome to {example}</h2>
-              <button onClick={this.handleClick}>
-              More updates! Click here to see if JS working
-            </button>
+            </div>
+            <div className="grid-3_xs-1">
+              <div className="col">grid-3_xs-1</div>
+              <div className="col">grid-3_xs-1</div>
+              <div className="col">grid-3_xs-1</div>
+              <div className="col">grid-3_xs-1</div>
+              <div className="col">grid-3_xs-1</div>
+              <div className="col">grid-3_xs-1</div>
+              <div className="col">grid-3_xs-1</div>
+              <div className="col">grid-3_xs-1</div>
+              <div className="col">grid-3_xs-1</div>
+            </div>
+            <div className="grid-12_md-4_xs-2">
+              <div className="col">grid-12_md-4_xs-2</div>
+              <div className="col">grid-12_md-4_xs-2</div>
+              <div className="col">grid-12_md-4_xs-2</div>
+              <div className="col">grid-12_md-4_xs-2</div>
+              <div className="col">grid-12_md-4_xs-2</div>
+              <div className="col">grid-12_md-4_xs-2</div>
+              <div className="col">grid-12_md-4_xs-2</div>
+              <div className="col">grid-12_md-4_xs-2</div>
+              <div className="col">grid-12_md-4_xs-2</div>
             </div>
             <div className="App__content">
               <h2>Welcome to {example}</h2>

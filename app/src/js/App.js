@@ -8,6 +8,7 @@ import AppMain from './components/pdp/AppMain';
 // Global Styles
 import '../css/global/variables.scss';
 import '../css/reset.scss';
+import '../css/gridlex.scss';
 import '../css/helpers.scss';
 import '../css/components/App.scss';
 
