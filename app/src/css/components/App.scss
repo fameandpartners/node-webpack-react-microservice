@@ -11,8 +11,6 @@
 }
 
 .App__main {
-  transition: 350ms transform ease-in-out;
-  transform: translateX(0%);
   &--open .App__blanket{
     z-index: 1;
     visibility: visible;
@@ -24,6 +22,7 @@
   position: absolute;
   visibility: hidden;
   background: $c-black;
+  z-index: 1;
 }
 
 .App-intro {

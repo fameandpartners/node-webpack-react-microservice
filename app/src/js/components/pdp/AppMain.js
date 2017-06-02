@@ -8,6 +8,7 @@ import { Motion, spring } from 'react-motion';
 import * as AppActions from '../../actions/AppActions';
 
 // App Components
+import HeaderHider from '../shared/HeaderHider';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 
@@ -60,20 +61,11 @@ class AppMain extends Component {
             damping: 18,
             precision: 12,
           }),
-          // opacityVal: spring(sideMenuOpen ? 0.6 : 0, {
-          //   stiffness: 250,
-          //   damping: 40,
-          //   precision: 0.001,
-          // }),
         }}
       >
         {({ x }) =>
           <div
             className="App__main height--full"
-            style={{
-              WebkitTransform: `translate3d(${x}%, 0, 0)`,
-              transform: `translate3d(${x}%, 0, 0)`,
-            }}
           >
             <div
               className={this.appBlanketClass}
@@ -83,7 +75,117 @@ class AppMain extends Component {
                 visibility: x !== 0 ? 'visible' : 'hidden',
               }}
             />
-            <Header />
+            <HeaderHider>
+              <Header />
+            </HeaderHider>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
+            <div className="App__content">
+              <h2>Welcome to {example}</h2>
+              <button onClick={this.handleClick}>
+              More updates! Click here to see if JS working
+            </button>
+            </div>
             <div className="App__content">
               <h2>Welcome to {example}</h2>
               <button onClick={this.handleClick}>

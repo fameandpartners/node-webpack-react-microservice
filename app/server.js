@@ -11,7 +11,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { render, template, setCacheStrategy } = require('rapscallion');
+const pdpData = require('./pdp.json');
 
+console.log(pdpData);
 
 // Components
 const Head = require('./src/js/Head');

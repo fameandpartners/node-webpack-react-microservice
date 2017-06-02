@@ -75,6 +75,8 @@
     "mirror-creator": "^1.1.0",
     "morgan": "^1.8.1",
     "node-sass": "^4.5.3",
+    "prop-types": "^15.5.10",
+    "raf": "^3.3.2",
     "rapscallion": "^2.1.7",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.5.2",
@@ -86,7 +88,8 @@
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
-    "sass-loader": "^6.0.3"
+    "sass-loader": "^6.0.3",
+    "shallowequal": "^1.0.1"
   },
   "devDependencies": {
     "autoprefixer": "6.7.2",
