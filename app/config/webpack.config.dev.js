@@ -161,13 +161,24 @@ module.exports = {
           },
         }],
       },
-      // "file" loader for svg
+      // "babel" loader needed to parse Icon.js file
+      // "svg-sprite" loader used to generate and swap JSX component for svg
       {
         test: /\.svg$/,
-        loader: 'file-loader',
-        options: {
-          name: 'static/media/[name].[hash:8].[ext]',
-        },
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              runtimeGenerator: require.resolve('./svg-to-icon-component-runtime-generator'),
+              runtimeOptions: {
+                iconModule: './src/js/components/shared/Icon.js', // Relative to current build context folder
+              },
+            },
+          },
+        ],
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.
