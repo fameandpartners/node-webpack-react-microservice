@@ -17,8 +17,6 @@ module.exports = function runtimeGenerator({ symbol, config, context, loaderCont
   const symbolRequest = stringifyRequest({ context }, symbolModule);
   const parentComponentDisplayName = 'SpriteSymbolComponent';
   const displayName = `${pascalCase(symbol.id)}${parentComponentDisplayName}`;
-  console.log('symbolRequest---', symbolRequest);
-  console.log('spriteRequest---', spriteRequest);
   return `
     import React from 'react';
     import SpriteSymbol from ${symbolRequest};
