@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
@@ -29,11 +30,6 @@ class Header extends Component {
     autoBind(this);
   }
 
-  handleClick() {
-    const { activateSideMenu, sideMenuOpen } = this.props;
-    activateSideMenu({ sideMenuOpen: !sideMenuOpen });
-  }
-
   render() {
     return (
       <header className="Header width--full">
@@ -61,7 +57,6 @@ class Header extends Component {
 
 Header.propTypes = {
   sideMenuOpen: PropTypes.bool,
-  activateSideMenu: PropTypes.func.isRequired,
 };
 
 Header.defaultProps = {

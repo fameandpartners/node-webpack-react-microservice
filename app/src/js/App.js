@@ -23,9 +23,6 @@ class App extends Component {
   sampleTest() {
     return true;
   }
-  componentDidMount() {
-    console.warn('Mounting Node', this.props);
-  }
 
   render() {
     return (

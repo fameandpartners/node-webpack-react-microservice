@@ -50,10 +50,6 @@ class AppMain extends Component {
     activateSideMenu({ sideMenuOpen: false });
   }
 
-  componentDidMount() {
-    console.warn('Mounting Node', this.props);
-  }
-
   render() {
     const { breakpoint, sideMenuOpen, example } = this.props;
     return (
