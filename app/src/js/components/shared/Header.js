@@ -10,6 +10,13 @@ import autoBind from 'react-autobind';
 // CSS
 import '../../../css/components/Header.scss';
 
+// Assets
+import FameLogo from '../../../svg/i-fame-logo.svg';
+import ShoppingBagIcon from '../../../svg/i-shopping-bag.svg';
+import AccountIcon from '../../../svg/i-account.svg';
+import SearchIcon from '../../../svg/i-search.svg';
+
+
 // function stateToProps(state) {
 //   // Which part of the Redux global state does our component want to receive as props?
 //   return {
@@ -41,12 +48,12 @@ class Header extends Component {
               <li><a className="Header__link" href="#about">Who we are</a></li>
             </ul>
             <div className="col-4 textAlign--center">
-              <div className="logo">F&P</div>
+              <FameLogo width="200px" height="26px" />
             </div>
             <ul className="col-4 textAlign--right">
-              <li className="Header__action">[Search]</li>
-              <li className="Header__action">[Me]</li>
-              <li className="Header__action">[Bag]</li>
+              <li className="Header__action"><SearchIcon width="18px" height="26px" /></li>
+              <li className="Header__action"><AccountIcon width="18px" height="26px" /></li>
+              <li className="Header__action"><ShoppingBagIcon width="18px" height="26px" /></li>
             </ul>
           </nav>
         </div>
