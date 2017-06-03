@@ -4,25 +4,29 @@ require('babel-register');
 const express = require('express');
 const logger = require('morgan');
 const React = require('react');
+const Provider = require('react-redux');
 const Promise = require('bluebird');
-const fs = require('fs');
 const redis = require('redis');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const { render, template, setCacheStrategy } = require('rapscallion');
-const pdpData = require('./pdp.json');
+const { render, setCacheStrategy } = require('rapscallion');
+// const pdpData = require('./pdp.json');
+// console.log(pdpData);
 
-console.log(pdpData);
+// Assets
+const clientAssets = require('./build/asset-manifest.json');
+const template = require('./template');
+
 
 // Components
-const Head = require('./src/js/Head');
 const App = require('./src/js/App');
 
-// Static Image asset path
-const ASSET_PATH = process.env.ASSET_PATH || '';
+// Store
+const AppStore = require('./src/js/stores/AppStore');
 
 // Set up Express + Redis
+// *****************************************************************************
 const app = express();
 const redisClient = redis.createClient({
   host: process.env.REDIS_HOST || '127.0.0.1',
@@ -36,6 +40,7 @@ setCacheStrategy({ // Global Singleton for Rapscallion
 });
 
 // Middleware
+// *****************************************************************************
 app.use(helmet());
 app.use(express.static('./build'));
 app.use(logger('dev'));
@@ -43,36 +48,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// Rendering
+// *****************************************************************************
 app.get('/app', (req, res) => {
   res.header('Content-Type', 'text/html');
-  fs.readFile('./build/asset-manifest.json', 'utf8', (err, assetManifest) => {
-    if (err) return err;
-    // const props = req.body;
-    const props = { $$appState: { defaultValue: ['injected'] } };
-    const assets = JSON.parse(assetManifest);
-    const responseRenderer = template`
-      <html>
-        ${render(React.createElement(Head))}
-        <body>
-            <div id='root'>
-              ${render(React.createElement(App, props))}
-            </div>
-          <script>
-            window.__data = ${JSON.stringify(props)};
-          </script>
-          <link rel="stylesheet" href=${ASSET_PATH + assets['main.css']} />
-          <script src=${ASSET_PATH + assets['main.js']}></script>
-        </body>
-      </html>
-    `;
-
-    responseRenderer.toStream().pipe(res);
-    return null;
+  const props = { $$appState: { defaultValue: ['injected'] } };
+  const store = AppStore(props);
+  const ReactRoot = render(React.createElement(Provider.Provider, { store },
+    React.createElement(App)
+  ));
+  const html = template({
+    root: ReactRoot,
+    initialState: store.getState(),
+    jsBundle: clientAssets['main.js'],
+    cssBundle: clientAssets['main.css'],
   });
+
+  html.toStream().pipe(res);
 });
 
 app.listen(process.env.PORT || 8001);
-console.log('');
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
 module.exports = app;
