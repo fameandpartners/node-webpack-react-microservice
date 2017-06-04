@@ -4,7 +4,7 @@ require('babel-register');
 const express = require('express');
 const logger = require('morgan');
 const React = require('react');
-const Provider = require('react-redux');
+const Provider = require('react-redux').Provider;
 const Promise = require('bluebird');
 const redis = require('redis');
 const cookieParser = require('cookie-parser');
@@ -54,7 +54,7 @@ app.get('/app', (req, res) => {
   res.header('Content-Type', 'text/html');
   const props = { $$appState: { defaultValue: ['injected'] } };
   const store = AppStore(props);
-  const ReactRoot = render(React.createElement(Provider.Provider, { store },
+  const ReactRoot = render(React.createElement(Provider, { store },
     React.createElement(App)
   ));
   const html = template({

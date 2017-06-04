@@ -3,8 +3,10 @@
    License: none (public domain)
 */
 /* apply a natural box layout model to all elements, but allowing components to change */
+/* avoid 300ms delay by treating elements as "touchable" */
 html {
     box-sizing: border-box;
+    touch-action: manipulation;
 }
 *, *:before, *:after {
     box-sizing: inherit;
