@@ -5,8 +5,8 @@
 ## General Formatting
 - Use 2 spaces for indentation.
 - Don't use ID selectors!
-- Prefix JavaScript hooks with `js-` and _never_ add styling rules to them.
-- Prefix utility classes with `u-` and use dash-casing (also use dash-casing for JavaScript hooks).
+- Prefix JavaScript hooks with `js-` and _never_ add styling rules to them. Additionally, and this is more of a `.js` rule, but _only_ ever bind JavaScript to these `js-` classes and never classes used for styling! Also, use dash-casing, e.g. `js-open-pdp-modal`.
+- Prefix utility classes with `u-` and use dash-casing, e.g. `u-pull-left`.
 - Add a space before the opening `{` in a rule declaration.
 - Add a space after the `:` in a property declaration.
 - A closing brace `}` should always be on a new line.
@@ -39,11 +39,11 @@
 
 ## SCSS Specifics
 - Use `.scss` syntax, not `.sass`.
-- The @extend directive is dangerous (Google it), but tl-dr; - don't use it!
+- The `@extend` directive is dangerous (Google it), but tl-dr; - don't use it!
 - Put `@include`s _after_ all of your other standard property declarations.
-- Don't nest selectors more than *one-level deep* and _only_ use nesting for pseudo-selectors, e.g.:
+- Don't nest selectors more than **one-level deep** and _only_ use nesting for pseudo-selectors, e.g.:
 ```scss
-SomeModule_link {
+.SomeModule_link {
   color: $link-color;
 
   &:hover {
