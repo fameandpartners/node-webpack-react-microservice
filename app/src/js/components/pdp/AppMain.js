@@ -25,6 +25,9 @@ import HeaderMobile from '../shared/HeaderMobile';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 
+// UI Global Components
+import Input from '../form/Input';
+
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
@@ -86,6 +89,18 @@ class AppMain extends Component {
               :
               <Header />
             }
+            <div className="layout-container typography ui-component-section grid-12">
+              <div className="col-12">
+                <h2>UI Global Components</h2>
+              </div>
+              <div className="col-4">
+                <pre>Input.js</pre>
+                <Input
+                  id="test-input"
+                  onChange={this.handleCMChange}
+                />
+              </div>
+            </div>
             <div className="App__content layout-container">
               <div className="grid-12">
                 <div className="App__primarappy-image-container brick col-6">
