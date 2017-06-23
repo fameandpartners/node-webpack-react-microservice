@@ -29,6 +29,7 @@ import Footer from '../shared/Footer';
 import Input from '../form/Input';
 import Select from '../form/Select';
 import RadioToggle from '../form/RadioToggle';
+import Button from '../generic/Button';
 
 // OTHER / TODO: REMOVE
 import noop from '../../libs/noop';
@@ -129,6 +130,13 @@ class AppMain extends Component {
                 />
               </div>
               <hr className="col-12" />
+              <div className="col-4">
+                <pre>Button.js</pre>
+                <Button
+                  text="Fame Button"
+                  onClick={noop}
+                />
+              </div>
             </div>
             <div className="App__content layout-container">
               <div className="grid-12">
