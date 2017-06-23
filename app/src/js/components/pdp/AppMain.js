@@ -28,6 +28,10 @@ import Footer from '../shared/Footer';
 // UI Global Components
 import Input from '../form/Input';
 import Select from '../form/Select';
+import RadioToggle from '../form/RadioToggle';
+
+// OTHER / TODO: REMOVE
+import noop from '../../libs/noop';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -111,6 +115,20 @@ class AppMain extends Component {
                   ]}
                 />
               </div>
+              <div className="col-4">
+                <pre>RadioToggle.js</pre>
+                <RadioToggle
+                  id="test-select"
+                  label="Choose Something"
+                  value="INCHES"
+                  options={[
+                    { label: 'in', value: 'INCHES' },
+                    { label: 'cm', value: 'CM' },
+                  ]}
+                  onChange={noop}
+                />
+              </div>
+              <hr className="col-12" />
             </div>
             <div className="App__content layout-container">
               <div className="grid-12">

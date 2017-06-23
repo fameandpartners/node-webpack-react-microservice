@@ -50,6 +50,11 @@ blockquote:before, blockquote:after, q:before, q:after {
   content: none;
 }
 
+hr {
+  border: none;
+  border-top: 1px solid;
+}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
