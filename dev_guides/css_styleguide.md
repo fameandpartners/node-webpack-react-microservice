@@ -5,7 +5,7 @@
 ## General Formatting
 - Use 2 spaces for indentation.
 - Don't use ID selectors!
-- Prefix JavaScript hooks with `js-` and _never_ add styling rules to them. Additionally, and this is more of a `.js` rule, but _only_ ever bind JavaScript to these `js-` classes and never classes used for styling! Also, use dash-casing, e.g. `js-open-pdp-modal`.
+- Prefix JavaScript hooks with `js-` and _never_ add styling rules to them. Additionally, and this is more of a `.js` rule, but _only_ ever bind JavaScript to these `js-` classes and never to classes used for styling! Also, use dash-casing, e.g. `js-open-pdp-modal`.
 - Prefix utility classes with `u-` and use dash-casing, e.g. `u-pull-left`.
 - Add a space before the opening `{` in a rule declaration.
 - Add a space after the `:` in a property declaration.
@@ -40,7 +40,7 @@
 ## SCSS Specifics
 - Use `.scss` syntax, not `.sass`.
 - The `@extend` directive is dangerous (Google it), but tl-dr; - don't use it!
-- Put `@include`s _after_ all of your other standard property declarations.
+- Put `@include`'s _after_ all of your other standard property declarations.
 - Don't nest selectors more than **one-level deep** and _only_ use nesting for pseudo-selectors, e.g.:
 ```scss
 .SomeModule_link {
@@ -73,10 +73,86 @@ function ListingCard() {
 }
 ```
 
+- When using BEM, block structure should be _flat_, i.e. don't reflect the nested DOM structure!
+  - E.g., you should never have classnames like `Block__element__child` (more than one double-underscore should be a red flag). So, using the previous example:
+```jsx
+// ListingCard.jsx
+function ListingCard() {
+  return (
+    <article class="ListingCard ListingCard--featured">
+
+      <h1 class="ListingCard__title">Adorable 2BR in the sunny Mission</h1>
+
+      <div class="ListingCard__content">
+        <p>Vestibulum id ligula porta felis euismod semper.</p>
+        <!-- DON'T do the below! -->
+        <a class="ListingCard__content__link">
+          THE CLASS ON THIS ELEMENT IS BAD
+        </a>
+        <!-- The below is how you SHOULD do it! -->        
+        <a class="ListingCard__link">
+          BETTER
+        </a>
+      </div>
+
+    </article>
+  );
+}
+```
+
+- Using the `--modifier` on the top level `Block` is a great way to keep your CSS maintainable.
+  - For example, on the Contentful modules, there was a module for editorials that was being used in three places, but with wildly varying sizes (and thus child elements needed to be styled differently).
+  - Instead of creating entirely separate elements which would've basically been duplicates, save for a few minor font & sizing differences, I just applied a `--modifier` class, and then changed the styles of the child elements as needed, e.g.:
+```html
+<!-- Standard Editorial -->
+<div class="Editorial">
+  <div class="Editorial__overlay">
+    <!-- large editorial's content -->
+  </div>
+</div>
+
+<!-- Extra-Large Editorial -->
+<div class="Editorial Editorial--featured">
+  <div class="Editorial__overlay">
+    <!-- extra large editorial's content -->
+  </div>
+</div>
+
+<!-- Small Editorial -->
+<div class="Editorial Editorial--mini">
+  <div class="Editorial__overlay">
+    <!-- small editorial's content -->
+  </div>
+</div>
+```
+
+Then, in the CSS:
+```scss
+.Editorial__overlay {
+  position: absolute;
+  margin: 20px;
+  width: calc(100% - 40px);
+  text-align: center;
+  color: $some-initial-color;
+}
+
+.Editorial--featured .Editorial__overlay {
+  width: 320px;
+  left: calc(50% - 20px);
+  transform: translateX(-50%);
+}
+
+.Editorial--mini .Editorial__overlay {
+  color: $for-example-purposes;
+}
+```
+
 
 ### References
 [AirBnB Styleguide](https://github.com/airbnb/css)
 
 [Medium Article](https://medium.com/@fat/mediums-css-is-actually-pretty-fucking-good-b8e2a6c78b06)
+
+[BEM F.A.Q.](http://getbem.com/faq/)
 
 [Skeleton GitHub](https://github.com/dhg/Skeleton)
