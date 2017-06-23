@@ -45,7 +45,7 @@
 - Put `@include`'s _after_ all of your other standard property declarations.
 - Don't nest selectors more than **one-level deep** and _only_ use nesting for pseudo-selectors, e.g.:
 ```scss
-.SomeModule_link {
+.SomeModule__link {
   color: $link-color;
 
   &:hover {
