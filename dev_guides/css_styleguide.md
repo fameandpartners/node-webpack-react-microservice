@@ -2,6 +2,7 @@
 
 - Basic rules, heavily borrowing AirBnB's excellent styleguide as the base, with influence from Medium and some inspiration from the Skeleton boilerplate.
 
+
 ## General Formatting
 - Use 2 spaces for indentation.
 - Don't use ID selectors!
@@ -37,6 +38,7 @@
 }
 ```
 
+
 ## SCSS Specifics
 - Use `.scss` syntax, not `.sass`.
 - The `@extend` directive is dangerous (Google it), but tl-dr; - don't use it!
@@ -54,7 +56,8 @@
 }
 ```
 
-## Structure (BEM)
+
+## CSS Rule Structure (BEM)
 - Use a custom variant of BEM with PascalCase for all declarations _except_ for utility classes, which should be in the format of: `u-helper-purpose`, e.g.: `u-full-width`.
 ```jsx
 // ListingCard.jsx
@@ -146,6 +149,35 @@ Then, in the CSS:
   color: $for-example-purposes;
 }
 ```
+
+
+## SCSS File Structure
+- Common sense rules all. Just try to keep things as modular as you can, e.g. separate files for separate modules, one for mixins, variables, any imports of an existing grid you're using, etc., e.g.:
+```scss
+  scss/
+  |- _base/
+  |  |- _variables.scss
+  |  |- _mixins.scss
+
+  |- _layouts/
+  |  |- _grid.scss
+
+  |- _modules/
+  |  |- _editorial.scss
+  |  |- _product.scss
+
+  |- _misc/
+  |  |- _helpers.scss
+
+  |- application.scss
+
+  stylesheets/
+  |- application.css
+```
+
+- As your .scss structure grows, it may make sense to have other partials to pull in sub-groups.
+  - E.g. for now, `application.scss` might just contain an import statement for each of the two modules, but if you end up having 15+ modules, it may make more sense for that file to import one `_modules.scss` partial (and then this file takes care of importing each module).
+
 
 
 ### References
