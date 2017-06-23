@@ -21,7 +21,7 @@ import * as AppActions from '../../actions/AppActions';
 
 // App Components
 import HeaderHider from '../shared/HeaderHider';
-import MobileHeader from '../shared/MobileHeader';
+import HeaderMobile from '../shared/HeaderMobile';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 
@@ -81,7 +81,7 @@ class AppMain extends Component {
             />
             { breakpoint === 'mobile' || breakpoint === 'tablet' ?
               <HeaderHider>
-                <MobileHeader />
+                <HeaderMobile />
               </HeaderHider>
               :
               <Header />

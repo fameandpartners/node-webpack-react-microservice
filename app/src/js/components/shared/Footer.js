@@ -24,7 +24,11 @@ const Footer = () => (
         <li><a href="##">Terms</a></li>
       </ul>
       <ul className="col-6">
-        <li className="Footer__category-title">Help</li>
+        <li
+          className="Footer__category-title"
+        >
+          Help
+        </li>
         <li><a href="##">Shipping Info</a></li>
         <li><a href="##">Returns Policy</a></li>
         <li><a href="##">Fame Contact Us</a></li>

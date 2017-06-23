@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import * as AppActions from '../../actions/AppActions';
 
 // CSS
-import '../../../css/components/MobileHeader.scss';
+import '../../../css/components/HeaderMobile.scss';
 
 // Components
 import Hamburger from './Hamburger';
@@ -30,7 +30,7 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class MobileHeader extends Component {
+class HeaderMobile extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -43,7 +43,7 @@ class MobileHeader extends Component {
 
   render() {
     return (
-      <header className="Header MobileHeader width--full">
+      <header className="Header HeaderMobile width--full">
         <div className="layout-container">
           <nav className="grid-12">
             <div className="col-6">
@@ -59,13 +59,13 @@ class MobileHeader extends Component {
   }
 }
 
-MobileHeader.propTypes = {
+HeaderMobile.propTypes = {
   sideMenuOpen: PropTypes.bool,
   activateSideMenu: PropTypes.func.isRequired,
 };
 
-MobileHeader.defaultProps = {
+HeaderMobile.defaultProps = {
   sideMenuOpen: false,
 };
 
-export default connect(stateToProps, dispatchToProps)(MobileHeader);
+export default connect(stateToProps, dispatchToProps)(HeaderMobile);
