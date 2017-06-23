@@ -27,6 +27,7 @@ import Footer from '../shared/Footer';
 
 // UI Global Components
 import Input from '../form/Input';
+import Select from '../form/Select';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -97,7 +98,17 @@ class AppMain extends Component {
                 <pre>Input.js</pre>
                 <Input
                   id="test-input"
-                  onChange={this.handleCMChange}
+                />
+              </div>
+              <div className="col-4">
+                <pre>Select.js</pre>
+                <Select
+                  id="test-select"
+                  label="Choose Something"
+                  options={[
+                    { id: 0, name: 'Option One', active: false },
+                    { id: 1, name: 'Option Two', active: false },
+                  ]}
                 />
               </div>
             </div>
