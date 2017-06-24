@@ -1,6 +1,7 @@
 .Button {
   width: 100%;
-  padding: 1rem;
+  height: $button-height;
+  padding: 0 2.2rem;
   border: 0;
   background: $c-black;
   color: $c-white;

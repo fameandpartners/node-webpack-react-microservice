@@ -1,5 +1,12 @@
 import React from 'react';
 
+// OTHER / TODO: REMOVE
+import noop from '../../libs/noop';
+
+// Components
+import Button from '../generic/Button';
+import Input from '../form/Input';
+
 // CSS
 import '../../../css/components/Footer.scss';
 
@@ -10,8 +17,12 @@ const Footer = () => (
       <div className="col-12">
         <h2>Sign up to always enjoy free returns</h2>
         <form>
-          <input placeholder="Email Address" />
-          <button>Sign up</button>
+          <div className="display--inline-block">
+            <Input id="footer-email" placeholder="Email Address" />
+          </div>
+          <div className="display--inline-block">
+            <Button handleClick={noop} text="Sign up" />
+          </div>
         </form>
       </div>
       <ul className="col-6">

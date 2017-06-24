@@ -3,11 +3,9 @@
   position: relative;
   width: 100%;
   outline: none;
-  background-color: $c-white;
   font-size: 1.4rem;
   -webkit-font-smoothing: antialiased;
-  height: 38px;
-  line-height: 37px;
+  height: $button-height;
   padding: 0 14px;
   text-align: left;
 
@@ -21,7 +19,6 @@
     width: 100%;
     left: 0;
     background-color: $c-white;
-    position: absolute;
     transition: all 0.17s ease-in-out, border 0.4s, border-color 0.3s;
 
     &:hover{
