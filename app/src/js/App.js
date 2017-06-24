@@ -19,9 +19,7 @@ class App extends Component {
     super(props);
     autoBind(this);
   }
-  handleClick() {
-    console.warn('javascript working');
-  }
+
   sampleTest() {
     return true;
   }

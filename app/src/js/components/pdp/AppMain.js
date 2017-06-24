@@ -134,7 +134,7 @@ class AppMain extends Component {
                 <pre>Button.js</pre>
                 <Button
                   text="Fame Button"
-                  onClick={noop}
+                  handleClick={noop}
                 />
               </div>
             </div>

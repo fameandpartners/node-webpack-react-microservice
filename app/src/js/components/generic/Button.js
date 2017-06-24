@@ -3,7 +3,6 @@
 // *****
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import noop from '../../libs/noop';
 
 // CSS
 import '../../../css/components/Button.scss';
@@ -11,13 +10,12 @@ import '../../../css/components/Button.scss';
 const propTypes = {
   disabled: PropTypes.bool,
   text: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
   disabled: false,
   text: 'Submit',
-  onClick: noop,
 };
 
 class Button extends Component {
@@ -28,15 +26,15 @@ class Button extends Component {
 
   handleClick() {
     if (!this.props.disabled) {
-      this.props.onClick();
+      this.props.handleClick();
     }
   }
 
   render() {
-    const { disabled, text, onClick } = this.props;
+    const { disabled, text, handleClick } = this.props;
 
     return (
-      <button onClick={onClick} className={`Button ${disabled ? 'Button--disabled' : ''}`}>
+      <button onClick={handleClick} className={`Button ${disabled ? 'Button--disabled' : ''}`}>
         {text}
       </button>
     );

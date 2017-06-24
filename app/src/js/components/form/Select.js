@@ -150,8 +150,6 @@ class Select extends Component {
     return dropdownComponent;
   }
 
-  generateClassName() {}
-
   render() {
     const {
       options,

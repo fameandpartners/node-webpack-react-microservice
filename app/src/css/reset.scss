@@ -37,6 +37,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+button {
+  outline: 0;
+}
+
 ol, ul {
     list-style: none;
 }
