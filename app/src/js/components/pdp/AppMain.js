@@ -51,6 +51,9 @@ function dispatchToProps(dispatch) {
 class AppMain extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen: false,
+    };
     autoBind(this);
   }
 
@@ -98,6 +101,7 @@ class AppMain extends Component {
             <div className="layout-container typography ui-component-section grid-12">
               <div className="col-12">
                 <h2>UI Global Components</h2>
+                <button onClick={this.props.toggleModal}>Toggle Modal</button>
               </div>
               <div className="col-4">
                 <pre>Input.js</pre>
@@ -197,6 +201,7 @@ AppMain.propTypes = {
   activateSideMenu: PropTypes.func.isRequired,
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
+  toggleModal: PropTypes.func.isRequired,
   // winWidth: PropTypes.number.isRequired,
 };
 

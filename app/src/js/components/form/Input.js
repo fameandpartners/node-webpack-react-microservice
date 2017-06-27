@@ -20,6 +20,7 @@ const propTypes = {
     PropTypes.string,
     PropTypes.instanceOf(null),
   ]),
+  label: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.string,
   onChange: PropTypes.func.isRequired,
@@ -30,6 +31,7 @@ const defaultProps = {
   error: false,
   focusOnMount: false,
   inlineUnit: null,
+  label: null,
   placeholder: '',
   type: 'input',
   onChange: noop,
@@ -54,6 +56,7 @@ class Input extends Component {
     const {
       id,
       defaultValue,
+      label,
       inlineUnit,
       placeholder,
       type,
@@ -62,6 +65,10 @@ class Input extends Component {
 
     return (
       <div className={`Input--wrapper ${error ? 'Input--wrapper__error' : ''}`}>
+        { label
+          ? <label htmlFor={id}>{label}</label>
+          : null
+        }
         <input
           ref={c => this.input = c}
           className="Input"

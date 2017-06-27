@@ -3,19 +3,20 @@
   position: relative;
   width: 100%;
   outline: none;
-  font-size: 1.4rem;
+  font-size: 1rem;
   -webkit-font-smoothing: antialiased;
-  height: $button-height;
   padding: 0 14px;
   text-align: left;
 
   .Input {
+    font-size: 0.875rem;
     border: 1px solid;
+    border-radius: 2px;
     border-color: $c-light-gray;
     cursor: pointer;
     display: inline-block;
     padding: 0 15px;
-    height: 100%;
+    height: $button-height;
     width: 100%;
     left: 0;
     background-color: $c-white;
