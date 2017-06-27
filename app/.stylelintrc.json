@@ -8,6 +8,11 @@
     }],
     "block-no-empty": true,
     "block-opening-brace-space-before": "always",
+    "block-opening-brace-newline-after": "always",
+    "block-closing-brace-newline-before": "always",
+    "block-closing-brace-newline-after": ["always", {
+      "ignoreAtRules": ["if", "else"]
+    }],
     "color-named": ["never", {
       "ignore": ["inside-function"]
     }],
@@ -18,6 +23,9 @@
     "declaration-property-value-blacklist": {
       "/^border/": ["none"]
     },
+    "declaration-no-important": true,
+    "declaration-block-semicolon-newline-after": "always",
+    "declaration-block-trailing-semicolon": "always",
     "declaration-colon-space-after": "always",
     "scss/dollar-variable-colon-space-after": "always",
     "declaration-colon-space-before": "never",
