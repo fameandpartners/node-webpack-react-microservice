@@ -213,7 +213,7 @@ module.exports = {
     new WatchMissingNodeModulesPlugin(paths.appNodeModules),
 
     new StyleLintPlugin({
-      files: "src/css/*.scss",
+      files: "src/css/**/*.scss",
       syntax: "scss"
     })
   ],
