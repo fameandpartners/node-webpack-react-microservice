@@ -6,7 +6,6 @@
 ## General Formatting
 - Use 2 spaces for indentation.
 - Don't use ID selectors!
-- **IF YOU ABSOLUTELY NEED TO USE A CSS SELECTOR AS A JS HOOK:** Prefix JavaScript hooks with `js-` and _never_ add styling rules to them. Additionally, and this is more of a `.js` rule, but _only_ ever bind JavaScript to these `js-` classes and never to classes used for styling! Also, use dash-casing, e.g. `js-open-pdp-modal`.
 - Prefix utility classes with `u-` and use dash-casing, e.g. `u-pull-left`.
 - Add a space before the opening `{` in a rule declaration.
 - Add a space after the `:` in a property declaration.
