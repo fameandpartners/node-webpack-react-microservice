@@ -17,4 +17,12 @@
     background-color: $c-disabled;
     cursor: not-allowed;
   }
+
+  &--tall {
+    height: $button-height--tall;
+  }
+
+  &--facebook {
+    background-color: $c-facebook;
+  }
 }

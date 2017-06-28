@@ -55,7 +55,6 @@ class Modal extends Component {
           }}
         >
           {children}
-          <span onClick={onClose}>×</span>
         </div>
       </div>
     );
@@ -71,22 +70,22 @@ class Modal extends Component {
         willLeave={this.willLeave}
       >
         {
-            (items) => {
-              if (items.length) {
-                return this.renderModal(items[0].key, items[0].style);
-              } return null;
-            }
+          (items) => {
+            if (items.length) {
+              return this.renderModal(items[0].key, items[0].style);
+            } return null;
           }
+        }
       </TransitionMotion>
     );
   }
 }
 
 Modal.propTypes = {
-  width: PropTypes.number || PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   isOpen: PropTypes.bool,
   zIndex: PropTypes.number,
-  children: PropTypes.arrayOf(PropTypes.node),
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   onClose: PropTypes.func,
 };
 

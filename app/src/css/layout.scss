@@ -11,3 +11,16 @@
     margin-bottom: 30px;
   }
 }
+
+.hr {
+  display: flex;
+}
+
+.hr:before,
+.hr:after {
+  color: $c-black;
+  content: '';
+  flex: 1;
+  margin: auto 1rem;
+  border-bottom: solid 1px;
+}
