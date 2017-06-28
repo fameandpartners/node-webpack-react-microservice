@@ -10,13 +10,13 @@
 }
 
 .App__content {
-  background-color: #222;
+  background-color: rgb(34, 34, 34);
   padding: 20px;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .App__main {
-  &--open .App__blanket{
+  &--open .App__blanket {
     z-index: 1;
     visibility: visible;
     opacity: 0.3;
