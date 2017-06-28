@@ -18,23 +18,6 @@
     box-shadow: inset 0 0 0 1px $c-neutral-12;
   }
 
-  &.is-open {
-    border-color: $c-light-gray;
-
-    .Select {
-      z-index: 100;
-      pointer-events: auto;
-      opacity: 1;
-      max-height: 300px;
-      overflow-y: auto;
-      transform: scale(1) translateZ(0);
-    }
-
-    .Select-list-item {
-      cursor: pointer;
-    }
-  }
-
   &__error {
     box-shadow: inset 0 0 0 1px $c-form-error;
   }
@@ -63,7 +46,7 @@
     margin: 8px 0;
   }
 
-  .Select-label{
+  .Select-label {
     position: absolute;
     font-weight: normal;
     font-size: 12px;
@@ -74,31 +57,6 @@
     visibility: collapse;
     opacity: 0;
     transform: translate(0, 0);
-  }
-
-  .Select {
-    padding: 0 14px;
-    top: 37px;
-    width: 100%;
-    height: auto;
-    left: 0;
-    box-shadow: inset 0 0 0 1px $c-light-gray;
-    background-color: $c-white;
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    overflow: auto;
-    pointer-events: none;
-    position: absolute;
-    z-index: -1;
-    transition: all 0.2s ease-in-out, opacity 0.1s ease-in;
-    transform: scale(0);
-    transform-origin: 50% 0;
-
-    &__carat {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-    }
   }
 
   .Select-list-item {
@@ -114,5 +72,47 @@
   .Select-list-item:focus,
   .Select-list-item.focused {
     color: $c-neutral-12;
+  }
+}
+
+.Select {
+  padding: 0 14px;
+  top: 37px;
+  width: 100%;
+  height: auto;
+  left: 0;
+  box-shadow: inset 0 0 0 1px $c-light-gray;
+  background-color: $c-white;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  overflow: auto;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  transition: all 0.2s ease-in-out, opacity 0.1s ease-in;
+  transform: scale(0);
+  transform-origin: 50% 0;
+
+  &__carat {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
+}
+
+.Select--wrapper.is-open {
+  border-color: $c-light-gray;
+
+  .Select {
+    z-index: 100;
+    pointer-events: auto;
+    opacity: 1;
+    max-height: 300px;
+    overflow-y: auto;
+    transform: scale(1) translateZ(0);
+  }
+
+  .Select-list-item {
+    cursor: pointer;
   }
 }
