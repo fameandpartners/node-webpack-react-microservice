@@ -1,22 +1,9 @@
-// *****
-// ** Button is a purely functional dumb/stateless component
-// *****
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, string, func } from 'prop-types';
+import classNames from 'classnames';
 
 // CSS
 import '../../../css/components/Button.scss';
-
-const propTypes = {
-  disabled: PropTypes.bool,
-  text: PropTypes.string,
-  handleClick: PropTypes.func.isRequired,
-};
-
-const defaultProps = {
-  disabled: false,
-  text: 'Submit',
-};
 
 class Button extends Component {
   constructor(props) {
@@ -31,18 +18,47 @@ class Button extends Component {
   }
 
   render() {
-    const { disabled, text, handleClick } = this.props;
+    const {
+      className,
+      disabled,
+      tall,
+      text,
+      handleClick,
+    } = this.props;
 
     return (
-      <button onClick={handleClick} className={`Button ${disabled ? 'Button--disabled' : ''}`}>
+      <button
+        onClick={handleClick}
+        className={
+          classNames(
+            'Button',
+            className,
+            {
+              'Button--disabled': disabled,
+              'Button--tall': tall,
+            },
+          )
+        }
+      >
         {text}
       </button>
     );
   }
 }
 
+Button.propTypes = {
+  className: string,
+  disabled: bool,
+  tall: bool,
+  text: string,
+  handleClick: func.isRequired,
+};
 
-Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
+Button.defaultProps = {
+  className: '',
+  tall: false,
+  disabled: false,
+  text: 'Submit',
+};
 
 export default Button;

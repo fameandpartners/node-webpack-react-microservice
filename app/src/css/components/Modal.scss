@@ -6,9 +6,32 @@
   width: 100%;
   height: 100%;
 
-  &__content {
-    padding: 15px 45px;
-    visibility: visible;
+  &__content-container {
+    padding: 20px 40px;
     background: $c-white;
+  }
+
+  &__content {
+    visibility: visible;
+  }
+
+
+}
+
+.Modal__content {
+  &--sm-margin-top {
+    margin-top: 15px;
+  }
+
+  &--sm-margin-bottom {
+    margin-bottom: 15px;
+  }
+
+  &--med-margin-top {
+    margin-top: 30px;
+  }
+
+  &--med-margin-bottom {
+    margin-bottom: 30px;
   }
 }
