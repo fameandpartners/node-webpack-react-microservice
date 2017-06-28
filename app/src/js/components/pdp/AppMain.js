@@ -21,9 +21,18 @@ import * as AppActions from '../../actions/AppActions';
 
 // App Components
 import HeaderHider from '../shared/HeaderHider';
-import MobileHeader from '../shared/MobileHeader';
+import HeaderMobile from '../shared/HeaderMobile';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
+
+// UI Global Components
+import Input from '../form/Input';
+import Select from '../form/Select';
+import RadioToggle from '../form/RadioToggle';
+import Button from '../generic/Button';
+
+// OTHER / TODO: REMOVE
+import noop from '../../libs/noop';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -42,6 +51,9 @@ function dispatchToProps(dispatch) {
 class AppMain extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen: false,
+    };
     autoBind(this);
   }
 
@@ -81,11 +93,55 @@ class AppMain extends Component {
             />
             { breakpoint === 'mobile' || breakpoint === 'tablet' ?
               <HeaderHider>
-                <MobileHeader />
+                <HeaderMobile />
               </HeaderHider>
               :
               <Header />
             }
+            <div className="layout-container typography ui-component-section grid-12">
+              <div className="col-12">
+                <h2>UI Global Components</h2>
+                <button onClick={this.props.toggleModal}>Toggle Modal</button>
+              </div>
+              <div className="col-4">
+                <pre>Input.js</pre>
+                <Input
+                  id="test-input"
+                />
+              </div>
+              <div className="col-4">
+                <pre>Select.js</pre>
+                <Select
+                  id="test-select"
+                  label="Choose Something"
+                  options={[
+                    { id: 0, name: 'Option One', active: false },
+                    { id: 1, name: 'Option Two', active: false },
+                  ]}
+                />
+              </div>
+              <div className="col-4">
+                <pre>RadioToggle.js</pre>
+                <RadioToggle
+                  id="test-select"
+                  label="Choose Something"
+                  value="INCHES"
+                  options={[
+                    { label: 'in', value: 'INCHES' },
+                    { label: 'cm', value: 'CM' },
+                  ]}
+                  onChange={noop}
+                />
+              </div>
+              <hr className="col-12" />
+              <div className="col-4">
+                <pre>Button.js</pre>
+                <Button
+                  text="Fame Button"
+                  handleClick={noop}
+                />
+              </div>
+            </div>
             <div className="App__content layout-container">
               <div className="grid-12">
                 <div className="App__primarappy-image-container brick col-6">
@@ -145,6 +201,7 @@ AppMain.propTypes = {
   activateSideMenu: PropTypes.func.isRequired,
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
+  toggleModal: PropTypes.func.isRequired,
   // winWidth: PropTypes.number.isRequired,
 };
 

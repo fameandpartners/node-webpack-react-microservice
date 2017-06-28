@@ -15,7 +15,7 @@ export default vo => template`
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-title" content="NKBA"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-    <link id="favicon" rel="shortcut icon" href="/favicon.ico" sizes="16x16 32x32" type="image/png" />
+    <link id="favicon" rel="shortcut icon" href="/favicon.png" sizes="96x96" type="image/png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png"/>
     <link rel="manifest" href="/manifest.json"/>
     <meta name="msapplication-tap-highlight" content="no"/>
