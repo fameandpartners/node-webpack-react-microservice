@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { func, node, number, object, oneOfType, string } from 'prop-types';
+import { arrayOf, bool, func, node, number, object, oneOfType, string } from 'prop-types';
 import autoBind from 'react-autobind';
 import { TransitionMotion, spring } from 'react-motion';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-// Utilities
-import noop from '../../libs/noop';
 
 // Actions
 import * as ModalActions from '../../actions/ModalActions';
@@ -17,7 +14,7 @@ import '../../../css/components/Modal.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    modalId: state.$$modalState.get('modalId'),
+    activeModalId: state.$$modalState.get('modalId'),
   };
 }
 
@@ -56,28 +53,39 @@ class ModalContainer extends Component {
     return { opacity: spring(0), position: spring(-10) };
   }
 
+  handleBackgroundClick() {
+    const { activateModal, closeOnBackgroundClick } = this.props;
+    if (closeOnBackgroundClick) {
+      activateModal({ modalId: null });
+    }
+  }
+
   handleForegroundClick(e) {
     e.stopPropagation();
   }
 
-  renderModal(key, style) {
+  hasActivatedModal() {
+    const { activeModalId, modalIds } = this.props;
+    return modalIds.indexOf(activeModalId) > -1;
+  }
+
+  renderModalContainer(key, style) {
     const {
       width,
       zIndex,
       children,
-      onClose,
     } = this.props;
 
     return (
       <div
-        className="Modal grid-middle"
+        className="ModalContainer grid-middle"
         style={{ zIndex, opacity: style.opacity }}
         key={key}
-        onClick={onClose}
+        onClick={this.handleBackgroundClick}
       >
         <div
+          className="ModalContainer__content-wrapper u-center col"
           onClick={this.handleForegroundClick}
-          className="Modal__content-container u-center col"
           style={{
             width,
             zIndex,
@@ -90,30 +98,17 @@ class ModalContainer extends Component {
     );
   }
 
-  // render() {
-  //   console.log('this.props.children of modalContainer', this.props.children);
-  //   return (
-  //     <div className="ModalContainer Modal__content-container">
-  //       {this.props.children}
-  //     </div>
-  //   );
-  // }
-  //
   render() {
-    const { modalId } = this.props;
-    console.log('modalId', modalId);
-    // TODO: Check if we have child with this modalId
-
     return (
       <TransitionMotion
-        styles={modalId ? [this.defaultStyles()] : []}
+        styles={this.hasActivatedModal() ? [this.defaultStyles()] : []}
         willEnter={this.willEnter}
         willLeave={this.willLeave}
       >
         {
         (items) => {
           if (items.length) {
-            return this.renderModal(items[0].key, items[0].style);
+            return this.renderModalContainer(items[0].key, items[0].style);
           } return null;
         }
       }
@@ -124,22 +119,25 @@ class ModalContainer extends Component {
 
 
 ModalContainer.propTypes = {
+  closeOnBackgroundClick: bool,
   width: oneOfType([number, string]),
   zIndex: number,
   children: oneOfType([object, node]),
-  onClose: func,
   // Redux
-  modalId: string,
+  activateModal: func.isRequired,
+  activeModalId: string,
+  modalIds: arrayOf(string),
 };
 
 ModalContainer.defaultProps = {
+  closeOnBackgroundClick: true,
   children: null,
   width: '400px',
   height: '400px',
   zIndex: 999,
-  onClose: noop,
+  modalIds: [],
   // Redux
-  modalId: null,
+  activeModalId: null,
 };
 
 

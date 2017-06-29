@@ -8,16 +8,20 @@ import { bindActionCreators } from 'redux';
 import CancelOut from '../shared/CancelOut';
 // import Modal from '../shared/Modal';
 import ModalContainer from '../modal/ModalContainer';
+import Modal from '../modal/Modal';
 import Input from '../form/Input';
 import FacebookButton from '../generic/FacebookButton';
 import Button from '../generic/Button';
-import Container from '../generic/Container';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
 
-// Utilities
-import noop from '../../libs/noop';
+// Constants
+import ModalConstants from '../../constants/ModalConstants';
+
+function mapStateToProps() {
+  return {};
+}
 
 function dispatchToProps(dispatch) {
   const actions = bindActionCreators(ModalActions, dispatch);
@@ -41,8 +45,14 @@ class OnboardingModal extends Component {
 
   render() {
     return (
-      <ModalContainer>
-        <Container>
+      <ModalContainer
+        closeOnBackgroundClick
+        modalIds={[
+          ModalConstants.SIGN_UP_MODAL,
+          ModalConstants.LOG_IN_MODAL,
+        ]}
+      >
+        <Modal>
           <div className="Modal__header">
             <div className="u-text-align-right">
               <CancelOut onClick={this.handleCloseModal} />
@@ -79,7 +89,7 @@ class OnboardingModal extends Component {
             </div>
           </div>
           <Button tall text="Sign up" />
-        </Container>
+        </Modal>
       </ModalContainer>
     );
   }
@@ -90,4 +100,4 @@ OnboardingModal.propTypes = {
   activateModal: func.isRequired,
 };
 
-export default connect(noop, dispatchToProps)(OnboardingModal);
+export default connect(mapStateToProps, dispatchToProps)(OnboardingModal);
