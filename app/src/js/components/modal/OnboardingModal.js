@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 
 // Components
 import CancelOut from '../shared/CancelOut';
-// import Modal from '../shared/Modal';
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 import Input from '../form/Input';
@@ -25,22 +24,23 @@ function mapStateToProps() {
 
 function dispatchToProps(dispatch) {
   const actions = bindActionCreators(ModalActions, dispatch);
-  return {
-    activateModal: actions.activateModal,
-  };
+  return { activateModal: actions.activateModal };
 }
 
 class OnboardingModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-    };
     autoBind(this);
   }
 
   handleCloseModal() {
     this.props.activateModal({ modalId: null });
+  }
+
+  handleSwitchModal(modalId) {
+    return () => {
+      this.props.activateModal({ modalId });
+    };
   }
 
   render() {
@@ -88,7 +88,14 @@ class OnboardingModal extends Component {
               />
             </div>
           </div>
-          <Button tall text="Sign up" />
+          <Button tall className="Modal__content--sm-margin-bottom" text="Sign up" />
+          <p>
+            <span>Already a member?&nbsp;</span>
+            <span
+              onClick={this.handleSwitchModal(ModalConstants.LOG_IN_MODAL)}
+              className="App__link"
+            >Sign in</span>
+          </p>
         </Modal>
       </ModalContainer>
     );

@@ -3,6 +3,13 @@
   width: 100vw;
   text-align: center;
   background: $c-white;
+
+  &__link {
+    color: $c-black;
+    cursor: pointer;
+    font-weight: 400;
+    text-decoration: underline;
+  }
 }
 
 .App .layout-container {
