@@ -11,9 +11,10 @@ import * as ModalActions from '../../actions/ModalActions';
 // CSS
 import '../../../css/components/Modal.scss';
 
-function stateToProps(state) {
+function mapStateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
+    shouldAppear: state.$$modalState.get('shouldAppear'),
     activeModalId: state.$$modalState.get('modalId'),
   };
 }
@@ -29,9 +30,6 @@ function dispatchToProps(dispatch) {
 class ModalContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-    };
     autoBind(this);
   }
 
@@ -56,7 +54,7 @@ class ModalContainer extends Component {
   handleBackgroundClick() {
     const { activateModal, closeOnBackgroundClick } = this.props;
     if (closeOnBackgroundClick) {
-      activateModal({ modalId: null });
+      activateModal({ shouldAppear: false });
     }
   }
 
@@ -65,8 +63,8 @@ class ModalContainer extends Component {
   }
 
   hasActivatedModal() {
-    const { activeModalId, modalIds } = this.props;
-    return modalIds.indexOf(activeModalId) > -1;
+    const { activeModalId, modalIds, shouldAppear } = this.props;
+    return shouldAppear && modalIds.indexOf(activeModalId) > -1;
   }
 
   renderModalContainer(key, style) {
@@ -127,6 +125,7 @@ ModalContainer.propTypes = {
   activateModal: func.isRequired,
   activeModalId: string,
   modalIds: arrayOf(string),
+  shouldAppear: bool,
 };
 
 ModalContainer.defaultProps = {
@@ -138,7 +137,8 @@ ModalContainer.defaultProps = {
   modalIds: [],
   // Redux
   activeModalId: null,
+  shouldAppear: false,
 };
 
 
-export default connect(stateToProps, dispatchToProps)(ModalContainer);
+export default connect(mapStateToProps, dispatchToProps)(ModalContainer);

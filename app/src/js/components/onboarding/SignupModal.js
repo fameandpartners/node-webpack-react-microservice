@@ -1,16 +1,16 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { func } from 'prop-types';
-import autoBind from 'react-autobind';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { func } from 'prop-types';
+import autobind from 'react-autobind';
 
 // Components
 import CancelOut from '../shared/CancelOut';
-import ModalContainer from '../modal/ModalContainer';
-import Modal from '../modal/Modal';
 import Input from '../form/Input';
 import FacebookButton from '../generic/FacebookButton';
 import Button from '../generic/Button';
+import Modal from '../modal/Modal';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -27,14 +27,14 @@ function dispatchToProps(dispatch) {
   return { activateModal: actions.activateModal };
 }
 
-class OnboardingModal extends Component {
+class SignupModal extends Component {
   constructor(props) {
     super(props);
-    autoBind(this);
+    autobind(this);
   }
 
   handleCloseModal() {
-    this.props.activateModal({ modalId: null });
+    this.props.activateModal({ shouldAppear: false });
   }
 
   handleSwitchModal(modalId) {
@@ -45,14 +45,10 @@ class OnboardingModal extends Component {
 
   render() {
     return (
-      <ModalContainer
-        closeOnBackgroundClick
-        modalIds={[
-          ModalConstants.SIGN_UP_MODAL,
-          ModalConstants.LOG_IN_MODAL,
-        ]}
-      >
-        <Modal>
+      <Modal>
+        <div
+          className="SignupModal"
+        >
           <div className="Modal__header">
             <div className="u-text-align-right">
               <CancelOut onClick={this.handleCloseModal} />
@@ -96,15 +92,15 @@ class OnboardingModal extends Component {
               className="App__link"
             >Sign in</span>
           </p>
-        </Modal>
-      </ModalContainer>
+        </div>
+      </Modal>
     );
   }
 }
 
-OnboardingModal.propTypes = {
+SignupModal.propTypes = {
   // Redux
   activateModal: func.isRequired,
 };
 
-export default connect(mapStateToProps, dispatchToProps)(OnboardingModal);
+export default connect(mapStateToProps, dispatchToProps)(SignupModal);
