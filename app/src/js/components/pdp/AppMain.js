@@ -18,6 +18,10 @@ import image7 from '../../../img/test/image_7.png';
 
 // Actions
 import * as AppActions from '../../actions/AppActions';
+import * as ModalActions from '../../actions/ModalActions';
+
+// Constants
+import ModalConstants from '../../constants/ModalConstants';
 
 // App Components
 import HeaderHider from '../shared/HeaderHider';
@@ -43,8 +47,10 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const actions = bindActionCreators(AppActions, dispatch);
+  const modalActions = bindActionCreators(ModalActions, dispatch);
   return {
     activateSideMenu: actions.activateSideMenu,
+    activateModal: modalActions.activateModal,
   };
 }
 
@@ -65,6 +71,10 @@ class AppMain extends Component {
   handleCloseMenu() {
     const { activateSideMenu } = this.props;
     activateSideMenu({ sideMenuOpen: false });
+  }
+
+  handleActivateModal() {
+    this.props.activateModal({ modalId: ModalConstants.SIGN_UP_MODAL });
   }
 
   render() {
@@ -101,7 +111,7 @@ class AppMain extends Component {
             <div className="layout-container typography ui-component-section grid-12">
               <div className="col-12">
                 <h2>UI Global Components</h2>
-                <button onClick={this.props.toggleModal}>Toggle Modal</button>
+                <button onClick={this.handleActivateModal}>Open Sign Up Modal</button>
               </div>
               <div className="col-4">
                 <pre>Input.js</pre>
@@ -198,10 +208,11 @@ class AppMain extends Component {
 
 AppMain.propTypes = {
   sideMenuOpen: PropTypes.bool,
+  // Redux
   activateSideMenu: PropTypes.func.isRequired,
+  activateModal: PropTypes.func.isRequired,
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
-  toggleModal: PropTypes.func.isRequired,
   // winWidth: PropTypes.number.isRequired,
 };
 
