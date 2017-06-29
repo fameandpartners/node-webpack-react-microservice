@@ -13,16 +13,17 @@
     background-color: $c-hover-gray;
   }
 
-  &.Button--disabled {
-    background-color: $c-disabled;
-    cursor: not-allowed;
-  }
 
   &--tall {
     height: $button-height--tall;
   }
 
-  &--facebook {
+  &.Button--disabled {
+    background-color: $c-disabled;
+    cursor: not-allowed;
+  }
+
+  &.Button--facebook {
     background-color: $c-facebook;
   }
 }
