@@ -4,7 +4,7 @@ import autoBind from 'react-autobind';
 // App Components
 import SideMenu from './components/shared/SideMenu';
 import AppMain from './components/pdp/AppMain';
-import OnboardingModal from './components/modal/OnboardingModal';
+import OnboardingModal from './components/onboarding/OnboardingModal';
 
 // Global Styles
 import '../css/global/variables.scss';

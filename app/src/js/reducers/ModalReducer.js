@@ -9,7 +9,9 @@ export default function ModalReducer($$state = $$initialState, action = null) {
   switch (action.type) {
     case ModalConstants.ACTIVATE_MODAL: {
       return $$state.merge({
-        modalId: action.modalId,
+        // Do not wipe modalId, if one is not provided
+        modalId: action.modalId ? action.modalId : $$state.get('modalId'),
+        shouldAppear: action.shouldAppear,
       });
     }
     default: {
