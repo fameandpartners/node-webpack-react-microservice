@@ -4,12 +4,13 @@
   text-align: center;
   background: $c-white;
 
-  &__link {
-    color: $c-black;
-    cursor: pointer;
-    font-weight: 400;
-    text-decoration: underline;
-  }
+}
+
+.App__link {
+  color: $c-black;
+  cursor: pointer;
+  font-weight: 400;
+  text-decoration: underline;
 }
 
 .App .layout-container {
@@ -22,12 +23,10 @@
   color: rgb(255, 255, 255);
 }
 
-.App__main {
-  &--open .App__blanket {
-    z-index: 1;
-    visibility: visible;
-    opacity: 0.3;
-  }
+.App__main--open .App__blanket {
+  z-index: 1;
+  visibility: visible;
+  opacity: 0.3;
 }
 
 .App__blanket {
