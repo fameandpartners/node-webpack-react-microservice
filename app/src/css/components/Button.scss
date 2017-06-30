@@ -13,6 +13,13 @@
     background-color: $c-hover-gray;
   }
 
+  &__meta {
+    margin-right: 10px;
+  }
+
+  &__meta > * {
+    vertical-align: middle;
+  }
 
   &--tall {
     height: $button-height--tall;

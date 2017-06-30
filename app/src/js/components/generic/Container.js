@@ -1,13 +1,14 @@
 /* eslint-disable react/prefer-stateless-function */
 // Component:Presentational
 import React, { PureComponent } from 'react';
-import { array, node, oneOfType } from 'prop-types';
+import PropTypes from 'prop-types';
 
 class Container extends PureComponent {
   render() {
+    const { className } = this.props;
     return (
       <div
-        className="Container"
+        className={`Container ${className}`}
       >
         {this.props.children}
       </div>
@@ -16,7 +17,12 @@ class Container extends PureComponent {
 }
 
 Container.propTypes = {
-  children: oneOfType([array, node]).isRequired,
+  className: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]).isRequired,
+};
+
+Container.defaultProps = {
+  className: '',
 };
 
 export default Container;

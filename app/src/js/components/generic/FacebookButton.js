@@ -1,8 +1,11 @@
 /* eslint-disable react/prefer-stateless-function */
 // Component:Presentational
 import React, { Component } from 'react';
-import { string } from 'prop-types';
-import autoBind from 'react-autobind';
+import PropTypes from 'prop-types';
+import autobind from 'react-autobind';
+
+// Assets
+import FacebookLogo from '../../../svg/i-facebook.svg';
 
 // Utilities
 import { reassignProps } from '../../utilities/props';
@@ -13,11 +16,19 @@ import Button from './Button';
 class FacebookButton extends Component {
   constructor(props) {
     super(props);
-    autoBind(this);
+    autobind(this);
   }
 
   handleClick() {
     console.log('handling facebook click');
+  }
+
+  facebookText() {
+    const { login, text } = this.props;
+    if (text) { return text; }
+    return login
+      ? 'Log in with Facebook'
+      : 'Sign up with Facebook';
   }
 
   render() {
@@ -29,14 +40,14 @@ class FacebookButton extends Component {
       },
     );
 
-
     return (
       <div
         className="FacebookButton"
       >
         <Button
-          text="Sign up with Facebook"
           {...props}
+          metaIcon={(<FacebookLogo width="20px" height="20px" />)}
+          text={this.facebookText()}
         />
       </div>
     );
@@ -44,11 +55,15 @@ class FacebookButton extends Component {
 }
 
 FacebookButton.propTypes = {
-  className: string,
+  className: PropTypes.string,
+  login: PropTypes.bool,
+  text: PropTypes.string,
 };
 
 FacebookButton.defaultProps = {
   className: '',
+  login: false,
+  text: '',
 };
 
 

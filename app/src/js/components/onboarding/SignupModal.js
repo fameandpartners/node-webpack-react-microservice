@@ -6,7 +6,6 @@ import { func } from 'prop-types';
 import autobind from 'react-autobind';
 
 // Components
-import CancelOut from '../shared/CancelOut';
 import Input from '../form/Input';
 import FacebookButton from '../generic/FacebookButton';
 import Button from '../generic/Button';
@@ -45,44 +44,37 @@ class SignupModal extends Component {
 
   render() {
     return (
-      <Modal>
+      <Modal
+        headline="Sign up to save your creation"
+        handleCloseModal={this.handleCloseModal}
+      >
         <div
-          className="SignupModal"
+          className="SignupModal typography"
         >
-          <div className="Modal__header">
-            <div className="u-text-align-right">
-              <CancelOut onClick={this.handleCloseModal} />
-            </div>
-          </div>
-          <div className="Modal__content typography">
-            <div className="Modal__content--med-margin-bottom">
-              <h3 className="h5">Sign up to save your creation</h3>
-            </div>
-            <FacebookButton />
-            <h4 className="h5 hr">Or</h4>
-            <div className="Modal__content--med-margin-bottom">
-              <Input
-                id="signup_first"
-                label="First Name"
-                wrapperClassName="Modal__content--med-margin-bottom"
-              />
-              <Input
-                id="signup_last"
-                label="Last Name"
-                wrapperClassName="Modal__content--med-margin-bottom"
-              />
-              <Input
-                id="signup_email"
-                label="Email"
-                wrapperClassName="Modal__content--med-margin-bottom"
-              />
-              <Input
-                id="signup_password"
-                type="password"
-                label="Password"
-                wrapperClassName="Modal__content--med-margin-bottom"
-              />
-            </div>
+          <FacebookButton />
+          <h4 className="h5 hr">Or</h4>
+          <div className="Modal__content--med-margin-bottom">
+            <Input
+              id="signup_first"
+              label="First Name"
+              wrapperClassName="Modal__content--med-margin-bottom"
+            />
+            <Input
+              id="signup_last"
+              label="Last Name"
+              wrapperClassName="Modal__content--med-margin-bottom"
+            />
+            <Input
+              id="signup_email"
+              label="Email"
+              wrapperClassName="Modal__content--med-margin-bottom"
+            />
+            <Input
+              id="signup_password"
+              type="password"
+              label="Password"
+              wrapperClassName="Modal__content--med-margin-bottom"
+            />
           </div>
           <Button tall className="Modal__content--sm-margin-bottom" text="Sign up" />
           <p>
@@ -90,7 +82,9 @@ class SignupModal extends Component {
             <span
               onClick={this.handleSwitchModal(ModalConstants.LOG_IN_MODAL)}
               className="App__link"
-            >Sign in</span>
+            >
+              Log in
+            </span>
           </p>
         </div>
       </Modal>
