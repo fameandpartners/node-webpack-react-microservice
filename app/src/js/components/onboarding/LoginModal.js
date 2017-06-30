@@ -49,21 +49,11 @@ class LoginModal extends Component {
         handleCloseModal={this.handleCloseModal}
       >
         <div
-          className="LoginModal"
+          className="LoginModal typography"
         >
           <FacebookButton login />
           <h4 className="h5 hr">Or</h4>
           <div className="Modal__content--med-margin-bottom">
-            <Input
-              id="signup_first"
-              label="First Name"
-              wrapperClassName="Modal__content--med-margin-bottom"
-            />
-            <Input
-              id="signup_last"
-              label="Last Name"
-              wrapperClassName="Modal__content--med-margin-bottom"
-            />
             <Input
               id="signup_email"
               label="Email"
@@ -76,13 +66,13 @@ class LoginModal extends Component {
               wrapperClassName="Modal__content--med-margin-bottom"
             />
           </div>
-          <Button tall className="Modal__content--sm-margin-bottom" text="Sign up" />
+          <Button tall className="Modal__content--sm-margin-bottom" text="Log in" />
           <p>
-            <span>Already a member?&nbsp;</span>
+            <span>Don't have an account?&nbsp;</span>
             <span
               onClick={this.handleSwitchModal(ModalConstants.LOG_IN_MODAL)}
               className="App__link"
-            >Sign in</span>
+            >Sign up</span>
           </p>
         </div>
       </Modal>
