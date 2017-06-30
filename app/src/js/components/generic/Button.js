@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bool, string, func } from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 // CSS
@@ -21,6 +21,7 @@ class Button extends Component {
     const {
       className,
       disabled,
+      metaIcon,
       tall,
       text,
       handleClick,
@@ -40,24 +41,30 @@ class Button extends Component {
           )
         }
       >
-        {text}
+        { metaIcon
+          ? <span className="Button__meta">{metaIcon}</span>
+          : null
+        }
+        <span>{text}</span>
       </button>
     );
   }
 }
 
 Button.propTypes = {
-  className: string,
-  disabled: bool,
-  tall: bool,
-  text: string,
-  handleClick: func.isRequired,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  metaIcon: PropTypes.node,
+  tall: PropTypes.bool,
+  text: PropTypes.string,
+  handleClick: PropTypes.func.isRequired,
 };
 
 Button.defaultProps = {
   className: '',
-  tall: false,
   disabled: false,
+  metaIcon: null,
+  tall: false,
   text: 'Submit',
 };
 
