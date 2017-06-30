@@ -6,6 +6,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -17,7 +18,7 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-var StyleLintPlugin = require('stylelint-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -174,10 +175,10 @@ module.exports = {
           {
             loader: 'svg-sprite-loader',
             options: {
-              runtimeGenerator: require.resolve('./svg-to-icon-component-runtime-generator'),
+              extract: true,
               runtimeOptions: {
-                iconModule: './src/js/components/shared/Icon.js', // Relative to current build context folder
-              },
+                spriteFilename: 'sprite-[hash:6].svg',
+              }
             },
           },
         ],
@@ -206,6 +207,8 @@ module.exports = {
     // a plugin that prints an error when you attempt to do this.
     // See https://github.com/facebookincubator/create-react-app/issues/240
     new CaseSensitivePathsPlugin(),
+    // Creates Sprite SVG
+    new SpriteLoaderPlugin(),
     // If you require a missing module and then `npm install` it, you still have
     // to restart the development server for Webpack to discover it. This plugin
     // makes the discovery automatic so you don't have to restart.
@@ -213,9 +216,9 @@ module.exports = {
     new WatchMissingNodeModulesPlugin(paths.appNodeModules),
 
     new StyleLintPlugin({
-      files: "src/css/**/*.scss",
-      syntax: "scss"
-    })
+      files: 'src/css/**/*.scss',
+      syntax: 'scss',
+    }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
