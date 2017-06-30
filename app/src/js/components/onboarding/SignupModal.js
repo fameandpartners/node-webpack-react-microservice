@@ -52,23 +52,23 @@ class SignupModal extends Component {
           className="SignupModal typography"
         >
           <FacebookButton />
-          <h4 className="h5 hr">Or</h4>
-          <div className="Modal__content--med-margin-bottom">
+          <h4 className="h5 hr">OR</h4>
+          <div className="Modal__content--sm-margin-bottom">
             <Input
               id="signup_first"
               label="First Name"
               focusOnMount
-              wrapperClassName="Modal__content--med-margin-bottom"
+              wrapperClassName="Modal__content--sm-margin-bottom"
             />
             <Input
               id="signup_last"
               label="Last Name"
-              wrapperClassName="Modal__content--med-margin-bottom"
+              wrapperClassName="Modal__content--sm-margin-bottom"
             />
             <Input
               id="signup_email"
               label="Email"
-              wrapperClassName="Modal__content--med-margin-bottom"
+              wrapperClassName="Modal__content--sm-margin-bottom"
             />
             <Input
               id="signup_password"
@@ -78,7 +78,7 @@ class SignupModal extends Component {
             />
           </div>
           <Button tall className="Modal__content--sm-margin-bottom" text="Sign up" />
-          <p>
+          <p className="Modal__content--med-margin-bottom">
             <span>Already a member?&nbsp;</span>
             <span
               onClick={this.handleSwitchModal(ModalConstants.LOG_IN_MODAL)}

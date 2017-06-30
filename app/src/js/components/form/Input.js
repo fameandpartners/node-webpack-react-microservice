@@ -39,7 +39,7 @@ class Input extends Component {
     return (
       <div
         className={classNames(
-          'Input--wrapper',
+          'Input__wrapper',
           wrapperClassName,
           {
             'Input--wrapper__error': error,
@@ -47,7 +47,7 @@ class Input extends Component {
         )}
       >
         { label
-          ? <label htmlFor={id}>{label}</label>
+          ? <label className="Input__label" htmlFor={id}>{label}</label>
           : null
         }
         <input
@@ -60,7 +60,7 @@ class Input extends Component {
           defaultValue={defaultValue}
         />
         {inlineMeta
-          ? <span className="Input-label">{inlineMeta}</span>
+          ? <span className="Input__meta-label">{inlineMeta}</span>
           : null
         }
       </div>

@@ -1,5 +1,5 @@
 // TODO: Clean up
-.Input--wrapper {
+.Input__wrapper {
   position: relative;
   width: 100%;
   outline: none;
@@ -49,7 +49,13 @@
   }
 }
 
-.Input-label {
+.Input__label {
+  display: inline-block;
+  font-size: 0.875rem;
+  margin-bottom: 3px;
+}
+
+.Input__meta-label {
   font-size: 0.875rem;
   position: absolute;
   right: 2px;

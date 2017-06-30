@@ -52,7 +52,7 @@ class LoginModal extends Component {
           className="LoginModal typography"
         >
           <FacebookButton login />
-          <h4 className="h5 hr">Or</h4>
+          <h4 className="h5 hr">OR</h4>
           <div className="Modal__content--med-margin-bottom">
             <Input
               id="signup_email"
@@ -76,7 +76,7 @@ class LoginModal extends Component {
             />
           </div>
           <Button tall className="Modal__content--sm-margin-bottom" text="Log in" />
-          <p>
+          <p className="Modal__content--med-margin-bottom">
             <span>Don't have an account?&nbsp;</span>
             <span
               onClick={this.handleSwitchModal(ModalConstants.SIGN_UP_MODAL)}
