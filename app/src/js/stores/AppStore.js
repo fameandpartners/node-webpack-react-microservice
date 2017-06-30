@@ -10,6 +10,8 @@ import reducers, { initialStates } from '../reducers';
  * @return {Object} whiteListedProps
  */
 function cleanHydratedState(props) {
+  console.log('props passed', props);
+  console.log('initialStates', initialStates);
   const propKeys = Object.keys(props);
   const cleanKeys = propKeys.filter(k => Object.prototype.hasOwnProperty.call(initialStates, k));
   return pick(props, cleanKeys);

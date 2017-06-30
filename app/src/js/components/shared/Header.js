@@ -48,12 +48,18 @@ class Header extends Component {
               <li><a className="Header__link" href="#about">Who we are</a></li>
             </ul>
             <div className="col-4 textAlign--center">
-              <FameLogo width="200px" height="26px" />
+              <img src={FameLogo.url} alt="Fame Logo" width="200px" height="26px" />
             </div>
             <ul className="col-4 textAlign--right">
-              <li className="Header__action"><SearchIcon width="18px" height="26px" /></li>
-              <li className="Header__action"><AccountIcon width="18px" height="26px" /></li>
-              <li className="Header__action"><ShoppingBagIcon width="18px" height="26px" /></li>
+              <li className="Header__action">
+                <img src={SearchIcon.url} alt="Search for dresses" width="18px" height="26px" />
+              </li>
+              <li className="Header__action">
+                <img src={AccountIcon.url} alt="My Account Icon" width="18px" height="26px" />
+              </li>
+              <li className="Header__action">
+                <img src={ShoppingBagIcon.url} alt="My bag" width="18px" height="26px" />
+              </li>
             </ul>
           </nav>
         </div>
