@@ -9,28 +9,29 @@
   cursor: pointer;
   transition: $standard-transition-time background-color;
 
-  &:hover {
-    background-color: $c-hover-gray;
-  }
+}
 
-  &__meta {
-    margin-right: 10px;
-  }
+.Button:hover {
+  background-color: $c-hover-gray;
+}
 
-  &__meta > * {
-    vertical-align: middle;
-  }
+.Button__meta {
+  margin-right: 10px;
+}
 
-  &--tall {
-    height: $button-height--tall;
-  }
+.Button__meta > * {
+  vertical-align: middle;
+}
 
-  &.Button--disabled {
-    background-color: $c-disabled;
-    cursor: not-allowed;
-  }
+.Button--tall {
+  height: $button-height--tall;
+}
 
-  &.Button--facebook {
-    background-color: $c-facebook;
-  }
+.Button--disabled {
+  background-color: $c-disabled;
+  cursor: not-allowed;
+}
+
+.Button--facebook {
+  background-color: $c-facebook;
 }
