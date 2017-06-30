@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { func } from 'prop-types';
 import autobind from 'react-autobind';
 
+// Utilities
+import objnoop from '../../libs/objnoop';
+
 // Components
 import Input from '../form/Input';
 import Button from '../generic/Button';
@@ -12,10 +15,6 @@ import Modal from '../modal/Modal';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
-
-function mapStateToProps() {
-  return {};
-}
 
 function dispatchToProps(dispatch) {
   const actions = bindActionCreators(ModalActions, dispatch);
@@ -67,4 +66,4 @@ LoginModal.propTypes = {
   activateModal: func.isRequired,
 };
 
-export default connect(mapStateToProps, dispatchToProps)(LoginModal);
+export default connect(objnoop, dispatchToProps)(LoginModal);

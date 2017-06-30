@@ -6,11 +6,10 @@
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
   text-align: left;
+}
 
-  &__error .Input {
-    border-color: $c-form-error;
-  }
-
+.Input__wrapper__error .Input {
+  border-color: $c-form-error;
 }
 
 .Input {

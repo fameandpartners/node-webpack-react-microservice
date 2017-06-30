@@ -42,7 +42,7 @@ class Input extends Component {
           'Input__wrapper',
           wrapperClassName,
           {
-            'Input--wrapper__error': error,
+            Input__wrapper__error: error,
           },
         )}
       >
