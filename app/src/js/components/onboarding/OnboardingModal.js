@@ -7,6 +7,7 @@ import { string } from 'prop-types';
 import ModalContainer from '../modal/ModalContainer';
 import SignupModal from '../onboarding/SignupModal';
 import LoginModal from '../onboarding/LoginModal';
+import ForgotPasswordModal from '../onboarding/ForgotPasswordModal';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -35,6 +36,8 @@ class OnboardingModal extends Component {
       return <SignupModal />;
     } else if (activeModalId === ModalConstants.LOG_IN_MODAL) {
       return <LoginModal />;
+    } else if (activeModalId === ModalConstants.FORGOT_PASSWORD_MODAL) {
+      return <ForgotPasswordModal />;
     }
     return null;
   }
@@ -45,6 +48,7 @@ class OnboardingModal extends Component {
         modalIds={[
           ModalConstants.SIGN_UP_MODAL,
           ModalConstants.LOG_IN_MODAL,
+          ModalConstants.FORGOT_PASSWORD_MODAL,
         ]}
       >
         { this.injectModalStep() }
