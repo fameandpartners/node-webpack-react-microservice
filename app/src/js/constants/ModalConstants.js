@@ -11,6 +11,7 @@ const modalIds = assign({},
   mirrorCreator([
     'SIGN_UP_MODAL',
     'LOG_IN_MODAL',
+    'FORGOT_PASSWORD_MODAL',
   ]),
 );
 

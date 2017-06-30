@@ -30,7 +30,7 @@ class Input extends Component {
       defaultValue,
       error,
       label,
-      inlineUnit,
+      inlineMeta,
       placeholder,
       type,
       wrapperClassName,
@@ -59,8 +59,8 @@ class Input extends Component {
           type={type}
           defaultValue={defaultValue}
         />
-        {inlineUnit
-          ? <span className="Input-label">{inlineUnit}</span>
+        {inlineMeta
+          ? <span className="Input-label">{inlineMeta}</span>
           : null
         }
       </div>
@@ -76,8 +76,9 @@ Input.propTypes = {
   ]),
   error: PropTypes.bool,
   focusOnMount: PropTypes.bool,
-  inlineUnit: PropTypes.oneOfType([
+  inlineMeta: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.node,
     PropTypes.instanceOf(null),
   ]),
   label: PropTypes.string,
@@ -91,7 +92,7 @@ Input.defaultProps = {
   defaultValue: '',
   error: false,
   focusOnMount: false,
-  inlineUnit: null,
+  inlineMeta: null,
   label: null,
   placeholder: '',
   type: 'input',

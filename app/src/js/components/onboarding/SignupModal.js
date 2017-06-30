@@ -57,6 +57,7 @@ class SignupModal extends Component {
             <Input
               id="signup_first"
               label="First Name"
+              focusOnMount
               wrapperClassName="Modal__content--med-margin-bottom"
             />
             <Input

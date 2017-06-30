@@ -57,12 +57,21 @@ class LoginModal extends Component {
             <Input
               id="signup_email"
               label="Email"
+              focusOnMount
               wrapperClassName="Modal__content--med-margin-bottom"
             />
             <Input
               id="signup_password"
               type="password"
               label="Password"
+              inlineMeta={(
+                <span
+                  className="App__link"
+                  onClick={this.handleSwitchModal(ModalConstants.FORGOT_PASSWORD_MODAL)}
+                >
+                  Forgot
+                </span>)
+              }
               wrapperClassName="Modal__content--med-margin-bottom"
             />
           </div>
@@ -70,7 +79,7 @@ class LoginModal extends Component {
           <p>
             <span>Don't have an account?&nbsp;</span>
             <span
-              onClick={this.handleSwitchModal(ModalConstants.LOG_IN_MODAL)}
+              onClick={this.handleSwitchModal(ModalConstants.SIGN_UP_MODAL)}
               className="App__link"
             >Sign up</span>
           </p>
