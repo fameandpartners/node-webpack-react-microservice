@@ -41,6 +41,7 @@ import noop from '../../libs/noop';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
+    productTitle: state.$$productState.get('productTitle'),
     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
   };
 }
@@ -78,7 +79,12 @@ class AppMain extends Component {
   }
 
   render() {
-    const { breakpoint, sideMenuOpen } = this.props;
+    const {
+      breakpoint,
+      productTitle,
+      sideMenuOpen,
+    } = this.props;
+
     return (
       <Motion
         style={{
@@ -103,7 +109,7 @@ class AppMain extends Component {
             />
             { breakpoint === 'mobile' || breakpoint === 'tablet' ?
               <HeaderHider>
-                <HeaderMobile />
+                <HeaderMobile headerTitle={productTitle} />
               </HeaderHider>
               :
               <Header />
@@ -207,16 +213,18 @@ class AppMain extends Component {
 }
 
 AppMain.propTypes = {
-  sideMenuOpen: PropTypes.bool,
-  // Redux
+  // Redux Props
   activateSideMenu: PropTypes.func.isRequired,
   activateModal: PropTypes.func.isRequired,
+  productTitle: PropTypes.string,
+  sideMenuOpen: PropTypes.bool,
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
   // winWidth: PropTypes.number.isRequired,
 };
 
 AppMain.defaultProps = {
+  productTitle: '',
   sideMenuOpen: false,
 };
 
