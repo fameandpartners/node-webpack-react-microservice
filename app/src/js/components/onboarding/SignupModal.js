@@ -7,6 +7,7 @@ import autobind from 'react-autobind';
 
 // Components
 import Input from '../form/Input';
+import Checkbox from '../form/Checkbox';
 import FacebookButton from '../generic/FacebookButton';
 import Button from '../generic/Button';
 import Modal from '../modal/Modal';
@@ -74,6 +75,11 @@ class SignupModal extends Component {
               id="signup_password"
               type="password"
               label="Password"
+              wrapperClassName="Modal__content--sm-margin-bottom"
+            />
+            <Checkbox
+              id="latest_trends"
+              label="Get emails on latest updates"
               wrapperClassName="Modal__content--med-margin-bottom"
             />
           </div>
