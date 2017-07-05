@@ -4,8 +4,7 @@ import autoBind from 'react-autobind';
 // App Components
 import SideMenu from './components/shared/SideMenu';
 import AppMain from './components/pdp/AppMain';
-import Modal from './components/shared/Modal';
-import Input from './components/form/Input';
+import OnboardingModal from './components/onboarding/OnboardingModal';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -29,28 +28,12 @@ class App extends Component {
     return true;
   }
 
-  toggleModal() {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  }
-
   render() {
     return (
       <div className="App">
         <SideMenu />
-        <AppMain toggleModal={this.toggleModal} />
-        <Modal onClose={this.toggleModal} isOpen={this.state.isOpen}>
-          <div className="Modal__content">
-            <h2>Sign up to save your creation</h2>
-            <button>Sign up with Facebook</button>
-            <hr />
-            <Input id="signup_first" label="First Name" />
-            <Input id="signup_last" label="Last Name" />
-            <Input id="signup_email" label="Email" />
-            <Input id="signup_password" type="password" label="Password" />
-          </div>
-        </Modal>
+        <AppMain />
+        <OnboardingModal />
       </div>
     );
   }

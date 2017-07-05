@@ -1,14 +1,33 @@
-.Modal {
-  background: rgba(10, 10, 10, .10);
+.ModalContainer {
+  background: rgba(10, 10, 10, 0.10);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
 
-  &__content {
-    padding: 15px 45px;
-    visibility: visible;
-    background: $c-white;
-  }
+.ModalContainer__content-wrapper {
+  padding: 20px 40px;
+  background: $c-white;
+}
+
+.ModalContainer__content {
+  visibility: visible;
+}
+
+.Modal__content--sm-margin-top {
+  margin-top: 15px;
+}
+
+.Modal__content--sm-margin-bottom {
+  margin-bottom: 15px;
+}
+
+.Modal__content--med-margin-top {
+  margin-top: 30px;
+}
+
+.Modal__content--med-margin-bottom {
+  margin-bottom: 30px;
 }

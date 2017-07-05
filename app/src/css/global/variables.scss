@@ -1,4 +1,5 @@
 // Note: Global to be accessible anywhere without include
+/* stylelint-disable color-no-hex */
 $c-black: #000;
 $c-hover-gray: #1F1F1F;
 $c-disabled: #ccc;
@@ -23,3 +24,7 @@ $button-height: 40px;
 $fast-transition-time: 300ms;
 $standard-transition-time: 500ms;
 $slow-transition-time: 800ms;
+
+// TODO: NEW Stuff in before CSS merge state
+$c-facebook: rgb(59, 89, 152);
+$button-height--tall: 56px;

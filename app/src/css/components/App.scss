@@ -3,6 +3,14 @@
   width: 100vw;
   text-align: center;
   background: $c-white;
+
+}
+
+.App__link {
+  color: $c-black;
+  cursor: pointer;
+  font-weight: 400;
+  text-decoration: underline;
 }
 
 .App .layout-container {
@@ -10,17 +18,15 @@
 }
 
 .App__content {
-  background-color: #222;
+  background-color: rgb(34, 34, 34);
   padding: 20px;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
-.App__main {
-  &--open .App__blanket{
-    z-index: 1;
-    visibility: visible;
-    opacity: 0.3;
-  }
+.App__main--open .App__blanket {
+  z-index: 1;
+  visibility: visible;
+  opacity: 0.3;
 }
 
 .App__blanket {

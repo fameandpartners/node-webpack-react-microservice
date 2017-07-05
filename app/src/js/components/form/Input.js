@@ -3,39 +3,11 @@
 // *****
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import noop from '../../libs/noop';
 
 // CSS
 import '../../../css/components/Input.scss';
-
-const propTypes = {
-  id: PropTypes.string.isRequired,
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  error: PropTypes.bool,
-  focusOnMount: PropTypes.bool,
-  inlineUnit: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.instanceOf(null),
-  ]),
-  label: PropTypes.string,
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-};
-
-const defaultProps = {
-  defaultValue: '',
-  error: false,
-  focusOnMount: false,
-  inlineUnit: null,
-  label: null,
-  placeholder: '',
-  type: 'input',
-  onChange: noop,
-};
 
 class Input extends Component {
   constructor(props) {
@@ -56,17 +28,26 @@ class Input extends Component {
     const {
       id,
       defaultValue,
+      error,
       label,
-      inlineUnit,
+      inlineMeta,
       placeholder,
       type,
-      error,
+      wrapperClassName,
     } = this.props;
 
     return (
-      <div className={`Input--wrapper ${error ? 'Input--wrapper__error' : ''}`}>
+      <div
+        className={classNames(
+          'Input__wrapper',
+          wrapperClassName,
+          {
+            Input__wrapper__error: error,
+          },
+        )}
+      >
         { label
-          ? <label htmlFor={id}>{label}</label>
+          ? <label className="Input__label" htmlFor={id}>{label}</label>
           : null
         }
         <input
@@ -78,8 +59,8 @@ class Input extends Component {
           type={type}
           defaultValue={defaultValue}
         />
-        {inlineUnit
-          ? <span className="Input-label">{inlineUnit}</span>
+        {inlineMeta
+          ? <span className="Input__meta-label">{inlineMeta}</span>
           : null
         }
       </div>
@@ -87,8 +68,36 @@ class Input extends Component {
   }
 }
 
+Input.propTypes = {
+  id: PropTypes.string.isRequired,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  error: PropTypes.bool,
+  focusOnMount: PropTypes.bool,
+  inlineMeta: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+    PropTypes.instanceOf(null),
+  ]),
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  wrapperClassName: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
 
-Input.propTypes = propTypes;
-Input.defaultProps = defaultProps;
+Input.defaultProps = {
+  defaultValue: '',
+  error: false,
+  focusOnMount: false,
+  inlineMeta: null,
+  label: null,
+  placeholder: '',
+  type: 'input',
+  wrapperClassName: '',
+  onChange: noop,
+};
 
 export default Input;

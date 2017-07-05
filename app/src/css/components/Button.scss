@@ -13,8 +13,25 @@
     background-color: $c-hover-gray;
   }
 
-  &.Button--disabled {
+  &__meta {
+    margin-right: 10px;
+  }
+
+  &__meta > * {
+    vertical-align: middle;
+  }
+
+  &--tall {
+    height: $button-height--tall;
+  }
+
+  &--disabled {
     background-color: $c-disabled;
     cursor: not-allowed;
   }
+
+  &--facebook {
+    background-color: $c-facebook;
+  }
+
 }

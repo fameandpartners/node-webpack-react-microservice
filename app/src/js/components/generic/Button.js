@@ -1,22 +1,9 @@
-// *****
-// ** Button is a purely functional dumb/stateless component
-// *****
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 // CSS
 import '../../../css/components/Button.scss';
-
-const propTypes = {
-  disabled: PropTypes.bool,
-  text: PropTypes.string,
-  handleClick: PropTypes.func.isRequired,
-};
-
-const defaultProps = {
-  disabled: false,
-  text: 'Submit',
-};
 
 class Button extends Component {
   constructor(props) {
@@ -31,18 +18,54 @@ class Button extends Component {
   }
 
   render() {
-    const { disabled, text, handleClick } = this.props;
+    const {
+      className,
+      disabled,
+      metaIcon,
+      tall,
+      text,
+      handleClick,
+    } = this.props;
 
     return (
-      <button onClick={handleClick} className={`Button ${disabled ? 'Button--disabled' : ''}`}>
-        {text}
+      <button
+        onClick={handleClick}
+        className={
+          classNames(
+            'Button',
+            className,
+            {
+              'Button--disabled': disabled,
+              'Button--tall': tall,
+            },
+          )
+        }
+      >
+        { metaIcon
+          ? <span className="Button__meta">{metaIcon}</span>
+          : null
+        }
+        <span>{text}</span>
       </button>
     );
   }
 }
 
+Button.propTypes = {
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  metaIcon: PropTypes.node,
+  tall: PropTypes.bool,
+  text: PropTypes.string,
+  handleClick: PropTypes.func.isRequired,
+};
 
-Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
+Button.defaultProps = {
+  className: '',
+  disabled: false,
+  metaIcon: null,
+  tall: false,
+  text: 'Submit',
+};
 
 export default Button;
