@@ -46,7 +46,9 @@ class FacebookButton extends Component {
       >
         <Button
           {...props}
-          metaIcon={(<img src={FacebookLogo.url} alt="Facebook logo" width="20px" height="20px" />)}
+          metaIcon={(
+            <img src={FacebookLogo.url} alt="Facebook logo" width="20px" height="20px" />
+          )}
           text={this.facebookText()}
         />
       </div>

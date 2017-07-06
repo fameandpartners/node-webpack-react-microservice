@@ -26,9 +26,9 @@ class Slider extends Component {
         ref={c => this.slider = c}
         className="Slider u-full-width"
       >
-        <div className="slider js_slider">
-          <div className="frame js_frame">
-            <ul className="slides js_slides">
+        <div className="Slider__view">
+          <div className="Slider__frame">
+            <ul className="Slider__slides">
               { children }
             </ul>
           </div>
