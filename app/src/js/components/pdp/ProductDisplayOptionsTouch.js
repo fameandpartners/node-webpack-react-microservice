@@ -21,9 +21,7 @@ import image7 from '../../../img/test/image_7.png';
 // import * as AppActions from '../../actions/AppActions';
 
 // CSS
-// import '../../../css/components/ProductDisplayOptionsTouch.scss';
-
-// Assets
+import '../../../css/components/ProductDisplayOptionsTouch.scss';
 
 
 // function stateToProps(state) {
@@ -58,17 +56,22 @@ class ProductDisplayOptionsTouch extends Component {
           <Slide><img className="width--full" alt="dress4" src={image6} /></Slide>
           <Slide><img className="width--full" alt="dress4" src={image7} /></Slide>
         </Slider>
+        <div className="ProductDisplayOptionsTouch__Options App--mb-normal App--mt-normal">
+          <div className="ProductDisplayOptionsTouch__Option display--inline-block">
+            <span>Fabric & Color</span><br />
+            <span>**SELECTION**</span>
+          </div>
+          <div className="ProductDisplayOptionsTouch__Option display--inline-block">
+            <span>Style Addons</span><br />
+            <span>**SELECTION**</span>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-ProductDisplayOptionsTouch.propTypes = {
-  // sideMenuOpen: PropTypes.bool,
-};
-
-ProductDisplayOptionsTouch.defaultProps = {
-  // sideMenuOpen: false,
-};
+ProductDisplayOptionsTouch.propTypes = {};
+ProductDisplayOptionsTouch.defaultProps = {};
 
 export default ProductDisplayOptionsTouch;
