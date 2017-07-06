@@ -56,12 +56,12 @@ class ProductDisplayOptionsTouch extends Component {
           <Slide><img className="width--full" alt="dress4" src={image6} /></Slide>
           <Slide><img className="width--full" alt="dress4" src={image7} /></Slide>
         </Slider>
-        <div className="ProductDisplayOptionsTouch__Options App--mb-normal App--mt-normal">
-          <div className="ProductDisplayOptionsTouch__Option display--inline-block">
+        <div className="ProductDisplayOptionsTouch__options App--mb-normal App--mt-normal">
+          <div className="ProductDisplayOptionsTouch__option display--inline-block">
             <span>Fabric & Color</span><br />
             <span>**SELECTION**</span>
           </div>
-          <div className="ProductDisplayOptionsTouch__Option display--inline-block">
+          <div className="ProductDisplayOptionsTouch__option display--inline-block">
             <span>Style Addons</span><br />
             <span>**SELECTION**</span>
           </div>
