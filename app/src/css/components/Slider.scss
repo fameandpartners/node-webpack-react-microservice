@@ -1,0 +1,34 @@
+/**
+ * (optional) define here the style definitions which should be applied on the slider container
+ * e.g. width including further controls like arrows etc.
+ */
+.Slider {
+  .frame {
+
+    /**
+    * (optional) wrapper width, specifies width of the slider frame.
+    */
+    width: 100%;
+    position: relative;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .slides {
+    width: 100%;
+    display: inline-block;
+  }
+
+  ul > * {
+    color: rgb(0, 0, 0);
+    position: relative;
+    display: inline-block;
+
+    /**
+    * (optional) if the content inside the slide element has a defined size.
+    */
+    margin-right: 10px;
+  }
+}

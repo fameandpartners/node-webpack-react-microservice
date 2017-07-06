@@ -43,7 +43,7 @@ class SideMenu extends Component {
     return (
       <Motion
         style={{
-          x: spring(sideMenuOpen ? 0 : -100, {
+          x: spring(sideMenuOpen ? 0 : -20, {
             stiffness: 170,
             damping: 18,
             precision: 80,
@@ -54,8 +54,8 @@ class SideMenu extends Component {
           <div
             className="SideMenu"
             style={{
-              WebkitTransform: `translate3d(${x}%, 0, 0)`,
-              transform: `translate3d(${x}%, 0, 0)`,
+              WebkitTransform: `translate3d(${x * 5}%, 0, 0)`,
+              transform: `translate3d(${x * 5}%, 0, 0)`,
             }}
           >
             <Hamburger
