@@ -20,7 +20,7 @@ class FacebookButton extends Component {
   }
 
   handleClick() {
-    console.log('handling facebook click');
+    return null;
   }
 
   facebookText() {

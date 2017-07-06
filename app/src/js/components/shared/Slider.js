@@ -2,19 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { lory } from 'lory.js';
-import win from '../../polyfills/windowPolyfill';
 
 // CSS
 import '../../../css/components/Slider.scss';
-
-// TEST IMAGES
-import image1 from '../../../img/test/image_1.png';
-import image2 from '../../../img/test/image_2.png';
-import image3 from '../../../img/test/image_3.png';
-import image4 from '../../../img/test/image_4.png';
-import image5 from '../../../img/test/image_5.png';
-import image6 from '../../../img/test/image_6.png';
-import image7 from '../../../img/test/image_7.png';
 
 class Slider extends Component {
   constructor(props) {
@@ -23,28 +13,23 @@ class Slider extends Component {
   }
 
   componentDidMount() {
-    if (win.document.querySelector) {
-      const simple = win.document.querySelector('.js_slider');
-
-      lory(simple, {
-        infinite: 1,
-      });
-    }
+    lory(this.slider, {
+      infinite: 1,
+    });
   }
 
   render() {
+    const { children } = this.props;
+
     return (
-      <div className="Slider u-full-width">
+      <div
+        ref={c => this.slider = c}
+        className="Slider u-full-width"
+      >
         <div className="slider js_slider">
           <div className="frame js_frame">
             <ul className="slides js_slides">
-              <img alt="dress2" src={image1} />
-              <img alt="dress2" src={image2} />
-              <img alt="dress3" src={image3} />
-              <img alt="dress4" src={image4} />
-              <img alt="dress4" src={image5} />
-              <img alt="dress4" src={image6} />
-              <img alt="dress4" src={image7} />
+              { children }
             </ul>
           </div>
         </div>
@@ -54,11 +39,10 @@ class Slider extends Component {
 }
 
 Slider.propTypes = {
-  sideMenuOpen: PropTypes.bool,
-};
-
-Slider.defaultProps = {
-  sideMenuOpen: false,
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default Slider;
