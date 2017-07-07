@@ -13,7 +13,7 @@ import AppStore from './stores/AppStore';
 // const hydrated = (typeof window === 'object') ? window.__data : {
 const hydrated = {
   $$appState: {
-    sideMenuOpen: true,
+    // sideMenuOpen: true,
   },
   $$productState: {
     preCustomizations: [
