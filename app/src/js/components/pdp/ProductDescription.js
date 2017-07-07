@@ -9,7 +9,7 @@ import objnoop from '../../libs/objnoop';
 // import * as AppActions from '../../actions/AppActions';
 
 // CSS
-// import '../../../css/components/ProductDescription.scss';
+import '../../../css/components/ProductDescription.scss';
 
 
 function stateToProps(state) {
@@ -30,8 +30,9 @@ class ProductDescription extends Component {
   render() {
     const { productDescription, modelDescription } = this.props;
     return (
-      <div className="ProductDescription">
+      <div className="ProductDescription u-center">
         <p>{ productDescription }</p>
+        <p>-</p>
         <p>{ modelDescription }</p>
       </div>
     );
