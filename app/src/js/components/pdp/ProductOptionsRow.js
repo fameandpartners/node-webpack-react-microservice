@@ -5,12 +5,24 @@ import noop from '../../libs/noop';
 
 /* eslint-disable react/prefer-stateless-function */
 class ProductOptionsRow extends PureComponent {
+  rightNodeElem() {
+    const { rightNode, handleClick } = this.props;
+    if (rightNode) return rightNode;
+    if (handleClick) {
+      return (
+        <span handleClick={handleClick} className="link">Add</span>
+      );
+    }
+    return null;
+  }
+
   render() {
     const {
       leftNode,
       leftNodeClassName,
-      rightNode,
       rightNodeClassName,
+      optionIsSelected,
+      header,
       handleClick,
     } = this.props;
 
@@ -21,7 +33,7 @@ class ProductOptionsRow extends PureComponent {
       >
         <span
           className={classNames(
-            'ProductOptionsRow--left textAlign--left',
+            'ProductOptionsRow__left textAlign--left',
             leftNodeClassName,
           )}
         >
@@ -30,11 +42,14 @@ class ProductOptionsRow extends PureComponent {
 
         <span
           className={classNames(
-            'ProductOptionsRow--right textAlign--right',
+            'ProductOptionsRow__right textAlign--right',
             rightNodeClassName,
+            {
+              'ProductOptionsRow__right--fade-in': optionIsSelected || header,
+            },
           )}
         >
-          {rightNode}
+          {this.rightNodeElem()}
         </span>
       </div>
     );
@@ -46,6 +61,8 @@ ProductOptionsRow.propTypes = {
   leftNodeClassName: PropTypes.string,
   rightNode: PropTypes.node,
   rightNodeClassName: PropTypes.string,
+  header: PropTypes.bool,
+  optionIsSelected: PropTypes.bool,
   handleClick: PropTypes.func,
 };
 
@@ -54,6 +71,8 @@ ProductOptionsRow.defaultProps = {
   leftNodeClassName: '',
   rightNode: null,
   rightNodeClassName: '',
+  optionIsSelected: false,
+  header: false,
   handleClick: noop,
 };
 

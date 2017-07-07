@@ -51,6 +51,7 @@ class ProductOptions extends Component {
           <div className="ProductOptions__container">
             <div className="ProductOptions__content typography">
               <ProductOptionsRow
+                header
                 leftNode={<h1 className="display--inline h4">{productTitle}</h1>}
                 leftNodeClassName="ProductOptionsRow--heading"
                 rightNode={<span className="h4">$240</span>}
@@ -58,17 +59,17 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 leftNode={<span>Color</span>}
                 leftNodeClassName="u-uppercase"
-                rightNode={<span />}
+                optionIsSelected={false}
               />
               <ProductOptionsRow
                 leftNode={<span>Length</span>}
                 leftNodeClassName="u-uppercase"
-                rightNode={<span />}
+                optionIsSelected={false}
               />
               <ProductOptionsRow
                 leftNode={<span>Style Addons</span>}
                 leftNodeClassName="u-uppercase"
-                rightNode={<span><a>Add</a></span>}
+                optionIsSelected={false}
               />
             </div>
           </div>

@@ -7,8 +7,25 @@
 .ProductOptionsRow {
   padding: 1.4em 0;
   border-bottom: 1px solid $c-light-gray;
+  transition: 600ms all ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: $c-black;
+    border-color: $c-black;
+  }
 }
 
 .ProductOptionsRow--heading {
   color: $c-black;
+}
+
+.ProductOptionsRow__right {
+  opacity: 0;
+  transition: 300ms opacity ease-in-out;
+}
+
+.ProductOptionsRow:hover .ProductOptionsRow__right,
+.ProductOptionsRow__right--fade-in {
+  opacity: 1;
 }
