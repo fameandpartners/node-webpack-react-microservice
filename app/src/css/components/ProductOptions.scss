@@ -1,0 +1,14 @@
+.ProductOptions__container {
+  color: $c-text-gray;
+  width: 70%;
+  max-width: 450px;
+}
+
+.ProductOptionsRow {
+  padding: 1.4em 0;
+  border-bottom: 1px solid $c-light-gray;
+}
+
+.ProductOptionsRow--heading {
+  color: $c-black;
+}
