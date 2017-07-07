@@ -14,11 +14,16 @@ import * as ModalActions from '../../actions/ModalActions';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
-// App Components
-// import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
+
+// PDP specific UI Components
+import ProductPrecustomizations from './ProductPrecustomizations';
+import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
+
+// Generic UI Components
+// import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
 import HeaderHider from '../shared/HeaderHider';
 import HeaderMobile from '../shared/HeaderMobile';
 import Header from '../shared/Header';
@@ -70,6 +75,7 @@ class AppMain extends Component {
       productTitle,
       sideMenuOpen,
     } = this.props;
+    console.log('breakpoint', breakpoint);
 
     return (
       <Motion
@@ -108,6 +114,15 @@ class AppMain extends Component {
                 ? <ProductDisplayOptionsTouch />
                 : <ProductOptions />
               }
+            </div>
+
+            <div className="layout-container grid-2_sm-1">
+              <div className="col">
+                <ProductDescription />
+              </div>
+              <div className="col">
+                <ProductPrecustomizations />
+              </div>
             </div>
 
             <div className="layout-container App--mb-normal">
