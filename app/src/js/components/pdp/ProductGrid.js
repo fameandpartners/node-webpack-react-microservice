@@ -61,16 +61,6 @@ class ProductGrid extends Component {
             <div className="brick">
               <img className="width--full" alt="dress5" src={image5} />
             </div>
-            <div className="brick typography">
-              <h2>Product Details</h2>
-              <p>
-              Low effort, high contrast. The Jo is a heavy georgette gown featuring
-              a contrasting pink bow at the front, criss-cross back strips,
-              and a side split. It has an invisible zipper.
-            </p>
-              <p>-</p>
-              <p>Our model wears a US 0 and is 5&apos;9"</p>
-            </div>
             <div className="brick">
               <img className="width--full" alt="dress6" src={image6} />
             </div>

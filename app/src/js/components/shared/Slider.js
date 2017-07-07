@@ -15,6 +15,8 @@ class Slider extends Component {
   componentDidMount() {
     lory(this.slider, {
       infinite: 1,
+      classNameFrame: 'Slider__frame',
+      classNameSlideContainer: 'Slider__slides',
     });
   }
 
