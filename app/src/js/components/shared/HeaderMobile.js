@@ -47,7 +47,7 @@ class HeaderMobile extends Component {
       <header className="Header HeaderMobile width--full">
         <div className="layout-container">
           <nav className="grid">
-            <div className="col-1">
+            <div className="col-2">
               <Hamburger
                 isOpen={false}
                 handleClick={this.handleClick}
@@ -56,7 +56,7 @@ class HeaderMobile extends Component {
             <div className="col">
               {headerTitle}
             </div>
-            <div className="col-1 textAlign--right">
+            <div className="col-2 textAlign--right">
               <img
                 src={ShoppingBagIcon.url}
                 alt="Shopping Bag Icon"

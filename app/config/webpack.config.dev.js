@@ -178,7 +178,7 @@ module.exports = {
               extract: true,
               runtimeOptions: {
                 spriteFilename: 'sprite-[hash:6].svg',
-              }
+              },
             },
           },
         ],
@@ -207,8 +207,6 @@ module.exports = {
     // a plugin that prints an error when you attempt to do this.
     // See https://github.com/facebookincubator/create-react-app/issues/240
     new CaseSensitivePathsPlugin(),
-    // Creates Sprite SVG
-    new SpriteLoaderPlugin(),
     // If you require a missing module and then `npm install` it, you still have
     // to restart the development server for Webpack to discover it. This plugin
     // makes the discovery automatic so you don't have to restart.
@@ -219,6 +217,8 @@ module.exports = {
       files: 'src/css/**/*.scss',
       syntax: 'scss',
     }),
+    // Creates Sprite SVG
+    new SpriteLoaderPlugin(),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
