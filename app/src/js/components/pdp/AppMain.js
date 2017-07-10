@@ -14,7 +14,6 @@ import * as ModalActions from '../../actions/ModalActions';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
-
 // PDP specific UI Components
 import ProductPrecustomizations from './ProductPrecustomizations';
 import ProductDescription from './ProductDescription';
@@ -28,6 +27,9 @@ import HeaderHider from '../shared/HeaderHider';
 import HeaderMobile from '../shared/HeaderMobile';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
+
+// CSS
+import '../../../css/components/AppMain.scss';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -75,7 +77,6 @@ class AppMain extends Component {
       productTitle,
       sideMenuOpen,
     } = this.props;
-    console.log('breakpoint', breakpoint);
 
     return (
       <Motion
@@ -89,7 +90,7 @@ class AppMain extends Component {
       >
         {({ x }) =>
           <div
-            className="App__main height--full"
+            className="AppMain height--full"
           >
             <div
               className={this.appBlanketClass}
@@ -116,12 +117,14 @@ class AppMain extends Component {
               }
             </div>
 
-            <div className="layout-container grid-2_sm-1">
-              <div className="col">
-                <ProductDescription />
-              </div>
-              <div className="col">
-                <ProductPrecustomizations />
+            <div className="layout-container">
+              <div className="grid-2_sm-1 AppMain__product-info">
+                <div className="col grid-middle">
+                  <ProductDescription />
+                </div>
+                <div className="col grid-middle">
+                  <ProductPrecustomizations />
+                </div>
               </div>
             </div>
 

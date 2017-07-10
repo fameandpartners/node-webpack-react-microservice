@@ -1,13 +1,21 @@
+.ProductOptions {
+  border-bottom: 1px solid $c-disabled;
+}
+
 .ProductOptions__container {
-  color: $c-text-gray;
   width: 70%;
   max-width: 450px;
 }
 
+.ProductOptions .ProductOptions__primary-image-container {
+  padding-bottom: 0;
+}
+
 .ProductOptionsRow {
+  color: $c-text-gray;
   padding: 1.4em 0;
   border-bottom: 1px solid $c-light-gray;
-  transition: 600ms all ease-in-out;
+  transition: 500ms all ease-in-out;
   cursor: pointer;
 
   &:hover {
@@ -16,8 +24,15 @@
   }
 }
 
+// TODO: @Elgrecode, this is a little overwritey, consider revising
 .ProductOptionsRow--heading {
   color: $c-black;
+  cursor: default;
+
+  &:hover {
+    border-bottom: 1px solid $c-light-gray;
+    color: inherit;
+  }
 }
 
 .ProductOptionsRow__right {
@@ -28,4 +43,8 @@
 .ProductOptionsRow:hover .ProductOptionsRow__right,
 .ProductOptionsRow__right--fade-in {
   opacity: 1;
+}
+
+.ProductOptions__additional-info {
+  color: $c-text-gray;
 }

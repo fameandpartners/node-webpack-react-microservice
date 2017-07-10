@@ -42,41 +42,61 @@ class ProductOptions extends Component {
     autoBind(this);
   }
 
+  handleColorOptionClick() {
+    console.warn('Handling color option click');
+  }
+
+  handleAddonOptionClick() {
+    console.warn('Handling Adddon Option Click');
+  }
+
+  handleSizeProfileClick() {
+    console.warn('Handling Size Profile Click');
+  }
+
+  handleAddToBag() {
+    console.warn('Handling Add to Bag Click');
+  }
+
   render() {
     const { productTitle } = this.props;
     return (
       <div className="ProductOptions grid-12">
-        <div className="App__primary-image-container brick col-6">
+        <div className="ProductOptions__primary-image-container brick col-6">
           <img className="width--full" alt="dress1" src={image1} />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
             <div className="ProductOptions__content App--mb-normal typography">
               <ProductOptionsRow
-                header
+                heading
                 leftNode={<h1 className="display--inline h4">{productTitle}</h1>}
-                leftNodeClassName="ProductOptionsRow--heading"
                 rightNode={<span className="h4">$240</span>}
               />
               <ProductOptionsRow
                 leftNode={<span>Color</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
-              />
-              <ProductOptionsRow
-                leftNode={<span>Length</span>}
-                leftNodeClassName="u-uppercase"
-                optionIsSelected={false}
+                handleClick={this.handleColorOptionClick}
               />
               <ProductOptionsRow
                 leftNode={<span>Style Addons</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
+                handleClick={this.handleAddonOptionClick}
               />
             </div>
             <div className="ProductOptions__ctas grid-1">
-              <Button secondary className="App--mb-small" text="Your size" />
-              <Button text="Add to Bag" />
+              <Button
+                secondary
+                text="Your size"
+                onClick={this.handleSizeProfileClick}
+                className="App--mb-small"
+              />
+              <Button
+                onClick={this.handleAddToBag}
+                text="Add to Bag"
+              />
             </div>
             <div className="ProductOptions__additional-info App--mb-normal">
               <p>
@@ -88,7 +108,6 @@ class ProductOptions extends Component {
                 <a className="link link--static">Learn more</a>
               </p>
               <ProductSecondaryActions />
-
             </div>
           </div>
         </div>
