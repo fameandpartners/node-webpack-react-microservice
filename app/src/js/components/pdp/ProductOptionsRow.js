@@ -1,16 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import noop from '../../libs/noop';
 
 /* eslint-disable react/prefer-stateless-function */
 class ProductOptionsRow extends PureComponent {
   rightNodeElem() {
     const { rightNode, handleClick } = this.props;
     if (rightNode) return rightNode;
-    if (handleClick) {
+    if (typeof handleClick === 'function') {
       return (
-        <span handleClick={handleClick} className="link">Add</span>
+        <span onClick={handleClick} className="link">Add</span>
       );
     }
     return null;
@@ -22,13 +21,20 @@ class ProductOptionsRow extends PureComponent {
       leftNodeClassName,
       rightNodeClassName,
       optionIsSelected,
-      header,
+      heading,
       handleClick,
     } = this.props;
 
     return (
       <div
-        className="ProductOptionsRow ProductOptions__ProductOptionsRow grid-spaceBetween"
+        className={classNames(
+          'ProductOptionsRow',
+          'ProductOptions__ProductOptionsRow',
+          'grid-spaceBetween',
+          {
+            'ProductOptionsRow--heading': heading,
+          },
+        )}
         onClick={handleClick}
       >
         <span
@@ -45,7 +51,7 @@ class ProductOptionsRow extends PureComponent {
             'ProductOptionsRow__right textAlign--right',
             rightNodeClassName,
             {
-              'ProductOptionsRow__right--fade-in': optionIsSelected || header,
+              'ProductOptionsRow__right--fade-in': optionIsSelected || heading,
             },
           )}
         >
@@ -61,7 +67,7 @@ ProductOptionsRow.propTypes = {
   leftNodeClassName: PropTypes.string,
   rightNode: PropTypes.node,
   rightNodeClassName: PropTypes.string,
-  header: PropTypes.bool,
+  heading: PropTypes.bool,
   optionIsSelected: PropTypes.bool,
   handleClick: PropTypes.func,
 };
@@ -72,8 +78,8 @@ ProductOptionsRow.defaultProps = {
   rightNode: null,
   rightNodeClassName: '',
   optionIsSelected: false,
-  header: false,
-  handleClick: noop,
+  heading: false,
+  handleClick: null,
 };
 
 export default ProductOptionsRow;

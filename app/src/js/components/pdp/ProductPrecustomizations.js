@@ -42,8 +42,8 @@ class ProductPrecustomizations extends Component {
         <div className="grid-12">
           { preCustomizations.map(pc => (
             <div key={`pc-${pc.id}`} className="ProductPrecustomizations__product-wrapper display--inline-block col-4">
-              <img alt={`Customize it ${pc.description}`} src={pc.smallImg} />
-              <span>{pc.description}</span>
+              <img className="width--full" alt={`Customize it ${pc.description}`} src={pc.smallImg} />
+              <span className="link--static">{pc.description}</span>
             </div>
           ))}
         </div>
