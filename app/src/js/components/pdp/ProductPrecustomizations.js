@@ -34,14 +34,14 @@ class ProductPrecustomizations extends Component {
 
   render() {
     const { preCustomizations } = this.props;
-    console.log('preCustomizations', preCustomizations);
+
     return (
       <div className="ProductPrecustomizations typography">
         <h5>Other versions</h5>
 
         <div className="grid-12">
           { preCustomizations.map(pc => (
-            <div className="ProductPrecustomizations__product-wrapper display--inline-block col-4">
+            <div key={`pc-${pc.id}`} className="ProductPrecustomizations__product-wrapper display--inline-block col-4">
               <img alt={`Customize it ${pc.description}`} src={pc.smallImg} />
               <span>{pc.description}</span>
             </div>
@@ -53,12 +53,14 @@ class ProductPrecustomizations extends Component {
 }
 
 ProductPrecustomizations.propTypes = {
-  preCustomizations: PropTypes.arrayOf({
-    id: PropTypes.string,
-    smallImg: PropTypes.string,
-    description: PropTypes.string,
-    selectedCustomizations: PropTypes.obj,
-  }).isRequired,
+  preCustomizations: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      smallImg: PropTypes.string,
+      description: PropTypes.string,
+      selectedCustomizations: PropTypes.obj,
+    }),
+  ).isRequired,
 };
 ProductPrecustomizations.defaultProps = {};
 

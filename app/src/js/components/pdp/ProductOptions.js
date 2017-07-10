@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
+import ProductSecondaryActions from './ProductSecondaryActions';
 
 // TEST IMAGES
 import image1 from '../../../img/test/image_1.png';
@@ -16,7 +17,8 @@ import image1 from '../../../img/test/image_1.png';
 // CSS
 import '../../../css/components/ProductOptions.scss';
 
-// Assets
+// UI Components
+import Button from '../generic/Button';
 
 
 function stateToProps(state) {
@@ -49,7 +51,7 @@ class ProductOptions extends Component {
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
-            <div className="ProductOptions__content typography">
+            <div className="ProductOptions__content App--mb-normal typography">
               <ProductOptionsRow
                 header
                 leftNode={<h1 className="display--inline h4">{productTitle}</h1>}
@@ -71,6 +73,22 @@ class ProductOptions extends Component {
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
               />
+            </div>
+            <div className="ProductOptions__ctas grid-1">
+              <Button secondary className="App--mb-small" text="Your size" />
+              <Button text="Add to Bag" />
+            </div>
+            <div className="ProductOptions__additional-info App--mb-normal">
+              <p>
+                $5 of each sale funds a women's empowerment charity.&nbsp;
+                <a className="link link--static">Learn more</a>
+              </p>
+              <p className="App--mb-small">
+                Complimentary shipping and returns.&nbsp;
+                <a className="link link--static">Learn more</a>
+              </p>
+              <ProductSecondaryActions />
+
             </div>
           </div>
         </div>
