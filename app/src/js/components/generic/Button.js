@@ -22,6 +22,7 @@ class Button extends Component {
       className,
       disabled,
       metaIcon,
+      secondary,
       tall,
       text,
       handleClick,
@@ -35,6 +36,7 @@ class Button extends Component {
             'Button',
             className,
             {
+              'Button--secondary': secondary,
               'Button--disabled': disabled,
               'Button--tall': tall,
             },
@@ -55,6 +57,7 @@ Button.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   metaIcon: PropTypes.node,
+  secondary: PropTypes.bool,
   tall: PropTypes.bool,
   text: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
@@ -64,6 +67,7 @@ Button.defaultProps = {
   className: '',
   disabled: false,
   metaIcon: null,
+  secondary: false,
   tall: false,
   text: 'Submit',
 };

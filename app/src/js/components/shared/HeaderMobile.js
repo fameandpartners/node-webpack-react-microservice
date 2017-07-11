@@ -42,15 +42,27 @@ class HeaderMobile extends Component {
   }
 
   render() {
+    const { headerTitle } = this.props;
     return (
       <header className="Header HeaderMobile width--full">
         <div className="layout-container">
-          <nav className="grid-12">
-            <div className="col-6">
-              <Hamburger isOpen={false} handleClick={this.handleClick} />
+          <nav className="grid">
+            <div className="col-2">
+              <Hamburger
+                isOpen={false}
+                handleClick={this.handleClick}
+              />
             </div>
-            <div className="col-6 textAlign--right">
-              <ShoppingBagIcon width="26px" height="26px" />
+            <div className="col">
+              {headerTitle}
+            </div>
+            <div className="col-2 textAlign--right">
+              <img
+                src={ShoppingBagIcon.url}
+                alt="Shopping Bag Icon"
+                width="26px"
+                height="26px"
+              />
             </div>
           </nav>
         </div>
@@ -60,11 +72,14 @@ class HeaderMobile extends Component {
 }
 
 HeaderMobile.propTypes = {
+  headerTitle: PropTypes.string,
+  // Redux Props
   sideMenuOpen: PropTypes.bool,
   activateSideMenu: PropTypes.func.isRequired,
 };
 
 HeaderMobile.defaultProps = {
+  headerTitle: '',
   sideMenuOpen: false,
 };
 

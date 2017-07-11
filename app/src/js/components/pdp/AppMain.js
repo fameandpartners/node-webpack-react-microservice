@@ -7,15 +7,6 @@ import { Motion, spring } from 'react-motion';
 import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
-// TEST IMAGES
-import image1 from '../../../img/test/image_1.png';
-import image2 from '../../../img/test/image_2.png';
-import image3 from '../../../img/test/image_3.png';
-import image4 from '../../../img/test/image_4.png';
-import image5 from '../../../img/test/image_5.png';
-import image6 from '../../../img/test/image_6.png';
-import image7 from '../../../img/test/image_7.png';
-
 // Actions
 import * as AppActions from '../../actions/AppActions';
 import * as ModalActions from '../../actions/ModalActions';
@@ -23,24 +14,27 @@ import * as ModalActions from '../../actions/ModalActions';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
-// App Components
+// PDP specific UI Components
+import ProductPrecustomizations from './ProductPrecustomizations';
+import ProductDescription from './ProductDescription';
+import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
+import ProductOptions from './ProductOptions';
+import ProductGrid from './ProductGrid';
+
+// Generic UI Components
+// import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
 import HeaderHider from '../shared/HeaderHider';
 import HeaderMobile from '../shared/HeaderMobile';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 
-// UI Global Components
-import Input from '../form/Input';
-import Select from '../form/Select';
-import RadioToggle from '../form/RadioToggle';
-import Button from '../generic/Button';
-
-// OTHER / TODO: REMOVE
-import noop from '../../libs/noop';
+// CSS
+import '../../../css/components/AppMain.scss';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
+    productTitle: state.$$productState.get('productTitle'),
     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
   };
 }
@@ -78,7 +72,12 @@ class AppMain extends Component {
   }
 
   render() {
-    const { breakpoint, sideMenuOpen } = this.props;
+    const {
+      breakpoint,
+      productTitle,
+      sideMenuOpen,
+    } = this.props;
+
     return (
       <Motion
         style={{
@@ -91,7 +90,7 @@ class AppMain extends Component {
       >
         {({ x }) =>
           <div
-            className="App__main height--full"
+            className="AppMain height--full"
           >
             <div
               className={this.appBlanketClass}
@@ -103,101 +102,39 @@ class AppMain extends Component {
             />
             { breakpoint === 'mobile' || breakpoint === 'tablet' ?
               <HeaderHider>
-                <HeaderMobile />
+                <HeaderMobile headerTitle={productTitle} />
               </HeaderHider>
               :
               <Header />
             }
-            <div className="layout-container typography ui-component-section grid-12">
-              <div className="col-12">
-                <h2>UI Global Components</h2>
-                <button onClick={this.handleActivateModal}>Open Sign Up Modal</button>
-              </div>
-              <div className="col-4">
-                <pre>Input.js</pre>
-                <Input
-                  id="test-input"
-                />
-              </div>
-              <div className="col-4">
-                <pre>Select.js</pre>
-                <Select
-                  id="test-select"
-                  label="Choose Something"
-                  options={[
-                    { id: 0, name: 'Option One', active: false },
-                    { id: 1, name: 'Option Two', active: false },
-                  ]}
-                />
-              </div>
-              <div className="col-4">
-                <pre>RadioToggle.js</pre>
-                <RadioToggle
-                  id="test-select"
-                  label="Choose Something"
-                  value="INCHES"
-                  options={[
-                    { label: 'in', value: 'INCHES' },
-                    { label: 'cm', value: 'CM' },
-                  ]}
-                  onChange={noop}
-                />
-              </div>
-              <hr className="col-12" />
-              <div className="col-4">
-                <pre>Button.js</pre>
-                <Button
-                  text="Fame Button"
-                  handleClick={noop}
-                />
-              </div>
+
+            { /* <ComponentTestPleaseRemove /> */ }
+
+            <div className="layout-container">
+              { breakpoint === 'mobile' || breakpoint === 'tablet'
+                ? <ProductDisplayOptionsTouch />
+                : <ProductOptions />
+              }
             </div>
-            <div className="App__content layout-container">
-              <div className="grid-12">
-                <div className="App__primarappy-image-container brick col-6">
-                  <img className="width--full" alt="dress1" src={image1} />
+
+            <div className="layout-container">
+              <div className="grid-2_sm-1 AppMain__product-info">
+                <div className="col grid-middle">
+                  <ProductDescription />
                 </div>
-                <div className="App__dress-options col-6">
-                  <div>Color</div>
-                  <div>Addons</div>
-                  <div>Sizing</div>
-                </div>
-              </div>
-              <div className="App__photo-montage masonry grid-12">
-                <div className="col-6">
-                  <div className="brick">
-                    <img className="width--full" alt="dress2" src={image2} />
-                  </div>
-                  <div className="brick">
-                    <img className="width--full" alt="dress3" src={image3} />
-                  </div>
-                  <div className="brick">
-                    <img className="width--full" alt="dress4" src={image4} />
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="brick">
-                    <img className="width--full" alt="dress5" src={image5} />
-                  </div>
-                  <div className="brick typography">
-                    <h2>Product Details</h2>
-                    <p>
-                      Low effort, high contrast. The Jo is a heavy georgette gown featuring
-                      a contrasting pink bow at the front, criss-cross back strips,
-                      and a side split. It has an invisible zipper.
-                    </p>
-                    <p>-</p>
-                    <p>Our model wears a US 0 and is 5&apos;9"</p>
-                  </div>
-                  <div className="brick">
-                    <img className="width--full" alt="dress6" src={image6} />
-                  </div>
-                  <div className="brick">
-                    <img className="width--full" alt="dress7" src={image7} />
-                  </div>
+                <div className="col grid-middle">
+                  <ProductPrecustomizations />
                 </div>
               </div>
             </div>
+
+            <div className="layout-container App--mb-normal">
+              { breakpoint === 'mobile' || breakpoint === 'tablet'
+                ? null
+                : <ProductGrid />
+              }
+            </div>
+
             <Footer />
           </div>
       }
@@ -207,16 +144,18 @@ class AppMain extends Component {
 }
 
 AppMain.propTypes = {
-  sideMenuOpen: PropTypes.bool,
-  // Redux
+  // Redux Props
   activateSideMenu: PropTypes.func.isRequired,
   activateModal: PropTypes.func.isRequired,
+  productTitle: PropTypes.string,
+  sideMenuOpen: PropTypes.bool,
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
   // winWidth: PropTypes.number.isRequired,
 };
 
 AppMain.defaultProps = {
+  productTitle: '',
   sideMenuOpen: false,
 };
 

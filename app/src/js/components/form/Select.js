@@ -178,7 +178,7 @@ class Select extends Component {
           : null
         }
         <span className="Select-item-text noSelect">{spanText}</span>
-        <Carat className="Select__carat" width="15px" height="15px" />
+        <img src={Carat.url} alt="carat" className="Select__carat" width="15px" height="15px" />
         <div className="Select">
           <div className="Select-list-wrapper">
             <ul className="Select-list">

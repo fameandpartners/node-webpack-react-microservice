@@ -3,7 +3,22 @@
   width: 100vw;
   text-align: center;
   background: $c-white;
+}
 
+.App--mb-small {
+  margin-bottom: 15px;
+}
+
+.App--mb-normal {
+  margin-bottom: 30px;
+}
+
+.App--mt-small {
+  margin-top: 15px;
+}
+
+.App--mb-normal {
+  margin-top: 30px;
 }
 
 .App__link {

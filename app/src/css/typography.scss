@@ -4,9 +4,8 @@
  */
 
 
-$link-color: rgb(12, 50, 100);
 $link-visited-color: rgb(12, 50, 8);
-$link-hover-color: saturate($link-color, 20%);
+$link-hover-color: saturate($c-link, 20%);
 
 $base-font-family: sans-serif;
 $base-font-size: 14px;
@@ -36,17 +35,29 @@ body {
  */
 
 .link {
-  color: $link-color;
+  cursor: pointer;
+  color: $c-link;
   text-decoration: none;
+  font-weight: 400;
+  transition: 500ms color;
 
   &:visited {
-    color: $link-visited-color;
+    color: $c-link;
   }
 
   &:hover,
   &:visited:hover {
     color: $link-hover-color;
     text-decoration: underline;
+  }
+
+  &--static {
+    text-decoration: underline;
+    color: inherit;
+  }
+
+  &--static:hover {
+    color: $c-black;
   }
 }
 
@@ -57,6 +68,10 @@ body {
 
 .bold {
   font-weight: 700;
+}
+
+p {
+  line-height: 1.9em;
 }
 
 .h1,
@@ -81,7 +96,7 @@ body {
 
 .h1 {
   font-size: 400%;
-  letter-spacing: -2px;
+  letter-spacing: -0.5px;
 }
 
 .h2 {
@@ -126,37 +141,37 @@ body {
   h1,
   .h1 {
 
-    @extend .h1; margin: 1em 0 0.5em;
+    @extend .h1; margin: 0.5em 0 0.5em;
   }
 
   h2,
   .h2 {
 
-    @extend .h2; margin: 1em 0 0.5em;
+    @extend .h2; margin: 0.5em 0 0.5em;
   }
 
   h3,
   .h3 {
 
-    @extend .h3; margin: 1em 0 0.5em;
+    @extend .h3; margin: 0.5em 0 0.5em;
   }
 
   h4,
   .h4 {
 
-    @extend .h4; margin: 1em 0 0.5em;
+    @extend .h4; margin: 0.5em 0 0.5em;
   }
 
   h5,
   .h5 {
 
-    @extend .h5; margin: 1em 0 0.5em;
+    @extend .h5; margin: 0.5em 0 0.5em;
   }
 
   h6,
   .h6 {
 
-    @extend .h6; margin: 1em 0 0.5em;
+    @extend .h6; margin: 0.5em 0 0.5em;
   }
 
 }
