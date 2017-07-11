@@ -12,6 +12,7 @@ import * as AppActions from '../../actions/AppActions';
 import * as ModalActions from '../../actions/ModalActions';
 
 // Constants
+import AppConstants from '../../constants/AppConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
@@ -36,6 +37,7 @@ function stateToProps(state) {
   return {
     productTitle: state.$$productState.get('productTitle'),
     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
+    cartDrawerOpen: state.$$appState.get('cartDrawerOpen'),
   };
 }
 
@@ -74,6 +76,7 @@ class AppMain extends Component {
   render() {
     const {
       breakpoint,
+      cartDrawerOpen,
       productTitle,
       sideMenuOpen,
     } = this.props;
@@ -81,61 +84,62 @@ class AppMain extends Component {
     return (
       <Motion
         style={{
-          x: spring(sideMenuOpen ? 15 : 0, {
-            stiffness: 170,
-            damping: 18,
-            precision: 12,
-          }),
+          opacity: spring(sideMenuOpen ? 15 : 0, AppConstants.ANIMATION_CONFIGURATION),
+          x: spring(cartDrawerOpen ? -2400 : 0, AppConstants.ANIMATION_CONFIGURATION),
         }}
       >
-        {({ x }) =>
-          <div
-            className="AppMain height--full"
-          >
+        {({ opacity, x }) =>
+          <div className="AppMain__wrapper">
             <div
-              className={this.appBlanketClass}
-              onClick={this.handleCloseMenu}
-              style={{
-                opacity: x / 100,
-                visibility: x !== 0 ? 'visible' : 'hidden',
-              }}
-            />
-            { breakpoint === 'mobile' || breakpoint === 'tablet' ?
-              <HeaderHider>
-                <HeaderMobile headerTitle={productTitle} />
-              </HeaderHider>
-              :
-              <Header />
-            }
-
-            { /* <ComponentTestPleaseRemove /> */ }
-
-            <div className="layout-container">
-              { breakpoint === 'mobile' || breakpoint === 'tablet'
-                ? <ProductDisplayOptionsTouch />
-                : <ProductOptions />
+              className="AppMain height--full"
+              style={{ transform: `translateX(${x / 8}px)` }}
+            >
+              <div
+                className={this.appBlanketClass}
+                onClick={this.handleCloseMenu}
+                style={{
+                  opacity: opacity / 100,
+                  visibility: opacity !== 0 ? 'visible' : 'hidden',
+                }}
+              />
+              { breakpoint === 'mobile' || breakpoint === 'tablet' ?
+                <HeaderHider>
+                  <HeaderMobile headerTitle={productTitle} />
+                </HeaderHider>
+                :
+                <Header />
               }
-            </div>
 
-            <div className="layout-container">
-              <div className="grid-2_sm-1 AppMain__product-info">
-                <div className="col grid-middle">
-                  <ProductDescription />
-                </div>
-                <div className="col grid-middle">
-                  <ProductPrecustomizations />
+              { /* <ComponentTestPleaseRemove /> */ }
+
+              <div className="layout-container">
+                { breakpoint === 'mobile' || breakpoint === 'tablet'
+                  ? <ProductDisplayOptionsTouch />
+                  : <ProductOptions />
+                }
+              </div>
+
+              <div className="layout-container">
+                <div className="grid-2_sm-1 AppMain__product-info">
+                  <div className="col grid-middle">
+                    <ProductDescription />
+                  </div>
+                  <div className="col grid-middle">
+                    <ProductPrecustomizations />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="layout-container App--mb-normal">
-              { breakpoint === 'mobile' || breakpoint === 'tablet'
-                ? null
-                : <ProductGrid />
-              }
-            </div>
+              <div className="layout-container App--mb-normal">
+                { breakpoint === 'mobile' || breakpoint === 'tablet'
+                  ? null
+                  : <ProductGrid />
+                }
+              </div>
 
-            <Footer />
+              <Footer />
+            </div>
+            <div className="Cart">Cart</div>
           </div>
       }
       </Motion>
@@ -147,6 +151,7 @@ AppMain.propTypes = {
   // Redux Props
   activateSideMenu: PropTypes.func.isRequired,
   activateModal: PropTypes.func.isRequired,
+  cartDrawerOpen: PropTypes.bool,
   productTitle: PropTypes.string,
   sideMenuOpen: PropTypes.bool,
   // Decorator Props
@@ -155,6 +160,7 @@ AppMain.propTypes = {
 };
 
 AppMain.defaultProps = {
+  cartDrawerOpen: false,
   productTitle: '',
   sideMenuOpen: false,
 };
