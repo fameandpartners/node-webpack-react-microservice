@@ -20,6 +20,8 @@ import SearchIcon from '../../../svg/i-search.svg';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
+    cartItems: state.$$cartState.get('lineItems'),
+    cartItemCount: state.$$cartState.get('lineItems').size,
     cartDrawerOpen: state.$$appState.get('cartDrawerOpen'),
   };
 }
@@ -38,12 +40,12 @@ class Header extends Component {
   }
 
   handleShoppingBagClick() {
-    console.log('handling shopping bag click');
     const { activateCartDrawer, cartDrawerOpen } = this.props;
     activateCartDrawer({ cartDrawerOpen: !cartDrawerOpen });
   }
 
   render() {
+    const { cartItemCount } = this.props;
     return (
       <header className="Header width--full">
         <div className="layout-container">
@@ -64,7 +66,10 @@ class Header extends Component {
                 <img src={AccountIcon.url} alt="My Account Icon" width="18px" height="26px" />
               </li>
               <li onClick={this.handleShoppingBagClick} className="Header__action">
-                <span className="Header__cart-count">[1]</span>
+                { cartItemCount > 0
+                  ? <span className="Header__cart-count">{cartItemCount}</span>
+                  : null
+                }
                 <img src={ShoppingBagIcon.url} alt="My bag" width="18px" height="26px" />
               </li>
             </ul>
@@ -77,10 +82,12 @@ class Header extends Component {
 
 Header.propTypes = {
   activateCartDrawer: PropTypes.func.isRequired,
+  cartItemCount: PropTypes.number,
   cartDrawerOpen: PropTypes.bool,
 };
 
 Header.defaultProps = {
+  cartItemCount: 0,
   cartDrawerOpen: false,
 };
 
