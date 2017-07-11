@@ -100,7 +100,7 @@ class ProductOptions extends Component {
             </div>
             <div className="ProductOptions__additional-info App--mb-normal">
               <p>
-                $5 of each sale funds a women's empowerment charity.&nbsp;
+                $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
                 <a className="link link--static">Learn more</a>
               </p>
               <p className="App--mb-small">
