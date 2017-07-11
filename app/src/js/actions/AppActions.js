@@ -7,6 +7,14 @@ export function activateSideMenu({ sideMenuOpen }) {
   };
 }
 
+export function activateCartDrawer({ cartDrawerOpen }) {
+  return {
+    type: AppConstants.ACTIVATE_CART_DRAWER,
+    cartDrawerOpen,
+  };
+}
+
 export default {
   activateSideMenu,
+  activateCartDrawer,
 };
