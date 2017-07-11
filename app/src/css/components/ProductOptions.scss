@@ -9,7 +9,7 @@
 
 .ProductOptionsRow {
   color: $c-text-gray;
-  padding: 1.4em 0;
+  padding: 1em 0;
   border-bottom: 1px solid $c-light-gray;
   transition: 500ms all ease-in-out;
   cursor: pointer;
@@ -43,4 +43,12 @@
 
 .ProductOptions__additional-info {
   color: $c-text-gray;
+}
+
+.ProductOptions__color-swatch {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-left: 10px;
 }

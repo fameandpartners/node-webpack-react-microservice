@@ -64,6 +64,7 @@ class Header extends Component {
                 <img src={AccountIcon.url} alt="My Account Icon" width="18px" height="26px" />
               </li>
               <li onClick={this.handleShoppingBagClick} className="Header__action">
+                <span className="Header__cart-count">[1]</span>
                 <img src={ShoppingBagIcon.url} alt="My bag" width="18px" height="26px" />
               </li>
             </ul>

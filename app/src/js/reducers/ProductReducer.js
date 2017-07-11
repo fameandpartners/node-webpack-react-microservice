@@ -22,17 +22,18 @@ export const $$initialState = Immutable.fromJS({
   currency: null,
 
   // ArrayOf({
-  // id: String,
-  // smallImg: String,
-  // descripition: String,
-  // preSelectedCustomizations: {}
+  //   id: String,
+  //   smallImg: String,
+  //   descripition: String,
+  //   preSelectedCustomizations: {}
   // })
   preCustomizations: [],
 
   // ArrayOf({
-  // id: String,
-  // meta: Object,
-  // hexValue
+  //   id: String,
+  //   name: String,
+  //   centsTotal: Number,
+  //   hexValue: String
   // })
   productColors: [],
 
@@ -43,8 +44,8 @@ export const $$initialState = Immutable.fromJS({
   productTitle: null,
 
   // ArrayOf({
-  // smallImg: String,
-  // bigImg: String
+  //   smallImg: String,
+  //   bigImg: String
   // })
   productImages: [],
 
@@ -52,15 +53,16 @@ export const $$initialState = Immutable.fromJS({
   modelDescription: null,
 
   // ObjectOf({
-  // id: String,
-  // meta: Object,
-  // hexValue
+  //   id: String,
+  //   name: String,
+  //   centsTotal: Number,
+  //   hexValue: String
   // })
   selectedColor: null,
 
   // ObjectOf({
-  // id: String,
-  // descripition: String,
+  //   id: String,
+  //   descripition: String,
   // })
   selectedCustomizations: null,
 });

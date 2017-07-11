@@ -51,14 +51,15 @@ body {
     text-decoration: underline;
   }
 
-  &--static {
-    text-decoration: underline;
-    color: inherit;
-  }
+}
 
-  &--static:hover {
-    color: $c-black;
-  }
+.link--static {
+  text-decoration: underline;
+  color: inherit;
+}
+
+.link--static:hover {
+  color: $c-black;
 }
 
 
@@ -70,7 +71,8 @@ body {
   font-weight: 700;
 }
 
-p {
+p,
+span {
   line-height: 1.9em;
 }
 
