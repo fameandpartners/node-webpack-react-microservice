@@ -11,9 +11,14 @@ const actionTypes = assign({},
 const configuration = assign({},
   {
     ANIMATION_CONFIGURATION: {
-      stiffness: 170,
-      damping: 18,
-      precision: 12,
+      stiffness: 80,
+      damping: 20,
+      precision: 5,
+    },
+    ANIMATION_CONFIGURATION_SMOOTH: {
+      stiffness: 100,
+      damping: 29,
+      precision: 8,
     },
   },
 );

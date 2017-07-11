@@ -25,7 +25,7 @@ export const $$initialState = Immutable.fromJS({
   // id: String,
   // smallImg: String,
   // descripition: String,
-  // selectedCustomizations: {}
+  // preSelectedCustomizations: {}
   // })
   preCustomizations: [],
 
@@ -50,6 +50,19 @@ export const $$initialState = Immutable.fromJS({
 
   // String
   modelDescription: null,
+
+  // ObjectOf({
+  // id: String,
+  // meta: Object,
+  // hexValue
+  // })
+  selectedColor: null,
+
+  // ObjectOf({
+  // id: String,
+  // descripition: String,
+  // })
+  selectedCustomizations: null,
 });
 
 export default function AppReducer($$state = $$initialState, action = null) {
