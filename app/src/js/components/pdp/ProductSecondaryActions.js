@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
-
-// UI components
-// import ProductSecondaryActionsRow from './ProductSecondaryActionsRow';
 
 import HeartIcon from '../../../svg/i-heart.svg';
 import ShareIcon from '../../../svg/i-share.svg';
 
 // Actions
 // import * as AppActions from '../../actions/AppActions';
-
-// CSS
-// import '../../../css/components/ProductSecondaryActions.scss';
-
-// UI Components
-// import Button from '../generic/Button';
-
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -58,7 +48,7 @@ class ProductSecondaryActions extends Component {
 }
 
 ProductSecondaryActions.propTypes = {
-  productTitle: PropTypes.string.isRequired,
+  // productTitle: PropTypes.string.isRequired,
 };
 
 ProductSecondaryActions.defaultProps = {
