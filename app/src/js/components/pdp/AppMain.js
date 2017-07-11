@@ -21,6 +21,7 @@ import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
+import Cart from './Cart';
 
 // Generic UI Components
 // import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
@@ -45,6 +46,7 @@ function dispatchToProps(dispatch) {
   const actions = bindActionCreators(AppActions, dispatch);
   const modalActions = bindActionCreators(ModalActions, dispatch);
   return {
+    activateCartDrawer: actions.activateCartDrawer,
     activateSideMenu: actions.activateSideMenu,
     activateModal: modalActions.activateModal,
   };
@@ -65,8 +67,9 @@ class AppMain extends Component {
   }
 
   handleCloseMenu() {
-    const { activateSideMenu } = this.props;
-    activateSideMenu({ sideMenuOpen: false });
+    const { activateSideMenu, activateCartDrawer, cartDrawerOpen, sideMenuOpen } = this.props;
+    if (sideMenuOpen) activateSideMenu({ sideMenuOpen: false });
+    else if (cartDrawerOpen) activateCartDrawer({ sideMenuOpen: false });
   }
 
   handleActivateModal() {
@@ -84,15 +87,17 @@ class AppMain extends Component {
     return (
       <Motion
         style={{
-          opacity: spring(sideMenuOpen ? 15 : 0, AppConstants.ANIMATION_CONFIGURATION),
-          x: spring(cartDrawerOpen ? -2400 : 0, AppConstants.ANIMATION_CONFIGURATION),
+          opacity: spring(
+              sideMenuOpen || cartDrawerOpen ? 15 : 0, AppConstants.ANIMATION_CONFIGURATION_SMOOTH,
+          ),
+          x: spring(cartDrawerOpen ? -500 : 0, AppConstants.ANIMATION_CONFIGURATION),
         }}
       >
         {({ opacity, x }) =>
           <div className="AppMain__wrapper">
             <div
               className="AppMain height--full"
-              style={{ transform: `translateX(${x / 8}px)` }}
+              style={{ transform: `translateX(${x}px)` }}
             >
               <div
                 className={this.appBlanketClass}
@@ -112,7 +117,7 @@ class AppMain extends Component {
 
               { /* <ComponentTestPleaseRemove /> */ }
 
-              <div className="layout-container">
+              <div className="layout-container App--mb-normal">
                 { breakpoint === 'mobile' || breakpoint === 'tablet'
                   ? <ProductDisplayOptionsTouch />
                   : <ProductOptions />
@@ -139,7 +144,12 @@ class AppMain extends Component {
 
               <Footer />
             </div>
-            <div className="Cart">Cart</div>
+            <div
+              className="Cart__drawer"
+              style={{ transform: `translateX(${500 - (x * -1)}px)` }}
+            >
+              <Cart />
+            </div>
           </div>
       }
       </Motion>
@@ -149,6 +159,7 @@ class AppMain extends Component {
 
 AppMain.propTypes = {
   // Redux Props
+  activateCartDrawer: PropTypes.func.isRequired,
   activateSideMenu: PropTypes.func.isRequired,
   activateModal: PropTypes.func.isRequired,
   cartDrawerOpen: PropTypes.bool,

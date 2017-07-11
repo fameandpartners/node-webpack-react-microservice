@@ -1,0 +1,16 @@
+.Cart__drawer {
+  top: 0;
+  right: 0;
+  position: fixed;
+  height: 100%;
+  width: 500px;
+  transform: translateX(500px);
+}
+
+.Cart__header {
+  height: 60px;
+  padding-top: 17px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $c-light-gray;
+  box-shadow: 0 3px 2px -2px $c-super-light-gray;
+}
