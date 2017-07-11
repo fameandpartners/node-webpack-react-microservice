@@ -38,6 +38,12 @@ const hydrated = {
     ],
     productTitle: 'Escala Dress',
     productDescription: 'Low effort, high contrast. The Jo is a heavy georgette gown featuring a contrasting pink bow at the front, criss-cross back straps, and a side split. It has an invisible zipper.',
+    selectedColor: {
+      id: '2096a',
+      centsTotal: 0,
+      name: 'Black',
+      hexValue: '#000000',
+    },
     modelDescription: 'Our model wears a US 0 and is 5’9”',
   },
 };

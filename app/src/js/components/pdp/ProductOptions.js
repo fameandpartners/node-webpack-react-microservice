@@ -23,8 +23,12 @@ import Button from '../generic/Button';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
+  const selectedColor = state.$$productState.get('selectedColor');
   return {
     productTitle: state.$$productState.get('productTitle'),
+    colorName: selectedColor.get('name'),
+    colorCentsTotal: selectedColor.get('centsTotal'),
+    colorHexValue: selectedColor.get('hexValue'),
   };
 }
 
@@ -58,6 +62,28 @@ class ProductOptions extends Component {
     console.warn('Handling Add to Bag Click');
   }
 
+  generateColorSelectionNode() {
+    const {
+      colorCentsTotal,
+      colorName,
+      colorHexValue,
+    } = this.props;
+
+    return (
+      <span>
+        <span>{colorName}</span>
+        { colorCentsTotal
+          ? <span>{colorCentsTotal}</span>
+          : null
+        }
+        <span
+          style={{ background: colorHexValue }}
+          className="ProductOptions__color-swatch display--inline-block"
+        />
+      </span>
+    );
+  }
+
   render() {
     const { productTitle } = this.props;
     return (
@@ -77,6 +103,7 @@ class ProductOptions extends Component {
                 leftNode={<span>Color</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
+                rightNode={this.generateColorSelectionNode()}
                 handleClick={this.handleColorOptionClick}
               />
               <ProductOptionsRow
@@ -118,6 +145,9 @@ class ProductOptions extends Component {
 
 ProductOptions.propTypes = {
   productTitle: PropTypes.string.isRequired,
+  colorCentsTotal: PropTypes.number.isRequired,
+  colorName: PropTypes.string.isRequired,
+  colorHexValue: PropTypes.string.isRequired,
 };
 
 ProductOptions.defaultProps = {

@@ -88,7 +88,7 @@ class AppMain extends Component {
       <Motion
         style={{
           opacity: spring(
-              sideMenuOpen || cartDrawerOpen ? 15 : 0, AppConstants.ANIMATION_CONFIGURATION_SMOOTH,
+              sideMenuOpen || cartDrawerOpen ? 25 : 0, AppConstants.ANIMATION_CONFIGURATION,
           ),
           x: spring(cartDrawerOpen ? -500 : 0, AppConstants.ANIMATION_CONFIGURATION),
         }}
