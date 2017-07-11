@@ -117,7 +117,7 @@ class AppMain extends Component {
 
               { /* <ComponentTestPleaseRemove /> */ }
 
-              <div className="layout-container App--mb-normal">
+              <div className="layout-container App--mt-normal">
                 { breakpoint === 'mobile' || breakpoint === 'tablet'
                   ? <ProductDisplayOptionsTouch />
                   : <ProductOptions />
