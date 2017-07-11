@@ -2,8 +2,6 @@ import Immutable from 'immutable';
 import ProductConstants from '../constants/ProductConstants';
 
 export const $$initialState = Immutable.fromJS({
-  // Number
-  basePrice: null,
 
   // ArrayOf({
   //   smallImg: String,
@@ -28,6 +26,12 @@ export const $$initialState = Immutable.fromJS({
   //   preSelectedCustomizations: {}
   // })
   preCustomizations: [],
+
+  // String
+  productId: null,
+
+  // Number
+  productCentsBasePrice: null,
 
   // ArrayOf({
   //   id: String,
