@@ -19,6 +19,7 @@ function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
     lineItems: state.$$cartState.get('lineItems').toJS(),
+    complementaryProducts: state.$$productState.get('complementaryProducts').toJS(),
   };
 }
 
@@ -47,7 +48,7 @@ class CartDrawer extends Component {
   }
 
   render() {
-    const { lineItems } = this.props;
+    const { complementaryProducts, lineItems } = this.props;
 
     return (
       <div className="CartDrawer u-flex--col height--full">
@@ -55,7 +56,7 @@ class CartDrawer extends Component {
           <h4>Shopping Bag</h4>
         </div>
         { lineItems.length > 0
-          ? <Cart lineItems={lineItems} />
+          ? <Cart complementaryProducts={complementaryProducts} lineItems={lineItems} />
           : <CartEmpty />
         }
       </div>
@@ -64,6 +65,13 @@ class CartDrawer extends Component {
 }
 
 CartDrawer.propTypes = {
+  complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
+    centsPrice: PropTypes.number,
+    smallImg: PropTypes.string,
+    productId: PropTypes.string,
+    productTitle: PropTypes.string,
+    url: PropTypes.string,
+  })).isRequired,
   lineItems: PropTypes.arrayOf(PropTypes.shape({
     color: PropTypes.shape({
       id: PropTypes.string,
