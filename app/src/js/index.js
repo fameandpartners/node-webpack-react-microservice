@@ -16,6 +16,23 @@ const hydrated = {
     // sideMenuOpen: true,
   },
   $$productState: {
+    complementaryProducts: [
+      {
+        centsPrice: 22900,
+        smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37492/original/fprv1060-white-front.jpg?1499455161',
+        productId: 'fprv1060',
+        productTitle: 'The Laurel Dress',
+        url: 'https://www.fameandpartners.com/dresses/dress-the-laurel-dress-1599?color=white',
+      },
+      {
+        centsPrice: 26900,
+        smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37428/original/fp2556-white-front.jpg?1499455106',
+        productId: 'fp2556',
+        productTitle: 'The Janette Dress',
+        url: 'https://www.fameandpartners.com/dresses/dress-the-janette-dress-1598?color=white',
+      },
+      //https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37492/original/fprv1060-white-front.jpg?1499455161
+    ],
     preCustomizations: [
       {
         id: 'a0',

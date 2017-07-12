@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { formatCents } from '../../utilities/accounting';
-
-// TEST IMAGES
 import image1 from '../../../img/test/image_1.png';
 
 
 // UI Components
 import Button from '../generic/Button';
+import ProductCrossSell from './ProductCrossSell';
 
 // CSS
 import '../../../css/components/Cart.scss';
@@ -44,7 +43,7 @@ class Cart extends Component {
         color,
         productCentsBasePrice,
         // productId, // TODO: @elgrecode, we'll need to compute something more that incorporates
-        // color and addons selections
+        // color and addons selections, BELOW Math.random() will be replaced with a UID
         productTitle,
       } = lineItem;
       return (
@@ -72,10 +71,11 @@ class Cart extends Component {
   }
 
   render() {
+    const { complementaryProducts } = this.props;
     return (
       <div className="Cart u-overflow-y--scroll">
         <div className="Cart__contents">
-          <div className="layout-container">
+          <div className="Cart__layout-container">
 
             { this.generateLineItems() }
 
@@ -91,26 +91,9 @@ class Cart extends Component {
               className="App--mb-normal"
               text="Checkout"
             />
-
           </div>
-          <div className="layout-container">
-            <h4>Complete the Look</h4>
-            <div className="Cart__cross-sell grid-12">
-              <div className="col-6">
-                <img className="width--full" alt="dress1" src={image1} />
-                <span className="">The Harrel Top</span>
-                <span className="Cart__cross-sell-cta link link--static display--block">
-                      Add to Cart
-                    </span>
-              </div>
-              <div className="col-6">
-                <img className="width--full" alt="dress1" src={image1} />
-                <span className="">The Marley Skirt</span>
-                <span className="Cart__cross-sell-cta link link--static display--block">
-                      Add to Cart
-                    </span>
-              </div>
-            </div>
+          <div className="Cart__layout-container">
+            <ProductCrossSell complementaryProducts={complementaryProducts} />
           </div>
 
         </div>
@@ -120,6 +103,13 @@ class Cart extends Component {
 }
 
 Cart.propTypes = {
+  complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
+    centsPrice: PropTypes.number,
+    smallImg: PropTypes.string,
+    productId: PropTypes.string,
+    productTitle: PropTypes.string,
+    url: PropTypes.string,
+  })).isRequired,
   lineItems: PropTypes.arrayOf(PropTypes.shape({
     color: PropTypes.shape({
       id: PropTypes.string,

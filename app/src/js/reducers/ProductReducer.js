@@ -4,9 +4,11 @@ import ProductConstants from '../constants/ProductConstants';
 export const $$initialState = Immutable.fromJS({
 
   // ArrayOf({
+  //   centsPrice: Number
   //   smallImg: String,
   //   productId: String,
-  //   productLink: String
+  //   productTitle: String,
+  //   url: String,
   // })
   complementaryProducts: [],
 
