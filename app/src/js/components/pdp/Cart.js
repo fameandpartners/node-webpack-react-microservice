@@ -123,7 +123,6 @@ Cart.propTypes = {
       centsTotal: PropTypes.number,
     })),
   })).isRequired,
-  // modelDescription: PropTypes.string.isRequired,
 };
 
 export default Cart;

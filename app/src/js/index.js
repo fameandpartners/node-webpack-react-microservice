@@ -31,7 +31,6 @@ const hydrated = {
         productTitle: 'The Janette Dress',
         url: 'https://www.fameandpartners.com/dresses/dress-the-janette-dress-1598?color=white',
       },
-      //https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37492/original/fprv1060-white-front.jpg?1499455161
     ],
     preCustomizations: [
       {

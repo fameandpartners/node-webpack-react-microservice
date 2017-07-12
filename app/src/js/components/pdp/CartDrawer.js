@@ -4,9 +4,6 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import objnoop from '../../libs/objnoop';
 
-// Actions
-// import * as AppActions from '../../actions/AppActions';
-
 // UI Components
 import CartEmpty from './CartEmpty';
 import Cart from './Cart';
