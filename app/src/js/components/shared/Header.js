@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import * as AppActions from '../../actions/AppActions';
+import * as CartActions from '../../actions/CartActions';
 
 // CSS
 import '../../../css/components/Header.scss';
@@ -22,15 +22,13 @@ function stateToProps(state) {
   return {
     cartItems: state.$$cartState.get('lineItems'),
     cartItemCount: state.$$cartState.get('lineItems').size,
-    cartDrawerOpen: state.$$appState.get('cartDrawerOpen'),
+    cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
   };
 }
 
 function dispatchToProps(dispatch) {
-  const actions = bindActionCreators(AppActions, dispatch);
-  return {
-    activateCartDrawer: actions.activateCartDrawer,
-  };
+  const { activateCartDrawer } = bindActionCreators(CartActions, dispatch);
+  return { activateCartDrawer };
 }
 
 class Header extends Component {

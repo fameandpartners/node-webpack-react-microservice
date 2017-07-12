@@ -7,13 +7,12 @@ export function addItemToCart({ lineItem }) {
   };
 }
 
-// TODO: @elgrecode, figure out if this belongs here
-// export function activateCartDrawer({ cartDrawerOpen }) {
-//   return {
-//     type: AppConstants.ACTIVATE_CART_DRAWER,
-//     cartDrawerOpen,
-//   };
-// }
+export function activateCartDrawer({ cartDrawerOpen }) {
+  return {
+    type: CartConstants.ACTIVATE_CART_DRAWER,
+    cartDrawerOpen,
+  };
+}
 
 export default {
   addItemToCart,

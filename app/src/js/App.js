@@ -20,7 +20,7 @@ import '../css/components/App.scss';
 function stateToProps(state) {
   const sideMenuOpen = state.$$appState.get('sideMenuOpen');
   const modalOpen = state.$$modalState.get('shouldAppear');
-  const cartDrawerOpen = state.$$appState.get('cartDrawerOpen');
+  const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
 
   return {
     lockBody: sideMenuOpen || modalOpen || cartDrawerOpen,
