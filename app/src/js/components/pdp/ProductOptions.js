@@ -117,10 +117,10 @@ class ProductOptions extends Component {
 
   reduceCustomizationSelectionPrice() {
     const { selectedCustomizations } = this.props;
-    return formatCents(
+    return `+${formatCents(
       selectedCustomizations.reduce((subTotal, c) => subTotal + c.centsTotal, 0),
       0,
-    );
+    )}`;
   }
 
   generateColorSelectionNode() {
@@ -132,9 +132,9 @@ class ProductOptions extends Component {
 
     return (
       <span>
-        <span>{colorName}</span>
+        <span>{colorName}</span>&nbsp;
         { colorCentsTotal
-          ? <span>{colorCentsTotal}</span>
+          ? <span>{this.addSelectionPrice(colorCentsTotal)}</span>
           : null
         }
         <span

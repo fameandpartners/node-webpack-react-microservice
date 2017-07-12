@@ -42,7 +42,7 @@ const hydrated = {
     productDescription: 'Low effort, high contrast. The Jo is a heavy georgette gown featuring a contrasting pink bow at the front, criss-cross back straps, and a side split. It has an invisible zipper.',
     selectedColor: {
       id: '2096a',
-      centsTotal: 0,
+      centsTotal: 1200,
       name: 'Black',
       hexValue: '#000000',
     },

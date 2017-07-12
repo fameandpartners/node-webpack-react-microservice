@@ -41,9 +41,8 @@ class Cart extends Component {
         (prevTotal, currLineItem) => {
           const lineItemTotal
             = currLineItem.color.centsTotal
-            + currLineItem.productCentsBasePrice;
-            // TODO: @elgrecode
-            // + currLineItem.addons.reduce();
+            + currLineItem.productCentsBasePrice
+            + currLineItem.addons.reduce((subTotal, c) => subTotal + c.centsTotal, 0);
           return prevTotal + lineItemTotal;
         }, 0,
       );
