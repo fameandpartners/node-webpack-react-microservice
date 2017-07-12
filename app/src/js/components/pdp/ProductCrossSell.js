@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { formatCents } from '../../utilities/accounting';
 
 /* eslint-disable react/prefer-stateless-function */
 class ProductCrossSell extends PureComponent {
@@ -13,7 +14,9 @@ class ProductCrossSell extends PureComponent {
             <div key={p.productId} className="col-6">
               <img className="width--full" alt="dress1" src={p.smallImg} />
               <span className="ProductCrossSell__title">{p.productTitle}</span>
-              <span className="ProductCrossSell__price display--block">{p.centsPrice}</span>
+              <span className="ProductCrossSell__price display--block">
+                {formatCents(p.centsPrice, 0)}
+              </span>
               <span className="ProductCrossSell__cta link link--static display--block">
                 Add to Cart
               </span>

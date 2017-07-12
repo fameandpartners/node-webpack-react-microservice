@@ -117,11 +117,11 @@ Cart.propTypes = {
       centsTotal: PropTypes.number,
       hexValue: PropTypes.string,
     }),
-    //   addons: ObjectOf({
-    //    ????????????
-    //   },
-    //   subTotal: Number,
-    //   quanitty: Number
+    addons: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string,
+      description: PropTypes.string,
+      centsTotal: PropTypes.number,
+    })),
   })).isRequired,
   // modelDescription: PropTypes.string.isRequired,
 };
