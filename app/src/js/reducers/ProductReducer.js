@@ -66,7 +66,7 @@ export const $$initialState = Immutable.fromJS({
 
   // ObjectOf({
   //   id: String,
-  //   descripition: String,
+  //   description: String,
   // })
   selectedCustomizations: null,
 });

@@ -3,6 +3,7 @@ import ModalConstants from '../constants/ModalConstants';
 
 export const $$initialState = Immutable.fromJS({
   modalId: null,
+  shouldAppear: false,
 });
 
 export default function ModalReducer($$state = $$initialState, action = null) {

@@ -36,9 +36,14 @@ class Cart extends Component {
   subTotal() {
     const { lineItems } = this.props;
     if (lineItems.length > 0) {
+      // Reduces subTotal based on base price, colors, and addons chosen
       return lineItems.reduce(
         (prevTotal, currLineItem) => {
-          const lineItemTotal = currLineItem.color.centsTotal + currLineItem.productCentsBasePrice;
+          const lineItemTotal
+            = currLineItem.color.centsTotal
+            + currLineItem.productCentsBasePrice;
+            // TODO: @elgrecode
+            // + currLineItem.addons.reduce();
           return prevTotal + lineItemTotal;
         }, 0,
       );
@@ -73,8 +78,8 @@ class Cart extends Component {
               {color.name}
             </span>
             <span className="Cart__line-description">
-                3 Addons
-              </span>
+              {lineItem.addons.length}&nbsp;Addon{lineItem.addons.length === 1 ? '' : 's'}
+            </span>
           </div>
         </div>
       );
