@@ -46,6 +46,18 @@ const hydrated = {
       name: 'Black',
       hexValue: '#000000',
     },
+    selectedCustomizations: [
+      {
+        id: 'customa49',
+        description: 'Adds laces to back strap',
+        centsTotal: 1400,
+      },
+      {
+        id: 'customa69',
+        description: 'Puts bow on back',
+        centsTotal: 1900,
+      },
+    ],
     modelDescription: 'Our model wears a US 0 and is 5’9”',
   },
 };

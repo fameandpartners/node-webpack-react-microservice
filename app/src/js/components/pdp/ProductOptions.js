@@ -26,6 +26,7 @@ import Button from '../generic/Button';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   const selectedColor = state.$$productState.get('selectedColor');
+
   return {
     // PRODUCT
     productId: state.$$productState.get('productId'),
@@ -39,6 +40,7 @@ function stateToProps(state) {
     colorHexValue: selectedColor.get('hexValue'),
 
     // ADDONS
+    selectedCustomizations: state.$$productState.get('selectedCustomizations').toJS(),
   };
 }
 
@@ -79,9 +81,10 @@ class ProductOptions extends Component {
       colorName,
       colorCentsTotal,
       colorHexValue,
+      // ADDONS
+      selectedCustomizations,
     } = this.props;
 
-    console.warn('Warning, must acccumulate style addons!!!');
     return {
       productId,
       productTitle,
@@ -92,9 +95,7 @@ class ProductOptions extends Component {
         centsTotal: colorCentsTotal,
         hexValue: colorHexValue,
       },
-      addons: {
-
-      },
+      addons: selectedCustomizations,
     };
   }
 
@@ -107,6 +108,19 @@ class ProductOptions extends Component {
 
     addItemToCart({ lineItem });
     activateCartDrawer({ cartDrawerOpen: true });
+  }
+
+  addSelectionPrice(centsTotal) {
+    if (centsTotal) { return `+${formatCents(centsTotal, 0)}`; }
+    return null;
+  }
+
+  reduceCustomizationSelectionPrice() {
+    const { selectedCustomizations } = this.props;
+    return formatCents(
+      selectedCustomizations.reduce((subTotal, c) => subTotal + c.centsTotal, 0),
+      0,
+    );
   }
 
   generateColorSelectionNode() {
@@ -129,6 +143,28 @@ class ProductOptions extends Component {
         />
       </span>
     );
+  }
+
+  generateAddonSelectionNode() {
+    const { selectedCustomizations } = this.props;
+
+    if (selectedCustomizations.length === 1) { // One customization
+      return (
+        <span>
+          <span>{selectedCustomizations[0].description}</span>&nbsp;
+          <span>{this.addSelectionPrice(selectedCustomizations[0].centsTotal)}</span>
+        </span>
+      );
+    } else if (selectedCustomizations.length > 1) { // Multiple customizations
+      return (
+        <span>
+          <span>{selectedCustomizations.length} Additions</span>&nbsp;
+          <span>{this.reduceCustomizationSelectionPrice()}</span>
+        </span>
+      );
+    }
+
+    return null;
   }
 
   render() {
@@ -165,6 +201,7 @@ class ProductOptions extends Component {
                 leftNode={<span>Style Addons</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
+                rightNode={this.generateAddonSelectionNode()}
                 handleClick={this.handleAddonOptionClick}
               />
             </div>
@@ -209,7 +246,14 @@ ProductOptions.propTypes = {
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
   colorId: PropTypes.string.isRequired,
-  // Redux Actions
+  // ADDONS
+  selectedCustomizations: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      description: PropTypes.string,
+    }),
+  ).isRequired,
+  //* Redux Actions
   addItemToCart: PropTypes.func.isRequired,
   activateCartDrawer: PropTypes.func.isRequired,
 };

@@ -15,7 +15,9 @@ export const $$initialState = Immutable.fromJS({
   //     hexValue: String
   //   }),
   //   addons: ObjectOf({
-  //    ????????????
+  //     id: String,
+  //     description: String,
+  //     centsTotal: Number,
   //   },
   //   subTotal: Number,
   //   quantity: Number
