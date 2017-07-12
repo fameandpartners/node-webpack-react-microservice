@@ -73,7 +73,7 @@ class Cart extends Component {
 
   render() {
     return (
-      <div className="Cart">
+      <div className="Cart u-overflow-y--scroll">
         <div className="Cart__contents">
           <div className="layout-container">
 

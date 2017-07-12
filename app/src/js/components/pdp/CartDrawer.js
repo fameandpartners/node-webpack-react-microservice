@@ -50,7 +50,7 @@ class CartDrawer extends Component {
     const { lineItems } = this.props;
 
     return (
-      <div className="CartDrawer">
+      <div className="CartDrawer u-flex--col height--full">
         <div className="CartDrawer__header">
           <h4>Shopping Bag</h4>
         </div>
