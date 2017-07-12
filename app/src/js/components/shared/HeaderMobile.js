@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 // Actions
 import * as AppActions from '../../actions/AppActions';
+import * as CartActions from '../../actions/CartActions';
 
 // CSS
 import '../../../css/components/HeaderMobile.scss';
@@ -26,10 +27,11 @@ function stateToProps(state) {
 }
 
 function dispatchToProps(dispatch) {
-  const actions = bindActionCreators(AppActions, dispatch);
+  const appActions = bindActionCreators(AppActions, dispatch);
+  const cartActions = bindActionCreators(CartActions, dispatch);
   return {
-    activateSideMenu: actions.activateSideMenu,
-    activateCartDrawer: actions.activateCartDrawer,
+    activateSideMenu: appActions.activateSideMenu,
+    activateCartDrawer: cartActions.activateCartDrawer,
   };
 }
 

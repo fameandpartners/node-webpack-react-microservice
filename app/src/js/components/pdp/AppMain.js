@@ -10,6 +10,7 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 // Actions
 import * as AppActions from '../../actions/AppActions';
 import * as ModalActions from '../../actions/ModalActions';
+import * as CartActions from '../../actions/CartActions';
 
 // Constants
 import AppConstants from '../../constants/AppConstants';
@@ -38,15 +39,16 @@ function stateToProps(state) {
   return {
     productTitle: state.$$productState.get('productTitle'),
     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
-    cartDrawerOpen: state.$$appState.get('cartDrawerOpen'),
+    cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
   };
 }
 
 function dispatchToProps(dispatch) {
   const actions = bindActionCreators(AppActions, dispatch);
   const modalActions = bindActionCreators(ModalActions, dispatch);
+  const cartActions = bindActionCreators(CartActions, dispatch);
   return {
-    activateCartDrawer: actions.activateCartDrawer,
+    activateCartDrawer: cartActions.activateCartDrawer,
     activateSideMenu: actions.activateSideMenu,
     activateModal: modalActions.activateModal,
   };

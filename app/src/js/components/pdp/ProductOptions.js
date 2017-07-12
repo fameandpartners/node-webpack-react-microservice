@@ -13,7 +13,6 @@ import ProductSecondaryActions from './ProductSecondaryActions';
 import image1 from '../../../img/test/image_1.png';
 
 // Actions
-import * as AppActions from '../../actions/AppActions';
 import * as CartActions from '../../actions/CartActions';
 
 // CSS
@@ -46,9 +45,7 @@ function stateToProps(state) {
 
 
 function dispatchToProps(dispatch) {
-  const { addItemToCart } = bindActionCreators(CartActions, dispatch);
-  const { activateCartDrawer } = bindActionCreators(AppActions, dispatch);
-
+  const { addItemToCart, activateCartDrawer } = bindActionCreators(CartActions, dispatch);
   return { addItemToCart, activateCartDrawer };
 }
 
