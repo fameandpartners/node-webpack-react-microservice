@@ -21,7 +21,7 @@ import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
-import Cart from './Cart';
+import CartDrawer from './CartDrawer';
 
 // Generic UI Components
 // import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
@@ -145,10 +145,10 @@ class AppMain extends Component {
               <Footer />
             </div>
             <div
-              className="Cart__drawer"
+              className="CartDrawer__wrapper"
               style={{ transform: `translateX(${500 - (x * -1)}px)` }}
             >
-              <Cart />
+              <CartDrawer />
             </div>
           </div>
       }
