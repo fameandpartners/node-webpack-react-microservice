@@ -21,6 +21,17 @@ export const $$initialState = Immutable.fromJS({
   // String
   currency: null,
 
+  // ObjectOf({
+  //   id: String,
+  //   smallImg: String,
+  //   name: String,
+  //   description: String,
+  // })
+  fabric: null,
+
+  // String
+  garmentCareInformation: null,
+
   // ArrayOf({
   //   id: String,
   //   smallImg: String,

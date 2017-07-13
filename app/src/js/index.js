@@ -32,6 +32,13 @@ const hydrated = {
         url: 'https://www.fameandpartners.com/dresses/dress-the-janette-dress-1598?color=white',
       },
     ],
+    fabric: {
+      id: 'poly-1234',
+      smallImg: '',
+      name: 'Silk',
+      description: 'Medium Weight\rExcellent stretch and recovery\rMain: 97% cotton, 3% elastane cotton sateen\rLining: 65% cotton, 35% polyester poplin\rTrim: Nylon invisible zip with hook & eye closure',
+    },
+    garmentCareInformation: 'Professional dry-clean only. See label for further details.',
     preCustomizations: [
       {
         id: 'a0',
