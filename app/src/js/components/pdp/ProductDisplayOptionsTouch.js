@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // UI Components
 import Slider from '../shared/Slider';
@@ -29,7 +31,7 @@ import '../../../css/components/ProductDisplayOptionsTouch.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    fabric: state.$$productState.get('fabric'),
+    fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
   };
 }
@@ -47,8 +49,17 @@ class ProductDisplayOptionsTouch extends Component {
     };
   }
 
+  handleFabricInfoModalClick() {
+    console.log('opening modal within product dispaly options touch');
+  }
+
   render() {
-    const { fabric, garmentCareInformation } = this.props;
+    const {
+      breakpoint,
+      fabric,
+      garmentCareInformation,
+    } = this.props;
+
     return (
       <div className="ProductDisplayOptionsTouch">
         <Slider>
@@ -59,15 +70,20 @@ class ProductDisplayOptionsTouch extends Component {
             />
           </Slide>
           <Slide>
+            <ProductFabric
+              breakpoint={breakpoint}
+              fabric={fabric}
+              garmentCareInformation={garmentCareInformation}
+              handleFabricInfoModalClick={this.handleFabricInfoModalClick}
+            />
+          </Slide>
+          <Slide>
             <div
               className="width--full height--full"
               style={this.generateBackgroundImageStyle(image2)}
             />
           </Slide>
 
-          <Slide>
-            <ProductFabric fabric={fabric} garmentCareInformation={garmentCareInformation} />
-          </Slide>
 
           <Slide>
             <div
@@ -117,6 +133,7 @@ class ProductDisplayOptionsTouch extends Component {
 }
 
 ProductDisplayOptionsTouch.propTypes = {
+  // Redux Properties
   fabric: PropTypes.shape({
     id: PropTypes.string,
     smallImg: PropTypes.string,
@@ -124,9 +141,11 @@ ProductDisplayOptionsTouch.propTypes = {
     description: PropTypes.string,
   }).isRequired,
   garmentCareInformation: PropTypes.string,
+  // Decorator props
+  breakpoint: PropTypes.string.isRequired,
 };
 ProductDisplayOptionsTouch.defaultProps = {
   garmentCareInformation: 'Professional dry-clean only.\rSee label for further details.',
 };
 
-export default connect(stateToProps)(ProductDisplayOptionsTouch);
+export default Resize(PDPBreakpoints)(connect(stateToProps)(ProductDisplayOptionsTouch));

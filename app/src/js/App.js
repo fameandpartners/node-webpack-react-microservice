@@ -53,4 +53,4 @@ App.propTypes = {
   lockBody: PropTypes.bool.isRequired,
 };
 
-export default connect(stateToProps, () => {})(App);
+export default connect(stateToProps)(App);
