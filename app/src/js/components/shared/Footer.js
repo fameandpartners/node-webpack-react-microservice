@@ -15,7 +15,7 @@ export default class Footer extends PureComponent {
   render() {
     return (
       <footer className="Footer">
-        <div className="layout-container grid-12">
+        <div className="layout-container grid-noGutter-12">
           <div className="col-12">
             <h2>Sign up to always enjoy free returns</h2>
             <form>
