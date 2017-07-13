@@ -40,7 +40,7 @@ class App extends Component {
   render() {
     const { lockBody } = this.props;
     return (
-      <div className={`App ${lockBody ? 'App--lock' : ''}`}>
+      <div className={`App ${lockBody ? 'App--scroll-lock' : ''}`}>
         <SideMenu />
         <AppMain />
         <OnboardingModal />

@@ -24,7 +24,7 @@ export const $$initialState = Immutable.fromJS({
   // ArrayOf({
   //   id: String,
   //   smallImg: String,
-  //   descripition: String,
+  //   description: String,
   //   preSelectedCustomizations: {}
   // })
   preCustomizations: [],
