@@ -119,12 +119,14 @@ class AppMain extends Component {
 
               { /* <ComponentTestPleaseRemove /> */ }
 
-              <div className="layout-container App--mt-normal">
-                { breakpoint === 'mobile' || breakpoint === 'tablet'
-                  ? <ProductDisplayOptionsTouch />
-                  : <ProductOptions />
-                }
-              </div>
+              { breakpoint === 'mobile' || breakpoint === 'tablet'
+                ? <ProductDisplayOptionsTouch />
+                : (
+                  <div className="App--mt-normal">
+                    <ProductOptions />
+                  </div>
+                )
+              }
 
               <div className="layout-container">
                 <div className="grid-2_sm-1 AppMain__product-info">

@@ -4,7 +4,7 @@
   line-height: 0;
   overflow: hidden;
   white-space: nowrap;
-  height: 350px;
+  height: 420px;
 }
 
 .Slider__slides {
@@ -14,5 +14,6 @@
 .Slider .Slide {
   color: rgb(0, 0, 0);
   display: inline-block;
+  margin-right: 20px;
   max-width: 320px; // TODO: @elgrecode This will have to be adjusted
 }
