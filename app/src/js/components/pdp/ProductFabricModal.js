@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
+import ProductFabricInfo from './ProductFabricInfo';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -46,28 +47,23 @@ class ProductFabricModal extends PureComponent {
 
     return (
       <ModalContainer
+        slideUp
+        width="100%"
         modalIds={[ModalConstants.FABRIC_MODAL]}
       >
         <Modal
           handleCloseModal={this.handleCloseModal}
+          modalClassName="grid-middle"
+          modalContentClassName="width--full"
+          modalWrapperClassName="u-flex--col"
         >
-          <div className="ProductFabricModal textAlign--center">
+          <div className="ProductFabricModal textAlign--center grid-middle">
             <div className="Modal__content--med-margin-bottom">
-              <h4>Fabric</h4>
-              {fabric.description.split('\n').map(
-                (item, key) =>
-                  <span key={`fd-${key}`}>{item}<br /></span>,
-                )
-              }
+              <ProductFabricInfo
+                fabric={fabric}
+                garmentCareInformation={garmentCareInformation}
+              />
             </div>
-            <div />
-            <h4>Garment Care</h4>
-            {garmentCareInformation.split('\n').map(
-                (item, key) =>
-                  <span key={`gc-${key}`}>{item}<br /></span>,
-                )
-            }
-
           </div>
         </Modal>
 

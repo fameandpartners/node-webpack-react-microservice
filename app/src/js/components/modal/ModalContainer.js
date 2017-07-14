@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import { arrayOf, bool, func, node, number, object, oneOfType, string } from 'prop-types';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-import { TransitionMotion, spring } from 'react-motion';
+import { TransitionMotion } from 'react-motion';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classnames from 'classnames';
 
 // Actions
 import * as ModalActions from '../../actions/ModalActions';
+
+// Constants
+import * as modalAnimations from '../../utilities/modal-animation';
 
 // CSS
 import '../../../css/components/Modal.scss';
@@ -34,21 +38,24 @@ class ModalContainer extends Component {
   }
 
   defaultStyles() {
-    return {
-      key: 'modal',
-      data: {},
-      style: {
-        opacity: spring(1), position: spring(0),
-      },
-    };
+    if (this.props.slideUp) {
+      return modalAnimations.SLIDE_UP_DEFAULT_STYLES;
+    }
+    return modalAnimations.STANDARD_DEFAULT_STYLES;
   }
 
   willEnter() {
-    return { opacity: 0, position: -10 };
+    if (this.props.slideUp) {
+      return modalAnimations.SLIDE_UP_WILL_ENTER;
+    }
+    return modalAnimations.STANDARD_WILL_ENTER;
   }
 
   willLeave() {
-    return { opacity: spring(0), position: spring(-10) };
+    if (this.props.slideUp) {
+      return modalAnimations.SLIDE_UP_WILL_LEAVE;
+    }
+    return modalAnimations.STANDARD_WILL_LEAVE;
   }
 
   handleBackgroundClick() {
@@ -69,25 +76,35 @@ class ModalContainer extends Component {
 
   renderModalContainer(key, style) {
     const {
+      height,
+      modalContainerClass,
       width,
       zIndex,
       children,
+      slideUp,
     } = this.props;
 
     return (
       <div
-        className="ModalContainer grid-middle"
+        className={classnames([
+          'ModalContainer u-center',
+          modalContainerClass,
+        ])}
         style={{ zIndex, opacity: style.opacity }}
         key={key}
         onClick={this.handleBackgroundClick}
       >
         <div
-          className="ModalContainer__content-wrapper u-center col"
+          className={classnames([
+            'ModalContainer__content-wrapper u-center col',
+            { ModalContainer__slideUp: slideUp },
+          ])}
           onClick={this.handleForegroundClick}
           style={{
+            height,
             width,
             zIndex,
-            transform: `translate3d(0, ${style.position}px, 0)`,
+            transform: `translate3d(0, ${style.y}%, 0)`,
           }}
         >
           {children}
@@ -117,22 +134,27 @@ class ModalContainer extends Component {
 
 
 ModalContainer.propTypes = {
-  closeOnBackgroundClick: bool,
-  width: oneOfType([number, string]),
-  zIndex: number,
-  children: oneOfType([object, node]),
+  closeOnBackgroundClick: PropTypes.bool,
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  modalContainerClass: PropTypes.string,
+  slideUp: PropTypes.bool,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  zIndex: PropTypes.number,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   // Redux
-  activateModal: func.isRequired,
-  activeModalId: string,
-  modalIds: arrayOf(string),
-  shouldAppear: bool,
+  activateModal: PropTypes.func.isRequired,
+  activeModalId: PropTypes.string,
+  modalIds: PropTypes.arrayOf(PropTypes.string),
+  shouldAppear: PropTypes.bool,
 };
 
 ModalContainer.defaultProps = {
   closeOnBackgroundClick: true,
   children: null,
+  slideUp: false,
   width: '400px',
-  height: '400px',
+  height: null,
+  modalContainerClass: '',
   zIndex: 999,
   modalIds: [],
   // Redux
