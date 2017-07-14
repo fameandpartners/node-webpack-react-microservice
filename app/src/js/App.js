@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import SideMenu from './components/shared/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import OnboardingModal from './components/onboarding/OnboardingModal';
+import ProductFabricModal from './components/pdp/ProductFabricModal';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -44,6 +45,7 @@ class App extends Component {
         <SideMenu />
         <AppMain />
         <OnboardingModal />
+        <ProductFabricModal />
       </div>
     );
   }
