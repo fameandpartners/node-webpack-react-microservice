@@ -23,6 +23,7 @@ import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import CartDrawer from './CartDrawer';
+import FameDifference from './FameDifference';
 
 // Generic UI Components
 // import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
@@ -144,6 +145,10 @@ class AppMain extends Component {
                   ? null
                   : <ProductGrid />
                 }
+              </div>
+
+              <div className="layout-container">
+                <FameDifference />
               </div>
 
               <Footer />
