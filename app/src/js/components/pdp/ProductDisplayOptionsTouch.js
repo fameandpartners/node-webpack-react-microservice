@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
@@ -21,8 +22,11 @@ import image6 from '../../../img/test/image_6.png';
 import image7 from '../../../img/test/image_7.png';
 
 
+// Constants
+import ModalConstants from '../../constants/ModalConstants';
+
 // Actions
-// import * as AppActions from '../../actions/AppActions';
+import * as ModalActions from '../../actions/ModalActions';
 
 // CSS
 import '../../../css/components/ProductDisplayOptionsTouch.scss';
@@ -34,6 +38,11 @@ function stateToProps(state) {
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
   };
+}
+
+function dispatchToProps(dispatch) {
+  const { activateModal } = bindActionCreators(ModalActions, dispatch);
+  return { activateModal };
 }
 
 class ProductDisplayOptionsTouch extends Component {
@@ -50,7 +59,7 @@ class ProductDisplayOptionsTouch extends Component {
   }
 
   handleFabricInfoModalClick() {
-    console.log('opening modal within product dispaly options touch');
+    this.props.activateModal({ modalId: ModalConstants.FABRIC_MODAL });
   }
 
   render() {
@@ -141,6 +150,8 @@ ProductDisplayOptionsTouch.propTypes = {
     description: PropTypes.string,
   }).isRequired,
   garmentCareInformation: PropTypes.string,
+  // Redux Actions
+  activateModal: PropTypes.func.isRequired,
   // Decorator props
   breakpoint: PropTypes.string.isRequired,
 };
@@ -148,4 +159,9 @@ ProductDisplayOptionsTouch.defaultProps = {
   garmentCareInformation: 'Professional dry-clean only.\rSee label for further details.',
 };
 
-export default Resize(PDPBreakpoints)(connect(stateToProps)(ProductDisplayOptionsTouch));
+export default
+Resize(
+  PDPBreakpoints,
+)(connect(
+  stateToProps, dispatchToProps,
+)(ProductDisplayOptionsTouch));

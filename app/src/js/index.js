@@ -36,9 +36,9 @@ const hydrated = {
       id: 'poly-1234',
       smallImg: '',
       name: 'Silk',
-      description: 'Medium Weight\rExcellent stretch and recovery\rMain: 97% cotton, 3% elastane cotton sateen\rLining: 65% cotton, 35% polyester poplin\rTrim: Nylon invisible zip with hook & eye closure',
+      description: 'Medium Weight\nExcellent stretch and recovery\nMain: 97% cotton, 3% elastane cotton sateen\nLining: 65% cotton, 35% polyester poplin\nTrim: Nylon invisible zip with hook & eye closure',
     },
-    garmentCareInformation: 'Professional dry-clean only. See label for further details.',
+    garmentCareInformation: 'Professional dry-clean only.\nSee label for further details.',
     preCustomizations: [
       {
         id: 'a0',
