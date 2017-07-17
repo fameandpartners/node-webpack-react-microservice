@@ -8,19 +8,25 @@ class FameDifference extends PureComponent {
     return (
       <div className="FameDifference typography">
         <h3>The Fame Difference</h3>
-        <p>
+        <p className="App--mb-normal">
           Our ethical, made-to-order model means less waste
           since we don't carry and store excess stock
         </p>
-        <div className="grid">
+        <div className="grid-center">
           <div className="col-12">
             <img className="width--full" src={aerialImage} alt="Sewing and designing" />
           </div>
-          <div className="FameDifference__artisan-quality col-6_md-4_sm-12">
-            Artisan quality, our clothing is handmade by artisan seamstresses
-            using time-honored techniques.
+          <div className="FameDifference__artisan-quality col-4_sm-12_md-5 grid-middle">
+            <div className="FameDifference__artisan col h5">
+              Artisan quality, our clothing is handmade by artisan seamstresses
+              using time-honored techniques.
+            </div>
+            <p>
+              Our ethical made-to-order model made-to-order means less waste,
+              since we don’t carry and store.
+            </p>
           </div>
-          <div className="FameDifference__hand col_md-8_sm-12">
+          <div className="FameDifference__hand col-8_sm-12_md-7">
             <img className="width--full" src={handmadeImage} alt="Hand designing" />
           </div>
         </div>
