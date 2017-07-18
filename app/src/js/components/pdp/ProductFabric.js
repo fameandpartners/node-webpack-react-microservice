@@ -68,8 +68,3 @@ ProductFabric.propTypes = {
 ProductFabric.defaultProps = {};
 
 export default ProductFabric;
-// <div>
-//   <h4>Garment Care</h4>
-//   <span>{garmentCareInformation}</span>
-// </div>
-// <span>{fabric.description}</span>

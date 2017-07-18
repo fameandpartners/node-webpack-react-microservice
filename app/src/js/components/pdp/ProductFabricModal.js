@@ -66,7 +66,6 @@ class ProductFabricModal extends PureComponent {
             </div>
           </div>
         </Modal>
-
       </ModalContainer>
     );
   }
@@ -92,4 +91,3 @@ ProductFabricModal.defaultProps = {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductFabricModal);
-// <span dangerouslySetInnerHTML={{ __html: fabric.description }} />

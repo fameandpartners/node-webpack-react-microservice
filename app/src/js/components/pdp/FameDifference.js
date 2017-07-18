@@ -23,7 +23,7 @@ class FameDifference extends PureComponent {
             </div>
             <p>
               Our ethical made-to-order model made-to-order means less waste,
-              since we don’t carry and store.
+              since we don&apos;t carry and store.
             </p>
           </div>
           <div className="FameDifference__hand col-8_sm-12_md-7">
