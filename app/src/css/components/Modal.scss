@@ -1,10 +1,13 @@
 .ModalContainer {
-  background: rgba(10, 10, 10, 0.10);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.ModalContainer--dim-background {
+  background: $c-dim-background;
 }
 
 .ModalContainer__slideUp {
@@ -15,10 +18,6 @@
 .ModalContainer__content-wrapper {
   padding: 20px 40px;
   background: $c-white;
-}
-
-.Modal {
-  flex: 1;
 }
 
 .ModalContainer__content {

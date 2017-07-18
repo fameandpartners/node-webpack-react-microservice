@@ -48,12 +48,13 @@ class ProductFabricModal extends PureComponent {
     return (
       <ModalContainer
         slideUp
+        dimBackground={false}
         width="100%"
         modalIds={[ModalConstants.FABRIC_MODAL]}
       >
         <Modal
           handleCloseModal={this.handleCloseModal}
-          modalClassName="grid-middle"
+          modalClassName="grid-middle u-flex--1"
           modalContentClassName="width--full"
           modalWrapperClassName="u-flex--col"
         >

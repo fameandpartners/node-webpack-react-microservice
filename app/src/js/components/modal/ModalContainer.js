@@ -76,6 +76,7 @@ class ModalContainer extends Component {
 
   renderModalContainer(key, style) {
     const {
+      dimBackground,
       height,
       modalContainerClass,
       width,
@@ -89,6 +90,7 @@ class ModalContainer extends Component {
         className={classnames([
           'ModalContainer u-center',
           modalContainerClass,
+          { 'ModalContainer--dim-background': dimBackground },
         ])}
         style={{ zIndex, opacity: style.opacity }}
         key={key}
@@ -135,6 +137,7 @@ class ModalContainer extends Component {
 
 ModalContainer.propTypes = {
   closeOnBackgroundClick: PropTypes.bool,
+  dimBackground: PropTypes.bool,
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   modalContainerClass: PropTypes.string,
   slideUp: PropTypes.bool,
@@ -150,6 +153,7 @@ ModalContainer.propTypes = {
 
 ModalContainer.defaultProps = {
   closeOnBackgroundClick: true,
+  dimBackground: true,
   children: null,
   slideUp: false,
   width: '400px',

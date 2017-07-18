@@ -33,8 +33,7 @@ export const STANDARD_WILL_LEAVE = {
 };
 
 export const SLIDE_UP_WILL_LEAVE = {
-  opacity: spring(0),
-  y: spring(20),
+  y: spring(100),
 };
 
 export default {
