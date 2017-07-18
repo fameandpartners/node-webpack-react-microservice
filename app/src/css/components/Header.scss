@@ -6,15 +6,26 @@
   border-bottom: 1px solid $c-light-gray;
   box-shadow: 0 3px 2px -2px $c-super-light-gray;
 
-  &__link {
-    margin-right: 1rem;
-  }
+}
 
-  &__action {
-    margin-left: 1rem;
-  }
+.Header__link {
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.Header__action {
+  position: relative;
+  cursor: pointer;
+  margin-left: 2rem;
 }
 
 .Header li {
   display: inline-block;
+}
+
+.Header__cart-count {
+  font-weight: 500;
+  position: absolute;
+  left: -10px;
+  bottom: 2px;
 }

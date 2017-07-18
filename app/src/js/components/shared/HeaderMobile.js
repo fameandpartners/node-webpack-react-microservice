@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 // Actions
 import * as AppActions from '../../actions/AppActions';
+import * as CartActions from '../../actions/CartActions';
 
 // CSS
 import '../../../css/components/HeaderMobile.scss';
@@ -19,14 +20,18 @@ import ShoppingBagIcon from '../../../svg/i-shopping-bag.svg';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
+    cartItems: state.$$cartState.get('lineItems'),
+    cartItemCount: state.$$cartState.get('lineItems').size,
     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
   };
 }
 
 function dispatchToProps(dispatch) {
-  const actions = bindActionCreators(AppActions, dispatch);
+  const appActions = bindActionCreators(AppActions, dispatch);
+  const cartActions = bindActionCreators(CartActions, dispatch);
   return {
-    activateSideMenu: actions.activateSideMenu,
+    activateSideMenu: appActions.activateSideMenu,
+    activateCartDrawer: cartActions.activateCartDrawer,
   };
 }
 
@@ -36,13 +41,18 @@ class HeaderMobile extends Component {
     autoBind(this);
   }
 
-  handleClick() {
+  handleMenuClick() {
     const { activateSideMenu, sideMenuOpen } = this.props;
     activateSideMenu({ sideMenuOpen: !sideMenuOpen });
   }
 
+  handleShoppingBagClick() {
+    const { activateCartDrawer } = this.props;
+    activateCartDrawer({ cartDrawerOpen: true });
+  }
+
   render() {
-    const { headerTitle } = this.props;
+    const { cartItemCount, headerTitle } = this.props;
     return (
       <header className="Header HeaderMobile width--full">
         <div className="layout-container">
@@ -50,20 +60,26 @@ class HeaderMobile extends Component {
             <div className="col-2">
               <Hamburger
                 isOpen={false}
-                handleClick={this.handleClick}
+                handleClick={this.handleMenuClick}
               />
             </div>
             <div className="col">
               {headerTitle}
             </div>
-            <div className="col-2 textAlign--right">
-              <img
-                src={ShoppingBagIcon.url}
-                alt="Shopping Bag Icon"
-                width="26px"
-                height="26px"
-              />
-            </div>
+            <ul className="col-2 textAlign--right">
+              <li onClick={this.handleShoppingBagClick} className="Header__action">
+                { cartItemCount > 0
+                  ? <span className="Header__cart-count">{cartItemCount}</span>
+                  : null
+                }
+                <img
+                  src={ShoppingBagIcon.url}
+                  alt="Shopping Bag Icon"
+                  width="26px"
+                  height="26px"
+                />
+              </li>
+            </ul>
           </nav>
         </div>
       </header>
@@ -74,11 +90,15 @@ class HeaderMobile extends Component {
 HeaderMobile.propTypes = {
   headerTitle: PropTypes.string,
   // Redux Props
+  cartItemCount: PropTypes.string,
   sideMenuOpen: PropTypes.bool,
+  // Redux Actions
+  activateCartDrawer: PropTypes.func.isRequired,
   activateSideMenu: PropTypes.func.isRequired,
 };
 
 HeaderMobile.defaultProps = {
+  cartItemCount: 0,
   headerTitle: '',
   sideMenuOpen: false,
 };

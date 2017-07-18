@@ -16,6 +16,22 @@ const hydrated = {
     // sideMenuOpen: true,
   },
   $$productState: {
+    complementaryProducts: [
+      {
+        centsPrice: 22900,
+        smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37492/original/fprv1060-white-front.jpg?1499455161',
+        productId: 'fprv1060',
+        productTitle: 'The Laurel Dress',
+        url: 'https://www.fameandpartners.com/dresses/dress-the-laurel-dress-1599?color=white',
+      },
+      {
+        centsPrice: 26900,
+        smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37428/original/fp2556-white-front.jpg?1499455106',
+        productId: 'fp2556',
+        productTitle: 'The Janette Dress',
+        url: 'https://www.fameandpartners.com/dresses/dress-the-janette-dress-1598?color=white',
+      },
+    ],
     preCustomizations: [
       {
         id: 'a0',
@@ -36,8 +52,28 @@ const hydrated = {
         selectedCustomizations: {},
       },
     ],
+    productId: '209gug902',
+    productCentsBasePrice: 21000,
     productTitle: 'Escala Dress',
     productDescription: 'Low effort, high contrast. The Jo is a heavy georgette gown featuring a contrasting pink bow at the front, criss-cross back straps, and a side split. It has an invisible zipper.',
+    selectedColor: {
+      id: '2096a',
+      centsTotal: 1200,
+      name: 'Black',
+      hexValue: '#000000',
+    },
+    selectedCustomizations: [
+      {
+        id: 'customa49',
+        description: 'Adds laces to back strap',
+        centsTotal: 1400,
+      },
+      {
+        id: 'customa69',
+        description: 'Puts bow on back',
+        centsTotal: 1900,
+      },
+    ],
     modelDescription: 'Our model wears a US 0 and is 5’9”',
   },
 };

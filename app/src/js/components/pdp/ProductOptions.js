@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
+import { formatCents } from '../../utilities/accounting';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
@@ -12,7 +13,7 @@ import ProductSecondaryActions from './ProductSecondaryActions';
 import image1 from '../../../img/test/image_1.png';
 
 // Actions
-// import * as AppActions from '../../actions/AppActions';
+import * as CartActions from '../../actions/CartActions';
 
 // CSS
 import '../../../css/components/ProductOptions.scss';
@@ -23,17 +24,29 @@ import Button from '../generic/Button';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
+  const selectedColor = state.$$productState.get('selectedColor');
+
   return {
+    // PRODUCT
+    productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
+    productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
+
+    // COLOR
+    colorId: selectedColor.get('id'),
+    colorName: selectedColor.get('name'),
+    colorCentsTotal: selectedColor.get('centsTotal'),
+    colorHexValue: selectedColor.get('hexValue'),
+
+    // ADDONS
+    selectedCustomizations: state.$$productState.get('selectedCustomizations').toJS(),
   };
 }
 
-function dispatchToProps() {
-  return {};
-  // const actions = bindActionCreators(AppActions, dispatch);
-  // return {
-  //   activateSideMenu: actions.activateSideMenu,
-  // };
+
+function dispatchToProps(dispatch) {
+  const { addItemToCart, activateCartDrawer } = bindActionCreators(CartActions, dispatch);
+  return { addItemToCart, activateCartDrawer };
 }
 
 class ProductOptions extends Component {
@@ -54,12 +67,109 @@ class ProductOptions extends Component {
     console.warn('Handling Size Profile Click');
   }
 
+  accumulateItemSelections() {
+    const {
+      // PRODUCT
+      productId,
+      productTitle,
+      productCentsBasePrice,
+      // COLOR
+      colorId,
+      colorName,
+      colorCentsTotal,
+      colorHexValue,
+      // ADDONS
+      selectedCustomizations,
+    } = this.props;
+
+    return {
+      productId,
+      productTitle,
+      productCentsBasePrice,
+      color: {
+        id: colorId,
+        name: colorName,
+        centsTotal: colorCentsTotal,
+        hexValue: colorHexValue,
+      },
+      addons: selectedCustomizations,
+    };
+  }
+
   handleAddToBag() {
-    console.warn('Handling Add to Bag Click');
+    const {
+      activateCartDrawer,
+      addItemToCart,
+    } = this.props;
+    const lineItem = this.accumulateItemSelections();
+
+    addItemToCart({ lineItem });
+    activateCartDrawer({ cartDrawerOpen: true });
+  }
+
+  addSelectionPrice(centsTotal) {
+    if (centsTotal) { return `+${formatCents(centsTotal, 0)}`; }
+    return null;
+  }
+
+  reduceCustomizationSelectionPrice() {
+    const { selectedCustomizations } = this.props;
+    return `+${formatCents(
+      selectedCustomizations.reduce((subTotal, c) => subTotal + c.centsTotal, 0),
+      0,
+    )}`;
+  }
+
+  generateColorSelectionNode() {
+    const {
+      colorCentsTotal,
+      colorName,
+      colorHexValue,
+    } = this.props;
+
+    return (
+      <span>
+        <span>{colorName}</span>&nbsp;
+        { colorCentsTotal
+          ? <span>{this.addSelectionPrice(colorCentsTotal)}</span>
+          : null
+        }
+        <span
+          style={{ background: colorHexValue }}
+          className="ProductOptions__color-swatch display--inline-block"
+        />
+      </span>
+    );
+  }
+
+  generateAddonSelectionNode() {
+    const { selectedCustomizations } = this.props;
+
+    if (selectedCustomizations.length === 1) { // One customization
+      return (
+        <span>
+          <span>{selectedCustomizations[0].description}</span>&nbsp;
+          <span>{this.addSelectionPrice(selectedCustomizations[0].centsTotal)}</span>
+        </span>
+      );
+    } else if (selectedCustomizations.length > 1) { // Multiple customizations
+      return (
+        <span>
+          <span>{selectedCustomizations.length} Additions</span>&nbsp;
+          <span>{this.reduceCustomizationSelectionPrice()}</span>
+        </span>
+      );
+    }
+
+    return null;
   }
 
   render() {
-    const { productTitle } = this.props;
+    const {
+      productCentsBasePrice,
+      productTitle,
+    } = this.props;
+
     return (
       <div className="ProductOptions grid-12">
         <div className="ProductOptions__primary-image-container brick col-6">
@@ -71,18 +181,24 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 heading
                 leftNode={<h1 className="display--inline h4">{productTitle}</h1>}
-                rightNode={<span className="h4">$240</span>}
+                rightNode={
+                  <span className="h4">
+                    {formatCents(productCentsBasePrice, 0)}
+                  </span>
+                }
               />
               <ProductOptionsRow
                 leftNode={<span>Color</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
+                rightNode={this.generateColorSelectionNode()}
                 handleClick={this.handleColorOptionClick}
               />
               <ProductOptionsRow
                 leftNode={<span>Style Addons</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
+                rightNode={this.generateAddonSelectionNode()}
                 handleClick={this.handleAddonOptionClick}
               />
             </div>
@@ -90,11 +206,11 @@ class ProductOptions extends Component {
               <Button
                 secondary
                 text="Your size"
-                onClick={this.handleSizeProfileClick}
+                handleClick={this.handleSizeProfileClick}
                 className="App--mb-small"
               />
               <Button
-                onClick={this.handleAddToBag}
+                handleClick={this.handleAddToBag}
                 text="Add to Bag"
               />
             </div>
@@ -117,7 +233,26 @@ class ProductOptions extends Component {
 }
 
 ProductOptions.propTypes = {
+  //* Redux Properties
+  // PRODUCT
+  productId: PropTypes.string.isRequired,
   productTitle: PropTypes.string.isRequired,
+  productCentsBasePrice: PropTypes.number.isRequired,
+  // COLOR
+  colorCentsTotal: PropTypes.number.isRequired,
+  colorName: PropTypes.string.isRequired,
+  colorHexValue: PropTypes.string.isRequired,
+  colorId: PropTypes.string.isRequired,
+  // ADDONS
+  selectedCustomizations: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      description: PropTypes.string,
+    }),
+  ).isRequired,
+  //* Redux Actions
+  addItemToCart: PropTypes.func.isRequired,
+  activateCartDrawer: PropTypes.func.isRequired,
 };
 
 ProductOptions.defaultProps = {

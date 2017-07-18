@@ -2,13 +2,13 @@ import Immutable from 'immutable';
 import ProductConstants from '../constants/ProductConstants';
 
 export const $$initialState = Immutable.fromJS({
-  // Number
-  basePrice: null,
 
   // ArrayOf({
+  //   centsPrice: Number
   //   smallImg: String,
   //   productId: String,
-  //   productLink: String
+  //   productTitle: String,
+  //   url: String,
   // })
   complementaryProducts: [],
 
@@ -22,17 +22,24 @@ export const $$initialState = Immutable.fromJS({
   currency: null,
 
   // ArrayOf({
-  // id: String,
-  // smallImg: String,
-  // descripition: String,
-  // selectedCustomizations: {}
+  //   id: String,
+  //   smallImg: String,
+  //   description: String,
+  //   preSelectedCustomizations: {}
   // })
   preCustomizations: [],
 
+  // String
+  productId: null,
+
+  // Number
+  productCentsBasePrice: null,
+
   // ArrayOf({
-  // id: String,
-  // meta: Object,
-  // hexValue
+  //   id: String,
+  //   name: String,
+  //   centsTotal: Number,
+  //   hexValue: String
   // })
   productColors: [],
 
@@ -43,13 +50,27 @@ export const $$initialState = Immutable.fromJS({
   productTitle: null,
 
   // ArrayOf({
-  // smallImg: String,
-  // bigImg: String
+  //   smallImg: String,
+  //   bigImg: String
   // })
   productImages: [],
 
   // String
   modelDescription: null,
+
+  // ObjectOf({
+  //   id: String,
+  //   name: String,
+  //   centsTotal: Number,
+  //   hexValue: String
+  // })
+  selectedColor: null,
+
+  // ObjectOf({
+  //   id: String,
+  //   description: String,
+  // })
+  selectedCustomizations: null,
 });
 
 export default function AppReducer($$state = $$initialState, action = null) {

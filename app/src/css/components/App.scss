@@ -3,6 +3,11 @@
   width: 100vw;
   text-align: center;
   background: $c-white;
+  overflow-y: scroll;
+}
+
+.App--scroll-lock {
+  overflow-y: hidden;
 }
 
 .App--mb-small {
@@ -17,7 +22,7 @@
   margin-top: 15px;
 }
 
-.App--mb-normal {
+.App--mt-normal {
   margin-top: 30px;
 }
 

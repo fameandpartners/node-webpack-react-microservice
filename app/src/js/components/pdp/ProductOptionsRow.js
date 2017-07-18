@@ -22,6 +22,7 @@ class ProductOptionsRow extends PureComponent {
       rightNodeClassName,
       optionIsSelected,
       heading,
+      rightNode,
       handleClick,
     } = this.props;
 
@@ -51,7 +52,7 @@ class ProductOptionsRow extends PureComponent {
             'ProductOptionsRow__right textAlign--right',
             rightNodeClassName,
             {
-              'ProductOptionsRow__right--fade-in': optionIsSelected || heading,
+              'ProductOptionsRow__right--fade-in': optionIsSelected || heading || rightNode,
             },
           )}
         >

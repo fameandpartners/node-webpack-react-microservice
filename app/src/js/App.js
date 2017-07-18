@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import { connect } from 'react-redux';
 
 // App Components
 import SideMenu from './components/shared/SideMenu';
@@ -15,6 +17,17 @@ import '../css/layout.scss';
 import '../css/typography.scss';
 import '../css/components/App.scss';
 
+function stateToProps(state) {
+  const sideMenuOpen = state.$$appState.get('sideMenuOpen');
+  const modalOpen = state.$$modalState.get('shouldAppear');
+  const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
+
+  return {
+    lockBody: sideMenuOpen || modalOpen || cartDrawerOpen,
+  };
+}
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -24,13 +37,10 @@ class App extends Component {
     autoBind(this);
   }
 
-  sampleTest() {
-    return true;
-  }
-
   render() {
+    const { lockBody } = this.props;
     return (
-      <div className="App">
+      <div className={`App ${lockBody ? 'App--scroll-lock' : ''}`}>
         <SideMenu />
         <AppMain />
         <OnboardingModal />
@@ -39,4 +49,8 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  lockBody: PropTypes.bool.isRequired,
+};
+
+export default connect(stateToProps, () => {})(App);

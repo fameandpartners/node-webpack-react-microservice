@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Actions
-// import * as AppActions from '../../actions/AppActions';
+import * as CartActions from '../../actions/CartActions';
 
 // CSS
 import '../../../css/components/Header.scss';
@@ -17,19 +17,19 @@ import AccountIcon from '../../../svg/i-account.svg';
 import SearchIcon from '../../../svg/i-search.svg';
 
 
-// function stateToProps(state) {
-//   // Which part of the Redux global state does our component want to receive as props?
-//   return {
-//     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
-//   };
-// }
-//
-// function dispatchToProps(dispatch) {
-//   const actions = bindActionCreators(AppActions, dispatch);
-//   return {
-//     activateSideMenu: actions.activateSideMenu,
-//   };
-// }
+function stateToProps(state) {
+  // Which part of the Redux global state does our component want to receive as props?
+  return {
+    cartItems: state.$$cartState.get('lineItems'),
+    cartItemCount: state.$$cartState.get('lineItems').size,
+    cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
+  };
+}
+
+function dispatchToProps(dispatch) {
+  const { activateCartDrawer } = bindActionCreators(CartActions, dispatch);
+  return { activateCartDrawer };
+}
 
 class Header extends Component {
   constructor(props) {
@@ -37,7 +37,13 @@ class Header extends Component {
     autoBind(this);
   }
 
+  handleShoppingBagClick() {
+    const { activateCartDrawer, cartDrawerOpen } = this.props;
+    activateCartDrawer({ cartDrawerOpen: !cartDrawerOpen });
+  }
+
   render() {
+    const { cartItemCount } = this.props;
     return (
       <header className="Header width--full">
         <div className="layout-container">
@@ -57,7 +63,11 @@ class Header extends Component {
               <li className="Header__action">
                 <img src={AccountIcon.url} alt="My Account Icon" width="18px" height="26px" />
               </li>
-              <li className="Header__action">
+              <li onClick={this.handleShoppingBagClick} className="Header__action">
+                { cartItemCount > 0
+                  ? <span className="Header__cart-count">{cartItemCount}</span>
+                  : null
+                }
                 <img src={ShoppingBagIcon.url} alt="My bag" width="18px" height="26px" />
               </li>
             </ul>
@@ -69,11 +79,14 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  sideMenuOpen: PropTypes.bool,
+  activateCartDrawer: PropTypes.func.isRequired,
+  cartItemCount: PropTypes.number,
+  cartDrawerOpen: PropTypes.bool,
 };
 
 Header.defaultProps = {
-  sideMenuOpen: false,
+  cartItemCount: 0,
+  cartDrawerOpen: false,
 };
 
-export default Header;
+export default connect(stateToProps, dispatchToProps)(Header);
