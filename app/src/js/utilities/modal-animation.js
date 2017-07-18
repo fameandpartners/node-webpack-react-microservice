@@ -2,7 +2,6 @@ import { spring } from 'react-motion';
 
 export const STANDARD_DEFAULT_STYLES = {
   key: 'modal',
-  data: {},
   style: {
     opacity: spring(1),
     y: spring(0),
