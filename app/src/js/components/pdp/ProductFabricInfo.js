@@ -2,9 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-// CSS
-// import '../../../css/components/ProductFabricInfo.scss';
-
 /* eslint-disable react/prefer-stateless-function */
 class ProductFabricInfo extends PureComponent {
   render() {
