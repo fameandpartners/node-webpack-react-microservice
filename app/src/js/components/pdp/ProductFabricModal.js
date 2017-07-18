@@ -49,7 +49,6 @@ class ProductFabricModal extends PureComponent {
       <ModalContainer
         slideUp
         dimBackground={false}
-        width="100%"
         modalIds={[ModalConstants.FABRIC_MODAL]}
       >
         <Modal

@@ -79,7 +79,6 @@ class ModalContainer extends Component {
       dimBackground,
       height,
       modalContainerClass,
-      width,
       zIndex,
       children,
       slideUp,
@@ -104,7 +103,6 @@ class ModalContainer extends Component {
           onClick={this.handleForegroundClick}
           style={{
             height,
-            width,
             zIndex,
             transform: `translate3d(0, ${style.y}%, 0)`,
           }}
@@ -141,7 +139,6 @@ ModalContainer.propTypes = {
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   modalContainerClass: PropTypes.string,
   slideUp: PropTypes.bool,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   zIndex: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   // Redux
@@ -156,7 +153,6 @@ ModalContainer.defaultProps = {
   dimBackground: true,
   children: null,
   slideUp: false,
-  width: '400px',
   height: null,
   modalContainerClass: '',
   zIndex: 999,

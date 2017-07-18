@@ -52,6 +52,8 @@ class ProductDisplayOptionsTouch extends Component {
   }
 
   generateBackgroundImageStyle(url) {
+    // TODO: @elgrecode
+    // Tentatively leaving this here until I have a better idea what to do with slides
     return {
       background: `url(${url})`,
       backgroundSize: 'cover',
