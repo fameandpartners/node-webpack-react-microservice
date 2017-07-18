@@ -10,14 +10,15 @@
   background: $c-dim-background;
 }
 
-.ModalContainer__slideUp {
-  width: 100%;
-  height: 100%;
-}
-
 .ModalContainer__content-wrapper {
   padding: 20px 40px;
   background: $c-white;
+  width: 400px;
+}
+
+.ModalContainer__slideUp {
+  width: 100%;
+  height: 100%;
 }
 
 .ModalContainer__content {

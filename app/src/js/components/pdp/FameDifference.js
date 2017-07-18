@@ -10,7 +10,7 @@ class FameDifference extends PureComponent {
         <h3>The Fame Difference</h3>
         <p className="App--mb-normal">
           Our ethical, made-to-order model means less waste
-          since we don't carry and store excess stock
+          since we don&apos;t carry and store excess stock
         </p>
         <div className="grid-center">
           <div className="col-12">
