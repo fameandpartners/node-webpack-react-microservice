@@ -43,6 +43,14 @@ class SignupModal extends Component {
     };
   }
 
+  handleTrendUpdateCheck() {
+    return () => {};
+  }
+
+  handleFormSubmission() {
+    return () => {};
+  }
+
   render() {
     return (
       <Modal
@@ -81,9 +89,15 @@ class SignupModal extends Component {
               id="latest_trends"
               label="Get emails on latest updates"
               wrapperClassName="Modal__content--med-margin-bottom"
+              onChange={this.handleTrendUpdateCheck()}
             />
           </div>
-          <Button tall className="Modal__content--sm-margin-bottom" text="Sign up" />
+          <Button
+            tall
+            className="Modal__content--sm-margin-bottom"
+            text="Sign up"
+            handleClick={this.handleFormSubmission()}
+          />
           <p className="Modal__content--med-margin-bottom">
             <span>Already a member?&nbsp;</span>
             <span

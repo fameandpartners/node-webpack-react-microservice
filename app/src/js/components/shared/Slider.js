@@ -30,7 +30,7 @@ class Slider extends Component {
       >
         <div className="Slider__view">
           <div className="Slider__frame">
-            <ul className="Slider__slides">
+            <ul className="Slider__slides u-height-full">
               { children }
             </ul>
           </div>
