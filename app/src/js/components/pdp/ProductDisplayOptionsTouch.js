@@ -64,6 +64,10 @@ class ProductDisplayOptionsTouch extends Component {
     this.props.activateModal({ modalId: ModalConstants.FABRIC_MODAL });
   }
 
+  handleColorOptionClick() {
+    this.props.activateModal({ modalId: ModalConstants.COLOR_SELECTION_MODAL });
+  }
+
   render() {
     const {
       breakpoint,
@@ -129,7 +133,10 @@ class ProductDisplayOptionsTouch extends Component {
 
         </Slider>
         <div className="ProductDisplayOptionsTouch__options App--mb-normal App--mt-normal">
-          <div className="ProductDisplayOptionsTouch__option display--inline-block">
+          <div
+            onClick={this.handleColorOptionClick}
+            className="ProductDisplayOptionsTouch__option display--inline-block"
+          >
             <span>Fabric & Color</span><br />
             <span>**SELECTION**</span>
           </div>

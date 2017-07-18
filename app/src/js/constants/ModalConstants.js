@@ -9,10 +9,11 @@ const actionTypes = assign({},
 
 const modalIds = assign({},
   mirrorCreator([
-    'SIGN_UP_MODAL',
-    'LOG_IN_MODAL',
+    'COLOR_SELECTION_MODAL',
     'FABRIC_MODAL',
     'FORGOT_PASSWORD_MODAL',
+    'LOG_IN_MODAL',
+    'SIGN_UP_MODAL',
   ]),
 );
 
