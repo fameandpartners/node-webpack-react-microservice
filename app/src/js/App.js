@@ -8,6 +8,7 @@ import SideMenu from './components/shared/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
+import ColorSelectionModal from './components/pdp/ColorSelectionModal';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -46,6 +47,7 @@ class App extends Component {
         <AppMain />
         <OnboardingModal />
         <ProductFabricModal />
+        <ColorSelectionModal />
       </div>
     );
   }
