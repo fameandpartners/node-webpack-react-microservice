@@ -91,3 +91,15 @@ ReactDOM.render(
   component,
   document.getElementById('root'),
 );
+
+
+if (module.hot) {
+  module.hot.accept('./App.js', () => {
+    /* eslint-disable global-require */
+    const NextRootContainer = require('./App.js');
+    ReactDOM.render(
+      <Provider store={store}><NextRootContainer /></Provider>,
+      document.getElementById('root'),
+    );
+  });
+}

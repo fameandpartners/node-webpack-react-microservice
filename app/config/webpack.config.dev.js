@@ -8,6 +8,9 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+console.log('DEFAULT_PORT', DEFAULT_PORT);
+
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 const publicPath = '/';
@@ -31,6 +34,10 @@ module.exports = {
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: [
+    // FOR HOT RELOADING
+    `webpack-dev-server/client?http://0.0.0.0:${DEFAULT_PORT}`, // WebpackDevServer host and port
+    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+
     // Include an alternative client for WebpackDevServer. A client's job is to
     // connect to WebpackDevServer by a socket and get notified about changes.
     // When you save a file, the client will either apply hot updates (in case
@@ -198,6 +205,7 @@ module.exports = {
       inject: true,
       template: paths.appHtml,
     }),
+    new webpack.NamedModulesPlugin(),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
     new webpack.DefinePlugin(env.stringified),
