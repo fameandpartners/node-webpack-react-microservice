@@ -8,6 +8,13 @@ import '../css/index.scss';
 // Store
 import AppStore from './stores/AppStore';
 
+function renderApp(Component) {
+  ReactDOM.render(
+    Component,
+    document.getElementById('root'),
+  );
+}
+
 // WARN: This can not go in production, it is just to show how hydration works
 // eslint-disable-next-line
 // const hydrated = (typeof window === 'object') ? window.__data : {
@@ -87,19 +94,14 @@ const hydrated = {
 const store = AppStore(hydrated);
 
 const component = <Provider store={store}><App /></Provider>;
-ReactDOM.render(
-  component,
-  document.getElementById('root'),
-);
+renderApp(component);
 
 
 if (module.hot) {
   module.hot.accept('./App.js', () => {
     /* eslint-disable global-require */
     const NextRootContainer = require('./App.js');
-    ReactDOM.render(
-      <Provider store={store}><NextRootContainer /></Provider>,
-      document.getElementById('root'),
-    );
+    const AppNode = (<Provider store={store}><NextRootContainer /></Provider>);
+    renderApp(AppNode);
   });
 }
