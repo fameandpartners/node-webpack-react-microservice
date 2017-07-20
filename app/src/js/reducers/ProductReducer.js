@@ -97,7 +97,7 @@ export const $$initialState = Immutable.fromJS({
 
 export default function AppReducer($$state = $$initialState, action = null) {
   switch (action.type) {
-    case ProductConstants.SELECT_COLOR: {
+    case ProductConstants.SELECT_PRODUCT_COLOR: {
       return $$state.merge({
         selectedColor: action.color,
       });

@@ -3,7 +3,7 @@ import mirrorCreator from 'mirror-creator';
 
 const actionTypes = assign({},
   mirrorCreator([
-    'SELECT_COLOR',
+    'SELECT_PRODUCT_COLOR',
   ]),
 );
 

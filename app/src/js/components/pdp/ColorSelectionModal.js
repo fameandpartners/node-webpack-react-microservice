@@ -3,6 +3,11 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classnames from 'classnames';
+import { formatCents } from '../../utilities/accounting';
+
+// Utilities
+import { isDarkLuminance } from '../../utilities/color';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
@@ -11,6 +16,7 @@ import Button from '../generic/Button';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
+import ProductActions from '../../actions/ProductActions';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -28,7 +34,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  return { activateModal };
+  const { selectProductColor } = bindActionCreators(ProductActions, dispatch);
+  return { activateModal, selectProductColor };
 }
 
 class ProductFabricModal extends PureComponent {
@@ -41,16 +48,39 @@ class ProductFabricModal extends PureComponent {
     this.props.activateModal({ shouldAppear: false });
   }
 
+  handleColorSelection(color) {
+    const { selectProductColor } = this.props;
+    return () => {
+      selectProductColor({ color });
+      this.handleCloseModal();
+    };
+  }
+
   generateColorSwatch(color, price = 0) {
     return (
       <div className="col-4">
         <div
-          className="ProductFabricSwatches-swatch-wrapper height--full"
+          onClick={this.handleColorSelection(color)}
+          className={classnames([
+            'ProductFabricSwatches__swatch-wrapper',
+            'col u-cursor--pointer height--full',
+          ])}
           style={{ background: color.hexValue }}
         >
-          <div className="ProductFabricSwatches-swatch">
-            <span>{color.name}</span>
-            <span>{price}</span>
+          <div
+            className={classnames(
+            'ProductFabricSwatches__swatch u-flex--center',
+            { 'ProductFabricSwatches__swatch--dark': isDarkLuminance(color.hexValue) },
+          )}
+          >
+            <div className="u-center">
+              <span>{color.name}</span>
+              <br />
+              { price
+                ? <span>{formatCents(price, 0)}</span>
+                : null
+              }
+            </div>
           </div>
         </div>
       </div>
@@ -86,11 +116,11 @@ class ProductFabricModal extends PureComponent {
               </div>
             </div>
           </div>
+          <div className="ButtonGroup">
+            <Button secondary text="Cancel" />
+            <Button text="Save" />
+          </div>
         </Modal>
-        <div className="ButtonGroup">
-          <Button secondary text="Cancel" />
-          <Button text="Save" />
-        </div>
       </ModalContainer>
     );
   }
@@ -114,6 +144,7 @@ ProductFabricModal.propTypes = {
   })).isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
+  selectProductColor: PropTypes.func.isRequired,
 };
 
 ProductFabricModal.defaultProps = {
