@@ -3,7 +3,6 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import objnoop from '../../libs/objnoop';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
@@ -15,6 +14,17 @@ import ModalActions from '../../actions/ModalActions';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
+
+// CSS
+import '../../../css/components/ProductFabricSwatches.scss';
+
+function mapStateToProps(state) {
+  return {
+    productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
+    productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
+    productSecondaryColorCentsPrice: state.$$productState.get('productSecondaryColorCentsPrice'),
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
@@ -31,7 +41,29 @@ class ProductFabricModal extends PureComponent {
     this.props.activateModal({ shouldAppear: false });
   }
 
+  generateColorSwatch(color, price = 0) {
+    return (
+      <div className="col-4">
+        <div
+          className="ProductFabricSwatches-swatch-wrapper height--full"
+          style={{ background: color.hexValue }}
+        >
+          <div className="ProductFabricSwatches-swatch">
+            <span>{color.name}</span>
+            <span>{price}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
+    const {
+      productDefaultColors,
+      productSecondaryColors,
+      productSecondaryColorCentsPrice,
+    } = this.props;
+
     return (
       <ModalContainer
         slideUp
@@ -40,26 +72,46 @@ class ProductFabricModal extends PureComponent {
       >
         <Modal
           handleCloseModal={this.handleCloseModal}
-          modalClassName="grid-middle u-flex--1"
+          modalClassName="u-flex--1"
           modalContentClassName="width--full"
           modalWrapperClassName="u-flex--col"
         >
-          <div className="ProductFabricModal textAlign--center grid-middle">
+          <div className="ProductFabricModal height--full u-overflow-y--scroll textAlign--center">
             <div className="Modal__content--med-margin-bottom">
-              Some Color swatches go here
+              <div className="grid-12">
+                { productDefaultColors.map(c => this.generateColorSwatch(c, 0))}
+                { productSecondaryColors.map(c =>
+                  this.generateColorSwatch(c, productSecondaryColorCentsPrice))
+                }
+              </div>
             </div>
           </div>
-          <div className="ButtonGroup">
-            <Button secondary text="Cancel" />
-            <Button text="Save" />
-          </div>
         </Modal>
+        <div className="ButtonGroup">
+          <Button secondary text="Cancel" />
+          <Button text="Save" />
+        </div>
       </ModalContainer>
     );
   }
 }
 
 ProductFabricModal.propTypes = {
+  // Redux Props
+  productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    hexValue: PropTypes.string,
+    patternUrl: PropTypes.string,
+  })).isRequired,
+  // Redux Props
+  productSecondaryColorCentsPrice: PropTypes.number.isRequired,
+  productSecondaryColors: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    hexValue: PropTypes.string,
+    patternUrl: PropTypes.string,
+  })).isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
 };
@@ -70,4 +122,4 @@ ProductFabricModal.defaultProps = {
 };
 
 
-export default connect(objnoop, mapDispatchToProps)(ProductFabricModal);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductFabricModal);

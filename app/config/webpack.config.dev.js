@@ -9,7 +9,6 @@ const paths = require('./paths');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
-console.log('DEFAULT_PORT', DEFAULT_PORT);
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
