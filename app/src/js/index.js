@@ -103,7 +103,7 @@ const hydrated = {
       {
         id: 'bright-yellow',
         name: 'Bright Yellow',
-        hexValue: '#000000',
+        hexValue: '#fcf751',
         patternUrl: null,
       },
       {
@@ -125,9 +125,15 @@ const hydrated = {
         patternUrl: null,
       },
       {
-        id: 'cherry-red',
-        name: 'Cherry Red',
-        hexValue: '#000000',
+        id: 'cobalt-blue',
+        name: 'Cobalt Blue',
+        hexValue: '#012D60',
+        patternUrl: null,
+      },
+      {
+        id: 'emerald-green',
+        name: 'Emerald Green',
+        hexValue: '#009875',
         patternUrl: null,
       },
     ],
