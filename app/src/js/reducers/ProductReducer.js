@@ -13,8 +13,8 @@ export const $$initialState = Immutable.fromJS({
   complementaryProducts: [],
 
   // ArrayOf({
-  // title: String,
-  // bigImg: String
+  //   title: String,
+  //   bigImg: String
   // })
   customizations: [],
 
@@ -49,10 +49,21 @@ export const $$initialState = Immutable.fromJS({
   // ArrayOf({
   //   id: String,
   //   name: String,
-  //   centsTotal: Number,
-  //   hexValue: String
+  //   hexValue: String,
+  //   patternUrl: String,
   // })
-  productColors: [],
+  productDefaultColors: [],
+
+  // Number
+  productSecondaryColorCentsPrice: null,
+
+  // ArrayOf({
+  //   id: String,
+  //   name: String,
+  //   hexValue: String,
+  //   patternUrl: String,
+  // })
+  productSecondaryColors: [],
 
   // String
   productDescription: null,
