@@ -14,7 +14,7 @@ import image1 from '../../../img/test/image_1.png';
 
 // Actions
 import * as CartActions from '../../actions/CartActions';
-
+import * as ProductActions from '../../actions/ProductActions';
 // CSS
 import '../../../css/components/ProductOptions.scss';
 
@@ -46,7 +46,12 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { addItemToCart, activateCartDrawer } = bindActionCreators(CartActions, dispatch);
-  return { addItemToCart, activateCartDrawer };
+  const { activateColorDrawer } = bindActionCreators(ProductActions, dispatch);
+  return {
+    activateCartDrawer,
+    activateColorDrawer,
+    addItemToCart,
+  };
 }
 
 class ProductOptions extends Component {
@@ -56,7 +61,7 @@ class ProductOptions extends Component {
   }
 
   handleColorOptionClick() {
-    console.warn('Handling color option click');
+    this.props.activateColorDrawer({ isActive: true });
   }
 
   handleAddonOptionClick() {
@@ -251,8 +256,9 @@ ProductOptions.propTypes = {
     }),
   ).isRequired,
   //* Redux Actions
-  addItemToCart: PropTypes.func.isRequired,
+  activateColorDrawer: PropTypes.func.isRequired,
   activateCartDrawer: PropTypes.func.isRequired,
+  addItemToCart: PropTypes.func.isRequired,
 };
 
 ProductOptions.defaultProps = {

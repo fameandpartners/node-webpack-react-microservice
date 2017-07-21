@@ -150,7 +150,7 @@ class ProductDisplayOptionsTouch extends Component {
           </div>
           <div className="ProductDisplayOptionsTouch__option display--inline-block">
             <span>Style Addons</span><br />
-            <span>**SELECTION**</span>
+            <span>-</span>
           </div>
         </div>
       </div>
