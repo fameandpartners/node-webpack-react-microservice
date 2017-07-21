@@ -29,8 +29,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  const { selectProductColor } = bindActionCreators(ProductActions, dispatch);
-  return { activateModal, selectProductColor };
+  const { activateColorDrawer, selectProductColor } = bindActionCreators(ProductActions, dispatch);
+  return {
+    activateColorDrawer,
+    activateModal,
+    selectProductColor,
+  };
 }
 
 class ColorSelectionDrawer extends PureComponent {
@@ -39,12 +43,10 @@ class ColorSelectionDrawer extends PureComponent {
     autoBind(this);
   }
 
-  handleCloseColorDrawer() {
-    console.log('handle close color drawer');
-  }
-
   handleColorSelection(color) {
-    this.props.selectProductColor({ color });
+    const { activateColorDrawer, selectProductColor } = this.props;
+    selectProductColor({ color });
+    activateColorDrawer({ isActive: false });
   }
 
   willEnter() {
@@ -71,22 +73,28 @@ class ColorSelectionDrawer extends PureComponent {
       >
         {(items) => {
           if (items.length) {
+            const { key, style } = items[0];
             return (
               /* eslint-disable */
               <div
-                key={items[0].key}
-                className="ColorSelectionDrawer height--full u-overflow-y--scroll textAlign--center"
+                key={key}
+                className="ColorSelectionDrawer__flex-wrapper"
                 style={{
-                  transform: `translate3d(${items[0].style.x}%, 0, 0)`,
+                  opacity: style.opacity,
+                  transform: `translate3d(${style.x}%, 0, 0)`,
                 }}
               >
-                <div className="ColorSelectionDrawer__content">
-                  <ColorSwatches
-                    productDefaultColors={productDefaultColors}
-                    productSecondaryColors={productSecondaryColors}
-                    productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
-                    handleColorSelection={this.handleColorSelection}
-                  />
+                <div
+                  className="ColorSelectionDrawer u-overflow-y--scroll textAlign--center"
+                >
+                  <div className="ColorSelectionDrawer__content">
+                    <ColorSwatches
+                      productDefaultColors={productDefaultColors}
+                      productSecondaryColors={productSecondaryColors}
+                      productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
+                      handleColorSelection={this.handleColorSelection}
+                    />
+                  </div>
                 </div>
               </div>
             );
@@ -117,6 +125,7 @@ ColorSelectionDrawer.propTypes = {
     patternUrl: PropTypes.string,
   })).isRequired,
   // Redux Actions
+  activateColorDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
 };
 
