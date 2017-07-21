@@ -124,7 +124,8 @@ class ModalContainer extends Component {
         (items) => {
           if (items.length) {
             return this.renderModalContainer(items[0].key, items[0].style);
-          } return null;
+          }
+          return null;
         }
       }
       </TransitionMotion>

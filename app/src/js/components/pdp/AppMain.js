@@ -9,14 +9,16 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Actions
 import * as AppActions from '../../actions/AppActions';
-import * as ModalActions from '../../actions/ModalActions';
 import * as CartActions from '../../actions/CartActions';
+import * as ModalActions from '../../actions/ModalActions';
+import * as ProductActions from '../../actions/ProductActions';
 
 // Constants
 import AppConstants from '../../constants/AppConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
+import ColorSelectionDrawer from './ColorSelectionDrawer';
 import ProductPrecustomizations from './ProductPrecustomizations';
 import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
@@ -24,6 +26,7 @@ import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import CartDrawer from './CartDrawer';
 import FameDifference from './FameDifference';
+import ButtonLedge from './ButtonLedge';
 
 // Generic UI Components
 // import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
@@ -48,7 +51,9 @@ function dispatchToProps(dispatch) {
   const actions = bindActionCreators(AppActions, dispatch);
   const modalActions = bindActionCreators(ModalActions, dispatch);
   const cartActions = bindActionCreators(CartActions, dispatch);
+  const productActions = bindActionCreators(ProductActions, dispatch);
   return {
+    activateColorDrawer: productActions.activateColorDrawer,
     activateCartDrawer: cartActions.activateCartDrawer,
     activateSideMenu: actions.activateSideMenu,
     activateModal: modalActions.activateModal,
@@ -77,6 +82,10 @@ class AppMain extends Component {
 
   handleActivateModal() {
     this.props.activateModal({ modalId: ModalConstants.SIGN_UP_MODAL });
+  }
+
+  handleCancelColorDrawer() {
+    this.props.activateColorDrawer({ isActive: false });
   }
 
   render() {
@@ -124,6 +133,7 @@ class AppMain extends Component {
                 ? <ProductDisplayOptionsTouch />
                 : (
                   <div className="App--mt-normal">
+                    <ColorSelectionDrawer />
                     <ProductOptions />
                   </div>
                 )
@@ -159,6 +169,11 @@ class AppMain extends Component {
             >
               <CartDrawer />
             </div>
+
+            <ButtonLedge
+              handleLeftButtonClick={this.handleCancelColorDrawer}
+              handleRightButtonClick={this.handleCancelColorDrawer}
+            />
           </div>
       }
       </Motion>
@@ -168,12 +183,16 @@ class AppMain extends Component {
 
 AppMain.propTypes = {
   // Redux Props
-  activateCartDrawer: PropTypes.func.isRequired,
-  activateSideMenu: PropTypes.func.isRequired,
   activateModal: PropTypes.func.isRequired,
   cartDrawerOpen: PropTypes.bool,
   productTitle: PropTypes.string,
   sideMenuOpen: PropTypes.bool,
+
+  // Redux Actions
+  activateCartDrawer: PropTypes.func.isRequired,
+  activateColorDrawer: PropTypes.func.isRequired,
+  activateSideMenu: PropTypes.func.isRequired,
+
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
   // winWidth: PropTypes.number.isRequired,

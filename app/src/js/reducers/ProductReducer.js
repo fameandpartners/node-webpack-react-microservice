@@ -32,6 +32,9 @@ export const $$initialState = Immutable.fromJS({
   // String
   garmentCareInformation: null,
 
+  // Bool
+  productColorDrawerOpen: null,
+
   // ArrayOf({
   //   id: String,
   //   smallImg: String,
@@ -84,7 +87,8 @@ export const $$initialState = Immutable.fromJS({
   //   id: String,
   //   name: String,
   //   centsTotal: Number,
-  //   hexValue: String
+  //   hexValue: String,
+  //   patternUrl,
   // })
   selectedColor: null,
 
@@ -95,8 +99,15 @@ export const $$initialState = Immutable.fromJS({
   selectedCustomizations: null,
 });
 
-export default function AppReducer($$state = $$initialState, action = null) {
+export default function ProductReducer($$state = $$initialState, action = null) {
+  console.log('hello');
   switch (action.type) {
+    case ProductConstants.ACTIVATE_COLOR_DRAWER: {
+      console.log('action', action);
+      return $$state.merge({
+        productColorDrawerOpen: action.isActive,
+      });
+    }
     case ProductConstants.SELECT_PRODUCT_COLOR: {
       return $$state.merge({
         selectedColor: action.color,

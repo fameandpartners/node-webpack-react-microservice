@@ -55,3 +55,18 @@
   background: $c-black;
   z-index: 2;
 }
+
+.ButtonLedge {
+  position: fixed;
+  width: 100%;
+  height: 100px;
+  background: $c-white;
+  text-align: center;
+  bottom: 0;
+  box-shadow: $box-shadow-top;
+}
+
+.ButtonLedge .ButtonLedge__button-wrapper {
+  margin: 0 auto;
+  max-width: 680px;
+}

@@ -1,0 +1,10 @@
+.ColorSelectionDrawer {
+  width: 100%;
+  background: $c-white;
+  position: fixed;
+}
+
+.ColorSelectionDrawer__content {
+  margin: 0 auto;
+  max-width: 680px;
+}

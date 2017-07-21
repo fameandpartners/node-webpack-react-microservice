@@ -23,9 +23,10 @@ function stateToProps(state) {
   const sideMenuOpen = state.$$appState.get('sideMenuOpen');
   const modalOpen = state.$$modalState.get('shouldAppear');
   const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
+  const colorDrawerOpen = state.$$productState.get('colorDrawerOpen');
 
   return {
-    lockBody: sideMenuOpen || modalOpen || cartDrawerOpen,
+    lockBody: sideMenuOpen || modalOpen || cartDrawerOpen || colorDrawerOpen,
   };
 }
 
