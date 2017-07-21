@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-import { lory } from 'lory.js';
+// import { lory } from 'lory.js';
 
 // CSS
 import '../../../css/components/Slider.scss';
@@ -13,11 +13,11 @@ class Slider extends Component {
   }
 
   componentDidMount() {
-    lory(this.slider, {
-      infinite: 1,
-      classNameFrame: 'Slider__frame',
-      classNameSlideContainer: 'Slider__slides',
-    });
+    // lory(this.slider, {
+    //   infinite: 1,
+    //   classNameFrame: 'Slider__frame',
+    //   classNameSlideContainer: 'Slider__slides',
+    // });
   }
 
   render() {
