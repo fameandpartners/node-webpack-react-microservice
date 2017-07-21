@@ -100,10 +100,8 @@ export const $$initialState = Immutable.fromJS({
 });
 
 export default function ProductReducer($$state = $$initialState, action = null) {
-  console.log('hello');
   switch (action.type) {
     case ProductConstants.ACTIVATE_COLOR_DRAWER: {
-      console.log('action', action);
       return $$state.merge({
         productColorDrawerOpen: action.isActive,
       });
