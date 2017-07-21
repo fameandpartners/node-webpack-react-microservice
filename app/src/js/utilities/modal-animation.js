@@ -20,6 +20,7 @@ export const SLIDE_UP_DEFAULT_STYLES = {
 export const SLIDE_OVER_DEFAULT_STYLES = {
   key: 'slide-over',
   style: {
+    opacity: spring(1),
     x: spring(0),
   },
 };
@@ -35,7 +36,8 @@ export const SLIDE_UP_WILL_ENTER = {
 };
 
 export const SLIDE_OVER_WILL_ENTER = {
-  x: 100,
+  opacity: 0,
+  x: 50,
 };
 
 export const STANDARD_WILL_LEAVE = {
@@ -48,7 +50,8 @@ export const SLIDE_UP_WILL_LEAVE = {
 };
 
 export const SLIDE_OVER_WILL_LEAVE = {
-  x: spring(100),
+  opacity: spring(0),
+  x: spring(50),
 };
 
 export default {

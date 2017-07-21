@@ -56,14 +56,17 @@
   z-index: 2;
 }
 
-.ButtonLedge {
+.ProductButtonLedge {
   position: fixed;
   width: 100%;
-  height: 100px;
   background: $c-white;
   text-align: center;
   bottom: 0;
   box-shadow: $box-shadow-top;
+}
+
+.ButtonLedge {
+  height: 100px;
 }
 
 .ButtonLedge .ButtonLedge__button-wrapper {
