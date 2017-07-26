@@ -1,7 +1,11 @@
-.ColorSelectionDrawer {
-  width: 100%;
-  background: $c-white;
+.ColorSelectionDrawer__wrapper {
   position: fixed;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  z-index: 1;
+  background: $c-white;
+  padding: 85px 0 100px 0;
 }
 
 .ColorSelectionDrawer__content {

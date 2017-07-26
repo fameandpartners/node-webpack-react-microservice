@@ -17,7 +17,6 @@ import AppConstants from '../../constants/AppConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
-import ColorSelectionDrawer from './ColorSelectionDrawer';
 import ProductButtonLedge from './ProductButtonLedge';
 import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
@@ -127,7 +126,6 @@ class AppMain extends Component {
                 ? <ProductDisplayOptionsTouch />
                 : (
                   <div className="App--mt-normal">
-                    <ColorSelectionDrawer />
                     <ProductOptions />
                   </div>
                 )
