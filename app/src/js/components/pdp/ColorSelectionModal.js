@@ -11,6 +11,7 @@ import { isDarkLuminance } from '../../utilities/color';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
+import ColorSwatches from './ColorSwatches';
 import Modal from '../modal/Modal';
 import Button from '../generic/Button';
 
@@ -29,6 +30,7 @@ function mapStateToProps(state) {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
     productSecondaryColorCentsPrice: state.$$productState.get('productSecondaryColorCentsPrice'),
+    selectedColorId: state.$$productState.get('selectedColor').get('id'),
   };
 }
 
@@ -92,6 +94,7 @@ class ProductFabricModal extends PureComponent {
       productDefaultColors,
       productSecondaryColors,
       productSecondaryColorCentsPrice,
+      selectedColorId,
     } = this.props;
 
     return (
@@ -106,14 +109,15 @@ class ProductFabricModal extends PureComponent {
           modalContentClassName="width--full"
           modalWrapperClassName="u-flex--col"
         >
-          <div className="ProductFabricModal height--full u-overflow-y--scroll textAlign--center">
+          <div className="height--full u-overflow-y--scroll textAlign--center">
             <div className="Modal__content--med-margin-bottom">
-              <div className="grid-12">
-                { productDefaultColors.map(c => this.generateColorSwatch(c, 0))}
-                { productSecondaryColors.map(c =>
-                  this.generateColorSwatch(c, productSecondaryColorCentsPrice))
-                }
-              </div>
+              <ColorSwatches
+                productDefaultColors={productDefaultColors}
+                productSecondaryColors={productSecondaryColors}
+                productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
+                selectedColorId={selectedColorId}
+                handleColorSelection={this.handleColorSelection}
+              />
             </div>
           </div>
           <div className="ButtonGroup">
@@ -142,13 +146,14 @@ ProductFabricModal.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
+  selectedColorId: PropTypes.string,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
 };
 
 ProductFabricModal.defaultProps = {
-  // Redux
+  selectedColorId: '',
   activeModalId: null,
 };
 

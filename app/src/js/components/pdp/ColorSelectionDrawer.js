@@ -24,6 +24,7 @@ function mapStateToProps(state) {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
     productSecondaryColorCentsPrice: state.$$productState.get('productSecondaryColorCentsPrice'),
+    selectedColorId: state.$$productState.get('selectedColor').get('id'),
   };
 }
 
@@ -63,6 +64,7 @@ class ColorSelectionDrawer extends PureComponent {
       productDefaultColors,
       productSecondaryColors,
       productSecondaryColorCentsPrice,
+      selectedColorId,
     } = this.props;
 
     return (
@@ -75,30 +77,27 @@ class ColorSelectionDrawer extends PureComponent {
           if (items.length) {
             const { key, style } = items[0];
             return (
-              /* eslint-disable */
               <div
                 key={key}
-                className="ColorSelectionDrawer__flex-wrapper"
+                className="ColorSelectionDrawer__wrapper"
                 style={{
                   opacity: style.opacity,
                   transform: `translate3d(${style.x}%, 0, 0)`,
                 }}
               >
-                <div
-                  className="ColorSelectionDrawer u-overflow-y--scroll textAlign--center"
-                >
+                <div className="ColorSelectionDrawer textAlign--center">
                   <div className="ColorSelectionDrawer__content">
                     <ColorSwatches
                       productDefaultColors={productDefaultColors}
                       productSecondaryColors={productSecondaryColors}
                       productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
+                      selectedColorId={selectedColorId}
                       handleColorSelection={this.handleColorSelection}
                     />
                   </div>
                 </div>
               </div>
             );
-
           }
           return null;
         }}
@@ -124,13 +123,14 @@ ColorSelectionDrawer.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
+  selectedColorId: PropTypes.string,
   // Redux Actions
   activateColorDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
 };
 
 ColorSelectionDrawer.defaultProps = {
-  // Redux
+  selectedColorId: '',
   activeModalId: null,
 };
 

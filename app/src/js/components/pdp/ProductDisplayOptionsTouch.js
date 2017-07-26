@@ -140,7 +140,7 @@ class ProductDisplayOptionsTouch extends Component {
           <div
             onClick={this.handleColorOptionClick}
             className={classnames(
-              'ProductDisplayOptionsTouch__option display--inline-block',
+              'ProductDisplayOptionsTouch__option display--inline-block u-cursor--pointer',
               { 'ProductDisplayOptionsTouch__option--dark': isDarkLuminance(selectedColor.hexValue) },
             )}
             style={{ background: selectedColor.hexValue }}

@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TransitionMotion } from 'react-motion';
 
+// CSS
+import '../../../css/components/ProductButtonLedge.scss';
+
 // Actions
 import * as ProductActions from '../../actions/ProductActions';
 
@@ -71,6 +74,7 @@ class ProductButtonLedge extends Component {
               >
                 <ButtonLedge
                   handleLeftButtonClick={this.handleCancelColorDrawer}
+                  handleRightButtonClick={this.handleCancelColorDrawer}
                 />
               </div>
             );
