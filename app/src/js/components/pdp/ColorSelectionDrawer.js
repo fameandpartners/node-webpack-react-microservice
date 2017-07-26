@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 
 // UI Components
 import ColorSwatches from './ColorSwatches';
+import ProductCustomizationNavigation from './ProductCustomizationNavigation';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -20,7 +21,8 @@ import '../../../css/components/ColorSelection.scss';
 
 function mapStateToProps(state) {
   return {
-    productColorDrawerOpen: state.$$productState.get('productColorDrawerOpen'),
+    productCustomizationDrawer: state.$$productState.get('productCustomizationDrawer'),
+    productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
     productSecondaryColorCentsPrice: state.$$productState.get('productSecondaryColorCentsPrice'),
@@ -44,6 +46,10 @@ class ColorSelectionDrawer extends PureComponent {
     autoBind(this);
   }
 
+  handleDrawerSelection(drawerName) {
+    console.log('this is the drawer I choose', drawerName);
+  }
+
   handleColorSelection(color) {
     const { activateColorDrawer, selectProductColor } = this.props;
     selectProductColor({ color });
@@ -60,7 +66,8 @@ class ColorSelectionDrawer extends PureComponent {
 
   render() {
     const {
-      productColorDrawerOpen,
+      productCustomizationDrawer,
+      productCustomizationDrawerOpen,
       productDefaultColors,
       productSecondaryColors,
       productSecondaryColorCentsPrice,
@@ -69,7 +76,7 @@ class ColorSelectionDrawer extends PureComponent {
 
     return (
       <TransitionMotion
-        styles={productColorDrawerOpen ? [modalAnimations.SLIDE_OVER_DEFAULT_STYLES] : []}
+        styles={productCustomizationDrawerOpen ? [modalAnimations.SLIDE_OVER_DEFAULT_STYLES] : []}
         willEnter={this.willEnter}
         willLeave={this.willLeave}
       >
@@ -79,21 +86,34 @@ class ColorSelectionDrawer extends PureComponent {
             return (
               <div
                 key={key}
-                className="ColorSelectionDrawer__wrapper"
+                className="ColorSelectionDrawer__wrapper u-flex--col"
                 style={{
                   opacity: style.opacity,
                   transform: `translate3d(${style.x}%, 0, 0)`,
                 }}
               >
-                <div className="ColorSelectionDrawer textAlign--center">
-                  <div className="ColorSelectionDrawer__content">
-                    <ColorSwatches
-                      productDefaultColors={productDefaultColors}
-                      productSecondaryColors={productSecondaryColors}
-                      productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
-                      selectedColorId={selectedColorId}
-                      handleColorSelection={this.handleColorSelection}
-                    />
+                <div className="ColorSelectionDrawer__header">
+                  <div className="grid-12">
+                    <div className="col-3">
+                      <ProductCustomizationNavigation
+                        handleDrawerSelection={this.handleDrawerSelection}
+                        productCustomizationDrawer={productCustomizationDrawer}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="ColorSelectionDrawer u-overflow-y--scroll textAlign--center">
+                  <div className="grid-center">
+                    <div className="ColorSelectionDrawer__content col-6">
+                      <ColorSwatches
+                        productDefaultColors={productDefaultColors}
+                        productSecondaryColors={productSecondaryColors}
+                        productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
+                        selectedColorId={selectedColorId}
+                        handleColorSelection={this.handleColorSelection}
+                      />
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -108,7 +128,8 @@ class ColorSelectionDrawer extends PureComponent {
 
 ColorSelectionDrawer.propTypes = {
   // Redux Props
-  productColorDrawerOpen: PropTypes.bool.isRequired,
+  productCustomizationDrawer: PropTypes.string.isRequired,
+  productCustomizationDrawerOpen: PropTypes.bool.isRequired,
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,

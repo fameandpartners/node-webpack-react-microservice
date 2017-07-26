@@ -1,0 +1,17 @@
+.ProductCustomizationNavigation__nav {
+  display: inline-table;
+}
+
+.ProductCustomizationNavigation__nav-list {
+  position: absolute;
+}
+
+.ProductCustomizationNavigation__nav-item {
+  margin-bottom: 1rem;
+  padding-bottom: 2px;
+}
+
+.ProductCustomizationNavigation__nav-item--active {
+  font-weight: 500;
+  border-bottom: 1px solid $c-black;
+}
