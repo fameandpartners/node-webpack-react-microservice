@@ -19,7 +19,7 @@ import ButtonLedge from '../generic/ButtonLedge';
 
 function stateToProps(state) {
   return {
-    productColorDrawerOpen: state.$$productState.get('productColorDrawerOpen'),
+    productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
   };
 }
 
@@ -53,10 +53,10 @@ class ProductButtonLedge extends Component {
   }
 
   render() {
-    const { productColorDrawerOpen } = this.props;
+    const { productCustomizationDrawerOpen } = this.props;
     return (
       <TransitionMotion
-        styles={productColorDrawerOpen ? [this.defaultStyles()] : []}
+        styles={productCustomizationDrawerOpen ? [this.defaultStyles()] : []}
         willEnter={this.willEnter}
         willLeave={this.willLeave}
       >
@@ -89,13 +89,13 @@ class ProductButtonLedge extends Component {
 
 ProductButtonLedge.propTypes = {
   // Redux Props
-  productColorDrawerOpen: PropTypes.bool,
+  productCustomizationDrawerOpen: PropTypes.bool,
   // Redux Actions
   activateColorDrawer: PropTypes.func.isRequired,
 };
 
 ProductButtonLedge.defaultProps = {
-  productColorDrawerOpen: false,
+  productCustomizationDrawerOpen: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductButtonLedge);
