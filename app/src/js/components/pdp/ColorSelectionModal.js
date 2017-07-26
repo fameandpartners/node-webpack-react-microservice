@@ -3,17 +3,11 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import classnames from 'classnames';
-import { formatCents } from '../../utilities/accounting';
-
-// Utilities
-import { isDarkLuminance } from '../../utilities/color';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import ColorSwatches from './ColorSwatches';
 import Modal from '../modal/Modal';
-import Button from '../generic/Button';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -52,41 +46,8 @@ class ProductFabricModal extends PureComponent {
 
   handleColorSelection(color) {
     const { selectProductColor } = this.props;
-    return () => {
-      selectProductColor({ color });
-      this.handleCloseModal();
-    };
-  }
-
-  generateColorSwatch(color, price = 0) {
-    return (
-      <div className="col-4">
-        <div
-          onClick={this.handleColorSelection(color)}
-          className={classnames([
-            'ProductFabricSwatches__swatch-wrapper',
-            'col u-cursor--pointer height--full',
-          ])}
-          style={{ background: color.hexValue }}
-        >
-          <div
-            className={classnames(
-            'ProductFabricSwatches__swatch u-flex--center',
-            { 'ProductFabricSwatches__swatch--dark': isDarkLuminance(color.hexValue) },
-          )}
-          >
-            <div className="u-center">
-              <span>{color.name}</span>
-              <br />
-              { price
-                ? <span>{formatCents(price, 0)}</span>
-                : null
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    selectProductColor({ color });
+    this.handleCloseModal();
   }
 
   render() {
@@ -106,11 +67,11 @@ class ProductFabricModal extends PureComponent {
         <Modal
           handleCloseModal={this.handleCloseModal}
           modalClassName="u-flex--1"
-          modalContentClassName="width--full"
+          modalContentClassName="width--full u-overflow-y--scroll"
           modalWrapperClassName="u-flex--col"
         >
-          <div className="height--full u-overflow-y--scroll textAlign--center">
-            <div className="Modal__content--med-margin-bottom">
+          <div className="height--full textAlign--center">
+            <div className="Modal__content--med-margin-bottom Modal__layout-container">
               <ColorSwatches
                 productDefaultColors={productDefaultColors}
                 productSecondaryColors={productSecondaryColors}
@@ -119,10 +80,6 @@ class ProductFabricModal extends PureComponent {
                 handleColorSelection={this.handleColorSelection}
               />
             </div>
-          </div>
-          <div className="ButtonGroup">
-            <Button secondary text="Cancel" />
-            <Button text="Save" />
           </div>
         </Modal>
       </ModalContainer>

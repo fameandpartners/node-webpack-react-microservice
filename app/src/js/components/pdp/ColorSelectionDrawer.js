@@ -103,7 +103,7 @@ class ColorSelectionDrawer extends PureComponent {
                   </div>
                 </div>
                 <div className="ColorSelectionDrawer u-overflow-y--scroll textAlign--center">
-                  <div className="grid-center">
+                  <div className="grid-center-noGutter">
                     <div className="ColorSelectionDrawer__content col-6">
                       <ColorSwatches
                         productDefaultColors={productDefaultColors}

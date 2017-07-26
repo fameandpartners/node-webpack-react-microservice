@@ -17,9 +17,8 @@ class ColorSelectionDrawer extends PureComponent {
   }
 
   handleColorSelection(color) {
-    const { handleColorSelection } = this.props;
     return () => {
-      handleColorSelection(color);
+      this.props.handleColorSelection(color);
     };
   }
 
