@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { TransitionMotion } from 'react-motion';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classnames from 'classnames';
 
 // UI Components
 import ColorSwatches from './ColorSwatches';
@@ -93,7 +94,10 @@ class ColorSelectionDrawer extends PureComponent {
             return (
               <div
                 key={key}
-                className="ColorSelectionDrawer__wrapper u-flex--col height--full width--full"
+                className={classnames(
+                  'ColorSelectionDrawer__wrapper u-flex--col height--full width--full',
+                  { 'u-pointerEvents--none': !productCustomizationDrawerOpen },
+                )}
                 style={{
                   opacity: style.opacity,
                   transform: `translate3d(${style.x}%, 0, 0)`,
