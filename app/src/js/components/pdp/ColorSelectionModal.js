@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
-import ColorSwatches from './ColorSwatches';
 import Modal from '../modal/Modal';
+import ProductCustomizationColor from '../pdp/ProductCustomizationColor';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -51,13 +51,6 @@ class ProductFabricModal extends PureComponent {
   }
 
   render() {
-    const {
-      productDefaultColors,
-      productSecondaryColors,
-      productSecondaryColorCentsPrice,
-      selectedColorId,
-    } = this.props;
-
     return (
       <ModalContainer
         slideUp
@@ -70,17 +63,11 @@ class ProductFabricModal extends PureComponent {
           modalContentClassName="width--full u-overflow-y--scroll"
           modalWrapperClassName="u-flex--col"
         >
-          <div className="height--full textAlign--center">
-            <div className="Modal__content--med-margin-bottom Modal__layout-container">
-              <ColorSwatches
-                productDefaultColors={productDefaultColors}
-                productSecondaryColors={productSecondaryColors}
-                productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
-                selectedColorId={selectedColorId}
-                handleColorSelection={this.handleColorSelection}
-              />
-            </div>
-          </div>
+
+          <ProductCustomizationColor
+            hasNavItems={false}
+            noCol={false}
+          />
         </Modal>
       </ModalContainer>
     );
@@ -88,22 +75,6 @@ class ProductFabricModal extends PureComponent {
 }
 
 ProductFabricModal.propTypes = {
-  // Redux Props
-  productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    hexValue: PropTypes.string,
-    patternUrl: PropTypes.string,
-  })).isRequired,
-  // Redux Props
-  productSecondaryColorCentsPrice: PropTypes.number.isRequired,
-  productSecondaryColors: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    hexValue: PropTypes.string,
-    patternUrl: PropTypes.string,
-  })).isRequired,
-  selectedColorId: PropTypes.string,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
