@@ -86,7 +86,7 @@ class ColorSelectionDrawer extends PureComponent {
             return (
               <div
                 key={key}
-                className="ColorSelectionDrawer__wrapper u-flex--col"
+                className="ColorSelectionDrawer__wrapper u-flex--col height--full width--full"
                 style={{
                   opacity: style.opacity,
                   transform: `translate3d(${style.x}%, 0, 0)`,

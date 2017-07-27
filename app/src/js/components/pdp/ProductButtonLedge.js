@@ -67,7 +67,7 @@ class ProductButtonLedge extends Component {
             return (
               <div
                 key={key}
-                className="ProductButtonLedge"
+                className="ProductButtonLedge width--full"
                 style={{
                   transform: `translate3d(0, ${style.y}%, 0)`,
                 }}
