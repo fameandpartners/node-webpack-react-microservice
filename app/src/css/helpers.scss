@@ -83,6 +83,10 @@
   text-decoration: underline;
 }
 
+.u-pointerEvents--none {
+  pointer-events: none;
+}
+
 // Flex Helpers
 .u-flex--col {
   display: flex;

@@ -89,7 +89,10 @@ class ModalContainer extends Component {
         className={classnames([
           'ModalContainer u-center',
           modalContainerClass,
-          { 'ModalContainer--dim-background': dimBackground },
+          {
+            'ModalContainer--dim-background': dimBackground,
+            'u-pointerEvents--none': !this.hasActivatedModal(),
+          },
         ])}
         style={{ zIndex, opacity: style.opacity }}
         key={key}
