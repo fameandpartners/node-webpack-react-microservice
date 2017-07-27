@@ -1,11 +1,7 @@
 import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
-// import { TransitionMotion } from 'react-motion';
 import classnames from 'classnames';
-
-// Actions
-// import ProductActions from '../../actions/ProductActions';
 
 // Constants
 import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE } from '../../constants/ProductConstants';
@@ -19,20 +15,6 @@ class ProductCustomizationNavigation extends PureComponent {
     autoBind(this);
   }
 
-  // handleColorSelection(color) {
-  //   const { activateColorDrawer, selectProductColor } = this.props;
-  //   selectProductColor({ color });
-  //   activateColorDrawer({ isActive: false });
-  // }
-  //
-  // willEnter() {
-  //   return modalAnimations.SLIDE_OVER_WILL_ENTER;
-  // }
-  //
-  // willLeave() {
-  //   return modalAnimations.SLIDE_OVER_WILL_LEAVE;
-  // }
-  //
   handleDrawerSelection(drawerName) {
     return () => {
       this.props.handleDrawerSelection(drawerName);
@@ -42,11 +24,6 @@ class ProductCustomizationNavigation extends PureComponent {
   render() {
     const { productCustomizationDrawer } = this.props;
 
-    // <TransitionMotion
-    // styles={productCustomizationDrawerOpen ? [modalAnimations.SLIDE_OVER_DEFAULT_STYLES] : []}
-    // willEnter={this.willEnter}
-    // willLeave={this.willLeave}
-    // >
     return (
       <div className="ProductCustomizationNavigation__nav">
         <div className="grid-middle height--full position--absolute">
@@ -73,7 +50,6 @@ class ProductCustomizationNavigation extends PureComponent {
         </div>
       </div>
     );
-    // </TransitionMotion>
   }
 }
 
