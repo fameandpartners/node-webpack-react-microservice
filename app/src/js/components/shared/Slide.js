@@ -7,7 +7,7 @@ class Slide extends PureComponent {
     const { children } = this.props;
 
     return (
-      <div className="Slide width--full">
+      <div className="Slide width--full height--full">
         { children }
       </div>
     );

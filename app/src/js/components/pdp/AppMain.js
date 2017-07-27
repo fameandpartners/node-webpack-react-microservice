@@ -23,6 +23,7 @@ import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import CartDrawer from './CartDrawer';
+import FameDifference from './FameDifference';
 
 // Generic UI Components
 // import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
@@ -119,12 +120,14 @@ class AppMain extends Component {
 
               { /* <ComponentTestPleaseRemove /> */ }
 
-              <div className="layout-container App--mt-normal">
-                { breakpoint === 'mobile' || breakpoint === 'tablet'
-                  ? <ProductDisplayOptionsTouch />
-                  : <ProductOptions />
-                }
-              </div>
+              { breakpoint === 'mobile' || breakpoint === 'tablet'
+                ? <ProductDisplayOptionsTouch />
+                : (
+                  <div className="App--mt-normal">
+                    <ProductOptions />
+                  </div>
+                )
+              }
 
               <div className="layout-container">
                 <div className="grid-2_sm-1 AppMain__product-info">
@@ -142,6 +145,10 @@ class AppMain extends Component {
                   ? null
                   : <ProductGrid />
                 }
+              </div>
+
+              <div className="layout-container">
+                <FameDifference />
               </div>
 
               <Footer />

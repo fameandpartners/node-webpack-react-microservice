@@ -45,6 +45,7 @@ class OnboardingModal extends Component {
   render() {
     return (
       <ModalContainer
+        modalContainerClass="grid-middle"
         modalIds={[
           ModalConstants.SIGN_UP_MODAL,
           ModalConstants.LOG_IN_MODAL,

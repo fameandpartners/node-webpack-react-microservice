@@ -56,7 +56,7 @@ class HeaderMobile extends Component {
     return (
       <header className="Header HeaderMobile width--full">
         <div className="layout-container">
-          <nav className="grid">
+          <nav className="grid-noGutter">
             <div className="col-2">
               <Hamburger
                 isOpen={false}

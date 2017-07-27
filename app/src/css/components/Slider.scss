@@ -1,21 +1,19 @@
 .Slider__frame {
   width: 100%;
   position: relative;
-  font-size: 0;
   line-height: 0;
   overflow: hidden;
   white-space: nowrap;
+  height: 420px;
 }
 
 .Slider__slides {
-  width: 100%;
-  display: inline-block;
+  height: 100%;
 }
 
 .Slider .Slide {
   color: rgb(0, 0, 0);
-  position: relative;
   display: inline-block;
-  max-width: 400px; // TODO: @elgrecode This will have to be adjusted
-  margin-right: 10px;
+  margin-right: 20px;
+  max-width: 320px; // TODO: @elgrecode This will have to be adjusted
 }
