@@ -51,9 +51,16 @@ class ColorSelectionDrawer extends PureComponent {
   }
 
   handleColorSelection(color) {
-    const { activateColorDrawer, selectProductColor } = this.props;
-    selectProductColor({ color });
-    activateColorDrawer({ isActive: false });
+    const {
+      activateColorDrawer,
+      productCustomizationDrawerOpen,
+      selectProductColor,
+    } = this.props;
+
+    if (productCustomizationDrawerOpen) {
+      selectProductColor({ color });
+      activateColorDrawer({ isActive: false });
+    }
   }
 
   willEnter() {
