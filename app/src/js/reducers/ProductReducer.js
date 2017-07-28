@@ -101,6 +101,19 @@ export const $$initialState = Immutable.fromJS({
   //   description: String,
   // })
   selectedCustomizations: null,
+
+
+  // Addon area
+  addons: {
+      // Marry previous customizations to addons
+    addonLayerImages: [],
+    selectedAddonImageLayers: [],
+    addonOptions: [],
+    baseImages: [],
+    baseSelected: null,
+    addonsLayersComputed: [],
+    addonsBasesComputed: [],
+  },
 });
 
 export default function ProductReducer($$state = $$initialState, action = null) {
