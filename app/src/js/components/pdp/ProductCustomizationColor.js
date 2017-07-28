@@ -15,7 +15,7 @@ import ProductCustomizationNavigation from './ProductCustomizationNavigation';
 
 // CSS
 // import '../../../css/components/ProductCustomizationColor.scss';
-//
+
 function mapStateToProps(state) {
   return {
     productCustomizationDrawer: state.$$productState.get('productCustomizationDrawer'),
@@ -29,10 +29,16 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  const { activateColorDrawer, selectProductColor } = bindActionCreators(ProductActions, dispatch);
+  const {
+    activateColorDrawer,
+    changeCustomizationDrawer,
+    selectProductColor,
+  } = bindActionCreators(ProductActions, dispatch);
+
   return {
     activateColorDrawer,
     activateModal,
+    changeCustomizationDrawer,
     selectProductColor,
   };
 }
@@ -43,10 +49,8 @@ class ProductCustomizationColor extends PureComponent {
     autoBind(this);
   }
 
-  handleDrawerSelection(drawerName) {
-    return () => {
-      this.props.handleDrawerSelection(drawerName);
-    };
+  handleDrawerSelection(productCustomizationDrawer) {
+    this.props.changeCustomizationDrawer({ productCustomizationDrawer });
   }
 
   handleColorSelection(color) {
@@ -73,8 +77,8 @@ class ProductCustomizationColor extends PureComponent {
     } = this.props;
 
     return (
-      <div className="ProductCustomizationColor u-flex--col">
-        <div className="ColorSelectionDrawer__header">
+      <div className="ProductCustomizationColor height--full u-flex--col">
+        <div className="ProductCustomizationColor__header">
           { hasNavItems
             ? (
               <div className="grid-12">
@@ -89,12 +93,19 @@ class ProductCustomizationColor extends PureComponent {
             : null
           }
         </div>
-        <div className="ColorSelectionDrawer u-overflow-y--scroll textAlign--center">
+        <div
+          className={classnames(
+            [
+              'ProductCustomizationColor__wrapper',
+              'height--full u-overflow-y--scroll textAlign--center',
+            ],
+        )}
+        >
+
           <div className="grid-center-noGutter">
             <div
               className={classnames(
-                'ColorSelectionDrawer__content col-6',
-                // { 'col-6': !noCol },
+                'ProductCustomizationColor__content col-6',
               )}
             >
               <ColorSwatches
@@ -132,9 +143,9 @@ ProductCustomizationColor.propTypes = {
     patternUrl: PropTypes.string,
   })).isRequired,
   selectedColorId: PropTypes.string,
-  handleDrawerSelection: PropTypes.func.isRequired,
   // Redux Actions
   activateColorDrawer: PropTypes.func.isRequired,
+  changeCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
 };
 

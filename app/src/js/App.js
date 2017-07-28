@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 // App Components
 import SideMenu from './components/shared/SideMenu';
 import AppMain from './components/pdp/AppMain';
-import ColorSelectionDrawer from './components/pdp/ColorSelectionDrawer';
+import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import ColorSelectionModal from './components/pdp/ColorSelectionModal';
@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <div className={`App ${lockBody ? 'App--scroll-lock' : ''}`}>
         <SideMenu />
-        <ColorSelectionDrawer />
+        <CustomizationDrawer />
         <AppMain />
         <OnboardingModal />
         <ProductFabricModal />

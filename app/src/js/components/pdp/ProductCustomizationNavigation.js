@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 // Constants
-import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE } from '../../constants/ProductConstants';
+import {
+  COLOR_CUSTOMIZE,
+  STYLE_CUSTOMIZE,
+  SIZE_CUSTOMIZE,
+} from '../../constants/ProductConstants';
 
 // CSS
 import '../../../css/components/ProductCustomizationNavigation.scss';
@@ -23,7 +27,6 @@ class ProductCustomizationNavigation extends PureComponent {
 
   render() {
     const { productCustomizationDrawer } = this.props;
-
     return (
       <div className="ProductCustomizationNavigation__nav">
         <div className="grid-middle height--full position--absolute">
@@ -45,6 +48,15 @@ class ProductCustomizationNavigation extends PureComponent {
               )}
             >
               <span>Style</span>
+            </li>
+            <li
+              onClick={this.handleDrawerSelection(SIZE_CUSTOMIZE)}
+              className={classnames(
+                'ProductCustomizationNavigation__nav-item u-cursor--pointer',
+                { 'ProductCustomizationNavigation__nav-item--active': productCustomizationDrawer === SIZE_CUSTOMIZE },
+              )}
+            >
+              <span>Your&nbsp;Size</span>
             </li>
           </ul>
         </div>
