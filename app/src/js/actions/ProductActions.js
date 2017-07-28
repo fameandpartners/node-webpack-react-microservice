@@ -7,6 +7,20 @@ export function activateColorDrawer({ isActive }) {
   };
 }
 
+export function activateCustomizationDrawer({ isActive }) {
+  return {
+    type: ProductConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
+    isActive,
+  };
+}
+
+export function changeCustomizationDrawer({ productCustomizationDrawer }) {
+  return {
+    type: ProductConstants.CHANGE_CUSTOMIZATION_DRAWER,
+    productCustomizationDrawer,
+  };
+}
+
 export function selectProductColor({ color }) {
   return {
     type: ProductConstants.SELECT_PRODUCT_COLOR,
@@ -16,5 +30,6 @@ export function selectProductColor({ color }) {
 
 export default {
   activateColorDrawer,
+  changeCustomizationDrawer,
   selectProductColor,
 };

@@ -32,7 +32,7 @@ export const $$initialState = Immutable.fromJS({
   // String
   garmentCareInformation: null,
 
-  // String ['COLOR_CUSTOMIZE', 'STYLE_CUSTOMIZE']
+  // String ['COLOR_CUSTOMIZE', 'STYLE_CUSTOMIZE', 'SIZE_PROFILE']
   productCustomizationDrawer: null,
 
   // Bool
@@ -109,6 +109,16 @@ export default function ProductReducer($$state = $$initialState, action = null) 
       return $$state.merge({
         productCustomizationDrawer: ProductConstants.COLOR_CUSTOMIZE,
         productCustomizationDrawerOpen: action.isActive,
+      });
+    }
+    case ProductConstants.ACTIVATE_CUSTOMIZATION_DRAWER: {
+      return $$state.merge({
+        productCustomizationDrawerOpen: action.isActive,
+      });
+    }
+    case ProductConstants.CHANGE_CUSTOMIZATION_DRAWER: {
+      return $$state.merge({
+        productCustomizationDrawer: action.productCustomizationDrawer,
       });
     }
     case ProductConstants.SELECT_PRODUCT_COLOR: {

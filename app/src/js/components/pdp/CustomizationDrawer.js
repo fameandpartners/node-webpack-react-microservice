@@ -5,23 +5,27 @@ import { TransitionMotion } from 'react-motion';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
+// CSS
+import '../../../css/components/CustomizationDrawer.scss';
+
 // UI Components
 import ProductCustomizationColor from './ProductCustomizationColor';
+import ProductCustomizationStyle from './ProductCustomizationStyle';
+import ProductCustomizationSize from './ProductCustomizationSize';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
-
-// CSS
-import '../../../css/components/ColorSelection.scss';
+import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE, SIZE_CUSTOMIZE } from '../../constants/ProductConstants';
 
 function mapStateToProps(state) {
   return {
+    productCustomizationDrawer: state.$$productState.get('productCustomizationDrawer'),
     productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
     selectedColorId: state.$$productState.get('selectedColor').get('id'),
   };
 }
 
-class ColorSelectionDrawer extends PureComponent {
+class CustomizationDrawer extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -33,6 +37,20 @@ class ColorSelectionDrawer extends PureComponent {
 
   willLeave() {
     return modalAnimations.SLIDE_OVER_WILL_LEAVE;
+  }
+
+  renderCustomizationContents() {
+    const { productCustomizationDrawer } = this.props;
+    switch (productCustomizationDrawer) {
+      case COLOR_CUSTOMIZE:
+        return <ProductCustomizationColor />;
+      case STYLE_CUSTOMIZE:
+        return <ProductCustomizationStyle />;
+      case SIZE_CUSTOMIZE:
+        return <ProductCustomizationSize />;
+      default:
+        return null;
+    }
   }
 
   render() {
@@ -53,7 +71,7 @@ class ColorSelectionDrawer extends PureComponent {
               <div
                 key={key}
                 className={classnames(
-                  'ColorSelectionDrawer__wrapper height--full width--full',
+                  'CustomizationDrawer__wrapper height--full width--full',
                   { 'u-pointerEvents--none': !productCustomizationDrawerOpen },
                 )}
                 style={{
@@ -61,7 +79,7 @@ class ColorSelectionDrawer extends PureComponent {
                   transform: `translate3d(${style.x}%, 0, 0)`,
                 }}
               >
-                <ProductCustomizationColor />
+                { this.renderCustomizationContents() }
               </div>
             );
           }
@@ -72,15 +90,16 @@ class ColorSelectionDrawer extends PureComponent {
   }
 }
 
-ColorSelectionDrawer.propTypes = {
+CustomizationDrawer.propTypes = {
   // Redux Props
+  productCustomizationDrawer: PropTypes.string.isRequired,
   productCustomizationDrawerOpen: PropTypes.bool.isRequired,
 };
 
-ColorSelectionDrawer.defaultProps = {
+CustomizationDrawer.defaultProps = {
   selectedColorId: '',
   activeModalId: null,
 };
 
 
-export default connect(mapStateToProps)(ColorSelectionDrawer);
+export default connect(mapStateToProps)(CustomizationDrawer);

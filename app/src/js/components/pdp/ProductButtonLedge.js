@@ -26,7 +26,7 @@ function stateToProps(state) {
 function dispatchToProps(dispatch) {
   const productActions = bindActionCreators(ProductActions, dispatch);
   return {
-    activateColorDrawer: productActions.activateColorDrawer,
+    activateCustomizationDrawer: productActions.activateCustomizationDrawer,
   };
 }
 
@@ -37,7 +37,7 @@ class ProductButtonLedge extends Component {
   }
 
   handleCancelColorDrawer() {
-    this.props.activateColorDrawer({ isActive: false });
+    this.props.activateCustomizationDrawer({ isActive: false });
   }
 
   defaultStyles() {
@@ -91,7 +91,7 @@ ProductButtonLedge.propTypes = {
   // Redux Props
   productCustomizationDrawerOpen: PropTypes.bool,
   // Redux Actions
-  activateColorDrawer: PropTypes.func.isRequired,
+  activateCustomizationDrawer: PropTypes.func.isRequired,
 };
 
 ProductButtonLedge.defaultProps = {
