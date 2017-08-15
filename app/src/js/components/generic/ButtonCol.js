@@ -26,7 +26,7 @@ class ButtonCol extends Component {
       <button
         onClick={handleClick}
         className={classnames(
-          'Button--tertiary ButtonCol grid-middle noselect',
+          'Button--tertiary ButtonCol grid-middle-noGutter noselect',
           className,
           { 'Button--selected': isSelected },
           { 'Button--tall': tall },

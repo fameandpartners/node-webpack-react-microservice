@@ -164,13 +164,15 @@ class ProductCustomizeStyle extends Component {
           key={`addon-option-${a.id}`}
           onClick={this.handleAddonSelection(a)}
         >
-          <ButtonCol
-            tall
-            className="App--mb-small width--full"
-            left={<span>{a.name}</span>}
-            right={<span>+ ${displayPrice}</span>}
-            isSelected={a.active}
-          />
+          <div className="App--mb-small">
+            <ButtonCol
+              tall
+              className="width--full"
+              left={<span>{a.name}</span>}
+              right={<span>+ ${displayPrice}</span>}
+              isSelected={a.active}
+            />
+          </div>
         </li>
       );
     });
@@ -322,21 +324,25 @@ class ProductCustomizeStyle extends Component {
     return (
       <div className="ProductCustomizeStyle height--full u-flex--col">
         <div className="ProductCustomizeStyle__header" />
-        <div className="ProductCustomizeStyle__wrapper">
+        <div className="ProductCustomizeStyle__wrapper u-flex--1">
           <div className="grid-center-noGutter">
-            <div className="ProductCustomizeStyle__content col-6">
-              <div className="typography">
-                <h2 className="h4">Customize It</h2>
-                {this.generateAddonsSummary()}
-
-                <div className="App--mb-normal ProductCustomizationStyle__cad-images">
-                  { this.generateBaseLayers() }
-                  { this.generateAddonLayers().reverse() }
+            <div className="ProductCustomizeStyle__content u-flex--col col-6">
+              <div className="App--mb-normal ProductCustomizationStyle__cad-images">
+                <div className="typography">
+                  <h2 className="h4">Customize It</h2>
+                  {this.generateAddonsSummary()}
                 </div>
 
-                <div className="ProductCustomizeStyle__addon-options">
-                  { this.generateAddonOptions() }
-                </div>
+                { this.generateBaseLayers() }
+                { this.generateAddonLayers().reverse() }
+              </div>
+
+              <div className="ProductCustomizeStyle__clear">
+                <span />
+              </div>
+
+              <div className="ProductCustomizeStyle__addon-options">
+                { this.generateAddonOptions() }
               </div>
             </div>
 
