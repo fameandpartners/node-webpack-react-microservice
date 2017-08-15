@@ -1,13 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { assign, findIndex, uniqBy } from 'lodash';
-import PDPConstants from '../../constants/PDPConstants';
+import { bindActionCreators } from 'redux';
+import autoBind from 'react-autobind';
+import classnames from 'classnames';
+
+// Components
+import ButtonCol from '../generic/ButtonCol';
+
+// Actions
+import * as ProductActions from '../../actions/ProductActions';
 
 // CSS
 import '../../../css/components/ProductCustomizationStyle.scss';
-
-// Constants
-const { DRAWERS } = PDPConstants;
 
 function mapStateToProps(state) {
   const addons = state.$$productState.get('addons').toJS();
@@ -22,17 +27,16 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
   // Binds our dispatcher to Redux calls
-  // const actions = bindActionCreators(pdpActions, dispatch);
-  // const { setAddonOptions,
-  // setAddonBaseLayer, setActiveAddonImageLayers, toggleDrawer } = actions;
+  const actions = bindActionCreators(ProductActions, dispatch);
+  const { setAddonOptions,
+  setAddonBaseLayer, setActiveAddonImageLayers } = actions;
 
   return {
-    // setAddonBaseLayer,
-    // setActiveAddonImageLayers,
-    // setAddonOptions,
-    // toggleDrawer,
+    setAddonBaseLayer,
+    setActiveAddonImageLayers,
+    setAddonOptions,
   };
 }
 
@@ -45,10 +49,9 @@ const propTypes = {
   baseImages: PropTypes.array.isRequired,
   baseSelected: PropTypes.number,
   // Redux actions
-  // setAddonOptions: PropTypes.func.isRequired,
-  // setAddonBaseLayer: PropTypes.func.isRequired,
-  // setActiveAddonImageLayers: PropTypes.func.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
+  setAddonOptions: PropTypes.func.isRequired,
+  setAddonBaseLayer: PropTypes.func.isRequired,
+  setActiveAddonImageLayers: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -58,22 +61,7 @@ const defaultProps = {
 class ProductCustomizeStyle extends Component {
   constructor(props, context) {
     super(props, context);
-    this.openMenu = this.openMenu.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
-    this.computeNewAddons = this.computeNewAddons.bind(this);
-    this.generateBaseLayers = this.generateBaseLayers.bind(this);
-    this.generateAddonLayers = this.generateAddonLayers.bind(this);
-    this.generateAddonOptions = this.generateAddonOptions.bind(this);
-  }
-
-  openMenu() {
-    const { toggleDrawer } = this.props;
-    toggleDrawer(DRAWERS.CAD_CUSTOMIZE);
-  }
-
-  closeMenu() {
-    const { toggleDrawer } = this.props;
-    toggleDrawer(null);
+    autoBind(this);
   }
 
   /**
@@ -103,15 +91,8 @@ class ProductCustomizeStyle extends Component {
    */
   generateAddonsSummary() {
     return (
-      <div>
-        <a
-          className="c-card-customize__content__left"
-        >
-          Customize It
-        </a>
-        <div className="c-card-customize__content__right">
-          {this.addonsSummarySelectedOptions()}
-        </div>
+      <div className="ProductCustomizationStyle__summary">
+        {this.addonsSummarySelectedOptions()}
       </div>
     );
   }
@@ -131,7 +112,10 @@ class ProductCustomizeStyle extends Component {
       return (
         <div
           key={`base-${url}`}
-          className={`CAD--layer CAD--layer__base ${isSelected ? ' is-selected' : ''}`}
+          className={classnames(
+            'ProductCustomizationStyle__cad-layer ProductCustomizationStyle__cad-layer__base',
+            { 'ProductCustomizationStyle__cad-layer--selected': isSelected },
+          )}
           style={{ backgroundImage: `url(${url})` }}
         />
       );
@@ -150,7 +134,10 @@ class ProductCustomizeStyle extends Component {
       return (
         <div
           key={`addon-layer-image-${a.name}`}
-          className={`CAD--layer CAD--layer__addon ${isSelected ? 'is-selected' : ''}`}
+          className={classnames(
+            'ProductCustomizationStyle__cad-layer ProductCustomizationStyle__cad-layer__addon',
+            { 'ProductCustomizationStyle__cad-layer--selected': isSelected },
+          )}
           style={{ backgroundImage: `url(${a.url})` }}
         />
       );
@@ -172,13 +159,18 @@ class ProductCustomizeStyle extends Component {
 
       return (
         <li
+          className="width--full"
           role="button"
           key={`addon-option-${a.id}`}
-          className={`clearfix noselect CAD--addon-list-item ${a.active ? 'is-selected' : ''}`}
           onClick={this.handleAddonSelection(a)}
         >
-          <span className="price pull-right noselect"> + ${displayPrice}</span>
-          <span className="name noselect">{a.name}</span>
+          <ButtonCol
+            tall
+            className="App--mb-small width--full"
+            left={<span>{a.name}</span>}
+            right={<span>+ ${displayPrice}</span>}
+            isSelected={a.active}
+          />
         </li>
       );
     });
@@ -244,8 +236,8 @@ class ProductCustomizeStyle extends Component {
 
   /**
    * Finds a subset of matches
-   * @param  {[type]} code [description]
-   * @return {[type]}      [description]
+   * @param  {Array} singleLayerMatchCode
+   * @return {Array} fullCode
    */
   findHighestPriorityMatch(singleLayerMatchCode, fullCode) {
     const { addonsLayersComputed, addonLayerImages } = this.props;
@@ -315,66 +307,37 @@ class ProductCustomizeStyle extends Component {
    * @action -> setAddonOptions, setAddonBaseLayer
    */
   handleAddonSelection(addon) {
-    // const { setAddonOptions, setActiveAddonImageLayers, setAddonBaseLayer } = this.props;
+    const { setAddonOptions, setActiveAddonImageLayers, setAddonBaseLayer } = this.props;
     return () => {
       const newAddons = this.computeNewAddons(addon);
       const newLayerCode = this.computeLayerCodeFromAddons(newAddons);
-      console.log('newAddons', newAddons);
-      console.log('newLayerCode', newLayerCode);
-      // setAddonOptions(newAddons); // Customization activation
-      // setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
-      // // Addon image activate
-      // setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode)); // Addon base layer active
+      setAddonOptions(newAddons); // Customization activation
+      setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
+      // Addon image activate
+      setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode)); // Addon base layer active
     };
   }
 
   render() {
-    let menuClass = 'pdp-side-menu';
-    let selectedClass = 'c-card-customize__content';
-
-    menuClass += ' is-active';
-    selectedClass += this.activeAddonsCount > 0 ? ' is-selected' : '';
-
     return (
       <div className="ProductCustomizeStyle height--full u-flex--col">
         <div className="ProductCustomizeStyle__header" />
-        <div className="ProductCustomizeStyle__contents">
-          <div
-            role="button"
-            className={selectedClass}
-            onClick={this.openMenu}
-          >
-            {this.generateAddonsSummary()}
-          </div>
+        <div className="ProductCustomizeStyle__wrapper">
+          <div className="grid-center-noGutter">
+            <div className="ProductCustomizeStyle__content col-6">
+              <div className="typography">
+                <h2 className="h4">Customize It</h2>
+                {this.generateAddonsSummary()}
 
-          <div className={menuClass}>
-            <div className="text-right">
-              <div
-                role="button"
-                className="btn-close med"
-                onClick={this.closeMenu}
-              >
-                <span className="hide-visually">Close Menu</span>
+                <div className="App--mb-normal ProductCustomizationStyle__cad-images">
+                  { this.generateBaseLayers() }
+                  { this.generateAddonLayers().reverse() }
+                </div>
+
+                <div className="ProductCustomizeStyle__addon-options">
+                  { this.generateAddonOptions() }
+                </div>
               </div>
-            </div>
-            <h2 className="h4 c-card-customize__header textAlign--left">Customize It</h2>
-            <p className="no-margin-bottom">
-              Select as many as you want
-            </p>
-
-            <div className="CAD--layer-wrapper">
-              { this.generateBaseLayers() }
-              { this.generateAddonLayers().reverse() }
-            </div>
-
-            <div className="CAD--addon-option-select">
-              { this.generateAddonOptions() }
-            </div>
-
-            <div className="btn-wrap">
-              <button className="btn btn-black btn-lrg">
-                Apply Customizations
-              </button>
             </div>
 
           </div>
