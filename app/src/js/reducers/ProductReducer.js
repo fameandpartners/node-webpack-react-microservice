@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import ProductConstants from '../constants/ProductConstants';
+import StyleConstants from '../constants/StyleConstants';
 
 export const $$initialState = Immutable.fromJS({
 
@@ -102,10 +103,9 @@ export const $$initialState = Immutable.fromJS({
   // })
   selectedCustomizations: null,
 
-
   // Addon area
   addons: {
-      // Marry previous customizations to addons
+    // Marry previous customizations to addons
     addonLayerImages: [],
     selectedAddonImageLayers: [],
     addonOptions: [],
@@ -137,6 +137,21 @@ export default function ProductReducer($$state = $$initialState, action = null) 
     case ProductConstants.SELECT_PRODUCT_COLOR: {
       return $$state.merge({
         selectedColor: action.color,
+      });
+    }
+    case StyleConstants.SET_ADDON_OPTIONS: {
+      return $$state.merge({
+        addons: $$state.get('addons').merge({ addonOptions: action.addonOptions }),
+      });
+    }
+    case StyleConstants.SET_ACTIVE_ADDON_IMAGE_LAYERS: {
+      return $$state.merge({
+        addons: $$state.get('addons').merge({ selectedAddonImageLayers: action.addonImageLayers }),
+      });
+    }
+    case StyleConstants.SET_ADDON_BASE_LAYER: {
+      return $$state.merge({
+        addons: $$state.get('addons').merge({ baseSelected: action.baseSelected }),
       });
     }
     default: {

@@ -137,8 +137,13 @@ button,
   outline: 0;
 }
 
+button {
+  border: 0;
+}
+
 ol,
-ul {
+ul,
+li {
   list-style: none;
 }
 
