@@ -3,6 +3,7 @@ import AppConstants from '../constants/AppConstants';
 
 export const $$initialState = Immutable.fromJS({
   defaultValue: [],
+  siteVersion: 'us',
   sideMenuOpen: false,
 });
 
