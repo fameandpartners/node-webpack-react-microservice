@@ -25,7 +25,7 @@ class ColorSwatches extends PureComponent {
   generateColorSwatch(color, price = 0) {
     const isActive = this.props.selectedColorId === color.id;
     return (
-      <div className="col-4">
+      <div className="col-4" key={color.id}>
         <div
           onClick={this.handleColorSelection(color)}
           className={classnames([

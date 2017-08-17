@@ -8,10 +8,11 @@ export function activateColorDrawer({ isActive }) {
   };
 }
 
-export function activateCustomizationDrawer({ isActive }) {
+export function activateCustomizationDrawer({ isActive = true, productCustomizationDrawer }) {
   return {
     type: ProductConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
     isActive,
+    productCustomizationDrawer,
   };
 }
 

@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 // Components
 import ButtonCol from '../generic/ButtonCol';
-import ProductCustomizationNavigation from './ProductCustomizationNavigation';
+import ProductCustomization from './ProductCustomization';
 
 // Actions
 import * as ProductActions from '../../actions/ProductActions';
@@ -319,47 +319,33 @@ class ProductCustomizeStyle extends Component {
       hasNavItems,
       productCustomizationDrawer,
     } = this.props;
+
     return (
-      <div className="ProductCustomizeStyle height--full u-flex--col">
-        <div className="ProductCustomizeStyle__header">
-          { hasNavItems
-          ? (
-            <div className="grid-12">
-              <div className="col-3">
-                <ProductCustomizationNavigation
-                  handleDrawerSelection={this.handleDrawerSelection}
-                  productCustomizationDrawer={productCustomizationDrawer}
-                />
-              </div>
+      <ProductCustomization
+        hasNavItems={hasNavItems}
+        handleDrawerSelection={this.handleDrawerSelection}
+        productCustomizationDrawer={productCustomizationDrawer}
+      >
+
+        <div className="ProductCustomizeStyle__content">
+          <div className="App--mb-normal ProductCustomizationStyle__cad-images">
+            {this.generateAddonsSummary()}
+          </div>
+
+          <div className="ProductCustomizeStyle__layer-wrapper u-center position--relative">
+            { this.generateBaseLayers() }
+            { this.generateAddonLayers().reverse() }
+          </div>
+
+
+          <div className="ProductCustomizeStyle__addon-options">
+            <div className="textAlign--right App--mb-small">
+              <span className="link link--static">Clear All</span>
             </div>
-          )
-          : null
-        }
-        </div>
-        <div className="ProductCustomizeStyle__wrapper u-overflow-y--scroll u-flex--1">
-          <div className="grid-center-noGutter">
-            <div className="ProductCustomizeStyle__content u-flex--col col-6">
-              <div className="App--mb-normal ProductCustomizationStyle__cad-images">
-                {this.generateAddonsSummary()}
-              </div>
-
-              <div className="ProductCustomizeStyle__layer-wrapper u-center position--relative">
-                { this.generateBaseLayers() }
-                { this.generateAddonLayers().reverse() }
-              </div>
-
-
-              <div className="ProductCustomizeStyle__addon-options">
-                <div className="ProductCustomizeStyle__clear">
-                  <span>Clear All</span>
-                </div>
-                { this.generateAddonOptions() }
-              </div>
-            </div>
-
+            { this.generateAddonOptions() }
           </div>
         </div>
-      </div>
+      </ProductCustomization>
     );
   }
 }
