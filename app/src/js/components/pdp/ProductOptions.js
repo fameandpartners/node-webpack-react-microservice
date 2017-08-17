@@ -48,19 +48,11 @@ function stateToProps(state) {
 
 
 function dispatchToProps(dispatch) {
-  const {
-    addItemToCart,
-    activateCartDrawer,
-  } = bindActionCreators(CartActions, dispatch);
-
-  const {
-    activateColorDrawer,
-    activateCustomizationDrawer,
-  } = bindActionCreators(ProductActions, dispatch);
+  const { addItemToCart, activateCartDrawer } = bindActionCreators(CartActions, dispatch);
+  const { activateCustomizationDrawer } = bindActionCreators(ProductActions, dispatch);
 
   return {
     activateCartDrawer,
-    activateColorDrawer,
     activateCustomizationDrawer,
     addItemToCart,
   };
@@ -72,20 +64,10 @@ class ProductOptions extends Component {
     autoBind(this);
   }
 
-  handleColorOptionClick() {
-    this.props.activateColorDrawer({ isActive: true });
-  }
-
-  handleAddonOptionClick() {
-    this.props.activateCustomizationDrawer({
-      productCustomizationDrawer: ProductConstants.STYLE_CUSTOMIZE,
-    });
-  }
-
-  handleSizeProfileClick() {
-    console.warn('Handling Size Profile Click');
-  }
-
+  /**
+   * TODO: This should be a shared utility
+   * or should punt to a shared utility
+   */
   accumulateItemSelections() {
     const {
       // PRODUCT
@@ -113,17 +95,6 @@ class ProductOptions extends Component {
       },
       addons: selectedCustomizations,
     };
-  }
-
-  handleAddToBag() {
-    const {
-      activateCartDrawer,
-      addItemToCart,
-    } = this.props;
-    const lineItem = this.accumulateItemSelections();
-
-    addItemToCart({ lineItem });
-    activateCartDrawer({ cartDrawerOpen: true });
   }
 
   addSelectionPrice(centsTotal) {
@@ -183,6 +154,41 @@ class ProductOptions extends Component {
     return null;
   }
 
+  generateSizingNode() {
+    return (
+      <span>
+        <span>5' 6"</span>&nbsp;
+        <span>Size ??</span>
+      </span>
+    );
+  }
+
+  /**
+   * Activates a drawer to a specific drawer type
+   * @param  {String} drawer
+   */
+  handleProductOptionClick(drawer) {
+    return () => {
+      this.props.activateCustomizationDrawer({
+        productCustomizationDrawer: drawer,
+      });
+    };
+  }
+
+  /**
+   * Handles adding item to cart
+   */
+  handleAddToBag() {
+    const {
+      activateCartDrawer,
+      addItemToCart,
+    } = this.props;
+    const lineItem = this.accumulateItemSelections();
+
+    addItemToCart({ lineItem });
+    activateCartDrawer({ cartDrawerOpen: true });
+  }
+
   render() {
     const {
       productCentsBasePrice,
@@ -209,25 +215,26 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 leftNode={<span>Color</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={false}
+                optionIsSelected
                 rightNode={this.generateColorSelectionNode()}
-                handleClick={this.handleColorOptionClick}
+                handleClick={this.handleProductOptionClick(ProductConstants.COLOR_CUSTOMIZE)}
               />
               <ProductOptionsRow
-                leftNode={<span>Style Addons</span>}
+                leftNode={<span>Design Customizations</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
                 rightNode={this.generateAddonSelectionNode()}
-                handleClick={this.handleAddonOptionClick}
+                handleClick={this.handleProductOptionClick(ProductConstants.STYLE_CUSTOMIZE)}
+              />
+              <ProductOptionsRow
+                leftNode={<span>Your size</span>}
+                leftNodeClassName="u-uppercase"
+                optionIsSelected={false}
+                rightNode={this.generateSizingNode()}
+                handleClick={this.handleProductOptionClick(ProductConstants.SIZE_CUSTOMIZE)}
               />
             </div>
             <div className="ProductOptions__ctas grid-1">
-              <Button
-                secondary
-                text="Your size"
-                handleClick={this.handleSizeProfileClick}
-                className="App--mb-small"
-              />
               <Button
                 handleClick={this.handleAddToBag}
                 text="Add to Bag"
@@ -270,7 +277,6 @@ ProductOptions.propTypes = {
     }),
   ).isRequired,
   //* Redux Actions
-  activateColorDrawer: PropTypes.func.isRequired,
   activateCartDrawer: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
   addItemToCart: PropTypes.func.isRequired,
