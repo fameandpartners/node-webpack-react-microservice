@@ -8,11 +8,14 @@ import { bindActionCreators } from 'redux';
 // Constants
 import {
   // DRAWERS,
+  AU_SIZES,
+  US_SIZES,
   INCH_SIZES,
-  // UNITS,
+  UNITS,
   // MIN_CM,
   // MAX_CM,
 } from '../../constants/PDPConstants';
+
 
 // Actions
 // import ModalActions from '../../actions/ModalActions';
@@ -25,10 +28,11 @@ import Input from '../form/Input';
 import RadioToggle from '../form/RadioToggle';
 
 // CSS
-// import '../../../css/components/ProductCustomizationStyle.scss';
+import '../../../css/components/ProductCustomizationSize.scss';
 
 function mapStateToProps(state) {
   return {
+    isSiteVersionUS: state.$$appState.get('siteVersion') === 'us',
     productCustomizationDrawer: state.$$productState.get('productCustomizationDrawer'),
     // productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
     // productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
@@ -100,6 +104,20 @@ class ProductCustomizationStyle extends PureComponent {
     }));
   }
 
+  /**
+   * Handler for changes of CM metric
+   */
+  handleCMChange({ value }) {
+    const numVal = parseInt(value, 10);
+
+    if (typeof numVal === 'number') {
+      this.updateHeightSelection({
+        temporaryHeightValue: numVal,
+        temporaryHeightUnit: UNITS.CM,
+      });
+    }
+  }
+
   // handleColorSelection(color) {
   //   const {
   //     activateColorDrawer,
@@ -115,8 +133,9 @@ class ProductCustomizationStyle extends PureComponent {
   render() {
     const {
       productCustomizationDrawer,
+      isSiteVersionUS,
     } = this.props;
-    // const SIZES = this.generateDressSizeSelections();
+    const SIZES = isSiteVersionUS ? US_SIZES : AU_SIZES;
 
     return (
       <ProductCustomization
@@ -124,54 +143,60 @@ class ProductCustomizationStyle extends PureComponent {
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        <div className="pdp-side-container pdp-side-container-size">
+        <div className="ProductCustomizationSize__layout-container typography">
           <div>
-            <h2 className="h4 c-card-customize__header textAlign--left">
-              Create a Personal Size Profile
-            </h2>
+            <h3 className="h3">
+              Let’s make it fit.
+            </h3>
             <p>
-              Just tell us your height and size, and we&apos;ll take care of the tailoring.
+              Just tell us your height and size, and we’ll take care of the tailoring.
             </p>
 
-            <div className="height-selection clearfix">
-              <h4>How tall are you?</h4>
-              <p>Tell the truth–no need to add height for heels.</p>
-              <div className="select-container pull-left">
-                { true ?
-                  <Select
-                    id="height-option-in"
-                    onChange={this.handleInchChange}
-                    className="sort-options"
-                    options={this.generateInchesOptions()}
-                  /> :
-                  <Input
-                    id="height-option-cm"
-                    type="number"
-                    onChange={this.handleCMChange}
+            <div className="ProductCustomizationSize__height">
+              <p className="textAlign--left">What's your height?</p>
+              <div className="grid-12">
+                <div className="col-6">
+                  { true ?
+                    <Select
+                      id="height-option-in"
+                      onChange={this.handleInchChange}
+                      className="sort-options"
+                      options={this.generateInchesOptions()}
+                    /> :
+                    <Input
+                      id="height-option-cm"
+                      type="number"
+                      onChange={this.handleCMChange}
+                    />
+                }
+                </div>
+
+                <div className="col-6">
+                  <RadioToggle
+                    id="metric"
+                    value="cm"
+                    options={[
+                      { label: 'inches', value: 'inch' },
+                      { value: 'cm' },
+                    ]}
+                    onChange={this.handleMetricSwitch}
                   />
-            }
+                </div>
               </div>
 
-              <div className="metric-container pull-left">
-                <RadioToggle
-                  id="metric"
-                  value="cm"
-                  options={[
-                    { label: 'inches', value: 'inch' },
-                    { value: 'cm' },
-                  ]}
-                  onChange={this.handleMetricSwitch}
-                />
-              </div>
             </div>
 
-            <div className="size-selection">
-              <h4>What's your size?</h4>
-              <div className="size-row">2, 4, 6, 8, 10</div>
-              <div className="btn-wrap">
-                <div onClick={this.handleSizeProfileApply} className="btn btn-black btn-lrg">
-                  Save
-                </div>
+            <div className="ProductCustomizationSize__size">
+              <p className="textAlign--left">What's your size?</p>
+              <div className="ProductCustomizationSize__options grid-12">
+                { SIZES.map(s => (
+                  <div className="ProductCustomizationSize__option col-3">
+                    <div className="ProductCustomizationSize__option-size">
+                      {s}
+                    </div>
+                  </div>
+                ))}
+                <div className="link link--static">Size Guide</div>
               </div>
             </div>
           </div>
@@ -183,6 +208,7 @@ class ProductCustomizationStyle extends PureComponent {
 
 ProductCustomizationStyle.propTypes = {
   // Redux Props
+  isSiteVersionUS: PropTypes.bool.isRequired,
   productCustomizationDrawer: PropTypes.string.isRequired,
   // Redux Actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
