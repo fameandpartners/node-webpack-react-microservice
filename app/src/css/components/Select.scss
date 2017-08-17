@@ -68,9 +68,13 @@
     transition: all 0.2s;
   }
 
-  .Select-list-item:hover,
+  .Select-list-item:hover {
+    background: $c-neutral-2;
+  }
+
   .Select-list-item:focus,
   .Select-list-item.focused {
+    background: $c-neutral-4;
     color: $c-neutral-12;
   }
 }
@@ -107,7 +111,7 @@
     z-index: 100;
     pointer-events: auto;
     opacity: 1;
-    max-height: 300px;
+    max-height: 325px;
     overflow-y: auto;
     transform: scale(1) translateZ(0);
   }

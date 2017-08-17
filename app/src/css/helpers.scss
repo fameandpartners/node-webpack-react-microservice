@@ -91,6 +91,10 @@
   pointer-events: none;
 }
 
+.u-user-select--none {
+  user-select: none;
+}
+
 // Flex Helpers
 .u-flex {
   display: flex;

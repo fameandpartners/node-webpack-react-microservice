@@ -3,14 +3,26 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import classnames from 'classnames';
+// import classnames from 'classnames';
+
+// Constants
+import {
+  // DRAWERS,
+  INCH_SIZES,
+  // UNITS,
+  // MIN_CM,
+  // MAX_CM,
+} from '../../constants/PDPConstants';
 
 // Actions
 // import ModalActions from '../../actions/ModalActions';
 import ProductActions from '../../actions/ProductActions';
 
 // UI Components
-import ProductCustomizationNavigation from './ProductCustomizationNavigation';
+import ProductCustomization from './ProductCustomization';
+import Select from '../form/Select';
+import Input from '../form/Input';
+import RadioToggle from '../form/RadioToggle';
 
 // CSS
 // import '../../../css/components/ProductCustomizationStyle.scss';
@@ -43,6 +55,51 @@ class ProductCustomizationStyle extends PureComponent {
     this.props.changeCustomizationDrawer({ productCustomizationDrawer });
   }
 
+  /**
+   * Helper method to generate normal option for Select
+   * @param  {Number} i
+   * @param  {Nunber} ft
+   * @param  {Number} inch
+   * @return {Node} defaultOption
+   */
+  defaultInchOption(i, ft, inch) {
+    return (
+      <div>
+        <span className="amt">{ft}</span>
+        <span className="metric">ft</span>
+        <span className="amt amt--last">{inch}</span>
+        <span className="metric">in</span>
+      </div>
+    );
+  }
+
+  /**
+   * Generates a description of height and dress size solection
+   * @return {Node} profileSummary
+   */
+  generateSizeProfileSummary() {
+    // const { customize } = this.props;
+    // const { height, size } = customize;
+    // const hasErrors = (customize.errors.height || customize.errors.size);
+    return (
+      <div>
+        <a className="c-card-customize__content__left">Size Profile</a>
+      </div>
+    );
+  }
+
+  /**
+   * Generates the inches options for the Select dropdown
+   * @return {Object} options
+   */
+  generateInchesOptions() {
+    return INCH_SIZES.map(({ ft, inch, totalInches }, i) => ({
+      id: i,
+      name: this.defaultInchOption(i, ft, inch),
+      meta: totalInches,
+    }));
+  }
+
   // handleColorSelection(color) {
   //   const {
   //     activateColorDrawer,
@@ -56,41 +113,70 @@ class ProductCustomizationStyle extends PureComponent {
   // }
 
   render() {
-    const { productCustomizationDrawer } = this.props;
+    const {
+      productCustomizationDrawer,
+    } = this.props;
+    // const SIZES = this.generateDressSizeSelections();
 
     return (
-      <div className="ProductCustomizationStyle height--full u-flex--col">
-        <div className="ProductCustomizationStyle__header">
-          <div className="grid-12">
-            <div className="col-3">
-              <ProductCustomizationNavigation
-                handleDrawerSelection={this.handleDrawerSelection}
-                productCustomizationDrawer={productCustomizationDrawer}
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          className={classnames(
-            [
-              'ProductCustomizationStyle__wrapper',
-              'height--full u-overflow-y--scroll textAlign--center',
-            ],
-        )}
-        >
+      <ProductCustomization
+        hasNavItems
+        handleDrawerSelection={this.handleDrawerSelection}
+        productCustomizationDrawer={productCustomizationDrawer}
+      >
+        <div className="pdp-side-container pdp-side-container-size">
+          <div>
+            <h2 className="h4 c-card-customize__header textAlign--left">
+              Create a Personal Size Profile
+            </h2>
+            <p>
+              Just tell us your height and size, and we&apos;ll take care of the tailoring.
+            </p>
 
-          <div className="grid-center-noGutter">
-            <div
-              className={classnames(
-                'ProductCustomizationStyle__content col-6',
-                // { 'col-6': !noCol },
-              )}
-            >
-              SIZE PROFILE GOES HERE!!
+            <div className="height-selection clearfix">
+              <h4>How tall are you?</h4>
+              <p>Tell the truth–no need to add height for heels.</p>
+              <div className="select-container pull-left">
+                { true ?
+                  <Select
+                    id="height-option-in"
+                    onChange={this.handleInchChange}
+                    className="sort-options"
+                    options={this.generateInchesOptions()}
+                  /> :
+                  <Input
+                    id="height-option-cm"
+                    type="number"
+                    onChange={this.handleCMChange}
+                  />
+            }
+              </div>
+
+              <div className="metric-container pull-left">
+                <RadioToggle
+                  id="metric"
+                  value="cm"
+                  options={[
+                    { label: 'inches', value: 'inch' },
+                    { value: 'cm' },
+                  ]}
+                  onChange={this.handleMetricSwitch}
+                />
+              </div>
+            </div>
+
+            <div className="size-selection">
+              <h4>What's your size?</h4>
+              <div className="size-row">2, 4, 6, 8, 10</div>
+              <div className="btn-wrap">
+                <div onClick={this.handleSizeProfileApply} className="btn btn-black btn-lrg">
+                  Save
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ProductCustomization>
     );
   }
 }

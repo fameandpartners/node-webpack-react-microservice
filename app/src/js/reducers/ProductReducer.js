@@ -126,6 +126,7 @@ export default function ProductReducer($$state = $$initialState, action = null) 
     }
     case ProductConstants.ACTIVATE_CUSTOMIZATION_DRAWER: {
       return $$state.merge({
+        productCustomizationDrawer: action.productCustomizationDrawer,
         productCustomizationDrawerOpen: action.isActive,
       });
     }
