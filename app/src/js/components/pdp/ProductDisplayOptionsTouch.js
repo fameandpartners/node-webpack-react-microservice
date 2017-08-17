@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classnames from 'classnames';
 import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
+import { isDarkLuminance } from '../../utilities/color';
 
 // UI Components
 import Slider from '../shared/Slider';
@@ -37,6 +39,7 @@ function stateToProps(state) {
   return {
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
+    selectedColor: state.$$productState.get('selectedColor').toJS(),
   };
 }
 
@@ -64,11 +67,16 @@ class ProductDisplayOptionsTouch extends Component {
     this.props.activateModal({ modalId: ModalConstants.FABRIC_MODAL });
   }
 
+  handleColorOptionClick() {
+    this.props.activateModal({ modalId: ModalConstants.COLOR_SELECTION_MODAL });
+  }
+
   render() {
     const {
       breakpoint,
       fabric,
       garmentCareInformation,
+      selectedColor,
     } = this.props;
 
     return (
@@ -129,13 +137,20 @@ class ProductDisplayOptionsTouch extends Component {
 
         </Slider>
         <div className="ProductDisplayOptionsTouch__options App--mb-normal App--mt-normal">
-          <div className="ProductDisplayOptionsTouch__option display--inline-block">
-            <span>Fabric & Color</span><br />
-            <span>**SELECTION**</span>
+          <div
+            onClick={this.handleColorOptionClick}
+            className={classnames(
+              'ProductDisplayOptionsTouch__option display--inline-block u-cursor--pointer',
+              { 'ProductDisplayOptionsTouch__option--dark': isDarkLuminance(selectedColor.hexValue) },
+            )}
+            style={{ background: selectedColor.hexValue }}
+          >
+            <span>Color</span><br />
+            <span>{selectedColor.name}</span>
           </div>
           <div className="ProductDisplayOptionsTouch__option display--inline-block">
             <span>Style Addons</span><br />
-            <span>**SELECTION**</span>
+            <span>-</span>
           </div>
         </div>
       </div>
@@ -152,6 +167,12 @@ ProductDisplayOptionsTouch.propTypes = {
     description: PropTypes.string,
   }).isRequired,
   garmentCareInformation: PropTypes.string,
+  selectedColor: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    centsTotal: PropTypes.number,
+    hexValue: PropTypes.string,
+  }).isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   // Decorator props

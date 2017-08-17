@@ -1,0 +1,24 @@
+.ColorSwatches__swatch::before {
+  padding-top: 100%;
+  float: left;
+  content: '';
+}
+
+.ColorSwatches__swatch--dark {
+  color: $c-white;
+}
+
+.ColorSwatches__wrapper--active {
+  outline: 3px solid $c-hover-gray;
+  outline-offset: 3px;
+}
+
+.ColorSwatches__swatch {
+  opacity: 0;
+  transition: $standard-transition-time opacity;
+  font-weight: 500;
+}
+
+.ColorSwatches__wrapper:hover .ColorSwatches__swatch {
+  opacity: 1;
+}

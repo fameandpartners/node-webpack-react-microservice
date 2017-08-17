@@ -8,6 +8,13 @@ import '../css/index.scss';
 // Store
 import AppStore from './stores/AppStore';
 
+function renderApp(Component) {
+  ReactDOM.render(
+    Component,
+    document.getElementById('root'),
+  );
+}
+
 // WARN: This can not go in production, it is just to show how hydration works
 // eslint-disable-next-line
 // const hydrated = (typeof window === 'object') ? window.__data : {
@@ -59,6 +66,125 @@ const hydrated = {
         selectedCustomizations: {},
       },
     ],
+    productDefaultColors: [
+      {
+        id: 'pretty-pink',
+        name: 'Pretty Pink',
+        hexValue: '#F7DBE9',
+        patternUrl: null,
+      },
+      {
+        id: 'red',
+        name: 'Red',
+        hexValue: '#E01B1B',
+        patternUrl: null,
+      },
+    ],
+    productSecondaryColorCentsPrice: 1600,
+    productSecondaryColors: [
+      {
+        id: 'aqua',
+        name: 'Aqua',
+        hexValue: '#F7DBE9',
+        patternUrl: null,
+      },
+      {
+        id: 'black',
+        name: 'Black',
+        hexValue: '#000000',
+        patternUrl: null,
+      },
+      {
+        id: 'blush',
+        name: 'Blush',
+        hexValue: '#F9DAD8',
+        patternUrl: null,
+      },
+      {
+        id: 'bright-yellow',
+        name: 'Bright Yellow',
+        hexValue: '#fcf751',
+        patternUrl: null,
+      },
+      {
+        id: 'burgandy',
+        name: 'Burgundy',
+        hexValue: '#77202F',
+        patternUrl: null,
+      },
+      {
+        id: 'candy-pink',
+        name: 'Candy Pink',
+        hexValue: '#ff99ff',
+        patternUrl: null,
+      },
+      {
+        id: 'champange',
+        name: 'Champagne',
+        hexValue: '#F9DAD8',
+        patternUrl: null,
+      },
+      {
+        id: 'cobalt-blue',
+        name: 'Cobalt Blue',
+        hexValue: '#012D60',
+        patternUrl: null,
+      },
+      {
+        id: 'emerald-green',
+        name: 'Emerald Green',
+        hexValue: '#009875',
+        patternUrl: null,
+      },
+      {
+        id: 'black',
+        name: 'Black',
+        hexValue: '#000000',
+        patternUrl: null,
+      },
+      {
+        id: 'blush',
+        name: 'Blush',
+        hexValue: '#F9DAD8',
+        patternUrl: null,
+      },
+      {
+        id: 'bright-yellow',
+        name: 'Bright Yellow',
+        hexValue: '#fcf751',
+        patternUrl: null,
+      },
+      {
+        id: 'burgandy',
+        name: 'Burgundy',
+        hexValue: '#77202F',
+        patternUrl: null,
+      },
+      {
+        id: 'candy-pink',
+        name: 'Candy Pink',
+        hexValue: '#ff99ff',
+        patternUrl: null,
+      },
+      {
+        id: 'champange',
+        name: 'Champagne',
+        hexValue: '#F9DAD8',
+        patternUrl: null,
+      },
+      {
+        id: 'cobalt-blue',
+        name: 'Cobalt Blue',
+        hexValue: '#012D60',
+        patternUrl: null,
+      },
+      {
+        id: 'emerald-green',
+        name: 'Emerald Green',
+        hexValue: '#009875',
+        patternUrl: null,
+      },
+    ],
     productId: '209gug902',
     productCentsBasePrice: 21000,
     productTitle: 'Escala Dress',
@@ -87,7 +213,14 @@ const hydrated = {
 const store = AppStore(hydrated);
 
 const component = <Provider store={store}><App /></Provider>;
-ReactDOM.render(
-  component,
-  document.getElementById('root'),
-);
+renderApp(component);
+
+
+if (module.hot) {
+  module.hot.accept('./App.js', () => {
+    /* eslint-disable global-require */
+    const NextRootContainer = require('./App.js');
+    const AppNode = (<Provider store={store}><NextRootContainer /></Provider>);
+    renderApp(AppNode);
+  });
+}

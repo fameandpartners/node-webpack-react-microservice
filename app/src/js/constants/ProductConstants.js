@@ -3,8 +3,19 @@ import mirrorCreator from 'mirror-creator';
 
 const actionTypes = assign({},
   mirrorCreator([
-    'SELECT_COLOR',
+    'ACTIVATE_COLOR_DRAWER',
+    'SELECT_PRODUCT_COLOR',
   ]),
 );
 
-export default actionTypes;
+const productCustomizationDrawer = assign({},
+  mirrorCreator([
+    'COLOR_CUSTOMIZE',
+    'STYLE_CUSTOMIZE',
+  ]),
+);
+
+export default assign({},
+  actionTypes,
+  productCustomizationDrawer,
+);

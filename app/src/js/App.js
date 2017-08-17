@@ -6,8 +6,10 @@ import { connect } from 'react-redux';
 // App Components
 import SideMenu from './components/shared/SideMenu';
 import AppMain from './components/pdp/AppMain';
+import ColorSelectionDrawer from './components/pdp/ColorSelectionDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
+import ColorSelectionModal from './components/pdp/ColorSelectionModal';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -43,9 +45,11 @@ class App extends Component {
     return (
       <div className={`App ${lockBody ? 'App--scroll-lock' : ''}`}>
         <SideMenu />
+        <ColorSelectionDrawer />
         <AppMain />
         <OnboardingModal />
         <ProductFabricModal />
+        <ColorSelectionModal />
       </div>
     );
   }

@@ -89,7 +89,10 @@ class ModalContainer extends Component {
         className={classnames([
           'ModalContainer u-center',
           modalContainerClass,
-          { 'ModalContainer--dim-background': dimBackground },
+          {
+            'ModalContainer--dim-background': dimBackground,
+            'u-pointerEvents--none': !this.hasActivatedModal(),
+          },
         ])}
         style={{ zIndex, opacity: style.opacity }}
         key={key}
@@ -124,7 +127,8 @@ class ModalContainer extends Component {
         (items) => {
           if (items.length) {
             return this.renderModalContainer(items[0].key, items[0].style);
-          } return null;
+          }
+          return null;
         }
       }
       </TransitionMotion>

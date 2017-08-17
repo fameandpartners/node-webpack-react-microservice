@@ -58,7 +58,7 @@ class SignupModal extends Component {
         handleCloseModal={this.handleCloseModal}
       >
         <div
-          className="SignupModal typography"
+          className="SignupModal typography Modal__layout-container"
         >
           <FacebookButton />
           <h4 className="h5 hr">OR</h4>

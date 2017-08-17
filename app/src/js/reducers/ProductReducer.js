@@ -13,8 +13,8 @@ export const $$initialState = Immutable.fromJS({
   complementaryProducts: [],
 
   // ArrayOf({
-  // title: String,
-  // bigImg: String
+  //   title: String,
+  //   bigImg: String
   // })
   customizations: [],
 
@@ -31,6 +31,13 @@ export const $$initialState = Immutable.fromJS({
 
   // String
   garmentCareInformation: null,
+
+  // String ['COLOR_CUSTOMIZE', 'STYLE_CUSTOMIZE']
+  productCustomizationDrawer: null,
+
+  // Bool
+  productCustomizationDrawerOpen: null,
+
 
   // ArrayOf({
   //   id: String,
@@ -49,10 +56,21 @@ export const $$initialState = Immutable.fromJS({
   // ArrayOf({
   //   id: String,
   //   name: String,
-  //   centsTotal: Number,
-  //   hexValue: String
+  //   hexValue: String,
+  //   patternUrl: String,
   // })
-  productColors: [],
+  productDefaultColors: [],
+
+  // Number
+  productSecondaryColorCentsPrice: null,
+
+  // ArrayOf({
+  //   id: String,
+  //   name: String,
+  //   hexValue: String,
+  //   patternUrl: String,
+  // })
+  productSecondaryColors: [],
 
   // String
   productDescription: null,
@@ -73,7 +91,8 @@ export const $$initialState = Immutable.fromJS({
   //   id: String,
   //   name: String,
   //   centsTotal: Number,
-  //   hexValue: String
+  //   hexValue: String,
+  //   patternUrl,
   // })
   selectedColor: null,
 
@@ -84,9 +103,15 @@ export const $$initialState = Immutable.fromJS({
   selectedCustomizations: null,
 });
 
-export default function AppReducer($$state = $$initialState, action = null) {
+export default function ProductReducer($$state = $$initialState, action = null) {
   switch (action.type) {
-    case ProductConstants.SELECT_COLOR: {
+    case ProductConstants.ACTIVATE_COLOR_DRAWER: {
+      return $$state.merge({
+        productCustomizationDrawer: ProductConstants.COLOR_CUSTOMIZE,
+        productCustomizationDrawerOpen: action.isActive,
+      });
+    }
+    case ProductConstants.SELECT_PRODUCT_COLOR: {
       return $$state.merge({
         selectedColor: action.color,
       });
