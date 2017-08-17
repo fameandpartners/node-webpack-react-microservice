@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { formatCents } from '../../utilities/accounting';
 
+// Constants
+import ProductConstants from '../../constants/ProductConstants';
+
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
 import ProductSecondaryActions from './ProductSecondaryActions';
@@ -45,11 +48,20 @@ function stateToProps(state) {
 
 
 function dispatchToProps(dispatch) {
-  const { addItemToCart, activateCartDrawer } = bindActionCreators(CartActions, dispatch);
-  const { activateColorDrawer } = bindActionCreators(ProductActions, dispatch);
+  const {
+    addItemToCart,
+    activateCartDrawer,
+  } = bindActionCreators(CartActions, dispatch);
+
+  const {
+    activateColorDrawer,
+    activateCustomizationDrawer,
+  } = bindActionCreators(ProductActions, dispatch);
+
   return {
     activateCartDrawer,
     activateColorDrawer,
+    activateCustomizationDrawer,
     addItemToCart,
   };
 }
@@ -65,7 +77,9 @@ class ProductOptions extends Component {
   }
 
   handleAddonOptionClick() {
-    console.warn('Handling Adddon Option Click');
+    this.props.activateCustomizationDrawer({
+      productCustomizationDrawer: ProductConstants.STYLE_CUSTOMIZE,
+    });
   }
 
   handleSizeProfileClick() {
@@ -258,6 +272,7 @@ ProductOptions.propTypes = {
   //* Redux Actions
   activateColorDrawer: PropTypes.func.isRequired,
   activateCartDrawer: PropTypes.func.isRequired,
+  activateCustomizationDrawer: PropTypes.func.isRequired,
   addItemToCart: PropTypes.func.isRequired,
 };
 

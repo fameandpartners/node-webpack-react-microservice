@@ -10,7 +10,7 @@ const actionTypes = assign({},
   ]),
 );
 
-const productCustomizationDrawer = assign({},
+const productCustomizationDrawers = assign({},
   mirrorCreator([
     'COLOR_CUSTOMIZE',
     'STYLE_CUSTOMIZE',
@@ -20,5 +20,5 @@ const productCustomizationDrawer = assign({},
 
 export default assign({},
   actionTypes,
-  productCustomizationDrawer,
+  productCustomizationDrawers,
 );

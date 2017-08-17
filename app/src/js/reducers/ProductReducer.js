@@ -34,10 +34,10 @@ export const $$initialState = Immutable.fromJS({
   garmentCareInformation: null,
 
   // String ['COLOR_CUSTOMIZE', 'STYLE_CUSTOMIZE', 'SIZE_PROFILE']
-  productCustomizationDrawer: null,
+  productCustomizationDrawer: ProductConstants.COLOR_CUSTOMIZE,
 
   // Bool
-  productCustomizationDrawerOpen: null,
+  productCustomizationDrawerOpen: false,
 
 
   // ArrayOf({
