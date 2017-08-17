@@ -7,9 +7,11 @@ import classnames from 'classnames';
 
 // Components
 import ButtonCol from '../generic/ButtonCol';
+import ProductCustomizationNavigation from './ProductCustomizationNavigation';
 
 // Actions
 import * as ProductActions from '../../actions/ProductActions';
+import * as ModalActions from '../../actions/ModalActions';
 
 // CSS
 import '../../../css/components/ProductCustomizationStyle.scss';
@@ -23,40 +25,29 @@ function mapStateToProps(state) {
     addonsBasesComputed: addons.addonsBasesComputed,
     baseImages: addons.baseImages,
     baseSelected: addons.baseSelected,
+    productCustomizationDrawer: state.$$productState.get('productCustomizationDrawer'),
     selectedAddonImageLayers: addons.selectedAddonImageLayers,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   // Binds our dispatcher to Redux calls
-  const actions = bindActionCreators(ProductActions, dispatch);
-  const { setAddonOptions,
-  setAddonBaseLayer, setActiveAddonImageLayers } = actions;
+  const {
+    changeCustomizationDrawer,
+    setAddonOptions,
+    setAddonBaseLayer,
+    setActiveAddonImageLayers,
+  } = bindActionCreators(ProductActions, dispatch);
+  const { activateModal } = bindActionCreators(ModalActions, dispatch);
 
   return {
+    activateModal,
+    changeCustomizationDrawer,
     setAddonBaseLayer,
     setActiveAddonImageLayers,
     setAddonOptions,
   };
 }
-
-const propTypes = {
-  addonLayerImages: PropTypes.array.isRequired,
-  selectedAddonImageLayers: PropTypes.array.isRequired,
-  addonOptions: PropTypes.array.isRequired,
-  addonsLayersComputed: PropTypes.array.isRequired,
-  addonsBasesComputed: PropTypes.array.isRequired,
-  baseImages: PropTypes.array.isRequired,
-  baseSelected: PropTypes.number,
-  // Redux actions
-  setAddonOptions: PropTypes.func.isRequired,
-  setAddonBaseLayer: PropTypes.func.isRequired,
-  setActiveAddonImageLayers: PropTypes.func.isRequired,
-};
-
-const defaultProps = {
-  baseSelected: null,
-};
 
 class ProductCustomizeStyle extends Component {
   constructor(props, context) {
@@ -71,6 +62,10 @@ class ProductCustomizeStyle extends Component {
   get activeAddonsCount() {
     const { addonOptions } = this.props;
     return addonOptions.reduce((acc, val) => (val.active ? acc + 1 : acc), 0);
+  }
+
+  handleDrawerSelection(productCustomizationDrawer) {
+    this.props.changeCustomizationDrawer({ productCustomizationDrawer });
   }
 
   /**
@@ -321,27 +316,44 @@ class ProductCustomizeStyle extends Component {
   }
 
   render() {
+    const {
+      hasNavItems,
+      productCustomizationDrawer,
+    } = this.props;
     return (
       <div className="ProductCustomizeStyle height--full u-flex--col">
-        <div className="ProductCustomizeStyle__header" />
-        <div className="ProductCustomizeStyle__wrapper u-flex--1">
+        <div className="ProductCustomizeStyle__header">
+          { hasNavItems
+          ? (
+            <div className="grid-12">
+              <div className="col-3">
+                <ProductCustomizationNavigation
+                  handleDrawerSelection={this.handleDrawerSelection}
+                  productCustomizationDrawer={productCustomizationDrawer}
+                />
+              </div>
+            </div>
+          )
+          : null
+        }
+        </div>
+        <div className="ProductCustomizeStyle__wrapper u-overflow-y--scroll u-flex--1">
           <div className="grid-center-noGutter">
             <div className="ProductCustomizeStyle__content u-flex--col col-6">
               <div className="App--mb-normal ProductCustomizationStyle__cad-images">
-                <div className="typography">
-                  <h2 className="h4">Customize It</h2>
-                  {this.generateAddonsSummary()}
-                </div>
+                {this.generateAddonsSummary()}
+              </div>
 
+              <div className="ProductCustomizeStyle__layer-wrapper u-center position--relative">
                 { this.generateBaseLayers() }
                 { this.generateAddonLayers().reverse() }
               </div>
 
-              <div className="ProductCustomizeStyle__clear">
-                <span />
-              </div>
 
               <div className="ProductCustomizeStyle__addon-options">
+                <div className="ProductCustomizeStyle__clear">
+                  <span>Clear All</span>
+                </div>
                 { this.generateAddonOptions() }
               </div>
             </div>
@@ -353,7 +365,30 @@ class ProductCustomizeStyle extends Component {
   }
 }
 
-ProductCustomizeStyle.propTypes = propTypes;
-ProductCustomizeStyle.defaultProps = defaultProps;
+/* eslint-disable */
+ProductCustomizeStyle.propTypes = {
+  // Normal Props
+  hasNavItems: PropTypes.bool,
+  // Redux Props
+  addonLayerImages: PropTypes.array.isRequired,
+  selectedAddonImageLayers: PropTypes.array.isRequired,
+  addonOptions: PropTypes.array.isRequired,
+  addonsLayersComputed: PropTypes.array.isRequired,
+  addonsBasesComputed: PropTypes.array.isRequired,
+  baseImages: PropTypes.array.isRequired,
+  baseSelected: PropTypes.number,
+  productCustomizationDrawer: PropTypes.string.isRequired,
+  // Redux actions
+  changeCustomizationDrawer: PropTypes.func.isRequired,
+  setAddonOptions: PropTypes.func.isRequired,
+  setAddonBaseLayer: PropTypes.func.isRequired,
+  setActiveAddonImageLayers: PropTypes.func.isRequired,
+};
+
+ProductCustomizeStyle.defaultProps = {
+  baseSelected: null,
+  hasNavItems: true,
+  selectedColorId: '',
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizeStyle);
