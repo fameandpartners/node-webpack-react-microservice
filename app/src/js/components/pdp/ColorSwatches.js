@@ -10,7 +10,7 @@ import { isDarkLuminance } from '../../utilities/color';
 // CSS
 import '../../../css/components/ColorSwatches.scss';
 
-class ColorSelectionDrawer extends PureComponent {
+class ColorSwatches extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -85,7 +85,7 @@ class ColorSelectionDrawer extends PureComponent {
   }
 }
 
-ColorSelectionDrawer.propTypes = {
+ColorSwatches.propTypes = {
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
@@ -103,7 +103,7 @@ ColorSelectionDrawer.propTypes = {
   handleColorSelection: PropTypes.func.isRequired,
 };
 
-ColorSelectionDrawer.defaultProps = {};
+ColorSwatches.defaultProps = {};
 
 
-export default ColorSelectionDrawer;
+export default ColorSwatches;

@@ -3,7 +3,6 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import classnames from 'classnames';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -11,10 +10,7 @@ import ProductActions from '../../actions/ProductActions';
 
 // UI Components
 import ColorSwatches from './ColorSwatches';
-import ProductCustomizationNavigation from './ProductCustomizationNavigation';
-
-// CSS
-// import '../../../css/components/ProductCustomizationColor.scss';
+import ProductCustomization from './ProductCustomization';
 
 function mapStateToProps(state) {
   return {
@@ -49,8 +45,9 @@ class ProductCustomizationColor extends PureComponent {
     autoBind(this);
   }
 
-  handleDrawerSelection(productCustomizationDrawer) {
-    this.props.changeCustomizationDrawer({ productCustomizationDrawer });
+  handleDrawerSelection(drawerSelected) {
+    const { changeCustomizationDrawer } = this.props;
+    changeCustomizationDrawer({ productCustomizationDrawer: drawerSelected });
   }
 
   handleColorSelection(color) {
@@ -77,48 +74,19 @@ class ProductCustomizationColor extends PureComponent {
     } = this.props;
 
     return (
-      <div className="ProductCustomizationColor height--full u-flex--col">
-        <div className="ProductCustomizationColor__header">
-          { hasNavItems
-            ? (
-              <div className="grid-12">
-                <div className="col-3">
-                  <ProductCustomizationNavigation
-                    handleDrawerSelection={this.handleDrawerSelection}
-                    productCustomizationDrawer={productCustomizationDrawer}
-                  />
-                </div>
-              </div>
-            )
-            : null
-          }
-        </div>
-        <div
-          className={classnames(
-            [
-              'ProductCustomizationColor__wrapper',
-              'height--full u-overflow-y--scroll textAlign--center',
-            ],
-        )}
-        >
-
-          <div className="grid-center-noGutter">
-            <div
-              className={classnames(
-                'ProductCustomizationColor__content col-6',
-              )}
-            >
-              <ColorSwatches
-                productDefaultColors={productDefaultColors}
-                productSecondaryColors={productSecondaryColors}
-                productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
-                selectedColorId={selectedColorId}
-                handleColorSelection={this.handleColorSelection}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <ProductCustomization
+        hasNavItems={hasNavItems}
+        handleDrawerSelection={this.handleDrawerSelection}
+        productCustomizationDrawer={productCustomizationDrawer}
+      >
+        <ColorSwatches
+          productDefaultColors={productDefaultColors}
+          productSecondaryColors={productSecondaryColors}
+          productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
+          selectedColorId={selectedColorId}
+          handleColorSelection={this.handleColorSelection}
+        />
+      </ProductCustomization>
     );
   }
 }

@@ -31,7 +31,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  // Binds our dispatcher to Redux calls
   const {
     changeCustomizationDrawer,
     setAddonOptions,
