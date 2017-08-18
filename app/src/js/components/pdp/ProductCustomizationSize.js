@@ -21,6 +21,7 @@ import {
 // Actions
 // import ModalActions from '../../actions/ModalActions';
 import ProductActions from '../../actions/ProductActions';
+import CustomizationActions from '../../actions/CustomizationActions';
 
 // UI Components
 import ProductCustomization from './ProductCustomization';
@@ -36,6 +37,9 @@ function mapStateToProps(state) {
   return {
     isUSSiteVersion: state.$$appState.get('siteVersion') === 'us',
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
+    temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
+    temporaryHeightId: state.$$customizationState.get('temporaryHeightId'),
+    temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
     // productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
     // productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     // productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
@@ -46,7 +50,16 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const { changeCustomizationDrawer } = bindActionCreators(ProductActions, dispatch);
-  return { changeCustomizationDrawer };
+  const {
+    updateCustomizationMetric,
+    updateHeightSelection,
+  } = bindActionCreators(CustomizationActions, dispatch);
+
+  return {
+    changeCustomizationDrawer,
+    updateCustomizationMetric,
+    updateHeightSelection,
+  };
 }
 
 
@@ -89,22 +102,15 @@ class ProductCustomizationStyle extends PureComponent {
    * @param  {Object} {option} - Select dropdown's option chosen
    */
   handleInchChange({ option }) {
+    const { updateHeightSelection } = this.props;
     const selection = INCH_SIZES[option.id];
 
     if (selection) {
       const inches = (selection.ft * 12) + selection.inch;
-      console.log('inches', inches);
-      // this.updateHeightSelection({
-      //   temporaryHeightId: option.id,
-      //   temporaryHeightValue: inches,
-      //   temporaryHeightUnit: UNITS.INCH,
-      // });
-    } else {
-      // this.updateHeightSelection({
-      //   temporaryHeightId: null,
-      //   temporaryHeightValue: null,
-      //   temporaryHeightUnit: UNITS.INCH,
-      // });
+      updateHeightSelection({
+        temporaryHeightId: option.id,
+        temporaryHeightValue: inches,
+      });
     }
   }
 
@@ -113,8 +119,9 @@ class ProductCustomizationStyle extends PureComponent {
    * @param  {String} {value} (CM|INCH)
    */
   handleMetricSwitch({ value }) {
-    this.updateHeightSelection({ temporaryHeightUnit: value });
-    this.handleUnitConversionUpdate(value);
+    const { updateCustomizationMetric } = this.props;
+    updateCustomizationMetric({ temporaryMeasurementMetric: value });
+    // this.handleUnitConversionUpdate(value);
   }
 
   /**
@@ -186,6 +193,7 @@ class ProductCustomizationStyle extends PureComponent {
       id: i,
       name: this.defaultInchOption(i, ft, inch),
       meta: totalInches,
+      active: i === this.props.temporaryHeightId,
     }));
   }
 
@@ -193,7 +201,10 @@ class ProductCustomizationStyle extends PureComponent {
     const {
       productCustomizationDrawer,
       isUSSiteVersion,
+      temporaryMeasurementMetric,
+      temporaryHeightValue,
     } = this.props;
+    console.log('temporaryHeightValue', temporaryHeightValue);
     const SIZES = isUSSiteVersion ? US_SIZES : AU_SIZES;
 
     return (
@@ -216,7 +227,7 @@ class ProductCustomizationStyle extends PureComponent {
             <p className="textAlign--left">How tall are you?</p>
             <div className="grid">
               <div className="col-8">
-                { true ?
+                { temporaryMeasurementMetric === UNITS.INCH ?
                   <Select
                     id="height-option-in"
                     className="sort-options"
@@ -234,10 +245,10 @@ class ProductCustomizationStyle extends PureComponent {
               <div className="col">
                 <RadioToggle
                   id="metric"
-                  value="cm"
+                  value={temporaryMeasurementMetric}
                   options={[
-                      { value: 'inch' },
-                      { label: 'cm', value: 'cm' },
+                      { value: UNITS.INCH },
+                      { label: 'cm', value: UNITS.CM },
                   ]}
                   onChange={this.handleMetricSwitch}
                 />
@@ -272,13 +283,21 @@ ProductCustomizationStyle.propTypes = {
   // Redux Props
   productCustomizationDrawer: PropTypes.string.isRequired,
   isUSSiteVersion: PropTypes.bool.isRequired,
+  temporaryMeasurementMetric: PropTypes.string,
+  temporaryHeightId: PropTypes.number,
+  temporaryHeightValue: PropTypes.number,
   // Redux Actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
+  updateCustomizationMetric: PropTypes.func.isRequired,
+  updateHeightSelection: PropTypes.func.isRequired,
 };
 
 ProductCustomizationStyle.defaultProps = {
   hasNavItems: true,
   selectedColorId: '',
+  temporaryMeasurementMetric: null,
+  temporaryHeightId: null,
+  temporaryHeightValue: null,
 };
 
 

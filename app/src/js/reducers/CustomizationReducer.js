@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import CustomizationConstants from '../constants/CustomizationConstants';
+import { UNITS } from '../constants/PDPConstants';
 
 export const $$initialState = Immutable.fromJS({
   // String ['COLOR_CUSTOMIZE', 'STYLE_CUSTOMIZE', 'SIZE_PROFILE']
@@ -7,6 +8,19 @@ export const $$initialState = Immutable.fromJS({
 
   // Bool
   productCustomizationDrawerOpen: false,
+
+  // String ['cm', 'inch']
+  temporaryMeasurementMetric: null,
+  selectedMeasurementMetric: UNITS.INCH,
+
+  // Number
+  temporaryHeightId: null,
+  selectedHeightId: null,
+
+  // Number
+  temporaryHeightValue: null,
+  selectedHeightValue: null,
+
 
   // ObjectOf({
   //   id: String,
@@ -70,6 +84,31 @@ export default function CartReducer($$state = $$initialState, action = null) {
     case CustomizationConstants.SELECT_PRODUCT_COLOR: {
       return $$state.merge({
         selectedColor: action.color,
+      });
+    }
+    case CustomizationConstants.UPDATE_MEASUREMENT_METRIC: {
+      if (action.selectedMeasurementMetric) {
+        return $$state.merge({
+          temporaryMeasurementMetric: action.selectedMeasurementMetric,
+          selectedMeasurementMetric: action.selectedMeasurementMetric,
+        });
+      }
+      return $$state.merge({
+        temporaryMeasurementMetric: action.temporaryMeasurementMetric,
+      });
+    }
+    case CustomizationConstants.UPDATE_HEIGHT_SELECTION: {
+      if (action.selectedHeightId && action.selectedHeightValue) {
+        return $$state.merge({
+          selectedHeightId: action.selectedHeightId,
+          selectedHeightValue: action.selectedHeightValue,
+          temporaryHeightId: action.selectedHeightId,
+          temporaryHeightValue: action.selectedHeightValue,
+        });
+      }
+      return $$state.merge({
+        temporaryHeightId: action.temporaryHeightId,
+        temporaryHeightValue: action.temporaryHeightValue,
       });
     }
     default: {
