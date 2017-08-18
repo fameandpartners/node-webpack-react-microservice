@@ -3,6 +3,7 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+// import { assign } from 'lodash';
 // import classnames from 'classnames';
 
 // Constants
@@ -11,7 +12,7 @@ import {
   US_SIZES,
   AU_SIZES,
   INCH_SIZES,
-  // UNITS,
+  UNITS,
   // MIN_CM,
   // MAX_CM,
 } from '../../constants/PDPConstants';
@@ -54,9 +55,56 @@ class ProductCustomizationStyle extends PureComponent {
     autoBind(this);
   }
 
+  updateHeightSelection(newHeight) {
+    console.log('newHeight', newHeight);
+    // const { height, errors } = this.props.customize;
+    // this.props.actions.customizeDress({
+    //   errors: assign({}, errors, { height: false }),
+    //   height: assign({}, height, newHeight),
+    // });
+  }
+
+  /**
+   * Handler for changes of CM metric
+   */
+  handleCMChange({ value }) {
+    const numVal = parseInt(value, 10);
+
+    if (typeof numVal === 'number') {
+      this.updateHeightSelection({
+        temporaryHeightValue: numVal,
+        temporaryHeightUnit: UNITS.CM,
+      });
+    }
+  }
+
   handleDrawerSelection(productCustomizationDrawer) {
     console.log('productCustomizationDrawer', productCustomizationDrawer);
     this.props.changeCustomizationDrawer({ productCustomizationDrawer });
+  }
+
+  /**
+   * Handles for changes of INCH metric
+   * @param  {Object} {option} - Select dropdown's option chosen
+   */
+  handleInchChange({ option }) {
+    const selection = INCH_SIZES[option.id];
+
+    if (selection) {
+      const inches = (selection.ft * 12) + selection.inch;
+      console.log('inches', inches);
+      // this.updateHeightSelection({
+      //   temporaryHeightId: option.id,
+      //   temporaryHeightValue: inches,
+      //   temporaryHeightUnit: UNITS.INCH,
+      // });
+    } else {
+      // this.updateHeightSelection({
+      //   temporaryHeightId: null,
+      //   temporaryHeightValue: null,
+      //   temporaryHeightUnit: UNITS.INCH,
+      // });
+    }
   }
 
   /**
@@ -104,17 +152,11 @@ class ProductCustomizationStyle extends PureComponent {
     }));
   }
 
-  // handleColorSelection(color) {
-  //   const {
-  //     activateColorDrawer,
-  //     selectProductColor,
-  //   } = this.props;
-  //
-  //   if (productCustomizationDrawerOpen) {
-  //     selectProductColor({ color });
-  //     activateColorDrawer({ isActive: false });
-  //   }
-  // }
+  handleDressSizeSelection(s) {
+    return () => {
+      console.log('s', s);
+    };
+  }
 
   render() {
     const {
@@ -146,9 +188,9 @@ class ProductCustomizationStyle extends PureComponent {
                 { true ?
                   <Select
                     id="height-option-in"
-                    onChange={this.handleInchChange}
                     className="sort-options"
                     options={this.generateInchesOptions()}
+                    onChange={this.handleInchChange}
                   /> :
                   <Input
                     id="height-option-cm"
@@ -174,17 +216,19 @@ class ProductCustomizationStyle extends PureComponent {
           </div>
 
           <div>
-            <p>What's your size?</p>
+            <p className="textAlign--left">What's your size?</p>
             <div className="ProductCustomizationSize__size grid-12">
               { SIZES.map(s => (
-                <div className="col-3">
+                <div key={s.id} className="col-3">
                   <Button
                     tertiary
                     square
                     text={s}
+                    onClick={this.handleDressSizeSelection(s)}
                   />
                 </div>
               ))}
+              <span className="link link--static">View Size Guide</span>
             </div>
           </div>
         </div>
