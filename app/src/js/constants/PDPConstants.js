@@ -28,6 +28,7 @@ const constants = assign({},
       SIZE_PROFILE: 'SIZE_PROFILE',
       CAD_CUSTOMIZE: 'CAD_CUSTOMIZE',
     },
+    CM_TO_INCHES: 2.54,
     UNITS: {
       INCH: 'inch',
       CM: 'cm',

@@ -15,13 +15,13 @@ import ProductCustomizationSize from './ProductCustomizationSize';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
-import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE, SIZE_CUSTOMIZE } from '../../constants/ProductConstants';
+import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE, SIZE_CUSTOMIZE } from '../../constants/CustomizationConstants';
 
 function mapStateToProps(state) {
   return {
-    productCustomizationDrawer: state.$$productState.get('productCustomizationDrawer'),
-    productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
-    selectedColorId: state.$$productState.get('selectedColor').get('id'),
+    productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
+    productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
+    selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
   };
 }
 

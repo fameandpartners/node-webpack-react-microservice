@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { formatCents } from '../../utilities/accounting';
 
 // Constants
-import ProductConstants from '../../constants/ProductConstants';
+import CustomizationConstants from '../../constants/CustomizationConstants';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
@@ -27,7 +27,7 @@ import Button from '../generic/Button';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
-  const selectedColor = state.$$productState.get('selectedColor');
+  const selectedColor = state.$$customizationState.get('selectedColor');
 
   return {
     // PRODUCT
@@ -42,7 +42,7 @@ function stateToProps(state) {
     colorHexValue: selectedColor.get('hexValue'),
 
     // ADDONS
-    selectedCustomizations: state.$$productState.get('selectedCustomizations').toJS(),
+    selectedCustomizations: state.$$customizationState.get('selectedCustomizations').toJS(),
   };
 }
 
@@ -217,21 +217,21 @@ class ProductOptions extends Component {
                 leftNodeClassName="u-uppercase"
                 optionIsSelected
                 rightNode={this.generateColorSelectionNode()}
-                handleClick={this.handleProductOptionClick(ProductConstants.COLOR_CUSTOMIZE)}
+                handleClick={this.handleProductOptionClick(CustomizationConstants.COLOR_CUSTOMIZE)}
               />
               <ProductOptionsRow
                 leftNode={<span>Design Customizations</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
                 rightNode={this.generateAddonSelectionNode()}
-                handleClick={this.handleProductOptionClick(ProductConstants.STYLE_CUSTOMIZE)}
+                handleClick={this.handleProductOptionClick(CustomizationConstants.STYLE_CUSTOMIZE)}
               />
               <ProductOptionsRow
                 leftNode={<span>Your size</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={false}
                 rightNode={this.generateSizingNode()}
-                handleClick={this.handleProductOptionClick(ProductConstants.SIZE_CUSTOMIZE)}
+                handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
             </div>
             <div className="ProductOptions__ctas grid-1">
