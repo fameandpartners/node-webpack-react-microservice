@@ -36,6 +36,18 @@
   &--tertiary {
     padding: 0 15px;
     background-color: $c-background-gray;
+    transition: none;
+    color: $c-black;
+  }
+
+  &--tertiary:hover {
+    background-color: $c-hover-gray;
+    color: $c-white;
+  }
+
+  &--square {
+    height: 50px;
+    width: 50px;
   }
 
   &--selected {

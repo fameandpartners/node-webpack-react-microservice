@@ -8,14 +8,13 @@ import { bindActionCreators } from 'redux';
 // Constants
 import {
   // DRAWERS,
-  AU_SIZES,
   US_SIZES,
+  AU_SIZES,
   INCH_SIZES,
-  UNITS,
+  // UNITS,
   // MIN_CM,
   // MAX_CM,
 } from '../../constants/PDPConstants';
-
 
 // Actions
 // import ModalActions from '../../actions/ModalActions';
@@ -26,13 +25,14 @@ import ProductCustomization from './ProductCustomization';
 import Select from '../form/Select';
 import Input from '../form/Input';
 import RadioToggle from '../form/RadioToggle';
+import Button from '../generic/Button';
 
 // CSS
 import '../../../css/components/ProductCustomizationSize.scss';
 
 function mapStateToProps(state) {
   return {
-    isSiteVersionUS: state.$$appState.get('siteVersion') === 'us',
+    isUSSiteVersion: state.$$appState.get('siteVersion') === 'us',
     productCustomizationDrawer: state.$$productState.get('productCustomizationDrawer'),
     // productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
     // productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
@@ -104,20 +104,6 @@ class ProductCustomizationStyle extends PureComponent {
     }));
   }
 
-  /**
-   * Handler for changes of CM metric
-   */
-  handleCMChange({ value }) {
-    const numVal = parseInt(value, 10);
-
-    if (typeof numVal === 'number') {
-      this.updateHeightSelection({
-        temporaryHeightValue: numVal,
-        temporaryHeightUnit: UNITS.CM,
-      });
-    }
-  }
-
   // handleColorSelection(color) {
   //   const {
   //     activateColorDrawer,
@@ -133,9 +119,9 @@ class ProductCustomizationStyle extends PureComponent {
   render() {
     const {
       productCustomizationDrawer,
-      isSiteVersionUS,
+      isUSSiteVersion,
     } = this.props;
-    const SIZES = isSiteVersionUS ? US_SIZES : AU_SIZES;
+    const SIZES = isUSSiteVersion ? US_SIZES : AU_SIZES;
 
     return (
       <ProductCustomization
@@ -144,60 +130,61 @@ class ProductCustomizationStyle extends PureComponent {
         productCustomizationDrawer={productCustomizationDrawer}
       >
         <div className="ProductCustomizationSize__layout-container typography">
-          <div>
+          <div className="App--mb-big">
             <h3 className="h3">
-              Let’s make it fit.
-            </h3>
+                Let’s make it fit.
+              </h3>
             <p>
-              Just tell us your height and size, and we’ll take care of the tailoring.
-            </p>
+                Just tell us your height and size, and we&apos;ll take care of the tailoring.
+              </p>
+          </div>
 
-            <div className="ProductCustomizationSize__height">
-              <p className="textAlign--left">What's your height?</p>
-              <div className="grid-12">
-                <div className="col-6">
-                  { true ?
-                    <Select
-                      id="height-option-in"
-                      onChange={this.handleInchChange}
-                      className="sort-options"
-                      options={this.generateInchesOptions()}
-                    /> :
-                    <Input
-                      id="height-option-cm"
-                      type="number"
-                      onChange={this.handleCMChange}
-                    />
-                }
-                </div>
-
-                <div className="col-6">
-                  <RadioToggle
-                    id="metric"
-                    value="cm"
-                    options={[
-                      { label: 'inches', value: 'inch' },
-                      { value: 'cm' },
-                    ]}
-                    onChange={this.handleMetricSwitch}
+          <div className="ProductCustomizationSize__height App--mb-normal">
+            <p className="textAlign--left">How tall are you?</p>
+            <div className="grid">
+              <div className="col-8">
+                { true ?
+                  <Select
+                    id="height-option-in"
+                    onChange={this.handleInchChange}
+                    className="sort-options"
+                    options={this.generateInchesOptions()}
+                  /> :
+                  <Input
+                    id="height-option-cm"
+                    type="number"
+                    onChange={this.handleCMChange}
                   />
-                </div>
+                }
               </div>
 
+              <div className="col">
+                <RadioToggle
+                  id="metric"
+                  value="cm"
+                  options={[
+                      { value: 'inch' },
+                      { label: 'cm', value: 'cm' },
+                  ]}
+                  onChange={this.handleMetricSwitch}
+                />
+              </div>
             </div>
 
-            <div className="ProductCustomizationSize__size">
-              <p className="textAlign--left">What's your size?</p>
-              <div className="ProductCustomizationSize__options grid-12">
-                { SIZES.map(s => (
-                  <div className="ProductCustomizationSize__option col-3">
-                    <div className="ProductCustomizationSize__option-size">
-                      {s}
-                    </div>
-                  </div>
-                ))}
-                <div className="link link--static">Size Guide</div>
-              </div>
+          </div>
+
+          <div>
+            <p>What's your size?</p>
+            <div className="ProductCustomizationSize__size grid-12">
+              { SIZES.map(s => (
+                <div className="col-3">
+                  <Button
+                    tertiary
+                    square
+                    text={s}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -208,8 +195,8 @@ class ProductCustomizationStyle extends PureComponent {
 
 ProductCustomizationStyle.propTypes = {
   // Redux Props
-  isSiteVersionUS: PropTypes.bool.isRequired,
   productCustomizationDrawer: PropTypes.string.isRequired,
+  isUSSiteVersion: PropTypes.bool.isRequired,
   // Redux Actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
 };
