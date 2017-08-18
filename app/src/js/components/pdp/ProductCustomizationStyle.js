@@ -156,7 +156,6 @@ class ProductCustomizeStyle extends Component {
           className="width--full"
           role="button"
           key={`addon-option-${a.id}`}
-          onClick={this.handleAddonSelection(a)}
         >
           <div className="App--mb-small">
             <ButtonCol
@@ -165,6 +164,7 @@ class ProductCustomizeStyle extends Component {
               left={<span>{a.name}</span>}
               right={<span>+ ${displayPrice}</span>}
               isSelected={a.active}
+              handleClick={this.handleAddonSelection(a)}
             />
           </div>
         </li>

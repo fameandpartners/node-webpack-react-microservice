@@ -8,6 +8,9 @@ import { TransitionMotion } from 'react-motion';
 // CSS
 import '../../../css/components/ProductButtonLedge.scss';
 
+// Utilities
+import noop from '../../libs/noop';
+
 // Actions
 import * as ProductActions from '../../actions/ProductActions';
 
@@ -36,8 +39,18 @@ class ProductButtonLedge extends Component {
     autoBind(this);
   }
 
-  handleCancelColorDrawer() {
+  activateCustomizationDrawer() {
+
+  }
+
+  handleLeftButtonClick() {
     this.props.activateCustomizationDrawer({ isActive: false });
+  }
+
+  handleRightButtonClick() {
+    if (this.props.rightNodeClick) {
+      this.props.rightNodeClick();
+    }
   }
 
   defaultStyles() {
@@ -73,8 +86,8 @@ class ProductButtonLedge extends Component {
                 }}
               >
                 <ButtonLedge
-                  handleLeftButtonClick={this.handleCancelColorDrawer}
-                  handleRightButtonClick={this.handleCancelColorDrawer}
+                  handleLeftButtonClick={this.activateCustomizationDrawer}
+                  handleRightButtonClick={this.activateCustomizationDrawer}
                 />
               </div>
             );
@@ -90,6 +103,7 @@ class ProductButtonLedge extends Component {
 ProductButtonLedge.propTypes = {
   // Redux Props
   productCustomizationDrawerOpen: PropTypes.bool,
+  rightNodeClick: PropTypes.func,
   // Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
 };
