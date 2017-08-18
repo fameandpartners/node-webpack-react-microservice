@@ -58,7 +58,6 @@ export function updateHeightSelection({
   temporaryHeightValue,
   selectedHeightValue,
 }) {
-  // Number
   return {
     type: CustomizationConstants.UPDATE_HEIGHT_SELECTION,
     temporaryHeightId,
@@ -68,10 +67,19 @@ export function updateHeightSelection({
   };
 }
 
+export function updateDressSizeSelection({ temporaryDressSize, selectedDressSize }) {
+  return {
+    type: CustomizationConstants.UPDATE_DRESS_SIZE_SELECTION,
+    temporaryDressSize,
+    selectedDressSize,
+  };
+}
+
 export default {
   // activateColorDrawer,
   // changeCustomizationDrawer,
   // selectProductColor,
   updateCustomizationMetric,
   updateHeightSelection,
+  updateDressSizeSelection,
 };

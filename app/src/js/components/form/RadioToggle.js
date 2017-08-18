@@ -18,8 +18,12 @@ const propTypes = {
   value: PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.bool,
-  ]).isRequired,
+  ]),
   onChange: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  value: null,
 };
 
 class RadioToggle extends Component {
@@ -95,4 +99,5 @@ class RadioToggle extends Component {
 
 
 RadioToggle.propTypes = propTypes;
+RadioToggle.defaultProps = defaultProps;
 export default RadioToggle;

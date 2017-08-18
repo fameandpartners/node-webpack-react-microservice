@@ -30,33 +30,40 @@ class ProductCustomizationNavigation extends PureComponent {
     return (
       <div className="ProductCustomizationNavigation__nav">
         <div className="grid-middle height--full position--absolute">
-          <ul className="ProductCustomizationNavigation__nav-list">
+          <ul className="ProductCustomizationNavigation__nav-list u-uppercase u-text-align-right">
             <li
               onClick={this.handleDrawerSelection(COLOR_CUSTOMIZE)}
-              className={classnames(
-                'ProductCustomizationNavigation__nav-item u-cursor--pointer',
+              className="ProductCustomizationNavigation__nav-item u-cursor--pointer"
+            >
+              <span
+                className={classnames(
                 { 'ProductCustomizationNavigation__nav-item--active': productCustomizationDrawer === COLOR_CUSTOMIZE },
               )}
-            >
-              <span>Color</span>
+              >
+                Color
+              </span>
             </li>
             <li
               onClick={this.handleDrawerSelection(STYLE_CUSTOMIZE)}
-              className={classnames(
+              className="ProductCustomizationNavigation__nav-item u-cursor--pointer"
+            >
+              <span
+                className={classnames(
                 'ProductCustomizationNavigation__nav-item u-cursor--pointer',
                 { 'ProductCustomizationNavigation__nav-item--active': productCustomizationDrawer === STYLE_CUSTOMIZE },
               )}
-            >
-              <span>Style</span>
+              >Style</span>
             </li>
             <li
               onClick={this.handleDrawerSelection(SIZE_CUSTOMIZE)}
-              className={classnames(
+              className="ProductCustomizationNavigation__nav-item u-cursor--pointer"
+            >
+              <span
+                className={classnames(
                 'ProductCustomizationNavigation__nav-item u-cursor--pointer',
                 { 'ProductCustomizationNavigation__nav-item--active': productCustomizationDrawer === SIZE_CUSTOMIZE },
               )}
-            >
-              <span>Your&nbsp;Size</span>
+              >Your&nbsp;Size</span>
             </li>
           </ul>
         </div>
