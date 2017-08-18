@@ -25,7 +25,7 @@ function mapStateToProps(state) {
     addonsBasesComputed: addons.addonsBasesComputed,
     baseImages: addons.baseImages,
     baseSelected: addons.baseSelected,
-    productCustomizationDrawer: state.$$productState.get('productCustomizationDrawer'),
+    productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     selectedAddonImageLayers: addons.selectedAddonImageLayers,
   };
 }

@@ -8,7 +8,7 @@ import {
   COLOR_CUSTOMIZE,
   STYLE_CUSTOMIZE,
   SIZE_CUSTOMIZE,
-} from '../../constants/ProductConstants';
+} from '../../constants/CustomizationConstants';
 
 // CSS
 import '../../../css/components/ProductCustomizationNavigation.scss';

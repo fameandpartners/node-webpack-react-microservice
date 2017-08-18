@@ -1,16 +1,16 @@
-import ProductConstants from '../constants/ProductConstants';
+import CustomizationConstants from '../constants/CustomizationConstants';
 import StyleConstants from '../constants/StyleConstants';
 
 export function activateColorDrawer({ isActive }) {
   return {
-    type: ProductConstants.ACTIVATE_COLOR_DRAWER,
+    type: CustomizationConstants.ACTIVATE_COLOR_DRAWER,
     isActive,
   };
 }
 
 export function activateCustomizationDrawer({ isActive = true, productCustomizationDrawer }) {
   return {
-    type: ProductConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
+    type: CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
     isActive,
     productCustomizationDrawer,
   };
@@ -18,21 +18,21 @@ export function activateCustomizationDrawer({ isActive = true, productCustomizat
 
 export function changeCustomizationDrawer({ productCustomizationDrawer }) {
   return {
-    type: ProductConstants.CHANGE_CUSTOMIZATION_DRAWER,
+    type: CustomizationConstants.CHANGE_CUSTOMIZATION_DRAWER,
     productCustomizationDrawer,
   };
 }
 
 export function selectProductColor({ color }) {
   return {
-    type: ProductConstants.SELECT_PRODUCT_COLOR,
+    type: CustomizationConstants.SELECT_PRODUCT_COLOR,
     color,
   };
 }
 
 // ADDON MANIPULATIONS
 export function setAddonOptions(addonOptions) {
-  return { type: StyleConstants.SET_ADDON_OPTIONS, addonOptions };
+  return { type: StyleConstants.SET_STYLE_ADDON_OPTIONS, addonOptions };
 }
 
 export function setActiveAddonImageLayers(addonImageLayers) {

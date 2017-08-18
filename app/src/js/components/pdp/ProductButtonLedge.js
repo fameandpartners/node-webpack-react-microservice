@@ -19,7 +19,7 @@ import ButtonLedge from '../generic/ButtonLedge';
 
 function stateToProps(state) {
   return {
-    productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
+    productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
   };
 }
 

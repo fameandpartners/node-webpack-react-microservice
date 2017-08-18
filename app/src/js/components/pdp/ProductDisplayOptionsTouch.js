@@ -39,7 +39,7 @@ function stateToProps(state) {
   return {
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
-    selectedColor: state.$$productState.get('selectedColor').toJS(),
+    selectedColor: state.$$customizationState.get('selectedColor').toJS(),
   };
 }
 

@@ -472,6 +472,10 @@ const hydrated = {
     productCentsBasePrice: 21000,
     productTitle: 'Escala Dress',
     productDescription: 'Low effort, high contrast. The Jo is a heavy georgette gown featuring a contrasting pink bow at the front, criss-cross back straps, and a side split. It has an invisible zipper.',
+    modelDescription: 'Our model wears a US 0 and is 5’9”',
+    addons: transformAddons(),
+  },
+  $$customizationState: {
     selectedColor: {
       id: '2096a',
       centsTotal: 1200,
@@ -490,8 +494,6 @@ const hydrated = {
         centsTotal: 1900,
       },
     ],
-    modelDescription: 'Our model wears a US 0 and is 5’9”',
-    addons: transformAddons(),
   },
 };
 const store = AppStore(hydrated);

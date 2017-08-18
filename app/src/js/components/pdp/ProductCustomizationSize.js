@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 // Constants
 import {
   // DRAWERS,
+  // CM_TO_INCHES,
   US_SIZES,
   AU_SIZES,
   INCH_SIZES,
@@ -34,7 +35,7 @@ import '../../../css/components/ProductCustomizationSize.scss';
 function mapStateToProps(state) {
   return {
     isUSSiteVersion: state.$$appState.get('siteVersion') === 'us',
-    productCustomizationDrawer: state.$$productState.get('productCustomizationDrawer'),
+    productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     // productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
     // productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     // productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
@@ -108,6 +109,42 @@ class ProductCustomizationStyle extends PureComponent {
   }
 
   /**
+   * Handles the toggling of a metric switch
+   * @param  {String} {value} (CM|INCH)
+   */
+  handleMetricSwitch({ value }) {
+    this.updateHeightSelection({ temporaryHeightUnit: value });
+    this.handleUnitConversionUpdate(value);
+  }
+
+  /**
+   * Converts unit values on the fly
+   * @param  {String} value (CM|INCH)
+   */
+  handleUnitConversionUpdate() { // value
+    // const { height } = this.props.customize;
+    // const { temporaryHeightValue } = height;
+    // if (value === UNITS.CM && temporaryHeightValue) { // CM selected
+    //   const newVal = Math.round(temporaryHeightValue * CM_TO_INCHES);
+    //   this.handleCMChange({ value: newVal });
+    // } else if (value === UNITS.INCH && temporaryHeightValue) { // INCH selected
+    //   const totalInches = Math.round(temporaryHeightValue / CM_TO_INCHES);
+    //   const option = find(INCH_SIZES, { totalInches });
+    //   this.handleInchChange({
+    //     option: {
+    //       id: option ? option.id : null,
+    //     },
+    //   });
+    // }
+  }
+
+  handleDressSizeSelection(s) {
+    return () => {
+      console.log('s', s);
+    };
+  }
+
+  /**
    * Helper method to generate normal option for Select
    * @param  {Number} i
    * @param  {Nunber} ft
@@ -150,12 +187,6 @@ class ProductCustomizationStyle extends PureComponent {
       name: this.defaultInchOption(i, ft, inch),
       meta: totalInches,
     }));
-  }
-
-  handleDressSizeSelection(s) {
-    return () => {
-      console.log('s', s);
-    };
   }
 
   render() {
