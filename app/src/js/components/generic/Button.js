@@ -23,7 +23,9 @@ class Button extends Component {
       disabled,
       metaIcon,
       secondary,
+      square,
       tall,
+      tertiary,
       text,
       handleClick,
     } = this.props;
@@ -38,7 +40,9 @@ class Button extends Component {
             {
               'Button--secondary': secondary,
               'Button--disabled': disabled,
+              'Button--square': square,
               'Button--tall': tall,
+              'Button--tertiary': tertiary,
             },
           )
         }
@@ -58,7 +62,9 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   metaIcon: PropTypes.node,
   secondary: PropTypes.bool,
+  square: PropTypes.bool,
   tall: PropTypes.bool,
+  tertiary: PropTypes.bool,
   text: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
 };
@@ -68,8 +74,10 @@ Button.defaultProps = {
   disabled: false,
   metaIcon: null,
   secondary: false,
+  square: false,
   tall: false,
   text: 'Submit',
+  tertiary: false,
 };
 
 export default Button;
