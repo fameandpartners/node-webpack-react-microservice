@@ -38,7 +38,6 @@ function mapStateToProps(state) {
     isUSSiteVersion: state.$$appState.get('siteVersion') === 'us',
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
-    temporaryHeightId: state.$$customizationState.get('temporaryHeightId'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
     // productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
@@ -52,14 +51,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   const { changeCustomizationDrawer } = bindActionCreators(ProductActions, dispatch);
   const {
-    updateCustomizationMetric,
+    updateMeasurementMetric,
     updateHeightSelection,
     updateDressSizeSelection,
   } = bindActionCreators(CustomizationActions, dispatch);
 
   return {
     changeCustomizationDrawer,
-    updateCustomizationMetric,
+    updateMeasurementMetric,
     updateHeightSelection,
     updateDressSizeSelection,
   };
@@ -103,7 +102,6 @@ class ProductCustomizationStyle extends PureComponent {
     if (selection) {
       const inches = (selection.ft * 12) + selection.inch;
       updateHeightSelection({
-        temporaryHeightId: option.id,
         temporaryHeightValue: inches,
       });
     }
@@ -114,8 +112,8 @@ class ProductCustomizationStyle extends PureComponent {
    * @param  {String} {value} (CM|INCH)
    */
   handleMetricSwitch({ value }) {
-    const { updateCustomizationMetric } = this.props;
-    updateCustomizationMetric({ temporaryMeasurementMetric: value });
+    const { updateMeasurementMetric } = this.props;
+    updateMeasurementMetric({ temporaryMeasurementMetric: value });
     this.handleUnitConversionUpdate(value);
   }
 
@@ -190,7 +188,7 @@ class ProductCustomizationStyle extends PureComponent {
       id: i,
       name: this.defaultInchOption(i, ft, inch),
       meta: totalInches,
-      active: i === this.props.temporaryHeightId,
+      active: totalInches === this.props.temporaryHeightValue,
     }));
   }
 
@@ -285,11 +283,10 @@ ProductCustomizationStyle.propTypes = {
   isUSSiteVersion: PropTypes.bool.isRequired,
   temporaryDressSize: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string,
-  temporaryHeightId: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
   // Redux Actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
-  updateCustomizationMetric: PropTypes.func.isRequired,
+  updateMeasurementMetric: PropTypes.func.isRequired,
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
 };
@@ -299,7 +296,6 @@ ProductCustomizationStyle.defaultProps = {
   selectedColorId: '',
   temporaryDressSize: null,
   temporaryMeasurementMetric: null,
-  temporaryHeightId: null,
   temporaryHeightValue: null,
 };
 

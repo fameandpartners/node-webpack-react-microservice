@@ -11,11 +11,13 @@ import '../../../css/components/ProductButtonLedge.scss';
 // Utilities
 import noop from '../../libs/noop';
 
+
 // Actions
-import * as ProductActions from '../../actions/ProductActions';
+import * as CustomizationActions from '../../actions/CustomizationActions';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
+import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE, SIZE_CUSTOMIZE } from '../../constants/CustomizationConstants';
 
 // UI Components
 import ButtonLedge from '../generic/ButtonLedge';
@@ -23,13 +25,20 @@ import ButtonLedge from '../generic/ButtonLedge';
 function stateToProps(state) {
   return {
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
+    productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
+    temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
+    temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
+    temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
   };
 }
 
 function dispatchToProps(dispatch) {
-  const productActions = bindActionCreators(ProductActions, dispatch);
+  const customizationActions = bindActionCreators(CustomizationActions, dispatch);
   return {
-    activateCustomizationDrawer: productActions.activateCustomizationDrawer,
+    activateCustomizationDrawer: customizationActions.activateCustomizationDrawer,
+    updateDressSizeSelection: customizationActions.updateDressSizeSelection,
+    updateHeightSelection: customizationActions.updateHeightSelection,
+    updateMeasurementMetric: customizationActions.updateMeasurementMetric,
   };
 }
 
@@ -39,17 +48,64 @@ class ProductButtonLedge extends Component {
     autoBind(this);
   }
 
-  activateCustomizationDrawer() {
-
-  }
-
   handleLeftButtonClick() {
     this.props.activateCustomizationDrawer({ isActive: false });
   }
 
+  saveColorSelection() {
+    // Check if valid
+    // If Valid
+  }
+
+  saveStyleSelection() {
+    const { updateDressSizeSelection } = this.props;
+    // Check if valid
+    // If Valid
+    updateDressSizeSelection();
+  }
+
+  saveSizeSeletion() {
+    console.warn('need to check validity......');
+    // Check if valid
+    // If Valid
+    const {
+      activateCustomizationDrawer,
+      temporaryDressSize,
+      temporaryMeasurementMetric,
+      temporaryHeightValue,
+      updateDressSizeSelection,
+      updateHeightSelection,
+      updateMeasurementMetric,
+    } = this.props;
+
+
+    updateDressSizeSelection({
+      selectedDressSize: temporaryDressSize,
+    });
+
+    updateHeightSelection({
+      selectedHeightValue: temporaryHeightValue,
+    });
+
+    updateMeasurementMetric({
+      selectedMeasurementMetric: temporaryMeasurementMetric,
+    });
+
+
+    activateCustomizationDrawer({ isActive: false });
+  }
+
   handleRightButtonClick() {
-    if (this.props.rightNodeClick) {
-      this.props.rightNodeClick();
+    const { productCustomizationDrawer } = this.props;
+    switch (productCustomizationDrawer) {
+      case COLOR_CUSTOMIZE:
+        return this.saveColorSelection;
+      case STYLE_CUSTOMIZE:
+        return this.saveStyleSelection;
+      case SIZE_CUSTOMIZE:
+        return this.saveSizeSeletion;
+      default:
+        return noop;
     }
   }
 
@@ -66,7 +122,9 @@ class ProductButtonLedge extends Component {
   }
 
   render() {
-    const { productCustomizationDrawerOpen } = this.props;
+    const {
+      productCustomizationDrawerOpen,
+    } = this.props;
     return (
       <TransitionMotion
         styles={productCustomizationDrawerOpen ? [this.defaultStyles()] : []}
@@ -86,8 +144,8 @@ class ProductButtonLedge extends Component {
                 }}
               >
                 <ButtonLedge
-                  handleLeftButtonClick={this.activateCustomizationDrawer}
-                  handleRightButtonClick={this.activateCustomizationDrawer}
+                  handleLeftButtonClick={this.handleLeftButtonClick}
+                  handleRightButtonClick={this.handleRightButtonClick()}
                 />
               </div>
             );
@@ -103,13 +161,20 @@ class ProductButtonLedge extends Component {
 ProductButtonLedge.propTypes = {
   // Redux Props
   productCustomizationDrawerOpen: PropTypes.bool,
-  rightNodeClick: PropTypes.func,
+  productCustomizationDrawer: PropTypes.string,
+  temporaryDressSize: PropTypes.number.isRequired,
+  temporaryHeightValue: PropTypes.number.isRequired,
+  temporaryMeasurementMetric: PropTypes.string.isRequired,
   // Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
+  updateDressSizeSelection: PropTypes.func.isRequired,
+  updateHeightSelection: PropTypes.func.isRequired,
+  updateMeasurementMetric: PropTypes.func.isRequired,
 };
 
 ProductButtonLedge.defaultProps = {
   productCustomizationDrawerOpen: false,
+  productCustomizationDrawer: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductButtonLedge);

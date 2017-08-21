@@ -10,12 +10,8 @@ export const $$initialState = Immutable.fromJS({
   productCustomizationDrawerOpen: false,
 
   // String ['cm', 'inch']
-  temporaryMeasurementMetric: null,
+  temporaryMeasurementMetric: UNITS.INCH,
   selectedMeasurementMetric: UNITS.INCH,
-
-  // Number
-  temporaryHeightId: null,
-  selectedHeightId: null,
 
   // Number
   temporaryHeightValue: null,
@@ -37,10 +33,9 @@ export const $$initialState = Immutable.fromJS({
   // })
   selectedCustomizations: null,
 
-  // ObjectOf({
-  //   id: String,
-  //   description: String,
-  // })
+
+  // Number
+  temporaryDressSize: null,
   selectedSize: null,
 
   selectedStyleAddonOptions: [],
@@ -98,16 +93,13 @@ export default function CartReducer($$state = $$initialState, action = null) {
       });
     }
     case CustomizationConstants.UPDATE_HEIGHT_SELECTION: {
-      if (action.selectedHeightId && action.selectedHeightValue) {
+      if (action.selectedHeightValue) {
         return $$state.merge({
-          selectedHeightId: action.selectedHeightId,
           selectedHeightValue: action.selectedHeightValue,
-          temporaryHeightId: action.selectedHeightId,
           temporaryHeightValue: action.selectedHeightValue,
         });
       }
       return $$state.merge({
-        temporaryHeightId: action.temporaryHeightId,
         temporaryHeightValue: action.temporaryHeightValue,
       });
     }

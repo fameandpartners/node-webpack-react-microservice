@@ -44,7 +44,15 @@ import CustomizationConstants from '../constants/CustomizationConstants';
 //   return { type: StyleConstants.SET_ADDON_BASE_LAYER, baseSelected };
 // }
 
-export function updateCustomizationMetric({ selectedMeasurementMetric, temporaryMeasurementMetric }) {
+export function activateCustomizationDrawer({ isActive = true, productCustomizationDrawer }) {
+  return {
+    type: CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
+    isActive,
+    productCustomizationDrawer,
+  };
+}
+
+export function updateMeasurementMetric({ selectedMeasurementMetric, temporaryMeasurementMetric }) {
   return {
     type: CustomizationConstants.UPDATE_MEASUREMENT_METRIC,
     selectedMeasurementMetric,
@@ -53,25 +61,21 @@ export function updateCustomizationMetric({ selectedMeasurementMetric, temporary
 }
 
 export function updateHeightSelection({
-  temporaryHeightId,
-  selectedHeightId,
   temporaryHeightValue,
   selectedHeightValue,
 }) {
   return {
     type: CustomizationConstants.UPDATE_HEIGHT_SELECTION,
-    temporaryHeightId,
-    selectedHeightId,
-    temporaryHeightValue,
     selectedHeightValue,
+    temporaryHeightValue,
   };
 }
 
 export function updateDressSizeSelection({ temporaryDressSize, selectedDressSize }) {
   return {
     type: CustomizationConstants.UPDATE_DRESS_SIZE_SELECTION,
-    temporaryDressSize,
     selectedDressSize,
+    temporaryDressSize,
   };
 }
 
@@ -79,7 +83,7 @@ export default {
   // activateColorDrawer,
   // changeCustomizationDrawer,
   // selectProductColor,
-  updateCustomizationMetric,
+  updateMeasurementMetric,
   updateHeightSelection,
   updateDressSizeSelection,
 };

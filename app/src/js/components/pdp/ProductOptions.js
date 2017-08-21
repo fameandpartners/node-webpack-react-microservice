@@ -7,6 +7,7 @@ import { formatCents } from '../../utilities/accounting';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
+import { UNITS } from '../../constants/PDPConstants';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
@@ -17,7 +18,7 @@ import image1 from '../../../img/test/image_1.png';
 
 // Actions
 import * as CartActions from '../../actions/CartActions';
-import * as ProductActions from '../../actions/ProductActions';
+import * as CustomizationActions from '../../actions/CustomizationActions';
 // CSS
 import '../../../css/components/ProductOptions.scss';
 
@@ -41,15 +42,18 @@ function stateToProps(state) {
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
 
-    // ADDONS
+    // SELECTIONS
     selectedCustomizations: state.$$customizationState.get('selectedCustomizations').toJS(),
+    selectedDressSize: state.$$customizationState.get('selectedDressSize'),
+    selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
+    selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
   };
 }
 
 
 function dispatchToProps(dispatch) {
   const { addItemToCart, activateCartDrawer } = bindActionCreators(CartActions, dispatch);
-  const { activateCustomizationDrawer } = bindActionCreators(ProductActions, dispatch);
+  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
 
   return {
     activateCartDrawer,
@@ -155,10 +159,29 @@ class ProductOptions extends Component {
   }
 
   generateSizingNode() {
+    const {
+      selectedHeightValue,
+      selectedMeasurementMetric,
+      selectedDressSize,
+    } = this.props;
+    let sizingInformation = null;
+
+    if (selectedHeightValue && selectedDressSize) {
+      // INCH
+      if (selectedMeasurementMetric === UNITS.INCH) {
+        console.log('we here?');
+        const ft = Math.floor(selectedHeightValue / 12);
+        const inch = selectedHeightValue % 12;
+        sizingInformation = `${ft}ft ${inch}in / ${selectedDressSize}`;
+      } else {
+        sizingInformation = `${selectedHeightValue} ${selectedMeasurementMetric.toLowerCase()} / ${selectedDressSize}`;
+      }
+      // CM
+    }
+
     return (
       <span>
-        <span>5' 6"</span>&nbsp;
-        <span>Size ??</span>
+        {sizingInformation}
       </span>
     );
   }
@@ -276,6 +299,9 @@ ProductOptions.propTypes = {
       description: PropTypes.string,
     }),
   ).isRequired,
+  selectedDressSize: PropTypes.number.isRequired,
+  selectedHeightValue: PropTypes.number.isRequired,
+  selectedMeasurementMetric: PropTypes.string.isRequired,
   //* Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
