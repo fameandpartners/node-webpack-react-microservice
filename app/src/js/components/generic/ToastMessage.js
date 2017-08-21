@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import autoBind from 'react-autobind';
 import '../../../css/components/ToastMessage.scss';
 
 class ToastMessage extends Component {
-  constructor(props) {
-    super(props);
-    autoBind(this);
+  constructor() {
+    super();
     this.state = {
       toastVisible: true,
     };
