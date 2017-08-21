@@ -8,14 +8,6 @@ export function activateColorDrawer({ isActive }) {
   };
 }
 
-export function activateCustomizationDrawer({ isActive = true, productCustomizationDrawer }) {
-  return {
-    type: CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
-    isActive,
-    productCustomizationDrawer,
-  };
-}
-
 export function changeCustomizationDrawer({ productCustomizationDrawer }) {
   return {
     type: CustomizationConstants.CHANGE_CUSTOMIZATION_DRAWER,
