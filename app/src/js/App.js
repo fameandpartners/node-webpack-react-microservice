@@ -10,6 +10,7 @@ import ColorSelectionDrawer from './components/pdp/ColorSelectionDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import ColorSelectionModal from './components/pdp/ColorSelectionModal';
+import ShareModal from './components/pdp/ShareModal';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -50,6 +51,7 @@ class App extends Component {
         <OnboardingModal />
         <ProductFabricModal />
         <ColorSelectionModal />
+        <ShareModal />
       </div>
     );
   }
