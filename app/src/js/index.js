@@ -21,8 +21,10 @@ function renderApp(Component) {
 const hydrated = {
   $$appState: {
     // sideMenuOpen: true,
+    currentURL: 'https://www.fameandpartners.com/',
   },
   $$productState: {
+    productImage: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/32710/original/usp1040-burgundy-1.jpg?1478188086',
     complementaryProducts: [
       {
         centsPrice: 22900,
