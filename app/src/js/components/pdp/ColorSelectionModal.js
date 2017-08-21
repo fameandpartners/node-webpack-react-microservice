@@ -11,7 +11,7 @@ import ProductCustomizationColor from '../pdp/ProductCustomizationColor';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
-import ProductActions from '../../actions/ProductActions';
+import CustomizationActions from '../../actions/CustomizationActions';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -30,7 +30,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  const { selectProductColor } = bindActionCreators(ProductActions, dispatch);
+  const { selectProductColor } = bindActionCreators(CustomizationActions, dispatch);
   return { activateModal, selectProductColor };
 }
 

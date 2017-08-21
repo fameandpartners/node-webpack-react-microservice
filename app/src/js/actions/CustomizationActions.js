@@ -8,47 +8,26 @@ import CustomizationConstants from '../constants/CustomizationConstants';
 //     isActive,
 //   };
 // }
-//
-// export function activateCustomizationDrawer({ isActive = true, productCustomizationDrawer }) {
-//   return {
-//     type: CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
-//     isActive,
-//     productCustomizationDrawer,
-//   };
-// }
-//
-// export function changeCustomizationDrawer({ productCustomizationDrawer }) {
-//   return {
-//     type: CustomizationConstants.CHANGE_CUSTOMIZATION_DRAWER,
-//     productCustomizationDrawer,
-//   };
-// }
-//
-// export function selectProductColor({ color }) {
-//   return {
-//     type: CustomizationConstants.SELECT_PRODUCT_COLOR,
-//     color,
-//   };
-// }
-
-// ADDON MANIPULATIONS
-// export function setAddonOptions(addonOptions) {
-//   return { type: StyleConstants.SET_STYLE_ADDON_OPTIONS, addonOptions };
-// }
-//
-// export function setActiveAddonImageLayers(addonImageLayers) {
-//   return { type: StyleConstants.SET_ACTIVE_ADDON_IMAGE_LAYERS, addonImageLayers };
-// }
-//
-// export function setAddonBaseLayer(baseSelected) {
-//   return { type: StyleConstants.SET_ADDON_BASE_LAYER, baseSelected };
-// }
 
 export function activateCustomizationDrawer({ isActive = true, productCustomizationDrawer }) {
   return {
     type: CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
     isActive,
     productCustomizationDrawer,
+  };
+}
+
+export function changeCustomizationDrawer({ productCustomizationDrawer }) {
+  return {
+    type: CustomizationConstants.CHANGE_CUSTOMIZATION_DRAWER,
+    productCustomizationDrawer,
+  };
+}
+
+export function selectProductColor({ color }) {
+  return {
+    type: CustomizationConstants.SELECT_PRODUCT_COLOR,
+    color,
   };
 }
 
@@ -79,10 +58,26 @@ export function updateDressSizeSelection({ temporaryDressSize, selectedDressSize
   };
 }
 
+// ADDON MANIPULATIONS
+export function setAddonOptions(addonOptions) {
+  return { type: CustomizationConstants.SET_STYLE_ADDON_OPTIONS, addonOptions };
+}
+
+export function setActiveAddonImageLayers(addonImageLayers) {
+  return { type: CustomizationConstants.SET_ACTIVE_ADDON_IMAGE_LAYERS, addonImageLayers };
+}
+
+export function setAddonBaseLayer(baseSelected) {
+  return { type: CustomizationConstants.SET_ADDON_BASE_LAYER, baseSelected };
+}
+
 export default {
-  // activateColorDrawer,
-  // changeCustomizationDrawer,
-  // selectProductColor,
+  activateCustomizationDrawer,
+  changeCustomizationDrawer,
+  selectProductColor,
+  setAddonOptions,
+  setActiveAddonImageLayers,
+  setAddonBaseLayer,
   updateMeasurementMetric,
   updateHeightSelection,
   updateDressSizeSelection,

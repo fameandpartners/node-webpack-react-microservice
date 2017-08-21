@@ -29,6 +29,7 @@ import Button from '../generic/Button';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   const selectedColor = state.$$customizationState.get('selectedColor');
+  const addons = state.$$customizationState.get('addons');
 
   return {
     // PRODUCT
@@ -43,7 +44,7 @@ function stateToProps(state) {
     colorHexValue: selectedColor.get('hexValue'),
 
     // SELECTIONS
-    selectedCustomizations: state.$$customizationState.get('selectedCustomizations').toJS(),
+    addonOptions: addons.get('addonOptions').toJS().filter(a => a.active),
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
@@ -84,7 +85,7 @@ class ProductOptions extends Component {
       colorCentsTotal,
       colorHexValue,
       // ADDONS
-      selectedCustomizations,
+      addonOptions,
     } = this.props;
 
     return {
@@ -97,20 +98,23 @@ class ProductOptions extends Component {
         centsTotal: colorCentsTotal,
         hexValue: colorHexValue,
       },
-      addons: selectedCustomizations,
+      addons: addonOptions,
     };
   }
 
   addSelectionPrice(centsTotal) {
-    if (centsTotal) { return `+${formatCents(centsTotal, 0)}`; }
+    console.log('centsTotal', centsTotal);
+    if (centsTotal) { return `+${formatCents(parseInt(centsTotal, 10), 0)}`; }
     return null;
   }
 
   reduceCustomizationSelectionPrice() {
-    const { selectedCustomizations } = this.props;
+    const { addonOptions } = this.props;
     return `+${formatCents(
-      selectedCustomizations.reduce((subTotal, c) => subTotal + c.centsTotal, 0),
-      0,
+      addonOptions.reduce(
+        (subTotal, c) =>
+          subTotal + parseInt(c.price.money.fractional, 10), 0),
+        0,
     )}`;
   }
 
@@ -137,19 +141,20 @@ class ProductOptions extends Component {
   }
 
   generateAddonSelectionNode() {
-    const { selectedCustomizations } = this.props;
+    const { addonOptions } = this.props;
+    console.warn('TODO: @elgrecode polish. addonOptions need to reference white listed build not old structure');
 
-    if (selectedCustomizations.length === 1) { // One customization
+    if (addonOptions.length === 1) { // One customization
       return (
         <span>
-          <span>{selectedCustomizations[0].description}</span>&nbsp;
-          <span>{this.addSelectionPrice(selectedCustomizations[0].centsTotal)}</span>
+          <span>{addonOptions[0].name}</span>&nbsp;
+          <span>{this.addSelectionPrice(addonOptions[0].price.money.fractional)}</span>
         </span>
       );
-    } else if (selectedCustomizations.length > 1) { // Multiple customizations
+    } else if (addonOptions.length > 1) { // Multiple customizations
       return (
         <span>
-          <span>{selectedCustomizations.length} Additions</span>&nbsp;
+          <span>{addonOptions.length} Additions</span>&nbsp;
           <span>{this.reduceCustomizationSelectionPrice()}</span>
         </span>
       );
@@ -169,7 +174,6 @@ class ProductOptions extends Component {
     if (selectedHeightValue && selectedDressSize) {
       // INCH
       if (selectedMeasurementMetric === UNITS.INCH) {
-        console.log('we here?');
         const ft = Math.floor(selectedHeightValue / 12);
         const inch = selectedHeightValue % 12;
         sizingInformation = `${ft}ft ${inch}in / ${selectedDressSize}`;
@@ -293,14 +297,14 @@ ProductOptions.propTypes = {
   colorHexValue: PropTypes.string.isRequired,
   colorId: PropTypes.string.isRequired,
   // ADDONS
-  selectedCustomizations: PropTypes.arrayOf(
+  addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       description: PropTypes.string,
     }),
   ).isRequired,
-  selectedDressSize: PropTypes.number.isRequired,
-  selectedHeightValue: PropTypes.number.isRequired,
+  selectedDressSize: PropTypes.number,
+  selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
   //* Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
@@ -309,7 +313,8 @@ ProductOptions.propTypes = {
 };
 
 ProductOptions.defaultProps = {
-  // sideMenuOpen: false,
+  selectedDressSize: null,
+  selectedHeightValue: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

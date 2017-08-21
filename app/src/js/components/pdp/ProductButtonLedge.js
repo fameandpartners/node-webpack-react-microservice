@@ -58,10 +58,10 @@ class ProductButtonLedge extends Component {
   }
 
   saveStyleSelection() {
-    const { updateDressSizeSelection } = this.props;
+    const { activateCustomizationDrawer } = this.props;
     // Check if valid
     // If Valid
-    updateDressSizeSelection();
+    activateCustomizationDrawer({ isActive: false });
   }
 
   saveSizeSeletion() {
@@ -162,8 +162,8 @@ ProductButtonLedge.propTypes = {
   // Redux Props
   productCustomizationDrawerOpen: PropTypes.bool,
   productCustomizationDrawer: PropTypes.string,
-  temporaryDressSize: PropTypes.number.isRequired,
-  temporaryHeightValue: PropTypes.number.isRequired,
+  temporaryDressSize: PropTypes.number,
+  temporaryHeightValue: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string.isRequired,
   // Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
@@ -175,6 +175,8 @@ ProductButtonLedge.propTypes = {
 ProductButtonLedge.defaultProps = {
   productCustomizationDrawerOpen: false,
   productCustomizationDrawer: null,
+  temporaryDressSize: null,
+  temporaryHeightValue: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductButtonLedge);

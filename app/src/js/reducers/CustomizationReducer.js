@@ -27,18 +27,32 @@ export const $$initialState = Immutable.fromJS({
   // })
   selectedColor: null,
 
-  // ObjectOf({
-  //   id: String,
-  //   description: String,
-  // })
-  selectedCustomizations: null,
+  // TODO: IF we figure out a way to untangle previous addons,
+  // we should have a flat representation of selections here
+  // // ObjectOf({
+  // //   id: String,
+  // //   description: String,
+  // // })
+  // selectedCustomizations: {},
 
 
   // Number
   temporaryDressSize: null,
-  selectedSize: null,
+  selectedDressSize: null,
 
   selectedStyleAddonOptions: [],
+
+  // Addon area
+  addons: {
+    // Marry previous customizations to addons
+    addonLayerImages: [],
+    selectedAddonImageLayers: [],
+    addonOptions: [],
+    baseImages: [],
+    baseSelected: null,
+    addonsLayersComputed: [],
+    addonsBasesComputed: [],
+  },
 
   // This is eventually what we have to make
   // size_id:86
@@ -65,6 +79,7 @@ export const $$initialState = Immutable.fromJS({
 
 export default function CartReducer($$state = $$initialState, action = null) {
   switch (action.type) {
+    // GENERAL
     case CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER: {
       return $$state.merge({
         productCustomizationDrawer: action.productCustomizationDrawer,
@@ -76,11 +91,13 @@ export default function CartReducer($$state = $$initialState, action = null) {
         productCustomizationDrawer: action.productCustomizationDrawer,
       });
     }
+    // COLOR
     case CustomizationConstants.SELECT_PRODUCT_COLOR: {
       return $$state.merge({
         selectedColor: action.color,
       });
     }
+    // HEIGHT
     case CustomizationConstants.UPDATE_MEASUREMENT_METRIC: {
       if (action.selectedMeasurementMetric) {
         return $$state.merge({
@@ -113,6 +130,22 @@ export default function CartReducer($$state = $$initialState, action = null) {
 
       return $$state.merge({
         temporaryDressSize: action.temporaryDressSize,
+      });
+    }
+    // STYLE
+    case CustomizationConstants.SET_ACTIVE_ADDON_IMAGE_LAYERS: {
+      return $$state.merge({
+        addons: $$state.get('addons').merge({ selectedAddonImageLayers: action.addonImageLayers }),
+      });
+    }
+    case CustomizationConstants.SET_ADDON_BASE_LAYER: {
+      return $$state.merge({
+        addons: $$state.get('addons').merge({ baseSelected: action.baseSelected }),
+      });
+    }
+    case CustomizationConstants.SET_STYLE_ADDON_OPTIONS: {
+      return $$state.merge({
+        addons: $$state.get('addons').merge({ addonOptions: action.addonOptions }),
       });
     }
     default: {
