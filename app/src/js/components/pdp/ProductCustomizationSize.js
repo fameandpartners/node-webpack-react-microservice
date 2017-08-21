@@ -4,19 +4,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
-// import classnames from 'classnames';
 
 // Constants
 import {
-  // DRAWERS,
   CM_TO_INCHES,
   US_SIZES,
   AU_SIZES,
   INCH_SIZES,
   UNITS,
+  // TODO: Will be used for error validations
   // MIN_CM,
   // MAX_CM,
-} from '../../constants/PDPConstants';
+} from '../../constants/ProductConstants';
 
 // Actions
 import CustomizationActions from '../../actions/CustomizationActions';
@@ -38,11 +37,6 @@ function mapStateToProps(state) {
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
-    // productCustomizationDrawerOpen: state.$$productState.get('productCustomizationDrawerOpen'),
-    // productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
-    // productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
-    // productSecondaryColorCentsPrice: state.$$productState.get('productSecondaryColorCentsPrice'),
-    // selectedColorId: state.$$productState.get('selectedColor').get('id'),
   };
 }
 
@@ -158,21 +152,6 @@ class ProductCustomizationStyle extends PureComponent {
         <span className="metric">ft</span>
         <span className="amt amt--last">{inch}</span>
         <span className="metric">in</span>
-      </div>
-    );
-  }
-
-  /**
-   * Generates a description of height and dress size solection
-   * @return {Node} profileSummary
-   */
-  generateSizeProfileSummary() {
-    // const { customize } = this.props;
-    // const { height, size } = customize;
-    // const hasErrors = (customize.errors.height || customize.errors.size);
-    return (
-      <div>
-        <a className="c-card-customize__content__left">Size Profile</a>
       </div>
     );
   }

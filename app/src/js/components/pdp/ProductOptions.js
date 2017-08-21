@@ -7,7 +7,7 @@ import { formatCents } from '../../utilities/accounting';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
-import { UNITS } from '../../constants/PDPConstants';
+import { UNITS } from '../../constants/ProductConstants';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
@@ -103,7 +103,6 @@ class ProductOptions extends Component {
   }
 
   addSelectionPrice(centsTotal) {
-    console.log('centsTotal', centsTotal);
     if (centsTotal) { return `+${formatCents(parseInt(centsTotal, 10), 0)}`; }
     return null;
   }
@@ -299,8 +298,8 @@ ProductOptions.propTypes = {
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
-      description: PropTypes.string,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.string,
     }),
   ).isRequired,
   selectedDressSize: PropTypes.number,
