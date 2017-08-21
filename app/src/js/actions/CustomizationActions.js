@@ -1,13 +1,4 @@
-/* eslint-disable max-len */
 import CustomizationConstants from '../constants/CustomizationConstants';
-// import StyleConstants from '../constants/StyleConstants';
-
-// export function activateColorDrawer({ isActive }) {
-//   return {
-//     type: CustomizationConstants.ACTIVATE_COLOR_DRAWER,
-//     isActive,
-//   };
-// }
 
 export function activateCustomizationDrawer({ isActive = true, productCustomizationDrawer }) {
   return {

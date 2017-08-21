@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import classnames from 'classnames';
 
-// CSS
-// import '../../../css/components/ButtonCol.scss';
-
 class ButtonCol extends Component {
   constructor(props) {
     super(props);

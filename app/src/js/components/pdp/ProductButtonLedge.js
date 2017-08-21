@@ -53,19 +53,21 @@ class ProductButtonLedge extends Component {
   }
 
   saveColorSelection() {
+    // TODO: Swap temp for selection
     // Check if valid
     // If Valid
+    this.props.activateCustomizationDrawer({ isActive: false });
   }
 
   saveStyleSelection() {
-    const { activateCustomizationDrawer } = this.props;
+    // TODO: Swap temp for selection
     // Check if valid
     // If Valid
-    activateCustomizationDrawer({ isActive: false });
+    this.props.activateCustomizationDrawer({ isActive: false });
   }
 
   saveSizeSeletion() {
-    console.warn('need to check validity......');
+    console.warn('TODO: need to check validity......');
     // Check if valid
     // If Valid
     const {

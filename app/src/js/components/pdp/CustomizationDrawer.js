@@ -92,11 +92,12 @@ class CustomizationDrawer extends PureComponent {
 
 CustomizationDrawer.propTypes = {
   // Redux Props
-  productCustomizationDrawer: PropTypes.string.isRequired,
+  productCustomizationDrawer: PropTypes.string,
   productCustomizationDrawerOpen: PropTypes.bool.isRequired,
 };
 
 CustomizationDrawer.defaultProps = {
+  productCustomizationDrawer: null,
   selectedColorId: '',
   activeModalId: null,
 };

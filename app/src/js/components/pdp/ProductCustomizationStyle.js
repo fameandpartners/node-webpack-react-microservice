@@ -350,7 +350,7 @@ class ProductCustomizeStyle extends Component {
   }
 }
 
-/* eslint-disable */
+/* eslint-disable react/forbid-prop-types */
 ProductCustomizeStyle.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
