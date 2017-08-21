@@ -1,6 +1,5 @@
 import Immutable from 'immutable';
 import CustomizationConstants from '../constants/CustomizationConstants';
-import StyleConstants from '../constants/StyleConstants';
 
 export const $$initialState = Immutable.fromJS({
 
@@ -81,18 +80,6 @@ export const $$initialState = Immutable.fromJS({
 
   // String
   modelDescription: null,
-
-  // Addon area
-  addons: {
-    // Marry previous customizations to addons
-    addonLayerImages: [],
-    selectedAddonImageLayers: [],
-    addonOptions: [],
-    baseImages: [],
-    baseSelected: null,
-    addonsLayersComputed: [],
-    addonsBasesComputed: [],
-  },
 });
 
 export default function ProductReducer($$state = $$initialState, action = null) {
@@ -101,21 +88,6 @@ export default function ProductReducer($$state = $$initialState, action = null) 
       return $$state.merge({
         productCustomizationDrawer: CustomizationConstants.COLOR_CUSTOMIZE,
         productCustomizationDrawerOpen: action.isActive,
-      });
-    }
-    case StyleConstants.SET_ACTIVE_ADDON_IMAGE_LAYERS: {
-      return $$state.merge({
-        addons: $$state.get('addons').merge({ selectedAddonImageLayers: action.addonImageLayers }),
-      });
-    }
-    case StyleConstants.SET_ADDON_BASE_LAYER: {
-      return $$state.merge({
-        addons: $$state.get('addons').merge({ baseSelected: action.baseSelected }),
-      });
-    }
-    case StyleConstants.SET_STYLE_ADDON_OPTIONS: {
-      return $$state.merge({
-        addons: $$state.get('addons').merge({ addonOptions: action.addonOptions }),
       });
     }
     default: {

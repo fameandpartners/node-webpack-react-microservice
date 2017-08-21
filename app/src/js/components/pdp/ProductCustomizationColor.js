@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
-import ProductActions from '../../actions/ProductActions';
+import CustomizationActions from '../../actions/CustomizationActions';
 
 // UI Components
 import ColorSwatches from './ColorSwatches';
@@ -26,13 +26,13 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const {
-    activateColorDrawer,
+    activateCustomizationDrawer,
     changeCustomizationDrawer,
     selectProductColor,
-  } = bindActionCreators(ProductActions, dispatch);
+  } = bindActionCreators(CustomizationActions, dispatch);
 
   return {
-    activateColorDrawer,
+    activateCustomizationDrawer,
     activateModal,
     changeCustomizationDrawer,
     selectProductColor,
@@ -52,14 +52,14 @@ class ProductCustomizationColor extends PureComponent {
 
   handleColorSelection(color) {
     const {
-      activateColorDrawer,
+      activateCustomizationDrawer,
       productCustomizationDrawerOpen,
       selectProductColor,
     } = this.props;
 
     if (productCustomizationDrawerOpen) {
       selectProductColor({ color });
-      activateColorDrawer({ isActive: false });
+      activateCustomizationDrawer({ isActive: false });
     }
   }
 
@@ -112,7 +112,7 @@ ProductCustomizationColor.propTypes = {
   })).isRequired,
   selectedColorId: PropTypes.string,
   // Redux Actions
-  activateColorDrawer: PropTypes.func.isRequired,
+  activateCustomizationDrawer: PropTypes.func.isRequired,
   changeCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
 };

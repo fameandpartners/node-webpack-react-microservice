@@ -19,8 +19,6 @@ import {
 } from '../../constants/PDPConstants';
 
 // Actions
-// import ModalActions from '../../actions/ModalActions';
-import ProductActions from '../../actions/ProductActions';
 import CustomizationActions from '../../actions/CustomizationActions';
 
 // UI Components
@@ -49,8 +47,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const { changeCustomizationDrawer } = bindActionCreators(ProductActions, dispatch);
   const {
+    changeCustomizationDrawer,
     updateMeasurementMetric,
     updateHeightSelection,
     updateDressSizeSelection,

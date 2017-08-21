@@ -10,14 +10,14 @@ import ButtonCol from '../generic/ButtonCol';
 import ProductCustomization from './ProductCustomization';
 
 // Actions
-import * as ProductActions from '../../actions/ProductActions';
+import * as CustomizationActions from '../../actions/CustomizationActions';
 import * as ModalActions from '../../actions/ModalActions';
 
 // CSS
 import '../../../css/components/ProductCustomizationStyle.scss';
 
 function mapStateToProps(state) {
-  const addons = state.$$productState.get('addons').toJS();
+  const addons = state.$$customizationState.get('addons').toJS();
   return {
     addonLayerImages: addons.addonLayerImages,
     addonOptions: addons.addonOptions,
@@ -36,7 +36,7 @@ function mapDispatchToProps(dispatch) {
     setAddonOptions,
     setAddonBaseLayer,
     setActiveAddonImageLayers,
-  } = bindActionCreators(ProductActions, dispatch);
+  } = bindActionCreators(CustomizationActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
 
   return {
