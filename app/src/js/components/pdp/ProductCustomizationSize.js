@@ -186,7 +186,7 @@ class ProductCustomizationStyle extends PureComponent {
         productCustomizationDrawer={productCustomizationDrawer}
       >
         <div className="ProductCustomizationSize__layout-container typography">
-          <div className="App--mb-big">
+          <div className="u-mb-big">
             <h3 className="h3">
                 Let’s make it fit.
               </h3>
@@ -195,7 +195,7 @@ class ProductCustomizationStyle extends PureComponent {
               </p>
           </div>
 
-          <div className="ProductCustomizationSize__height App--mb-normal">
+          <div className="ProductCustomizationSize__height u-mb-normal">
             <p className="textAlign--left">How tall are you?</p>
             <div className="grid">
               <div className="col-8">

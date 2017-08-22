@@ -66,16 +66,16 @@ class ColorSwatches extends PureComponent {
 
     return (
       <div className="ColorSwatches">
-        <h3 className="App--mb-small textAlign--left">
+        <h3 className="u-mb-small textAlign--left">
           Fame Recommends
         </h3>
-        <div className="App--mb-normal grid-12">
+        <div className="u-mb-normal grid-12">
           { productDefaultColors.map(c => this.generateColorSwatch(c, 0))}
         </div>
-        <h3 className="App--mb-small textAlign--left">
+        <h3 className="u-mb-small textAlign--left">
           Additional Colors +$16
         </h3>
-        <div className="App--mb-normal grid-12">
+        <div className="u-mb-normal grid-12">
           { productSecondaryColors.map(c =>
             this.generateColorSwatch(c, productSecondaryColorCentsPrice))
           }

@@ -157,7 +157,7 @@ class ProductCustomizeStyle extends Component {
           role="button"
           key={`addon-option-${a.id}`}
         >
-          <div className="App--mb-small">
+          <div className="u-mb-small">
             <ButtonCol
               tall
               className="width--full"
@@ -328,7 +328,7 @@ class ProductCustomizeStyle extends Component {
       >
 
         <div className="ProductCustomizeStyle__content">
-          <div className="App--mb-normal ProductCustomizationStyle__cad-images">
+          <div className="u-mb-normal ProductCustomizationStyle__cad-images">
             {this.generateAddonsSummary()}
           </div>
 
@@ -339,7 +339,7 @@ class ProductCustomizeStyle extends Component {
 
 
           <div className="ProductCustomizeStyle__addon-options">
-            <div className="textAlign--right App--mb-small">
+            <div className="textAlign--right u-mb-small">
               <span className="link link--static">Clear All</span>
             </div>
             { this.generateAddonOptions() }

@@ -136,7 +136,7 @@ class ProductDisplayOptionsTouch extends Component {
           </Slide>
 
         </Slider>
-        <div className="ProductDisplayOptionsTouch__options App--mb-normal App--mt-normal">
+        <div className="ProductDisplayOptionsTouch__options u-mb-normal u-mt-normal">
           <div
             onClick={this.handleColorOptionClick}
             className={classnames(
