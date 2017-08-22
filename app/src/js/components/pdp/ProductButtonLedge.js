@@ -97,7 +97,7 @@ class ProductButtonLedge extends Component {
     activateCustomizationDrawer({ isActive: false });
   }
 
-  handleRightButtonClick() {
+  chooseCustomizationCallback() {
     const { productCustomizationDrawer } = this.props;
     switch (productCustomizationDrawer) {
       case COLOR_CUSTOMIZE:
@@ -147,7 +147,7 @@ class ProductButtonLedge extends Component {
               >
                 <ButtonLedge
                   handleLeftButtonClick={this.handleLeftButtonClick}
-                  handleRightButtonClick={this.handleRightButtonClick()}
+                  handleRightButtonClick={this.chooseCustomizationCallback()}
                 />
               </div>
             );

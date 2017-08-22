@@ -171,22 +171,22 @@ class ProductOptions extends Component {
     let sizingInformation = null;
 
     if (selectedHeightValue && selectedDressSize) {
-      // INCH
       if (selectedMeasurementMetric === UNITS.INCH) {
+        // INCH
         const ft = Math.floor(selectedHeightValue / 12);
         const inch = selectedHeightValue % 12;
         sizingInformation = `${ft}ft ${inch}in / ${selectedDressSize}`;
       } else {
+        // CM
         sizingInformation = `${selectedHeightValue} ${selectedMeasurementMetric.toLowerCase()} / ${selectedDressSize}`;
       }
-      // CM
     }
 
-    return (
+    return sizingInformation ? (
       <span>
         {sizingInformation}
       </span>
-    );
+    ) : null;
   }
 
   /**
