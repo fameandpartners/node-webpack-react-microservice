@@ -1,7 +1,6 @@
 /* eslint-disable prefer-template */
-// import platform from 'platform';
-
 import window from '../../polyfills/windowPolyfill';
+
 
 export function objectToGetParams(object) {
   return '?' + Object.keys(object)
