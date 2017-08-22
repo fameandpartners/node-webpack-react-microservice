@@ -91,13 +91,13 @@ ProductCustomizationColor.propTypes = {
   productCustomizationDrawer: PropTypes.string.isRequired,
   productCustomizationDrawerOpen: PropTypes.bool.isRequired,
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
   productSecondaryColors: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,

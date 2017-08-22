@@ -183,11 +183,18 @@ ProductButtonLedge.propTypes = {
   // Redux Props
   productCustomizationDrawerOpen: PropTypes.bool,
   productCustomizationDrawer: PropTypes.string,
-  temporaryColor: PropTypes.string,
+  temporaryColor: PropTypes.shape({
+    id: PropTypes.number,
+    centsTotal: PropTypes.number,
+    name: PropTypes.string,
+    presentation: PropTypes.string,
+    hexValue: PropTypes.string,
+    patternUrl: PropTypes.string,
+  }).isRequired,
   temporaryDressSize: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string.isRequired,
-  temporaryStyleCustomizations: PropTypes.string.isRequired,
+  temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
@@ -204,6 +211,7 @@ ProductButtonLedge.defaultProps = {
   temporaryColor: null,
   temporaryDressSize: null,
   temporaryHeightValue: null,
+  temporaryStyleCustomizations: [],
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductButtonLedge);
