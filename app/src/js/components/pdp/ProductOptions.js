@@ -44,10 +44,11 @@ function stateToProps(state) {
     colorHexValue: selectedColor.get('hexValue'),
 
     // SELECTIONS
-    addonOptions: addons.get('addonOptions').toJS().filter(a => a.active),
+    addonOptions: addons.get('addonOptions').toJS(),
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
+    selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
   };
 }
 
@@ -67,6 +68,11 @@ class ProductOptions extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+  }
+
+  retrieveSelectedAddonOptions() {
+    const { addonOptions, selectedStyleCustomizations } = this.props;
+    return addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1);
   }
 
   /**
@@ -107,10 +113,9 @@ class ProductOptions extends Component {
     return null;
   }
 
-  reduceCustomizationSelectionPrice() {
-    const { addonOptions } = this.props;
+  reduceCustomizationSelectionPrice(selectedOptions) {
     return `+${formatCents(
-      addonOptions.reduce(
+      selectedOptions.reduce(
         (subTotal, c) =>
           subTotal + parseInt(c.price.money.fractional, 10), 0),
         0,
@@ -140,21 +145,21 @@ class ProductOptions extends Component {
   }
 
   generateAddonSelectionNode() {
-    const { addonOptions } = this.props;
+    const selectedOptions = this.retrieveSelectedAddonOptions();
     console.warn('TODO: @elgrecode polish. addonOptions need to reference white listed build not old structure');
 
-    if (addonOptions.length === 1) { // One customization
+    if (selectedOptions.length === 1) { // One customization
       return (
         <span>
-          <span>{addonOptions[0].name}</span>&nbsp;
-          <span>{this.addSelectionPrice(addonOptions[0].price.money.fractional)}</span>
+          <span>{selectedOptions[0].name}</span>&nbsp;
+          <span>{this.addSelectionPrice(selectedOptions[0].price.money.fractional)}</span>
         </span>
       );
-    } else if (addonOptions.length > 1) { // Multiple customizations
+    } else if (selectedOptions.length > 1) { // Multiple customizations
       return (
         <span>
-          <span>{addonOptions.length} Additions</span>&nbsp;
-          <span>{this.reduceCustomizationSelectionPrice()}</span>
+          <span>{selectedOptions.length} Additions</span>&nbsp;
+          <span>{this.reduceCustomizationSelectionPrice(selectedOptions)}</span>
         </span>
       );
     }
@@ -189,6 +194,22 @@ class ProductOptions extends Component {
     ) : null;
   }
 
+  calculateSubTotal() {
+    const {
+      productCentsBasePrice = 0,
+      colorCentsTotal = 0,
+    } = this.props;
+
+    console.warn('TODO: switch to clean transformed version of addons');
+    const customizationStyleCents = this.retrieveSelectedAddonOptions()
+      .reduce((prev, curr) => prev + parseInt(curr.price.money.fractional, 10), 0);
+
+    return formatCents(
+      parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice,
+      0,
+    );
+  }
+
   /**
    * Activates a drawer to a specific drawer type
    * @param  {String} drawer
@@ -217,8 +238,8 @@ class ProductOptions extends Component {
 
   render() {
     const {
-      productCentsBasePrice,
       productTitle,
+      selectedStyleCustomizations,
     } = this.props;
 
     return (
@@ -234,7 +255,7 @@ class ProductOptions extends Component {
                 leftNode={<h1 className="display--inline h4">{productTitle}</h1>}
                 rightNode={
                   <span className="h4">
-                    {formatCents(productCentsBasePrice, 0)}
+                    {this.calculateSubTotal()}
                   </span>
                 }
               />
@@ -248,7 +269,7 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 leftNode={<span>Design Customizations</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={false}
+                optionIsSelected={!!selectedStyleCustomizations.length}
                 rightNode={this.generateAddonSelectionNode()}
                 handleClick={this.handleProductOptionClick(CustomizationConstants.STYLE_CUSTOMIZE)}
               />
@@ -262,6 +283,7 @@ class ProductOptions extends Component {
             </div>
             <div className="ProductOptions__ctas grid-1">
               <Button
+                tall
                 handleClick={this.handleAddToBag}
                 text="Add to Bag"
               />
@@ -305,6 +327,7 @@ ProductOptions.propTypes = {
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
+  selectedStyleCustomizations: PropTypes.string.isRequired,
   //* Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
