@@ -1,7 +1,23 @@
 .ShareModal__icons-row li {
   display: inline-block;
-  padding: 4px 12px 24px;
+  margin: 4px 16px 24px;
 }
 
-// TO-DO:
-// - SVG Hover State Colors / Cursor Pointer
+.ShareModal__icon-button {
+  transition: all 0.2s;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: transparent;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    z-index: $z-max;
+  }
+
+  &:hover {
+    opacity: 0.3;
+  }
+}

@@ -89,33 +89,43 @@ class ShareModal extends Component {
             className="ShareModal typography Modal__layout-container"
           >
             <ul className="ShareModal__icons-row">
-              <li>
-                <FacebookShareButton url={currentURL}>
-                  <img
-                    src={FacebookShareIcon.url}
+              <li className="u-cursor--pointer">
+                <FacebookShareButton
+                  url={currentURL}
+                  className="ShareModal__icon-button"
+                >
+                  <object
+                    data={FacebookShareIcon.url}
+                    type="image/svg+xml"
                     alt="Facebook Share Icon"
                     width="40px"
                     height="40px"
                   />
                 </FacebookShareButton>
               </li>
-              <li>
+              <li className="u-cursor--pointer">
                 <PinterestShareButton
                   url={currentURL}
+                  className="ShareModal__icon-button"
                   media={currentProductImage}
                 >
-                  <img
-                    src={PinterestShareIcon.url}
+                  <object
+                    data={PinterestShareIcon.url}
+                    type="image/svg+xml"
                     alt="Pinterest Share Icon"
                     width="40px"
                     height="40px"
                   />
                 </PinterestShareButton>
               </li>
-              <li>
-                <TwitterShareButton url={currentURL}>
-                  <img
-                    src={TwitterShareIcon.url}
+              <li className="u-cursor--pointer">
+                <TwitterShareButton
+                  url={currentURL}
+                  className="ShareModal__icon-button"
+                >
+                  <object
+                    data={TwitterShareIcon.url}
+                    type="image/svg+xml"
                     alt="Twitter Share Icon"
                     width="40px"
                     height="40px"
