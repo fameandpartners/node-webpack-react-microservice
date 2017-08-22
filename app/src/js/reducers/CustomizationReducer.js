@@ -108,6 +108,17 @@ export default function CartReducer($$state = $$initialState, action = null) {
         temporaryDressSize: action.temporaryDressSize,
       });
     }
+    case CustomizationConstants.UPDATE_CUSTOMIZATION_STYLE_SELECTION: {
+      if (action.selectedStyleCustomizations) {
+        return $$state.merge({
+          temporaryStyleCustomizations: action.selectedStyleCustomizations,
+          selectedStyleCustomizations: action.selectedStyleCustomizations,
+        });
+      }
+      return $$state.merge({
+        temporaryStyleCustomizations: action.temporaryStyleCustomizations,
+      });
+    }
     // STYLE
     case CustomizationConstants.SET_ACTIVE_ADDON_IMAGE_LAYERS: {
       return $$state.merge({
@@ -117,17 +128,6 @@ export default function CartReducer($$state = $$initialState, action = null) {
     case CustomizationConstants.SET_ADDON_BASE_LAYER: {
       return $$state.merge({
         addons: $$state.get('addons').merge({ baseSelected: action.baseSelected }),
-      });
-    }
-    case CustomizationConstants.SET_STYLE_ADDON_OPTIONS: {
-      if (action.selectedStyleCustomizations) {
-        return $$state.merge({
-          temporaryStyleCustomizations: action.selectedStyleCustomizations,
-          selectedStyleCustomizations: action.selectedStyleCustomizations,
-        });
-      }
-      return $$state.merge({
-        temporaryStyleCustomizations: action.temporaryStyleCustomizations,
       });
     }
     default: {

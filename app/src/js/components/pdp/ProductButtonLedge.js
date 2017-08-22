@@ -30,6 +30,7 @@ function stateToProps(state) {
     temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
+    temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
   };
 }
@@ -44,6 +45,7 @@ function dispatchToProps(dispatch) {
     updateDressSizeSelection: customizationActions.updateDressSizeSelection,
     updateHeightSelection: customizationActions.updateHeightSelection,
     updateMeasurementMetric: customizationActions.updateMeasurementMetric,
+    updateCustomizationStyleSelection: customizationActions.updateCustomizationStyleSelection,
   };
 }
 
@@ -71,10 +73,17 @@ class ProductButtonLedge extends Component {
   }
 
   saveStyleSelection() {
-    // TODO: Swap temp for selection
-    // Check if valid
-    // If Valid
-    this.props.activateCustomizationDrawer({ isActive: false });
+    const {
+      activateCustomizationDrawer,
+      setShareableQueryParams,
+      temporaryStyleCustomizations,
+      updateCustomizationStyleSelection,
+    } = this.props;
+    updateCustomizationStyleSelection({
+      selectedStyleCustomizations: temporaryStyleCustomizations,
+    });
+    setShareableQueryParams({ customizations: temporaryStyleCustomizations });
+    activateCustomizationDrawer({ isActive: false });
   }
 
   saveSizeSeletion() {
@@ -178,6 +187,7 @@ ProductButtonLedge.propTypes = {
   temporaryDressSize: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string.isRequired,
+  temporaryStyleCustomizations: PropTypes.string.isRequired,
   // Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
@@ -185,6 +195,7 @@ ProductButtonLedge.propTypes = {
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
+  updateCustomizationStyleSelection: PropTypes.func.isRequired,
 };
 
 ProductButtonLedge.defaultProps = {
