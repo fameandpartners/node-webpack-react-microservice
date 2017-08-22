@@ -9,6 +9,7 @@ import { ShareButtons } from '../../libs/react-share/react-share';
 
 // Components
 import Button from '../generic/Button';
+import Input from '../form/Input';
 import RenderSVG from '../utility/RenderSVG';
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
@@ -45,6 +46,7 @@ class ShareModal extends Component {
 
     this.state = {
       clipboard: new Clipboard('.js-clipboard-node'),
+      clipboardError: false,
     };
 
     autobind(this);
@@ -52,18 +54,32 @@ class ShareModal extends Component {
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
+    this.setState({
+      clipboardError: false,
+    });
   }
 
   handleCopyLinkClick() {
     /* eslint-disable no-console */
     console.log(`Copied Share Link: ${this.props.currentURL}`);
-    // TO-DO:
-    // - Toast
-    // - Fallback?
+    // TO-DO: Link Mike's Success Toast
+  }
+
+  handleCopyLinkClickError() {
+    this.setState({
+      clipboardError: true,
+    });
+    // TO-DO: select() !
   }
 
   componentWillMount() {
     this.state.clipboard.text = () => this.props.currentURL;
+
+    this.state.clipboard
+      .on('error', () => {
+        console.warn('Clipboard Copy Error');
+        this.handleCopyLinkClickError();
+      });
   }
 
   render() {
@@ -71,6 +87,11 @@ class ShareModal extends Component {
       currentURL,
       currentProductImage,
     } = this.props;
+
+    const {
+      clipboardError,
+    } = this.state;
+
     const {
       FacebookShareButton,
       PinterestShareButton,
@@ -138,6 +159,27 @@ class ShareModal extends Component {
               text="Copy Link"
               handleClick={this.handleCopyLinkClick}
             />
+            {
+              /* REMOVE: Temporary, for easier testing... */
+            }
+            <Button
+              secondary
+              className="Modal__content--med-margin-bottom"
+              text="Trigger Error"
+              handleClick={this.handleCopyLinkClickError}
+            />
+            {
+              clipboardError ?
+              (
+                <Input
+                  id="copy_link_fallback"
+                  label="Press Ctrl/Cmd-C To Copy"
+                  defaultValue={currentURL}
+                  focusOnMount
+                  wrapperClassName="Modal__content--med-margin-bottom"
+                />
+              ) : null
+            }
           </div>
         </Modal>
       </ModalContainer>
