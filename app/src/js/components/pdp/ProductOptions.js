@@ -228,7 +228,7 @@ class ProductOptions extends Component {
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
-            <div className="ProductOptions__content App--mb-normal typography">
+            <div className="ProductOptions__content u-mb-normal typography">
               <ProductOptionsRow
                 heading
                 leftNode={<h1 className="display--inline h4">{productTitle}</h1>}
@@ -266,12 +266,12 @@ class ProductOptions extends Component {
                 text="Add to Bag"
               />
             </div>
-            <div className="ProductOptions__additional-info App--mb-normal">
+            <div className="ProductOptions__additional-info u-mb-normal">
               <p>
                 $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
                 <a className="link link--static">Learn more</a>
               </p>
-              <p className="App--mb-small">
+              <p className="u-mb-small">
                 Complimentary shipping and returns.&nbsp;
                 <a className="link link--static">Learn more</a>
               </p>

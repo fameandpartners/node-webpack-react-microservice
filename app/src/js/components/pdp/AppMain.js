@@ -125,7 +125,7 @@ class AppMain extends Component {
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? <ProductDisplayOptionsTouch />
                 : (
-                  <div className="App--mt-normal">
+                  <div className="u-mt-normal">
                     <ProductOptions />
                   </div>
                 )
@@ -142,7 +142,7 @@ class AppMain extends Component {
                 </div>
               </div>
 
-              <div className="layout-container App--mb-normal">
+              <div className="layout-container u-mb-normal">
                 { breakpoint === 'mobile' || breakpoint === 'tablet'
                   ? null
                   : <ProductGrid />
