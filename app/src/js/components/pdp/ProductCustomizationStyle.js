@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { assign, findIndex, uniqBy } from 'lodash';
+import { findIndex, uniqBy } from 'lodash';
 import { bindActionCreators } from 'redux';
 import autoBind from 'react-autobind';
 import classnames from 'classnames';
+
+// Utilities
+import { addOrRemoveFrom } from '../../utilities/array';
 
 // Components
 import ButtonCol from '../generic/ButtonCol';
@@ -154,16 +157,12 @@ class ProductCustomizeStyle extends Component {
    * @param  {Object} addon - addon selected or deselected
    * @return {Array} - newAddons
    */
-  computeNewAddons(addon) {
+  computeActivenessOfAddons(activeAddonIdArray) {
     const { addonOptions } = this.props;
-    const matchedIndex = findIndex(addonOptions, { id: addon.id });
-    // NOTE: Mutable way to modify item in array (creating new array)
-    const newAddons = [
-      ...addonOptions.slice(0, matchedIndex),
-      assign({}, addon, { active: !addon.active }),
-      ...addonOptions.slice(matchedIndex + 1),
-    ];
-    return newAddons;
+    return addonOptions.map(a => ({
+      id: a.id,
+      active: activeAddonIdArray.indexOf(a.id) > -1,
+    }));
   }
 
 
@@ -275,24 +274,44 @@ class ProductCustomizeStyle extends Component {
 
 
   /**
+   * Activates an array of active ids
+   * @param  {ArrayOf(Number)} newAddonIds - ids to be activated
+   * @action -> setAddonOptions, setActiveAddonImageLayers, setAddonBaseLayer
+   */
+  activateAddonIdLayers(newAddonIds) {
+    const {
+      setAddonOptions,
+      setActiveAddonImageLayers,
+      setAddonBaseLayer,
+    } = this.props;
+    const newAddons = this.computeActivenessOfAddons(newAddonIds);
+    const newLayerCode = this.computeLayerCodeFromAddons(newAddons);
+
+    setAddonOptions({ temporaryStyleCustomizations: newAddonIds });
+    setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
+    setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode));
+  }
+
+
+  /**
    * Event handler for addon selection
    * @param  {Object} addon
-   * @action -> setAddonOptions, setAddonBaseLayer
+   * @action -> activateAddonIdLayers
    */
   handleAddonSelection(addon) {
-    const { setAddonOptions, setActiveAddonImageLayers, setAddonBaseLayer } = this.props;
+    const { temporaryStyleCustomizations } = this.props;
     return () => {
-      // TODO: NEXT, compute new addons using temporaryStyleSelections
-      const newAddons = this.computeNewAddons(addon);
-      const newLayerCode = this.computeLayerCodeFromAddons(newAddons);
-
-      setAddonOptions({
-        temporaryStyleCustomizations: newAddons.filter(a => a.active).map(a => a.id),
-      });
-      setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
-      // Addon image activate
-      setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode)); // Addon base layer active
+      const newAddonIds = addOrRemoveFrom(temporaryStyleCustomizations, addon.id);
+      this.activateAddonIdLayers(newAddonIds);
     };
+  }
+
+  /**
+   * Handle clearing of addon selections
+   * @action -> activateAddonIdLayers
+   */
+  handleClearAddonSelections() {
+    this.activateAddonIdLayers([]);
   }
 
   render() {
@@ -314,10 +333,14 @@ class ProductCustomizeStyle extends Component {
             { this.generateAddonLayers().reverse() }
           </div>
 
-
           <div className="ProductCustomizeStyle__addon-options">
             <div className="textAlign--right u-mb-small">
-              <span className="link link--static">Clear All</span>
+              <span
+                onClick={this.handleClearAddonSelections}
+                className="link link--static"
+              >
+                  Clear All
+              </span>
             </div>
             { this.generateAddonOptions() }
           </div>
@@ -333,13 +356,13 @@ ProductCustomizeStyle.propTypes = {
   hasNavItems: PropTypes.bool,
   // Redux Props
   addonLayerImages: PropTypes.array.isRequired,
-  selectedAddonImageLayers: PropTypes.array.isRequired,
   addonOptions: PropTypes.array.isRequired,
   addonsLayersComputed: PropTypes.array.isRequired,
   addonsBasesComputed: PropTypes.array.isRequired,
   baseImages: PropTypes.array.isRequired,
   baseSelected: PropTypes.number,
   productCustomizationDrawer: PropTypes.string.isRequired,
+  selectedAddonImageLayers: PropTypes.array.isRequired,
   temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
