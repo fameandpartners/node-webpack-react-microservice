@@ -16,7 +16,6 @@ function mapStateToProps(state) {
   return {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
-    productSecondaryColorCentsPrice: state.$$productState.get('productSecondaryColorCentsPrice'),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
     temporaryColorId: state.$$customizationState.get('temporaryColor').get('id'),
@@ -65,7 +64,6 @@ class ProductCustomizationColor extends PureComponent {
       productCustomizationDrawer,
       productDefaultColors,
       productSecondaryColors,
-      productSecondaryColorCentsPrice,
       temporaryColorId,
     } = this.props;
 
@@ -78,7 +76,6 @@ class ProductCustomizationColor extends PureComponent {
         <ColorSwatches
           productDefaultColors={productDefaultColors}
           productSecondaryColors={productSecondaryColors}
-          productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
           temporaryColorId={temporaryColorId}
           handleColorSelection={this.handleColorSelection}
         />
@@ -99,7 +96,6 @@ ProductCustomizationColor.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  productSecondaryColorCentsPrice: PropTypes.number.isRequired,
   productSecondaryColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,

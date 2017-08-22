@@ -365,10 +365,10 @@ const hydrated = {
         patternUrl: null,
       },
     ],
-    productSecondaryColorCentsPrice: 1600,
     productSecondaryColors: [
       {
         id: 10,
+        centsTotal: 1600,
         name: 'aqua',
         presentation: 'Aqua',
         hexValue: '#F7DBE9',
@@ -376,6 +376,7 @@ const hydrated = {
       },
       {
         id: 20,
+        centsTotal: 1600,
         name: 'black',
         presentation: 'Black',
         hexValue: '#000000',
@@ -383,6 +384,7 @@ const hydrated = {
       },
       {
         id: 17,
+        centsTotal: 1600,
         name: 'blush',
         presentation: 'Blush',
         hexValue: '#F9DAD8',
@@ -390,6 +392,7 @@ const hydrated = {
       },
       {
         id: 81,
+        centsTotal: 1600,
         name: 'bright-yellow',
         presentation: 'Bright Yellow',
         hexValue: '#fcf751',
@@ -397,6 +400,7 @@ const hydrated = {
       },
       {
         id: 94,
+        centsTotal: 1600,
         name: 'burgundy',
         presentation: 'Burgundy',
         hexValue: '#77202F',
@@ -404,6 +408,7 @@ const hydrated = {
       },
       {
         id: 55,
+        centsTotal: 1600,
         name: 'candy-pink',
         presentation: 'Candy Pink',
         hexValue: '#ff99ff',
@@ -411,6 +416,7 @@ const hydrated = {
       },
       {
         id: 35,
+        centsTotal: 1600,
         name: 'champagne',
         presentation: 'Champagne',
         hexValue: '#F9DAD8',
@@ -418,6 +424,7 @@ const hydrated = {
       },
       {
         id: 37,
+        centsTotal: 1600,
         name: 'cobalt-blue',
         presentation: 'Cobalt Blue',
         hexValue: '#012D60',
@@ -425,6 +432,7 @@ const hydrated = {
       },
       {
         id: 97,
+        centsTotal: 1600,
         name: 'emerald-green',
         presentation: 'Emerald Green',
         hexValue: '#009875',

@@ -44,7 +44,7 @@ class ColorSwatches extends PureComponent {
           )}
           >
             <div className="u-center">
-              <span>{color.name}</span>
+              <span>{color.presentation}</span>
               <br />
               { price
                 ? <span>{formatCents(price, 0)}</span>
@@ -61,7 +61,6 @@ class ColorSwatches extends PureComponent {
     const {
       productDefaultColors,
       productSecondaryColors,
-      productSecondaryColorCentsPrice,
     } = this.props;
 
     return (
@@ -77,7 +76,7 @@ class ColorSwatches extends PureComponent {
         </h3>
         <div className="u-mb-normal grid-12">
           { productSecondaryColors.map(c =>
-            this.generateColorSwatch(c, productSecondaryColorCentsPrice))
+            this.generateColorSwatch(c, c.centsTotal))
           }
         </div>
       </div>
@@ -92,7 +91,6 @@ ColorSwatches.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  productSecondaryColorCentsPrice: PropTypes.number.isRequired,
   productSecondaryColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
