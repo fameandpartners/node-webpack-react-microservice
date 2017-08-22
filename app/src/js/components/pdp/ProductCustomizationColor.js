@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
+import AppActions from '../../actions/AppActions';
 import ModalActions from '../../actions/ModalActions';
 import CustomizationActions from '../../actions/CustomizationActions';
 
@@ -24,18 +25,18 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+  const { setShareableQueryParams } = bindActionCreators(AppActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const {
-    activateCustomizationDrawer,
     changeCustomizationDrawer,
     selectProductColor,
   } = bindActionCreators(CustomizationActions, dispatch);
 
   return {
-    activateCustomizationDrawer,
     activateModal,
     changeCustomizationDrawer,
     selectProductColor,
+    setShareableQueryParams,
   };
 }
 
@@ -52,14 +53,14 @@ class ProductCustomizationColor extends PureComponent {
 
   handleColorSelection(color) {
     const {
-      activateCustomizationDrawer,
       productCustomizationDrawerOpen,
       selectProductColor,
+      setShareableQueryParams,
     } = this.props;
 
     if (productCustomizationDrawerOpen) {
       selectProductColor({ color });
-      activateCustomizationDrawer({ isActive: false });
+      setShareableQueryParams({ color: color.id });
     }
   }
 
@@ -112,9 +113,9 @@ ProductCustomizationColor.propTypes = {
   })).isRequired,
   selectedColorId: PropTypes.string,
   // Redux Actions
-  activateCustomizationDrawer: PropTypes.func.isRequired,
   changeCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
+  setShareableQueryParams: PropTypes.func.isRequired,
 };
 
 ProductCustomizationColor.defaultProps = {

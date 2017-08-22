@@ -222,7 +222,7 @@ class ProductOptions extends Component {
     } = this.props;
 
     return (
-      <div className="ProductOptions grid-12">
+      <div className="ProductOptions grid-12-noGutter">
         <div className="ProductOptions__primary-image-container brick col-6">
           <img className="width--full" alt="dress1" src={image1} />
         </div>
