@@ -23,7 +23,6 @@ function mapStateToProps(state) {
   return {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
-    productSecondaryColorCentsPrice: state.$$productState.get('productSecondaryColorCentsPrice'),
     selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
   };
 }

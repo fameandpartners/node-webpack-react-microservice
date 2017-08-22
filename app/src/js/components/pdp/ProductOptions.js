@@ -39,7 +39,7 @@ function stateToProps(state) {
 
     // COLOR
     colorId: selectedColor.get('id'),
-    colorName: selectedColor.get('name'),
+    colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
 

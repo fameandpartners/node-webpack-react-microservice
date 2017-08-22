@@ -55,9 +55,6 @@ export const $$initialState = Immutable.fromJS({
   // })
   productDefaultColors: [],
 
-  // Number
-  productSecondaryColorCentsPrice: null,
-
   // ArrayOf({
   //   id: String,
   //   name: String,
