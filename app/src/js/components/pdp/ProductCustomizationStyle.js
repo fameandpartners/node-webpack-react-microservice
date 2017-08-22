@@ -339,7 +339,7 @@ class ProductCustomizeStyle extends Component {
                 onClick={this.handleClearAddonSelections}
                 className="link link--static"
               >
-                  Clear All
+                Clear All
               </span>
             </div>
             { this.generateAddonOptions() }
