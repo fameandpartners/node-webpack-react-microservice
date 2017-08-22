@@ -52,7 +52,7 @@ class ProductCustomizationNavigation extends PureComponent {
                 'ProductCustomizationNavigation__nav-item u-cursor--pointer',
                 { 'ProductCustomizationNavigation__nav-item--active': productCustomizationDrawer === STYLE_CUSTOMIZE },
               )}
-              >Style</span>
+              >Design&nbsp;Customizations</span>
             </li>
             <li
               onClick={this.handleDrawerSelection(SIZE_CUSTOMIZE)}

@@ -14,6 +14,7 @@ import noop from '../../libs/noop';
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
+import * as AppActions from '../../actions/AppActions';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
@@ -26,6 +27,7 @@ function stateToProps(state) {
   return {
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
+    temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
@@ -34,8 +36,11 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const customizationActions = bindActionCreators(CustomizationActions, dispatch);
+  const appActions = bindActionCreators(AppActions, dispatch);
   return {
     activateCustomizationDrawer: customizationActions.activateCustomizationDrawer,
+    selectProductColor: customizationActions.selectProductColor,
+    setShareableQueryParams: appActions.setShareableQueryParams,
     updateDressSizeSelection: customizationActions.updateDressSizeSelection,
     updateHeightSelection: customizationActions.updateHeightSelection,
     updateMeasurementMetric: customizationActions.updateMeasurementMetric,
@@ -53,10 +58,16 @@ class ProductButtonLedge extends Component {
   }
 
   saveColorSelection() {
-    // TODO: Swap temp for selection
-    // Check if valid
-    // If Valid
-    this.props.activateCustomizationDrawer({ isActive: false });
+    const {
+      activateCustomizationDrawer,
+      selectProductColor,
+      setShareableQueryParams,
+      temporaryColor,
+    } = this.props;
+
+    selectProductColor({ selectedColor: temporaryColor });
+    setShareableQueryParams({ color: temporaryColor.id });
+    activateCustomizationDrawer({ isActive: false });
   }
 
   saveStyleSelection() {
@@ -92,7 +103,6 @@ class ProductButtonLedge extends Component {
     updateMeasurementMetric({
       selectedMeasurementMetric: temporaryMeasurementMetric,
     });
-
 
     activateCustomizationDrawer({ isActive: false });
   }
@@ -164,11 +174,14 @@ ProductButtonLedge.propTypes = {
   // Redux Props
   productCustomizationDrawerOpen: PropTypes.bool,
   productCustomizationDrawer: PropTypes.string,
+  temporaryColor: PropTypes.string,
   temporaryDressSize: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string.isRequired,
   // Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
+  selectProductColor: PropTypes.func.isRequired,
+  setShareableQueryParams: PropTypes.func.isRequired,
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
@@ -177,6 +190,7 @@ ProductButtonLedge.propTypes = {
 ProductButtonLedge.defaultProps = {
   productCustomizationDrawerOpen: false,
   productCustomizationDrawer: null,
+  temporaryColor: null,
   temporaryDressSize: null,
   temporaryHeightValue: null,
 };

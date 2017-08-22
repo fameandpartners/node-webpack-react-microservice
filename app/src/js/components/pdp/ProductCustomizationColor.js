@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import AppActions from '../../actions/AppActions';
 import ModalActions from '../../actions/ModalActions';
 import CustomizationActions from '../../actions/CustomizationActions';
 
@@ -20,12 +19,11 @@ function mapStateToProps(state) {
     productSecondaryColorCentsPrice: state.$$productState.get('productSecondaryColorCentsPrice'),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
-    selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
+    temporaryColorId: state.$$customizationState.get('temporaryColor').get('id'),
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  const { setShareableQueryParams } = bindActionCreators(AppActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const {
     changeCustomizationDrawer,
@@ -36,7 +34,6 @@ function mapDispatchToProps(dispatch) {
     activateModal,
     changeCustomizationDrawer,
     selectProductColor,
-    setShareableQueryParams,
   };
 }
 
@@ -51,16 +48,14 @@ class ProductCustomizationColor extends PureComponent {
     changeCustomizationDrawer({ productCustomizationDrawer: drawerSelected });
   }
 
-  handleColorSelection(color) {
+  handleColorSelection(temporaryColor) {
     const {
       productCustomizationDrawerOpen,
       selectProductColor,
-      setShareableQueryParams,
     } = this.props;
 
     if (productCustomizationDrawerOpen) {
-      selectProductColor({ color });
-      setShareableQueryParams({ color: color.id });
+      selectProductColor({ temporaryColor });
     }
   }
 
@@ -71,7 +66,7 @@ class ProductCustomizationColor extends PureComponent {
       productDefaultColors,
       productSecondaryColors,
       productSecondaryColorCentsPrice,
-      selectedColorId,
+      temporaryColorId,
     } = this.props;
 
     return (
@@ -84,7 +79,7 @@ class ProductCustomizationColor extends PureComponent {
           productDefaultColors={productDefaultColors}
           productSecondaryColors={productSecondaryColors}
           productSecondaryColorCentsPrice={productSecondaryColorCentsPrice}
-          selectedColorId={selectedColorId}
+          temporaryColorId={temporaryColorId}
           handleColorSelection={this.handleColorSelection}
         />
       </ProductCustomization>
@@ -111,16 +106,15 @@ ProductCustomizationColor.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  selectedColorId: PropTypes.string,
+  temporaryColorId: PropTypes.string,
   // Redux Actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
-  setShareableQueryParams: PropTypes.func.isRequired,
 };
 
 ProductCustomizationColor.defaultProps = {
   hasNavItems: true,
-  selectedColorId: '',
+  temporaryColorId: '',
 };
 
 

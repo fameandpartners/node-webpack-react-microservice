@@ -64,9 +64,13 @@ export default function CartReducer($$state = $$initialState, action = null) {
     }
     // COLOR
     case CustomizationConstants.SELECT_PRODUCT_COLOR: {
-      return $$state.merge({
-        selectedColor: action.color,
-      });
+      if (action.selectedColor) {
+        return $$state.merge({
+          temporaryColor: action.selectedColor,
+          selectedColor: action.selectedColor,
+        });
+      }
+      return $$state.merge({ temporaryColor: action.temporaryColor });
     }
     // HEIGHT
     case CustomizationConstants.UPDATE_MEASUREMENT_METRIC: {
