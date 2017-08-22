@@ -24,7 +24,6 @@ function setURLQueryParams(queryStr) {
   }
 }
 
-
 export default function AppReducer($$state = $$initialState, action = null) {
   switch (action.type) {
     case AppConstants.SET_SHAREABLE_QUERY_PARAMS: {
