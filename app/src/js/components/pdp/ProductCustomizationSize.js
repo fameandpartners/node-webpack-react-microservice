@@ -75,7 +75,7 @@ class ProductCustomizationStyle extends PureComponent {
     const { updateHeightSelection } = this.props;
     const numVal = parseInt(value, 10);
 
-    if (typeof numVal === 'number') {
+    if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
       updateHeightSelection({
         temporaryHeightValue: numVal,
         temporaryHeightUnit: UNITS.CM,
