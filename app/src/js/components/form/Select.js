@@ -142,7 +142,7 @@ class Select extends Component {
           key={`${this.props.id}-${option.id}`}
           data-value={option.meta}
           className={classnames(
-            'Select-list-item u-user-select--none',
+            'Select__list-item u-user-select--none',
             {
               selected: option.active && !anyItemFocused,
               focused: isFocused,

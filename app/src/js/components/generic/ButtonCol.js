@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import autoBind from 'react-autobind';
 import classnames from 'classnames';
 
-class ButtonCol extends Component {
-  constructor(props) {
-    super(props);
-    autoBind(this);
-  }
-
+/* eslint-disable react/prefer-stateless-function */
+class ButtonCol extends PureComponent {
   render() {
     const {
       className,
