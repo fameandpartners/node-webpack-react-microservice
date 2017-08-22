@@ -240,6 +240,8 @@ class ProductOptions extends Component {
     const {
       productTitle,
       selectedStyleCustomizations,
+      selectedDressSize,
+      selectedHeightValue,
     } = this.props;
 
     return (
@@ -276,7 +278,7 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 leftNode={<span>Your size</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={false}
+                optionIsSelected={selectedDressSize && selectedHeightValue}
                 rightNode={this.generateSizingNode()}
                 handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
