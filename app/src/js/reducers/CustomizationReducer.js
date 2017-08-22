@@ -28,12 +28,13 @@ export const $$initialState = Immutable.fromJS({
   temporaryColor: null,
   selectedColor: null,
 
-
   // Number
   temporaryDressSize: null,
   selectedDressSize: null,
 
-  selectedStyleAddonOptions: [],
+  // ArrayOf(Number)
+  temporaryStyleCustomizations: [],
+  selectedStyleCustomizations: [],
 
   // Addon area
   addons: {
@@ -119,8 +120,14 @@ export default function CartReducer($$state = $$initialState, action = null) {
       });
     }
     case CustomizationConstants.SET_STYLE_ADDON_OPTIONS: {
+      if (action.selectedStyleCustomizations) {
+        return $$state.merge({
+          temporaryStyleCustomizations: action.selectedStyleCustomizations,
+          selectedStyleCustomizations: action.selectedStyleCustomizations,
+        });
+      }
       return $$state.merge({
-        addons: $$state.get('addons').merge({ addonOptions: action.addonOptions }),
+        temporaryStyleCustomizations: action.temporaryStyleCustomizations,
       });
     }
     default: {
