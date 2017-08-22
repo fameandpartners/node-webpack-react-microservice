@@ -55,7 +55,7 @@
     transform: translate(0, 0);
   }
 
-  .Select-list-item {
+  .Select__list-item {
     padding: 0 25px;
     color: $c-neutral-10;
     cursor: default;
@@ -66,16 +66,16 @@
     margin: 0 1px;
   }
 
-  .Select-list-item:first-child {
+  .Select__list-item:first-child {
     margin-top: 1px;
   }
 
-  .Select-list-item:hover {
+  .Select__list-item:hover {
     background: $c-neutral-2;
   }
 
-  .Select-list-item:focus,
-  .Select-list-item.focused {
+  .Select__list-item:focus,
+  .Select__list-item.focused {
     background: $c-neutral-4;
     color: $c-neutral-12;
   }
@@ -118,7 +118,7 @@
     transform: scale(1) translateZ(0);
   }
 
-  .Select-list-item {
+  .Select__list-item {
     cursor: pointer;
   }
 }
