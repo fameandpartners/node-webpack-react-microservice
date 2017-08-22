@@ -68,30 +68,6 @@ class ProductCustomizeStyle extends Component {
   }
 
   /**
-   * Creates a numerical string for addons based on selection
-   * @return {String|null} summary
-   */
-  addonsSummarySelectedOptions() {
-    const activeOptions = this.activeAddonsCount;
-    if (activeOptions) {
-      return `${activeOptions} Customization${activeOptions > 1 ? 's' : ''}`;
-    }
-    return null;
-  }
-
-  /**
-   * Generates a description of addons selected
-   * @return {Node} addonsSummary
-   */
-  generateAddonsSummary() {
-    return (
-      <div className="ProductCustomizationStyle__summary">
-        {this.addonsSummarySelectedOptions()}
-      </div>
-    );
-  }
-
-  /**
    * Determines positioning and hide show of base layers
    * @return {Array[Node]}
    */
@@ -328,10 +304,6 @@ class ProductCustomizeStyle extends Component {
       >
 
         <div className="ProductCustomizeStyle__content">
-          <div className="u-mb-normal ProductCustomizationStyle__cad-images">
-            {this.generateAddonsSummary()}
-          </div>
-
           <div className="ProductCustomizeStyle__layer-wrapper u-center position--relative">
             { this.generateBaseLayers() }
             { this.generateAddonLayers().reverse() }

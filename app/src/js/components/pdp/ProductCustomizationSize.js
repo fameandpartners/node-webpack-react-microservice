@@ -141,7 +141,7 @@ class ProductCustomizationStyle extends PureComponent {
   /**
    * Helper method to generate normal option for Select
    * @param  {Number} i
-   * @param  {Nunber} ft
+   * @param  {Number} ft
    * @param  {Number} inch
    * @return {Node} defaultOption
    */
@@ -188,11 +188,11 @@ class ProductCustomizationStyle extends PureComponent {
         <div className="ProductCustomizationSize__layout-container typography">
           <div className="u-mb-big">
             <h3 className="h3">
-                Let’s make it fit.
-              </h3>
+              Let’s make it fit.
+            </h3>
             <p>
-                Just tell us your height and size, and we&apos;ll take care of the tailoring.
-              </p>
+              Just tell us your height and size, and we&apos;ll take care of the tailoring.
+            </p>
           </div>
 
           <div className="ProductCustomizationSize__height u-mb-normal">
