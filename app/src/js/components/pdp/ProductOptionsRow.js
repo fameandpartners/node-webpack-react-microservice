@@ -53,6 +53,7 @@ class ProductOptionsRow extends PureComponent {
             rightNodeClassName,
             {
               'ProductOptionsRow__right--fade-in': optionIsSelected || heading || rightNode,
+              'ProductOptionsRow__right--dark': optionIsSelected,
             },
           )}
         >
