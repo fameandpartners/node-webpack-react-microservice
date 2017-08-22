@@ -5,8 +5,16 @@ const actionTypes = assign({},
   mirrorCreator([
     'ACTIVATE_SIDE_MENU',
     'ACTIVATE_CART_DRAWER',
+    'SET_SHAREABLE_QUERY_PARAMS',
   ]),
 );
+
+const queryParams = {
+  QUERY_PARAMS: {
+    color: 'clr',
+    customizations: 'cus',
+  },
+};
 
 const configuration = assign({},
   {
@@ -23,4 +31,4 @@ const configuration = assign({},
   },
 );
 
-export default assign({}, actionTypes, configuration);
+export default assign({}, actionTypes, queryParams, configuration);
