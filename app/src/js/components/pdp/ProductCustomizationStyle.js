@@ -27,6 +27,7 @@ function mapStateToProps(state) {
     baseSelected: addons.baseSelected,
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     selectedAddonImageLayers: addons.selectedAddonImageLayers,
+    temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
   };
 }
 
@@ -119,7 +120,7 @@ class ProductCustomizeStyle extends Component {
    * @return {Array[Node]} - addonOptionNodes
    */
   generateAddonOptions() {
-    const { addonOptions } = this.props;
+    const { addonOptions, temporaryStyleCustomizations } = this.props;
 
     return addonOptions.map((a) => {
       const displayPrice = parseFloat((
@@ -139,7 +140,7 @@ class ProductCustomizeStyle extends Component {
               className="width--full"
               left={<span>{a.name}</span>}
               right={<span>+ ${displayPrice}</span>}
-              isSelected={a.active}
+              isSelected={temporaryStyleCustomizations.indexOf(a.id) > -1}
               handleClick={this.handleAddonSelection(a)}
             />
           </div>
@@ -281,9 +282,13 @@ class ProductCustomizeStyle extends Component {
   handleAddonSelection(addon) {
     const { setAddonOptions, setActiveAddonImageLayers, setAddonBaseLayer } = this.props;
     return () => {
+      // TODO: NEXT, compute new addons using temporaryStyleSelections
       const newAddons = this.computeNewAddons(addon);
       const newLayerCode = this.computeLayerCodeFromAddons(newAddons);
-      setAddonOptions(newAddons); // Customization activation
+
+      setAddonOptions({
+        temporaryStyleCustomizations: newAddons.filter(a => a.active).map(a => a.id),
+      });
       setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
       // Addon image activate
       setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode)); // Addon base layer active
@@ -335,6 +340,7 @@ ProductCustomizeStyle.propTypes = {
   baseImages: PropTypes.array.isRequired,
   baseSelected: PropTypes.number,
   productCustomizationDrawer: PropTypes.string.isRequired,
+  temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
   setAddonOptions: PropTypes.func.isRequired,
@@ -346,6 +352,7 @@ ProductCustomizeStyle.defaultProps = {
   baseSelected: null,
   hasNavItems: true,
   selectedColorId: '',
+  temporaryStyleCustomizations: [],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizeStyle);

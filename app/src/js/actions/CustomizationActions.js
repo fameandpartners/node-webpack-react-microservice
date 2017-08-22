@@ -51,8 +51,12 @@ export function updateDressSizeSelection({ temporaryDressSize, selectedDressSize
 }
 
 // ADDON MANIPULATIONS
-export function setAddonOptions(addonOptions) {
-  return { type: CustomizationConstants.SET_STYLE_ADDON_OPTIONS, addonOptions };
+export function setAddonOptions({ temporaryStyleCustomizations, selectedStyleCustomizations }) {
+  return {
+    type: CustomizationConstants.SET_STYLE_ADDON_OPTIONS,
+    selectedStyleCustomizations,
+    temporaryStyleCustomizations,
+  };
 }
 
 export function setActiveAddonImageLayers(addonImageLayers) {
