@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import autobind from 'react-autobind';
 import Clipboard from 'clipboard';
-import { ShareButtons } from 'react-share';
+import { ShareButtons } from '../../libs/react-share/react-share';
 
 // Components
 import Button from '../generic/Button';
