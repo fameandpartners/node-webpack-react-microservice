@@ -23,7 +23,7 @@ class ColorSwatches extends PureComponent {
   }
 
   generateColorSwatch(color, price = 0) {
-    const isActive = this.props.selectedColorId === color.id;
+    const isActive = this.props.temporaryColorId === color.id;
     return (
       <div className="col-4" key={color.id}>
         <div
@@ -99,7 +99,7 @@ ColorSwatches.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  selectedColorId: PropTypes.string.isRequired,
+  temporaryColorId: PropTypes.string.isRequired,
   handleColorSelection: PropTypes.func.isRequired,
 };
 

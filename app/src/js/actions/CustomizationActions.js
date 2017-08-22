@@ -15,10 +15,11 @@ export function changeCustomizationDrawer({ productCustomizationDrawer }) {
   };
 }
 
-export function selectProductColor({ color }) {
+export function selectProductColor({ selectedColor, temporaryColor }) {
   return {
     type: CustomizationConstants.SELECT_PRODUCT_COLOR,
-    color,
+    selectedColor,
+    temporaryColor,
   };
 }
 

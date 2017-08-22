@@ -445,6 +445,12 @@ const hydrated = {
       name: 'Black',
       hexValue: '#000000',
     },
+    temporaryColor: {
+      id: 20,
+      centsTotal: 1200,
+      name: 'Black',
+      hexValue: '#000000',
+    },
   },
 };
 const store = AppStore(hydrated);

@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import queryString from 'query-string';
-import AppConstants from '../constants/AppConstants';
+import AppConstants, { QUERY_PARAMS } from '../constants/AppConstants';
 import win from '../polyfills/windowPolyfill';
 
 export const $$initialState = Immutable.fromJS({
@@ -11,18 +11,13 @@ export const $$initialState = Immutable.fromJS({
 });
 
 function generateQueryParms(queryUpdateObj) {
-  console.log('queryUpdateObj', queryUpdateObj);
-  const QUERY_PARAMS = AppConstants.QUERY_PARAMS;
-  // Clean Query params
-  return queryString.stringify(
-    Object.keys(queryUpdateObj)
-    .filter(key => QUERY_PARAMS[key]),
-  );
+  return queryString.stringify(queryUpdateObj);
 }
 
-function setQueryParams(queryStr) {
+function setURLQueryParams(queryStr) {
   if (win.history.pushState) {
     const newurl = `${win.location.protocol}//${win.location.host}${win.location.pathname}?${queryStr}`;
+    // TODO: @elgrecode IF we don't want to add a history state we can use replaceState
     win.history.pushState({ path: newurl }, '', newurl);
   }
 }
@@ -31,12 +26,12 @@ function setQueryParams(queryStr) {
 export default function AppReducer($$state = $$initialState, action = null) {
   switch (action.type) {
     case AppConstants.SET_SHAREABLE_QUERY_PARAMS: {
-      const queryStr = generateQueryParms(action);
-      setQueryParams(queryStr);
-
-      return $$state.merge({
-        queryStr,
+      const queryStr = generateQueryParms({
+        [QUERY_PARAMS.color]: action.color,
+        [QUERY_PARAMS.customizations]: action.customizations,
       });
+      setURLQueryParams(queryStr);
+      return $$state.merge({ queryStr });
     }
     case AppConstants.ACTIVATE_SIDE_MENU: {
       return $$state.merge({

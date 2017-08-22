@@ -294,7 +294,7 @@ ProductOptions.propTypes = {
   colorCentsTotal: PropTypes.number.isRequired,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
-  colorId: PropTypes.string.isRequired,
+  colorId: PropTypes.number.isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
