@@ -450,13 +450,15 @@ const hydrated = {
     selectedColor: {
       id: 20,
       centsTotal: 1200,
-      name: 'Black',
+      name: 'black',
+      presentation: 'Black',
       hexValue: '#000000',
     },
     temporaryColor: {
       id: 20,
       centsTotal: 1200,
-      name: 'Black',
+      name: 'black',
+      presentation: 'Black',
       hexValue: '#000000',
     },
   },

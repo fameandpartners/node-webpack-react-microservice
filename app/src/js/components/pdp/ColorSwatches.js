@@ -97,7 +97,7 @@ ColorSwatches.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  temporaryColorId: PropTypes.string.isRequired,
+  temporaryColorId: PropTypes.number.isRequired,
   handleColorSelection: PropTypes.func.isRequired,
 };
 

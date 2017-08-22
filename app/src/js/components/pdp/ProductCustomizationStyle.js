@@ -37,7 +37,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   const {
     changeCustomizationDrawer,
-    setAddonOptions,
+    updateCustomizationStyleSelection,
     setAddonBaseLayer,
     setActiveAddonImageLayers,
   } = bindActionCreators(CustomizationActions, dispatch);
@@ -48,7 +48,7 @@ function mapDispatchToProps(dispatch) {
     changeCustomizationDrawer,
     setAddonBaseLayer,
     setActiveAddonImageLayers,
-    setAddonOptions,
+    updateCustomizationStyleSelection,
   };
 }
 
@@ -276,18 +276,18 @@ class ProductCustomizeStyle extends Component {
   /**
    * Activates an array of active ids
    * @param  {ArrayOf(Number)} newAddonIds - ids to be activated
-   * @action -> setAddonOptions, setActiveAddonImageLayers, setAddonBaseLayer
+   * @action -> updateCustomizationStyleSelection, setActiveAddonImageLayers, setAddonBaseLayer
    */
   activateAddonIdLayers(newAddonIds) {
     const {
-      setAddonOptions,
+      updateCustomizationStyleSelection,
       setActiveAddonImageLayers,
       setAddonBaseLayer,
     } = this.props;
     const newAddons = this.computeActivenessOfAddons(newAddonIds);
     const newLayerCode = this.computeLayerCodeFromAddons(newAddons);
 
-    setAddonOptions({ temporaryStyleCustomizations: newAddonIds });
+    updateCustomizationStyleSelection({ temporaryStyleCustomizations: newAddonIds });
     setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
     setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode));
   }
@@ -366,7 +366,7 @@ ProductCustomizeStyle.propTypes = {
   temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
-  setAddonOptions: PropTypes.func.isRequired,
+  updateCustomizationStyleSelection: PropTypes.func.isRequired,
   setAddonBaseLayer: PropTypes.func.isRequired,
   setActiveAddonImageLayers: PropTypes.func.isRequired,
 };

@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import queryString from 'query-string';
+import { assign } from 'lodash';
 import AppConstants, { QUERY_PARAMS } from '../constants/AppConstants';
 import win from '../polyfills/windowPolyfill';
 
@@ -8,6 +9,7 @@ export const $$initialState = Immutable.fromJS({
   siteVersion: 'us',
   sideMenuOpen: false,
   queryStr: null,
+  queryParams: {},
 });
 
 function generateQueryParms(queryUpdateObj) {
@@ -26,12 +28,13 @@ function setURLQueryParams(queryStr) {
 export default function AppReducer($$state = $$initialState, action = null) {
   switch (action.type) {
     case AppConstants.SET_SHAREABLE_QUERY_PARAMS: {
-      const queryStr = generateQueryParms({
+      const queryParams = assign({}, {
         [QUERY_PARAMS.color]: action.color,
         [QUERY_PARAMS.customizations]: action.customizations,
       });
+      const queryStr = generateQueryParms(queryParams);
       setURLQueryParams(queryStr);
-      return $$state.merge({ queryStr });
+      return $$state.merge({ queryParams, queryStr });
     }
     case AppConstants.ACTIVATE_SIDE_MENU: {
       return $$state.merge({
