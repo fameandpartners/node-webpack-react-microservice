@@ -4,7 +4,7 @@
 }
 
 .ShareModal__icon-button {
-  transition: all 0.2s;
+  transition: $fastest-transition-time all;
 
   &:before {
     content: "";

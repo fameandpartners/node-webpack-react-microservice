@@ -2,7 +2,7 @@
   border: 0;
   background: $c-white;
   cursor: pointer;
-  transition: $standard-transition-time all;
+  transition: $fastest-transition-time all;
 
   &:hover {
     opacity: 0.3;

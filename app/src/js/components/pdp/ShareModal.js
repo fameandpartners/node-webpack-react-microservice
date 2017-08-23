@@ -76,7 +76,6 @@ class ShareModal extends Component {
     this.setState({
       clipboardError: true,
     });
-    // TO-DO: select() !
   }
 
   componentWillMount() {
