@@ -247,7 +247,7 @@ class ProductOptions extends Component {
     return (
       <div className="ProductOptions grid-12-noGutter">
         <div className="ProductOptions__primary-image-container brick col-6">
-          <img className="width--full" alt="dress1" src={image1} />
+          <img className="u-width--full" alt="dress1" src={image1} />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">

@@ -17,17 +17,17 @@ import AppConstants from '../../constants/AppConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
-import ProductButtonLedge from './ProductButtonLedge';
+import AddToCartMobile from './AddToCartMobile';
+import CartDrawer from './CartDrawer';
+import CustomizationButtonLedge from './CustomizationButtonLedge';
 import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import ProductPrecustomizations from './ProductPrecustomizations';
-import CartDrawer from './CartDrawer';
 import FameDifference from './FameDifference';
 
 // Generic UI Components
-// import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
 import HeaderHider from '../shared/HeaderHider';
 import HeaderMobile from '../shared/HeaderMobile';
 import Header from '../shared/Header';
@@ -68,7 +68,7 @@ class AppMain extends Component {
 
   get appBlanketClass() {
     const { sideMenuOpen } = this.props;
-    return `App__blanket height--full width--full ${sideMenuOpen ? 'App__blanket--open' : ''}`;
+    return `App__blanket height--full u-width--full ${sideMenuOpen ? 'App__blanket--open' : ''}`;
   }
 
   handleCloseMenu() {
@@ -120,8 +120,6 @@ class AppMain extends Component {
                 <Header />
               }
 
-              { /* <ComponentTestPleaseRemove /> */ }
-
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? <ProductDisplayOptionsTouch />
                 : (
@@ -162,7 +160,8 @@ class AppMain extends Component {
               <CartDrawer />
             </div>
 
-            <ProductButtonLedge />
+            <AddToCartMobile />
+            <CustomizationButtonLedge />
           </div>
       }
       </Motion>
@@ -183,7 +182,6 @@ AppMain.propTypes = {
 
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
-  // winWidth: PropTypes.number.isRequired,
 };
 
 AppMain.defaultProps = {

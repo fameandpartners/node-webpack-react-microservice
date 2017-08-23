@@ -59,7 +59,7 @@ class ProductFabricModal extends PureComponent {
         <Modal
           handleCloseModal={this.handleCloseModal}
           modalClassName="u-flex u-flex--1"
-          modalContentClassName="width--full u-overflow-y--scroll"
+          modalContentClassName="u-width--full u-overflow-y--scroll"
           modalWrapperClassName="u-flex--col"
         >
 

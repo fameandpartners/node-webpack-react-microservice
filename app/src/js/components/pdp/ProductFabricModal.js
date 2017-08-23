@@ -54,7 +54,7 @@ class ProductFabricModal extends PureComponent {
         <Modal
           handleCloseModal={this.handleCloseModal}
           modalClassName="grid-middle u-flex--1"
-          modalContentClassName="width--full"
+          modalContentClassName="u-width--full"
           modalWrapperClassName="u-flex--col"
         >
           <div className="ProductFabricModal textAlign--center grid-middle">

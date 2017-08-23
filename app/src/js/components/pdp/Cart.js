@@ -52,7 +52,7 @@ class Cart extends Component {
           className="Cart__single-product-description u-mt-normal grid-12"
         >
           <div className="col-5">
-            <img className="width--full" alt="dress1" src={image1} />
+            <img className="u-width--full" alt="dress1" src={image1} />
           </div>
           <div className="col-7 textAlign--left">
             <span className="Cart__line-description">

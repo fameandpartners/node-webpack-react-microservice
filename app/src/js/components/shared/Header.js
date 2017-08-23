@@ -45,7 +45,7 @@ class Header extends Component {
   render() {
     const { cartItemCount } = this.props;
     return (
-      <header className="Header width--full">
+      <header className="Header u-width--full">
         <div className="layout-container">
           <nav className="grid-12">
             <ul className="col-4 textAlign--left">

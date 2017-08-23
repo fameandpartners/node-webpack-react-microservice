@@ -48,24 +48,24 @@ class ProductGrid extends Component {
         <div className="App__photo-montage masonry grid-12">
           <div className="col-6">
             <div className="brick">
-              <img className="width--full" alt="dress2" src={image2} />
+              <img className="u-width--full" alt="dress2" src={image2} />
             </div>
             <div className="brick">
-              <img className="width--full" alt="dress3" src={image3} />
+              <img className="u-width--full" alt="dress3" src={image3} />
             </div>
             <div className="brick">
-              <img className="width--full" alt="dress4" src={image4} />
+              <img className="u-width--full" alt="dress4" src={image4} />
             </div>
           </div>
           <div className="col-6">
             <div className="brick">
-              <img className="width--full" alt="dress5" src={image5} />
+              <img className="u-width--full" alt="dress5" src={image5} />
             </div>
             <div className="brick">
-              <img className="width--full" alt="dress6" src={image6} />
+              <img className="u-width--full" alt="dress6" src={image6} />
             </div>
             <div className="brick">
-              <img className="width--full" alt="dress7" src={image7} />
+              <img className="u-width--full" alt="dress7" src={image7} />
             </div>
           </div>
         </div>

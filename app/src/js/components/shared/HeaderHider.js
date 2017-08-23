@@ -245,7 +245,7 @@ class HeaderHider extends Component {
     };
 
     return (
-      <div style={wrapperStyles} className="HeaderHider__wrapper width--full">
+      <div style={wrapperStyles} className="HeaderHider__wrapper u-width--full">
         <div
           ref={(inner) => { this.inner = inner; }}
           style={innerStyle}

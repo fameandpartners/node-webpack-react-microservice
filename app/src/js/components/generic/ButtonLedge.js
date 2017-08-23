@@ -6,6 +6,9 @@ import autoBind from 'react-autobind';
 // UI Components
 import Button from '../generic/Button';
 
+// CSS
+import '../../../css/components/ButtonLedge.scss';
+
 class ButtonLedge extends Component {
   constructor(props) {
     super(props);
@@ -13,9 +16,21 @@ class ButtonLedge extends Component {
   }
 
   render() {
-    const { handleLeftButtonClick, handleRightButtonClick } = this.props;
+    const {
+      addHeight,
+      leftText,
+      rightText,
+      handleLeftButtonClick,
+      handleRightButtonClick,
+    } = this.props;
+
     return (
-      <div className="ButtonLedge">
+      <div
+        className={classnames(
+        'ButtonLedge',
+        { 'ButtonLedge--height': addHeight },
+      )}
+      >
         <div
           className={classnames(
             'ButtonLedge__button-wrapper grid-center-middle-noGutter height--full',
@@ -26,7 +41,7 @@ class ButtonLedge extends Component {
               <div className="col-6">
                 <Button
                   secondary
-                  text="Cancel"
+                  text={leftText}
                   handleClick={handleLeftButtonClick}
                 />
               </div>
@@ -38,7 +53,7 @@ class ButtonLedge extends Component {
             ? (
               <div className="col-6">
                 <Button
-                  text="Save"
+                  text={rightText}
                   handleClick={handleRightButtonClick}
                 />
               </div>
@@ -52,11 +67,17 @@ class ButtonLedge extends Component {
 }
 
 ButtonLedge.propTypes = {
+  addHeight: PropTypes.bool,
+  leftText: PropTypes.string,
+  rightText: PropTypes.string,
   handleLeftButtonClick: PropTypes.func.isRequired,
   handleRightButtonClick: PropTypes.func.isRequired,
 };
 
 ButtonLedge.defaultProps = {
+  addHeight: false,
+  leftText: 'Cancel',
+  rightText: 'Save',
   handleLeftButtonClick: null,
   handleRightButtonClick: null,
 };

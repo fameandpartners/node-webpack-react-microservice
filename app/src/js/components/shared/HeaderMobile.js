@@ -54,7 +54,7 @@ class HeaderMobile extends Component {
   render() {
     const { cartItemCount, headerTitle } = this.props;
     return (
-      <header className="Header HeaderMobile width--full">
+      <header className="Header HeaderMobile u-width--full">
         <div className="layout-container">
           <nav className="grid-noGutter">
             <div className="col-2">
