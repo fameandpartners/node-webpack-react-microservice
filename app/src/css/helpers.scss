@@ -1,7 +1,3 @@
-.width--full {
-  width: 100%;
-}
-
 .height--full {
   height: 100%;
 }
@@ -36,10 +32,6 @@
 
 .position--absolute {
   position: absolute;
-}
-
-.position--fixed {
-  position: fixed;
 }
 
 .position--relative {
@@ -84,6 +76,10 @@
   margin-top: 50px;
 }
 
+.u-position--fixed {
+  position: fixed;
+}
+
 .u-cursor--pointer {
   cursor: pointer;
 }
@@ -118,6 +114,10 @@
 
 .u-user-select--none {
   user-select: none;
+}
+
+.u-width--full {
+  width: 100%;
 }
 
 // Flex Helpers

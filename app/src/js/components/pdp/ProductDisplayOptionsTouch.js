@@ -84,7 +84,7 @@ class ProductDisplayOptionsTouch extends Component {
         <Slider>
           <Slide>
             <div
-              className="width--full height--full"
+              className="u-width--full height--full"
               style={this.generateBackgroundImageStyle(image1)}
             />
           </Slide>
@@ -98,7 +98,7 @@ class ProductDisplayOptionsTouch extends Component {
           </Slide>
           <Slide>
             <div
-              className="width--full height--full"
+              className="u-width--full height--full"
               style={this.generateBackgroundImageStyle(image2)}
             />
           </Slide>
@@ -106,31 +106,31 @@ class ProductDisplayOptionsTouch extends Component {
 
           <Slide>
             <div
-              className="width--full height--full"
+              className="u-width--full height--full"
               style={this.generateBackgroundImageStyle(image3)}
             />
           </Slide>
           <Slide>
             <div
-              className="width--full height--full"
+              className="u-width--full height--full"
               style={this.generateBackgroundImageStyle(image4)}
             />
           </Slide>
           <Slide>
             <div
-              className="width--full height--full"
+              className="u-width--full height--full"
               style={this.generateBackgroundImageStyle(image5)}
             />
           </Slide>
           <Slide>
             <div
-              className="width--full height--full"
+              className="u-width--full height--full"
               style={this.generateBackgroundImageStyle(image6)}
             />
           </Slide>
           <Slide>
             <div
-              className="width--full height--full"
+              className="u-width--full height--full"
               style={this.generateBackgroundImageStyle(image7)}
             />
           </Slide>

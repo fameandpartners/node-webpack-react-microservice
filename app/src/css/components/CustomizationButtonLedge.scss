@@ -1,4 +1,4 @@
-.ProductButtonLedge {
+.CustomizationButtonLedge {
   position: fixed;
   width: 100%;
   background: $c-white;
@@ -8,11 +8,7 @@
   z-index: 2;
 }
 
-.ButtonLedge {
-  height: 100px;
-}
-
-.ProductButtonLedge .ButtonLedge .ButtonLedge__button-wrapper {
+.CustomizationButtonLedge .ButtonLedge .ButtonLedge__button-wrapper {
   margin: 0 auto;
   max-width: 680px;
 }

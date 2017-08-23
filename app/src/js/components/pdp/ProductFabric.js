@@ -33,7 +33,7 @@ class ProductFabric extends PureComponent {
         className="ProductFabric position--relative height--full"
         style={{ background: `url(${fabricImg})` }}
       >
-        <div className="ProductFabric__contents width--full position--absolute textAlign--center">
+        <div className="ProductFabric__contents u-width--full position--absolute textAlign--center">
 
           <ProductFabricInfo
             className="textAlign--left"

@@ -14,7 +14,7 @@ class FameDifference extends PureComponent {
         </p>
         <div className="grid-center">
           <div className="col-12">
-            <img className="width--full" src={aerialImage} alt="Sewing and designing" />
+            <img className="u-width--full" src={aerialImage} alt="Sewing and designing" />
           </div>
           <div className="FameDifference__artisan-quality col-4_sm-12_md-5 grid-middle">
             <div className="FameDifference__artisan col h5">
@@ -27,7 +27,7 @@ class FameDifference extends PureComponent {
             </p>
           </div>
           <div className="FameDifference__hand col-8_sm-12_md-7">
-            <img className="width--full" src={handmadeImage} alt="Hand designing" />
+            <img className="u-width--full" src={handmadeImage} alt="Hand designing" />
           </div>
         </div>
       </div>
