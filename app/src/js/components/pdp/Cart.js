@@ -59,7 +59,7 @@ class Cart extends Component {
               <span>{productTitle}</span> - <span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>
             <span className="Cart__line-description">
-              {color.name}
+              {color.presentation}
             </span>
             <span className="Cart__line-description">
               {lineItem.addons.length}&nbsp;Addon{lineItem.addons.length === 1 ? '' : 's'}
@@ -112,7 +112,7 @@ Cart.propTypes = {
   })).isRequired,
   lineItems: PropTypes.arrayOf(PropTypes.shape({
     color: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       name: PropTypes.string,
       centsTotal: PropTypes.number,
       hexValue: PropTypes.string,

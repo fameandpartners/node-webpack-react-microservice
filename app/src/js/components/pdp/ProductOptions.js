@@ -17,13 +17,12 @@ import ProductSecondaryActions from './ProductSecondaryActions';
 import image1 from '../../../img/test/image_1.png';
 
 // Actions
-import * as CartActions from '../../actions/CartActions';
 import * as CustomizationActions from '../../actions/CustomizationActions';
 // CSS
 import '../../../css/components/ProductOptions.scss';
 
 // UI Components
-import Button from '../generic/Button';
+import AddToCartButton from './AddToCartButton';
 
 
 function stateToProps(state) {
@@ -38,7 +37,6 @@ function stateToProps(state) {
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
 
     // COLOR
-    colorId: selectedColor.get('id'),
     colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
@@ -54,14 +52,9 @@ function stateToProps(state) {
 
 
 function dispatchToProps(dispatch) {
-  const { addItemToCart, activateCartDrawer } = bindActionCreators(CartActions, dispatch);
   const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
 
-  return {
-    activateCartDrawer,
-    activateCustomizationDrawer,
-    addItemToCart,
-  };
+  return { activateCustomizationDrawer };
 }
 
 class ProductOptions extends Component {
@@ -73,39 +66,6 @@ class ProductOptions extends Component {
   retrieveSelectedAddonOptions() {
     const { addonOptions, selectedStyleCustomizations } = this.props;
     return addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1);
-  }
-
-  /**
-   * TODO: This should be a shared utility
-   * or should punt to a shared utility
-   */
-  accumulateItemSelections() {
-    const {
-      // PRODUCT
-      productId,
-      productTitle,
-      productCentsBasePrice,
-      // COLOR
-      colorId,
-      colorName,
-      colorCentsTotal,
-      colorHexValue,
-      // ADDONS
-      addonOptions,
-    } = this.props;
-
-    return {
-      productId,
-      productTitle,
-      productCentsBasePrice,
-      color: {
-        id: colorId,
-        name: colorName,
-        centsTotal: colorCentsTotal,
-        hexValue: colorHexValue,
-      },
-      addons: addonOptions,
-    };
   }
 
   addSelectionPrice(centsTotal) {
@@ -222,20 +182,6 @@ class ProductOptions extends Component {
     };
   }
 
-  /**
-   * Handles adding item to cart
-   */
-  handleAddToBag() {
-    const {
-      activateCartDrawer,
-      addItemToCart,
-    } = this.props;
-    const lineItem = this.accumulateItemSelections();
-
-    addItemToCart({ lineItem });
-    activateCartDrawer({ cartDrawerOpen: true });
-  }
-
   render() {
     const {
       productTitle,
@@ -284,11 +230,7 @@ class ProductOptions extends Component {
               />
             </div>
             <div className="ProductOptions__ctas grid-1">
-              <Button
-                tall
-                handleClick={this.handleAddToBag}
-                text="Add to Bag"
-              />
+              <AddToCartButton />
             </div>
             <div className="ProductOptions__additional-info u-mb-normal">
               <p>
@@ -311,14 +253,12 @@ class ProductOptions extends Component {
 ProductOptions.propTypes = {
   //* Redux Properties
   // PRODUCT
-  productId: PropTypes.string.isRequired,
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   // COLOR
   colorCentsTotal: PropTypes.number.isRequired,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
-  colorId: PropTypes.number.isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -331,9 +271,7 @@ ProductOptions.propTypes = {
   selectedMeasurementMetric: PropTypes.string.isRequired,
   selectedStyleCustomizations: PropTypes.string.isRequired,
   //* Redux Actions
-  activateCartDrawer: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
-  addItemToCart: PropTypes.func.isRequired,
 };
 
 ProductOptions.defaultProps = {

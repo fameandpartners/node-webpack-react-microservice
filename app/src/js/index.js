@@ -283,9 +283,10 @@ function transformAddons() {
           const mappedImageLayer = addons.layer_images.find(img => (img.bit_array[i] ? img : null));
           return assign({}, {
             id: ao.table.id,
-            name: ao.table.name,
+            description: ao.table.name,
             position: mappedImageLayer ? mappedImageLayer.position : '',
             price: ao.table.display_price,
+            centsTotal: parseInt(ao.table.display_price.money.fractional, 10),
             img: mappedImageLayer ? mappedImageLayer.url : '',
             active: false,
           });
