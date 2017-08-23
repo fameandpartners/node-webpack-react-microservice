@@ -17,7 +17,7 @@ import AppConstants from '../../constants/AppConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
-import AddToCartMobile from './AddToCartMobile';
+import AddToCartButtonLedgeMobile from './AddToCartButtonLedgeMobile';
 import CartDrawer from './CartDrawer';
 import CustomizationButtonLedge from './CustomizationButtonLedge';
 import ProductDescription from './ProductDescription';
@@ -160,7 +160,12 @@ class AppMain extends Component {
               <CartDrawer />
             </div>
 
-            <AddToCartMobile />
+            <div
+              className="u-position--fixed u-width--full u-bottom"
+              style={{ transform: `translateX(${x}px)` }}
+            >
+              <AddToCartButtonLedgeMobile />
+            </div>
             <CustomizationButtonLedge />
           </div>
       }

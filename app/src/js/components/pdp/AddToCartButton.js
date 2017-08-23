@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Utilities
-import { calculateSubTotal, getSelectedColor } from '../../utilities/pdp';
+import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
 
 // Breakpoint Decoration
 import Resize from '../../decorators/Resize';
@@ -15,32 +15,33 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 import * as CartActions from '../../actions/CartActions';
 
 // UI
-import ButtonLedge from '../generic/ButtonLedge';
+import Button from '../generic/Button';
 
 // CSS
-import '../../../css/components/AddToCartMobile.scss';
+// import '../../../css/components/AddToCartButton.scss';
 
 
 function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
-  const selectedColorObj = getSelectedColor(selectedColor, state.$$productState);
   const selectedStyleCustomizations = state.$$customizationState.get('selectedStyleCustomizations').toJS();
   const addonOptions = state.$$customizationState.get('addons').get('addonOptions').toJS();
 
   return {
-    colorCentsTotal: selectedColorObj.centsTotal,
+    $$productState: state.$$productState,
+    $$customizationState: state.$$customizationState,
+    colorCentsTotal: selectedColor.get('centsTotal'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     selectedAddonOptions: addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1),
   };
 }
 
 function dispatchToProps(dispatch) {
-  const { addItemToCart } = bindActionCreators(CartActions, dispatch);
-  return { addItemToCart };
+  const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
+  return { activateCartDrawer, addItemToCart };
 }
 
 
-class AddToCartMobile extends Component {
+class AddToCartButton extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -55,41 +56,44 @@ class AddToCartMobile extends Component {
    * Handles adding item to cart
    */
   handleAddToBag() {
-    const { addItemToCart } = this.props;
-    const lineItem = this.accumulateItemSelections();
+    const {
+      addItemToCart,
+      activateCartDrawer,
+      $$customizationState,
+      $$productState,
+    } = this.props;
+    const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
     addItemToCart({ lineItem });
+    activateCartDrawer({ cartDrawerOpen: true });
   }
 
   render() {
-    const { breakpoint } = this.props;
-    return (breakpoint === 'tablet' || breakpoint === 'mobile')
-    ? (
-      <div className="AddToCartMobile u-position--fixed u-width--full">
-        <ButtonLedge
-          leftText="Your Size"
-          rightText={`${this.subTotal()} - Add to Bag`}
-          handleLeftButtonClick={() => {}}
-          handleRightButtonClick={() => {}}
-        />
-      </div>
-    ) : null;
+    return (
+      <Button
+        tall
+        className="AddToCartButton"
+        text={`${this.subTotal()} - Add to Bag`}
+        handleClick={this.handleAddToBag}
+      />
+    );
   }
 }
 
-AddToCartMobile.propTypes = {
-  // Decorator Props
-  breakpoint: PropTypes.string.isRequired,
+/*  eslint-disable react/forbid-prop-types */
+AddToCartButton.propTypes = {
   // Redux Props
+  $$productState: PropTypes.object.isRequired,
+  $$customizationState: PropTypes.object.isRequired,
   colorCentsTotal: PropTypes.number.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   addItemToCart: PropTypes.func.isRequired,
+  activateCartDrawer: PropTypes.func.isRequired,
 };
 
-AddToCartMobile.defaultProps = {
+AddToCartButton.defaultProps = {
   selectedAddonOptions: [],
 };
 
-export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartMobile));
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));

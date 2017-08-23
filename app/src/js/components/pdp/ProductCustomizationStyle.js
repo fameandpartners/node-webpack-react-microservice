@@ -141,7 +141,7 @@ class ProductCustomizeStyle extends Component {
             <ButtonCol
               tall
               className="u-width--full"
-              left={<span>{a.name}</span>}
+              left={<span>{a.description}</span>}
               right={<span>+ ${displayPrice}</span>}
               isSelected={temporaryStyleCustomizations.indexOf(a.id) > -1}
               handleClick={this.handleAddonSelection(a)}

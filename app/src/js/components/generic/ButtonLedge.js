@@ -20,6 +20,7 @@ class ButtonLedge extends Component {
       addHeight,
       leftText,
       rightText,
+      rightNode,
       handleLeftButtonClick,
       handleRightButtonClick,
     } = this.props;
@@ -40,6 +41,7 @@ class ButtonLedge extends Component {
             ? (
               <div className="col-6">
                 <Button
+                  tall
                   secondary
                   text={leftText}
                   handleClick={handleLeftButtonClick}
@@ -49,13 +51,18 @@ class ButtonLedge extends Component {
             : null
           }
 
-          {handleRightButtonClick
+          {handleRightButtonClick || rightNode
             ? (
               <div className="col-6">
-                <Button
-                  text={rightText}
-                  handleClick={handleRightButtonClick}
-                />
+                { rightNode ||
+                  (
+                    <Button
+                      tall
+                      text={rightText}
+                      handleClick={handleRightButtonClick}
+                    />
+                  )
+                }
               </div>
             )
             : null
@@ -69,6 +76,7 @@ class ButtonLedge extends Component {
 ButtonLedge.propTypes = {
   addHeight: PropTypes.bool,
   leftText: PropTypes.string,
+  rightNode: PropTypes.node,
   rightText: PropTypes.string,
   handleLeftButtonClick: PropTypes.func.isRequired,
   handleRightButtonClick: PropTypes.func.isRequired,
@@ -77,6 +85,7 @@ ButtonLedge.propTypes = {
 ButtonLedge.defaultProps = {
   addHeight: false,
   leftText: 'Cancel',
+  rightNode: null,
   rightText: 'Save',
   handleLeftButtonClick: null,
   handleRightButtonClick: null,
