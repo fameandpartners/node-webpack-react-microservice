@@ -66,8 +66,8 @@ class Footer extends PureComponent {
             <li
               className="Footer__category-title"
             >
-      Help
-      </li>
+              Help
+            </li>
             <li><a href="##">Shipping Info</a></li>
             <li><a href="##">Returns Policy</a></li>
             <li><a href="##">Fame Contact Us</a></li>
