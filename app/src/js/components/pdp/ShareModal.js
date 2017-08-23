@@ -54,9 +54,16 @@ class ShareModal extends Component {
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
-    this.setState({
-      clipboardError: false,
-    });
+
+    /**
+     *  Without this we see the fallback copy field disappear
+     *  instantly while the Share Modal is still fading out.
+     */
+    setTimeout(() => {
+      this.setState({
+        clipboardError: false,
+      });
+    }, 1000);
   }
 
   handleCopyLinkClick() {
@@ -160,22 +167,14 @@ class ShareModal extends Component {
               handleClick={this.handleCopyLinkClick}
             />
             {
-              /* REMOVE: Temporary, for easier testing... */
-            }
-            <Button
-              secondary
-              className="Modal__content--med-margin-bottom"
-              text="Trigger Error"
-              handleClick={this.handleCopyLinkClickError}
-            />
-            {
               clipboardError ?
               (
                 <Input
                   id="copy_link_fallback"
                   label="Press Ctrl/Cmd-C To Copy"
                   defaultValue={currentURL}
-                  focusOnMount
+                  selectOnMount
+                  readOnly
                   wrapperClassName="Modal__content--med-margin-bottom"
                 />
               ) : null
