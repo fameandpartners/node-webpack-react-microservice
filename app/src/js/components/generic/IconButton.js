@@ -16,12 +16,6 @@ class IconButton extends Component {
     autobind(this);
   }
 
-  handleClick() {
-    if (!this.props.disabled) {
-      this.props.handleClick();
-    }
-  }
-
   render() {
     const {
       className,
@@ -54,22 +48,18 @@ class IconButton extends Component {
 }
 
 IconButton.propTypes = {
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
   handleClick: PropTypes.func.isRequired,
-  svgPath: PropTypes.string,
-  altText: PropTypes.string,
+  svgPath: PropTypes.string.isRequired,
+  altText: PropTypes.string.isRequired,
+  className: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
 };
 
 IconButton.defaultProps = {
   className: '',
-  disabled: false,
-  svgPath: '',
-  altText: '',
-  width: '',
-  height: '',
+  width: '40px',
+  height: '40px',
 };
 
 export default IconButton;
