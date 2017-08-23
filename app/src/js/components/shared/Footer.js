@@ -37,19 +37,11 @@ class Footer extends PureComponent {
     this.props.activateModal({ modalId: ModalConstants.SIGN_UP_MODAL });
   }
 
-  handleShareModalOpenClick(e) {
-    e.preventDefault();
-    this.props.activateModal({ modalId: ModalConstants.SHARE_MODAL });
-  }
-
   render() {
     return (
       <footer className="Footer">
         <div className="layout-container grid-noGutter-12">
           <div className="col-12">
-            <div className="display--inline-block">
-              <Button handleClick={this.handleShareModalOpenClick} text="Open Share Modal" />
-            </div>
             <h2>Sign up to always enjoy free returns</h2>
             <form>
               <div className="display--inline-block">
