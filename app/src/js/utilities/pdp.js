@@ -8,7 +8,7 @@ export function calculateSubTotal({
   console.log('productCentsBasePrice', productCentsBasePrice);
   console.log('colorCentsTotal', colorCentsTotal);
   const customizationStyleCents = selectedAddonOptions
-    .reduce((prev, curr) => prev + parseInt(curr.price.money.fractional, 10), 0);
+    .reduce((prev, curr) => prev + parseInt(curr.centsTotal, 10), 0);
 
   return formatCents(
     parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice,

@@ -61,10 +61,22 @@ class AddToCartButton extends Component {
       activateCartDrawer,
       $$customizationState,
       $$productState,
+      shouldActivateCartDrawer,
     } = this.props;
     const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
     addItemToCart({ lineItem });
-    activateCartDrawer({ cartDrawerOpen: true });
+
+    if (shouldActivateCartDrawer) {
+      activateCartDrawer({ cartDrawerOpen: true });
+    }
+  }
+
+  generateText() {
+    if (this.props.showTotal) {
+      return `${this.subTotal()} - Add to Bag`;
+    }
+
+    return 'Add to Bag';
   }
 
   render() {
@@ -72,7 +84,7 @@ class AddToCartButton extends Component {
       <Button
         tall
         className="AddToCartButton"
-        text={`${this.subTotal()} - Add to Bag`}
+        text={this.generateText()}
         handleClick={this.handleAddToBag}
       />
     );
@@ -81,6 +93,9 @@ class AddToCartButton extends Component {
 
 /*  eslint-disable react/forbid-prop-types */
 AddToCartButton.propTypes = {
+  // Passed Props
+  shouldActivateCartDrawer: PropTypes.bool,
+  showTotal: PropTypes.bool,
   // Redux Props
   $$productState: PropTypes.object.isRequired,
   $$customizationState: PropTypes.object.isRequired,
@@ -94,6 +109,8 @@ AddToCartButton.propTypes = {
 
 AddToCartButton.defaultProps = {
   selectedAddonOptions: [],
+  shouldActivateCartDrawer: false,
+  showTotal: true,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));
