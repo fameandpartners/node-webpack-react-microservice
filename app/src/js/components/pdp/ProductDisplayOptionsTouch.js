@@ -39,7 +39,7 @@ function stateToProps(state) {
   return {
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
-    selectedColor: state.$$productState.get('selectedColor').toJS(),
+    selectedColor: state.$$customizationState.get('selectedColor').toJS(),
   };
 }
 
@@ -136,7 +136,7 @@ class ProductDisplayOptionsTouch extends Component {
           </Slide>
 
         </Slider>
-        <div className="ProductDisplayOptionsTouch__options App--mb-normal App--mt-normal">
+        <div className="ProductDisplayOptionsTouch__options u-mb-normal u-mt-normal">
           <div
             onClick={this.handleColorOptionClick}
             className={classnames(

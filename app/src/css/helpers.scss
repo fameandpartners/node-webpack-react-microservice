@@ -59,8 +59,37 @@
 }
 
 // NOTE: Nav, we will need to merge these :(
+// Global Margins
+.u-mb-small {
+  margin-bottom: 15px;
+}
+
+.u-mb-normal {
+  margin-bottom: 30px;
+}
+
+.u-mb-big {
+  margin-bottom: 50px;
+}
+
+.u-mt-small {
+  margin-top: 15px;
+}
+
+.u-mt-normal {
+  margin-top: 30px;
+}
+
+.u-mt-big {
+  margin-top: 50px;
+}
+
 .u-cursor--pointer {
   cursor: pointer;
+}
+
+.u-text-align-left {
+  text-align: left;
 }
 
 .u-text-align-right {
@@ -87,7 +116,15 @@
   pointer-events: none;
 }
 
+.u-user-select--none {
+  user-select: none;
+}
+
 // Flex Helpers
+.u-flex {
+  display: flex;
+}
+
 .u-flex--col {
   display: flex;
   flex-direction: column;
@@ -99,6 +136,5 @@
 }
 
 .u-flex--1 {
-  display: flex;
   flex: 1;
 }

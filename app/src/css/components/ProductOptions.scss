@@ -41,6 +41,11 @@
   opacity: 1;
 }
 
+.ProductOptionsRow__right--selected {
+  font-weight: 500;
+  color: $c-black;
+}
+
 .ProductOptions__additional-info {
   color: $c-text-gray;
 }

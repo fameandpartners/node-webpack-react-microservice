@@ -18,8 +18,12 @@ const propTypes = {
   value: PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.bool,
-  ]).isRequired,
+  ]),
   onChange: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  value: null,
 };
 
 class RadioToggle extends Component {
@@ -72,9 +76,13 @@ class RadioToggle extends Component {
 
     return (
       <div className="RadioToggle--wrapper">
-        <span className={this.labelClass(0)} onClick={this.handleSelection(0)}>
-          {options[0].label || options[0].value}
-        </span>
+        {options[0].label
+        ? (
+          <span className={this.labelClass(0)} onClick={this.handleSelection(0)}>
+            {options[0].label || options[0].value}
+          </span>
+        ) : null
+      }
         <button
           className={`RadioToggle ${switchClass}`}
           type="checkbox"
@@ -91,4 +99,5 @@ class RadioToggle extends Component {
 
 
 RadioToggle.propTypes = propTypes;
+RadioToggle.defaultProps = defaultProps;
 export default RadioToggle;

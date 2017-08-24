@@ -18,13 +18,6 @@ function stateToProps(state) {
   };
 }
 
-function dispatchToProps() {
-  return {};
-  // const actions = bindActionCreators(AppActions, dispatch);
-  // return {
-  //   activateSideMenu: actions.activateSideMenu,
-  // };
-}
 
 class ProductPrecustomizations extends Component {
   constructor(props) {
@@ -41,7 +34,7 @@ class ProductPrecustomizations extends Component {
 
         <div className="grid-12">
           { preCustomizations.map(pc => (
-            <div key={`pc-${pc.id}`} className="ProductPrecustomizations__product-wrapper display--inline-block col-4">
+            <div key={`pc-${pc.id}`} className="ProductPrecustomizations__product-wrapper col-4">
               <img className="width--full" alt={`Customize it ${pc.description}`} src={pc.smallImg} />
               <span className="link--static">{pc.description}</span>
             </div>
@@ -62,6 +55,5 @@ ProductPrecustomizations.propTypes = {
     }),
   ).isRequired,
 };
-ProductPrecustomizations.defaultProps = {};
 
-export default connect(stateToProps, dispatchToProps)(ProductPrecustomizations);
+export default connect(stateToProps)(ProductPrecustomizations);

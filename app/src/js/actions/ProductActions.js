@@ -1,20 +1,12 @@
-import ProductConstants from '../constants/ProductConstants';
+import CustomizationConstants from '../constants/CustomizationConstants';
 
 export function activateColorDrawer({ isActive }) {
   return {
-    type: ProductConstants.ACTIVATE_COLOR_DRAWER,
+    type: CustomizationConstants.ACTIVATE_COLOR_DRAWER,
     isActive,
-  };
-}
-
-export function selectProductColor({ color }) {
-  return {
-    type: ProductConstants.SELECT_PRODUCT_COLOR,
-    color,
   };
 }
 
 export default {
   activateColorDrawer,
-  selectProductColor,
 };

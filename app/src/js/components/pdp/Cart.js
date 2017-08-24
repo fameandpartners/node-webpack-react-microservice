@@ -49,7 +49,7 @@ class Cart extends Component {
       return (
         <div
           key={Math.random()}
-          className="Cart__single-product-description App--mt-normal grid-12"
+          className="Cart__single-product-description u-mt-normal grid-12"
         >
           <div className="col-5">
             <img className="width--full" alt="dress1" src={image1} />
@@ -88,7 +88,7 @@ class Cart extends Component {
             </div>
             <Button
               tall
-              className="App--mb-normal"
+              className="u-mb-normal"
               text="Checkout"
             />
           </div>

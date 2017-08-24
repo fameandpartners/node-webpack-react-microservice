@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { formatCents } from '../../utilities/accounting';
 
+// Constants
+import CustomizationConstants from '../../constants/CustomizationConstants';
+import { UNITS } from '../../constants/ProductConstants';
+
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
 import ProductSecondaryActions from './ProductSecondaryActions';
@@ -14,7 +18,7 @@ import image1 from '../../../img/test/image_1.png';
 
 // Actions
 import * as CartActions from '../../actions/CartActions';
-import * as ProductActions from '../../actions/ProductActions';
+import * as CustomizationActions from '../../actions/CustomizationActions';
 // CSS
 import '../../../css/components/ProductOptions.scss';
 
@@ -24,7 +28,8 @@ import Button from '../generic/Button';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
-  const selectedColor = state.$$productState.get('selectedColor');
+  const selectedColor = state.$$customizationState.get('selectedColor');
+  const addons = state.$$customizationState.get('addons');
 
   return {
     // PRODUCT
@@ -34,22 +39,27 @@ function stateToProps(state) {
 
     // COLOR
     colorId: selectedColor.get('id'),
-    colorName: selectedColor.get('name'),
+    colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
 
-    // ADDONS
-    selectedCustomizations: state.$$productState.get('selectedCustomizations').toJS(),
+    // SELECTIONS
+    addonOptions: addons.get('addonOptions').toJS(),
+    selectedDressSize: state.$$customizationState.get('selectedDressSize'),
+    selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
+    selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
+    selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
   };
 }
 
 
 function dispatchToProps(dispatch) {
   const { addItemToCart, activateCartDrawer } = bindActionCreators(CartActions, dispatch);
-  const { activateColorDrawer } = bindActionCreators(ProductActions, dispatch);
+  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+
   return {
     activateCartDrawer,
-    activateColorDrawer,
+    activateCustomizationDrawer,
     addItemToCart,
   };
 }
@@ -60,18 +70,15 @@ class ProductOptions extends Component {
     autoBind(this);
   }
 
-  handleColorOptionClick() {
-    this.props.activateColorDrawer({ isActive: true });
+  retrieveSelectedAddonOptions() {
+    const { addonOptions, selectedStyleCustomizations } = this.props;
+    return addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1);
   }
 
-  handleAddonOptionClick() {
-    console.warn('Handling Adddon Option Click');
-  }
-
-  handleSizeProfileClick() {
-    console.warn('Handling Size Profile Click');
-  }
-
+  /**
+   * TODO: This should be a shared utility
+   * or should punt to a shared utility
+   */
   accumulateItemSelections() {
     const {
       // PRODUCT
@@ -84,7 +91,7 @@ class ProductOptions extends Component {
       colorCentsTotal,
       colorHexValue,
       // ADDONS
-      selectedCustomizations,
+      addonOptions,
     } = this.props;
 
     return {
@@ -97,31 +104,21 @@ class ProductOptions extends Component {
         centsTotal: colorCentsTotal,
         hexValue: colorHexValue,
       },
-      addons: selectedCustomizations,
+      addons: addonOptions,
     };
   }
 
-  handleAddToBag() {
-    const {
-      activateCartDrawer,
-      addItemToCart,
-    } = this.props;
-    const lineItem = this.accumulateItemSelections();
-
-    addItemToCart({ lineItem });
-    activateCartDrawer({ cartDrawerOpen: true });
-  }
-
   addSelectionPrice(centsTotal) {
-    if (centsTotal) { return `+${formatCents(centsTotal, 0)}`; }
+    if (centsTotal) { return `+${formatCents(parseInt(centsTotal, 10), 0)}`; }
     return null;
   }
 
-  reduceCustomizationSelectionPrice() {
-    const { selectedCustomizations } = this.props;
+  reduceCustomizationSelectionPrice(selectedOptions) {
     return `+${formatCents(
-      selectedCustomizations.reduce((subTotal, c) => subTotal + c.centsTotal, 0),
-      0,
+      selectedOptions.reduce(
+        (subTotal, c) =>
+          subTotal + parseInt(c.price.money.fractional, 10), 0),
+        0,
     )}`;
   }
 
@@ -148,20 +145,21 @@ class ProductOptions extends Component {
   }
 
   generateAddonSelectionNode() {
-    const { selectedCustomizations } = this.props;
+    const selectedOptions = this.retrieveSelectedAddonOptions();
+    console.warn('TODO: @elgrecode polish. addonOptions need to reference white listed build not old structure');
 
-    if (selectedCustomizations.length === 1) { // One customization
+    if (selectedOptions.length === 1) { // One customization
       return (
         <span>
-          <span>{selectedCustomizations[0].description}</span>&nbsp;
-          <span>{this.addSelectionPrice(selectedCustomizations[0].centsTotal)}</span>
+          <span>{selectedOptions[0].name}</span>&nbsp;
+          <span>{this.addSelectionPrice(selectedOptions[0].price.money.fractional)}</span>
         </span>
       );
-    } else if (selectedCustomizations.length > 1) { // Multiple customizations
+    } else if (selectedOptions.length > 1) { // Multiple customizations
       return (
         <span>
-          <span>{selectedCustomizations.length} Additions</span>&nbsp;
-          <span>{this.reduceCustomizationSelectionPrice()}</span>
+          <span>{selectedOptions.length} Additions</span>&nbsp;
+          <span>{this.reduceCustomizationSelectionPrice(selectedOptions)}</span>
         </span>
       );
     }
@@ -169,62 +167,135 @@ class ProductOptions extends Component {
     return null;
   }
 
+  generateSizingNode() {
+    const {
+      selectedHeightValue,
+      selectedMeasurementMetric,
+      selectedDressSize,
+    } = this.props;
+    let sizingInformation = null;
+
+    if (selectedHeightValue && selectedDressSize) {
+      if (selectedMeasurementMetric === UNITS.INCH) {
+        // INCH
+        const ft = Math.floor(selectedHeightValue / 12);
+        const inch = selectedHeightValue % 12;
+        sizingInformation = `${ft}ft ${inch}in / ${selectedDressSize}`;
+      } else {
+        // CM
+        sizingInformation = `${selectedHeightValue} ${selectedMeasurementMetric.toLowerCase()} / ${selectedDressSize}`;
+      }
+    }
+
+    return sizingInformation ? (
+      <span>
+        {sizingInformation}
+      </span>
+    ) : null;
+  }
+
+  calculateSubTotal() {
+    const {
+      productCentsBasePrice = 0,
+      colorCentsTotal = 0,
+    } = this.props;
+
+    console.warn('TODO: switch to clean transformed version of addons');
+    const customizationStyleCents = this.retrieveSelectedAddonOptions()
+      .reduce((prev, curr) => prev + parseInt(curr.price.money.fractional, 10), 0);
+
+    return formatCents(
+      parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice,
+      0,
+    );
+  }
+
+  /**
+   * Activates a drawer to a specific drawer type
+   * @param  {String} drawer
+   */
+  handleProductOptionClick(drawer) {
+    return () => {
+      this.props.activateCustomizationDrawer({
+        productCustomizationDrawer: drawer,
+      });
+    };
+  }
+
+  /**
+   * Handles adding item to cart
+   */
+  handleAddToBag() {
+    const {
+      activateCartDrawer,
+      addItemToCart,
+    } = this.props;
+    const lineItem = this.accumulateItemSelections();
+
+    addItemToCart({ lineItem });
+    activateCartDrawer({ cartDrawerOpen: true });
+  }
+
   render() {
     const {
-      productCentsBasePrice,
       productTitle,
+      selectedStyleCustomizations,
+      selectedDressSize,
+      selectedHeightValue,
     } = this.props;
 
     return (
-      <div className="ProductOptions grid-12">
+      <div className="ProductOptions grid-12-noGutter">
         <div className="ProductOptions__primary-image-container brick col-6">
           <img className="width--full" alt="dress1" src={image1} />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
-            <div className="ProductOptions__content App--mb-normal typography">
+            <div className="ProductOptions__content u-mb-normal typography">
               <ProductOptionsRow
                 heading
                 leftNode={<h1 className="display--inline h4">{productTitle}</h1>}
                 rightNode={
                   <span className="h4">
-                    {formatCents(productCentsBasePrice, 0)}
+                    {this.calculateSubTotal()}
                   </span>
                 }
               />
               <ProductOptionsRow
                 leftNode={<span>Color</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={false}
+                optionIsSelected
                 rightNode={this.generateColorSelectionNode()}
-                handleClick={this.handleColorOptionClick}
+                handleClick={this.handleProductOptionClick(CustomizationConstants.COLOR_CUSTOMIZE)}
               />
               <ProductOptionsRow
-                leftNode={<span>Style Addons</span>}
+                leftNode={<span>Design Customizations</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={false}
+                optionIsSelected={!!selectedStyleCustomizations.length}
                 rightNode={this.generateAddonSelectionNode()}
-                handleClick={this.handleAddonOptionClick}
+                handleClick={this.handleProductOptionClick(CustomizationConstants.STYLE_CUSTOMIZE)}
+              />
+              <ProductOptionsRow
+                leftNode={<span>Your size</span>}
+                leftNodeClassName="u-uppercase"
+                optionIsSelected={selectedDressSize && selectedHeightValue}
+                rightNode={this.generateSizingNode()}
+                handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
             </div>
             <div className="ProductOptions__ctas grid-1">
               <Button
-                secondary
-                text="Your size"
-                handleClick={this.handleSizeProfileClick}
-                className="App--mb-small"
-              />
-              <Button
+                tall
                 handleClick={this.handleAddToBag}
                 text="Add to Bag"
               />
             </div>
-            <div className="ProductOptions__additional-info App--mb-normal">
+            <div className="ProductOptions__additional-info u-mb-normal">
               <p>
                 $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
                 <a className="link link--static">Learn more</a>
               </p>
-              <p className="App--mb-small">
+              <p className="u-mb-small">
                 Complimentary shipping and returns.&nbsp;
                 <a className="link link--static">Learn more</a>
               </p>
@@ -247,22 +318,27 @@ ProductOptions.propTypes = {
   colorCentsTotal: PropTypes.number.isRequired,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
-  colorId: PropTypes.string.isRequired,
+  colorId: PropTypes.number.isRequired,
   // ADDONS
-  selectedCustomizations: PropTypes.arrayOf(
+  addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
-      description: PropTypes.string,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.string,
     }),
   ).isRequired,
+  selectedDressSize: PropTypes.number,
+  selectedHeightValue: PropTypes.number,
+  selectedMeasurementMetric: PropTypes.string.isRequired,
+  selectedStyleCustomizations: PropTypes.string.isRequired,
   //* Redux Actions
-  activateColorDrawer: PropTypes.func.isRequired,
   activateCartDrawer: PropTypes.func.isRequired,
+  activateCustomizationDrawer: PropTypes.func.isRequired,
   addItemToCart: PropTypes.func.isRequired,
 };
 
 ProductOptions.defaultProps = {
-  // sideMenuOpen: false,
+  selectedDressSize: null,
+  selectedHeightValue: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

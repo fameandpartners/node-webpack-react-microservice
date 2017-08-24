@@ -1,0 +1,30 @@
+.ProductCustomizationStyle__cad-layer {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: top;
+  background-size: 100%;
+}
+
+.ProductCustomizationStyle__cad-layer--selected {
+  opacity: 1;
+}
+
+.ProductCustomizeStyle__layer-wrapper {
+  height: 200px;
+  width: 300px;
+
+  @include sm {
+    height: 260px;
+    width: 430px;
+  }
+
+  @include md {
+    height: 300px;
+    width: 500px;
+  }
+}

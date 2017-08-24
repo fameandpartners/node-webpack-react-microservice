@@ -7,6 +7,15 @@ export function activateSideMenu({ sideMenuOpen }) {
   };
 }
 
+export function setShareableQueryParams({ color, customizations }) {
+  return {
+    type: AppConstants.SET_SHAREABLE_QUERY_PARAMS,
+    color,
+    customizations,
+  };
+}
+
 export default {
   activateSideMenu,
+  setShareableQueryParams,
 };

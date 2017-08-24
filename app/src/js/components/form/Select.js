@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import autoBind from 'react-autobind';
+import classnames from 'classnames';
 import noop from '../../libs/noop';
 import KEYS from '../../constants/keys';
 
@@ -49,15 +50,13 @@ class Select extends Component {
     this.state = {
       isOpen: false,
       arrowFocusedIndex: -1,
+      selectedIndex: 0,
     };
     autoBind(this);
 
     // debounce to avoid onFocus & onClick from firing setState twice
     this.setDropdownState = _.debounce((state) => {
-      this.setState({
-        isOpen: state,
-        arrowFocusedIndex: -1,
-      });
+      this.setState({ isOpen: state });
     }, 250, true);
   }
 
@@ -75,7 +74,7 @@ class Select extends Component {
     if (this.state.isOpen) {
       this.setState({
         isOpen: false,
-        arrowFocusedIndex: -1,
+        arrowFocusedIndex: this.state.selectedIndex,
       });
     }
   }
@@ -89,6 +88,7 @@ class Select extends Component {
     switch (event.keyCode) {
       case KEYS.ARROW_UP:
         event.preventDefault();
+        this.setState({ isOpen: true });
         if (index > 0) {
           this.setState({ arrowFocusedIndex: index - 1 });
         } else {
@@ -97,6 +97,7 @@ class Select extends Component {
         return null;
       case KEYS.ARROW_DOWN:
         event.preventDefault();
+        this.setState({ isOpen: true });
         if (index < maxIndex) {
           this.setState({
             arrowFocusedIndex: index + 1,
@@ -120,6 +121,7 @@ class Select extends Component {
 
   handleDropdownItemClick(option) {
     return () => {
+      this.setState({ selectedIndex: option.id });
       this.closeDropdown();
       if (typeof this.props.onChange === 'function') {
         this.props.onChange({
@@ -135,13 +137,20 @@ class Select extends Component {
 
     const dropdownComponent = options.map((option, index) => {
       const isFocused = (this.state.arrowFocusedIndex === index);
+      const anyItemFocused = (this.state.arrowFocusedIndex !== this.state.selectedIndex);
 
       return (
         <li
           ref={`options${index}`}
           key={`${this.props.id}-${option.id}`}
           data-value={option.meta}
-          className={`Select-list-item noSelect ${option.active ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}
+          className={classnames(
+            'Select__list-item u-user-select--none',
+            {
+              selected: option.active && !anyItemFocused,
+              focused: isFocused,
+            },
+          )}
           onClick={this.handleDropdownItemClick(option)}
           aria-hidden={this.state.isOpen ? 'false' : 'true'}
         >
@@ -168,7 +177,17 @@ class Select extends Component {
 
     return (
       <div
-        className={`Select--wrapper ${className || ''} ${error ? 'Select--wrapper__error' : ''} ${label ? 'translate-label' : ''} ${isOpen ? 'is-open' : ''} ${singleOption ? 'single-option' : ''} ${activeOption.active ? 'is-set' : ''}`}
+        className={classnames(
+          'Select--wrapper',
+          className,
+          {
+            'Select--wrapper__error': error,
+            'translate-label': label,
+            'is-open': isOpen,
+            'single-option': singleOption,
+            'is-set': activeOption.active,
+          },
+        )}
         ref={c => this.selectWrapper = c}
         onClick={this.toggleDropdown}
         onBlur={this.closeDropdown}

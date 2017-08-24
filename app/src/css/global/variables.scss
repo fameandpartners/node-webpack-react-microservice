@@ -37,3 +37,33 @@ $c-link: rgb(113, 181, 218);
 
 // Z-Index Values
 $z-max: 99999;
+
+/* stylelint-disable at-rule-empty-line-before */
+$xs: 35.5em; // up to 568px
+$sm: 53.75em; // max 860px
+$md: 64em; // max 1024px
+$lg: 80em; // max 1280px
+
+@mixin xs {
+  @media (max-width: #{$xs}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: #{$sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$lg}) {
+    @content;
+  }
+}
