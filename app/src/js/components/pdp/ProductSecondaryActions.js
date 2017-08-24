@@ -4,6 +4,9 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+// TEMP. (REMOVE)
+import noop from '../../libs/noop';
+
 // Components
 import IconButton from '../generic/IconButton';
 
@@ -51,12 +54,16 @@ class ProductSecondaryActions extends Component {
       <div className="ProductSecondaryActions">
         <ul>
           <li className="display--inline">
-            <img src={HeartIcon.url} alt="Favorite this dress" width="40px" height="18px" />
+            <IconButton
+              svgPath={HeartIcon.url}
+              width="40px"
+              height="18px"
+              handleClick={noop}
+            />
           </li>
           <li className="display--inline">
             <IconButton
               svgPath={ShareIcon.url}
-              altText="Share this dress"
               width="40px"
               height="18px"
               handleClick={this.handleOpenShareModalClick}

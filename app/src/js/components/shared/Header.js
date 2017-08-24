@@ -7,6 +7,9 @@ import { bindActionCreators } from 'redux';
 // Actions
 import * as CartActions from '../../actions/CartActions';
 
+// Components
+import IconSVG from '../utility/IconSVG';
+
 // CSS
 import '../../../css/components/Header.scss';
 
@@ -54,21 +57,37 @@ class Header extends Component {
               <li><a className="Header__link" href="#about">Who we are</a></li>
             </ul>
             <div className="col-4 textAlign--center">
-              <img src={FameLogo.url} alt="Fame Logo" width="200px" height="26px" />
+              <IconSVG
+                svgPath={FameLogo.url}
+                width="200px"
+                height="26px"
+              />
             </div>
             <ul className="col-4 textAlign--right">
               <li className="Header__action">
-                <img src={SearchIcon.url} alt="Search for dresses" width="18px" height="26px" />
+                <IconSVG
+                  svgPath={SearchIcon.url}
+                  width="18px"
+                  height="26px"
+                />
               </li>
               <li className="Header__action">
-                <img src={AccountIcon.url} alt="My Account Icon" width="18px" height="26px" />
+                <IconSVG
+                  svgPath={AccountIcon.url}
+                  width="18px"
+                  height="26px"
+                />
               </li>
               <li onClick={this.handleShoppingBagClick} className="Header__action">
                 { cartItemCount > 0
                   ? <span className="Header__cart-count">{cartItemCount}</span>
                   : null
                 }
-                <img src={ShoppingBagIcon.url} alt="My bag" width="18px" height="26px" />
+                <IconSVG
+                  svgPath={ShoppingBagIcon.url}
+                  width="18px"
+                  height="26px"
+                />
               </li>
             </ul>
           </nav>

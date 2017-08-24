@@ -4,7 +4,7 @@ import autobind from 'react-autobind';
 import classNames from 'classnames';
 
 // Components
-import RenderSVG from '../utility/RenderSVG';
+import IconSVG from '../utility/IconSVG';
 
 // CSS
 import '../../../css/components/IconButton.scss';
@@ -21,7 +21,6 @@ class IconButton extends Component {
       className,
       handleClick,
       svgPath,
-      altText,
       width,
       height,
     } = this.props;
@@ -36,9 +35,8 @@ class IconButton extends Component {
           )
         }
       >
-        <RenderSVG
+        <IconSVG
           svgPath={svgPath}
-          altText={altText}
           width={width}
           height={height}
         />
@@ -50,7 +48,6 @@ class IconButton extends Component {
 IconButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
   svgPath: PropTypes.string.isRequired,
-  altText: PropTypes.string.isRequired,
   className: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
