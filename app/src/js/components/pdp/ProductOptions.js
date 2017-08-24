@@ -4,6 +4,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { formatCents } from '../../utilities/accounting';
+import { calculateSubTotal } from '../../utilities/pdp';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
@@ -156,18 +157,12 @@ class ProductOptions extends Component {
 
   calculateSubTotal() {
     const {
-      productCentsBasePrice = 0,
-      colorCentsTotal = 0,
+      productCentsBasePrice,
+      colorCentsTotal,
     } = this.props;
 
-    console.warn('TODO: switch to clean transformed version of addons');
-    const customizationStyleCents = this.retrieveSelectedAddonOptions()
-      .reduce((prev, curr) => prev + parseInt(curr.price.money.fractional, 10), 0);
-
-    return formatCents(
-      parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice,
-      0,
-    );
+    const selectedAddonOptions = this.retrieveSelectedAddonOptions();
+    return calculateSubTotal({ colorCentsTotal, productCentsBasePrice, selectedAddonOptions });
   }
 
   /**
@@ -230,7 +225,7 @@ class ProductOptions extends Component {
               />
             </div>
             <div className="ProductOptions__ctas grid-1">
-              <AddToCartButton />
+              <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
             <div className="ProductOptions__additional-info u-mb-normal">
               <p>

@@ -146,7 +146,7 @@ class ProductDisplayOptionsTouch extends Component {
             style={{ background: selectedColor.hexValue }}
           >
             <span>Color</span><br />
-            <span>{selectedColor.name}</span>
+            <span>{selectedColor.presentation}</span>
           </div>
           <div className="ProductDisplayOptionsTouch__option display--inline-block">
             <span>Style Addons</span><br />
