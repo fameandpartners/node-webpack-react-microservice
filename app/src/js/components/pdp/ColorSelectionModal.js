@@ -17,6 +17,7 @@ import ModalActions from '../../actions/ModalActions';
 import CustomizationActions from '../../actions/CustomizationActions';
 
 // Constants
+import CustomizationConstants from '../../constants/CustomizationConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
 // CSS
@@ -60,6 +61,7 @@ class ProductFabricModal extends PureComponent {
         modalIds={[ModalConstants.COLOR_SELECTION_MODAL]}
       >
         <Modal
+          headline={CustomizationConstants.COLOR_HEADLINE}
           handleCloseModal={this.handleCloseModal}
           modalClassName="u-flex u-flex--1"
           modalContentClassName="u-width--full u-overflow-y--scroll"
