@@ -59,7 +59,7 @@ class SideMenu extends Component {
             }}
           >
             <Hamburger
-              className="SideMenu__menu-btn position--absolute"
+              className="SideMenu__menu-btn u-position--absolute"
               isOpen
               handleClick={this.handleCloseMenu}
             />

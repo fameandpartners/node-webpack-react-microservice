@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { TransitionMotion } from 'react-motion';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // CSS
 import '../../../css/components/CustomizationDrawer.scss';
@@ -40,14 +42,28 @@ class CustomizationDrawer extends PureComponent {
   }
 
   renderCustomizationContents() {
-    const { productCustomizationDrawer } = this.props;
+    const { breakpoint, productCustomizationDrawer } = this.props;
+    const hasNavItems = breakpoint === 'desktop';
+
     switch (productCustomizationDrawer) {
       case COLOR_CUSTOMIZE:
-        return <ProductCustomizationColor />;
+        return (
+          <ProductCustomizationColor
+            hasNavItems={hasNavItems}
+          />
+        );
       case STYLE_CUSTOMIZE:
-        return <ProductCustomizationStyle />;
+        return (
+          <ProductCustomizationStyle
+            hasNavItems={hasNavItems}
+          />
+        );
       case SIZE_CUSTOMIZE:
-        return <ProductCustomizationSize />;
+        return (
+          <ProductCustomizationSize
+            hasNavItems={hasNavItems}
+          />
+        );
       default:
         return null;
     }
@@ -91,6 +107,8 @@ class CustomizationDrawer extends PureComponent {
 }
 
 CustomizationDrawer.propTypes = {
+  // Decorator Props
+  breakpoint: PropTypes.string.isRequired,
   // Redux Props
   productCustomizationDrawer: PropTypes.string,
   productCustomizationDrawerOpen: PropTypes.bool.isRequired,
@@ -103,4 +121,4 @@ CustomizationDrawer.defaultProps = {
 };
 
 
-export default connect(mapStateToProps)(CustomizationDrawer);
+export default Resize(PDPBreakpoints)(connect(mapStateToProps)(CustomizationDrawer));

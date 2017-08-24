@@ -10,6 +10,7 @@ import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import ColorSelectionModal from './components/pdp/ColorSelectionModal';
+import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -34,9 +35,7 @@ function stateToProps(state) {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-    };
+    this.state = { isOpen: false };
     autoBind(this);
   }
 
@@ -50,6 +49,7 @@ class App extends Component {
         <OnboardingModal />
         <ProductFabricModal />
         <ColorSelectionModal />
+        <StyleSelectionModal />
       </div>
     );
   }

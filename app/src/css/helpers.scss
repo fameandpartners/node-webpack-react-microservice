@@ -30,7 +30,7 @@
   overflow: hidden;
 }
 
-.position--absolute {
+.u-position--absolute {
   position: absolute;
 }
 
@@ -78,6 +78,10 @@
 
 .u-bottom {
   bottom: 0;
+}
+
+.u-left {
+  left: 0;
 }
 
 .u-position--fixed {

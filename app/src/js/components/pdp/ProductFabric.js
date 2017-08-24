@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import classnames from 'classnames';
 import fabricImg from '../../../img/test/fabric.png';
 import ProductFabricInfo from './ProductFabricInfo';
 
@@ -33,7 +34,12 @@ class ProductFabric extends PureComponent {
         className="ProductFabric position--relative height--full"
         style={{ background: `url(${fabricImg})` }}
       >
-        <div className="ProductFabric__contents u-width--full position--absolute textAlign--center">
+        <div
+          className={classnames(
+            'ProductFabric__contents u-width--full',
+            'u-position--absolute textAlign--center',
+          )}
+        >
 
           <ProductFabricInfo
             className="textAlign--left"
