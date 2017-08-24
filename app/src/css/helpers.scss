@@ -58,6 +58,27 @@
   text-align: right;
 }
 
+.text--underline {
+  text-decoration: underline;
+}
+
+.cursor--pointer {
+  cursor: pointer;
+}
+
+.text--noHighlight {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+
+
+.padding--none {
+  padding: 0;
+}
+
 // NOTE: Nav, we will need to merge these :(
 // Global Margins
 .u-mb-small {
