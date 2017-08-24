@@ -7,14 +7,14 @@ import { bindActionCreators } from 'redux';
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
-import ProductCustomizationColor from '../pdp/ProductCustomizationColor';
-
-// Components
-import ButtonLedge from '../generic/ButtonLedge';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
 import CustomizationActions from '../../actions/CustomizationActions';
+
+// Components
+import ButtonLedge from '../generic/ButtonLedge';
+import ProductCustomizationStyle from './ProductCustomizationStyle';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -36,7 +36,7 @@ function mapDispatchToProps(dispatch) {
   return { activateModal, selectProductColor };
 }
 
-class ProductFabricModal extends PureComponent {
+class StyleSelectionModal extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -57,7 +57,7 @@ class ProductFabricModal extends PureComponent {
       <ModalContainer
         slideUp
         dimBackground={false}
-        modalIds={[ModalConstants.COLOR_SELECTION_MODAL]}
+        modalIds={[ModalConstants.STYLE_SELECTION_MODAL]}
       >
         <Modal
           handleCloseModal={this.handleCloseModal}
@@ -65,10 +65,7 @@ class ProductFabricModal extends PureComponent {
           modalContentClassName="u-width--full u-overflow-y--scroll"
           modalWrapperClassName="u-flex--col"
         >
-
-          <ProductCustomizationColor
-            hasNavItems={false}
-          />
+          <ProductCustomizationStyle hasNavItems={false} />
           <div className="u-position--absolute u-bottom u-width--full">
             <ButtonLedge
               handleLeftButtonClick={this.handleCloseModal}
@@ -81,16 +78,16 @@ class ProductFabricModal extends PureComponent {
   }
 }
 
-ProductFabricModal.propTypes = {
+StyleSelectionModal.propTypes = {
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
 };
 
-ProductFabricModal.defaultProps = {
+StyleSelectionModal.defaultProps = {
   selectedColorId: '',
   activeModalId: null,
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductFabricModal);
+export default connect(mapStateToProps, mapDispatchToProps)(StyleSelectionModal);

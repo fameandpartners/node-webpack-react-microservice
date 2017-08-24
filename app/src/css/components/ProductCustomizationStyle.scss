@@ -15,8 +15,8 @@
 }
 
 .ProductCustomizeStyle__layer-wrapper {
-  height: 200px;
-  width: 300px;
+  height: 210px;
+  width: 400px;
 
   @include sm {
     height: 260px;
@@ -24,7 +24,7 @@
   }
 
   @include md {
-    height: 300px;
+    height: 270px;
     width: 500px;
   }
 }

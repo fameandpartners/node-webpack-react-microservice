@@ -49,7 +49,7 @@ class ProductCustomization extends PureComponent {
           <div className="grid-center-noGutter">
             <div
               className={classnames(
-                'ProductCustomization__content col-6',
+                'ProductCustomization__content col-6_sm-10',
               )}
             >
               { children }

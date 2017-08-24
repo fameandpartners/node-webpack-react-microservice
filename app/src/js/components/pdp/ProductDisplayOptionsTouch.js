@@ -71,6 +71,10 @@ class ProductDisplayOptionsTouch extends Component {
     this.props.activateModal({ modalId: ModalConstants.COLOR_SELECTION_MODAL });
   }
 
+  handleStyleOptionClick() {
+    this.props.activateModal({ modalId: ModalConstants.STYLE_SELECTION_MODAL });
+  }
+
   render() {
     const {
       breakpoint,
@@ -148,7 +152,10 @@ class ProductDisplayOptionsTouch extends Component {
             <span>Color</span><br />
             <span>{selectedColor.presentation}</span>
           </div>
-          <div className="ProductDisplayOptionsTouch__option display--inline-block">
+          <div
+            onClick={this.handleStyleOptionClick}
+            className="ProductDisplayOptionsTouch__option display--inline-block"
+          >
             <span>Style Addons</span><br />
             <span>-</span>
           </div>

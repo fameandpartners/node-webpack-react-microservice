@@ -17,7 +17,6 @@ function mapStateToProps(state) {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
-    productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
     temporaryColorId: state.$$customizationState.get('temporaryColor').get('id'),
   };
 }
@@ -47,15 +46,12 @@ class ProductCustomizationColor extends PureComponent {
     changeCustomizationDrawer({ productCustomizationDrawer: drawerSelected });
   }
 
-  handleColorSelection(temporaryColor) {
-    const {
-      productCustomizationDrawerOpen,
-      selectProductColor,
-    } = this.props;
+  handleCloseModal() {
+    this.props.activateModal({ shouldAppear: false });
+  }
 
-    if (productCustomizationDrawerOpen) {
-      selectProductColor({ temporaryColor });
-    }
+  handleColorSelection(temporaryColor) {
+    this.props.selectProductColor({ temporaryColor });
   }
 
   render() {
@@ -89,7 +85,6 @@ ProductCustomizationColor.propTypes = {
   hasNavItems: PropTypes.bool,
   // Redux Props
   productCustomizationDrawer: PropTypes.string.isRequired,
-  productCustomizationDrawerOpen: PropTypes.bool.isRequired,
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -104,6 +99,7 @@ ProductCustomizationColor.propTypes = {
   })).isRequired,
   temporaryColorId: PropTypes.string,
   // Redux Actions
+  activateModal: PropTypes.func.isRequired,
   changeCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
 };
