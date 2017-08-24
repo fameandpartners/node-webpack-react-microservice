@@ -10,7 +10,7 @@ import { ShareButtons } from '../../libs/react-share/react-share';
 // Components
 import Button from '../generic/Button';
 import Input from '../form/Input';
-import RenderSVG from '../utility/RenderSVG';
+import IconSVG from '../utility/IconSVG';
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 
@@ -122,9 +122,8 @@ class ShareModal extends Component {
                   url={currentURL}
                   className="ShareModal__icon-button"
                 >
-                  <RenderSVG
+                  <IconSVG
                     svgPath={FacebookShareIcon.url}
-                    altText="Facebook Share Icon"
                     width="40px"
                     height="40px"
                   />
@@ -136,9 +135,8 @@ class ShareModal extends Component {
                   className="ShareModal__icon-button"
                   media={currentProductImage}
                 >
-                  <RenderSVG
+                  <IconSVG
                     svgPath={PinterestShareIcon.url}
-                    altText="Pinterest Share Icon"
                     width="40px"
                     height="40px"
                   />
@@ -149,9 +147,8 @@ class ShareModal extends Component {
                   url={currentURL}
                   className="ShareModal__icon-button"
                 >
-                  <RenderSVG
+                  <IconSVG
                     svgPath={TwitterShareIcon.url}
-                    altText="Twitter Share Icon"
                     width="40px"
                     height="40px"
                   />
