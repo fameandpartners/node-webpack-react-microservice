@@ -11,6 +11,7 @@ import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import ColorSelectionModal from './components/pdp/ColorSelectionModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
+import SizeSelectionModal from './components/pdp/SizeSelectionModal';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -50,6 +51,7 @@ class App extends Component {
         <ProductFabricModal />
         <ColorSelectionModal />
         <StyleSelectionModal />
+        <SizeSelectionModal />
       </div>
     );
   }

@@ -13,7 +13,7 @@ import ModalActions from '../../actions/ModalActions';
 
 // Components
 import ButtonLedge from '../generic/ButtonLedge';
-import ProductCustomizationStyle from './ProductCustomizationStyle';
+import ProductCustomizationSize from './ProductCustomizationSize';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -46,16 +46,16 @@ class StyleSelectionModal extends PureComponent {
       <ModalContainer
         slideUp
         dimBackground={false}
-        modalIds={[ModalConstants.STYLE_SELECTION_MODAL]}
+        modalIds={[ModalConstants.SIZE_SELECTION_MODAL]}
       >
         <Modal
           handleCloseModal={this.handleCloseModal}
-          headline={CustomizationConstants.STYLE_HEADLINE}
+          headline={CustomizationConstants.SIZE_HEADLINE}
           modalClassName="u-flex u-flex--1"
           modalContentClassName="u-width--full u-overflow-y--scroll"
           modalWrapperClassName="u-flex--col"
         >
-          <ProductCustomizationStyle hasNavItems={false} />
+          <ProductCustomizationSize hasNavItems={false} />
           <div className="u-position--absolute u-bottom u-width--full">
             <ButtonLedge
               handleLeftButtonClick={this.handleCloseModal}

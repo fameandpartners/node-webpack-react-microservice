@@ -171,6 +171,7 @@ class ProductCustomizationStyle extends PureComponent {
 
   render() {
     const {
+      hasNavItems,
       productCustomizationDrawer,
       isUSSiteVersion,
       temporaryDressSize,
@@ -181,7 +182,7 @@ class ProductCustomizationStyle extends PureComponent {
 
     return (
       <ProductCustomization
-        hasNavItems
+        hasNavItems={hasNavItems}
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
@@ -255,6 +256,8 @@ class ProductCustomizationStyle extends PureComponent {
 }
 
 ProductCustomizationStyle.propTypes = {
+  // Passed Props
+  hasNavItems: PropTypes.bool.isRequired,
   // Redux Props
   productCustomizationDrawer: PropTypes.string.isRequired,
   isUSSiteVersion: PropTypes.bool.isRequired,

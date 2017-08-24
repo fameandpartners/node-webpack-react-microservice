@@ -15,16 +15,21 @@
 }
 
 .ProductCustomizeStyle__layer-wrapper {
-  height: 210px;
-  width: 400px;
+  height: 200px;
+  width: 300px;
+
+  @include xs {
+    height: 240px;
+    width: 440px;
+  }
 
   @include sm {
-    height: 260px;
-    width: 430px;
+    height: 290px;
+    width: 480px;
   }
 
   @include md {
-    height: 270px;
-    width: 500px;
+    height: 320px;
+    width: 550px;
   }
 }
