@@ -4,11 +4,10 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { formatCents } from '../../utilities/accounting';
-import { calculateSubTotal } from '../../utilities/pdp';
+import { calculateSubTotal, sizingDisplayText } from '../../utilities/pdp';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
-import { UNITS } from '../../constants/ProductConstants';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
@@ -134,19 +133,11 @@ class ProductOptions extends Component {
       selectedMeasurementMetric,
       selectedDressSize,
     } = this.props;
-    let sizingInformation = null;
-
-    if (selectedHeightValue && selectedDressSize) {
-      if (selectedMeasurementMetric === UNITS.INCH) {
-        // INCH
-        const ft = Math.floor(selectedHeightValue / 12);
-        const inch = selectedHeightValue % 12;
-        sizingInformation = `${ft}ft ${inch}in / ${selectedDressSize}`;
-      } else {
-        // CM
-        sizingInformation = `${selectedHeightValue} ${selectedMeasurementMetric.toLowerCase()} / ${selectedDressSize}`;
-      }
-    }
+    const sizingInformation = sizingDisplayText({
+      selectedDressSize,
+      selectedHeightValue,
+      selectedMeasurementMetric,
+    });
 
     return sizingInformation ? (
       <span>

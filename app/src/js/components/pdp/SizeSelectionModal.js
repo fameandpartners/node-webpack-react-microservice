@@ -9,6 +9,7 @@ import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 
 // Actions
+import CustomizationActions from '../../actions/CustomizationActions';
 import ModalActions from '../../actions/ModalActions';
 
 // Components
@@ -22,13 +23,28 @@ import CustomizationConstants from '../../constants/CustomizationConstants';
 // CSS
 import '../../../css/components/ProductFabricSwatches.scss';
 
-function mapStateToProps() {
-  return {};
+function stateToProps(state) {
+  return {
+    temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
+    temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
+    temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
+  };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
+  const {
+    updateDressSizeSelection,
+    updateHeightSelection,
+    updateMeasurementMetric,
+  } = bindActionCreators(CustomizationActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  return { activateModal };
+
+  return {
+    activateModal,
+    updateDressSizeSelection,
+    updateHeightSelection,
+    updateMeasurementMetric,
+  };
 }
 
 class StyleSelectionModal extends PureComponent {
@@ -39,6 +55,36 @@ class StyleSelectionModal extends PureComponent {
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
+  }
+
+  handleSaveSizeSelection() {
+    console.warn('TODO: need to check validity......');
+    // Check if valid
+    // If Valid
+    const {
+      activateModal,
+      temporaryDressSize,
+      temporaryMeasurementMetric,
+      temporaryHeightValue,
+      updateDressSizeSelection,
+      updateHeightSelection,
+      updateMeasurementMetric,
+    } = this.props;
+
+
+    updateDressSizeSelection({
+      selectedDressSize: temporaryDressSize,
+    });
+
+    updateHeightSelection({
+      selectedHeightValue: temporaryHeightValue,
+    });
+
+    updateMeasurementMetric({
+      selectedMeasurementMetric: temporaryMeasurementMetric,
+    });
+
+    activateModal({ shouldAppear: false });
   }
 
   render() {
@@ -59,7 +105,7 @@ class StyleSelectionModal extends PureComponent {
           <div className="u-position--absolute u-bottom u-width--full">
             <ButtonLedge
               handleLeftButtonClick={this.handleCloseModal}
-              handleRightButtonClick={() => {}}
+              handleRightButtonClick={this.handleSaveSizeSelection}
             />
           </div>
         </Modal>
@@ -69,11 +115,21 @@ class StyleSelectionModal extends PureComponent {
 }
 
 StyleSelectionModal.propTypes = {
+  // Redux Props
+  temporaryDressSize: PropTypes.number,
+  temporaryHeightValue: PropTypes.number,
+  temporaryMeasurementMetric: PropTypes.string.isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
+  updateDressSizeSelection: PropTypes.func.isRequired,
+  updateHeightSelection: PropTypes.func.isRequired,
+  updateMeasurementMetric: PropTypes.func.isRequired,
 };
 
-StyleSelectionModal.defaultProps = {};
+StyleSelectionModal.defaultProps = {
+  temporaryDressSize: null,
+  temporaryHeightValue: null,
+};
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(StyleSelectionModal);
+export default connect(stateToProps, dispatchToProps)(StyleSelectionModal);
