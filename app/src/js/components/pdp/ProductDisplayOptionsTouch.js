@@ -175,7 +175,7 @@ ProductDisplayOptionsTouch.propTypes = {
   }).isRequired,
   garmentCareInformation: PropTypes.string,
   selectedColor: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     centsTotal: PropTypes.number,
     hexValue: PropTypes.string,

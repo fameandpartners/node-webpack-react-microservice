@@ -328,7 +328,7 @@ class ProductCustomizeStyle extends Component {
       >
 
         <div className="ProductCustomizeStyle__content">
-          <div className="ProductCustomizeStyle__layer-wrapper u-center position--relative">
+          <div className="ProductCustomizeStyle__layer-wrapper u-center u-position--relative">
             { this.generateBaseLayers() }
             { this.generateAddonLayers().reverse() }
           </div>

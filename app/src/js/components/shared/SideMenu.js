@@ -63,7 +63,7 @@ class SideMenu extends Component {
               isOpen
               handleClick={this.handleCloseMenu}
             />
-            <div className="SideMenu__body position--relative">
+            <div className="SideMenu__body u-position--relative">
               <ul>
                 <li>Item 1</li>
                 <li>Item 2</li>

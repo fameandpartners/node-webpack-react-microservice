@@ -13,8 +13,9 @@ import ProductCustomizationColor from '../pdp/ProductCustomizationColor';
 import ButtonLedge from '../generic/ButtonLedge';
 
 // Actions
-import ModalActions from '../../actions/ModalActions';
+import AppActions from '../../actions/AppActions';
 import CustomizationActions from '../../actions/CustomizationActions';
+import ModalActions from '../../actions/ModalActions';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
@@ -23,18 +24,23 @@ import ModalConstants from '../../constants/ModalConstants';
 // CSS
 import '../../../css/components/ProductFabricSwatches.scss';
 
-function mapStateToProps(state) {
+
+function stateToProps(state) {
   return {
-    productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
-    productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
-    selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
+    temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
   };
 }
 
-function mapDispatchToProps(dispatch) {
+
+function dispatchToProps(dispatch) {
+  const { setShareableQueryParams } = bindActionCreators(AppActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const { selectProductColor } = bindActionCreators(CustomizationActions, dispatch);
-  return { activateModal, selectProductColor };
+  return {
+    activateModal,
+    selectProductColor,
+    setShareableQueryParams,
+  };
 }
 
 class ProductFabricModal extends PureComponent {
@@ -51,6 +57,19 @@ class ProductFabricModal extends PureComponent {
     const { selectProductColor } = this.props;
     selectProductColor({ color });
     this.handleCloseModal();
+  }
+
+  handleSaveColorSelection() {
+    const {
+      activateModal,
+      selectProductColor,
+      setShareableQueryParams,
+      temporaryColor,
+    } = this.props;
+
+    selectProductColor({ selectedColor: temporaryColor });
+    setShareableQueryParams({ color: temporaryColor.id });
+    activateModal({ shouldAppear: false });
   }
 
   render() {
@@ -74,7 +93,7 @@ class ProductFabricModal extends PureComponent {
           <div className="u-position--absolute u-bottom u-width--full">
             <ButtonLedge
               handleLeftButtonClick={this.handleCloseModal}
-              handleRightButtonClick={() => {}}
+              handleRightButtonClick={this.handleSaveColorSelection}
             />
           </div>
         </Modal>
@@ -84,15 +103,23 @@ class ProductFabricModal extends PureComponent {
 }
 
 ProductFabricModal.propTypes = {
+  // Redux Props
+  temporaryColor: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    centsTotal: PropTypes.number,
+    hexValue: PropTypes.string,
+    patternUrl: PropTypes.string,
+  }).isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
+  setShareableQueryParams: PropTypes.func.isRequired,
 };
 
 ProductFabricModal.defaultProps = {
-  selectedColorId: '',
   activeModalId: null,
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductFabricModal);
+export default connect(stateToProps, dispatchToProps)(ProductFabricModal);

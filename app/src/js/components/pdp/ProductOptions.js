@@ -264,7 +264,7 @@ ProductOptions.propTypes = {
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
-  selectedStyleCustomizations: PropTypes.string.isRequired,
+  selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number).isRequired,
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
 };
