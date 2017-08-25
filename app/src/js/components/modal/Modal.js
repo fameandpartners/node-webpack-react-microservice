@@ -24,7 +24,7 @@ class Modal extends PureComponent {
     return (
       <div
         className={classnames([
-          'Modal__wrapper height--full',
+          'Modal__wrapper u-height--full',
           modalWrapperClassName,
         ])}
       >

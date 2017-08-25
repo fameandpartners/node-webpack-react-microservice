@@ -87,7 +87,7 @@ class CustomizationDrawer extends PureComponent {
               <div
                 key={key}
                 className={classnames(
-                  'CustomizationDrawer__wrapper height--full u-width--full',
+                  'CustomizationDrawer__wrapper u-height--full u-width--full',
                   { 'u-pointerEvents--none': !productCustomizationDrawerOpen },
                 )}
                 style={{

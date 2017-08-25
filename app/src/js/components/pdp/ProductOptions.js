@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+// Utilities
 import { formatCents } from '../../utilities/accounting';
-import { calculateSubTotal, sizingDisplayText } from '../../utilities/pdp';
+import {
+  addonSelectionDisplayText,
+  calculateSubTotal,
+  sizingDisplayText,
+} from '../../utilities/pdp';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
@@ -53,7 +59,6 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
-
   return { activateCustomizationDrawer };
 }
 
@@ -68,20 +73,6 @@ class ProductOptions extends Component {
     return addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1);
   }
 
-  addSelectionPrice(centsTotal) {
-    if (centsTotal) { return `+${formatCents(parseInt(centsTotal, 10), 0)}`; }
-    return null;
-  }
-
-  reduceCustomizationSelectionPrice(selectedOptions) {
-    return `+${formatCents(
-      selectedOptions.reduce(
-        (subTotal, c) =>
-          subTotal + parseInt(c.price.money.fractional, 10), 0),
-        0,
-    )}`;
-  }
-
   generateColorSelectionNode() {
     const {
       colorCentsTotal,
@@ -93,7 +84,7 @@ class ProductOptions extends Component {
       <span>
         <span>{colorName}</span>&nbsp;
         { colorCentsTotal
-          ? <span>{this.addSelectionPrice(colorCentsTotal)}</span>
+          ? <span>+{formatCents(colorCentsTotal, 0)}</span>
           : null
         }
         <span
@@ -106,25 +97,11 @@ class ProductOptions extends Component {
 
   generateAddonSelectionNode() {
     const selectedOptions = this.retrieveSelectedAddonOptions();
-    console.warn('TODO: @elgrecode polish. addonOptions need to reference white listed build not old structure');
+    const displayText = addonSelectionDisplayText({ selectedAddonOptions: selectedOptions });
 
-    if (selectedOptions.length === 1) { // One customization
-      return (
-        <span>
-          <span>{selectedOptions[0].name}</span>&nbsp;
-          <span>{this.addSelectionPrice(selectedOptions[0].price.money.fractional)}</span>
-        </span>
-      );
-    } else if (selectedOptions.length > 1) { // Multiple customizations
-      return (
-        <span>
-          <span>{selectedOptions.length} Additions</span>&nbsp;
-          <span>{this.reduceCustomizationSelectionPrice(selectedOptions)}</span>
-        </span>
-      );
-    }
-
-    return null;
+    return (
+      <span>{displayText}</span>
+    );
   }
 
   generateSizingNode() {
