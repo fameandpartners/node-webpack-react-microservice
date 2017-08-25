@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import autobind from 'react-autobind';
 
-class IconSVG extends Component {
-  constructor(props) {
-    super(props);
-    autobind(this);
-  }
-
+/* eslint-disable react/prefer-stateless-function */
+class IconSVG extends PureComponent {
   render() {
     const {
       svgPath,
