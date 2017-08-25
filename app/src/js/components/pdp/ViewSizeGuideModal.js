@@ -59,7 +59,7 @@ class ViewSizeGuideModal extends PureComponent {
         >
           <div className="ViewSizeGuideModal textAlign--center grid-middle">
             <div className="Modal__content--med-margin-bottom">
-              <h1 style={{ fontSize: '3em' }}>I'm the View Size Guide Modal</h1>
+              <h1 style={{ fontSize: '3em' }}>I&apos;m the View Size Guide Modal</h1>
               <br />
               <ProductFabricInfo
                 fabric={fabric}

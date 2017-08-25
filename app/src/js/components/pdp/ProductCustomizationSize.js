@@ -243,7 +243,7 @@ class ProductCustomizationStyle extends PureComponent {
           </div>
 
           <div>
-            <p className="textAlign--left">What's your size?</p>
+            <p className="textAlign--left">What&apos;s your size?</p>
             <div className="ProductCustomizationSize__size grid-12">
               { SIZES.map(s => (
                 <div key={s} className="col-3">
