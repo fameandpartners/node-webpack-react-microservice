@@ -40,6 +40,8 @@ class ModalContainer extends Component {
   defaultStyles() {
     if (this.props.slideUp) {
       return modalAnimations.SLIDE_UP_DEFAULT_STYLES;
+    } else if (this.props.slideLeft) {
+      return modalAnimations.SLIDE_LEFT_DEFAULT_STYLES;
     }
     return modalAnimations.STANDARD_DEFAULT_STYLES;
   }
@@ -47,6 +49,8 @@ class ModalContainer extends Component {
   willEnter() {
     if (this.props.slideUp) {
       return modalAnimations.SLIDE_UP_WILL_ENTER;
+    } else if (this.props.slideLeft) {
+      return modalAnimations.SLIDE_LEFT_WILL_ENTER;
     }
     return modalAnimations.STANDARD_WILL_ENTER;
   }
@@ -54,6 +58,8 @@ class ModalContainer extends Component {
   willLeave() {
     if (this.props.slideUp) {
       return modalAnimations.SLIDE_UP_WILL_LEAVE;
+    } else if (this.props.slideLeft) {
+      return modalAnimations.SLIDE_LEFT_WILL_LEAVE;
     }
     return modalAnimations.STANDARD_WILL_LEAVE;
   }
@@ -82,6 +88,7 @@ class ModalContainer extends Component {
       zIndex,
       children,
       slideUp,
+      slideLeft,
     } = this.props;
 
     return (
@@ -101,13 +108,13 @@ class ModalContainer extends Component {
         <div
           className={classnames([
             'ModalContainer__content-wrapper u-center col',
-            { ModalContainer__slideUp: slideUp },
+            { ModalContainer__slideUp: slideUp || slideLeft },
           ])}
           onClick={this.handleForegroundClick}
           style={{
             height,
             zIndex,
-            transform: `translate3d(0, ${style.y}%, 0)`,
+            transform: `translate3d(${style.x || 0}%, ${style.y || 0}, 0)`,
           }}
         >
           {children}
@@ -143,6 +150,7 @@ ModalContainer.propTypes = {
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   modalContainerClass: PropTypes.string,
   slideUp: PropTypes.bool,
+  slideLeft: PropTypes.bool,
   zIndex: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   // Redux
@@ -157,6 +165,7 @@ ModalContainer.defaultProps = {
   dimBackground: true,
   children: null,
   slideUp: false,
+  slideLeft: false,
   height: null,
   modalContainerClass: '',
   zIndex: 999,

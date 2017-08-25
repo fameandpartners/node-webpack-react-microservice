@@ -14,6 +14,7 @@ const modalIds = assign({},
     'FORGOT_PASSWORD_MODAL',
     'LOG_IN_MODAL',
     'SIGN_UP_MODAL',
+    'VIEW_SIZE_GUIDE_MODAL',
   ]),
 );
 
