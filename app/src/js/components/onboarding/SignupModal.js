@@ -18,7 +18,7 @@ import ModalActions from '../../actions/ModalActions';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
-function mapStateToProps() {
+function stateToProps() {
   return {};
 }
 
@@ -118,4 +118,4 @@ SignupModal.propTypes = {
   activateModal: func.isRequired,
 };
 
-export default connect(mapStateToProps, dispatchToProps)(SignupModal);
+export default connect(stateToProps, dispatchToProps)(SignupModal);

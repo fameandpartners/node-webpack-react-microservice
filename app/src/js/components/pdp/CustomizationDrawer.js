@@ -19,7 +19,7 @@ import ProductCustomizationSize from './ProductCustomizationSize';
 import * as modalAnimations from '../../utilities/modal-animation';
 import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE, SIZE_CUSTOMIZE } from '../../constants/CustomizationConstants';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   return {
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
@@ -121,4 +121,4 @@ CustomizationDrawer.defaultProps = {
 };
 
 
-export default Resize(PDPBreakpoints)(connect(mapStateToProps)(CustomizationDrawer));
+export default Resize(PDPBreakpoints)(connect(stateToProps)(CustomizationDrawer));
