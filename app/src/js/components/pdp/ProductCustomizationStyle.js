@@ -19,7 +19,7 @@ import * as ModalActions from '../../actions/ModalActions';
 // CSS
 import '../../../css/components/ProductCustomizationStyle.scss';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   const addons = state.$$customizationState.get('addons').toJS();
   return {
     addonLayerImages: addons.addonLayerImages,
@@ -34,7 +34,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   const {
     changeCustomizationDrawer,
     updateCustomizationStyleSelection,
@@ -379,4 +379,4 @@ ProductCustomizationStyle.defaultProps = {
   temporaryStyleCustomizations: [],
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizationStyle);
+export default connect(stateToProps, dispatchToProps)(ProductCustomizationStyle);

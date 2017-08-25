@@ -30,7 +30,7 @@ import Button from '../generic/Button';
 // CSS
 import '../../../css/components/ProductCustomizationSize.scss';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   return {
     isUSSiteVersion: state.$$appState.get('siteVersion') === 'us',
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
@@ -40,7 +40,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   const {
     changeCustomizationDrawer,
     updateMeasurementMetric,
@@ -280,4 +280,4 @@ ProductCustomizationStyle.defaultProps = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizationStyle);
+export default connect(stateToProps, dispatchToProps)(ProductCustomizationStyle);

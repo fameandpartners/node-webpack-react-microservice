@@ -12,7 +12,7 @@ import ForgotPasswordModal from '../onboarding/ForgotPasswordModal';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
     activeModalId: state.$$modalState.get('modalId'),
@@ -68,4 +68,4 @@ OnboardingModal.defaultProps = {
 };
 
 
-export default connect(mapStateToProps, dispatchToProps)(OnboardingModal);
+export default connect(stateToProps, dispatchToProps)(OnboardingModal);

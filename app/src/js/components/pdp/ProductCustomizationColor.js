@@ -12,7 +12,7 @@ import CustomizationActions from '../../actions/CustomizationActions';
 import ColorSwatches from './ColorSwatches';
 import ProductCustomization from './ProductCustomization';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   return {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
@@ -21,7 +21,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const {
     changeCustomizationDrawer,
@@ -111,4 +111,4 @@ ProductCustomizationColor.defaultProps = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizationColor);
+export default connect(stateToProps, dispatchToProps)(ProductCustomizationColor);
