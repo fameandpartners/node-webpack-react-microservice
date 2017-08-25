@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 // CSS
 import '../../../css/components/Button.scss';
@@ -35,7 +35,7 @@ class Button extends Component {
       <button
         onClick={handleClick}
         className={
-          classNames(
+          classnames(
             'Button',
             className,
             {

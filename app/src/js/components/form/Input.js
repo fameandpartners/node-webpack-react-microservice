@@ -3,7 +3,7 @@
 // *****
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import noop from '../../libs/noop';
 
 // CSS
@@ -38,7 +38,7 @@ class Input extends Component {
 
     return (
       <div
-        className={classNames(
+        className={classnames(
           'Input__wrapper',
           wrapperClassName,
           {
