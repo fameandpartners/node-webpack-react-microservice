@@ -21,8 +21,12 @@ class Input extends Component {
   }
 
   componentDidMount() {
-    if (this.props.focusOnMount) this.input.focus();
-    if (this.props.selectOnMount) this.input.select();
+    if (this.props.focusOnMount) {
+      this.input.focus();
+    } else if (this.props.selectOnMount) {
+      this.input.focus();
+      this.input.select();
+    }
   }
 
   render() {
