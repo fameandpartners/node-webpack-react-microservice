@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import * as CartActions from '../../actions/CartActions';
 
 // Components
-import IconSVG from '../utility/IconSVG';
+import IconSVG from '../generic/IconSVG';
 
 // CSS
 import '../../../css/components/Header.scss';

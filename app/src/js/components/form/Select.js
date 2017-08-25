@@ -14,7 +14,7 @@ import noop from '../../libs/noop';
 import KEYS from '../../constants/keys';
 
 // Components
-import IconSVG from '../utility/IconSVG';
+import IconSVG from '../generic/IconSVG';
 
 // CSS
 import '../../../css/components/Select.scss';

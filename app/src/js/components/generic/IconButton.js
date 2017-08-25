@@ -4,7 +4,7 @@ import autobind from 'react-autobind';
 import classNames from 'classnames';
 
 // Components
-import IconSVG from '../utility/IconSVG';
+import IconSVG from '../generic/IconSVG';
 
 // CSS
 import '../../../css/components/IconButton.scss';

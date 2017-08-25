@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 
 // Components
-import IconSVG from '../utility/IconSVG';
+import IconSVG from '../generic/IconSVG';
 
 // Assets
 import FacebookLogo from '../../../svg/i-facebook.svg';

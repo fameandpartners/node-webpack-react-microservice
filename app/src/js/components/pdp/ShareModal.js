@@ -10,7 +10,7 @@ import { ShareButtons } from '../../libs/react-share/react-share';
 // Components
 import Button from '../generic/Button';
 import Input from '../form/Input';
-import IconSVG from '../utility/IconSVG';
+import IconSVG from '../generic/IconSVG';
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 
