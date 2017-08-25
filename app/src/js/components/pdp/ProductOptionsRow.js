@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 /* eslint-disable react/prefer-stateless-function */
 class ProductOptionsRow extends PureComponent {
@@ -28,7 +28,7 @@ class ProductOptionsRow extends PureComponent {
 
     return (
       <div
-        className={classNames(
+        className={classnames(
           'ProductOptionsRow',
           'ProductOptions__ProductOptionsRow',
           'grid-spaceBetween',
@@ -39,7 +39,7 @@ class ProductOptionsRow extends PureComponent {
         onClick={handleClick}
       >
         <span
-          className={classNames(
+          className={classnames(
             'ProductOptionsRow__left textAlign--left',
             leftNodeClassName,
           )}
@@ -48,7 +48,7 @@ class ProductOptionsRow extends PureComponent {
         </span>
 
         <span
-          className={classNames(
+          className={classnames(
             'ProductOptionsRow__right textAlign--right',
             rightNodeClassName,
             {
