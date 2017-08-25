@@ -1,5 +1,5 @@
 /* eslint-disable prefer-template */
-import window from '../../polyfills/windowPolyfill';
+import win from '../../polyfills/windowPolyfill';
 
 export function objectToGetParams(object) {
   return '?' + Object.keys(object)
@@ -10,10 +10,10 @@ export function objectToGetParams(object) {
 
 /* eslint-disable no-mixed-operators */
 export function windowOpen(url, { name, height = 400, width = 550 }) {
-  const left = (window.outerWidth / 2)
-    + (window.screenX || window.screenLeft || 0) - (width / 2);
-  const top = (window.outerHeight / 2)
-    + (window.screenY || window.screenTop || 0) - (height / 2);
+  const left = (win.outerWidth / 2)
+    + (win.screenX || win.screenLeft || 0) - (width / 2);
+  const top = (win.outerHeight / 2)
+    + (win.screenY || win.screenTop || 0) - (height / 2);
 
   const config = {
     height,
@@ -31,7 +31,7 @@ export function windowOpen(url, { name, height = 400, width = 550 }) {
     chrome: 'yes',
   };
 
-  return window.open(
+  return win.open(
     url,
     name,
     Object.keys(config).map(key => `${key}=${config[key]}`).join(', '),
