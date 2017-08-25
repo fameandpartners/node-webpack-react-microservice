@@ -19,9 +19,6 @@ import HeartIcon from '../../../svg/i-heart.svg';
 import ShareIcon from '../../../svg/i-share.svg';
 
 
-// Actions
-// import * as AppActions from '../../actions/AppActions';
-
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
@@ -31,11 +28,6 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   return bindActionCreators(ModalActions, dispatch);
-  // return {};
-  // const actions = bindActionCreators(AppActions, dispatch);
-  // return {
-  //   activateSideMenu: actions.activateSideMenu,
-  // };
 }
 
 class ProductSecondaryActions extends Component {
@@ -76,13 +68,11 @@ class ProductSecondaryActions extends Component {
 }
 
 ProductSecondaryActions.propTypes = {
-  // productTitle: PropTypes.string.isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
 };
 
 ProductSecondaryActions.defaultProps = {
-  // sideMenuOpen: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductSecondaryActions);
