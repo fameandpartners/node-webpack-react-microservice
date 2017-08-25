@@ -84,7 +84,7 @@ ProductCustomizationColor.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
   // Redux Props
-  productCustomizationDrawer: PropTypes.string.isRequired,
+  productCustomizationDrawer: PropTypes.string,
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -97,7 +97,7 @@ ProductCustomizationColor.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  temporaryColorId: PropTypes.string,
+  temporaryColorId: PropTypes.number,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   changeCustomizationDrawer: PropTypes.func.isRequired,
@@ -106,6 +106,7 @@ ProductCustomizationColor.propTypes = {
 
 ProductCustomizationColor.defaultProps = {
   hasNavItems: true,
+  productCustomizationDrawer: null,
   temporaryColorId: '',
 };
 

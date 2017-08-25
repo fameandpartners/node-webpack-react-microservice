@@ -28,7 +28,7 @@ function stateToProps(state) {
   const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
 
   return {
-    lockBody: sideMenuOpen || modalOpen || cartDrawerOpen,
+    lockBody: (sideMenuOpen || modalOpen || cartDrawerOpen),
   };
 }
 

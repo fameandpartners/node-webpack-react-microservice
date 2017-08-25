@@ -3,6 +3,9 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 
+// Utilities
+import noop from '../../libs/noop';
+
 // UI Components
 import Button from '../generic/Button';
 
@@ -78,8 +81,8 @@ ButtonLedge.propTypes = {
   leftText: PropTypes.string,
   rightNode: PropTypes.node,
   rightText: PropTypes.string,
-  handleLeftButtonClick: PropTypes.func.isRequired,
-  handleRightButtonClick: PropTypes.func.isRequired,
+  handleLeftButtonClick: PropTypes.func,
+  handleRightButtonClick: PropTypes.func,
 };
 
 ButtonLedge.defaultProps = {
@@ -87,8 +90,8 @@ ButtonLedge.defaultProps = {
   leftText: 'Cancel',
   rightNode: null,
   rightText: 'Save',
-  handleLeftButtonClick: null,
-  handleRightButtonClick: null,
+  handleLeftButtonClick: noop,
+  handleRightButtonClick: noop,
 };
 
 export default ButtonLedge;

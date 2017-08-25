@@ -90,7 +90,7 @@ class HeaderMobile extends Component {
 HeaderMobile.propTypes = {
   headerTitle: PropTypes.string,
   // Redux Props
-  cartItemCount: PropTypes.string,
+  cartItemCount: PropTypes.number,
   sideMenuOpen: PropTypes.bool,
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,

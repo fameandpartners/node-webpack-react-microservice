@@ -71,13 +71,13 @@ CartDrawer.propTypes = {
   })).isRequired,
   lineItems: PropTypes.arrayOf(PropTypes.shape({
     color: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       name: PropTypes.string,
       centsTotal: PropTypes.number,
       hexValue: PropTypes.string,
     }),
     addons: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       description: PropTypes.string,
       centsTotal: PropTypes.number,
     })),

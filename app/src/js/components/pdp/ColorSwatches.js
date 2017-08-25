@@ -69,7 +69,7 @@ class ColorSwatches extends PureComponent {
                   </span>
                 )
                 : (
-                  <div className="u-center">
+                  <div className="u-center u-text-align-center">
                     <span>
                       <span>{color.presentation}</span>
                       <br />
@@ -130,13 +130,13 @@ ColorSwatches.propTypes = {
   breakpoint: PropTypes.string.isRequired,
   // Passed Props
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
   productSecondaryColors: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,

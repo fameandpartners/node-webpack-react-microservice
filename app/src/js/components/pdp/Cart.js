@@ -89,6 +89,7 @@ class Cart extends Component {
             <Button
               tall
               className="u-mb-normal"
+              handleClick={() => { console.warn('TODO: SUBMIT API REQUEST'); }}
               text="Checkout"
             />
           </div>
@@ -118,7 +119,7 @@ Cart.propTypes = {
       hexValue: PropTypes.string,
     }),
     addons: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       description: PropTypes.string,
       centsTotal: PropTypes.number,
     })),

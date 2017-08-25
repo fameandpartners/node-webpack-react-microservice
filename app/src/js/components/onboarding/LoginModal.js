@@ -75,7 +75,12 @@ class LoginModal extends Component {
               wrapperClassName="Modal__content--med-margin-bottom"
             />
           </div>
-          <Button tall className="Modal__content--sm-margin-bottom" text="Log in" />
+          <Button
+            tall
+            className="Modal__content--sm-margin-bottom"
+            text="Log in"
+            handleClick={() => {}}
+          />
           <p className="Modal__content--med-margin-bottom">
             <span>Don't have an account?&nbsp;</span>
             <span

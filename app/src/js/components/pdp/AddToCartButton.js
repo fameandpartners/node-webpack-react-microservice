@@ -17,7 +17,6 @@ import * as CartActions from '../../actions/CartActions';
 // UI
 import Button from '../generic/Button';
 
-
 function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
   const selectedStyleCustomizations = state.$$customizationState.get('selectedStyleCustomizations').toJS();

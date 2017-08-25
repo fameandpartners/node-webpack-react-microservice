@@ -52,7 +52,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-class ProductCustomizeStyle extends Component {
+class ProductCustomizationStyle extends Component {
   constructor(props, context) {
     super(props, context);
     autoBind(this);
@@ -327,13 +327,13 @@ class ProductCustomizeStyle extends Component {
         productCustomizationDrawer={productCustomizationDrawer}
       >
 
-        <div className="ProductCustomizeStyle__content">
-          <div className="ProductCustomizeStyle__layer-wrapper u-center u-position--relative">
+        <div className="ProductCustomizationStyle__content">
+          <div className="ProductCustomizationStyle__layer-wrapper u-center u-position--relative">
             { this.generateBaseLayers() }
             { this.generateAddonLayers().reverse() }
           </div>
 
-          <div className="ProductCustomizeStyle__addon-options">
+          <div className="ProductCustomizationStyle__addon-options">
             <div className="textAlign--right u-mb-small">
               <span
                 onClick={this.handleClearAddonSelections}
@@ -351,7 +351,7 @@ class ProductCustomizeStyle extends Component {
 }
 
 /* eslint-disable react/forbid-prop-types */
-ProductCustomizeStyle.propTypes = {
+ProductCustomizationStyle.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
   // Redux Props
@@ -361,7 +361,7 @@ ProductCustomizeStyle.propTypes = {
   addonsBasesComputed: PropTypes.array.isRequired,
   baseImages: PropTypes.array.isRequired,
   baseSelected: PropTypes.number,
-  productCustomizationDrawer: PropTypes.string.isRequired,
+  productCustomizationDrawer: PropTypes.string,
   selectedAddonImageLayers: PropTypes.array.isRequired,
   temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux actions
@@ -371,11 +371,12 @@ ProductCustomizeStyle.propTypes = {
   setActiveAddonImageLayers: PropTypes.func.isRequired,
 };
 
-ProductCustomizeStyle.defaultProps = {
+ProductCustomizationStyle.defaultProps = {
   baseSelected: null,
   hasNavItems: true,
   selectedColorId: '',
+  productCustomizationDrawer: null,
   temporaryStyleCustomizations: [],
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizeStyle);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizationStyle);
