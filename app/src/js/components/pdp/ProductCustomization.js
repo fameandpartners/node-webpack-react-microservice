@@ -65,12 +65,13 @@ ProductCustomization.propTypes = {
   // Normal Props
   children: PropTypes.node.isRequired,
   hasNavItems: PropTypes.bool,
-  productCustomizationDrawer: PropTypes.string.isRequired,
+  productCustomizationDrawer: PropTypes.string,
   handleDrawerSelection: PropTypes.func.isRequired,
 };
 
 ProductCustomization.defaultProps = {
   hasNavItems: true,
+  productCustomizationDrawer: null,
   selectedColorId: '',
 };
 

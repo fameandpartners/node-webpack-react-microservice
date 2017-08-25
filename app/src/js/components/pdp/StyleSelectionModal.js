@@ -99,14 +99,17 @@ class StyleSelectionModal extends PureComponent {
 }
 
 StyleSelectionModal.propTypes = {
+  // Redux Props
+  temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   setShareableQueryParams: PropTypes.func.isRequired,
-  temporaryStyleCustomizations: PropTypes.func.isRequired,
   updateCustomizationStyleSelection: PropTypes.func.isRequired,
 };
 
-StyleSelectionModal.defaultProps = {};
+StyleSelectionModal.defaultProps = {
+  temporaryStyleCustomizations: [],
+};
 
 
 export default connect(stateToProps, dispatchToProps)(StyleSelectionModal);

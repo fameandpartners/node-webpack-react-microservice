@@ -77,7 +77,7 @@ class ProductDisplayOptionsTouch extends Component {
   }
 
   generateAddonButtonText(selectedAddonOptions) {
-    if (selectedAddonOptions) {
+    if (selectedAddonOptions && selectedAddonOptions.length) {
       return addonSelectionDisplayText({ selectedAddonOptions });
     }
     return '-';

@@ -73,7 +73,6 @@ class AddToCartButtonLedgeMobile extends Component {
           leftText={this.generateSizingButtonText()}
           rightNode={(<AddToCartButton />)}
           handleLeftButtonClick={this.handleSizeClick}
-          handleRightButtonClick={this.handleAddToBag}
         />
       </div>
     ) : null;
