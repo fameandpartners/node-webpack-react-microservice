@@ -21,9 +21,7 @@ class ColorSwatches extends PureComponent {
   }
 
   handleColorSelection(color) {
-    return () => {
-      this.props.handleColorSelection(color);
-    };
+    return () => { this.props.handleColorSelection(color); };
   }
 
   generateColorSwatch(color, price = 0, isTouch) {
