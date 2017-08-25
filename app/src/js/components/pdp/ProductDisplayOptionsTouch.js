@@ -83,16 +83,8 @@ class ProductDisplayOptionsTouch extends Component {
     return '-';
   }
 
-  handleFabricInfoModalClick() {
-    this.props.activateModal({ modalId: ModalConstants.FABRIC_MODAL });
-  }
-
-  handleColorOptionClick() {
-    this.props.activateModal({ modalId: ModalConstants.COLOR_SELECTION_MODAL });
-  }
-
-  handleStyleOptionClick() {
-    this.props.activateModal({ modalId: ModalConstants.STYLE_SELECTION_MODAL });
+  handleOpenModalClick(modalId) {
+    return () => { this.props.activateModal({ modalId }); };
   }
 
   render() {
@@ -118,7 +110,7 @@ class ProductDisplayOptionsTouch extends Component {
               breakpoint={breakpoint}
               fabric={fabric}
               garmentCareInformation={garmentCareInformation}
-              handleFabricInfoModalClick={this.handleFabricInfoModalClick}
+              handleFabricInfoModalClick={this.handleOpenModalClick(ModalConstants.FABRIC_MODAL)}
             />
           </Slide>
           <Slide>
@@ -163,7 +155,7 @@ class ProductDisplayOptionsTouch extends Component {
         </Slider>
         <div className="ProductDisplayOptionsTouch__options u-mb-normal u-mt-normal">
           <div
-            onClick={this.handleColorOptionClick}
+            onClick={this.handleOpenModalClick(ModalConstants.COLOR_SELECTION_MODAL)}
             className={classnames(
               'ProductDisplayOptionsTouch__option display--inline-block u-cursor--pointer',
               { 'ProductDisplayOptionsTouch__option--dark': isDarkLuminance(selectedColor.hexValue) },
@@ -179,7 +171,7 @@ class ProductDisplayOptionsTouch extends Component {
           </div>
           <div
             role="button"
-            onClick={this.handleStyleOptionClick}
+            onClick={this.handleOpenModalClick(ModalConstants.STYLE_SELECTION_MODAL)}
             className={classnames(
               'Button Button--tertiary ProductDisplayOptionsTouch__option display--inline-block',
               { 'Button--selected': selectedAddonOptions.length },

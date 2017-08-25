@@ -4,6 +4,9 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
+import classnames from 'classnames';
+
+// Decorators
 import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
@@ -66,13 +69,14 @@ class AppMain extends Component {
     autoBind(this);
   }
 
-  get appBlanketClass() {
-    const { sideMenuOpen } = this.props;
-    return `App__blanket u-height--full u-width--full ${sideMenuOpen ? 'App__blanket--open' : ''}`;
-  }
-
   handleCloseMenu() {
-    const { activateSideMenu, activateCartDrawer, cartDrawerOpen, sideMenuOpen } = this.props;
+    const {
+      activateCartDrawer,
+      activateSideMenu,
+      cartDrawerOpen,
+      sideMenuOpen,
+    } = this.props;
+
     if (sideMenuOpen) activateSideMenu({ sideMenuOpen: false });
     else if (cartDrawerOpen) activateCartDrawer({ sideMenuOpen: false });
   }
@@ -105,7 +109,10 @@ class AppMain extends Component {
               style={{ transform: `translateX(${x}px)` }}
             >
               <div
-                className={this.appBlanketClass}
+                className={classnames(
+                  'App__blanket u-height--full u-width--full',
+                  { 'App__blanket--open': sideMenuOpen },
+                )}
                 onClick={this.handleCloseMenu}
                 style={{
                   opacity: opacity / 100,
