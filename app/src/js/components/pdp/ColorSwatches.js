@@ -48,7 +48,7 @@ class ColorSwatches extends PureComponent {
         >
           <div
             className={classnames(
-              'ColorSwatches__swatch',
+              'ColorSwatches__swatch u-flex',
               { 'ColorSwatches__swatch--dark': !isTouch && isDarkLuminance(color.hexValue) },
               { 'u-flex--center': !isTouch },
             )}
@@ -69,7 +69,7 @@ class ColorSwatches extends PureComponent {
                   </span>
                 )
                 : (
-                  <div className="u-center u-text-align-center">
+                  <div className="u-center">
                     <span>
                       <span>{color.presentation}</span>
                       <br />
