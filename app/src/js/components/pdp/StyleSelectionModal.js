@@ -9,6 +9,8 @@ import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 
 // Actions
+import AppActions from '../../actions/AppActions';
+import CustomizationActions from '../../actions/CustomizationActions';
 import ModalActions from '../../actions/ModalActions';
 
 // Components
@@ -22,13 +24,26 @@ import CustomizationConstants from '../../constants/CustomizationConstants';
 // CSS
 import '../../../css/components/ProductFabricSwatches.scss';
 
-function mapStateToProps() {
-  return {};
+function stateToProps(state) {
+  return {
+    temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
+  };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  return { activateModal };
+  const { setShareableQueryParams } = bindActionCreators(AppActions, dispatch);
+  const {
+    activateCustomizationDrawer,
+    updateCustomizationStyleSelection,
+  } = bindActionCreators(CustomizationActions, dispatch);
+
+  return {
+    activateModal,
+    activateCustomizationDrawer,
+    setShareableQueryParams,
+    updateCustomizationStyleSelection,
+  };
 }
 
 class StyleSelectionModal extends PureComponent {
@@ -39,6 +54,21 @@ class StyleSelectionModal extends PureComponent {
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
+  }
+
+  handleSaveStyleSelection() {
+    const {
+      activateModal,
+      setShareableQueryParams,
+      temporaryStyleCustomizations,
+      updateCustomizationStyleSelection,
+    } = this.props;
+
+    updateCustomizationStyleSelection({
+      selectedStyleCustomizations: temporaryStyleCustomizations,
+    });
+    setShareableQueryParams({ customizations: temporaryStyleCustomizations });
+    activateModal({ shouldAppear: false });
   }
 
   render() {
@@ -59,7 +89,7 @@ class StyleSelectionModal extends PureComponent {
           <div className="u-position--absolute u-bottom u-width--full">
             <ButtonLedge
               handleLeftButtonClick={this.handleCloseModal}
-              handleRightButtonClick={() => {}}
+              handleRightButtonClick={this.handleSaveStyleSelection}
             />
           </div>
         </Modal>
@@ -71,9 +101,12 @@ class StyleSelectionModal extends PureComponent {
 StyleSelectionModal.propTypes = {
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
+  setShareableQueryParams: PropTypes.func.isRequired,
+  temporaryStyleCustomizations: PropTypes.func.isRequired,
+  updateCustomizationStyleSelection: PropTypes.func.isRequired,
 };
 
 StyleSelectionModal.defaultProps = {};
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(StyleSelectionModal);
+export default connect(stateToProps, dispatchToProps)(StyleSelectionModal);
