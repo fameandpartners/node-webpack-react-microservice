@@ -2,7 +2,7 @@
   padding-bottom: 100px;
 }
 
-.ColorSwatches__swatch::before {
+.ColorSwatches__swatch::after {
   padding-top: 100%;
   float: left;
   content: '';
@@ -23,6 +23,11 @@
   font-weight: 500;
 }
 
+.ColorSwatches__wrapper--touch .ColorSwatches__swatch,
 .ColorSwatches__wrapper:hover .ColorSwatches__swatch {
   opacity: 1;
+}
+
+.ColorSwatches__touch-display-text {
+  bottom: -30px;
 }

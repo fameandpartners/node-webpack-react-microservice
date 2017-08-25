@@ -26,7 +26,7 @@ class ProductCustomization extends PureComponent {
           { hasNavItems
             ? (
               <div className="grid-12">
-                <div className="col-3">
+                <div className="col-2">
                   <ProductCustomizationNavigation
                     handleDrawerSelection={handleDrawerSelection}
                     productCustomizationDrawer={productCustomizationDrawer}
