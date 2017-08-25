@@ -21,7 +21,7 @@ class ProductCustomization extends PureComponent {
     } = this.props;
 
     return (
-      <div className="ProductCustomization height--full u-flex--col">
+      <div className="ProductCustomization u-height--full u-flex--col">
         <div className="ProductCustomization__header">
           { hasNavItems
             ? (

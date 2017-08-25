@@ -40,7 +40,7 @@ class ColorSwatches extends PureComponent {
           onClick={this.handleColorSelection(color)}
           className={classnames([
             'ColorSwatches__wrapper',
-            'col u-cursor--pointer height--full u-position--relative',
+            'col u-cursor--pointer u-height--full u-position--relative',
             { 'ColorSwatches__wrapper--active': isActive },
             { 'ColorSwatches__wrapper--touch': isTouch },
           ])}

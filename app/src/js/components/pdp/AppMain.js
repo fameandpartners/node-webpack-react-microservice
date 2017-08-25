@@ -68,7 +68,7 @@ class AppMain extends Component {
 
   get appBlanketClass() {
     const { sideMenuOpen } = this.props;
-    return `App__blanket height--full u-width--full ${sideMenuOpen ? 'App__blanket--open' : ''}`;
+    return `App__blanket u-height--full u-width--full ${sideMenuOpen ? 'App__blanket--open' : ''}`;
   }
 
   handleCloseMenu() {
@@ -101,7 +101,7 @@ class AppMain extends Component {
         {({ opacity, x }) =>
           <div className="AppMain__wrapper">
             <div
-              className="AppMain height--full"
+              className="AppMain u-height--full"
               style={{ transform: `translateX(${x}px)` }}
             >
               <div

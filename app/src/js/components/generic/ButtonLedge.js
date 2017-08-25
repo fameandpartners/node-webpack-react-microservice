@@ -34,7 +34,7 @@ class ButtonLedge extends Component {
       >
         <div
           className={classnames(
-            'ButtonLedge__button-wrapper grid-center-middle-noGutter height--full',
+            'ButtonLedge__button-wrapper grid-center-middle-noGutter u-height--full',
           )}
         >
           {handleLeftButtonClick

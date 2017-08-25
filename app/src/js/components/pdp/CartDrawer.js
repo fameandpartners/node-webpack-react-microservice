@@ -48,7 +48,7 @@ class CartDrawer extends Component {
     const { complementaryProducts, lineItems } = this.props;
 
     return (
-      <div className="CartDrawer u-flex--col height--full">
+      <div className="CartDrawer u-flex--col u-height--full">
         <div className="CartDrawer__header">
           <h4>Shopping Bag</h4>
         </div>

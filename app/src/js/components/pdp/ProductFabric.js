@@ -31,7 +31,7 @@ class ProductFabric extends PureComponent {
     } = this.props;
     return (
       <div
-        className="ProductFabric u-position--relative height--full"
+        className="ProductFabric u-position--relative u-height--full"
         style={{ background: `url(${fabricImg})` }}
       >
         <div

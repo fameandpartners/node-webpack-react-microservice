@@ -1,12 +1,18 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+
+// Decorators
 import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
+
+// Utilities
 import { isDarkLuminance } from '../../utilities/color';
+import { addonSelectionDisplayText } from '../../utilities/pdp';
 
 // UI Components
 import Slider from '../shared/Slider';
@@ -37,9 +43,11 @@ import '../../../css/components/ProductDisplayOptionsTouch.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
+    addonOptions: state.$$customizationState.get('addons').get('addonOptions').toJS(),
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
     selectedColor: state.$$customizationState.get('selectedColor').toJS(),
+    selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
   };
 }
 
@@ -54,6 +62,11 @@ class ProductDisplayOptionsTouch extends Component {
     autoBind(this);
   }
 
+  retrieveSelectedAddonOptions() {
+    const { addonOptions, selectedStyleCustomizations } = this.props;
+    return addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1);
+  }
+
   generateBackgroundImageStyle(url) {
     // TODO: @elgrecode
     // Tentatively leaving this here until I have a better idea what to do with slides
@@ -61,6 +74,13 @@ class ProductDisplayOptionsTouch extends Component {
       background: `url(${url})`,
       backgroundSize: 'cover',
     };
+  }
+
+  generateAddonButtonText(selectedAddonOptions) {
+    if (selectedAddonOptions) {
+      return addonSelectionDisplayText({ selectedAddonOptions });
+    }
+    return '-';
   }
 
   handleFabricInfoModalClick() {
@@ -82,13 +102,14 @@ class ProductDisplayOptionsTouch extends Component {
       garmentCareInformation,
       selectedColor,
     } = this.props;
+    const selectedAddonOptions = this.retrieveSelectedAddonOptions();
 
     return (
       <div className="ProductDisplayOptionsTouch">
         <Slider>
           <Slide>
             <div
-              className="u-width--full height--full"
+              className="u-width--full u-height--full"
               style={this.generateBackgroundImageStyle(image1)}
             />
           </Slide>
@@ -102,7 +123,7 @@ class ProductDisplayOptionsTouch extends Component {
           </Slide>
           <Slide>
             <div
-              className="u-width--full height--full"
+              className="u-width--full u-height--full"
               style={this.generateBackgroundImageStyle(image2)}
             />
           </Slide>
@@ -110,31 +131,31 @@ class ProductDisplayOptionsTouch extends Component {
 
           <Slide>
             <div
-              className="u-width--full height--full"
+              className="u-width--full u-height--full"
               style={this.generateBackgroundImageStyle(image3)}
             />
           </Slide>
           <Slide>
             <div
-              className="u-width--full height--full"
+              className="u-width--full u-height--full"
               style={this.generateBackgroundImageStyle(image4)}
             />
           </Slide>
           <Slide>
             <div
-              className="u-width--full height--full"
+              className="u-width--full u-height--full"
               style={this.generateBackgroundImageStyle(image5)}
             />
           </Slide>
           <Slide>
             <div
-              className="u-width--full height--full"
+              className="u-width--full u-height--full"
               style={this.generateBackgroundImageStyle(image6)}
             />
           </Slide>
           <Slide>
             <div
-              className="u-width--full height--full"
+              className="u-width--full u-height--full"
               style={this.generateBackgroundImageStyle(image7)}
             />
           </Slide>
@@ -149,15 +170,27 @@ class ProductDisplayOptionsTouch extends Component {
             )}
             style={{ background: selectedColor.hexValue }}
           >
-            <span>Color</span><br />
-            <span>{selectedColor.presentation}</span>
+            <div className="grid-middle-noGutter u-height--full">
+              <div className="col">
+                <span>Color</span><br />
+                <span>{selectedColor.presentation}</span>
+              </div>
+            </div>
           </div>
           <div
+            role="button"
             onClick={this.handleStyleOptionClick}
-            className="ProductDisplayOptionsTouch__option display--inline-block"
+            className={classnames(
+              'Button Button--tertiary ProductDisplayOptionsTouch__option display--inline-block',
+              { 'Button--selected': selectedAddonOptions.length },
+            )}
           >
-            <span>Style Addons</span><br />
-            <span>-</span>
+            <div className="grid-middle-noGutter u-height--full">
+              <div className="col">
+                <span>Style Addons</span><br />
+                <span>{this.generateAddonButtonText(selectedAddonOptions)}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -165,8 +198,10 @@ class ProductDisplayOptionsTouch extends Component {
   }
 }
 
+/* eslint-disable react/forbid-prop-types */
 ProductDisplayOptionsTouch.propTypes = {
   // Redux Properties
+  addonOptions: PropTypes.array.isRequired,
   fabric: PropTypes.shape({
     id: PropTypes.string,
     smallImg: PropTypes.string,
@@ -180,6 +215,7 @@ ProductDisplayOptionsTouch.propTypes = {
     centsTotal: PropTypes.number,
     hexValue: PropTypes.string,
   }).isRequired,
+  selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   // Decorator props
@@ -187,6 +223,7 @@ ProductDisplayOptionsTouch.propTypes = {
 };
 ProductDisplayOptionsTouch.defaultProps = {
   garmentCareInformation: 'Professional dry-clean only.\rSee label for further details.',
+  selectedStyleCustomizations: [],
 };
 
 export default
