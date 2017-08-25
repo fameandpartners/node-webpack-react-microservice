@@ -17,9 +17,6 @@ import * as CartActions from '../../actions/CartActions';
 // UI
 import Button from '../generic/Button';
 
-// CSS
-// import '../../../css/components/AddToCartButton.scss';
-
 
 function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
