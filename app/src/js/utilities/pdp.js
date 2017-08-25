@@ -1,4 +1,5 @@
 import { formatCents } from './accounting';
+import { UNITS } from '../constants/ProductConstants';
 
 export function calculateSubTotal({
   colorCentsTotal = 0,
@@ -22,6 +23,26 @@ function filterSelectedAddons(addonOptions, selectedStyleCustomizations) {
       description: a.description,
       centsTotal: a.centsTotal,
     }));
+}
+
+export function sizingDisplayText({
+  selectedHeightValue,
+  selectedMeasurementMetric,
+  selectedDressSize }) {
+  let sizingInformation = null;
+
+  if (selectedHeightValue && selectedDressSize) {
+    if (selectedMeasurementMetric === UNITS.INCH) {
+      // INCH
+      const ft = Math.floor(selectedHeightValue / 12);
+      const inch = selectedHeightValue % 12;
+      sizingInformation = `${ft}ft ${inch}in / ${selectedDressSize}`;
+    } else {
+      // CM
+      sizingInformation = `${selectedHeightValue} ${selectedMeasurementMetric.toLowerCase()} / ${selectedDressSize}`;
+    }
+  }
+  return sizingInformation;
 }
 
 export function accumulateCustomizationSelections({ $$customizationState, $$productState }) {
