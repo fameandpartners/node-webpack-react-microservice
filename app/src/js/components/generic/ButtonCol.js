@@ -18,7 +18,7 @@ class ButtonCol extends PureComponent {
       <button
         onClick={handleClick}
         className={classnames(
-          'Button--tertiary ButtonCol grid-middle-noGutter noselect',
+          'Button Button--tertiary ButtonCol grid-middle-noGutter noselect',
           className,
           { 'Button--selected': isSelected },
           { 'Button--tall': tall },
