@@ -29,7 +29,7 @@ class ProductCustomizationNavigation extends PureComponent {
     const { productCustomizationDrawer } = this.props;
     return (
       <div className="ProductCustomizationNavigation__nav">
-        <div className="grid-middle height--full position--absolute">
+        <div className="grid-middle u-height--full u-position--absolute">
           <ul className="ProductCustomizationNavigation__nav-list u-uppercase u-text-align-right">
             <li
               onClick={this.handleDrawerSelection(COLOR_CUSTOMIZE)}

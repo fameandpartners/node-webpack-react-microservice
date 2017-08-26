@@ -12,17 +12,16 @@ import CustomizationActions from '../../actions/CustomizationActions';
 import ColorSwatches from './ColorSwatches';
 import ProductCustomization from './ProductCustomization';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   return {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
-    productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
     temporaryColorId: state.$$customizationState.get('temporaryColor').get('id'),
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const {
     changeCustomizationDrawer,
@@ -47,15 +46,12 @@ class ProductCustomizationColor extends PureComponent {
     changeCustomizationDrawer({ productCustomizationDrawer: drawerSelected });
   }
 
-  handleColorSelection(temporaryColor) {
-    const {
-      productCustomizationDrawerOpen,
-      selectProductColor,
-    } = this.props;
+  handleCloseModal() {
+    this.props.activateModal({ shouldAppear: false });
+  }
 
-    if (productCustomizationDrawerOpen) {
-      selectProductColor({ temporaryColor });
-    }
+  handleColorSelection(temporaryColor) {
+    this.props.selectProductColor({ temporaryColor });
   }
 
   render() {
@@ -88,8 +84,7 @@ ProductCustomizationColor.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
   // Redux Props
-  productCustomizationDrawer: PropTypes.string.isRequired,
-  productCustomizationDrawerOpen: PropTypes.bool.isRequired,
+  productCustomizationDrawer: PropTypes.string,
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -102,16 +97,18 @@ ProductCustomizationColor.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  temporaryColorId: PropTypes.string,
+  temporaryColorId: PropTypes.number,
   // Redux Actions
+  activateModal: PropTypes.func.isRequired,
   changeCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
 };
 
 ProductCustomizationColor.defaultProps = {
   hasNavItems: true,
+  productCustomizationDrawer: null,
   temporaryColorId: '',
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizationColor);
+export default connect(stateToProps, dispatchToProps)(ProductCustomizationColor);

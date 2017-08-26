@@ -45,7 +45,7 @@ $md: 64em; // max 1024px
 $lg: 80em; // max 1280px
 
 @mixin xs {
-  @media (max-width: #{$xs}) {
+  @media (min-width: #{$xs}) {
     @content;
   }
 }

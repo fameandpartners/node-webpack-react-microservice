@@ -15,7 +15,7 @@ import * as modalAnimations from '../../utilities/modal-animation';
 // CSS
 import '../../../css/components/Modal.scss';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
     shouldAppear: state.$$modalState.get('shouldAppear'),
@@ -167,4 +167,4 @@ ModalContainer.defaultProps = {
 };
 
 
-export default connect(mapStateToProps, dispatchToProps)(ModalContainer);
+export default connect(stateToProps, dispatchToProps)(ModalContainer);

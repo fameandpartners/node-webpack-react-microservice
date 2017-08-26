@@ -1,8 +1,4 @@
-.width--full {
-  width: 100%;
-}
-
-.height--full {
+.u-height--full {
   height: 100%;
 }
 
@@ -34,15 +30,11 @@
   overflow: hidden;
 }
 
-.position--absolute {
+.u-position--absolute {
   position: absolute;
 }
 
-.position--fixed {
-  position: fixed;
-}
-
-.position--relative {
+.u-position--relative {
   position: relative;
 }
 
@@ -84,6 +76,18 @@
   margin-top: 50px;
 }
 
+.u-bottom {
+  bottom: 0;
+}
+
+.u-left {
+  left: 0;
+}
+
+.u-position--fixed {
+  position: fixed;
+}
+
 .u-cursor--pointer {
   cursor: pointer;
 }
@@ -102,6 +106,7 @@
 
 .u-overflow-y--scroll {
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .u-uppercase {
@@ -118,6 +123,10 @@
 
 .u-user-select--none {
   user-select: none;
+}
+
+.u-width--full {
+  width: 100%;
 }
 
 // Flex Helpers

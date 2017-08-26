@@ -30,7 +30,7 @@ import Button from '../generic/Button';
 // CSS
 import '../../../css/components/ProductCustomizationSize.scss';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   return {
     isUSSiteVersion: state.$$appState.get('siteVersion') === 'us',
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
@@ -40,7 +40,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   const {
     changeCustomizationDrawer,
     updateMeasurementMetric,
@@ -171,6 +171,7 @@ class ProductCustomizationStyle extends PureComponent {
 
   render() {
     const {
+      hasNavItems,
       productCustomizationDrawer,
       isUSSiteVersion,
       temporaryDressSize,
@@ -181,7 +182,7 @@ class ProductCustomizationStyle extends PureComponent {
 
     return (
       <ProductCustomization
-        hasNavItems
+        hasNavItems={hasNavItems}
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
@@ -255,6 +256,8 @@ class ProductCustomizationStyle extends PureComponent {
 }
 
 ProductCustomizationStyle.propTypes = {
+  // Passed Props
+  hasNavItems: PropTypes.bool.isRequired,
   // Redux Props
   productCustomizationDrawer: PropTypes.string.isRequired,
   isUSSiteVersion: PropTypes.bool.isRequired,
@@ -277,4 +280,4 @@ ProductCustomizationStyle.defaultProps = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizationStyle);
+export default connect(stateToProps, dispatchToProps)(ProductCustomizationStyle);

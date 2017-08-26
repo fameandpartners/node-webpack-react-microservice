@@ -21,7 +21,7 @@ import Input from '../form/Input';
 // CSS
 import '../../../css/components/Footer.scss';
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   return bindActionCreators(ModalActions, dispatch);
 }
 
@@ -86,4 +86,4 @@ Footer.propTypes = {
   activateModal: PropTypes.func.isRequired,
 };
 
-export default connect(objnoop, mapDispatchToProps)(Footer);
+export default connect(objnoop, dispatchToProps)(Footer);

@@ -15,7 +15,7 @@ import ModalActions from '../../actions/ModalActions';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
     activeModalId: state.$$modalState.get('modalId'),
@@ -24,7 +24,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   return { activateModal };
 }
@@ -54,7 +54,7 @@ class ProductFabricModal extends PureComponent {
         <Modal
           handleCloseModal={this.handleCloseModal}
           modalClassName="grid-middle u-flex--1"
-          modalContentClassName="width--full"
+          modalContentClassName="u-width--full"
           modalWrapperClassName="u-flex--col"
         >
           <div className="ProductFabricModal textAlign--center grid-middle">
@@ -90,4 +90,4 @@ ProductFabricModal.defaultProps = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductFabricModal);
+export default connect(stateToProps, dispatchToProps)(ProductFabricModal);

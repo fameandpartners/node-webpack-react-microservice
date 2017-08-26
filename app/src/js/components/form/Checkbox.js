@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 // CSS
 import '../../../css/components/Checkbox.scss';
@@ -25,7 +25,7 @@ class Checkbox extends Component {
 
     return (
       <div
-        className={classNames(
+        className={classnames(
           'Checkbox__wrapper',
           wrapperClassName,
         )}

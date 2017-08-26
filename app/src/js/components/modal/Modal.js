@@ -24,17 +24,27 @@ class Modal extends PureComponent {
     return (
       <div
         className={classnames([
-          'Modal__wrapper height--full',
+          'Modal__wrapper u-height--full',
           modalWrapperClassName,
         ])}
       >
-        <div className="Modal__header Modal__layout-container Modal__content--sm-margin-top">
-          <div className="Modal__content--sm-margin-bottom u-text-align-right">
+        <div
+          className={classnames(
+            'Modal__header Modal__layout-container',
+            {
+              'Modal__header--headline': !!headline,
+            },
+          )}
+        >
+          <div
+            className={classnames(
+             'Modal__content--sm-margin-bottom',
+             'u-position--absolute u-text-align-right',
+           )}
+          >
             <CancelOut onClick={handleCloseModal} />
           </div>
-          <div className="Modal__content--med-margin-bottom">
-            <h3 className="h5">{headline}</h3>
-          </div>
+          <h3 className="h5">{headline}</h3>
         </div>
 
         <div

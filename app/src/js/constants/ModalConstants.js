@@ -10,6 +10,8 @@ const actionTypes = assign({},
 const modalIds = assign({},
   mirrorCreator([
     'COLOR_SELECTION_MODAL',
+    'STYLE_SELECTION_MODAL',
+    'SIZE_SELECTION_MODAL',
     'FABRIC_MODAL',
     'FORGOT_PASSWORD_MODAL',
     'LOG_IN_MODAL',
