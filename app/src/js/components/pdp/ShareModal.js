@@ -4,15 +4,13 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import autobind from 'react-autobind';
-import Clipboard from 'clipboard';
 import { ShareButtons } from '../../libs/react-share/react-share';
 
 // Components
-import Button from '../generic/Button';
-import Input from '../form/Input';
-import IconSVG from '../generic/IconSVG';
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
+import CopyLink from '../generic/CopyLink';
+import IconSVG from '../generic/IconSVG';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -28,7 +26,7 @@ import TwitterShareIcon from '../../../svg/share-twitter.svg';
 // CSS
 import '../../../css/components/ShareModal.scss';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   return {
     currentURL: state.$$appState.get('currentURL'),
     currentProductImage: state.$$productState.get('productImage'),
@@ -43,49 +41,11 @@ function dispatchToProps(dispatch) {
 class ShareModal extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      clipboard: new Clipboard('.js-clipboard-node'),
-      clipboardError: false,
-    };
-
     autobind(this);
   }
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
-
-    /**
-     *  Without this we see the fallback copy field disappear
-     *  instantly while the Share Modal is still fading out.
-     */
-    setTimeout(() => {
-      this.setState({
-        clipboardError: false,
-      });
-    }, 1000);
-  }
-
-  handleCopyLinkClick() {
-    /* eslint-disable no-console */
-    console.log(`Copied Share Link: ${this.props.currentURL}`);
-    // TO-DO: Link Mike's Success Toast
-  }
-
-  handleCopyLinkClickError() {
-    this.setState({
-      clipboardError: true,
-    });
-  }
-
-  componentWillMount() {
-    this.state.clipboard.text = () => this.props.currentURL;
-
-    this.state.clipboard
-      .on('error', () => {
-        console.warn('Clipboard Copy Error');
-        this.handleCopyLinkClickError();
-      });
   }
 
   render() {
@@ -93,10 +53,6 @@ class ShareModal extends Component {
       currentURL,
       currentProductImage,
     } = this.props;
-
-    const {
-      clipboardError,
-    } = this.state;
 
     const {
       FacebookShareButton,
@@ -155,26 +111,7 @@ class ShareModal extends Component {
                 </TwitterShareButton>
               </li>
             </ul>
-            <Button
-              tall
-              secondary
-              className="Modal__content--med-margin-bottom js-clipboard-node"
-              text="Copy Link"
-              handleClick={this.handleCopyLinkClick}
-            />
-            {
-              clipboardError ?
-              (
-                <Input
-                  id="copy_link_fallback"
-                  label="Press Ctrl/Cmd-C To Copy"
-                  defaultValue={currentURL}
-                  selectOnMount
-                  readOnly
-                  wrapperClassName="Modal__content--med-margin-bottom"
-                />
-              ) : null
-            }
+            <CopyLink url={currentURL} />
           </div>
         </Modal>
       </ModalContainer>
@@ -183,15 +120,10 @@ class ShareModal extends Component {
 }
 
 ShareModal.propTypes = {
-  currentURL: PropTypes.string.isRequired,
-  currentProductImage: PropTypes.string.isRequired,
   // Redux
   activateModal: PropTypes.func.isRequired,
+  currentURL: PropTypes.string.isRequired,
+  currentProductImage: PropTypes.string.isRequired,
 };
 
-ShareModal.defaultProps = {
-  currentURL: '',
-  currentProductImage: '',
-};
-
-export default connect(mapStateToProps, dispatchToProps)(ShareModal);
+export default connect(stateToProps, dispatchToProps)(ShareModal);
