@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
-import cx from 'classnames';
+import classnames from 'classnames';
 import * as links from './social-media-share-links';
-import { isPromise, windowOpen } from './utils';
+import { windowOpen } from './utils';
 
 
 const supportedNetworks = Object.keys(links);
@@ -12,7 +12,6 @@ const supportedNetworks = Object.keys(links);
 export default class ShareButton extends Component {
   constructor(props) {
     super(props);
-
     autobind(this);
   }
 
@@ -21,7 +20,6 @@ export default class ShareButton extends Component {
       disabled,
       windowWidth,
       windowHeight,
-      beforeOnClick,
     } = this.props;
 
     if (!disabled) {
@@ -34,17 +32,7 @@ export default class ShareButton extends Component {
 
       const windowOpenBound = () => windowOpen(this.link(), windowOptions);
 
-      if (beforeOnClick) {
-        const returnVal = beforeOnClick();
-
-        if (isPromise(returnVal)) {
-          returnVal.then(windowOpenBound);
-        } else {
-          windowOpenBound();
-        }
-      } else {
-        windowOpenBound();
-      }
+      windowOpenBound();
     }
   }
 
@@ -69,12 +57,12 @@ export default class ShareButton extends Component {
       style,
     } = this.props;
 
-    const classes = cx(
+    const classes = classnames(
       'SocialMediaShareButton',
       `SocialMediaShareButton--${network}`,
       {
-        'SocialMediaShareButton--disabled': !!disabled,
-        disabled: !!disabled,
+        'SocialMediaShareButton--disabled': disabled,
+        disabled,
       },
       className,
     );
@@ -110,18 +98,15 @@ ShareButton.propTypes = {
   style: PropTypes.object,
   windowWidth: PropTypes.number,
   windowHeight: PropTypes.number,
-  beforeOnClick: PropTypes.func,
 };
 
 ShareButton.defaultProps = {
+  disabled: false,
   disabledStyle: {
     opacity: 0.6,
   },
 };
 
-/* HOC to ease migration from v1 to v2.
- * To-be-removed in v2.
- */
 function createShareButton(network, optsMap = () => ({}), propTypes, defaultProps = {}) {
   const CreatedButton = props => (
     <ShareButton
