@@ -4,24 +4,20 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import autobind from 'react-autobind';
-import { ShareButtons } from '../../libs/react-share/react-share';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 import CopyLink from '../generic/CopyLink';
-import IconSVG from '../generic/IconSVG';
+import FacebookIconShareButton from '../generic/FacebookIconShareButton';
+import TwitterIconShareButton from '../generic/TwitterIconShareButton';
+import PinterestIconShareButton from '../generic/PinterestIconShareButton';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
-
-// Assets
-import FacebookShareIcon from '../../../svg/share-facebook.svg';
-import PinterestShareIcon from '../../../svg/share-pinterest.svg';
-import TwitterShareIcon from '../../../svg/share-twitter.svg';
 
 // CSS
 import '../../../css/components/ShareModal.scss';
@@ -54,12 +50,6 @@ class ShareModal extends Component {
       currentProductImage,
     } = this.props;
 
-    const {
-      FacebookShareButton,
-      PinterestShareButton,
-      TwitterShareButton,
-    } = ShareButtons;
-
     return (
       <ModalContainer
         modalContainerClass="grid-middle"
@@ -72,43 +62,22 @@ class ShareModal extends Component {
           <div
             className="ShareModal typography Modal__layout-container"
           >
-            <ul className="ShareModal__icons-row">
+            <ul className="ShareModal__icons-row Modal__content--sm-margin-top">
               <li className="u-cursor--pointer">
-                <FacebookShareButton
+                <FacebookIconShareButton
                   url={currentURL}
-                  className="ShareModal__icon-button"
-                >
-                  <IconSVG
-                    svgPath={FacebookShareIcon.url}
-                    width="40px"
-                    height="40px"
-                  />
-                </FacebookShareButton>
+                />
               </li>
               <li className="u-cursor--pointer">
-                <PinterestShareButton
+                <PinterestIconShareButton
                   url={currentURL}
-                  className="ShareModal__icon-button"
-                  media={currentProductImage}
-                >
-                  <IconSVG
-                    svgPath={PinterestShareIcon.url}
-                    width="40px"
-                    height="40px"
-                  />
-                </PinterestShareButton>
+                  image={currentProductImage}
+                />
               </li>
               <li className="u-cursor--pointer">
-                <TwitterShareButton
+                <TwitterIconShareButton
                   url={currentURL}
-                  className="ShareModal__icon-button"
-                >
-                  <IconSVG
-                    svgPath={TwitterShareIcon.url}
-                    width="40px"
-                    height="40px"
-                  />
-                </TwitterShareButton>
+                />
               </li>
             </ul>
             <CopyLink url={currentURL} />
