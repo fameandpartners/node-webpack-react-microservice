@@ -69,12 +69,12 @@ class ColorSwatches extends PureComponent {
                   </span>
                 )
                 : (
-                  <div className="u-center u-textAlign--center">
+                  <div className="u-center u-text-align--center">
                     <span>
                       <span>{color.presentation}</span>
                       <br />
                       { price
-                      ? <span className="u-text-align-center">{formatCents(price, 0)}</span>
+                      ? <span>{formatCents(price, 0)}</span>
                       : null
                     }
                     </span>
