@@ -116,6 +116,7 @@ const productState = {
 const hydrated = {
   $$appState: {
     // sideMenuOpen: true,
+    currentURL: 'https://www.fameandpartners.com/',
   },
   $$productState: productState,
   $$customizationState: {

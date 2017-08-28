@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 
+// Components
+import IconSVG from '../generic/IconSVG';
+
 // Assets
 import FacebookLogo from '../../../svg/i-facebook.svg';
 
@@ -47,7 +50,11 @@ class FacebookButton extends Component {
         <Button
           {...props}
           metaIcon={(
-            <img src={FacebookLogo.url} alt="Facebook logo" width="20px" height="20px" />
+            <IconSVG
+              svgPath={FacebookLogo.url}
+              width="20px"
+              height="20px"
+            />
           )}
           text={this.facebookText()}
         />

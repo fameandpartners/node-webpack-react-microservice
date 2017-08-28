@@ -15,6 +15,7 @@ const modalIds = assign({},
     'FABRIC_MODAL',
     'FORGOT_PASSWORD_MODAL',
     'LOG_IN_MODAL',
+    'SHARE_MODAL',
     'SIGN_UP_MODAL',
   ]),
 );
