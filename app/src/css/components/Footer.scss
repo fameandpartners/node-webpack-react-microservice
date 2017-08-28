@@ -35,11 +35,11 @@
 
 .Footer .Footer__category-list {
   margin-top: 95px;
+  margin-bottom: 45px;
 
   @include md {
     margin-top: 7px;
   }
-  margin-bottom: 45px;
 }
 
 .Footer .Footer__category-list li {

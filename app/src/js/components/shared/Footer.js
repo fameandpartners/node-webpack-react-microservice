@@ -4,7 +4,6 @@ import classNames from 'classnames';
 // Components
 import Button from '../generic/Button';
 import Input from '../form/Input';
-import Icon from './Icon';
 
 // CSS
 import '../../../css/components/Footer.scss';
@@ -193,7 +192,6 @@ class Footer extends PureComponent {
             </p>
           </div>
         </div>
-        <Icon />
       </footer>
     );
   }
