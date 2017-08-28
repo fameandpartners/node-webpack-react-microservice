@@ -85,6 +85,33 @@ class ProductDisplayOptionsTouch extends Component {
     return () => { this.props.activateModal({ modalId }); };
   }
 
+  calculateSliderHeight() {
+    const { breakpoint, winHeight } = this.props;
+    const MOBILE_HEIGHT_ELEMS = 301; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER
+    const TABLET_HEIGHT_ELEMS = 301; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER
+    const MAX_HEIGHT = 740;
+    const MIN_HEIGHT = 350;
+    let sliderHeight = MIN_HEIGHT;
+
+    if (breakpoint === 'tablet') {
+      sliderHeight = winHeight - TABLET_HEIGHT_ELEMS;
+    }
+
+    if (breakpoint === 'mobile') {
+      sliderHeight = winHeight - MOBILE_HEIGHT_ELEMS;
+    }
+
+
+    console.log('sliderHeight', sliderHeight);
+    if (sliderHeight > MAX_HEIGHT) {
+      return `${MAX_HEIGHT}px`;
+    } else if (sliderHeight < MIN_HEIGHT) {
+      return `${MIN_HEIGHT}px`;
+    }
+
+    return `${sliderHeight}px`;
+  }
+
   render() {
     const {
       breakpoint,
@@ -96,7 +123,7 @@ class ProductDisplayOptionsTouch extends Component {
 
     return (
       <div className="ProductImageSlider">
-        <Slider winWidth={winWidth} winHeight={winHeight}>
+        <Slider sliderHeight={this.calculateSliderHeight()} winWidth={winWidth} winHeight={winHeight}>
           <Slide>
             <div
               className="u-width--full u-height--full"

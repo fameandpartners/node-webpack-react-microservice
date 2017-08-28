@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
@@ -30,16 +31,17 @@ class Slider extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, sliderHeight } = this.props;
 
     return (
       <div
         ref={c => this.slider = c}
-        className="Slider u-full-width"
+        className="Slider u-full-width u-height--full"
+        style={{height: sliderHeight}}
       >
-        <div className="Slider__view">
-          <div className="Slider__frame">
-            <ul className="Slider__slides u-height-full">
+        <div className="Slider__view u-height--full">
+          <div className="Slider__frame u-height--full">
+            <ul className="Slider__slides u-height--full">
               { children }
             </ul>
           </div>
@@ -54,6 +56,7 @@ Slider.propTypes = {
     PropTypes.array,
     PropTypes.node,
   ]).isRequired,
+  sliderHeight: PropTypes.string.isRequired,
   winHeight: PropTypes.number,
   winWidth: PropTypes.number,
 };
