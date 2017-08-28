@@ -50,32 +50,32 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a href="##">Shipping Info</a>
+                <a href="/faqs#collapse-delivery-how-long">Shipping Info</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Returns Policy</a>
+                <a href="/faqs#collapse-returns-policy">Returns Policy</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Fame Contact Us</a>
+                <a href="/contact">Fame Contact Us</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">FAQs</a>
+                <a href="/faqs">FAQs</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Size Guide</a>
+                <a href="/size-guide">Size Guide</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Track My Order</a>
+                <a href="/faqs#collapse-orders-track">Track My Order</a>
               </p>
             </li>
           </ul>
@@ -83,32 +83,32 @@ class Footer extends PureComponent {
             <li><p className="Footer__category-title">About</p></li>
             <li>
               <p>
-                <a href="##">Why shop with us</a>
+                <a href="/why-us">Why shop with us</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">About us</a>
+                <a href="/about">About us</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Fame Society</a>
+                <a href="/fame-society-application">Fame Society</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">From our CEO</a>
+                <a href="/from-our-ceo">From our CEO</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Privacy Policy</a>
+                <a href="/privacy">Privacy Policy</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Terms</a>
+                <a href="/terms">Terms</a>
               </p>
             </li>
           </ul>
@@ -116,32 +116,32 @@ class Footer extends PureComponent {
             <li><p className="Footer__category-title">Shop By</p></li>
             <li>
               <p>
-                <a href="##">Best Sellers</a>
+                <a href="/dresses/best-sellers">Best Sellers</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">What's new</a>
+                <a href="/dresses?order=newest">What's new</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Made in 48 Hours</a>
+                <a href="/getitquick">Made in 48 Hours</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Formal</a>
+                <a href="/dresses/formal">Formal</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">Prom</a>
+                <a href="/dresses/prom">Prom</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="##">View All Dresses</a>
+                <a href="/dresses">View All Dresses</a>
               </p>
             </li>
           </ul>
@@ -149,16 +149,7 @@ class Footer extends PureComponent {
             <p className="Footer__copy">
               Sign up to always enjoy free returns
             </p>
-            <form
-              className={
-                classNames({
-                  'Footer__form--error': signupError,
-                  'grid-center': true,
-                  Footer__form: true,
-
-                })
-              }
-            >
+            <form className={classNames('grid-center', 'Footer__form')}>
               <div className="col-7_sm-9 padding--none">
                 <div>
                   <Input
@@ -182,9 +173,9 @@ class Footer extends PureComponent {
         </div>
         <div className="layout-container grid-noGutter">
           <div className="col-12 Footer__site-version-container">
-            <p className="text--noHighlight">Country: &nbsp;
+            <p className="u-user-select--none">Country: &nbsp;
               <span
-                className="text--underline cursor--pointer"
+                className="u-text-decoration--underline u-cursor--pointer"
                 onClick={this.changeSiteVersion}
               >
                 {siteVersion}

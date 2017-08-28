@@ -50,18 +50,11 @@
   text-align: right;
 }
 
-.text--underline {
-  text-decoration: underline;
-}
-
-.cursor--pointer {
+.u-cursor--pointer {
   cursor: pointer;
 }
 
-.text--noHighlight {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
+.u-user-select--none {
   user-select: none;
 }
 
@@ -109,10 +102,6 @@
   position: fixed;
 }
 
-.u-cursor--pointer {
-  cursor: pointer;
-}
-
 .u-text-align-left {
   text-align: left;
 }
@@ -134,7 +123,7 @@
   text-transform: uppercase;
 }
 
-.u-underline {
+.u-text-decoration--underline {
   text-decoration: underline;
 }
 

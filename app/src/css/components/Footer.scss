@@ -15,10 +15,6 @@
 .Footer input,
 .Footer button {
 
-  @include sm {
-    height: 46px;
-  }
-
   @include md {
     margin-bottom: 0;
   }
@@ -26,11 +22,7 @@
 
 .Footer p {
   font-weight: 500;
-  padding-bottom: 2px;
-
-  @include md {
-    padding-bottom: 0;
-  }
+  line-height: 30px;
 }
 
 .Footer .Footer__category-list {
@@ -104,23 +96,4 @@
 
 .Footer__form--error input {
   border: 1px solid $c-red;
-}
-
-.Footer__form .Input__meta-label {
-  margin-top: 10px;
-  background: transparent;
-  color: $c-red;
-  padding-top: 5px;
-  left: -10px;
-  width: 100%;
-  padding-right: 0;
-  font-size: 12px;
-  padding-top: 10px;
-}
-
-.hide-for-mobile {
-
-  @include xs {
-    display: none;
-  }
 }
