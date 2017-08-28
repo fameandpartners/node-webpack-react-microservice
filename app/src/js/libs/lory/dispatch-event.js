@@ -9,13 +9,13 @@ import CustomEvent from 'custom-event';
  */
 export default function dispatchEvent(target, type, detail) {
   const event = new CustomEvent(
-        type,
+    type,
     {
       bubbles: true,
       cancelable: true,
       detail,
     },
-    );
+  );
 
   target.dispatchEvent(event);
 }
