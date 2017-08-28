@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-// import { lory } from 'lory.js';
-
-// CSS
 import '../../../css/components/Slider.scss';
 
+import { lory } from '../../libs/lory';
+
+let loryInstance = null;
+// CSS
 class Slider extends Component {
   constructor(props) {
     super(props);
@@ -13,11 +14,19 @@ class Slider extends Component {
   }
 
   componentDidMount() {
-    // lory(this.slider, {
-    //   infinite: 1,
-    //   classNameFrame: 'Slider__frame',
-    //   classNameSlideContainer: 'Slider__slides',
-    // });
+    loryInstance = lory(this.slider, {
+      infinite: 1,
+      classNameFrame: 'Slider__frame',
+      classNameSlideContainer: 'Slider__slides',
+    });
+  }
+
+  componentDidUpdate(lastProps) {
+    if ((lastProps.winWidth !== this.props.winWidth)
+  || (lastProps.winHeight !== this.props.winHeight)) {
+      console.log('resetting');
+      loryInstance.reset();
+    }
   }
 
   render() {
@@ -45,6 +54,13 @@ Slider.propTypes = {
     PropTypes.array,
     PropTypes.node,
   ]).isRequired,
+  winHeight: PropTypes.number,
+  winWidth: PropTypes.number,
+};
+
+Slider.defaultProps = {
+  winHeight: null,
+  winWidth: null,
 };
 
 export default Slider;
