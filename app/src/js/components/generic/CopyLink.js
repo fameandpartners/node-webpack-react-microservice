@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import Clipboard from 'clipboard';
@@ -37,7 +36,7 @@ class CopyLink extends Component {
   /* eslint-disable react/no-find-dom-node */
   componentDidMount() {
     this.setState({
-      clipboard: new Clipboard(ReactDOM.findDOMNode(this.copyTrigger), {
+      clipboard: new Clipboard(this.copyTrigger, {
         text: () => this.props.url,
         error: () => {
           this.handleCopyLinkClickError();
@@ -60,7 +59,7 @@ class CopyLink extends Component {
         <Button
           tall
           secondary
-          ref={i => this.copyTrigger = i}
+          passedRef={i => this.copyTrigger = i}
           className="Modal__content--med-margin-bottom"
           text="Copy Link"
           handleClick={this.handleCopyLinkClick}
