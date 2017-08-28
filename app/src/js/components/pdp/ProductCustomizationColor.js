@@ -16,6 +16,7 @@ function stateToProps(state) {
   return {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
+    productSecondaryColorsCentsPrice: state.$$productState.get('productSecondaryColorsCentsPrice'),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     temporaryColorId: state.$$customizationState.get('temporaryColor').get('id'),
   };
@@ -60,6 +61,7 @@ class ProductCustomizationColor extends PureComponent {
       productCustomizationDrawer,
       productDefaultColors,
       productSecondaryColors,
+      productSecondaryColorsCentsPrice,
       temporaryColorId,
     } = this.props;
 
@@ -72,6 +74,7 @@ class ProductCustomizationColor extends PureComponent {
         <ColorSwatches
           productDefaultColors={productDefaultColors}
           productSecondaryColors={productSecondaryColors}
+          productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
           temporaryColorId={temporaryColorId}
           handleColorSelection={this.handleColorSelection}
         />
@@ -97,6 +100,7 @@ ProductCustomizationColor.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
+  productSecondaryColorsCentsPrice: PropTypes.number,
   temporaryColorId: PropTypes.number,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
@@ -107,6 +111,7 @@ ProductCustomizationColor.propTypes = {
 ProductCustomizationColor.defaultProps = {
   hasNavItems: true,
   productCustomizationDrawer: null,
+  productSecondaryColorsCentsPrice: 0,
   temporaryColorId: '',
 };
 

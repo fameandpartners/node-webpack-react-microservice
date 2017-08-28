@@ -56,7 +56,7 @@ class Header extends Component {
               <li><a className="Header__link" href="#featured">Featured</a></li>
               <li><a className="Header__link" href="#about">Who we are</a></li>
             </ul>
-            <div className="col-4 textAlign--center">
+            <div className="col-4 u-text-align--center">
               <IconSVG
                 svgPath={FameLogo.url}
                 width="200px"

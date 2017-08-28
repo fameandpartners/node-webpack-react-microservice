@@ -8,6 +8,7 @@ export const $$initialState = Immutable.fromJS({
   // ArrayOf({
   //   generatedId: ????
   //   productCentsBasePrice: Number,
+  //   productImage: String,
   //   productTitle: String,
   //   color: ObjectOf({
   //     id: String,

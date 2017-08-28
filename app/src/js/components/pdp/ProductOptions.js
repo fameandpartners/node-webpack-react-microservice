@@ -19,9 +19,6 @@ import CustomizationConstants from '../../constants/CustomizationConstants';
 import ProductOptionsRow from './ProductOptionsRow';
 import ProductSecondaryActions from './ProductSecondaryActions';
 
-// TEST IMAGES
-import image1 from '../../../img/test/image_1.png';
-
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
 // CSS
@@ -39,6 +36,7 @@ function stateToProps(state) {
   return {
     // PRODUCT
     productId: state.$$productState.get('productId'),
+    productImage: state.$$productState.get('productImages').toJS()[0],
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
 
@@ -147,6 +145,7 @@ class ProductOptions extends Component {
 
   render() {
     const {
+      productImage,
       productTitle,
       selectedStyleCustomizations,
       selectedDressSize,
@@ -156,7 +155,7 @@ class ProductOptions extends Component {
     return (
       <div className="ProductOptions grid-12-noGutter">
         <div className="ProductOptions__primary-image-container brick col-6">
-          <img className="u-width--full" alt="dress1" src={image1} />
+          <img className="u-width--full" alt="dress1" src={productImage.bigImg} />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
@@ -216,10 +215,19 @@ class ProductOptions extends Component {
 ProductOptions.propTypes = {
   //* Redux Properties
   // PRODUCT
+  productImage: PropTypes.shape({
+    id: PropTypes.number,
+    colorId: PropTypes.number,
+    smallImg: PropTypes.string,
+    bigImg: PropTypes.string,
+    height: PropTypes.number,
+    width: PropTypes.number,
+    position: PropTypes.number,
+  }).isRequired,
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   // COLOR
-  colorCentsTotal: PropTypes.number.isRequired,
+  colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
   // ADDONS
@@ -238,6 +246,7 @@ ProductOptions.propTypes = {
 };
 
 ProductOptions.defaultProps = {
+  colorCentsTotal: 0,
   selectedDressSize: null,
   selectedHeightValue: null,
 };

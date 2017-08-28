@@ -4,7 +4,30 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { assign } from 'lodash';
 import App from './App';
+
+// CSS
 import '../css/index.scss';
+
+// MOCK JSON
+import productJSON from '../mock/product.json';
+
+// Transforms
+import {
+  transformProductCentsBasePrice,
+  transformProductComplementaryProducts,
+  transformProductCurrency,
+  transformProductDefaultColors,
+  transformProductDescription,
+  transformProductSecondaryColors,
+  transformProductSecondaryColorsCentsPrice,
+  transformProductFabric,
+  transformProductGarmentInformation,
+  transformProductId,
+  transformProductImages,
+  transformProductPreCustomizations,
+  transformProductModelDescription,
+  transformProductTitle,
+} from './utilities/pdp';
 
 // Store
 import AppStore from './stores/AppStore';
@@ -43,237 +66,8 @@ function computeLayerCode(url, sentinel, length = 4) {
 }
 
 function transformAddons() {
-  const addons = {
-    base_images: [
-      {
-        name: 'FP2573P_base-2.png',
-        url: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1609/cads/1505/web/base-2.png?1500591595',
-        position: 4,
-        bit_array: [
-          false,
-          false,
-          true,
-          false,
-        ],
-      },
-      {
-        name: 'FP2573P_base.png',
-        url: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1609/cads/1506/web/base-.png?1500591596',
-        position: 5,
-        bit_array: [
-          false,
-          false,
-          false,
-          false,
-        ],
-      },
-    ],
-    layer_images: [
-      {
-        name: 'FP2573P_layer-3.png',
-        url: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1609/cads/1502/web/layer-3.png?1500591594',
-        position: 1,
-        bit_array: [
-          false,
-          false,
-          false,
-          true,
-        ],
-      },
-      {
-        name: 'FP2573P_layer-1.png',
-        url: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1609/cads/1503/web/layer-1.png?1500591594',
-        position: 2,
-        bit_array: [
-          false,
-          true,
-          false,
-          false,
-        ],
-      },
-      {
-        name: 'FP2573P_layer-0.png',
-        url: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1609/cads/1504/web/layer-0.png?1500591595',
-        position: 3,
-        bit_array: [
-          true,
-          false,
-          false,
-          false,
-        ],
-      },
-    ],
-  };
-  const allCustomizations = [
-    {
-      table: {
-        id: 4605,
-        name: 'Change To Short Sleeves',
-        image: 'logo_empty.png',
-        display_price: {
-          money: {
-            fractional: '400.0',
-            currency: {
-              id: 'aud',
-              priority: 4,
-              iso_code: 'AUD',
-              name: 'Australian Dollar',
-              symbol: '$',
-              alternate_symbols: [
-                'A$',
-              ],
-              subunit: 'Cent',
-              subunit_to_unit: 100,
-              symbol_first: true,
-              html_entity: '$',
-              decimal_mark: '.',
-              thousands_separator: ',',
-              iso_numeric: '036',
-            },
-            bank: {
-              rounding_method: null,
-              rates: {},
-              mutex: {},
-            },
-          },
-          options: {
-            with_currency: false,
-            symbol_position: 'before',
-            no_cents: false,
-            decimal_mark: '.',
-            thousands_separator: ',',
-          },
-        },
-        position: 1,
-      },
-    },
-    {
-      table: {
-        id: 4606,
-        name: 'Raise Front Neckline',
-        image: 'logo_empty.png',
-        display_price: {
-          money: {
-            fractional: '900.0',
-            currency: {
-              id: 'aud',
-              priority: 4,
-              iso_code: 'AUD',
-              name: 'Australian Dollar',
-              symbol: '$',
-              alternate_symbols: [
-                'A$',
-              ],
-              subunit: 'Cent',
-              subunit_to_unit: 100,
-              symbol_first: true,
-              html_entity: '$',
-              decimal_mark: '.',
-              thousands_separator: ',',
-              iso_numeric: '036',
-            },
-            bank: {
-              rounding_method: null,
-              rates: {},
-              mutex: {},
-            },
-          },
-          options: {
-            with_currency: false,
-            symbol_position: 'before',
-            no_cents: false,
-            decimal_mark: '.',
-            thousands_separator: ',',
-          },
-        },
-        position: 2,
-      },
-    },
-    {
-      table: {
-        id: 4607,
-        name: 'Make Knee Length',
-        image: 'logo_empty.png',
-        display_price: {
-          money: {
-            fractional: '900.0',
-            currency: {
-              id: 'aud',
-              priority: 4,
-              iso_code: 'AUD',
-              name: 'Australian Dollar',
-              symbol: '$',
-              alternate_symbols: [
-                'A$',
-              ],
-              subunit: 'Cent',
-              subunit_to_unit: 100,
-              symbol_first: true,
-              html_entity: '$',
-              decimal_mark: '.',
-              thousands_separator: ',',
-              iso_numeric: '036',
-            },
-            bank: {
-              rounding_method: null,
-              rates: {},
-              mutex: {},
-            },
-          },
-          options: {
-            with_currency: false,
-            symbol_position: 'before',
-            no_cents: false,
-            decimal_mark: '.',
-            thousands_separator: ',',
-          },
-        },
-        position: 3,
-      },
-    },
-    {
-      table: {
-        id: 4608,
-        name: 'Add Separate Waist Tie',
-        image: 'logo_empty.png',
-        display_price: {
-          money: {
-            fractional: '900.0',
-            currency: {
-              id: 'aud',
-              priority: 4,
-              iso_code: 'AUD',
-              name: 'Australian Dollar',
-              symbol: '$',
-              alternate_symbols: [
-                'A$',
-              ],
-              subunit: 'Cent',
-              subunit_to_unit: 100,
-              symbol_first: true,
-              html_entity: '$',
-              decimal_mark: '.',
-              thousands_separator: ',',
-              iso_numeric: '036',
-            },
-            bank: {
-              rounding_method: null,
-              rates: {},
-              mutex: {},
-            },
-          },
-          options: {
-            with_currency: false,
-            symbol_position: 'before',
-            no_cents: false,
-            decimal_mark: '.',
-            thousands_separator: ',',
-          },
-        },
-        position: 4,
-      },
-    },
-  ];
+  const addons = productJSON.product.available_options.table.addons;
+  const allCustomizations = productJSON.product.available_options.table.customizations.table.all;
   return assign({}, {
       // Marry previous customizations to addons
     addonLayerImages: addons.layer_images,
@@ -299,6 +93,23 @@ function transformAddons() {
   });
 }
 
+const productState = {
+  currency: transformProductCurrency(productJSON.product),
+  complementaryProducts: transformProductComplementaryProducts(),
+  fabric: transformProductFabric(productJSON.product),
+  garmentCareInformation: transformProductGarmentInformation(),
+  preCustomizations: transformProductPreCustomizations(),
+  productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
+  productDescription: transformProductDescription(productJSON.product),
+  productDefaultColors: transformProductDefaultColors(productJSON.product),
+  productSecondaryColors: transformProductSecondaryColors(productJSON.product),
+  productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
+  productId: transformProductId(productJSON.product),
+  productImages: transformProductImages(productJSON.images),
+  modelDescription: transformProductModelDescription(productJSON.product),
+  productTitle: transformProductTitle(productJSON.product),
+};
+
 // WARN: This can not go in production, it is just to show how hydration works
 // eslint-disable-next-line
 // const hydrated = (typeof window === 'object') ? window.__data : {
@@ -307,163 +118,11 @@ const hydrated = {
     // sideMenuOpen: true,
     currentURL: 'https://www.fameandpartners.com/',
   },
-  $$productState: {
-    productImage: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/32710/original/usp1040-burgundy-1.jpg?1478188086',
-    complementaryProducts: [
-      {
-        centsPrice: 22900,
-        smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37492/original/fprv1060-white-front.jpg?1499455161',
-        productId: 'fprv1060',
-        productTitle: 'The Laurel Dress',
-        url: 'https://www.fameandpartners.com/dresses/dress-the-laurel-dress-1599?color=white',
-      },
-      {
-        centsPrice: 26900,
-        smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37428/original/fp2556-white-front.jpg?1499455106',
-        productId: 'fp2556',
-        productTitle: 'The Janette Dress',
-        url: 'https://www.fameandpartners.com/dresses/dress-the-janette-dress-1598?color=white',
-      },
-    ],
-    fabric: {
-      id: 'poly-1234',
-      smallImg: '',
-      name: 'Silk',
-      description: 'Medium Weight\nExcellent stretch and recovery\nMain: 97% cotton, 3% elastane cotton sateen\nLining: 65% cotton, 35% polyester poplin\nTrim: Nylon invisible zip with hook & eye closure',
-    },
-    garmentCareInformation: 'Professional dry-clean only.\nSee label for further details.',
-    preCustomizations: [
-      {
-        id: 'a0',
-        smallImg: 'bs.co/a0.jpg',
-        description: 'For cocktail',
-        selectedCustomizations: {},
-      },
-      {
-        id: 'a1',
-        smallImg: 'bs.co/a1.jpg',
-        description: 'For office',
-        selectedCustomizations: {},
-      },
-      {
-        id: 'a2',
-        smallImg: 'bs.co/a2.jpg',
-        description: 'For day',
-        selectedCustomizations: {},
-      },
-    ],
-    productDefaultColors: [
-      {
-        id: 4,
-        name: 'pretty-pink',
-        presentation: 'Pretty Pink',
-        hexValue: '#F7DBE9',
-        patternUrl: null,
-      },
-      {
-        id: 5,
-        name: 'red',
-        presentation: 'Red',
-        hexValue: '#E01B1B',
-        patternUrl: null,
-      },
-    ],
-    productSecondaryColors: [
-      {
-        id: 10,
-        centsTotal: 1600,
-        name: 'aqua',
-        presentation: 'Aqua',
-        hexValue: '#F7DBE9',
-        patternUrl: null,
-      },
-      {
-        id: 20,
-        centsTotal: 1600,
-        name: 'black',
-        presentation: 'Black',
-        hexValue: '#000000',
-        patternUrl: null,
-      },
-      {
-        id: 17,
-        centsTotal: 1600,
-        name: 'blush',
-        presentation: 'Blush',
-        hexValue: '#F9DAD8',
-        patternUrl: null,
-      },
-      {
-        id: 81,
-        centsTotal: 1600,
-        name: 'bright-yellow',
-        presentation: 'Bright Yellow',
-        hexValue: '#fcf751',
-        patternUrl: null,
-      },
-      {
-        id: 94,
-        centsTotal: 1600,
-        name: 'burgundy',
-        presentation: 'Burgundy',
-        hexValue: '#77202F',
-        patternUrl: null,
-      },
-      {
-        id: 55,
-        centsTotal: 1600,
-        name: 'candy-pink',
-        presentation: 'Candy Pink',
-        hexValue: '#ff99ff',
-        patternUrl: null,
-      },
-      {
-        id: 35,
-        centsTotal: 1600,
-        name: 'champagne',
-        presentation: 'Champagne',
-        hexValue: '#F9DAD8',
-        patternUrl: null,
-      },
-      {
-        id: 37,
-        centsTotal: 1600,
-        name: 'cobalt-blue',
-        presentation: 'Cobalt Blue',
-        hexValue: '#012D60',
-        patternUrl: null,
-      },
-      {
-        id: 97,
-        centsTotal: 1600,
-        name: 'emerald-green',
-        presentation: 'Emerald Green',
-        hexValue: '#009875',
-        patternUrl: null,
-      },
-    ],
-    productId: '209gug902',
-    productCentsBasePrice: 21000,
-    productTitle: 'Escala Dress',
-    productDescription: 'Low effort, high contrast. The Jo is a heavy georgette gown featuring a contrasting pink bow at the front, criss-cross back straps, and a side split. It has an invisible zipper.',
-    modelDescription: 'Our model wears a US 0 and is 5’9”',
-  },
+  $$productState: productState,
   $$customizationState: {
     addons: transformAddons(),
-    selectedColor: {
-      id: 20,
-      centsTotal: 1200,
-      name: 'black',
-      presentation: 'Black',
-      hexValue: '#000000',
-    },
-    temporaryColor: {
-      id: 20,
-      centsTotal: 1200,
-      name: 'black',
-      presentation: 'Black',
-      hexValue: '#000000',
-    },
+    selectedColor: productState.productDefaultColors[0],
+    temporaryColor: productState.productDefaultColors[0],
   },
 };
 const store = AppStore(hydrated);
