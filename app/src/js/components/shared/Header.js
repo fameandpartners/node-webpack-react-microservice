@@ -53,7 +53,7 @@ class Header extends Component {
               <li><a className="Header__link" href="#featured">Featured</a></li>
               <li><a className="Header__link" href="#about">Who we are</a></li>
             </ul>
-            <div className="col-4 textAlign--center">
+            <div className="col-4 u-textAlign--center">
               <img src={FameLogo.url} alt="Fame Logo" width="200px" height="26px" />
             </div>
             <ul className="col-4 textAlign--right">

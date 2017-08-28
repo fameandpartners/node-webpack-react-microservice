@@ -65,6 +65,9 @@ export const $$initialState = Immutable.fromJS({
   // })
   productSecondaryColors: [],
 
+  // Number
+  productSecondaryColorsCentsPrice: null,
+
   // String
   productDescription: null,
 
