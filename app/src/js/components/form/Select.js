@@ -13,6 +13,9 @@ import classnames from 'classnames';
 import noop from '../../libs/noop';
 import KEYS from '../../constants/keys';
 
+// Components
+import IconSVG from '../generic/IconSVG';
+
 // CSS
 import '../../../css/components/Select.scss';
 import Carat from '../../../svg/carat.svg';
@@ -197,7 +200,12 @@ class Select extends Component {
           : null
         }
         <span className="Select-item-text noSelect">{spanText}</span>
-        <img src={Carat.url} alt="carat" className="Select__carat" width="15px" height="15px" />
+        <IconSVG
+          svgPath={Carat.url}
+          className="Select__carat"
+          width="15px"
+          height="15px"
+        />
         <div className="Select">
           <div className="Select-list-wrapper">
             <ul className="Select-list">
