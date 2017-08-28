@@ -41,7 +41,7 @@ class ProductCustomization extends PureComponent {
           className={classnames(
             [
               'ProductCustomization__wrapper',
-              'u-overflow-y--scroll textAlign--center u-flex--1',
+              'u-overflow-y--scroll u-textAlign--center u-flex--1',
             ],
         )}
         >

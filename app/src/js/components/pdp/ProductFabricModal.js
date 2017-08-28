@@ -57,7 +57,7 @@ class ProductFabricModal extends PureComponent {
           modalContentClassName="u-width--full"
           modalWrapperClassName="u-flex--col"
         >
-          <div className="ProductFabricModal textAlign--center grid-middle">
+          <div className="ProductFabricModal u-textAlign--center grid-middle">
             <div className="Modal__content--med-margin-bottom">
               <ProductFabricInfo
                 fabric={fabric}

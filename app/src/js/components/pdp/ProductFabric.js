@@ -37,7 +37,7 @@ class ProductFabric extends PureComponent {
         <div
           className={classnames(
             'ProductFabric__contents u-width--full',
-            'u-position--absolute textAlign--center',
+            'u-position--absolute u-textAlign--center',
           )}
         >
 

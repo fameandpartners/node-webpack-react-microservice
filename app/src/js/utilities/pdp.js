@@ -66,6 +66,7 @@ export function addonSelectionDisplayText({ selectedAddonOptions }) {
 export function accumulateCustomizationSelections({ $$customizationState, $$productState }) {
   const productId = $$productState.get('productId');
   const productTitle = $$productState.get('productTitle');
+  const productImage = $$productState.get('productImages').get(0).get('bigImg');
   const productCentsBasePrice = $$productState.get('productCentsBasePrice');
   const color = $$customizationState.get('selectedColor').toJS();
   const selectedStyleCustomizations = $$customizationState.get('selectedStyleCustomizations').toJS();
@@ -74,6 +75,7 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
 
   return {
     productId,
+    productImage,
     productTitle,
     productCentsBasePrice,
     color,
@@ -81,7 +83,66 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   };
 }
 
+// ************* DATA MODEL TRANSFORMS ******************* //
+// ******************************************************* //
+
+export function transformProductCentsBasePrice({ prices = {} }) {
+  // "original_amount": String,
+  //   ****** into ******
+  // productCentsBasePrice: Number
+  // })
+  const productCentsBasePrice = parseInt(prices.original_amount, 10) * 100;
+  return productCentsBasePrice;
+}
+
+export function transformProductCurrency({ prices = {} }) {
+  // "currency": String,
+  //   ****** into ******
+  // currency: String
+  // })
+  return prices.currency;
+}
+
+export function transformProductComplementaryProducts() {
+  // UNKNOWN
+  //   ****** into ******
+  // centsPrice: Number,
+  // smallImg: String,
+  // productId: String,
+  // productTitle: String,
+  // url: String,
+  // })
+  console.warn('NEED BACKEND COMPLEMENTARY PRODUCTS');
+  const complementaryProducts = [
+    {
+      centsPrice: 22900,
+      smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37492/original/fprv1060-white-front.jpg?1499455161',
+      productId: 'fprv1060',
+      productTitle: 'The Laurel Dress',
+      url: 'https://www.fameandpartners.com/dresses/dress-the-laurel-dress-1599?color=white',
+    },
+    {
+      centsPrice: 26900,
+      smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37428/original/fp2556-white-front.jpg?1499455106',
+      productId: 'fp2556',
+      productTitle: 'The Janette Dress',
+      url: 'https://www.fameandpartners.com/dresses/dress-the-janette-dress-1598?color=white',
+    },
+  ];
+  return complementaryProducts;
+}
+
+export function transformProductDescription({ description }) {
+  // "description": String,
+  //   ****** into ******
+  // productDescription: String
+  // })
+  const productDescription = description;
+  return productDescription;
+}
+
 export function transformProductDefaultColors({ colors = {} }) {
+  console.warn('NEED A WAY TO RECIVE patternUrl');
   const defaultColors = colors.table.default || [];
   // "created_at": String,
   // "id": Number,
@@ -149,6 +210,43 @@ export function transformProductSecondaryColors({ colors = {} }) {
   });
 }
 
+export function transformProductSecondaryColorsCentsPrice({ colors = {} }) {
+  const extraPrice = colors.table.default_extra_price.price || {};
+  // amount: String,
+  // currency: String,
+  // id: Number|Null
+  // variant_id: Number|Null
+  //   ****** into ******
+  // productSecondaryColorsCentsPrice: Number
+  const productSecondaryColorsCentsPrice = parseInt(extraPrice.amount, 10) * 100;
+  return productSecondaryColorsCentsPrice;
+}
+
+export function transformProductFabric({ fabric }) {
+  console.warn('NEED BACKEND FABRIC IMG');
+  //   "fabric": String,
+  //   ****** into ******
+  //   {
+  //    id: Number,
+  //    img: String,
+  //    name: String,
+  //    description: String,
+  //   }
+  return {
+    id: 'does-not-exist-yet',
+    img: 'does-not-exist-yet.png',
+    name: 'does-not-exist-yet',
+    description: fabric,
+  };
+}
+
+export function transformProductGarmentInformation() {
+  //   "garment_care": null, // CURRENTLY NOT PASSED
+  //   ****** into ******
+  //   garmentCareInformation: String
+  return 'Professional dry-clean only.\nSee label for further details.';
+}
+
 export function transformProductId({ id = 'dress-id' }) {
   //   "id": Number,
   //   ****** into ******
@@ -183,12 +281,73 @@ export function transformProductImages(images) {
   }));
 }
 
+export function transformProductPreCustomizations() {
+  console.warn('NEED BACKEND PRECUSTOMIZATIONS');
+  //   UNKNOWN: Will need data from backend
+  //   ****** into ******
+  //   preCustomizations: arrayOf({
+  //     id: Number|String,
+  //     smallImg: String,
+  //     description: String,
+  //     selectedCustomizations: String (Potentially URL)
+  //   })
+  const preCustomizations = [
+    {
+      id: 'a0',
+      smallImg: 'bs.co/a0.jpg',
+      description: 'For cocktail',
+      selectedCustomizations: {},
+    },
+    {
+      id: 'a1',
+      smallImg: 'bs.co/a1.jpg',
+      description: 'For office',
+      selectedCustomizations: {},
+    },
+    {
+      id: 'a2',
+      smallImg: 'bs.co/a2.jpg',
+      description: 'For day',
+      selectedCustomizations: {},
+    },
+  ];
+  return preCustomizations;
+}
+
+export function transformProductModelDescription({ fit }) {
+  //   "fit": String,
+  //   ****** into ******
+  //   modelDescription: String,
+  const modelDescription = fit;
+  return modelDescription;
+}
+
+export function transformProductTitle({ name }) {
+  //   "name": Number,
+  //   ****** into ******
+  //   title: String,
+  const title = name;
+  return title;
+}
+
 export default {
   addonSelectionDisplayText,
   calculateSubTotal,
   sizingDisplayText,
   reduceCustomizationSelectionPrice,
   // Transforms
+  transformProductCentsBasePrice,
+  transformProductComplementaryProducts,
+  transformProductCurrency,
+  transformProductDefaultColors,
+  transformProductDescription,
+  transformProductSecondaryColors,
+  transformProductSecondaryColorsCentsPrice,
+  transformProductFabric,
+  transformProductGarmentInformation,
   transformProductId,
   transformProductImages,
+  transformProductPreCustomizations,
+  transformProductModelDescription,
+  transformProductTitle,
 };

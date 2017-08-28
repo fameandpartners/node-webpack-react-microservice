@@ -58,7 +58,7 @@ class ColorSwatches extends PureComponent {
                   <span
                     className={classnames(
                       'ColorSwatches__touch-display-text',
-                      'u-width--full u-position--absolute u-left u-text-align-center',
+                      'u-width--full u-position--absolute u-left',
                     )}
                   >
                     <span>{color.presentation}</span>
@@ -69,12 +69,12 @@ class ColorSwatches extends PureComponent {
                   </span>
                 )
                 : (
-                  <div className="u-center">
+                  <div className="u-center u-textAlign--center">
                     <span>
                       <span>{color.presentation}</span>
                       <br />
                       { price
-                      ? <span>{formatCents(price, 0)}</span>
+                      ? <span className="u-text-align-center">{formatCents(price, 0)}</span>
                       : null
                     }
                     </span>
@@ -92,6 +92,7 @@ class ColorSwatches extends PureComponent {
       breakpoint,
       productDefaultColors,
       productSecondaryColors,
+      productSecondaryColorsCentsPrice,
     } = this.props;
     const isTouch = (breakpoint === 'mobile' || breakpoint === 'tablet');
 
@@ -113,11 +114,11 @@ class ColorSwatches extends PureComponent {
           { productDefaultColors.map(c => this.generateColorSwatch(c, 0, isTouch))}
         </div>
         <h3 className="u-mb-small textAlign--left">
-          Additional Colors +$16
+          Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
         </h3>
         <div className="u-mb-normal grid-12">
           { productSecondaryColors.map(c =>
-            this.generateColorSwatch(c, c.centsTotal, isTouch))
+            this.generateColorSwatch(c, productSecondaryColorsCentsPrice, isTouch))
           }
         </div>
       </div>
@@ -137,10 +138,12 @@ ColorSwatches.propTypes = {
   })).isRequired,
   productSecondaryColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
+    centsPrice: PropTypes.number,
     name: PropTypes.string,
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
+  productSecondaryColorsCentsPrice: PropTypes.number.isRequired,
   temporaryColorId: PropTypes.number.isRequired,
   handleColorSelection: PropTypes.func.isRequired,
 };
