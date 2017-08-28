@@ -92,8 +92,6 @@ class ProductDisplayOptionsTouch extends Component {
       sliderHeight = winHeight - MOBILE_HEIGHT_ELEMS;
     }
 
-
-    console.log('sliderHeight', sliderHeight);
     if (sliderHeight > MAX_HEIGHT) {
       return `${MAX_HEIGHT}px`;
     } else if (sliderHeight < MIN_HEIGHT) {
@@ -126,6 +124,7 @@ class ProductDisplayOptionsTouch extends Component {
             </Slide>
             ))}
           {
+          // LEAVE FOR PRODUCT FABRIC
           //   <Slide style={{ width: '90%' }}>
           //   <ProductFabric
           //     breakpoint={breakpoint}
