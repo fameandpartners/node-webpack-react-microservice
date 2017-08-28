@@ -6,7 +6,6 @@ import '../../../css/components/Slider.scss';
 import { lory } from '../../libs/lory';
 
 let loryInstance = null;
-// CSS
 class Slider extends Component {
   constructor(props) {
     super(props);

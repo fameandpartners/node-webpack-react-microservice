@@ -15,10 +15,10 @@ class ProductGrid extends Component {
     autoBind(this);
   }
 
-  splitProductImages(mod) {
+  splitProductImages(remainder) {
     const { productImages } = this.props;
     return productImages
-      .filter((img, i) => i % 2 === mod)
+      .filter((img, i) => i % 2 === remainder)
       .map(img => (
         <div key={img.id} className="brick">
           <img className="u-width--full" alt="dress2" src={img.bigImg} />

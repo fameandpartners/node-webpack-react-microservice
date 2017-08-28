@@ -79,7 +79,7 @@ class Cart extends Component {
             { this.generateLineItems() }
 
 
-            <div className="Cart__subtotal u-textAlign--center">
+            <div className="Cart__subtotal u-text-align--center">
               <span>Subtotal</span>
               <span className="Cart__subtotal-price">
                 { formatCents(this.subTotal(), 2) }
