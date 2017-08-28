@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { assign, findIndex, uniqBy } from 'lodash';
+import { findIndex, uniqBy } from 'lodash';
 import { bindActionCreators } from 'redux';
 import autoBind from 'react-autobind';
 import classnames from 'classnames';
+
+// Utilities
+import { addOrRemoveFrom } from '../../utilities/array';
 
 // Components
 import ButtonCol from '../generic/ButtonCol';
@@ -16,7 +19,7 @@ import * as ModalActions from '../../actions/ModalActions';
 // CSS
 import '../../../css/components/ProductCustomizationStyle.scss';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   const addons = state.$$customizationState.get('addons').toJS();
   return {
     addonLayerImages: addons.addonLayerImages,
@@ -27,13 +30,14 @@ function mapStateToProps(state) {
     baseSelected: addons.baseSelected,
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     selectedAddonImageLayers: addons.selectedAddonImageLayers,
+    temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   const {
     changeCustomizationDrawer,
-    setAddonOptions,
+    updateCustomizationStyleSelection,
     setAddonBaseLayer,
     setActiveAddonImageLayers,
   } = bindActionCreators(CustomizationActions, dispatch);
@@ -44,11 +48,11 @@ function mapDispatchToProps(dispatch) {
     changeCustomizationDrawer,
     setAddonBaseLayer,
     setActiveAddonImageLayers,
-    setAddonOptions,
+    updateCustomizationStyleSelection,
   };
 }
 
-class ProductCustomizeStyle extends Component {
+class ProductCustomizationStyle extends Component {
   constructor(props, context) {
     super(props, context);
     autoBind(this);
@@ -119,7 +123,7 @@ class ProductCustomizeStyle extends Component {
    * @return {Array[Node]} - addonOptionNodes
    */
   generateAddonOptions() {
-    const { addonOptions } = this.props;
+    const { addonOptions, temporaryStyleCustomizations } = this.props;
 
     return addonOptions.map((a) => {
       const displayPrice = parseFloat((
@@ -129,17 +133,17 @@ class ProductCustomizeStyle extends Component {
 
       return (
         <li
-          className="width--full"
+          className="u-width--full"
           role="button"
           key={`addon-option-${a.id}`}
         >
           <div className="u-mb-small">
             <ButtonCol
               tall
-              className="width--full"
-              left={<span>{a.name}</span>}
+              className="u-width--full"
+              left={<span>{a.description}</span>}
               right={<span>+ ${displayPrice}</span>}
-              isSelected={a.active}
+              isSelected={temporaryStyleCustomizations.indexOf(a.id) > -1}
               handleClick={this.handleAddonSelection(a)}
             />
           </div>
@@ -153,16 +157,12 @@ class ProductCustomizeStyle extends Component {
    * @param  {Object} addon - addon selected or deselected
    * @return {Array} - newAddons
    */
-  computeNewAddons(addon) {
+  computeActivenessOfAddons(activeAddonIdArray) {
     const { addonOptions } = this.props;
-    const matchedIndex = findIndex(addonOptions, { id: addon.id });
-    // NOTE: Mutable way to modify item in array (creating new array)
-    const newAddons = [
-      ...addonOptions.slice(0, matchedIndex),
-      assign({}, addon, { active: !addon.active }),
-      ...addonOptions.slice(matchedIndex + 1),
-    ];
-    return newAddons;
+    return addonOptions.map(a => ({
+      id: a.id,
+      active: activeAddonIdArray.indexOf(a.id) > -1,
+    }));
   }
 
 
@@ -274,20 +274,44 @@ class ProductCustomizeStyle extends Component {
 
 
   /**
+   * Activates an array of active ids
+   * @param  {ArrayOf(Number)} newAddonIds - ids to be activated
+   * @action -> updateCustomizationStyleSelection, setActiveAddonImageLayers, setAddonBaseLayer
+   */
+  activateAddonIdLayers(newAddonIds) {
+    const {
+      updateCustomizationStyleSelection,
+      setActiveAddonImageLayers,
+      setAddonBaseLayer,
+    } = this.props;
+    const newAddons = this.computeActivenessOfAddons(newAddonIds);
+    const newLayerCode = this.computeLayerCodeFromAddons(newAddons);
+
+    updateCustomizationStyleSelection({ temporaryStyleCustomizations: newAddonIds });
+    setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
+    setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode));
+  }
+
+
+  /**
    * Event handler for addon selection
    * @param  {Object} addon
-   * @action -> setAddonOptions, setAddonBaseLayer
+   * @action -> activateAddonIdLayers
    */
   handleAddonSelection(addon) {
-    const { setAddonOptions, setActiveAddonImageLayers, setAddonBaseLayer } = this.props;
+    const { temporaryStyleCustomizations } = this.props;
     return () => {
-      const newAddons = this.computeNewAddons(addon);
-      const newLayerCode = this.computeLayerCodeFromAddons(newAddons);
-      setAddonOptions(newAddons); // Customization activation
-      setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
-      // Addon image activate
-      setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode)); // Addon base layer active
+      const newAddonIds = addOrRemoveFrom(temporaryStyleCustomizations, addon.id);
+      this.activateAddonIdLayers(newAddonIds);
     };
+  }
+
+  /**
+   * Handle clearing of addon selections
+   * @action -> activateAddonIdLayers
+   */
+  handleClearAddonSelections() {
+    this.activateAddonIdLayers([]);
   }
 
   render() {
@@ -303,16 +327,20 @@ class ProductCustomizeStyle extends Component {
         productCustomizationDrawer={productCustomizationDrawer}
       >
 
-        <div className="ProductCustomizeStyle__content">
-          <div className="ProductCustomizeStyle__layer-wrapper u-center position--relative">
+        <div className="ProductCustomizationStyle__content">
+          <div className="ProductCustomizationStyle__layer-wrapper u-center u-position--relative">
             { this.generateBaseLayers() }
             { this.generateAddonLayers().reverse() }
           </div>
 
-
-          <div className="ProductCustomizeStyle__addon-options">
+          <div className="ProductCustomizationStyle__addon-options">
             <div className="textAlign--right u-mb-small">
-              <span className="link link--static">Clear All</span>
+              <span
+                onClick={this.handleClearAddonSelections}
+                className="link link--static"
+              >
+                Clear All
+              </span>
             </div>
             { this.generateAddonOptions() }
           </div>
@@ -323,29 +351,32 @@ class ProductCustomizeStyle extends Component {
 }
 
 /* eslint-disable react/forbid-prop-types */
-ProductCustomizeStyle.propTypes = {
+ProductCustomizationStyle.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
   // Redux Props
   addonLayerImages: PropTypes.array.isRequired,
-  selectedAddonImageLayers: PropTypes.array.isRequired,
   addonOptions: PropTypes.array.isRequired,
   addonsLayersComputed: PropTypes.array.isRequired,
   addonsBasesComputed: PropTypes.array.isRequired,
   baseImages: PropTypes.array.isRequired,
   baseSelected: PropTypes.number,
-  productCustomizationDrawer: PropTypes.string.isRequired,
+  productCustomizationDrawer: PropTypes.string,
+  selectedAddonImageLayers: PropTypes.array.isRequired,
+  temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
-  setAddonOptions: PropTypes.func.isRequired,
+  updateCustomizationStyleSelection: PropTypes.func.isRequired,
   setAddonBaseLayer: PropTypes.func.isRequired,
   setActiveAddonImageLayers: PropTypes.func.isRequired,
 };
 
-ProductCustomizeStyle.defaultProps = {
+ProductCustomizationStyle.defaultProps = {
   baseSelected: null,
   hasNavItems: true,
   selectedColorId: '',
+  productCustomizationDrawer: null,
+  temporaryStyleCustomizations: [],
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCustomizeStyle);
+export default connect(stateToProps, dispatchToProps)(ProductCustomizationStyle);

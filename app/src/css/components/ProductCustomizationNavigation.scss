@@ -11,6 +11,11 @@
   margin-bottom: 1rem;
   padding-bottom: 2px;
   color: $c-text-gray;
+  transition: $fast-transition-time all ease-in-out;
+}
+
+.ProductCustomizationNavigation__nav-item:hover {
+  transform: translateX(-5px);
 }
 
 .ProductCustomizationNavigation__nav-item--active {

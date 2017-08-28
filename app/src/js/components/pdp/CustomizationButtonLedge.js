@@ -6,14 +6,14 @@ import { bindActionCreators } from 'redux';
 import { TransitionMotion } from 'react-motion';
 
 // CSS
-import '../../../css/components/ProductButtonLedge.scss';
+import '../../../css/components/CustomizationButtonLedge.scss';
 
 // Utilities
 import noop from '../../libs/noop';
 
-
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
+import * as AppActions from '../../actions/AppActions';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
@@ -26,23 +26,29 @@ function stateToProps(state) {
   return {
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
+    temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
+    temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
   };
 }
 
 function dispatchToProps(dispatch) {
   const customizationActions = bindActionCreators(CustomizationActions, dispatch);
+  const appActions = bindActionCreators(AppActions, dispatch);
   return {
     activateCustomizationDrawer: customizationActions.activateCustomizationDrawer,
+    selectProductColor: customizationActions.selectProductColor,
+    setShareableQueryParams: appActions.setShareableQueryParams,
     updateDressSizeSelection: customizationActions.updateDressSizeSelection,
     updateHeightSelection: customizationActions.updateHeightSelection,
     updateMeasurementMetric: customizationActions.updateMeasurementMetric,
+    updateCustomizationStyleSelection: customizationActions.updateCustomizationStyleSelection,
   };
 }
 
-class ProductButtonLedge extends Component {
+class CustomizationButtonLedge extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -53,17 +59,30 @@ class ProductButtonLedge extends Component {
   }
 
   saveColorSelection() {
-    // TODO: Swap temp for selection
-    // Check if valid
-    // If Valid
-    this.props.activateCustomizationDrawer({ isActive: false });
+    const {
+      activateCustomizationDrawer,
+      selectProductColor,
+      setShareableQueryParams,
+      temporaryColor,
+    } = this.props;
+
+    selectProductColor({ selectedColor: temporaryColor });
+    setShareableQueryParams({ color: temporaryColor.id });
+    activateCustomizationDrawer({ isActive: false });
   }
 
   saveStyleSelection() {
-    // TODO: Swap temp for selection
-    // Check if valid
-    // If Valid
-    this.props.activateCustomizationDrawer({ isActive: false });
+    const {
+      activateCustomizationDrawer,
+      setShareableQueryParams,
+      temporaryStyleCustomizations,
+      updateCustomizationStyleSelection,
+    } = this.props;
+    updateCustomizationStyleSelection({
+      selectedStyleCustomizations: temporaryStyleCustomizations,
+    });
+    setShareableQueryParams({ customizations: temporaryStyleCustomizations });
+    activateCustomizationDrawer({ isActive: false });
   }
 
   saveSizeSeletion() {
@@ -92,7 +111,6 @@ class ProductButtonLedge extends Component {
     updateMeasurementMetric({
       selectedMeasurementMetric: temporaryMeasurementMetric,
     });
-
 
     activateCustomizationDrawer({ isActive: false });
   }
@@ -140,12 +158,13 @@ class ProductButtonLedge extends Component {
             return (
               <div
                 key={key}
-                className="ProductButtonLedge width--full"
+                className="CustomizationButtonLedge u-width--full"
                 style={{
                   transform: `translate3d(0, ${style.y}%, 0)`,
                 }}
               >
                 <ButtonLedge
+                  addHeight
                   handleLeftButtonClick={this.handleLeftButtonClick}
                   handleRightButtonClick={this.chooseCustomizationCallback()}
                 />
@@ -160,25 +179,39 @@ class ProductButtonLedge extends Component {
   }
 }
 
-ProductButtonLedge.propTypes = {
+CustomizationButtonLedge.propTypes = {
   // Redux Props
   productCustomizationDrawerOpen: PropTypes.bool,
   productCustomizationDrawer: PropTypes.string,
+  temporaryColor: PropTypes.shape({
+    id: PropTypes.number,
+    centsTotal: PropTypes.number,
+    name: PropTypes.string,
+    presentation: PropTypes.string,
+    hexValue: PropTypes.string,
+    patternUrl: PropTypes.string,
+  }).isRequired,
   temporaryDressSize: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string.isRequired,
+  temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
+  selectProductColor: PropTypes.func.isRequired,
+  setShareableQueryParams: PropTypes.func.isRequired,
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
+  updateCustomizationStyleSelection: PropTypes.func.isRequired,
 };
 
-ProductButtonLedge.defaultProps = {
+CustomizationButtonLedge.defaultProps = {
   productCustomizationDrawerOpen: false,
   productCustomizationDrawer: null,
+  temporaryColor: null,
   temporaryDressSize: null,
   temporaryHeightValue: null,
+  temporaryStyleCustomizations: [],
 };
 
-export default connect(stateToProps, dispatchToProps)(ProductButtonLedge);
+export default connect(stateToProps, dispatchToProps)(CustomizationButtonLedge);

@@ -15,10 +15,11 @@ export function changeCustomizationDrawer({ productCustomizationDrawer }) {
   };
 }
 
-export function selectProductColor({ color }) {
+export function selectProductColor({ selectedColor, temporaryColor }) {
   return {
     type: CustomizationConstants.SELECT_PRODUCT_COLOR,
-    color,
+    selectedColor,
+    temporaryColor,
   };
 }
 
@@ -49,9 +50,15 @@ export function updateDressSizeSelection({ temporaryDressSize, selectedDressSize
   };
 }
 
-// ADDON MANIPULATIONS
-export function setAddonOptions(addonOptions) {
-  return { type: CustomizationConstants.SET_STYLE_ADDON_OPTIONS, addonOptions };
+export function updateCustomizationStyleSelection({
+  temporaryStyleCustomizations,
+  selectedStyleCustomizations,
+}) {
+  return {
+    type: CustomizationConstants.UPDATE_CUSTOMIZATION_STYLE_SELECTION,
+    selectedStyleCustomizations,
+    temporaryStyleCustomizations,
+  };
 }
 
 export function setActiveAddonImageLayers(addonImageLayers) {
@@ -66,7 +73,7 @@ export default {
   activateCustomizationDrawer,
   changeCustomizationDrawer,
   selectProductColor,
-  setAddonOptions,
+  updateCustomizationStyleSelection,
   setActiveAddonImageLayers,
   setAddonBaseLayer,
   updateMeasurementMetric,

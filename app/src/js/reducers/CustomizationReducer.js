@@ -19,7 +19,7 @@ export const $$initialState = Immutable.fromJS({
 
 
   // ObjectOf({
-  //   id: String,
+  //   id: Number,
   //   name: String,
   //   centsTotal: Number,
   //   hexValue: String,
@@ -28,12 +28,13 @@ export const $$initialState = Immutable.fromJS({
   temporaryColor: null,
   selectedColor: null,
 
-
   // Number
   temporaryDressSize: null,
   selectedDressSize: null,
 
-  selectedStyleAddonOptions: [],
+  // ArrayOf(Number)
+  temporaryStyleCustomizations: [],
+  selectedStyleCustomizations: [],
 
   // Addon area
   addons: {
@@ -64,9 +65,13 @@ export default function CartReducer($$state = $$initialState, action = null) {
     }
     // COLOR
     case CustomizationConstants.SELECT_PRODUCT_COLOR: {
-      return $$state.merge({
-        selectedColor: action.color,
-      });
+      if (action.selectedColor) {
+        return $$state.merge({
+          temporaryColor: action.selectedColor,
+          selectedColor: action.selectedColor,
+        });
+      }
+      return $$state.merge({ temporaryColor: action.temporaryColor });
     }
     // HEIGHT
     case CustomizationConstants.UPDATE_MEASUREMENT_METRIC: {
@@ -103,6 +108,17 @@ export default function CartReducer($$state = $$initialState, action = null) {
         temporaryDressSize: action.temporaryDressSize,
       });
     }
+    case CustomizationConstants.UPDATE_CUSTOMIZATION_STYLE_SELECTION: {
+      if (action.selectedStyleCustomizations) {
+        return $$state.merge({
+          temporaryStyleCustomizations: action.selectedStyleCustomizations,
+          selectedStyleCustomizations: action.selectedStyleCustomizations,
+        });
+      }
+      return $$state.merge({
+        temporaryStyleCustomizations: action.temporaryStyleCustomizations,
+      });
+    }
     // STYLE
     case CustomizationConstants.SET_ACTIVE_ADDON_IMAGE_LAYERS: {
       return $$state.merge({
@@ -112,11 +128,6 @@ export default function CartReducer($$state = $$initialState, action = null) {
     case CustomizationConstants.SET_ADDON_BASE_LAYER: {
       return $$state.merge({
         addons: $$state.get('addons').merge({ baseSelected: action.baseSelected }),
-      });
-    }
-    case CustomizationConstants.SET_STYLE_ADDON_OPTIONS: {
-      return $$state.merge({
-        addons: $$state.get('addons').merge({ addonOptions: action.addonOptions }),
       });
     }
     default: {

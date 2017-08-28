@@ -7,7 +7,7 @@ const actionTypes = assign({},
     'ACTIVATE_CUSTOMIZATION_DRAWER',
     'CHANGE_CUSTOMIZATION_DRAWER',
     'SELECT_PRODUCT_COLOR',
-    'SET_STYLE_ADDON_OPTIONS',
+    'UPDATE_CUSTOMIZATION_STYLE_SELECTION',
     'SET_ACTIVE_ADDON_IMAGE_LAYERS',
     'SET_ADDON_BASE_LAYER',
     'UPDATE_DRESS_SIZE_SELECTION',
@@ -24,7 +24,14 @@ const productCustomizationDrawers = assign({},
   ]),
 );
 
+const productCustomizationHeadlines = {
+  COLOR_HEADLINE: 'Color',
+  STYLE_HEADLINE: 'Design Customizations',
+  SIZE_HEADLINE: 'Your Size',
+};
+
 export default assign({},
   actionTypes,
   productCustomizationDrawers,
+  productCustomizationHeadlines,
 );

@@ -29,7 +29,7 @@ class ProductCustomizationNavigation extends PureComponent {
     const { productCustomizationDrawer } = this.props;
     return (
       <div className="ProductCustomizationNavigation__nav">
-        <div className="grid-middle height--full position--absolute">
+        <div className="grid-middle u-height--full u-position--absolute">
           <ul className="ProductCustomizationNavigation__nav-list u-uppercase u-text-align-right">
             <li
               onClick={this.handleDrawerSelection(COLOR_CUSTOMIZE)}
@@ -52,7 +52,7 @@ class ProductCustomizationNavigation extends PureComponent {
                 'ProductCustomizationNavigation__nav-item u-cursor--pointer',
                 { 'ProductCustomizationNavigation__nav-item--active': productCustomizationDrawer === STYLE_CUSTOMIZE },
               )}
-              >Style</span>
+              >Design&nbsp;Customizations</span>
             </li>
             <li
               onClick={this.handleDrawerSelection(SIZE_CUSTOMIZE)}
