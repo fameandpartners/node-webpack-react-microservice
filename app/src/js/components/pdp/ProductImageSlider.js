@@ -15,21 +15,11 @@ import { addonSelectionDisplayText } from '../../utilities/pdp';
 // UI Components
 import Slider from '../shared/Slider';
 import Slide from '../shared/Slide';
-import ProductFabric from './ProductFabric';
-
-// // TEST IMAGES
-// import image1 from '../../../img/test/image_1.png';
-import image1 from '../../../img/test/image_1.png';
-import image2 from '../../../img/test/image_2.png';
-import image3 from '../../../img/test/image_3.png';
-import image4 from '../../../img/test/image_4.png';
-import image5 from '../../../img/test/image_5.png';
-import image6 from '../../../img/test/image_6.png';
-import image7 from '../../../img/test/image_7.png';
+// import ProductFabric from './ProductFabric';
 
 
 // Constants
-import ModalConstants from '../../constants/ModalConstants';
+// import ModalConstants from '../../constants/ModalConstants';
 
 // Actions
 import * as ModalActions from '../../actions/ModalActions';
@@ -44,6 +34,7 @@ function stateToProps(state) {
     addonOptions: state.$$customizationState.get('addons').get('addonOptions').toJS(),
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
+    productImages: state.$$productState.get('productImages').toJS(),
     selectedColor: state.$$customizationState.get('selectedColor').toJS(),
     selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
   };
@@ -114,9 +105,10 @@ class ProductDisplayOptionsTouch extends Component {
 
   render() {
     const {
-      breakpoint,
-      fabric,
-      garmentCareInformation,
+      // breakpoint,
+      // fabric,
+      // garmentCareInformation,
+      productImages,
       winHeight,
       winWidth,
     } = this.props;
@@ -124,56 +116,25 @@ class ProductDisplayOptionsTouch extends Component {
     return (
       <div className="ProductImageSlider">
         <Slider sliderHeight={this.calculateSliderHeight()} winWidth={winWidth} winHeight={winHeight}>
-          <Slide>
-            <div
-              className="u-width--full u-height--full"
-              style={this.generateBackgroundImageStyle(image1)}
-            />
-          </Slide>
-          <Slide>
-            <ProductFabric
-              breakpoint={breakpoint}
-              fabric={fabric}
-              garmentCareInformation={garmentCareInformation}
-              handleFabricInfoModalClick={this.handleOpenModalClick(ModalConstants.FABRIC_MODAL)}
-            />
-          </Slide>
-          <Slide>
-            <div
-              className="u-width--full u-height--full"
-              style={this.generateBackgroundImageStyle(image2)}
-            />
-          </Slide>
-          <Slide>
-            <div
-              className="u-width--full u-height--full"
-              style={this.generateBackgroundImageStyle(image3)}
-            />
-          </Slide>
-          <Slide>
-            <div
-              className="u-width--full u-height--full"
-              style={this.generateBackgroundImageStyle(image4)}
-            />
-          </Slide>
-          <Slide>
-            <div
-              className="u-width--full u-height--full"
-              style={this.generateBackgroundImageStyle(image5)}
-            />
-          </Slide>
-          <Slide>
-            <div
-              className="u-width--full u-height--full"
-              style={this.generateBackgroundImageStyle(image6)}
-            />
-          </Slide>
-          <Slide>
-            <div
-              className="u-width--full u-height--full"
-              style={this.generateBackgroundImageStyle(image7)}
-            />
-          </Slide>
+          { productImages.map(img => (
+            <Slide key={img.id}>
+              <img
+                alt="Something"
+                src={img.bigImg}
+                className="u-height--full"
+              />
+            </Slide>
+            ))}
+          {
+          //   <Slide style={{ width: '90%' }}>
+          //   <ProductFabric
+          //     breakpoint={breakpoint}
+          //     fabric={fabric}
+          //     garmentCareInformation={garmentCareInformation}
+          //     handleFabricInfoModalClick={this.handleOpenModalClick(ModalConstants.FABRIC_MODAL)}
+          //   />
+          // </Slide>
+          }
         </Slider>
       </div>
     );
@@ -184,13 +145,14 @@ class ProductDisplayOptionsTouch extends Component {
 ProductDisplayOptionsTouch.propTypes = {
   // Redux Properties
   addonOptions: PropTypes.array.isRequired,
-  fabric: PropTypes.shape({
-    id: PropTypes.string,
-    smallImg: PropTypes.string,
-    name: PropTypes.string,
-    description: PropTypes.string,
-  }).isRequired,
-  garmentCareInformation: PropTypes.string,
+  // fabric: PropTypes.shape({
+  //   id: PropTypes.string,
+  //   smallImg: PropTypes.string,
+  //   name: PropTypes.string,
+  //   description: PropTypes.string,
+  // }).isRequired,
+  // garmentCareInformation: PropTypes.string,
+  productImages: PropTypes.array.isRequired,
   selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,

@@ -50,6 +50,7 @@ export const $$initialState = Immutable.fromJS({
   // ArrayOf({
   //   id: String,
   //   name: String,
+  //   presentation: String,
   //   hexValue: String,
   //   patternUrl: String,
   // })
@@ -58,6 +59,7 @@ export const $$initialState = Immutable.fromJS({
   // ArrayOf({
   //   id: String,
   //   name: String,
+  //   presentation: String,
   //   hexValue: String,
   //   patternUrl: String,
   // })
@@ -70,8 +72,13 @@ export const $$initialState = Immutable.fromJS({
   productTitle: null,
 
   // ArrayOf({
+  //   id: Number,
+  //   colorId: Number,
   //   smallImg: String,
   //   bigImg: String
+  //   height: Number
+  //   width: Number
+  //   position: Number
   // })
   productImages: [],
 
