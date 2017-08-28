@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { ShareButtons } from '../../libs/react-share/react-share';
+import PinterestShareButton from '../react-share/PinterestShareButton';
 
 // Components
 import IconSVG from '../generic/IconSVG';
@@ -19,10 +19,6 @@ class PinterestIconShareButton extends PureComponent {
       url,
       image,
     } = this.props;
-
-    const {
-      PinterestShareButton,
-    } = ShareButtons;
 
     return (
       <PinterestShareButton

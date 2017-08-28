@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { ShareButtons } from '../../libs/react-share/react-share';
+import TwitterShareButton from '../react-share/TwitterShareButton';
 
 // Components
 import IconSVG from '../generic/IconSVG';
@@ -18,10 +18,6 @@ class TwitterIconShareButton extends PureComponent {
     const {
       url,
     } = this.props;
-
-    const {
-      TwitterShareButton,
-    } = ShareButtons;
 
     return (
       <TwitterShareButton
