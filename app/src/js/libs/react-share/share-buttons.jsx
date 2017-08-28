@@ -30,9 +30,7 @@ export default class ShareButton extends Component {
         width: windowWidth,
       };
 
-      const windowOpenBound = () => windowOpen(this.link(), windowOptions);
-
-      windowOpenBound();
+      this.handleWindowOpen(this.link(), windowOptions);
     }
   }
 
@@ -40,6 +38,10 @@ export default class ShareButton extends Component {
     if (e.key === 'Enter' || e.key === 13) {
       this.onClick(e);
     }
+  }
+
+  handleWindowOpen(link, options) {
+    windowOpen(link, options);
   }
 
   link() {
