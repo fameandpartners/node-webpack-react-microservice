@@ -43,7 +43,7 @@ class ProductGrid extends Component {
 }
 
 ProductGrid.propTypes = {
-  productImages: PropTypes.array.shape({
+  productImages: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     colorId: PropTypes.number,
     smallImg: PropTypes.string,
@@ -51,7 +51,7 @@ ProductGrid.propTypes = {
     height: PropTypes.number,
     width: PropTypes.number,
     position: PropTypes.number,
-  }).isRequired,
+  })).isRequired,
 };
 
 export default connect(stateToProps)(ProductGrid);
