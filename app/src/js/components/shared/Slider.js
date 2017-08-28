@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
@@ -20,13 +19,11 @@ class Slider extends Component {
       classNameFrame: 'Slider__frame',
       classNameSlideContainer: 'Slider__slides',
     });
-    window.ll = loryInstance;
   }
 
   componentDidUpdate(lastProps) {
     if ((lastProps.winWidth !== this.props.winWidth)
   || (lastProps.winHeight !== this.props.winHeight)) {
-      console.log('resetting');
       loryInstance.reset();
     }
   }
@@ -38,7 +35,7 @@ class Slider extends Component {
       <div
         ref={c => this.slider = c}
         className="Slider u-height--full"
-        style={{height: sliderHeight}}
+        style={{ height: sliderHeight }}
       >
         <div className="Slider__view u-height--full">
           <div className="Slider__frame u-height--full">
