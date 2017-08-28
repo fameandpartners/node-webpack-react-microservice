@@ -219,7 +219,7 @@ ProductOptions.propTypes = {
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   // COLOR
-  colorCentsTotal: PropTypes.number.isRequired,
+  colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
   // ADDONS
@@ -238,6 +238,7 @@ ProductOptions.propTypes = {
 };
 
 ProductOptions.defaultProps = {
+  colorCentsTotal: 0,
   selectedDressSize: null,
   selectedHeightValue: null,
 };

@@ -81,9 +81,114 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   };
 }
 
+export function transformProductDefaultColors({ colors = {} }) {
+  const defaultColors = colors.table.default || [];
+  // "created_at": String,
+  // "id": Number,
+  // "image_content_type": null,
+  // "image_file_name": null,
+  // "image_file_size": null,
+  // "name": String,
+  // "option_type_id": Number,
+  // "position": Number,
+  // "presentation": String,
+  // "updated_at": String,
+  // "use_in_customisation": Boolean,
+  // "value": String
+  //   ****** into ******
+  // ArrayOf({
+  //   id: Number,
+  //   name: String,
+  //   presentation: String,
+  //   hexValue: String,
+  //   patternUrl: String,
+  // })
+  return defaultColors.map((c) => {
+    const optionValue = c.option_value;
+    return {
+      id: optionValue.id,
+      name: optionValue.name,
+      presentation: optionValue.presentation,
+      hexValue: optionValue.value,
+      patternUrl: 'this-does-not-exist-yet.png',
+    };
+  });
+}
+
+export function transformProductSecondaryColors({ colors = {} }) {
+  const secondaryColors = colors.table.extra || [];
+  // "created_at": String,
+  // "id": Number,
+  // "image_content_type": null,
+  // "image_file_name": null,
+  // "image_file_size": null,
+  // "name": String,
+  // "option_type_id": Number,
+  // "position": Number,
+  // "presentation": String,
+  // "updated_at": String,
+  // "use_in_customisation": Boolean,
+  // "value": String
+  //   ****** into ******
+  // ArrayOf({
+  //   id: Number,
+  //   name: String,
+  //   presentation: String,
+  //   hexValue: String,
+  //   patternUrl: String,
+  // })
+  return secondaryColors.map((c) => {
+    const optionValue = c.option_value;
+    return {
+      id: optionValue.id,
+      name: optionValue.name,
+      presentation: optionValue.presentation,
+      hexValue: optionValue.value,
+      patternUrl: 'this-does-not-exist-yet.png',
+    };
+  });
+}
+
+export function transformProductId({ id = 'dress-id' }) {
+  //   "id": Number,
+  //   ****** into ******
+  //   id: Number,
+  return id;
+}
+
+export function transformProductImages(images) {
+  //   "id": Number,
+  //   "url": String,
+  //   "url_product": String,
+  //   "color_id": 25,
+  //   "height": Number,
+  //   "width": Number,
+  //   "alt": String
+  //   ****** into ******
+  //   id: Number,
+  //   colorId: Number,
+  //   smallImg: String,
+  //   bigImg: String
+  //   height: Number
+  //   width: Number
+  //   position: Number
+  return images.map(i => ({
+    id: i.id,
+    colorId: i.color_id,
+    smallImg: i.url_product,
+    bigImg: i.url,
+    height: i.height,
+    width: i.width,
+    position: i.position,
+  }));
+}
+
 export default {
   addonSelectionDisplayText,
   calculateSubTotal,
   sizingDisplayText,
   reduceCustomizationSelectionPrice,
+  // Transforms
+  transformProductId,
+  transformProductImages,
 };

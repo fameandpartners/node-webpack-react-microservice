@@ -20,6 +20,7 @@ class Slider extends Component {
       classNameFrame: 'Slider__frame',
       classNameSlideContainer: 'Slider__slides',
     });
+    window.ll = loryInstance;
   }
 
   componentDidUpdate(lastProps) {
@@ -36,7 +37,7 @@ class Slider extends Component {
     return (
       <div
         ref={c => this.slider = c}
-        className="Slider u-full-width u-height--full"
+        className="Slider u-height--full"
         style={{height: sliderHeight}}
       >
         <div className="Slider__view u-height--full">
