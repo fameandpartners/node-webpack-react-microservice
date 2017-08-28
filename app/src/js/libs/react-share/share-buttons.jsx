@@ -112,10 +112,28 @@ ShareButton.defaultProps = {
 function createShareButton(network, optsMap = () => ({}), propTypes, defaultProps = {}) {
   const CreatedButton = props => (
     <ShareButton
-      {...props}
+      className={props.className}
+      disabled={props.disabled}
+      disabledStyle={props.disabledStyle}
       network={network}
       opts={optsMap(props)}
-    />
+      url={props.url}
+      style={props.style}
+      windowWidth={props.windowWidth}
+      windowHeight={props.windowHeight}
+      // Facebook
+      quote={props.quote}
+      hashtag={props.hashtag}
+      // Twitter
+      hashtags={props.hashtags}
+      title={props.title}
+      via={props.via}
+      // Pinterest
+      media={props.media}
+      description={props.description}
+    >
+      {props.children}
+    </ShareButton>
   );
 
   CreatedButton.propTypes = propTypes;
