@@ -89,7 +89,7 @@ app.post('/pdp', (req, res) => {
     // Response stream back
     html.toStream().pipe(res);
   } catch (e) {
-    // Catch errors so we don't c
+    // Catch errors so we don't generate malformed HTML
     res.send({ e, error: true, message: 'Incorrect Params' });
   }
 });
