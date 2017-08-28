@@ -1,7 +1,6 @@
 /* eslint-disable prefer-template */
 import { objectToGetParams } from './utils';
 
-
 export function twitter(url, { title, via, hashtags = [] }) {
   return 'https://twitter.com/share' + objectToGetParams({
     url,
@@ -11,11 +10,9 @@ export function twitter(url, { title, via, hashtags = [] }) {
   });
 }
 
-export function facebook(url, { quote, hashtag }) {
+export function facebook(url) {
   return 'https://www.facebook.com/sharer/sharer.php' + objectToGetParams({
     u: url,
-    quote,
-    hashtag,
   });
 }
 

@@ -1,25 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import autobind from 'react-autobind';
 import ShareButton from './ShareButton';
+import { twitter } from './social-media-share-links';
 
-export default class TwitterShareButton extends Component {
-  constructor(props) {
-    super(props);
-    autobind(this);
-  }
-
-  optsMap() {
-    return ({});
-  }
-
+/* eslint-disable react/prefer-stateless-function */
+export default class TwitterShareButton extends PureComponent {
   render() {
     const {
       children,
       className,
       disabled,
       disabledStyle,
-      // opts,
       url,
       style,
       windowWidth,
@@ -29,14 +20,15 @@ export default class TwitterShareButton extends Component {
       via,
     } = this.props;
 
+    const twitterShareLink = twitter(url, { title, via, hashtags });
+
     return (
       <ShareButton
         className={className}
         disabled={disabled}
         disabledStyle={disabledStyle}
         network="twitter"
-        opts={this.optsMap(this.props)}
-        url={url}
+        link={twitterShareLink}
         style={style}
         windowWidth={windowWidth}
         windowHeight={windowHeight}
@@ -58,8 +50,6 @@ TwitterShareButton.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   disabledStyle: PropTypes.object,
-  // network: PropTypes.oneOf(supportedNetworks),
-  // opts: PropTypes.object,
   url: PropTypes.string.isRequired,
   style: PropTypes.object,
   windowWidth: PropTypes.number,

@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import classnames from 'classnames';
-import * as links from './social-media-share-links';
 import { windowOpen } from './utils';
-
-
-const supportedNetworks = Object.keys(links);
 
 export default class ShareButton extends Component {
   constructor(props) {
@@ -20,6 +16,7 @@ export default class ShareButton extends Component {
       disabled,
       windowWidth,
       windowHeight,
+      link,
     } = this.props;
 
     if (!disabled) {
@@ -30,7 +27,7 @@ export default class ShareButton extends Component {
         width: windowWidth,
       };
 
-      this.handleWindowOpen(this.link(), windowOptions);
+      this.handleWindowOpen(link, windowOptions);
     }
   }
 
@@ -42,11 +39,6 @@ export default class ShareButton extends Component {
 
   handleWindowOpen(link, options) {
     windowOpen(link, options);
-  }
-
-  link() {
-    const { url, opts, network } = this.props;
-    return links[network](url, opts);
   }
 
   render() {
@@ -94,9 +86,8 @@ ShareButton.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   disabledStyle: PropTypes.object,
-  network: PropTypes.oneOf(supportedNetworks),
-  opts: PropTypes.object,
-  url: PropTypes.string.isRequired,
+  network: PropTypes.string,
+  link: PropTypes.string.isRequired,
   style: PropTypes.object,
   windowWidth: PropTypes.number,
   windowHeight: PropTypes.number,

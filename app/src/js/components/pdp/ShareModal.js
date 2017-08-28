@@ -25,7 +25,7 @@ import '../../../css/components/ShareModal.scss';
 function stateToProps(state) {
   return {
     currentURL: state.$$appState.get('currentURL'),
-    currentProductImage: state.$$productState.get('productImage'),
+    currentProductImage: state.$$productState.get('productImages').get(0).get('bigImg'),
   };
 }
 
