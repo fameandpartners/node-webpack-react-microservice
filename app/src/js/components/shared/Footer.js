@@ -145,8 +145,8 @@ class Footer extends PureComponent {
               </p>
             </li>
           </ul>
-          <div className="col-6_md-12_sm-12_sm-first">
-            <p className="Footer__copy">
+          <div className="col-6_md-12_sm-12_sm-first u-mb-big">
+            <p className="Footer__copy u-mb-small">
               Sign up to always enjoy free returns
             </p>
             <form className={classNames('grid-center', 'Footer__form')}>

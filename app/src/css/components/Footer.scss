@@ -1,23 +1,7 @@
 .Footer {
   background: $c-background-gray;
-  padding-bottom: 80px;
-
-  @include sm {
-    padding-top: 40px;
-  }
-
-  @include lg {
-    padding-top: 70px;
-  }
-
-}
-
-.Footer input,
-.Footer button {
-
-  @include md {
-    margin-bottom: 0;
-  }
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .Footer p {
@@ -25,28 +9,13 @@
   line-height: 30px;
 }
 
-.Footer .Footer__category-list {
-  margin-top: 95px;
-  margin-bottom: 45px;
-
-  @include md {
-    margin-top: 7px;
-  }
-}
-
 .Footer .Footer__category-list li {
   font-size: 14px;
-  color: $c-black;
   text-align: left;
-  list-style: none;
 }
 
 .Footer .Footer__category-title {
   text-transform: uppercase;
-}
-
-.Footer .Footer__category-list li a {
-  color: $c-black;
 }
 
 .Footer .Footer__site-version-container p {
@@ -60,13 +29,9 @@
 
 .Footer .Footer__copy {
   font-size: 18px;
-  margin-top: 55px;
-  margin-bottom: 8px;
 
   @include sm {
     font-size: 22px;
-    margin-bottom: 5px;
-    margin-top: 15px;
   }
 
 }
@@ -77,14 +42,6 @@
   font-size: 12px;
 }
 
-.show-on-desktop {
-  display: none;
-
-  @include md {
-    display: inline-block;
-  }
-}
-
 .Footer .Footer__form {
   max-width: 350px;
 
@@ -92,8 +49,4 @@
     max-width: 480px;
   }
   margin: 0 auto;
-}
-
-.Footer__form--error input {
-  border: 1px solid $c-red;
 }
