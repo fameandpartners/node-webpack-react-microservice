@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
+import { find } from 'lodash';
 
 function stateToProps(state) {
   return {
+    selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
     productImages: state.$$productState.get('productImages').toJS(),
   };
 }
@@ -15,9 +17,17 @@ class ProductGrid extends Component {
     autoBind(this);
   }
 
+  /**
+   * Splits the product images based on color and even/oddness
+   * @param  {Number} remainder - even or odd number
+   * @return {Array} productImages
+   */
   splitProductImages(remainder) {
-    const { productImages } = this.props;
+    const { selectedColorId, productImages } = this.props;
+    const colorMatch = find(productImages, { colorId: selectedColorId });
+
     return productImages
+      .filter(img => (colorMatch ? img.colorId === selectedColorId : true))
       .filter((img, i) => i % 2 === remainder)
       .map(img => (
         <div key={img.id} className="brick">
@@ -43,6 +53,7 @@ class ProductGrid extends Component {
 }
 
 ProductGrid.propTypes = {
+  selectedColorId: PropTypes.number.isRequired,
   productImages: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     colorId: PropTypes.number,
