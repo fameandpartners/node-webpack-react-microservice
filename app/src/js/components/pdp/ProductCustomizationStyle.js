@@ -379,7 +379,7 @@ class ProductCustomizationStyle extends Component {
           </div>
 
           <div className="ProductCustomizationStyle__addon-options">
-            <div className="textAlign--right float--right u-width--full u-mb-small">
+            <div className="textAlign--right u-float--right u-width--full u-mb-small">
               { clearAll ?
                 (
                   <span

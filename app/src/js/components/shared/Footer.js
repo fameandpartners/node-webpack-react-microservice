@@ -172,7 +172,7 @@ class Footer extends PureComponent {
                   breakpoint === 'desktop' ?
                     <div className="grid">
                       <ul className="Footer__icon-list Footer__icon-list--desktop col-12">
-                        <li className="float--left">
+                        <li className="u-float--left">
                           <a href="https://www.facebook.com/FameandPartners">
                             <IconSVG
                               svgPath={FacebookShareIcon.url}
@@ -181,7 +181,7 @@ class Footer extends PureComponent {
                             />
                           </a>
                         </li>
-                        <li className="float--left">
+                        <li className="u-float--left">
                           <a href="https://twitter.com/FameandPartners">
                             <IconSVG
                               svgPath={TwitterShareIcon.url}
@@ -190,7 +190,7 @@ class Footer extends PureComponent {
                             />
                           </a>
                         </li>
-                        <li className="float--left">
+                        <li className="u-float--left">
                           <a href="https://www.pinterest.com/fameandpartners">
                             <IconSVG
                               svgPath={PinterestShareIcon.url}
@@ -218,35 +218,37 @@ class Footer extends PureComponent {
           breakpoint === 'desktop' ?
           null :
           <div className="grid-center-noGutter">
-            <ul className="Footer__icon-list Footer__icon-list--mobile col-3_sm-6_xs-8_md-4">
-              <li className="float--left">
-                <a href="https://www.facebook.com/FameandPartners">
-                  <IconSVG
-                    svgPath={FacebookShareIcon.url}
-                    width="40px"
-                    height="40px"
-                  />
-                </a>
-              </li>
-              <li className="float--left">
-                <a href="https://twitter.com/FameandPartners">
-                  <IconSVG
-                    svgPath={TwitterShareIcon.url}
-                    width="40px"
-                    height="40px"
-                  />
-                </a>
-              </li>
-              <li className="float--left">
-                <a href="https://www.pinterest.com/fameandpartners">
-                  <IconSVG
-                    svgPath={PinterestShareIcon.url}
-                    width="40px"
-                    height="40px"
-                  />
-                </a>
-              </li>
-            </ul>
+            <div className="col-3_sm-6_xs-8_md-4">
+              <ul className="Footer__icon-list Footer__icon-list--mobile grid">
+                <li className="u-float--left col-4 u-mt-normal u-mb-normal">
+                  <a href="https://www.facebook.com/FameandPartners">
+                    <IconSVG
+                      svgPath={FacebookShareIcon.url}
+                      width="40px"
+                      height="40px"
+                    />
+                  </a>
+                </li>
+                <li className="u-float--left col-4 u-mt-normal u-mb-normal">
+                  <a href="https://twitter.com/FameandPartners">
+                    <IconSVG
+                      svgPath={TwitterShareIcon.url}
+                      width="40px"
+                      height="40px"
+                    />
+                  </a>
+                </li>
+                <li className="u-float--left col-4 u-mt-normal u-mb-normal">
+                  <a href="https://www.pinterest.com/fameandpartners">
+                    <IconSVG
+                      svgPath={PinterestShareIcon.url}
+                      width="40px"
+                      height="40px"
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         }
         <div className="layout-container grid-noGutter">
