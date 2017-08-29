@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { find } from 'lodash';
 
 // Utilities
 import { formatCents } from '../../utilities/accounting';
@@ -36,11 +38,12 @@ function stateToProps(state) {
   return {
     // PRODUCT
     productId: state.$$productState.get('productId'),
-    productImage: state.$$productState.get('productImages').toJS()[0],
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
+    $$productImages: state.$$productState.get('productImages'),
 
     // COLOR
+    colorId: selectedColor.get('id'),
     colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
@@ -143,9 +146,15 @@ class ProductOptions extends Component {
     };
   }
 
+  findColorSpecificFirstImageUrl() {
+    const { $$productImages, colorId } = this.props;
+    const productImages = $$productImages.toJS();
+    const hasMatch = find(productImages, { colorId });
+    return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
+  }
+
   render() {
     const {
-      productImage,
       productTitle,
       selectedStyleCustomizations,
       selectedDressSize,
@@ -155,7 +164,7 @@ class ProductOptions extends Component {
     return (
       <div className="ProductOptions grid-12-noGutter">
         <div className="ProductOptions__primary-image-container brick col-6">
-          <img className="u-width--full" alt="dress1" src={productImage.bigImg} />
+          <img className="u-width--full" alt="dress1" src={this.findColorSpecificFirstImageUrl()} />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
@@ -215,18 +224,11 @@ class ProductOptions extends Component {
 ProductOptions.propTypes = {
   //* Redux Properties
   // PRODUCT
-  productImage: PropTypes.shape({
-    id: PropTypes.number,
-    colorId: PropTypes.number,
-    smallImg: PropTypes.string,
-    bigImg: PropTypes.string,
-    height: PropTypes.number,
-    width: PropTypes.number,
-    position: PropTypes.number,
-  }).isRequired,
+  $$productImages: ImmutablePropTypes.map.isRequired,
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   // COLOR
+  colorId: PropTypes.number.isRequired,
   colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
