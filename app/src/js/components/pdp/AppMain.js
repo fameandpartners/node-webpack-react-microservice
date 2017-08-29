@@ -4,6 +4,9 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
+import classnames from 'classnames';
+
+// Decorators
 import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
@@ -17,17 +20,17 @@ import AppConstants from '../../constants/AppConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
-import ProductButtonLedge from './ProductButtonLedge';
+import AddToCartButtonLedgeMobile from './AddToCartButtonLedgeMobile';
+import CartDrawer from './CartDrawer';
+import CustomizationButtonLedge from './CustomizationButtonLedge';
 import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import ProductPrecustomizations from './ProductPrecustomizations';
-import CartDrawer from './CartDrawer';
 import FameDifference from './FameDifference';
 
 // Generic UI Components
-// import ComponentTestPleaseRemove from '../shared/ComponentTestPleaseRemove';
 import HeaderHider from '../shared/HeaderHider';
 import HeaderMobile from '../shared/HeaderMobile';
 import Header from '../shared/Header';
@@ -66,13 +69,14 @@ class AppMain extends Component {
     autoBind(this);
   }
 
-  get appBlanketClass() {
-    const { sideMenuOpen } = this.props;
-    return `App__blanket height--full width--full ${sideMenuOpen ? 'App__blanket--open' : ''}`;
-  }
-
   handleCloseMenu() {
-    const { activateSideMenu, activateCartDrawer, cartDrawerOpen, sideMenuOpen } = this.props;
+    const {
+      activateCartDrawer,
+      activateSideMenu,
+      cartDrawerOpen,
+      sideMenuOpen,
+    } = this.props;
+
     if (sideMenuOpen) activateSideMenu({ sideMenuOpen: false });
     else if (cartDrawerOpen) activateCartDrawer({ sideMenuOpen: false });
   }
@@ -101,11 +105,14 @@ class AppMain extends Component {
         {({ opacity, x }) =>
           <div className="AppMain__wrapper">
             <div
-              className="AppMain height--full"
+              className="AppMain u-height--full"
               style={{ transform: `translateX(${x}px)` }}
             >
               <div
-                className={this.appBlanketClass}
+                className={classnames(
+                  'App__blanket u-height--full u-width--full',
+                  { 'App__blanket--open': sideMenuOpen },
+                )}
                 onClick={this.handleCloseMenu}
                 style={{
                   opacity: opacity / 100,
@@ -119,8 +126,6 @@ class AppMain extends Component {
                 :
                 <Header />
               }
-
-              { /* <ComponentTestPleaseRemove /> */ }
 
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? <ProductDisplayOptionsTouch />
@@ -162,7 +167,13 @@ class AppMain extends Component {
               <CartDrawer />
             </div>
 
-            <ProductButtonLedge />
+            <div
+              className="u-position--fixed u-width--full u-bottom"
+              style={{ transform: `translateX(${x}px)` }}
+            >
+              <AddToCartButtonLedgeMobile />
+            </div>
+            <CustomizationButtonLedge />
           </div>
       }
       </Motion>
@@ -183,7 +194,6 @@ AppMain.propTypes = {
 
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
-  // winWidth: PropTypes.number.isRequired,
 };
 
 AppMain.defaultProps = {

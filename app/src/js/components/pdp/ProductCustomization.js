@@ -21,12 +21,12 @@ class ProductCustomization extends PureComponent {
     } = this.props;
 
     return (
-      <div className="ProductCustomization height--full u-flex--col">
+      <div className="ProductCustomization u-height--full u-flex--col">
         <div className="ProductCustomization__header">
           { hasNavItems
             ? (
               <div className="grid-12">
-                <div className="col-3">
+                <div className="col-2">
                   <ProductCustomizationNavigation
                     handleDrawerSelection={handleDrawerSelection}
                     productCustomizationDrawer={productCustomizationDrawer}
@@ -41,7 +41,7 @@ class ProductCustomization extends PureComponent {
           className={classnames(
             [
               'ProductCustomization__wrapper',
-              'u-overflow-y--scroll textAlign--center u-flex--1',
+              'u-overflow-y--scroll u-text-align--center u-flex--1',
             ],
         )}
         >
@@ -49,7 +49,7 @@ class ProductCustomization extends PureComponent {
           <div className="grid-center-noGutter">
             <div
               className={classnames(
-                'ProductCustomization__content col-6',
+                'ProductCustomization__content col-6_sm-10',
               )}
             >
               { children }
@@ -65,12 +65,13 @@ ProductCustomization.propTypes = {
   // Normal Props
   children: PropTypes.node.isRequired,
   hasNavItems: PropTypes.bool,
-  productCustomizationDrawer: PropTypes.string.isRequired,
+  productCustomizationDrawer: PropTypes.string,
   handleDrawerSelection: PropTypes.func.isRequired,
 };
 
 ProductCustomization.defaultProps = {
   hasNavItems: true,
+  productCustomizationDrawer: null,
   selectedColorId: '',
 };
 

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { TransitionMotion } from 'react-motion';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // CSS
 import '../../../css/components/CustomizationDrawer.scss';
@@ -17,11 +19,13 @@ import ProductCustomizationSize from './ProductCustomizationSize';
 import * as modalAnimations from '../../utilities/modal-animation';
 import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE, SIZE_CUSTOMIZE } from '../../constants/CustomizationConstants';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
+  const selectedColor = state.$$customizationState.get('selectedColor');
+  const selectedColorId = selectedColor ? selectedColor.get('id') : null;
   return {
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
-    selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
+    selectedColorId,
   };
 }
 
@@ -40,14 +44,28 @@ class CustomizationDrawer extends PureComponent {
   }
 
   renderCustomizationContents() {
-    const { productCustomizationDrawer } = this.props;
+    const { breakpoint, productCustomizationDrawer } = this.props;
+    const hasNavItems = breakpoint === 'desktop';
+
     switch (productCustomizationDrawer) {
       case COLOR_CUSTOMIZE:
-        return <ProductCustomizationColor />;
+        return (
+          <ProductCustomizationColor
+            hasNavItems={hasNavItems}
+          />
+        );
       case STYLE_CUSTOMIZE:
-        return <ProductCustomizationStyle />;
+        return (
+          <ProductCustomizationStyle
+            hasNavItems={hasNavItems}
+          />
+        );
       case SIZE_CUSTOMIZE:
-        return <ProductCustomizationSize />;
+        return (
+          <ProductCustomizationSize
+            hasNavItems={hasNavItems}
+          />
+        );
       default:
         return null;
     }
@@ -71,7 +89,7 @@ class CustomizationDrawer extends PureComponent {
               <div
                 key={key}
                 className={classnames(
-                  'CustomizationDrawer__wrapper height--full width--full',
+                  'CustomizationDrawer__wrapper u-height--full u-width--full',
                   { 'u-pointerEvents--none': !productCustomizationDrawerOpen },
                 )}
                 style={{
@@ -91,6 +109,8 @@ class CustomizationDrawer extends PureComponent {
 }
 
 CustomizationDrawer.propTypes = {
+  // Decorator Props
+  breakpoint: PropTypes.string.isRequired,
   // Redux Props
   productCustomizationDrawer: PropTypes.string,
   productCustomizationDrawerOpen: PropTypes.bool.isRequired,
@@ -103,4 +123,4 @@ CustomizationDrawer.defaultProps = {
 };
 
 
-export default connect(mapStateToProps)(CustomizationDrawer);
+export default Resize(PDPBreakpoints)(connect(stateToProps)(CustomizationDrawer));

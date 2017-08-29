@@ -19,7 +19,7 @@ export const $$initialState = Immutable.fromJS({
 
 
   // ObjectOf({
-  //   id: String,
+  //   id: Number,
   //   name: String,
   //   centsTotal: Number,
   //   hexValue: String,
@@ -36,17 +36,19 @@ export const $$initialState = Immutable.fromJS({
   temporaryStyleCustomizations: [],
   selectedStyleCustomizations: [],
 
-  // Addon area
-  addons: {
-    // Marry previous customizations to addons
-    addonLayerImages: [],
-    selectedAddonImageLayers: [],
-    addonOptions: [],
-    baseImages: [],
-    baseSelected: null,
-    addonsLayersComputed: [],
-    addonsBasesComputed: [],
-  },
+  // TODO: V2 This data structure could use some clean up and
+  // is a legacy carry over from previous pdp implementation
+  // ArrayOf({
+  //   addonLayerImages: Array|Null,
+  //   selectedAddonImageLayers: Array,
+  //   addonOptions: Array,
+  //   baseImages: Array|Null,
+  //   isLegacyCADCustomizations: Boolean,
+  //   baseSelected: Object,
+  //   addonsLayersComputed: Array,
+  //   addonsBasesComputed: Array,
+  // })
+  addons: null,
 });
 
 export default function CartReducer($$state = $$initialState, action = null) {

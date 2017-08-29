@@ -3,7 +3,7 @@
 // *****
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import noop from '../../libs/noop';
 
 // CSS
@@ -21,7 +21,12 @@ class Input extends Component {
   }
 
   componentDidMount() {
-    if (this.props.focusOnMount) this.input.focus();
+    if (this.props.focusOnMount) {
+      this.input.focus();
+    } else if (this.props.selectOnMount) {
+      this.input.focus();
+      this.input.select();
+    }
   }
 
   render() {
@@ -34,11 +39,12 @@ class Input extends Component {
       placeholder,
       type,
       wrapperClassName,
+      readOnly,
     } = this.props;
 
     return (
       <div
-        className={classNames(
+        className={classnames(
           'Input__wrapper',
           wrapperClassName,
           {
@@ -58,10 +64,15 @@ class Input extends Component {
           placeholder={placeholder}
           type={type}
           defaultValue={defaultValue}
+          readOnly={readOnly}
         />
-        {inlineMeta
-          ? <span className="Input__meta-label">{inlineMeta}</span>
+        {inlineMeta && error
+          ? <span className="Input__meta-label--error">{inlineMeta}</span>
           : null
+        }
+        {inlineMeta && !error
+            ? <span className="Input__meta-label">{inlineMeta}</span>
+            : null
         }
       </div>
     );
@@ -76,6 +87,8 @@ Input.propTypes = {
   ]),
   error: PropTypes.bool,
   focusOnMount: PropTypes.bool,
+  selectOnMount: PropTypes.bool,
+  readOnly: PropTypes.bool,
   inlineMeta: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node,
@@ -92,6 +105,8 @@ Input.defaultProps = {
   defaultValue: '',
   error: false,
   focusOnMount: false,
+  selectOnMount: false,
+  readOnly: false,
   inlineMeta: null,
   label: null,
   placeholder: '',

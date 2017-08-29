@@ -1,8 +1,4 @@
-.width--full {
-  width: 100%;
-}
-
-.height--full {
+.u-height--full {
   height: 100%;
 }
 
@@ -34,15 +30,11 @@
   overflow: hidden;
 }
 
-.position--absolute {
+.u-position--absolute {
   position: absolute;
 }
 
-.position--fixed {
-  position: fixed;
-}
-
-.position--relative {
+.u-position--relative {
   position: relative;
 }
 
@@ -50,12 +42,26 @@
   text-align: left;
 }
 
-.textAlign--center {
+.u-text-align--center {
   text-align: center;
 }
 
 .textAlign--right {
   text-align: right;
+}
+
+.u-cursor--pointer {
+  cursor: pointer;
+}
+
+.u-user-select--none {
+  user-select: none;
+}
+
+
+
+.padding--none {
+  padding: 0;
 }
 
 // NOTE: Nav, we will need to merge these :(
@@ -84,8 +90,16 @@
   margin-top: 50px;
 }
 
-.u-cursor--pointer {
-  cursor: pointer;
+.u-bottom {
+  bottom: 0;
+}
+
+.u-left {
+  left: 0;
+}
+
+.u-position--fixed {
+  position: fixed;
 }
 
 .u-text-align-left {
@@ -102,13 +116,14 @@
 
 .u-overflow-y--scroll {
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .u-uppercase {
   text-transform: uppercase;
 }
 
-.u-underline {
+.u-text-decoration--underline {
   text-decoration: underline;
 }
 
@@ -118,6 +133,10 @@
 
 .u-user-select--none {
   user-select: none;
+}
+
+.u-width--full {
+  width: 100%;
 }
 
 // Flex Helpers

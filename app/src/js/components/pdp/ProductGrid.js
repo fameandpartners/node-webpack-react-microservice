@@ -1,40 +1,16 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { find } from 'lodash';
 
-// // TEST IMAGES
-// import image1 from '../../../img/test/image_1.png';
-import image2 from '../../../img/test/image_2.png';
-import image3 from '../../../img/test/image_3.png';
-import image4 from '../../../img/test/image_4.png';
-import image5 from '../../../img/test/image_5.png';
-import image6 from '../../../img/test/image_6.png';
-import image7 from '../../../img/test/image_7.png';
-
-// Actions
-// import * as AppActions from '../../actions/AppActions';
-
-// CSS
-// import '../../../css/components/ProductDisplayOptionsTouch.scss';
-
-// Assets
-
-
-// function stateToProps(state) {
-//   // Which part of the Redux global state does our component want to receive as props?
-//   return {
-//     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
-//   };
-// }
-//
-// function dispatchToProps(dispatch) {
-//   const actions = bindActionCreators(AppActions, dispatch);
-//   return {
-//     activateSideMenu: actions.activateSideMenu,
-//   };
-// }
+function stateToProps(state) {
+  return {
+    selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
+    $$productImages: state.$$productState.get('productImages'),
+  };
+}
 
 class ProductGrid extends Component {
   constructor(props) {
@@ -42,31 +18,36 @@ class ProductGrid extends Component {
     autoBind(this);
   }
 
+  /**
+   * Splits the product images based on color and even/oddness
+   * @param  {Number} remainder - even or odd number
+   * @return {Array} productImages
+   */
+  splitProductImages(remainder) {
+    const { selectedColorId, $$productImages } = this.props;
+    const productImages = $$productImages.toJS();
+    const colorMatch = find(productImages, { colorId: selectedColorId });
+    const firstColorId = productImages[0].colorId;
+
+    return productImages
+      .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
+      .filter((img, i) => i % 2 === remainder)
+      .map(img => (
+        <div key={img.id} className="brick">
+          <img className="u-width--full" alt="dress2" src={img.bigImg} />
+        </div>
+        ));
+  }
+
   render() {
     return (
       <div className="ProductGrid">
         <div className="App__photo-montage masonry grid-12">
           <div className="col-6">
-            <div className="brick">
-              <img className="width--full" alt="dress2" src={image2} />
-            </div>
-            <div className="brick">
-              <img className="width--full" alt="dress3" src={image3} />
-            </div>
-            <div className="brick">
-              <img className="width--full" alt="dress4" src={image4} />
-            </div>
+            {this.splitProductImages(0)}
           </div>
           <div className="col-6">
-            <div className="brick">
-              <img className="width--full" alt="dress5" src={image5} />
-            </div>
-            <div className="brick">
-              <img className="width--full" alt="dress6" src={image6} />
-            </div>
-            <div className="brick">
-              <img className="width--full" alt="dress7" src={image7} />
-            </div>
+            {this.splitProductImages(1)}
           </div>
         </div>
       </div>
@@ -75,11 +56,16 @@ class ProductGrid extends Component {
 }
 
 ProductGrid.propTypes = {
-  // sideMenuOpen: PropTypes.bool,
+  selectedColorId: PropTypes.number.isRequired,
+  $$productImages: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
+    id: PropTypes.number,
+    colorId: PropTypes.number,
+    smallImg: PropTypes.string,
+    bigImg: PropTypes.string,
+    height: PropTypes.number,
+    width: PropTypes.number,
+    position: PropTypes.number,
+  })).isRequired,
 };
 
-ProductGrid.defaultProps = {
-  // sideMenuOpen: false,
-};
-
-export default ProductGrid;
+export default connect(stateToProps)(ProductGrid);

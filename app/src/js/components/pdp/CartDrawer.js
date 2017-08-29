@@ -48,7 +48,7 @@ class CartDrawer extends Component {
     const { complementaryProducts, lineItems } = this.props;
 
     return (
-      <div className="CartDrawer u-flex--col height--full">
+      <div className="CartDrawer u-flex--col u-height--full">
         <div className="CartDrawer__header">
           <h4>Shopping Bag</h4>
         </div>
@@ -71,13 +71,13 @@ CartDrawer.propTypes = {
   })).isRequired,
   lineItems: PropTypes.arrayOf(PropTypes.shape({
     color: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       name: PropTypes.string,
       centsTotal: PropTypes.number,
       hexValue: PropTypes.string,
     }),
     addons: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       description: PropTypes.string,
       centsTotal: PropTypes.number,
     })),

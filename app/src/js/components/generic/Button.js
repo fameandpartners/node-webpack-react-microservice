@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 // CSS
 import '../../../css/components/Button.scss';
@@ -29,13 +29,15 @@ class Button extends Component {
       tertiary,
       text,
       handleClick,
+      passedRef,
     } = this.props;
 
     return (
       <button
+        ref={passedRef}
         onClick={handleClick}
         className={
-          classNames(
+          classnames(
             'Button',
             className,
             {
@@ -60,6 +62,7 @@ class Button extends Component {
 }
 
 Button.propTypes = {
+  passedRef: PropTypes.func,
   className: PropTypes.string,
   disabled: PropTypes.bool,
   metaIcon: PropTypes.node,
@@ -73,6 +76,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  passedRef: null,
   className: '',
   disabled: false,
   metaIcon: null,

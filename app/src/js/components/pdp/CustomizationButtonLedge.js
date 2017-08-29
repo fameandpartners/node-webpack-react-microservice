@@ -6,11 +6,10 @@ import { bindActionCreators } from 'redux';
 import { TransitionMotion } from 'react-motion';
 
 // CSS
-import '../../../css/components/ProductButtonLedge.scss';
+import '../../../css/components/CustomizationButtonLedge.scss';
 
 // Utilities
 import noop from '../../libs/noop';
-
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
@@ -49,7 +48,7 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class ProductButtonLedge extends Component {
+class CustomizationButtonLedge extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -159,12 +158,13 @@ class ProductButtonLedge extends Component {
             return (
               <div
                 key={key}
-                className="ProductButtonLedge width--full"
+                className="CustomizationButtonLedge u-width--full"
                 style={{
                   transform: `translate3d(0, ${style.y}%, 0)`,
                 }}
               >
                 <ButtonLedge
+                  addHeight
                   handleLeftButtonClick={this.handleLeftButtonClick}
                   handleRightButtonClick={this.chooseCustomizationCallback()}
                 />
@@ -179,7 +179,7 @@ class ProductButtonLedge extends Component {
   }
 }
 
-ProductButtonLedge.propTypes = {
+CustomizationButtonLedge.propTypes = {
   // Redux Props
   productCustomizationDrawerOpen: PropTypes.bool,
   productCustomizationDrawer: PropTypes.string,
@@ -205,7 +205,7 @@ ProductButtonLedge.propTypes = {
   updateCustomizationStyleSelection: PropTypes.func.isRequired,
 };
 
-ProductButtonLedge.defaultProps = {
+CustomizationButtonLedge.defaultProps = {
   productCustomizationDrawerOpen: false,
   productCustomizationDrawer: null,
   temporaryColor: null,
@@ -214,4 +214,4 @@ ProductButtonLedge.defaultProps = {
   temporaryStyleCustomizations: [],
 };
 
-export default connect(stateToProps, dispatchToProps)(ProductButtonLedge);
+export default connect(stateToProps, dispatchToProps)(CustomizationButtonLedge);

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { formatCents } from '../../utilities/accounting';
-import image1 from '../../../img/test/image_1.png';
-
 
 // UI Components
 import Button from '../generic/Button';
@@ -42,6 +40,7 @@ class Cart extends Component {
       const {
         color,
         productCentsBasePrice,
+        productImage,
         // productId, // TODO: @elgrecode, we'll need to compute something more that incorporates
         // color and addons selections, BELOW Math.random() will be replaced with a UID
         productTitle,
@@ -52,14 +51,14 @@ class Cart extends Component {
           className="Cart__single-product-description u-mt-normal grid-12"
         >
           <div className="col-5">
-            <img className="width--full" alt="dress1" src={image1} />
+            <img className="u-width--full" alt="dress1" src={productImage} />
           </div>
           <div className="col-7 textAlign--left">
             <span className="Cart__line-description">
               <span>{productTitle}</span> - <span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>
             <span className="Cart__line-description">
-              {color.name}
+              {color.presentation}
             </span>
             <span className="Cart__line-description">
               {lineItem.addons.length}&nbsp;Addon{lineItem.addons.length === 1 ? '' : 's'}
@@ -80,7 +79,7 @@ class Cart extends Component {
             { this.generateLineItems() }
 
 
-            <div className="Cart__subtotal textAlign--center">
+            <div className="Cart__subtotal u-text-align--center">
               <span>Subtotal</span>
               <span className="Cart__subtotal-price">
                 { formatCents(this.subTotal(), 2) }
@@ -89,6 +88,7 @@ class Cart extends Component {
             <Button
               tall
               className="u-mb-normal"
+              handleClick={() => { console.warn('TODO: SUBMIT API REQUEST'); }}
               text="Checkout"
             />
           </div>
@@ -111,17 +111,18 @@ Cart.propTypes = {
     url: PropTypes.string,
   })).isRequired,
   lineItems: PropTypes.arrayOf(PropTypes.shape({
+    addons: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      description: PropTypes.string,
+      centsTotal: PropTypes.number,
+    })),
     color: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       name: PropTypes.string,
       centsTotal: PropTypes.number,
       hexValue: PropTypes.string,
     }),
-    addons: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      description: PropTypes.string,
-      centsTotal: PropTypes.number,
-    })),
+    productImage: PropTypes.string,
   })).isRequired,
 };
 

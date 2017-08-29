@@ -44,3 +44,9 @@
 .Modal__layout-container {
   padding: 0 40px;
 }
+
+.Modal__header--headline {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $c-light-gray;
+}

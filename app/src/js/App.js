@@ -10,7 +10,13 @@ import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import ColorSelectionModal from './components/pdp/ColorSelectionModal';
+<<<<<<< HEAD
 import ViewSizeGuideModal from './components/pdp/ViewSizeGuideModal';
+=======
+import ShareModal from './components/pdp/ShareModal';
+import StyleSelectionModal from './components/pdp/StyleSelectionModal';
+import SizeSelectionModal from './components/pdp/SizeSelectionModal';
+>>>>>>> master
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -27,7 +33,7 @@ function stateToProps(state) {
   const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
 
   return {
-    lockBody: sideMenuOpen || modalOpen || cartDrawerOpen,
+    lockBody: (sideMenuOpen || modalOpen || cartDrawerOpen),
   };
 }
 
@@ -35,9 +41,7 @@ function stateToProps(state) {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-    };
+    this.state = { isOpen: false };
     autoBind(this);
   }
 
@@ -51,7 +55,13 @@ class App extends Component {
         <OnboardingModal />
         <ProductFabricModal />
         <ColorSelectionModal />
+<<<<<<< HEAD
         <ViewSizeGuideModal />
+=======
+        <ShareModal />
+        <StyleSelectionModal />
+        <SizeSelectionModal />
+>>>>>>> master
       </div>
     );
   }
