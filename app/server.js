@@ -19,8 +19,12 @@ const clientAssets = require('./build/asset-manifest.json');
 const template = require('./template');
 
 
+// Utilities
+const { transformProductJSON } = require('./src/js/utilities/pdp');
+
 // Components
 const App = require('./src/js/App');
+const mockJSON = require('./src/mock/product.json');
 
 // Store
 const AppStore = require('./src/js/stores/AppStore');
@@ -50,12 +54,11 @@ app.use(cookieParser());
 
 // Rendering
 // *****************************************************************************
-app.get('/app', (req, res) => {
-  res.header('Content-Type', 'text/html');
-  const props = { $$appState: { defaultValue: ['injected'] } };
+app.get('/pdp', (req, res) => {
+  const props = transformProductJSON(mockJSON);
   const store = AppStore(props);
   const ReactRoot = render(React.createElement(Provider, { store },
-    React.createElement(App)
+    React.createElement(App),
   ));
   const html = template({
     root: ReactRoot,
@@ -65,6 +68,30 @@ app.get('/app', (req, res) => {
   });
 
   html.toStream().pipe(res);
+});
+
+app.post('/pdp', (req, res) => {
+  res.header('Content-Type', 'text/html');
+
+  try {
+    const props = transformProductJSON({});
+    const store = AppStore(props);
+    const ReactRoot = render(React.createElement(Provider, { store },
+      React.createElement(App),
+    ));
+    const html = template({
+      root: ReactRoot,
+      initialState: store.getState(),
+      jsBundle: clientAssets['main.js'],
+      cssBundle: clientAssets['main.css'],
+    });
+
+    // Response stream back
+    html.toStream().pipe(res);
+  } catch (e) {
+    // Catch errors so we don't generate malformed HTML
+    res.send({ e, error: true, message: 'Incorrect Params' });
+  }
 });
 
 app.listen(process.env.PORT || 8001);

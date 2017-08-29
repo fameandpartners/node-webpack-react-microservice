@@ -95,7 +95,7 @@ AddToCartButton.propTypes = {
   // Redux Props
   $$productState: PropTypes.object.isRequired,
   $$customizationState: PropTypes.object.isRequired,
-  colorCentsTotal: PropTypes.number.isRequired,
+  colorCentsTotal: PropTypes.number,
   productCentsBasePrice: PropTypes.number.isRequired,
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
@@ -104,6 +104,7 @@ AddToCartButton.propTypes = {
 };
 
 AddToCartButton.defaultProps = {
+  colorCentsTotal: 0,
   selectedAddonOptions: [],
   shouldActivateCartDrawer: false,
   showTotal: true,

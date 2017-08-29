@@ -1,7 +1,10 @@
 export default {
   debounce: 500,
   onResize(win) {
-    const { innerWidth: winWidth } = win;
+    const {
+      innerWidth: winWidth,
+      innerHeight: winHeight,
+    } = win;
     let breakpoint = 'desktop';
     if (win.innerWidth >= 768) {
       breakpoint = 'tablet';
@@ -15,7 +18,7 @@ export default {
     if (win.innerWidth < 768) {
       breakpoint = 'mobile';
     }
-    return { breakpoint, winWidth };
+    return { breakpoint, winHeight, winWidth };
   },
   breakpoints: {
     mobile: 768,

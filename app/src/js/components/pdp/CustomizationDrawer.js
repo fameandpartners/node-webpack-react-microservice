@@ -20,10 +20,12 @@ import * as modalAnimations from '../../utilities/modal-animation';
 import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE, SIZE_CUSTOMIZE } from '../../constants/CustomizationConstants';
 
 function stateToProps(state) {
+  const selectedColor = state.$$customizationState.get('selectedColor');
+  const selectedColorId = selectedColor ? selectedColor.get('id') : null;
   return {
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
-    selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
+    selectedColorId,
   };
 }
 

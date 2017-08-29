@@ -29,10 +29,12 @@ class Button extends Component {
       tertiary,
       text,
       handleClick,
+      passedRef,
     } = this.props;
 
     return (
       <button
+        ref={passedRef}
         onClick={handleClick}
         className={
           classnames(
@@ -60,6 +62,7 @@ class Button extends Component {
 }
 
 Button.propTypes = {
+  passedRef: PropTypes.func,
   className: PropTypes.string,
   disabled: PropTypes.bool,
   metaIcon: PropTypes.node,
@@ -73,6 +76,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  passedRef: null,
   className: '',
   disabled: false,
   metaIcon: null,
