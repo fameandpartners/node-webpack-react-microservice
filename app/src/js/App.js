@@ -28,8 +28,8 @@ import '../css/components/App.scss';
 
 // Configure Error Tracking
 Raven
-    .config('https://bc3111a59f064fbba31becef25d2fb7c@sentry.io/88252')
-    .install();
+  .config('https://bc3111a59f064fbba31becef25d2fb7c@sentry.io/88252')
+  .install();
 
 
 function stateToProps(state) {
