@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 
+// Sentry Error Tracking
+import Raven from 'raven-js';
+
 // App Components
 import SideMenu from './components/shared/SideMenu';
 import AppMain from './components/pdp/AppMain';
@@ -22,6 +25,12 @@ import '../css/helpers.scss';
 import '../css/layout.scss';
 import '../css/typography.scss';
 import '../css/components/App.scss';
+
+// Configure Error Tracking
+Raven
+    .config('https://bc3111a59f064fbba31becef25d2fb7c@sentry.io/88252')
+    .install();
+
 
 function stateToProps(state) {
   const sideMenuOpen = state.$$appState.get('sideMenuOpen');
