@@ -110,7 +110,7 @@ class ProductCustomizationStyle extends Component {
         <div
           key={`addon-layer-image-${a.name}`}
           className={classnames(
-            'ProductCustomizationStyle__cad-layer ProductCustomizationStyle__cad-layer__addon',
+            'ProductCustomizationStyle__cad-layer',
             { 'ProductCustomizationStyle__cad-layer--selected': isSelected },
           )}
           style={{ backgroundImage: `url(${a.url})` }}
@@ -241,7 +241,7 @@ class ProductCustomizationStyle extends Component {
         <div
           key={`addon-layer-image-${addonOptionMatch.name}`}
           className={classnames(
-            'ProductCustomizationStyle__cad-layer ProductCustomizationStyle__cad-layer__addon',
+            'ProductCustomizationStyle__cad-layer',
             'ProductCustomizationStyle__cad-layer--legacy',
             {
               'ProductCustomizationStyle__cad-layer--selected': true,
@@ -252,11 +252,9 @@ class ProductCustomizationStyle extends Component {
       );
     }
     return (
+      /* eslint-disable max-len */
       <div
-        className={classnames(
-          'ProductCustomizationStyle__cad-layer ProductCustomizationStyle__cad-layer__addon',
-          'ProductCustomizationStyle__cad-layer--legacy',
-      )}
+        className="ProductCustomizationStyle__cad-layer ProductCustomizationStyle__cad-layer--legacy"
       />
     );
   }
