@@ -17,8 +17,19 @@ class FacebookIconShareButton extends PureComponent {
   render() {
     const {
       url,
+      externalLink,
     } = this.props;
-
+    if (externalLink) {
+      return (
+        <a href={url}>
+          <IconSVG
+            svgPath={FacebookShareIcon.url}
+            width="40px"
+            height="40px"
+          />
+        </a>
+      );
+    }
     return (
       <FacebookShareButton
         url={url}
@@ -36,6 +47,11 @@ class FacebookIconShareButton extends PureComponent {
 
 FacebookIconShareButton.propTypes = {
   url: PropTypes.string.isRequired,
+  externalLink: PropTypes.bool,
+};
+
+FacebookIconShareButton.defaultProps = {
+  externalLink: false,
 };
 
 export default FacebookIconShareButton;

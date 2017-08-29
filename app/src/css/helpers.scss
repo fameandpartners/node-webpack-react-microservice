@@ -157,3 +157,11 @@
 .u-flex--1 {
   flex: 1;
 }
+
+.u-show-large-only {
+  display: none;
+
+  @include lg {
+    display: inline-block;
+  }
+}

@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 // Components
 import Button from '../generic/Button';
 import Input from '../form/Input';
+import FacebookIconShareButton from '../generic/FacebookIconShareButton';
+import TwitterIconShareButton from '../generic/TwitterIconShareButton';
+import PinterestIconShareButton from '../generic/PinterestIconShareButton';
 
 // CSS
 import '../../../css/components/Footer.scss';
@@ -41,12 +45,13 @@ class Footer extends PureComponent {
 
   render() {
     const { siteVersion, signupError } = this.state;
+    const { breakpoint } = this.props;
     return (
       <footer className="Footer">
         <div className="layout-container grid-noGutter-reverse-spaceAround">
           <ul className="col-2_sm-4 Footer__category-list">
             <li>
-              <p className="Footer__category-title">Help</p>
+              <p className="Footer__category-title">{breakpoint}</p>
             </li>
             <li>
               <p>
@@ -154,12 +159,38 @@ class Footer extends PureComponent {
                 <div>
                   <Input
                     id="footer-email"
-                    placeholder="Email your email address"
+                    placeholder="Enter your email address"
                     type="email"
                     error={signupError}
                     inlineMeta={signupError ? 'Error! Something is wrong...' : null}
                   />
                 </div>
+                {
+                  breakpoint === 'desktop' ?
+                    <div className="grid">
+                      <ul className="Footer__icon-list Footer__icon-list--desktop col-12">
+                        <li>
+                          <FacebookIconShareButton
+                            url="https://www.facebook.com/FameandPartners"
+                            externalLink
+                          />
+                        </li>
+                        <li>
+                          <TwitterIconShareButton
+                            url="https://twitter.com/FameandPartners"
+                            externalLink
+                          />
+                        </li>
+                        <li>
+                          <PinterestIconShareButton
+                            url="https://www.pinterest.com/fameandpartners"
+                            externalLink
+                          />
+                        </li>
+                      </ul>
+                    </div> : null
+                }
+
               </div>
               <div className="col-3 padding--none">
                 <Button
@@ -171,6 +202,32 @@ class Footer extends PureComponent {
             </form>
           </div>
         </div>
+        {
+          breakpoint === 'desktop' ?
+          null :
+          <div className="grid-center-noGutter">
+            <ul className="Footer__icon-list Footer__icon-list--mobile col-3_sm-6_xs-8_md-4">
+              <li>
+                <FacebookIconShareButton
+                  url="https://www.facebook.com/FameandPartners"
+                  externalLink
+                />
+              </li>
+              <li>
+                <TwitterIconShareButton
+                  url="https://twitter.com/FameandPartners"
+                  externalLink
+                />
+              </li>
+              <li>
+                <PinterestIconShareButton
+                  url="https://www.pinterest.com/fameandpartners"
+                  externalLink
+                />
+              </li>
+            </ul>
+          </div>
+        }
         <div className="layout-container grid-noGutter">
           <div className="col-12 Footer__site-version-container">
             <p className="u-user-select--none">Country: &nbsp;
@@ -187,5 +244,9 @@ class Footer extends PureComponent {
     );
   }
 }
+
+Footer.propTypes = {
+  breakpoint: PropTypes.string.isRequired,
+};
 
 export default Footer;

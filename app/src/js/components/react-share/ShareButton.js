@@ -53,6 +53,7 @@ export default class ShareButton extends Component {
 
     const classes = classnames(
       'SocialMediaShareButton',
+      'u-cursor--pointer',
       `SocialMediaShareButton--${network}`,
       {
         'SocialMediaShareButton--disabled': disabled,

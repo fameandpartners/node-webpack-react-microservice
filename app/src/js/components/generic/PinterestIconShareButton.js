@@ -18,12 +18,23 @@ class PinterestIconShareButton extends PureComponent {
     const {
       url,
       image,
+      externalLink,
     } = this.props;
-
+    if (externalLink) {
+      return (
+        <a href={url}>
+          <IconSVG
+            svgPath={PinterestShareIcon.url}
+            width="40px"
+            height="40px"
+          />
+        </a>
+      );
+    }
     return (
       <PinterestShareButton
         url={url}
-        className="ShareModal__icon-button"
+        className="SocialShare__icon-button"
         media={image}
       >
         <IconSVG
@@ -36,9 +47,15 @@ class PinterestIconShareButton extends PureComponent {
   }
 }
 
+
 PinterestIconShareButton.propTypes = {
   url: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
+  externalLink: PropTypes.bool,
+};
+
+PinterestIconShareButton.defaultProps = {
+  externalLink: true,
 };
 
 export default PinterestIconShareButton;

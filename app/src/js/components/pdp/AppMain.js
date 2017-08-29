@@ -158,7 +158,9 @@ class AppMain extends Component {
                 <FameDifference />
               </div>
 
-              <Footer />
+              <Footer
+                breakpoint={breakpoint}
+              />
             </div>
             <div
               className="CartDrawer__wrapper"
