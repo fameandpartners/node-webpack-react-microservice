@@ -46,7 +46,7 @@ function stateToProps(state) {
     colorHexValue: selectedColor.get('hexValue'),
 
     // SELECTIONS
-    addonOptions: addons.get('addonOptions').toJS(),
+    addonOptions: addons ? addons.get('addonOptions').toJS() : null,
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
@@ -236,7 +236,7 @@ ProductOptions.propTypes = {
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       name: PropTypes.string,
     }),
-  ).isRequired,
+  ),
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
@@ -246,6 +246,7 @@ ProductOptions.propTypes = {
 };
 
 ProductOptions.defaultProps = {
+  addonOptions: [],
   colorCentsTotal: 0,
   selectedDressSize: null,
   selectedHeightValue: null,

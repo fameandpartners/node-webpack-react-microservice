@@ -114,14 +114,15 @@ function computeLayerCode(url, sentinel, length = 4) {
 }
 
 export function transformAddons(productJSON) {
-  console.log('productJSON', productJSON);
   const addons = productJSON.product.available_options.table.addons;
   const allCustomizations = productJSON.product.available_options.table.customizations.table.all;
-  return assign({}, {
+
+  if (addons) { // NEW CAD SYSTEM, We have layers to our cads
+    return assign({}, {
       // Marry previous customizations to addons
-    addonLayerImages: addons.layer_images,
-    selectedAddonImageLayers: [],
-    addonOptions: allCustomizations.map(
+      addonLayerImages: addons.layer_images,
+      selectedAddonImageLayers: [],
+      addonOptions: allCustomizations.map(
         (ao, i) => {
           const mappedImageLayer = addons.layer_images.find(img => (img.bit_array[i] ? img : null));
           return assign({}, {
@@ -135,11 +136,25 @@ export function transformAddons(productJSON) {
           });
         },
       ),
-    baseImages: addons.base_images,
-    baseSelected: null,
-    addonsLayersComputed: addons.layer_images.map(({ url }) => computeLayerCode(url, 'layer')),
-    addonsBasesComputed: addons.base_images.map(({ url }) => computeLayerCode(url, 'base')),
-  });
+      baseImages: addons.base_images,
+      baseSelected: null,
+      addonsLayersComputed: addons.layer_images.map(({ url }) => computeLayerCode(url, 'layer')),
+      addonsBasesComputed: addons.base_images.map(({ url }) => computeLayerCode(url, 'base')),
+    });
+  }
+
+  return {
+    // Building LegacyCADS in the same manner
+    isLegacyCADCustomizations: true,
+    addonOptions: allCustomizations.map(ao => assign({}, {
+      id: ao.table.id,
+      description: ao.table.name,
+      position: ao.table.position,
+      price: ao.table.display_price,
+      centsTotal: parseInt(ao.table.display_price.money.fractional, 10),
+      img: ao.table.image,
+    })),
+  };
 }
 
 export function transformProductCentsBasePrice({ prices = {} }) {
@@ -409,6 +424,8 @@ export function transformProductJSON(productJSON) {
     selectedColor: productState.productDefaultColors[0],
     temporaryColor: productState.productDefaultColors[0],
   };
+
+  console.log('customizationState', customizationState);
 
   return {
     $$productState: productState,
