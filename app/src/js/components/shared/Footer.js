@@ -5,9 +5,12 @@ import PropTypes from 'prop-types';
 // Components
 import Button from '../generic/Button';
 import Input from '../form/Input';
-import FacebookIconShareButton from '../generic/FacebookIconShareButton';
-import TwitterIconShareButton from '../generic/TwitterIconShareButton';
-import PinterestIconShareButton from '../generic/PinterestIconShareButton';
+import IconSVG from '../generic/IconSVG';
+
+// Assets
+import PinterestShareIcon from '../../../svg/share-pinterest.svg';
+import TwitterShareIcon from '../../../svg/share-twitter.svg';
+import FacebookShareIcon from '../../../svg/share-facebook.svg';
 
 // CSS
 import '../../../css/components/Footer.scss';
@@ -170,22 +173,31 @@ class Footer extends PureComponent {
                     <div className="grid">
                       <ul className="Footer__icon-list Footer__icon-list--desktop col-12">
                         <li className="float--left">
-                          <FacebookIconShareButton
-                            url="https://www.facebook.com/FameandPartners"
-                            externalLink
-                          />
+                          <a href="https://www.facebook.com/FameandPartners">
+                            <IconSVG
+                              svgPath={FacebookShareIcon.url}
+                              width="40px"
+                              height="40px"
+                            />
+                          </a>
                         </li>
                         <li className="float--left">
-                          <TwitterIconShareButton
-                            url="https://twitter.com/FameandPartners"
-                            externalLink
-                          />
+                          <a href="https://twitter.com/FameandPartners">
+                            <IconSVG
+                              svgPath={TwitterShareIcon.url}
+                              width="40px"
+                              height="40px"
+                            />
+                          </a>
                         </li>
                         <li className="float--left">
-                          <PinterestIconShareButton
-                            url="https://www.pinterest.com/fameandpartners"
-                            externalLink
-                          />
+                          <a href="https://www.pinterest.com/fameandpartners">
+                            <IconSVG
+                              svgPath={PinterestShareIcon.url}
+                              width="40px"
+                              height="40px"
+                            />
+                          </a>
                         </li>
                       </ul>
                     </div> : null
@@ -207,23 +219,32 @@ class Footer extends PureComponent {
           null :
           <div className="grid-center-noGutter">
             <ul className="Footer__icon-list Footer__icon-list--mobile col-3_sm-6_xs-8_md-4">
-              <li>
-                <FacebookIconShareButton
-                  url="https://www.facebook.com/FameandPartners"
-                  externalLink
-                />
+              <li className="float--left">
+                <a href="https://www.facebook.com/FameandPartners">
+                  <IconSVG
+                    svgPath={FacebookShareIcon.url}
+                    width="40px"
+                    height="40px"
+                  />
+                </a>
               </li>
-              <li>
-                <TwitterIconShareButton
-                  url="https://twitter.com/FameandPartners"
-                  externalLink
-                />
+              <li className="float--left">
+                <a href="https://twitter.com/FameandPartners">
+                  <IconSVG
+                    svgPath={TwitterShareIcon.url}
+                    width="40px"
+                    height="40px"
+                  />
+                </a>
               </li>
-              <li>
-                <PinterestIconShareButton
-                  url="https://www.pinterest.com/fameandpartners"
-                  externalLink
-                />
+              <li className="float--left">
+                <a href="https://www.pinterest.com/fameandpartners">
+                  <IconSVG
+                    svgPath={PinterestShareIcon.url}
+                    width="40px"
+                    height="40px"
+                  />
+                </a>
               </li>
             </ul>
           </div>

@@ -17,19 +17,8 @@ class TwitterIconShareButton extends PureComponent {
   render() {
     const {
       url,
-      externalLink,
     } = this.props;
-    if (externalLink) {
-      return (
-        <a href={url}>
-          <IconSVG
-            svgPath={TwitterShareIcon.url}
-            width="40px"
-            height="40px"
-          />
-        </a>
-      );
-    }
+
     return (
       <TwitterShareButton
         url={url}
@@ -47,11 +36,6 @@ class TwitterIconShareButton extends PureComponent {
 
 TwitterIconShareButton.propTypes = {
   url: PropTypes.string.isRequired,
-  externalLink: PropTypes.bool,
-};
-
-TwitterIconShareButton.defaultProps = {
-  externalLink: false,
 };
 
 export default TwitterIconShareButton;
