@@ -176,8 +176,6 @@ class Footer extends PureComponent {
                           <a href="https://www.facebook.com/FameandPartners">
                             <IconSVG
                               svgPath={FacebookShareIcon.url}
-                              width="40px"
-                              height="40px"
                             />
                           </a>
                         </li>
@@ -185,8 +183,6 @@ class Footer extends PureComponent {
                           <a href="https://twitter.com/FameandPartners">
                             <IconSVG
                               svgPath={TwitterShareIcon.url}
-                              width="40px"
-                              height="40px"
                             />
                           </a>
                         </li>
@@ -194,8 +190,6 @@ class Footer extends PureComponent {
                           <a href="https://www.pinterest.com/fameandpartners">
                             <IconSVG
                               svgPath={PinterestShareIcon.url}
-                              width="40px"
-                              height="40px"
                             />
                           </a>
                         </li>
@@ -224,8 +218,6 @@ class Footer extends PureComponent {
                   <a href="https://www.facebook.com/FameandPartners">
                     <IconSVG
                       svgPath={FacebookShareIcon.url}
-                      width="40px"
-                      height="40px"
                     />
                   </a>
                 </li>
@@ -233,8 +225,6 @@ class Footer extends PureComponent {
                   <a href="https://twitter.com/FameandPartners">
                     <IconSVG
                       svgPath={TwitterShareIcon.url}
-                      width="40px"
-                      height="40px"
                     />
                   </a>
                 </li>
@@ -242,8 +232,6 @@ class Footer extends PureComponent {
                   <a href="https://www.pinterest.com/fameandpartners">
                     <IconSVG
                       svgPath={PinterestShareIcon.url}
-                      width="40px"
-                      height="40px"
                     />
                   </a>
                 </li>
