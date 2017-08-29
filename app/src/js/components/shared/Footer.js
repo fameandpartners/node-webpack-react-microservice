@@ -51,7 +51,7 @@ class Footer extends PureComponent {
         <div className="layout-container grid-noGutter-reverse-spaceAround">
           <ul className="col-2_sm-4 Footer__category-list">
             <li>
-              <p className="Footer__category-title">{breakpoint}</p>
+              <p className="Footer__category-title">Help</p>
             </li>
             <li>
               <p>
@@ -169,19 +169,19 @@ class Footer extends PureComponent {
                   breakpoint === 'desktop' ?
                     <div className="grid">
                       <ul className="Footer__icon-list Footer__icon-list--desktop col-12">
-                        <li>
+                        <li className="float--left">
                           <FacebookIconShareButton
                             url="https://www.facebook.com/FameandPartners"
                             externalLink
                           />
                         </li>
-                        <li>
+                        <li className="float--left">
                           <TwitterIconShareButton
                             url="https://twitter.com/FameandPartners"
                             externalLink
                           />
                         </li>
-                        <li>
+                        <li className="float--left">
                           <PinterestIconShareButton
                             url="https://www.pinterest.com/fameandpartners"
                             externalLink
