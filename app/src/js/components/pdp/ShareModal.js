@@ -77,18 +77,18 @@ class ShareModal extends Component {
             className="ShareModal typography Modal__layout-container"
           >
             <ul className="ShareModal__icons-row Modal__content--sm-margin-top">
-              <li className="u-cursor--pointer">
+              <li>
                 <FacebookIconShareButton
                   url={currentURL}
                 />
               </li>
-              <li className="u-cursor--pointer">
+              <li>
                 <PinterestIconShareButton
                   url={currentURL}
                   image={currentProductImage}
                 />
               </li>
-              <li className="u-cursor--pointer">
+              <li>
                 <TwitterIconShareButton
                   url={currentURL}
                 />
