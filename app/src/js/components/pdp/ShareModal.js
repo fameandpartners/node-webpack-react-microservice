@@ -1,9 +1,14 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import autobind from 'react-autobind';
+import { find } from 'lodash';
+
+// polyfills
+import win from '../../polyfills/windowPolyfill';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
@@ -24,8 +29,8 @@ import '../../../css/components/ShareModal.scss';
 
 function stateToProps(state) {
   return {
-    currentURL: state.$$appState.get('currentURL'),
-    currentProductImage: state.$$productState.get('productImages').get(0).get('bigImg'),
+    colorId: state.$$customizationState.get('selectedColor').get('id'),
+    $$productImages: state.$$productState.get('productImages'),
   };
 }
 
@@ -44,11 +49,16 @@ class ShareModal extends Component {
     this.props.activateModal({ shouldAppear: false });
   }
 
+  findColorSpecificFirstImageUrl() {
+    const { $$productImages, colorId } = this.props;
+    const productImages = $$productImages.toJS();
+    const hasMatch = find(productImages, { colorId });
+    return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
+  }
+
   render() {
-    const {
-      currentURL,
-      currentProductImage,
-    } = this.props;
+    const currentProductImage = this.findColorSpecificFirstImageUrl();
+    const currentURL = win.location.href;
 
     return (
       <ModalContainer
@@ -89,10 +99,19 @@ class ShareModal extends Component {
 }
 
 ShareModal.propTypes = {
-  // Redux
+  // Redux Actions
   activateModal: PropTypes.func.isRequired,
-  currentURL: PropTypes.string.isRequired,
-  currentProductImage: PropTypes.string.isRequired,
+  // Redux Props
+  colorId: PropTypes.number.isRequired,
+  $$productImages: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
+    id: PropTypes.number,
+    colorId: PropTypes.number,
+    smallImg: PropTypes.string,
+    bigImg: PropTypes.string,
+    height: PropTypes.number,
+    width: PropTypes.number,
+    position: PropTypes.number,
+  })).isRequired,
 };
 
 export default connect(stateToProps, dispatchToProps)(ShareModal);

@@ -425,8 +425,6 @@ export function transformProductJSON(productJSON) {
     temporaryColor: productState.productDefaultColors[0],
   };
 
-  console.log('customizationState', customizationState);
-
   return {
     $$productState: productState,
     $$customizationState: customizationState,

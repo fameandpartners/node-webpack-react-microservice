@@ -71,6 +71,14 @@ class StyleSelectionModal extends PureComponent {
     activateModal({ shouldAppear: false });
   }
 
+  /**
+   * Handle clearing of addon selections
+   * @action -> activateAddonIdLayers
+   */
+  handleClearAddonSelections() {
+    this.activateAddonIdLayers([]);
+  }
+
   render() {
     return (
       <ModalContainer
@@ -85,7 +93,7 @@ class StyleSelectionModal extends PureComponent {
           modalContentClassName="u-width--full u-overflow-y--scroll"
           modalWrapperClassName="u-flex--col"
         >
-          <ProductCustomizationStyle hasNavItems={false} />
+          <ProductCustomizationStyle hasNavItems={false} clearAll={false} />
           <div className="u-position--absolute u-bottom u-width--full">
             <ButtonLedge
               handleLeftButtonClick={this.handleCloseModal}

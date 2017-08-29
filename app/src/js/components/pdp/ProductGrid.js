@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
@@ -7,7 +8,7 @@ import { find } from 'lodash';
 function stateToProps(state) {
   return {
     selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
-    productImages: state.$$productState.get('productImages').toJS(),
+    $$productImages: state.$$productState.get('productImages'),
   };
 }
 
@@ -23,11 +24,13 @@ class ProductGrid extends Component {
    * @return {Array} productImages
    */
   splitProductImages(remainder) {
-    const { selectedColorId, productImages } = this.props;
+    const { selectedColorId, $$productImages } = this.props;
+    const productImages = $$productImages.toJS();
     const colorMatch = find(productImages, { colorId: selectedColorId });
+    const firstColorId = productImages[0].colorId;
 
     return productImages
-      .filter(img => (colorMatch ? img.colorId === selectedColorId : true))
+      .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
       .filter((img, i) => i % 2 === remainder)
       .map(img => (
         <div key={img.id} className="brick">
@@ -54,7 +57,7 @@ class ProductGrid extends Component {
 
 ProductGrid.propTypes = {
   selectedColorId: PropTypes.number.isRequired,
-  productImages: PropTypes.arrayOf(PropTypes.shape({
+  $$productImages: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
     id: PropTypes.number,
     colorId: PropTypes.number,
     smallImg: PropTypes.string,
