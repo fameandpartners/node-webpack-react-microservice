@@ -146,6 +146,10 @@ class ProductOptions extends Component {
     };
   }
 
+  /**
+   * Checks for our current color amongst images and returns that image, or default
+   * @return {String} imageUrl
+   */
   findColorSpecificFirstImageUrl() {
     const { $$productImages, colorId } = this.props;
     const productImages = $$productImages.toJS();

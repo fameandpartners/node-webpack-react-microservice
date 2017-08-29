@@ -36,14 +36,18 @@ export const $$initialState = Immutable.fromJS({
   temporaryStyleCustomizations: [],
   selectedStyleCustomizations: [],
 
-  // addonLayerImages: Array,
-  // selectedAddonImageLayers: Array,
-  // addonOptions: ArrayOfa,
-  // baseImages: Array,
-  // isLegacyCADCustomizations: Boolean,
-  // baseSelected: null,
-  // addonsLayersComputed: Array,
-  // addonsBasesComputed: Array,
+  // TODO: V2 This data structure could use some clean up and
+  // is a legacy carry over from previous pdp implementation
+  // ArrayOf({
+  //   addonLayerImages: Array|Null,
+  //   selectedAddonImageLayers: Array,
+  //   addonOptions: Array,
+  //   baseImages: Array|Null,
+  //   isLegacyCADCustomizations: Boolean,
+  //   baseSelected: Object,
+  //   addonsLayersComputed: Array,
+  //   addonsBasesComputed: Array,
+  // })
   addons: null,
 });
 
