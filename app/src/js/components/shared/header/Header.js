@@ -20,7 +20,6 @@ import ShoppingBagIcon from '../../../../svg/i-shopping-bag.svg';
 import AccountIcon from '../../../../svg/i-account.svg';
 import SearchIcon from '../../../../svg/i-search.svg';
 
-
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
