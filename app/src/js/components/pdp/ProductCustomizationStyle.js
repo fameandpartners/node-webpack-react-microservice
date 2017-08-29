@@ -330,6 +330,7 @@ class ProductCustomizationStyle extends Component {
 
   /**
    * Event handler for addon selection
+   * NOTE: We have to be mindful of Legacy CAD Customizations which do not have addon layers
    * @param  {Object} addon
    * @action -> activateAddonIdLayers
    */
@@ -338,7 +339,8 @@ class ProductCustomizationStyle extends Component {
     return () => {
       let newAddonIds = [];
       if (isLegacyCADCustomizations) {
-        newAddonIds = [addon.id]; // ONLY ONE ALLOWED
+        const currentHasInstanceOf = temporaryStyleCustomizations.indexOf(addon.id) > -1;
+        newAddonIds = currentHasInstanceOf ? [] : [addon.id]; // ONLY ONE MAX ALLOWED
       } else {
         newAddonIds = addOrRemoveFrom(temporaryStyleCustomizations, addon.id);
       }
@@ -357,6 +359,7 @@ class ProductCustomizationStyle extends Component {
 
   render() {
     const {
+      clearAll,
       hasNavItems,
       isLegacyCADCustomizations,
       productCustomizationDrawer,
@@ -371,20 +374,25 @@ class ProductCustomizationStyle extends Component {
 
         <div className="ProductCustomizationStyle__content">
           <div className="ProductCustomizationStyle__layer-wrapper u-center u-position--relative">
-            { isLegacyCADCustomizations ?
-              this.generateLegacyCADLayers() :
-              [this.generateBaseLayers(), this.generateAddonLayers().reverse()]
+            { isLegacyCADCustomizations
+              ? this.generateLegacyCADLayers()
+              : [this.generateBaseLayers(), this.generateAddonLayers().reverse()]
             }
           </div>
 
           <div className="ProductCustomizationStyle__addon-options">
-            <div className="textAlign--right u-mb-small">
-              <span
-                onClick={this.handleClearAddonSelections}
-                className="link link--static"
-              >
-                Clear All
-              </span>
+            <div className="textAlign--right float--right u-width--full u-mb-small">
+              { clearAll ?
+                (
+                  <span
+                    onClick={this.handleClearAddonSelections}
+                    className="link link--static"
+                  >
+                    Clear All
+                  </span>
+                )
+                : null
+              }
             </div>
             { this.generateAddonOptions() }
           </div>
@@ -397,6 +405,7 @@ class ProductCustomizationStyle extends Component {
 /* eslint-disable react/forbid-prop-types */
 ProductCustomizationStyle.propTypes = {
   // Normal Props
+  clearAll: PropTypes.bool,
   hasNavItems: PropTypes.bool,
   // Redux Props
   addonLayerImages: PropTypes.array,
@@ -417,6 +426,9 @@ ProductCustomizationStyle.propTypes = {
 };
 
 ProductCustomizationStyle.defaultProps = {
+  // Normal Props
+  clearAll: true,
+  // Redux Props
   addonLayerImages: null,
   addonsLayersComputed: null,
   addonsBasesComputed: null,
@@ -428,4 +440,5 @@ ProductCustomizationStyle.defaultProps = {
   temporaryStyleCustomizations: [],
 };
 
+/* eslint-disable max-len */
 export default connect(stateToProps, dispatchToProps)(ProductCustomizationStyle);

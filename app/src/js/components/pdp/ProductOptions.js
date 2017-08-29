@@ -224,7 +224,15 @@ class ProductOptions extends Component {
 ProductOptions.propTypes = {
   //* Redux Properties
   // PRODUCT
-  $$productImages: ImmutablePropTypes.map.isRequired,
+  $$productImages: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
+    id: PropTypes.number,
+    colorId: PropTypes.number,
+    smallImg: PropTypes.string,
+    bigImg: PropTypes.string,
+    height: PropTypes.number,
+    width: PropTypes.number,
+    position: PropTypes.number,
+  })).isRequired,
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   // COLOR
