@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 
+// Components
+import ShopAllNavigation from './ShopAllNavigation';
+
 // CSS
 import '../../../../css/components/HeaderNavigation.scss';
 
@@ -13,7 +16,7 @@ class HeaderNavigation extends Component {
   render() {
     return (
       <div className="HeaderNavigation u-position--absolute u-width--full">
-        Main Nav
+        <ShopAllNavigation />
       </div>
     );
   }
