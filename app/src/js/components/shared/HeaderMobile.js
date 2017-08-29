@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import ToastMessage from '../generic/ToastMessage';
 
 // Actions
 import * as AppActions from '../../actions/AppActions';
@@ -77,6 +78,10 @@ class HeaderMobile extends Component {
                   alt="Shopping Bag Icon"
                   width="26px"
                   height="26px"
+                />
+                <ToastMessage
+                  message="Added to Bag"
+                  closeTimeoutMS={3000}
                 />
               </li>
             </ul>
