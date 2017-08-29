@@ -10,13 +10,10 @@ import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import ColorSelectionModal from './components/pdp/ColorSelectionModal';
-<<<<<<< HEAD
 import ViewSizeGuideModal from './components/pdp/ViewSizeGuideModal';
-=======
 import ShareModal from './components/pdp/ShareModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeSelectionModal from './components/pdp/SizeSelectionModal';
->>>>>>> master
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -55,13 +52,10 @@ class App extends Component {
         <OnboardingModal />
         <ProductFabricModal />
         <ColorSelectionModal />
-<<<<<<< HEAD
         <ViewSizeGuideModal />
-=======
         <ShareModal />
         <StyleSelectionModal />
         <SizeSelectionModal />
->>>>>>> master
       </div>
     );
   }
