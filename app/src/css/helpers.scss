@@ -50,6 +50,20 @@
   text-align: right;
 }
 
+.u-cursor--pointer {
+  cursor: pointer;
+}
+
+.u-user-select--none {
+  user-select: none;
+}
+
+
+
+.padding--none {
+  padding: 0;
+}
+
 // NOTE: Nav, we will need to merge these :(
 // Global Margins
 .u-mb-small {
@@ -88,10 +102,6 @@
   position: fixed;
 }
 
-.u-cursor--pointer {
-  cursor: pointer;
-}
-
 .u-text-align-left {
   text-align: left;
 }
@@ -113,7 +123,7 @@
   text-transform: uppercase;
 }
 
-.u-underline {
+.u-text-decoration--underline {
   text-decoration: underline;
 }
 

@@ -66,9 +66,13 @@ class Input extends Component {
           defaultValue={defaultValue}
           readOnly={readOnly}
         />
-        {inlineMeta
-          ? <span className="Input__meta-label">{inlineMeta}</span>
+        {inlineMeta && error
+          ? <span className="Input__meta-label--error">{inlineMeta}</span>
           : null
+        }
+        {inlineMeta && !error
+            ? <span className="Input__meta-label">{inlineMeta}</span>
+            : null
         }
       </div>
     );

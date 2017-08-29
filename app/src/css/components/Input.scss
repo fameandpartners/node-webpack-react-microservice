@@ -9,7 +9,7 @@
 }
 
 .Input__wrapper__error .Input {
-  border-color: $c-form-error;
+  border-color: $c-red;
 }
 
 .Input {
@@ -68,4 +68,16 @@
   background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 27%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 27%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 27%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.Input__meta-label--error {
+  margin-top: 10px;
+  background: transparent;
+  color: $c-red;
+  padding-top: 5px;
+  left: -10px;
+  width: 100%;
+  padding-right: 0;
+  font-size: 12px;
+  padding-top: 10px;
 }
