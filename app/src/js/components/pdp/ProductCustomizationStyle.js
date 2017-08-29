@@ -414,7 +414,7 @@ ProductCustomizationStyle.propTypes = {
   baseSelected: PropTypes.number,
   isLegacyCADCustomizations: PropTypes.bool.isRequired,
   productCustomizationDrawer: PropTypes.string,
-  selectedAddonImageLayers: PropTypes.array.isRequired,
+  selectedAddonImageLayers: PropTypes.array,
   temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
@@ -433,6 +433,7 @@ ProductCustomizationStyle.defaultProps = {
   baseImages: null,
   baseSelected: null,
   hasNavItems: true,
+  selectedAddonImageLayers: [],
   selectedColorId: '',
   productCustomizationDrawer: null,
   temporaryStyleCustomizations: [],

@@ -52,7 +52,7 @@ class SideMenu extends Component {
       >
         {({ x }) =>
           <div
-            className="SideMenu"
+            className="SideMenu u-width--full"
             style={{
               WebkitTransform: `translate3d(${x * 5}%, 0, 0)`,
               transform: `translate3d(${x * 5}%, 0, 0)`,

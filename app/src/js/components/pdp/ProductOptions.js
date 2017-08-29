@@ -199,7 +199,7 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 leftNode={<span>Your size</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={selectedDressSize && selectedHeightValue}
+                optionIsSelected={!!(selectedDressSize && selectedHeightValue)}
                 rightNode={this.generateSizingNode()}
                 handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
