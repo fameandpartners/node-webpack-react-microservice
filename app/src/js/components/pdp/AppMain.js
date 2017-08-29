@@ -31,9 +31,9 @@ import ProductPrecustomizations from './ProductPrecustomizations';
 import FameDifference from './FameDifference';
 
 // Generic UI Components
-import HeaderHider from '../shared/HeaderHider';
-import HeaderMobile from '../shared/HeaderMobile';
-import Header from '../shared/Header';
+import HeaderHider from '../shared/header/HeaderHider';
+import HeaderMobile from '../shared/header/HeaderMobile';
+import Header from '../shared/header/Header';
 import Footer from '../shared/Footer';
 
 // CSS

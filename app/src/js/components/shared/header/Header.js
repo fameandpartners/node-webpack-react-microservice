@@ -5,19 +5,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import * as CartActions from '../../actions/CartActions';
+import * as CartActions from '../../../actions/CartActions';
 
 // Components
-import IconSVG from '../generic/IconSVG';
+import HeaderNavigation from './HeaderNavigation';
+import IconSVG from '../../generic/IconSVG';
 
 // CSS
-import '../../../css/components/Header.scss';
+import '../../../../css/components/Header.scss';
 
 // Assets
-import FameLogo from '../../../svg/i-fame-logo.svg';
-import ShoppingBagIcon from '../../../svg/i-shopping-bag.svg';
-import AccountIcon from '../../../svg/i-account.svg';
-import SearchIcon from '../../../svg/i-search.svg';
+import FameLogo from '../../../../svg/i-fame-logo.svg';
+import ShoppingBagIcon from '../../../../svg/i-shopping-bag.svg';
+import AccountIcon from '../../../../svg/i-account.svg';
+import SearchIcon from '../../../../svg/i-search.svg';
 
 
 function stateToProps(state) {
@@ -48,13 +49,12 @@ class Header extends Component {
   render() {
     const { cartItemCount } = this.props;
     return (
-      <header className="Header u-width--full">
+      <header className="Header u-position--relative u-width--full">
         <div className="layout-container">
           <nav className="grid-12">
             <ul className="col-4 textAlign--left">
-              <li><a className="Header__link" href="#shop">Shop all</a></li>
-              <li><a className="Header__link" href="#featured">Featured</a></li>
-              <li><a className="Header__link" href="#about">Who we are</a></li>
+              <li><span className="Header__link" role="link">Shop all</span></li>
+              <li><span className="Header__link" href="#about">Who we are</span></li>
             </ul>
             <div className="col-4 u-text-align--center">
               <IconSVG
@@ -92,6 +92,7 @@ class Header extends Component {
             </ul>
           </nav>
         </div>
+        <HeaderNavigation />
       </header>
     );
   }

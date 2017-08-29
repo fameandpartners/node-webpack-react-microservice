@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import '../../../css/components/Hamburger.scss';
+import '../../../../css/components/Hamburger.scss';
 
 /* eslint-disable react/prefer-stateless-function */
 class Hamburger extends PureComponent {

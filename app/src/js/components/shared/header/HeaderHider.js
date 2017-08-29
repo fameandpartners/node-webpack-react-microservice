@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import raf from 'raf';
 import autoBind from 'react-autobind';
-import shouldUpdate from '../../libs/HeaderHiderShouldUpdate';
-import window from '../../polyfills/windowPolyfill';
-import noop from '../../libs/noop';
-// CSS
-import '../../../css/components/HeaderHider.scss';
+import shouldUpdate from '../../../libs/HeaderHiderShouldUpdate';
+import window from '../../../polyfills/windowPolyfill';
+import noop from '../../../libs/noop';
 
+// CSS
+import '../../../../css/components/HeaderHider.scss';
 
 class HeaderHider extends Component {
   constructor(props) {

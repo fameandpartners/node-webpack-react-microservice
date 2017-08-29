@@ -9,7 +9,7 @@ import { Motion, spring } from 'react-motion';
 import * as AppActions from '../../actions/AppActions';
 
 // Components
-import Hamburger from './Hamburger';
+import Hamburger from './header/Hamburger';
 
 // CSS
 import '../../../css/components/SideMenu.scss';
