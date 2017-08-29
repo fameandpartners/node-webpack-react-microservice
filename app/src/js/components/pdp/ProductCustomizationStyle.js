@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { findIndex, uniqBy } from 'lodash';
+import { find, findIndex, uniqBy } from 'lodash';
 import { bindActionCreators } from 'redux';
 import autoBind from 'react-autobind';
 import classnames from 'classnames';
@@ -28,6 +28,7 @@ function stateToProps(state) {
     addonsBasesComputed: addons.addonsBasesComputed,
     baseImages: addons.baseImages,
     baseSelected: addons.baseSelected,
+    isLegacyCADCustomizations: addons.isLegacyCADCustomizations,
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     selectedAddonImageLayers: addons.selectedAddonImageLayers,
     temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
@@ -231,6 +232,35 @@ class ProductCustomizationStyle extends Component {
     return this.reduceMatchesBasedOnPriority(singleMatchingAddonLayers);
   }
 
+  generateLegacyCADLayers() {
+    const { addonOptions, temporaryStyleCustomizations } = this.props;
+    const addonOptionMatch = find(addonOptions, { id: temporaryStyleCustomizations[0] });
+
+    if (addonOptionMatch) {
+      return (
+        <div
+          key={`addon-layer-image-${addonOptionMatch.name}`}
+          className={classnames(
+            'ProductCustomizationStyle__cad-layer ProductCustomizationStyle__cad-layer__addon',
+            'ProductCustomizationStyle__cad-layer--legacy',
+            {
+              'ProductCustomizationStyle__cad-layer--selected': true,
+            },
+        )}
+          style={{ backgroundImage: `url(${addonOptionMatch.img})` }}
+        />
+      );
+    }
+    return (
+      <div
+        className={classnames(
+          'ProductCustomizationStyle__cad-layer ProductCustomizationStyle__cad-layer__addon',
+          'ProductCustomizationStyle__cad-layer--legacy',
+      )}
+      />
+    );
+  }
+
   /**
    * Finds addon layers that match the full code
    * @param  {Array} fullCode - i.e. ['1', '1', '1', '1']
@@ -280,16 +310,21 @@ class ProductCustomizationStyle extends Component {
    */
   activateAddonIdLayers(newAddonIds) {
     const {
-      updateCustomizationStyleSelection,
+      isLegacyCADCustomizations,
       setActiveAddonImageLayers,
       setAddonBaseLayer,
+      updateCustomizationStyleSelection,
     } = this.props;
     const newAddons = this.computeActivenessOfAddons(newAddonIds);
     const newLayerCode = this.computeLayerCodeFromAddons(newAddons);
 
     updateCustomizationStyleSelection({ temporaryStyleCustomizations: newAddonIds });
-    setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
-    setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode));
+
+    if (!isLegacyCADCustomizations) {
+      // NEW CAD LAYERS NEED SWAPPING OF BASES AND LAYERS
+      setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode)));
+      setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode));
+    }
   }
 
 
@@ -299,9 +334,15 @@ class ProductCustomizationStyle extends Component {
    * @action -> activateAddonIdLayers
    */
   handleAddonSelection(addon) {
-    const { temporaryStyleCustomizations } = this.props;
+    const { isLegacyCADCustomizations, temporaryStyleCustomizations } = this.props;
     return () => {
-      const newAddonIds = addOrRemoveFrom(temporaryStyleCustomizations, addon.id);
+      let newAddonIds = [];
+      if (isLegacyCADCustomizations) {
+        newAddonIds = [addon.id]; // ONLY ONE ALLOWED
+      } else {
+        newAddonIds = addOrRemoveFrom(temporaryStyleCustomizations, addon.id);
+      }
+
       this.activateAddonIdLayers(newAddonIds);
     };
   }
@@ -317,6 +358,7 @@ class ProductCustomizationStyle extends Component {
   render() {
     const {
       hasNavItems,
+      isLegacyCADCustomizations,
       productCustomizationDrawer,
     } = this.props;
 
@@ -329,8 +371,10 @@ class ProductCustomizationStyle extends Component {
 
         <div className="ProductCustomizationStyle__content">
           <div className="ProductCustomizationStyle__layer-wrapper u-center u-position--relative">
-            { this.generateBaseLayers() }
-            { this.generateAddonLayers().reverse() }
+            { isLegacyCADCustomizations ?
+              this.generateLegacyCADLayers() :
+              [this.generateBaseLayers(), this.generateAddonLayers().reverse()]
+            }
           </div>
 
           <div className="ProductCustomizationStyle__addon-options">
@@ -355,12 +399,13 @@ ProductCustomizationStyle.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
   // Redux Props
-  addonLayerImages: PropTypes.array.isRequired,
+  addonLayerImages: PropTypes.array,
   addonOptions: PropTypes.array.isRequired,
-  addonsLayersComputed: PropTypes.array.isRequired,
-  addonsBasesComputed: PropTypes.array.isRequired,
-  baseImages: PropTypes.array.isRequired,
+  addonsLayersComputed: PropTypes.array,
+  addonsBasesComputed: PropTypes.array,
+  baseImages: PropTypes.array,
   baseSelected: PropTypes.number,
+  isLegacyCADCustomizations: PropTypes.bool.isRequired,
   productCustomizationDrawer: PropTypes.string,
   selectedAddonImageLayers: PropTypes.array.isRequired,
   temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
@@ -372,6 +417,10 @@ ProductCustomizationStyle.propTypes = {
 };
 
 ProductCustomizationStyle.defaultProps = {
+  addonLayerImages: null,
+  addonsLayersComputed: null,
+  addonsBasesComputed: null,
+  baseImages: null,
   baseSelected: null,
   hasNavItems: true,
   selectedColorId: '',

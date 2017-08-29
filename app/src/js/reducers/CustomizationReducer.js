@@ -36,17 +36,15 @@ export const $$initialState = Immutable.fromJS({
   temporaryStyleCustomizations: [],
   selectedStyleCustomizations: [],
 
-  // Addon area
-  addons: {
-    // Marry previous customizations to addons
-    addonLayerImages: [],
-    selectedAddonImageLayers: [],
-    addonOptions: [],
-    baseImages: [],
-    baseSelected: null,
-    addonsLayersComputed: [],
-    addonsBasesComputed: [],
-  },
+  // addonLayerImages: Array,
+  // selectedAddonImageLayers: Array,
+  // addonOptions: ArrayOfa,
+  // baseImages: Array,
+  // isLegacyCADCustomizations: Boolean,
+  // baseSelected: null,
+  // addonsLayersComputed: Array,
+  // addonsBasesComputed: Array,
+  addons: null,
 });
 
 export default function CartReducer($$state = $$initialState, action = null) {
