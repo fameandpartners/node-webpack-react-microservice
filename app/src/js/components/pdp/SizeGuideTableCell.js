@@ -1,11 +1,21 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import autobind from 'react-autobind';
 
 /* eslint-disable react/prefer-stateless-function */
 class SizeGuideTableCell extends PureComponent {
+  constructor(props) {
+    super(props);
+    autobind(this);
+  }
+
+  updateCoordinates() {
+    console.log(`Column: ${this.props.columnIndex}, Row: ${this.props.rowIndex}`);
+    this.props.hovered(this.props.columnIndex, this.props.rowIndex);
+  }
+
   render() {
-    /* eslint-disable no-unused-vars */
     const {
       contents,
       hoverCoordinates,
@@ -18,15 +28,15 @@ class SizeGuideTableCell extends PureComponent {
       {
         /* eslint-disable max-len */
         // TO-DO: clean-up (and better names, e.g. active == onCrossPath && current == currentlyHovered)
-        'SizeGuideTable__cell--active': (hoverCoordinates.hoverCol === columnIndex) || (hoverCoordinates.hoverRow === rowIndex),
-        'SizeGuideTable__cell--current': (hoverCoordinates.hoverCol === columnIndex) && (hoverCoordinates.hoverRow === rowIndex),
+        'SizeGuideTable__cell--active': (hoverCoordinates.hoverColumn === columnIndex) || (hoverCoordinates.hoverRow === rowIndex),
+        'SizeGuideTable__cell--current': (hoverCoordinates.hoverColumn === columnIndex) && (hoverCoordinates.hoverRow === rowIndex),
       },
     );
 
     return (
       <div
         className={cellClasses}
-        onMouseOver={() => console.log(`Column: ${columnIndex}, Row: ${rowIndex}`)}
+        onMouseOver={this.updateCoordinates}
       >
         {contents}
       </div>
@@ -40,23 +50,25 @@ SizeGuideTableCell.propTypes = {
     PropTypes.number,
   ]),
   hoverCoordinates: PropTypes.shape({
-    hoverCol: PropTypes.number,
+    hoverColumn: PropTypes.number,
     hoverRow: PropTypes.number,
   }),
   // should be required, temporarily not
   columnIndex: PropTypes.number,
   rowIndex: PropTypes.number,
+  hovered: PropTypes.func,
 };
 
 SizeGuideTableCell.defaultProps = {
   contents: '',
   // temp. obv. non-index value assigned
   hoverCoordinates: {
-    hoverCol: -1,
+    hoverColumn: -1,
     hoverRow: -1,
   },
   columnIndex: null,
   rowIndex: -2,
+  hovered: null,
 };
 
 export default SizeGuideTableCell;
