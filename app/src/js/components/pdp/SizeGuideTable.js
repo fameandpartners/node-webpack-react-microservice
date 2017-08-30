@@ -16,7 +16,7 @@ class SizeGuideTable extends PureComponent {
 
     this.state = {
       // works (e.g. set to 2, now the fun part...)
-      hoverIndex: null,
+      hoverIndex: 3,
     };
   }
 
@@ -71,21 +71,33 @@ class SizeGuideTable extends PureComponent {
               <div className="SizeGuideTable__column">
                 <SizeGuideTableCell
                   contents={item['Size US']}
+                  hoverIndex={hoverIndex}
+                  myIndex={key}
                 />
                 <SizeGuideTableCell
                   contents={item['Size Aus/UK']}
+                  hoverIndex={hoverIndex}
+                  myIndex={key}
                 />
                 <SizeGuideTableCell
                   contents={centimeters ? item['Bust cm'] : item['Bust Inches']}
+                  hoverIndex={hoverIndex}
+                  myIndex={key}
                 />
                 <SizeGuideTableCell
                   contents={centimeters ? item['Underbust cm'] : item['Underbust Inches']}
+                  hoverIndex={hoverIndex}
+                  myIndex={key}
                 />
                 <SizeGuideTableCell
                   contents={centimeters ? item['Waist cm'] : item['Waist Inches']}
+                  hoverIndex={hoverIndex}
+                  myIndex={key}
                 />
                 <SizeGuideTableCell
                   contents={centimeters ? item['Hip cm'] : item['Hip Inches']}
+                  hoverIndex={hoverIndex}
+                  myIndex={key}
                 />
               </div>
             </div>,
