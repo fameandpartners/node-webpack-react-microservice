@@ -3,23 +3,22 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-// Constants
-import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
+import classnames from 'classnames';
 
 // Actions
 import * as CartActions from '../../../actions/CartActions';
 
 // Components
-import HeaderActionButtons from './HeaderActionButtons';
-import HeaderNavigation from './HeaderNavigation';
+import SearchBarExpander from '../../generic/SearchBarExpander';
 import IconSVG from '../../generic/IconSVG';
 
 // CSS
 import '../../../../css/components/Header.scss';
 
 // Assets
-import FameLogo from '../../../../svg/i-fame-logo.svg';
+import ShoppingBagIcon from '../../../../svg/i-shopping-bag.svg';
+import AccountIcon from '../../../../svg/i-account.svg';
+import SearchIcon from '../../../../svg/i-search.svg';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -45,16 +44,6 @@ class Header extends Component {
     };
   }
 
-  handleAnimationEnd() {
-    this.setState({ openNavItem: null });
-  }
-
-  handleLinkMouseOver(openNavItem) {
-    return () => {
-      this.setState({ openNavItem });
-    };
-  }
-
   handleShoppingBagClick() {
     const { activateCartDrawer, cartDrawerOpen } = this.props;
     activateCartDrawer({ cartDrawerOpen: !cartDrawerOpen });
@@ -69,47 +58,59 @@ class Header extends Component {
   }
 
   render() {
-    const { isHovering } = this.props;
-    const { openNavItem } = this.state;
+    const { cartItemCount } = this.props;
+    const { searchBarActive } = this.state;
 
     return (
-      <header className="Header u-position--relative u-width--full">
-        <div className="layout-container Header__content-padding">
-          <nav className="grid-12-noGutter">
-            <ul className="col-4 textAlign--left">
-              <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.SHOP_ALL)}>
-                <span className="Header__link" role="link">Shop all</span>
-              </li>
-              <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.WHO_WE_ARE)}>
-                <span className="Header__link" href="#about">Who we are</span>
-              </li>
-            </ul>
-            <div className="col-4 u-text-align--center">
-              <IconSVG
-                svgPath={FameLogo.url}
-                width="200px"
-                height="26px"
-              />
-            </div>
-
-            <HeaderActionButtons />
-          </nav>
-        </div>
-
-        <HeaderNavigation
-          isActive={isHovering}
-          openNavItem={openNavItem}
-          handleAnimationEnd={this.handleAnimationEnd}
-        />
-      </header>
+      <ul className="col-4 textAlign--right">
+        <li className="Header__action">
+          <IconSVG
+            svgPath={AccountIcon.url}
+            width="18px"
+            height="26px"
+          />
+        </li>
+        <li
+          className={classnames(
+                  'Header__action',
+                  { 'Header__action--active-search': searchBarActive },
+                )}
+          onClick={this.handleSearchOpenClick}
+        >
+          <IconSVG
+            svgPath={SearchIcon.url}
+            width="18px"
+            height="26px"
+          />
+        </li>
+        <li>
+          <SearchBarExpander
+            isActive={searchBarActive}
+            onBlur={this.handleSearchBarBlur}
+          />
+        </li>
+        <li
+          className="Header__action"
+          onClick={this.handleShoppingBagClick}
+        >
+          { cartItemCount > 0
+                  ? <span className="Header__cart-count">{cartItemCount}</span>
+                  : null
+                }
+          <IconSVG
+            svgPath={ShoppingBagIcon.url}
+            width="18px"
+            height="26px"
+          />
+        </li>
+      </ul>
     );
   }
 }
 
 Header.propTypes = {
-  // Decorator Props
-  isHovering: PropTypes.bool,
   // Redux Props
+  cartItemCount: PropTypes.number,
   cartDrawerOpen: PropTypes.bool,
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,

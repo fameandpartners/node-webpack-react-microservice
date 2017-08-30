@@ -16,8 +16,11 @@ class SearchBar extends Component {
         className="SearchBar"
       >
         <Input
+          id="dress_query"
+          lineInput
           focusOnMount
           indent
+          onBlur={this.props.onBlur}
         />
       </div>
     );
@@ -25,11 +28,7 @@ class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
-  isActive: PropTypes.bool,
-};
-
-SearchBar.defaultProps = {
-  isActive: false,
+  onBlur: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

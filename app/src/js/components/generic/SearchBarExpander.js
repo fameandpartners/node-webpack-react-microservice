@@ -12,8 +12,7 @@ class SearchBarExpander extends Component {
   }
 
   defaultStyles() {
-    // ANIMATING TO:
-    const STANDARD_DEFAULT_STYLES = {
+    const DEFAULT_STYLES = {
       key: 'search',
       style: {
         opacity: spring(1),
@@ -21,15 +20,23 @@ class SearchBarExpander extends Component {
       },
     };
 
-    return STANDARD_DEFAULT_STYLES;
+    return DEFAULT_STYLES;
   }
 
   willEnter() {
-    const STANDARD_WILL_ENTER = {
+    const WILL_ENTER = {
       opacity: 0,
       width: 0,
     };
-    return STANDARD_WILL_ENTER;
+    return WILL_ENTER;
+  }
+
+  willLeave() {
+    const WILL_LEAVE = {
+      opacity: spring(0),
+      width: spring(0),
+    };
+    return WILL_LEAVE;
   }
 
   render() {
@@ -37,6 +44,7 @@ class SearchBarExpander extends Component {
       <TransitionMotion
         styles={this.props.isActive ? [this.defaultStyles()] : []}
         willEnter={this.willEnter}
+        willLeave={this.willLeave}
       >
         {(items) => {
           if (items.length) {
@@ -50,7 +58,7 @@ class SearchBarExpander extends Component {
                   opacity: style.opacity,
                 }}
               >
-                <SearchBar />
+                <SearchBar onBlur={this.props.onBlur} />
               </div>
             );
           }
@@ -63,6 +71,7 @@ class SearchBarExpander extends Component {
 
 SearchBarExpander.propTypes = {
   isActive: PropTypes.bool,
+  onBlur: PropTypes.func.isRequired,
 };
 
 SearchBarExpander.defaultProps = {
