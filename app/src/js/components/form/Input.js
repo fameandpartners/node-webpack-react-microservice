@@ -35,6 +35,7 @@ class Input extends Component {
       defaultValue,
       error,
       label,
+      indent,
       inlineMeta,
       placeholder,
       type,
@@ -58,7 +59,10 @@ class Input extends Component {
         }
         <input
           ref={c => this.input = c}
-          className="Input"
+          className={classnames(
+            'Input',
+            { 'Input--indent': indent },
+          )}
           id={id}
           onChange={this.handleChange}
           placeholder={placeholder}
@@ -89,6 +93,7 @@ Input.propTypes = {
   focusOnMount: PropTypes.bool,
   selectOnMount: PropTypes.bool,
   readOnly: PropTypes.bool,
+  indent: PropTypes.bool,
   inlineMeta: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node,
@@ -107,6 +112,7 @@ Input.defaultProps = {
   focusOnMount: false,
   selectOnMount: false,
   readOnly: false,
+  indent: false,
   inlineMeta: null,
   label: null,
   placeholder: '',

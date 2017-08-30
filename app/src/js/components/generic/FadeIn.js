@@ -24,7 +24,7 @@ class FadeIn extends Component {
     return (
       <div
         className={classnames(
-          'FadeIn u-width--full layout-container',
+          'FadeIn',
           { 'FadeIn--fade-in': this.state.fadeIn },
         )}
       >

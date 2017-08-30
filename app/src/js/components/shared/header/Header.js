@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classnames from 'classnames';
 
 // Constants
 import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
@@ -11,6 +12,7 @@ import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
 import * as CartActions from '../../../actions/CartActions';
 
 // Components
+import SearchBarExpander from '../../generic/SearchBarExpander';
 import HeaderNavigation from './HeaderNavigation';
 import IconSVG from '../../generic/IconSVG';
 
@@ -41,7 +43,10 @@ class Header extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
-    this.state = { openNavItem: null };
+    this.state = {
+      searchBarActive: false,
+      openNavItem: null,
+    };
   }
 
   handleAnimationEnd() {
@@ -59,9 +64,13 @@ class Header extends Component {
     activateCartDrawer({ cartDrawerOpen: !cartDrawerOpen });
   }
 
+  handleSearchOpenClick() {
+    this.setState({ searchBarActive: true });
+  }
+
   render() {
     const { cartItemCount, isHovering } = this.props;
-    const { openNavItem } = this.state;
+    const { openNavItem, searchBarActive } = this.state;
 
     return (
       <header className="Header u-position--relative u-width--full">
@@ -85,19 +94,31 @@ class Header extends Component {
             <ul className="col-4 textAlign--right">
               <li className="Header__action">
                 <IconSVG
-                  svgPath={SearchIcon.url}
-                  width="18px"
-                  height="26px"
-                />
-              </li>
-              <li className="Header__action">
-                <IconSVG
                   svgPath={AccountIcon.url}
                   width="18px"
                   height="26px"
                 />
               </li>
-              <li onClick={this.handleShoppingBagClick} className="Header__action">
+              <li
+                className={classnames(
+                  'Header__action',
+                  { 'Header__action--active-search': searchBarActive },
+                )}
+                onClick={this.handleSearchOpenClick}
+              >
+                <IconSVG
+                  svgPath={SearchIcon.url}
+                  width="18px"
+                  height="26px"
+                />
+              </li>
+              <li>
+                <SearchBarExpander isActive={searchBarActive} />
+              </li>
+              <li
+                className="Header__action"
+                onClick={this.handleShoppingBagClick}
+              >
                 { cartItemCount > 0
                   ? <span className="Header__cart-count">{cartItemCount}</span>
                   : null

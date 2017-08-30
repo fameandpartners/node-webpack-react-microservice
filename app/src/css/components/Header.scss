@@ -20,6 +20,12 @@
   position: relative;
   cursor: pointer;
   margin-left: 2rem;
+  z-index: 1;
+  transition: $fast-transition-time margin;
+}
+
+.Header__action--active-search {
+  margin-right: -1.9em;
 }
 
 .Header li {
