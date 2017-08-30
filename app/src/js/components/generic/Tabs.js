@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
-// import classnames from 'classnames';
+import classnames from 'classnames';
 
 // CSS
 import '../../../css/components/Tabs.scss';
@@ -13,23 +13,20 @@ class Tabs extends PureComponent {
     autobind(this);
 
     this.state = {
-      selectedTab: null,
+      selectedTabId: null,
     };
   }
 
   handleTabChange(clickedTab) {
-    console.log(`Set Active Tab: ${clickedTab}`);
-
     this.setState({
-      selectedTab: clickedTab,
+      selectedTabId: clickedTab,
     });
   }
 
   componentWillMount() {
-    const firstTabID = this.props.content[0].id;
-
     this.setState({
-      selectedTab: firstTabID,
+      // set initial tab on load
+      selectedTabId: this.props.content[0].id,
     });
   }
 
@@ -39,34 +36,37 @@ class Tabs extends PureComponent {
     } = this.props;
 
     const {
-      selectedTab,
+      selectedTabId,
     } = this.state;
+
+    const selectedTabObj = content.filter(item => item.id === selectedTabId)[0];
 
     return (
       <div className="Tabs">
-        <pre>selectedTab: {selectedTab}</pre>
         <ul className="Tabs__headings">
           {content.map(
-            (item, key) =>
+            item =>
               <li
-                key={`use-a-real-key--${key}`}
+                key={item.id}
                 onClick={() => this.handleTabChange(item.id)}
-                className={item.id === selectedTab ? 'Tabs__link Tabs__link--active' : 'Tabs__link'}
+                className={classnames(
+                  'Tabs__link',
+                  {
+                    'Tabs__link--active': item.id === selectedTabId,
+                  },
+                )}
               >
                 {item.heading}
               </li>,
           )}
         </ul>
         <div className="Tabs__contents">
-          {content.map(
-            (item, key) =>
-              <div
-                key={`use-a-real-key--${key}`}
-                className={item.id === selectedTab ? 'Tabs__panel Tabs__panel--active' : 'Tabs__panel'}
-              >
-                {item.content}
-              </div>,
-          )}
+          <div
+            key={selectedTabObj.id}
+            className="Tabs__panel"
+          >
+            {selectedTabObj.content}
+          </div>
         </div>
       </div>
     );
@@ -74,7 +74,12 @@ class Tabs extends PureComponent {
 }
 
 Tabs.propTypes = {
-  content: PropTypes.arrayOf(PropTypes.string).isRequired,
+  content: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    heading: PropTypes.string,
+    content: PropTypes.shape({
+    }),
+  })).isRequired,
 };
 
 export default Tabs;
