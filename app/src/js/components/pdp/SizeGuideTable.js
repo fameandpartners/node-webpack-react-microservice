@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+// Components
+import SizeGuideTableCell from './SizeGuideTableCell';
+
 // CSS
 import '../../../css/components/SizeGuideTable.scss';
 
@@ -15,47 +18,47 @@ class SizeGuideTable extends PureComponent {
     return (
       <div className="SizeGuideTable">
         <div className="SizeGuideTable__column">
-          <div className="SizeGuideTable__cell">
-            US
-          </div>
-          <div className="SizeGuideTable__cell">
-            AU
-          </div>
-          <div className="SizeGuideTable__cell">
-            Bust
-          </div>
-          <div className="SizeGuideTable__cell">
-            Underbust
-          </div>
-          <div className="SizeGuideTable__cell">
-            Waist
-          </div>
-          <div className="SizeGuideTable__cell">
-            Hip
-          </div>
+          <SizeGuideTableCell
+            contents="US"
+          />
+          <SizeGuideTableCell
+            contents="AU"
+          />
+          <SizeGuideTableCell
+            contents="Bust"
+          />
+          <SizeGuideTableCell
+            contents="Underbust"
+          />
+          <SizeGuideTableCell
+            contents="Waist"
+          />
+          <SizeGuideTableCell
+            contents="Hip"
+          />
         </div>
         {sizeChart.map(
           (item, key) =>
             <div key={`replace-with-actual-key-${key}`}>
               <div className="SizeGuideTable__column">
-                <div className="SizeGuideTable__cell">
-                  {item['Size US']}
-                </div>
-                <div className="SizeGuideTable__cell">
-                  {item['Size Aus/UK']}
-                </div>
-                <div className="SizeGuideTable__cell">
-                  {centimeters ? item['Bust cm'] : item['Bust Inches']}
-                </div>
-                <div className="SizeGuideTable__cell">
-                  {centimeters ? item['Underbust cm'] : item['Underbust Inches']}
-                </div>
-                <div className="SizeGuideTable__cell">
-                  {centimeters ? item['Waist cm'] : item['Waist Inches']}
-                </div>
-                <div className="SizeGuideTable__cell">
-                  {centimeters ? item['Hip cm'] : item['Hip Inches']}
-                </div>
+                <SizeGuideTableCell
+                  contents={item['Size US']}
+                />
+                <SizeGuideTableCell
+                  contents={item['Size Aus/UK']}
+                />
+                <SizeGuideTableCell
+                  contents={centimeters ? item['Bust cm'] : item['Bust Inches']}
+                />
+                <SizeGuideTableCell
+                  contents={centimeters ? item['Underbust cm'] : item['Underbust Inches']}
+                />
+                <SizeGuideTableCell
+                  contents={centimeters ? item['Waist cm'] : item['Waist Inches']}
+                />
+                <SizeGuideTableCell
+                  contents={centimeters ? item['Hip cm'] : item['Hip Inches']}
+                />
               </div>
             </div>,
         )}
