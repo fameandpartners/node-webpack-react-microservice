@@ -84,6 +84,7 @@
     "query-string": "^5.0.0",
     "raf": "^3.3.2",
     "rapscallion": "^2.1.7",
+    "raven-js": "^3.17.0",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.5.2",
     "react-autobind": "^1.0.6",
