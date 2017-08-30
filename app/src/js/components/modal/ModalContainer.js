@@ -114,7 +114,7 @@ class ModalContainer extends Component {
           style={{
             height,
             zIndex,
-            transform: `translate3d(${style.x || 0}%, ${style.y || 0}, 0)`,
+            transform: `translate3d(${style.x || 0}%, ${style.y || 0}%, 0)`,
           }}
         >
           {children}
