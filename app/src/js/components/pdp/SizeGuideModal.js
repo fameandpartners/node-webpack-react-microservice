@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
+import Tabs from '../generic/Tabs';
 import SizeGuideTable from './SizeGuideTable';
 
 import Button from '../generic/Button';
@@ -16,6 +17,7 @@ import ModalActions from '../../actions/ModalActions';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
+import SizeGuideModalTabConstants from '../../constants/SizeGuideModalTabConstants';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -68,9 +70,22 @@ class SizeGuideModal extends PureComponent {
             <div className="Modal__content--med-margin-bottom">
               <h1 style={{ fontSize: '3em' }}>ViewSizeGuide Modal [DESKTOP]</h1>
               <br />
-              <SizeGuideTable
-                sizeChart={sizeChart}
-                centimeters={centimeters}
+              <Tabs
+                content={[
+                  {
+                    id: SizeGuideModalTabConstants.SIZE_GUIDE,
+                    heading: 'Size Guide',
+                    content: (<SizeGuideTable
+                      sizeChart={sizeChart}
+                      centimeters={centimeters}
+                    />),
+                  },
+                  {
+                    id: SizeGuideModalTabConstants.MEASURING_TIPS,
+                    heading: 'Measuring Tips',
+                    content: <div>Measuring Tips Content</div>,
+                  },
+                ]}
               />
               <Button
                 text="Toggle Inches / CM"
