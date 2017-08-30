@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // CSS
-import '../../../css/components/ViewSizeGuideInfo.scss';
+import '../../../css/components/SizeGuideTable.scss';
 
 /* eslint-disable react/prefer-stateless-function */
-class ViewSizeGuideInfo extends PureComponent {
+class SizeGuideTable extends PureComponent {
   render() {
     const {
       sizeChart,
@@ -64,7 +64,7 @@ class ViewSizeGuideInfo extends PureComponent {
   }
 }
 
-ViewSizeGuideInfo.propTypes = {
+SizeGuideTable.propTypes = {
   centimeters: PropTypes.bool,
   // Redux Properties
   sizeChart: PropTypes.arrayOf(PropTypes.shape({
@@ -81,8 +81,8 @@ ViewSizeGuideInfo.propTypes = {
   })).isRequired,
 };
 
-ViewSizeGuideInfo.defaultProps = {
+SizeGuideTable.defaultProps = {
   centimeters: false,
 };
 
-export default ViewSizeGuideInfo;
+export default SizeGuideTable;

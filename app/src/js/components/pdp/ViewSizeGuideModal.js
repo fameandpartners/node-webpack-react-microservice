@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
-import ViewSizeGuideInfo from './ViewSizeGuideInfo';
+import SizeGuideTable from './SizeGuideTable';
 
 import Button from '../generic/Button';
 
@@ -52,8 +52,6 @@ class ViewSizeGuideModal extends PureComponent {
       centimeters,
     } = this.state;
 
-    console.log(sizeChart);
-
     return (
       <ModalContainer
         slideLeft
@@ -70,7 +68,7 @@ class ViewSizeGuideModal extends PureComponent {
             <div className="Modal__content--med-margin-bottom">
               <h1 style={{ fontSize: '3em' }}>ViewSizeGuide Modal [DESKTOP]</h1>
               <br />
-              <ViewSizeGuideInfo
+              <SizeGuideTable
                 sizeChart={sizeChart}
                 centimeters={centimeters}
               />
