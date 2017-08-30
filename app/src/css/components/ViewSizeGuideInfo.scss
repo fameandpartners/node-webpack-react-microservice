@@ -3,9 +3,10 @@
   flex-wrap: wrap;
   margin: 0 0 3em 0;
   padding: 0;
+  flex-direction: column;
 
   @include sm {
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 
@@ -16,17 +17,18 @@
   padding: 0.8em 1.2em;
   overflow: hidden;
   list-style: none;
+  display: flex;
 
   @include sm {
-    display: flex;
+    display: block;
   }
 }
 
 .ViewSizeGuideInfo__table-column {
-  flex-flow: column;
+  flex-flow: row;
+  display: flex;
 
   @include sm {
-    flex-flow: row;
-    display: flex;
+    flex-flow: column;
   }
 }

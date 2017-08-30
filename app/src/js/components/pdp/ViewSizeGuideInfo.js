@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-// import classnames from 'classnames';
 
 // CSS
 import '../../../css/components/ViewSizeGuideInfo.scss';
@@ -9,36 +8,54 @@ import '../../../css/components/ViewSizeGuideInfo.scss';
 class ViewSizeGuideInfo extends PureComponent {
   render() {
     const {
-      // className,
       sizeChart,
       centimeters,
     } = this.props;
 
     return (
       <div className="ViewSizeGuideInfo__table">
+        <div className="ViewSizeGuideInfo__table-column">
+          <div className="ViewSizeGuideInfo__table-cell">
+            US
+          </div>
+          <div className="ViewSizeGuideInfo__table-cell">
+            AU
+          </div>
+          <div className="ViewSizeGuideInfo__table-cell">
+            Bust
+          </div>
+          <div className="ViewSizeGuideInfo__table-cell">
+            Underbust
+          </div>
+          <div className="ViewSizeGuideInfo__table-cell">
+            Waist
+          </div>
+          <div className="ViewSizeGuideInfo__table-cell">
+            Hip
+          </div>
+        </div>
         {sizeChart.map(
           (item, key) =>
-            <div
-              key={`replace-with-actual-key-${key}`}
-              className="ViewSizeGuideInfo__table-column"
-            >
-              <div className="ViewSizeGuideInfo__table-cell">
-                {item['Size US']}
-              </div>
-              <div className="ViewSizeGuideInfo__table-cell">
-                {item['Size Aus/UK']}
-              </div>
-              <div className="ViewSizeGuideInfo__table-cell">
-                {centimeters ? item['Bust cm'] : item['Bust Inches']}
-              </div>
-              <div className="ViewSizeGuideInfo__table-cell">
-                {centimeters ? item['Underbust cm'] : item['Underbust Inches']}
-              </div>
-              <div className="ViewSizeGuideInfo__table-cell">
-                {centimeters ? item['Waist cm'] : item['Waist Inches']}
-              </div>
-              <div className="ViewSizeGuideInfo__table-cell">
-                {centimeters ? item['Hip cm'] : item['Hip Inches']}
+            <div key={`replace-with-actual-key-${key}`}>
+              <div className="ViewSizeGuideInfo__table-column">
+                <div className="ViewSizeGuideInfo__table-cell">
+                  {item['Size US']}
+                </div>
+                <div className="ViewSizeGuideInfo__table-cell">
+                  {item['Size Aus/UK']}
+                </div>
+                <div className="ViewSizeGuideInfo__table-cell">
+                  {centimeters ? item['Bust cm'] : item['Bust Inches']}
+                </div>
+                <div className="ViewSizeGuideInfo__table-cell">
+                  {centimeters ? item['Underbust cm'] : item['Underbust Inches']}
+                </div>
+                <div className="ViewSizeGuideInfo__table-cell">
+                  {centimeters ? item['Waist cm'] : item['Waist Inches']}
+                </div>
+                <div className="ViewSizeGuideInfo__table-cell">
+                  {centimeters ? item['Hip cm'] : item['Hip Inches']}
+                </div>
               </div>
             </div>,
         )}
@@ -48,7 +65,6 @@ class ViewSizeGuideInfo extends PureComponent {
 }
 
 ViewSizeGuideInfo.propTypes = {
-  // className: PropTypes.string,
   centimeters: PropTypes.bool,
   // Redux Properties
   sizeChart: PropTypes.arrayOf(PropTypes.shape({
@@ -66,7 +82,6 @@ ViewSizeGuideInfo.propTypes = {
 };
 
 ViewSizeGuideInfo.defaultProps = {
-  // className: '',
   centimeters: false,
 };
 
