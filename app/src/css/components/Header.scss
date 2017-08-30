@@ -24,8 +24,12 @@
   transition: $fast-transition-time margin;
 }
 
-.Header__action--active-search {
+.Header__action--active-search-left {
   margin-right: -1.9em;
+}
+
+.Header__action--active-search-right {
+  margin-left: -1.2em;
 }
 
 .Header li {

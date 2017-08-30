@@ -9,6 +9,7 @@ import classnames from 'classnames';
 import * as CartActions from '../../../actions/CartActions';
 
 // Components
+import CancelOut from '../CancelOut';
 import SearchBarExpander from '../../generic/SearchBarExpander';
 import IconSVG from '../../generic/IconSVG';
 
@@ -49,7 +50,7 @@ class Header extends Component {
     activateCartDrawer({ cartDrawerOpen: !cartDrawerOpen });
   }
 
-  handleSearchBarBlur() {
+  handleSearchBarClose() {
     this.setState({ searchBarActive: false });
   }
 
@@ -63,45 +64,69 @@ class Header extends Component {
 
     return (
       <ul className="col-4 textAlign--right">
-        <li className="Header__action">
-          <IconSVG
-            svgPath={AccountIcon.url}
-            width="18px"
-            height="26px"
-          />
-        </li>
+        { searchBarActive ? null : (
+          <li className="Header__action">
+            <IconSVG
+              svgPath={AccountIcon.url}
+              width="18px"
+              height="26px"
+              onClick={this.handleSearchOpenClick}
+            />
+          </li>
+        )}
+
         <li
           className={classnames(
-                  'Header__action',
-                  { 'Header__action--active-search': searchBarActive },
-                )}
-          onClick={this.handleSearchOpenClick}
+          'Header__action',
+          { 'Header__action--active-search-left': searchBarActive },
+        )}
         >
-          <IconSVG
-            svgPath={SearchIcon.url}
-            width="18px"
-            height="26px"
-          />
+          <span
+            className="Header__icon-click-wrapper"
+            role="button"
+            onClick={this.handleSearchOpenClick}
+          >
+            <IconSVG
+              svgPath={SearchIcon.url}
+              width="18px"
+              height="26px"
+            />
+          </span>
         </li>
+
         <li>
           <SearchBarExpander
             isActive={searchBarActive}
-            onBlur={this.handleSearchBarBlur}
+            onBlur={this.handleSearchBarClose}
           />
         </li>
+
         <li
-          className="Header__action"
-          onClick={this.handleShoppingBagClick}
+          className={classnames(
+            'Header__action',
+            { 'Header__action--active-search-right': searchBarActive },
+          )}
         >
           { cartItemCount > 0
-                  ? <span className="Header__cart-count">{cartItemCount}</span>
-                  : null
-                }
-          <IconSVG
-            svgPath={ShoppingBagIcon.url}
-            width="18px"
-            height="26px"
-          />
+            ? <span className="Header__cart-count">{cartItemCount}</span>
+            : null
+          }
+          { searchBarActive
+            ? <CancelOut onClick={this.handleSearchBarClose} />
+            : (
+              <span
+                className="Header__icon-click-wrapper"
+                role="button"
+                onClick={this.handleShoppingBagClick}
+              >
+                <IconSVG
+                  svgPath={ShoppingBagIcon.url}
+                  width="18px"
+                  height="26px"
+                />
+              </span>
+            )
+          }
         </li>
       </ul>
     );
