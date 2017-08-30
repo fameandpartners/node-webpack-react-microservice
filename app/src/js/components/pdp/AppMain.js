@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
 import classnames from 'classnames';
+import ReactHoverObserver from 'react-hover-observer';
 
 // Decorators
 import Resize from '../../decorators/Resize';
@@ -124,7 +125,9 @@ class AppMain extends Component {
                   <HeaderMobile headerTitle={productTitle} />
                 </HeaderHider>
                 :
-                <Header />
+                <ReactHoverObserver hoverOffDelayInMs={200}>
+                  <Header />
+                </ReactHoverObserver>
               }
 
               { breakpoint === 'mobile' || breakpoint === 'tablet'

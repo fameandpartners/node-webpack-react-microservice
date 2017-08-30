@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-import classnames from 'classnames';
-
 // CSS
 import '../../../../css/components/ShopAllNavigation.scss';
 
@@ -12,18 +10,10 @@ import { NAVIGATION_LINKS } from '../../../constants/AppConstants';
 // Components
 import NavLinkCol from './NavLinkCol';
 
-class ShopAllNavigation extends Component {
+class ShopAllNavigation extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-    this.state = {
-      fadeIn: false,
-    };
-  }
-
-  /* eslint-disable react/no-did-mount-set-state */
-  componentDidMount() {
-    this.setState({ fadeIn: true });
   }
 
   render() {
@@ -31,10 +21,7 @@ class ShopAllNavigation extends Component {
     return (
       <div
         ref={childRef}
-        className={classnames(
-          'ShopAllNavigation u-width--full layout-container',
-          { 'ShopAllNavigation--fade-in': this.state.fadeIn },
-        )}
+        className="ShopAllNavigation u-width--full layout-container"
       >
         <div className="ShopAllNavigation__link-container u-center grid">
           <NavLinkCol

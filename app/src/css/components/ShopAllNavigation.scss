@@ -1,13 +1,3 @@
-.ShopAllNavigation {
-  opacity: 0;
-  transition: $fast-transition-time opacity ease-in;
-  transition-delay: $fastest-transition-time;
-}
-
-.ShopAllNavigation--fade-in {
-  opacity: 1;
-}
-
 .ShopAllNavigation__link-container {
   padding-top: 15px;
   max-width: 850px;

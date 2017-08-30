@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { TransitionMotion } from 'react-motion';
 import classnames from 'classnames';
+import noop from '../../../libs/noop';
 
 // Constants
 import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
 
 // Components
+import FadeIn from '../../generic/FadeIn';
 import ShopAllNavigation from './ShopAllNavigation';
 import WhoWeAreNavigation from './WhoWeAreNavigation';
 
@@ -29,6 +31,11 @@ class HeaderNavigation extends Component {
     return modalAnimations.STANDARD_DEFAULT_STYLES;
   }
 
+  didLeave() {
+    this.containerHeight = 0;
+    this.props.handleAnimationEnd();
+  }
+
   willEnter() {
     return modalAnimations.STANDARD_WILL_ENTER;
   }
@@ -42,15 +49,19 @@ class HeaderNavigation extends Component {
     switch (openNavItem) {
       case NAVIGATION_CONTAINERS.SHOP_ALL:
         return (
-          <ShopAllNavigation
-            childRef={el => this.childElement = el}
-          />
+          <FadeIn key={NAVIGATION_CONTAINERS.SHOP_ALL}>
+            <ShopAllNavigation
+              childRef={el => this.childElement = el}
+            />
+          </FadeIn>
         );
       case NAVIGATION_CONTAINERS.WHO_WE_ARE:
         return (
-          <WhoWeAreNavigation
-            childRef={el => this.childElement = el}
-          />
+          <FadeIn key={NAVIGATION_CONTAINERS.WHO_WE_ARE}>
+            <WhoWeAreNavigation
+              childRef={el => this.childElement = el}
+            />
+          </FadeIn>
         );
       default:
         return null;
@@ -81,6 +92,7 @@ class HeaderNavigation extends Component {
         styles={this.props.isActive ? [this.defaultStyles()] : []}
         willEnter={this.willEnter}
         willLeave={this.willLeave}
+        didLeave={this.didLeave}
       >
         {(items) => {
           if (items.length) {
@@ -111,10 +123,12 @@ class HeaderNavigation extends Component {
 HeaderNavigation.propTypes = {
   isActive: PropTypes.bool.isRequired,
   openNavItem: PropTypes.string,
+  handleAnimationEnd: PropTypes.func,
 };
 
 HeaderNavigation.defaultProps = {
   openNavItem: null,
+  handleAnimationEnd: noop,
 };
 
 export default HeaderNavigation;
