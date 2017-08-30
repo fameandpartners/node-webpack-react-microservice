@@ -36,7 +36,7 @@ class ShopAllNavigation extends Component {
           { 'ShopAllNavigation--fade-in': this.state.fadeIn },
         )}
       >
-        <div className="ShopAllNavigation__link-container u-mt-normal u-mb-big u-center grid">
+        <div className="ShopAllNavigation__link-container u-center grid">
           <NavLinkCol
             colTitle="Weddings"
             links={NAVIGATION_LINKS.WEDDINGS}

@@ -20,7 +20,7 @@ class NavLinkCol extends Component {
         }
         <ul>
           { links.map(l => (
-            <li className="u-width--full">
+            <li key={l.text} className="u-width--full">
               <a href={l.url}>{l.text}</a>
             </li>
           ))}
@@ -31,11 +31,15 @@ class NavLinkCol extends Component {
 }
 
 NavLinkCol.propTypes = {
-  colTitle: PropTypes.string.isRequired,
-  links: PropTypes.arrayOf({
+  colTitle: PropTypes.string,
+  links: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string,
-    relativeUrl: PropTypes.string,
-  }).isRequired,
+    url: PropTypes.string,
+  })).isRequired,
+};
+
+NavLinkCol.defaultProps = {
+  colTitle: null,
 };
 
 export default NavLinkCol;

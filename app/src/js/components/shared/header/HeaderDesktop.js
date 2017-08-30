@@ -42,6 +42,7 @@ class Header extends Component {
     super(props);
     autoBind(this);
     this.state = {
+      clickActive: false,
       openNavItem: null,
     };
   }
@@ -60,12 +61,10 @@ class Header extends Component {
   render() {
     const { cartItemCount, isHovering } = this.props;
     const { openNavItem } = this.state;
-    console.log('isHovering', isHovering);
-    console.log('this.props', this.props);
 
     return (
       <header className="Header u-position--relative u-width--full">
-        <div className="layout-container">
+        <div className="layout-container Header__content-padding">
           <nav className="grid-12-noGutter">
             <ul className="col-4 textAlign--left">
               <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.SHOP_ALL)}>
@@ -111,7 +110,11 @@ class Header extends Component {
             </ul>
           </nav>
         </div>
-        <HeaderNavigation openNavItem={openNavItem} />
+
+        <HeaderNavigation
+          isActive={isHovering}
+          openNavItem={openNavItem}
+        />
       </header>
     );
   }
