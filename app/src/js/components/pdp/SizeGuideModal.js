@@ -9,8 +9,7 @@ import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 import Tabs from '../generic/Tabs';
 import SizeGuideTable from './SizeGuideTable';
-
-import Button from '../generic/Button';
+import MeasuringTipsPanel from './MeasuringTipsPanel';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -35,10 +34,6 @@ class SizeGuideModal extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-
-    this.state = {
-      centimeters: false,
-    };
   }
 
   handleCloseModal() {
@@ -49,10 +44,6 @@ class SizeGuideModal extends PureComponent {
     const {
       sizeChart,
     } = this.props;
-
-    const {
-      centimeters,
-    } = this.state;
 
     return (
       <ModalContainer
@@ -68,8 +59,6 @@ class SizeGuideModal extends PureComponent {
         >
           <div className="SizeGuideModal u-text-align--center grid-middle">
             <div className="Modal__content--med-margin-bottom">
-              <h1 style={{ fontSize: '3em' }}>ViewSizeGuide Modal [DESKTOP]</h1>
-              <br />
               <Tabs
                 content={[
                   {
@@ -77,19 +66,14 @@ class SizeGuideModal extends PureComponent {
                     heading: 'Size Guide',
                     content: (<SizeGuideTable
                       sizeChart={sizeChart}
-                      centimeters={centimeters}
                     />),
                   },
                   {
                     id: SizeGuideModalTabConstants.MEASURING_TIPS,
                     heading: 'Measuring Tips',
-                    content: <div>Measuring Tips Content</div>,
+                    content: <MeasuringTipsPanel />,
                   },
                 ]}
-              />
-              <Button
-                text="Toggle Inches / CM"
-                handleClick={() => this.setState({ centimeters: !centimeters })}
               />
             </div>
           </div>
