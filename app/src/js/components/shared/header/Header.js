@@ -8,7 +8,7 @@ import HeaderDesktop from './HeaderDesktop';
 import '../../../../css/components/Header.scss';
 
 export default () => (
-  <ReactHoverObserver hoverOffDelayInMs={200}>
+  <ReactHoverObserver hoverOffDelayInMs={2000000}>
     <HeaderDesktop />
   </ReactHoverObserver>
 );

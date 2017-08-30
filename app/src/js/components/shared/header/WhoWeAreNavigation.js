@@ -39,7 +39,7 @@ class WhoWeAreNavigation extends Component {
           { 'WhoWeAreNavigation--fade-in': this.state.fadeIn },
         )}
       >
-        <div className="WhoWeAreNavigation__link-container u-mt-normal u-mb-big u-center grid">
+        <div className="WhoWeAreNavigation__link-container u-center grid">
           <NavLinkCol
             links={this.splitLinks(1)}
           />
