@@ -28,6 +28,10 @@
   background: $c-background-gray;
 }
 
+.SizeGuideTable__cell--current {
+  background: $c-neutral-4;
+}
+
 .SizeGuideTable__column {
   flex-flow: row;
   display: flex;
