@@ -15,7 +15,10 @@ class SizeGuideTable extends PureComponent {
     autobind(this);
 
     this.state = {
-      hoverIndex: 4,
+      hoverCoordinates: {
+        hoverCol: 5,
+        hoverRow: 4,
+      },
     };
   }
 
@@ -26,7 +29,7 @@ class SizeGuideTable extends PureComponent {
     } = this.props;
 
     const {
-      hoverIndex,
+      hoverCoordinates,
     } = this.state;
 
     return (
@@ -34,37 +37,37 @@ class SizeGuideTable extends PureComponent {
         <div className="SizeGuideTable__column">
           <SizeGuideTableCell
             contents="US"
-            hoverIndex={hoverIndex}
+            hoverCoordinates={hoverCoordinates}
             columnIndex={0}
             rowIndex={0}
           />
           <SizeGuideTableCell
             contents="AU"
-            hoverIndex={hoverIndex}
+            hoverCoordinates={hoverCoordinates}
             columnIndex={0}
             rowIndex={1}
           />
           <SizeGuideTableCell
             contents="Bust"
-            hoverIndex={hoverIndex}
+            hoverCoordinates={hoverCoordinates}
             columnIndex={0}
             rowIndex={2}
           />
           <SizeGuideTableCell
             contents="Underbust"
-            hoverIndex={hoverIndex}
+            hoverCoordinates={hoverCoordinates}
             columnIndex={0}
             rowIndex={3}
           />
           <SizeGuideTableCell
             contents="Waist"
-            hoverIndex={hoverIndex}
+            hoverCoordinates={hoverCoordinates}
             columnIndex={0}
             rowIndex={4}
           />
           <SizeGuideTableCell
             contents="Hip"
-            hoverIndex={hoverIndex}
+            hoverCoordinates={hoverCoordinates}
             columnIndex={0}
             rowIndex={5}
           />
@@ -75,37 +78,37 @@ class SizeGuideTable extends PureComponent {
               <div className="SizeGuideTable__column">
                 <SizeGuideTableCell
                   contents={item['Size US']}
-                  hoverIndex={hoverIndex}
+                  hoverCoordinates={hoverCoordinates}
                   columnIndex={key}
                   rowIndex={0}
                 />
                 <SizeGuideTableCell
                   contents={item['Size Aus/UK']}
-                  hoverIndex={hoverIndex}
+                  hoverCoordinates={hoverCoordinates}
                   columnIndex={key}
                   rowIndex={1}
                 />
                 <SizeGuideTableCell
                   contents={centimeters ? item['Bust cm'] : item['Bust Inches']}
-                  hoverIndex={hoverIndex}
+                  hoverCoordinates={hoverCoordinates}
                   columnIndex={key}
                   rowIndex={2}
                 />
                 <SizeGuideTableCell
                   contents={centimeters ? item['Underbust cm'] : item['Underbust Inches']}
-                  hoverIndex={hoverIndex}
+                  hoverCoordinates={hoverCoordinates}
                   columnIndex={key}
                   rowIndex={3}
                 />
                 <SizeGuideTableCell
                   contents={centimeters ? item['Waist cm'] : item['Waist Inches']}
-                  hoverIndex={hoverIndex}
+                  hoverCoordinates={hoverCoordinates}
                   columnIndex={key}
                   rowIndex={4}
                 />
                 <SizeGuideTableCell
                   contents={centimeters ? item['Hip cm'] : item['Hip Inches']}
-                  hoverIndex={hoverIndex}
+                  hoverCoordinates={hoverCoordinates}
                   columnIndex={key}
                   rowIndex={5}
                 />
