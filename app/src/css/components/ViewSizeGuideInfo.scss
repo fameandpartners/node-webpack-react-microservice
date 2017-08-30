@@ -1,4 +1,4 @@
-.ViewSizeGuideInfo__table {
+.SizeGuideTable {
   display: flex;
   flex-wrap: wrap;
   margin: 0 0 3em 0;
@@ -10,7 +10,7 @@
   }
 }
 
-.ViewSizeGuideInfo__table-cell {
+.SizeGuideTable__cell {
   box-sizing: border-box;
   flex-grow: 1;
   width: 100%;
@@ -24,7 +24,7 @@
   }
 }
 
-.ViewSizeGuideInfo__table-column {
+.SizeGuideTable__column {
   flex-flow: row;
   display: flex;
 
