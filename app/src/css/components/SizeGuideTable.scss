@@ -24,6 +24,10 @@
   }
 }
 
+.SizeGuideTable__cell--active {
+  background: $c-background-gray;
+}
+
 .SizeGuideTable__column {
   flex-flow: row;
   display: flex;
