@@ -7,7 +7,9 @@ import { bindActionCreators } from 'redux';
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
-import ProductFabricInfo from './ProductFabricInfo';
+import ViewSizeGuideInfo from './ViewSizeGuideInfo';
+
+import Button from '../generic/Button';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -15,16 +17,14 @@ import ModalActions from '../../actions/ModalActions';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
-function mapStateToProps(state) {
+function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    activeModalId: state.$$modalState.get('modalId'),
-    fabric: state.$$productState.get('fabric').toJS(),
-    garmentCareInformation: state.$$productState.get('garmentCareInformation'),
+    sizeChart: state.$$productState.get('sizeChart').toJS(),
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   return { activateModal };
 }
@@ -33,6 +33,10 @@ class ViewSizeGuideModal extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+
+    this.state = {
+      centimeters: false,
+    };
   }
 
   handleCloseModal() {
@@ -41,9 +45,14 @@ class ViewSizeGuideModal extends PureComponent {
 
   render() {
     const {
-      fabric,
-      garmentCareInformation,
+      sizeChart,
     } = this.props;
+
+    const {
+      centimeters,
+    } = this.state;
+
+    console.log(sizeChart);
 
     return (
       <ModalContainer
@@ -54,16 +63,20 @@ class ViewSizeGuideModal extends PureComponent {
         <Modal
           handleCloseModal={this.handleCloseModal}
           modalClassName="grid-middle u-flex--1"
-          modalContentClassName="width--full"
+          modalContentClassName="u-width--full"
           modalWrapperClassName="u-flex--col"
         >
-          <div className="ViewSizeGuideModal textAlign--center grid-middle">
+          <div className="ViewSizeGuideModal u-text-align--center grid-middle">
             <div className="Modal__content--med-margin-bottom">
-              <h1 style={{ fontSize: '3em' }}>I&apos;m the View Size Guide Modal</h1>
+              <h1 style={{ fontSize: '3em' }}>ViewSizeGuide Modal [DESKTOP]</h1>
               <br />
-              <ProductFabricInfo
-                fabric={fabric}
-                garmentCareInformation={garmentCareInformation}
+              <ViewSizeGuideInfo
+                sizeChart={sizeChart}
+                centimeters={centimeters}
+              />
+              <Button
+                text="Toggle Inches / CM"
+                handleClick={() => this.setState({ centimeters: !centimeters })}
               />
             </div>
           </div>
@@ -75,14 +88,18 @@ class ViewSizeGuideModal extends PureComponent {
 
 ViewSizeGuideModal.propTypes = {
   // Redux Properties
-  fabric: PropTypes.shape({
-    id: PropTypes.string,
-    smallImg: PropTypes.string,
-    name: PropTypes.string,
-    description: PropTypes.string,
-  }).isRequired,
-  garmentCareInformation: PropTypes.string.isRequired,
-  // Redux Actions
+  sizeChart: PropTypes.arrayOf(PropTypes.shape({
+    'Size Aus/UK': PropTypes.number,
+    'Size US': PropTypes.number,
+    'Bust cm': PropTypes.string,
+    'Bust Inches': PropTypes.string,
+    'Underbust cm': PropTypes.number,
+    'Underbust Inches': PropTypes.string,
+    'Waist cm': PropTypes.string,
+    'Waist Inches': PropTypes.string,
+    'Hip cm': PropTypes.string,
+    'Hip Inches': PropTypes.string,
+  })).isRequired,
   activateModal: PropTypes.func.isRequired,
 };
 
@@ -91,5 +108,4 @@ ViewSizeGuideModal.defaultProps = {
   activeModalId: null,
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ViewSizeGuideModal);
+export default connect(stateToProps, dispatchToProps)(ViewSizeGuideModal);
