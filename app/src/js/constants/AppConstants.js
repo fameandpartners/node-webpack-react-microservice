@@ -16,124 +16,157 @@ const queryParams = {
   },
 };
 
+const navigationContainers = {
+  NAVIGATION_CONTAINERS: mirrorCreator([
+    'SHOP_ALL',
+    'WHO_WE_ARE',
+  ]),
+};
+
 const navigationLinks = {
   NAVIGATION_LINKS: {
     WEDDINGS: [
       {
         text: 'Brides',
-        relativeUrl: '/bespoke-bridal-collection',
+        url: '/bespoke-bridal-collection',
       },
       {
         text: 'Bridesmaids',
-        relativeUrl: '/modern-bridesmaid-dresses',
+        url: '/modern-bridesmaid-dresses',
       },
       {
         text: 'Wedding Guests',
-        relativeUrl: '/dresses/wedding-guests',
+        url: '/dresses/wedding-guests',
       },
       {
         text: 'Bespoke Bridal',
-        relativeUrl: '/this-has-no-link',
+        url: '/this-has-no-link',
       },
       {
         text: 'Bridal Style Guides',
-        relativeUrl: '/this-has-no-link',
+        url: '/this-has-no-link',
       },
       {
         text: 'Summer Weddings',
-        relativeUrl: '/dresses/summer-weddings',
+        url: '/dresses/summer-weddings',
       },
       {
         text: 'Wedding Styling',
-        relativeUrl: '/wedding-consultation',
+        url: '/wedding-consultation',
       },
       {
         text: 'The Wedding App',
-        relativeUrl: '/wedding-atelier',
+        url: '/wedding-atelier',
       },
     ],
     DRESSES: [
       {
         text: 'Maxi Dresses',
-        relativeUrl: '/dresses/long',
+        url: '/dresses/long',
       },
       {
         text: 'Midi Dresses',
-        relativeUrl: '/dresses/midi',
+        url: '/dresses/midi',
       },
       {
         text: 'Mini Dresses',
-        relativeUrl: '/dresses/mini',
+        url: '/dresses/mini',
       },
       {
         text: 'Cocktail',
-        relativeUrl: '/dresses/cocktail',
+        url: '/dresses/cocktail',
       },
       {
         text: 'Casual',
-        relativeUrl: '/dresses/casual',
+        url: '/dresses/casual',
       },
       {
         text: 'Evening',
-        relativeUrl: '/dresses/evening',
+        url: '/dresses/evening',
       },
       {
         text: 'Prom',
-        relativeUrl: '/dresses/prom',
+        url: '/dresses/prom',
       },
     ],
     SEPARATES: [
       {
         text: 'Tops',
-        relativeUrl: '/tops',
+        url: '/tops',
       },
       {
         text: 'Skirts',
-        relativeUrl: '/skirts',
+        url: '/skirts',
       },
       {
         text: 'Pants',
-        relativeUrl: '/pants',
+        url: '/pants',
       },
       {
         text: 'Jumpsuits',
-        relativeUrl: '/dresses/jumpsuits',
+        url: '/dresses/jumpsuits',
       },
       {
         text: 'Outerwear',
-        relativeUrl: '/outerwear',
+        url: '/outerwear',
       },
     ],
     NEW_ARRIVALS: [
       {
         text: 'Best Sellers',
-        relativeUrl: '/bespoke-bridal-collection',
+        url: '/bespoke-bridal-collection',
       },
       {
         text: 'Trending Looks',
-        relativeUrl: '/modern-bridesmaid-dresses',
+        url: '/modern-bridesmaid-dresses',
       },
     ],
     COLLECTIONS: [
       {
         text: 'High Contrast',
-        relativeUrl: '/high-contrast',
+        url: '/high-contrast',
       },
       {
         text: 'Modern Evening',
-        relativeUrl: '/the-modern-evening-collection',
+        url: '/the-modern-evening-collection',
       },
       {
         text: 'Pre-Season Evening',
-        relativeUrl: '/pre-season-evening-collection',
+        url: '/pre-season-evening-collection',
       },
       {
         text: 'Inside/Out',
-        relativeUrl: '/inside-out-collection',
+        url: '/inside-out-collection',
       },
       {
         text: 'Anti Fast Fashion Shop',
-        relativeUrl: '/the-anti-fast-fashion-shop',
+        url: '/the-anti-fast-fashion-shop',
+      },
+    ],
+    WHO_WE_ARE: [
+      {
+        text: 'About Us',
+        url: '/about',
+      },
+      {
+        text: 'Why Made to Order',
+        url: '/why-us',
+      },
+      {
+        text: 'Empowerment Initiatives',
+        url: '/iequalchange',
+      },
+      {
+        text: 'Read the Fame Files',
+        url: 'http://blog.fameandpartners.com/',
+      },
+      {
+        text: 'Join the Fame Society',
+        url: '/fame-society-application',
+      },
+      {
+        text: 'Meet the CEO',
+        url: '/from-our-ceo',
       },
     ],
   },
@@ -156,6 +189,7 @@ const configuration = assign({},
 
 export default assign({},
   actionTypes,
+  navigationContainers,
   navigationLinks,
   queryParams,
   configuration,

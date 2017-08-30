@@ -14,11 +14,14 @@ class NavLinkCol extends Component {
     const { colTitle, links } = this.props;
     return (
       <div className="col NavLinkCol">
-        <h2 className="h6 u-uppercase u-mb-small">{colTitle}</h2>
+        { colTitle
+          ? <h2 className="h6 u-uppercase u-mb-small">{colTitle}</h2>
+          : null
+        }
         <ul>
           { links.map(l => (
             <li className="u-width--full">
-              <a href={l.href}>{l.text}</a>
+              <a href={l.url}>{l.text}</a>
             </li>
           ))}
         </ul>

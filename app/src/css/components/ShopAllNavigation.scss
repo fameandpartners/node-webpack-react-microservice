@@ -1,5 +1,11 @@
 .ShopAllNavigation {
-  padding: 30px 0;
+  opacity: 0;
+  transition: $fast-transition-time opacity ease-in;
+  transition-delay: $fastest-transition-time;
+}
+
+.ShopAllNavigation--fade-in {
+  opacity: 100;
 }
 
 .ShopAllNavigation__link-container {

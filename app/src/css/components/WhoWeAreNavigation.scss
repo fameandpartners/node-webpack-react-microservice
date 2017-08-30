@@ -1,0 +1,15 @@
+.WhoWeAreNavigation {
+  padding: 30px 0;
+  margin-bottom: 30px;
+  opacity: 0;
+  transition: $standard-transition-time opacity ease-in-out;
+  transition-delay: $fastest-transition-time;
+}
+
+.WhoWeAreNavigation--fade-in {
+  opacity: 100;
+}
+
+.WhoWeAreNavigation__link-container {
+  max-width: 450px;
+}

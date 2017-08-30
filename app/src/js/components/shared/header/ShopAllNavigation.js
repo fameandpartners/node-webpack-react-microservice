@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import classnames from 'classnames';
 
 // CSS
 import '../../../../css/components/ShopAllNavigation.scss';
@@ -15,11 +16,26 @@ class ShopAllNavigation extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+    this.state = {
+      fadeIn: false,
+    };
+  }
+
+  /* eslint-disable react/no-did-mount-set-state */
+  componentDidMount() {
+    this.setState({ fadeIn: true });
   }
 
   render() {
+    const { childRef } = this.props;
     return (
-      <div className="ShopAllNavigation u-position--absolute u-width--full layout-container">
+      <div
+        ref={childRef}
+        className={classnames(
+          'ShopAllNavigation u-width--full layout-container',
+          { 'ShopAllNavigation--fade-in': this.state.fadeIn },
+        )}
+      >
         <div className="ShopAllNavigation__link-container u-mt-normal u-mb-big u-center grid">
           <NavLinkCol
             colTitle="Weddings"
@@ -48,11 +64,7 @@ class ShopAllNavigation extends Component {
 }
 
 ShopAllNavigation.propTypes = {
-  openNavItem: PropTypes.string,
-};
-
-ShopAllNavigation.defaultProps = {
-  openNavItem: null,
+  childRef: PropTypes.func.isRequired,
 };
 
 export default ShopAllNavigation;
