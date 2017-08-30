@@ -146,7 +146,7 @@ class ProductCustomizationStyle extends PureComponent {
   handleViewSizeGuideClick() {
     /* eslint-disable no-console */
     console.log('Show Size Guide!');
-    this.props.activateModal({ modalId: ModalConstants.VIEW_SIZE_GUIDE_MODAL });
+    this.props.activateModal({ modalId: ModalConstants.SIZE_GUIDE_MODAL });
   }
 
   /**

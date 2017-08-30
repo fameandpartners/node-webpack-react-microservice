@@ -29,7 +29,7 @@ function dispatchToProps(dispatch) {
   return { activateModal };
 }
 
-class ViewSizeGuideModal extends PureComponent {
+class SizeGuideModal extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -56,7 +56,7 @@ class ViewSizeGuideModal extends PureComponent {
       <ModalContainer
         slideLeft
         dimBackground={false}
-        modalIds={[ModalConstants.VIEW_SIZE_GUIDE_MODAL]}
+        modalIds={[ModalConstants.SIZE_GUIDE_MODAL]}
       >
         <Modal
           handleCloseModal={this.handleCloseModal}
@@ -64,7 +64,7 @@ class ViewSizeGuideModal extends PureComponent {
           modalContentClassName="u-width--full"
           modalWrapperClassName="u-flex--col"
         >
-          <div className="ViewSizeGuideModal u-text-align--center grid-middle">
+          <div className="SizeGuideModal u-text-align--center grid-middle">
             <div className="Modal__content--med-margin-bottom">
               <h1 style={{ fontSize: '3em' }}>ViewSizeGuide Modal [DESKTOP]</h1>
               <br />
@@ -84,7 +84,7 @@ class ViewSizeGuideModal extends PureComponent {
   }
 }
 
-ViewSizeGuideModal.propTypes = {
+SizeGuideModal.propTypes = {
   // Redux Properties
   sizeChart: PropTypes.arrayOf(PropTypes.shape({
     'Size Aus/UK': PropTypes.number,
@@ -101,9 +101,9 @@ ViewSizeGuideModal.propTypes = {
   activateModal: PropTypes.func.isRequired,
 };
 
-ViewSizeGuideModal.defaultProps = {
+SizeGuideModal.defaultProps = {
   // Redux
   activeModalId: null,
 };
 
-export default connect(stateToProps, dispatchToProps)(ViewSizeGuideModal);
+export default connect(stateToProps, dispatchToProps)(SizeGuideModal);

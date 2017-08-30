@@ -10,7 +10,7 @@ import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import ColorSelectionModal from './components/pdp/ColorSelectionModal';
-import ViewSizeGuideModal from './components/pdp/ViewSizeGuideModal';
+import SizeGuideModal from './components/pdp/SizeGuideModal';
 import ShareModal from './components/pdp/ShareModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeSelectionModal from './components/pdp/SizeSelectionModal';
@@ -52,7 +52,7 @@ class App extends Component {
         <OnboardingModal />
         <ProductFabricModal />
         <ColorSelectionModal />
-        <ViewSizeGuideModal />
+        <SizeGuideModal />
         <ShareModal />
         <StyleSelectionModal />
         <SizeSelectionModal />
