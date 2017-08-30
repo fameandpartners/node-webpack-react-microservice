@@ -15,75 +15,34 @@ class ViewSizeGuideInfo extends PureComponent {
     } = this.props;
 
     return (
-      <table className="ViewSizeGuideInfo__table">
-        <tbody>
-          <tr>
-            <td>US</td>
-            {sizeChart.map(
-              (item, key) =>
-                <td key={`add-a-real-key-plz-${key}`}>
-                  {item['Size US']}
-                </td>,
-            )}
-          </tr>
-          <tr>
-            <td>AUS</td>
-            {sizeChart.map(
-              (item, key) =>
-                <td key={`add-a-real-key-plz-${key}`}>
-                  {item['Size Aus/UK']}
-                </td>,
-            )}
-          </tr>
-          <tr>
-            <td>Bust</td>
-            {sizeChart.map(
-              (item, key) =>
-                <td key={`add-a-real-key-plz-${key}`}>
-                  {centimeters ? item['Bust cm'] : item['Bust Inches']}
-                </td>,
-            )}
-          </tr>
-          <tr>
-            <td>Underbust</td>
-            {sizeChart.map(
-              (item, key) =>
-                <td key={`add-a-real-key-plz-${key}`}>
-                  {centimeters ? item['Underbust cm'] : item['Underbust Inches']}
-                </td>,
-            )}
-          </tr>
-          <tr>
-            <td>Waist</td>
-            {sizeChart.map(
-              (item, key) =>
-                <td key={`add-a-real-key-plz-${key}`}>
-                  {centimeters ? item['Waist cm'] : item['Waist Inches']}
-                </td>,
-            )}
-          </tr>
-          <tr>
-            <td>Hip</td>
-            {sizeChart.map(
-              (item, key) =>
-                <td key={`add-a-real-key-plz-${key}`}>
-                  {centimeters ? item['Hip cm'] : item['Hip Inches']}
-                </td>,
-            )}
-          </tr>
-          {/* sizeChart.map(
-            (item, key) =>
-              <tr key={`something-${key}`}>
-                <td>US: {item['Size US']}</td>
-                <td>AUS: {item['Size Aus/UK']}</td>
-                <td>Bust: {item['Bust Inches']}</td>
-                <td>Underbust: {item['Underbust Inches']}</td>
-                <td>Waist: {item['Waist Inches']}</td>
-                <td>Hip: {item['Hip Inches']}</td>
-              </tr>,
-          ) */}
-        </tbody>
-      </table>
+      <div className="ViewSizeGuideInfo__table">
+        {sizeChart.map(
+          (item, key) =>
+            <div
+              key={`replace-with-actual-key-${key}`}
+              className="ViewSizeGuideInfo__table-column"
+            >
+              <div className="ViewSizeGuideInfo__table-cell">
+                {item['Size US']}
+              </div>
+              <div className="ViewSizeGuideInfo__table-cell">
+                {item['Size Aus/UK']}
+              </div>
+              <div className="ViewSizeGuideInfo__table-cell">
+                {centimeters ? item['Bust cm'] : item['Bust Inches']}
+              </div>
+              <div className="ViewSizeGuideInfo__table-cell">
+                {centimeters ? item['Underbust cm'] : item['Underbust Inches']}
+              </div>
+              <div className="ViewSizeGuideInfo__table-cell">
+                {centimeters ? item['Waist cm'] : item['Waist Inches']}
+              </div>
+              <div className="ViewSizeGuideInfo__table-cell">
+                {centimeters ? item['Hip cm'] : item['Hip Inches']}
+              </div>
+            </div>,
+        )}
+      </div>
     );
   }
 }

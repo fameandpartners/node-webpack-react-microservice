@@ -1,3 +1,32 @@
-.ViewSizeGuideInfo__table td {
-  padding: 8px;
+.ViewSizeGuideInfo__table {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 3em 0;
+  padding: 0;
+
+  @include sm {
+    flex-direction: column;
+  }
+}
+
+.ViewSizeGuideInfo__table-cell {
+  box-sizing: border-box;
+  flex-grow: 1;
+  width: 100%;
+  padding: 0.8em 1.2em;
+  overflow: hidden;
+  list-style: none;
+
+  @include sm {
+    display: flex;
+  }
+}
+
+.ViewSizeGuideInfo__table-column {
+  flex-flow: column;
+
+  @include sm {
+    flex-flow: row;
+    display: flex;
+  }
 }
