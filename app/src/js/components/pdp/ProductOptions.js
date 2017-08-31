@@ -175,7 +175,7 @@ class ProductOptions extends Component {
             <div className="ProductOptions__content u-mb-normal typography">
               <ProductOptionsRow
                 heading
-                leftNode={<h1 className="display--inline h4">{productTitle}</h1>}
+                leftNode={<h1 className="u-display--inline h4">{productTitle}</h1>}
                 rightNode={
                   <span className="h4">
                     {this.calculateSubTotal()}

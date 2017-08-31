@@ -42,8 +42,8 @@ class ContainerDividerToggle extends Component {
 
   willLeave() {
     return {
-      x: spring(-10),
-      opacity: spring(0),
+      x: spring(0),
+      opacity: spring(1),
     };
   }
 
@@ -85,18 +85,19 @@ class ContainerDividerToggle extends Component {
   render() {
     const { activeId, activationIdSet } = this.props;
     return (
-      <div>
+      <div className="u-position--relative u-overflow--hidden">
         <TransitionMotion
           styles={activationIdSet.indexOf(activeId) > -1 ? [this.transitionedStyles()] : []}
           willEnter={this.willEnter}
+          willLeave={this.willLeave}
         >
           {
             (items) => {
               if (items.length) {
-                console.log('transitioning');
                 return this.renderContainerDividerToggle(items[0].key, items[0].style);
               }
-              console.log('stagnant');
+
+              // Default
               const stagnantStyles = this.stagnantStyles();
               return this.renderContainerDividerToggle(stagnantStyles.key, stagnantStyles.style);
             }

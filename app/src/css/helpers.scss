@@ -10,7 +10,7 @@
   display: block;
 }
 
-.display--inline {
+.u-display--inline {
   display: inline;
 }
 
@@ -26,7 +26,7 @@
   float: right;
 }
 
-.overflow--hidden {
+.u-overflow--hidden {
   overflow: hidden;
 }
 
@@ -80,6 +80,10 @@
 
 .u-mb-big {
   margin-bottom: 50px;
+}
+
+.u-mr-small {
+  margin-right: 15px;
 }
 
 .u-mt-small {

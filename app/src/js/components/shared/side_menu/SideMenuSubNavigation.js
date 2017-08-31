@@ -7,8 +7,8 @@ import { bindActionCreators } from 'redux';
 
 // Components
 import FadeIn from '../../generic/FadeIn';
-import ShopAllNavigation from '../navigation/ShopAllNavigationMobile';
-import WhoWeAreNavigation from '../navigation/WhoWeAreNavigationMobile';
+import ShopAllNavigationMobile from '../navigation/ShopAllNavigationMobile';
+import WhoWeAreNavigationMobile from '../navigation/WhoWeAreNavigationMobile';
 
 // Constants
 import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
@@ -44,20 +44,21 @@ class SideMenu extends Component {
   }
 
   generateSideMenuSubNavigationContents() {
-    switch (this.props.subNavigationContainer) {
+    const { subNavigationContainer, handleReturnClick } = this.props;
+    switch (subNavigationContainer) {
       case NAVIGATION_CONTAINERS.SHOP_ALL:
         return (
           <FadeIn key={NAVIGATION_CONTAINERS.SHOP_ALL}>
-            <ShopAllNavigation
-              childRef={el => this.childElement = el}
+            <ShopAllNavigationMobile
+              handleReturnClick={handleReturnClick}
             />
           </FadeIn>
         );
       case NAVIGATION_CONTAINERS.WHO_WE_ARE:
         return (
           <FadeIn key={NAVIGATION_CONTAINERS.WHO_WE_ARE}>
-            <WhoWeAreNavigation
-              childRef={el => this.childElement = el}
+            <WhoWeAreNavigationMobile
+              handleReturnClick={handleReturnClick}
             />
           </FadeIn>
         );
@@ -77,6 +78,7 @@ class SideMenu extends Component {
 
 SideMenu.propTypes = {
   subNavigationContainer: PropTypes.string,
+  handleReturnClick: PropTypes.func.isRequired,
 };
 
 SideMenu.defaultProps = {

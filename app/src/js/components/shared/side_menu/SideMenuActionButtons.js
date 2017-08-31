@@ -54,7 +54,7 @@ class SideMenuActionButtons extends Component {
               role="button"
             >
               <span className="SideMenuActionButtons--mr-caret-bump">Shop all</span>
-              <span className="u-position--relative u-display--inline">
+              <span className="u-position--relative u-u-display--inline">
                 <IconSVG
                   svgPath={Carat.url}
                   className="SideMenuActionButtons__caret--right"
