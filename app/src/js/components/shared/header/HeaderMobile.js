@@ -66,7 +66,7 @@ class HeaderMobile extends Component {
             <div className="col">
               {headerTitle}
             </div>
-            <ul className="col-2 textAlign--right">
+            <ul className="col-2 u-text-align--right">
               <li onClick={this.handleShoppingBagClick} className="Header__action">
                 { cartItemCount > 0
                   ? <span className="Header__cart-count">{cartItemCount}</span>

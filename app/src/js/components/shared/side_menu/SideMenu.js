@@ -82,7 +82,7 @@ class SideMenu extends Component {
               transform: `translate3d(${x * 5}%, 0, 0)`,
             }}
           >
-            <div className="SideMenu__header header">
+            <div className="SideMenu__header header__wrapper">
               <Hamburger
                 className="SideMenu__menu-btn u-position--absolute"
                 isOpen

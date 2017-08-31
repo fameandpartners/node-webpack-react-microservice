@@ -63,7 +63,7 @@ class Header extends Component {
     const { searchBarActive } = this.state;
 
     return (
-      <ul className="col-4 textAlign--right">
+      <ul className="col-4 u-text-align--right">
         { searchBarActive ? null : (
           <li className="Header__action">
             <IconSVG
@@ -107,7 +107,7 @@ class Header extends Component {
             { 'Header__action--active-search-right': searchBarActive },
           )}
         >
-          { cartItemCount > 0
+          { cartItemCount > 0 && !searchBarActive
             ? <span className="Header__cart-count">{cartItemCount}</span>
             : null
           }
@@ -142,7 +142,6 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  isHovering: false,
   cartItemCount: 0,
   cartDrawerOpen: false,
 };

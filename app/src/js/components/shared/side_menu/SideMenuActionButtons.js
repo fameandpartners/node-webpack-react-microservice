@@ -79,7 +79,9 @@ class SideMenuActionButtons extends Component {
               </span>
             </li>
             <li><span>Account</span></li>
-            <li className="u-mb-normal"><span>Orders</span></li>
+            <li className="u-mb-normal">
+              <span>Orders</span>
+            </li>
             <li>
               <span
                 className="SideMenuActionButtons__icon-wrapper"

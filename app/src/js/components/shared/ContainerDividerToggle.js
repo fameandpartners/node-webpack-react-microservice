@@ -108,7 +108,6 @@ class ContainerDividerToggle extends Component {
   }
 }
 
-
 ContainerDividerToggle.propTypes = {
   activeId: PropTypes.string,
   activationIdSet: PropTypes.arrayOf(PropTypes.string).isRequired,
