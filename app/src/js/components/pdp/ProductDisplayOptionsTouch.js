@@ -72,7 +72,7 @@ class ProductDisplayOptionsTouch extends Component {
           <div
             onClick={this.handleOpenModalClick(ModalConstants.COLOR_SELECTION_MODAL)}
             className={classnames(
-              'ProductDisplayOptionsTouch__option display--inline-block u-cursor--pointer',
+              'ProductDisplayOptionsTouch__option u-display--inline-block u-cursor--pointer',
               { 'ProductDisplayOptionsTouch__option--dark': isDarkLuminance(selectedColor.hexValue) },
             )}
             style={{ background: selectedColor.hexValue }}
@@ -88,7 +88,7 @@ class ProductDisplayOptionsTouch extends Component {
             role="button"
             onClick={this.handleOpenModalClick(ModalConstants.STYLE_SELECTION_MODAL)}
             className={classnames(
-              'Button Button--tertiary ProductDisplayOptionsTouch__option display--inline-block',
+              'Button Button--tertiary ProductDisplayOptionsTouch__option u-display--inline-block',
               { 'Button--selected': selectedAddonOptions.length },
             )}
           >

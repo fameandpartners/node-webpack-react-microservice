@@ -90,7 +90,7 @@ class ProductOptions extends Component {
         }
         <span
           style={{ background: colorHexValue }}
-          className="ProductOptions__color-swatch display--inline-block"
+          className="ProductOptions__color-swatch u-display--inline-block"
         />
       </span>
     );

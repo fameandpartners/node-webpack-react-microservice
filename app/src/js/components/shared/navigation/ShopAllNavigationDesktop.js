@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 // CSS
-import '../../../../css/components/ShopAllNavigation.scss';
+import '../../../../css/components/ShopAllNavigationDesktop.scss';
 
 // Constants
 import { NAVIGATION_LINKS } from '../../../constants/AppConstants';
@@ -10,7 +10,7 @@ import { NAVIGATION_LINKS } from '../../../constants/AppConstants';
 // Components
 import NavLinkCol from './NavLinkCol';
 
-class ShopAllNavigation extends PureComponent {
+class ShopAllNavigationDesktop extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -21,9 +21,9 @@ class ShopAllNavigation extends PureComponent {
     return (
       <div
         ref={childRef}
-        className="ShopAllNavigation u-width--full layout-container"
+        className="ShopAllNavigationDesktop u-width--full layout-container"
       >
-        <div className="ShopAllNavigation__link-container u-center grid">
+        <div className="ShopAllNavigationDesktop__link-container u-center grid">
           <NavLinkCol
             colTitle="Weddings"
             links={NAVIGATION_LINKS.WEDDINGS}
@@ -50,8 +50,8 @@ class ShopAllNavigation extends PureComponent {
   }
 }
 
-ShopAllNavigation.propTypes = {
+ShopAllNavigationDesktop.propTypes = {
   childRef: PropTypes.func.isRequired,
 };
 
-export default ShopAllNavigation;
+export default ShopAllNavigationDesktop;

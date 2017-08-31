@@ -6,13 +6,19 @@ import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
 
 // Actions
-import * as AppActions from '../../actions/AppActions';
+import * as AppActions from '../../../actions/AppActions';
+
+// Constants
+import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
 
 // Components
-import Hamburger from './header/Hamburger';
+import ContainerDividerToggle from '../ContainerDividerToggle';
+import SideMenuActionButtons from './SideMenuActionButtons';
+import SideMenuSubNavigation from './SideMenuSubNavigation';
+import Hamburger from '../header/Hamburger';
 
 // CSS
-import '../../../css/components/SideMenu.scss';
+import '../../../../css/components/SideMenu.scss';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -33,13 +39,23 @@ class SideMenu extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+    this.state = {
+      subNavigationContainer: null,
+    };
   }
+
   handleCloseMenu() {
     const { activateSideMenu } = this.props;
     activateSideMenu({ sideMenuOpen: false });
   }
+
+  handleMenuActionClick(subNavigationContainer) {
+    this.setState({ subNavigationContainer });
+  }
+
   render() {
     const { sideMenuOpen } = this.props;
+    const { subNavigationContainer } = this.state;
     return (
       <Motion
         style={{
@@ -63,14 +79,25 @@ class SideMenu extends Component {
               isOpen
               handleClick={this.handleCloseMenu}
             />
-            <div className="SideMenu__body u-position--relative">
-              <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-                <li>Item 4</li>
-              </ul>
-            </div>
+
+            <ContainerDividerToggle
+              activeId={subNavigationContainer}
+              activationIdSet={[
+                NAVIGATION_CONTAINERS.SHOP_ALL,
+                NAVIGATION_CONTAINERS.WHO_WE_ARE,
+              ]}
+              leftContainerNode={
+                <SideMenuActionButtons
+                  handleMenuActionClick={this.handleMenuActionClick}
+                />
+              }
+              rightContainerNode={(
+                <SideMenuSubNavigation
+                  subNavigationContainer={NAVIGATION_CONTAINERS.SHOP_ALL}
+                />
+              )}
+            />
+
           </div>
         }
       </Motion>

@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { spring, TransitionMotion } from 'react-motion';
+import noop from '../../libs/noop';
 
+// Components
 import SearchBar from './SearchBar';
+
+// CSS
+import '../../../css/components/SearchBarExpander.scss';
 
 class SearchBarExpander extends Component {
   constructor(props) {
@@ -12,37 +17,34 @@ class SearchBarExpander extends Component {
   }
 
   defaultStyles() {
-    const DEFAULT_STYLES = {
+    return {
       key: 'search',
       style: {
         opacity: spring(1),
         width: spring(240),
       },
     };
-
-    return DEFAULT_STYLES;
   }
 
   willEnter() {
-    const WILL_ENTER = {
+    return {
       opacity: 0,
       width: 0,
     };
-    return WILL_ENTER;
   }
 
   willLeave() {
-    const WILL_LEAVE = {
+    return {
       opacity: spring(0),
       width: spring(0),
     };
-    return WILL_LEAVE;
   }
 
   render() {
+    const { isActive, onBlur } = this.props;
     return (
       <TransitionMotion
-        styles={this.props.isActive ? [this.defaultStyles()] : []}
+        styles={isActive ? [this.defaultStyles()] : []}
         willEnter={this.willEnter}
         willLeave={this.willLeave}
       >
@@ -51,14 +53,14 @@ class SearchBarExpander extends Component {
             const style = items[0].style;
             return (
               <div
-                className="SearchBarExpander"
+                className="SearchBarExpander u-center u-display--inline-block"
                 key={items[0].key}
                 style={{
                   width: `${style.width}px`,
                   opacity: style.opacity,
                 }}
               >
-                <SearchBar onBlur={this.props.onBlur} />
+                <SearchBar onBlur={onBlur} />
               </div>
             );
           }
@@ -75,6 +77,8 @@ SearchBarExpander.propTypes = {
 };
 
 SearchBarExpander.defaultProps = {
+  hasIcon: true,
+  handleSearchIconClick: noop,
   isActive: false,
 };
 

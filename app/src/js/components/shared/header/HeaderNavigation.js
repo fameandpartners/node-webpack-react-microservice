@@ -10,8 +10,8 @@ import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
 
 // Components
 import FadeIn from '../../generic/FadeIn';
-import ShopAllNavigation from './ShopAllNavigation';
-import WhoWeAreNavigation from './WhoWeAreNavigation';
+import ShopAllNavigation from '../navigation/ShopAllNavigationDesktop';
+import WhoWeAreNavigation from '../navigation/WhoWeAreNavigationDesktop';
 
 // Constants
 import * as modalAnimations from '../../../utilities/modal-animation';
