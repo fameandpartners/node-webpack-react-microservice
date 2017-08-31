@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+// Decorators
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
+
 // Components
-import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 import Tabs from '../generic/Tabs';
 import SizeGuideTable from './SizeGuideTable';
@@ -40,45 +43,50 @@ class SizeGuideModal extends PureComponent {
     this.props.activateModal({ shouldAppear: false });
   }
 
+  handleSwitchModal(modalId) {
+    return () => this.props.activateModal({ modalId });
+  }
+
   render() {
     const {
       sizeChart,
+      breakpoint,
     } = this.props;
 
     return (
-      <ModalContainer
-        slideLeft
-        dimBackground={false}
-        modalIds={[ModalConstants.SIZE_GUIDE_MODAL]}
+      <Modal
+        handleCloseModal={
+          breakpoint === 'mobile' || breakpoint === 'tablet'
+          ?
+            this.handleSwitchModal(ModalConstants.SIZE_SELECTION_MODAL)
+          :
+            this.handleCloseModal
+        }
+        modalClassName="grid-middle u-flex--1"
+        modalContentClassName="u-width--full"
+        modalWrapperClassName="u-flex--col"
       >
-        <Modal
-          handleCloseModal={this.handleCloseModal}
-          modalClassName="grid-middle u-flex--1"
-          modalContentClassName="u-width--full"
-          modalWrapperClassName="u-flex--col"
-        >
-          <div className="SizeGuideModal u-text-align--center grid-middle">
-            <div className="Modal__content--med-margin-bottom">
-              <Tabs
-                content={[
-                  {
-                    id: SizeGuideModalTabConstants.SIZE_GUIDE,
-                    heading: 'Size Guide',
-                    content: (<SizeGuideTable
-                      sizeChart={sizeChart}
-                    />),
-                  },
-                  {
-                    id: SizeGuideModalTabConstants.MEASURING_TIPS,
-                    heading: 'Measuring Tips',
-                    content: <MeasuringTipsPanel />,
-                  },
-                ]}
-              />
-            </div>
+        <div className="SizeGuideModal u-text-align--center grid-middle">
+          <div className="Modal__content--med-margin-bottom">
+            <Tabs
+              content={[
+                {
+                  id: SizeGuideModalTabConstants.SIZE_GUIDE,
+                  heading: 'Size Guide',
+                  content: (<SizeGuideTable
+                    sizeChart={sizeChart}
+                  />),
+                },
+                {
+                  id: SizeGuideModalTabConstants.MEASURING_TIPS,
+                  heading: 'Measuring Tips',
+                  content: <MeasuringTipsPanel />,
+                },
+              ]}
+            />
           </div>
-        </Modal>
-      </ModalContainer>
+        </div>
+      </Modal>
     );
   }
 }
@@ -98,6 +106,9 @@ SizeGuideModal.propTypes = {
     'Hip Inches': PropTypes.string,
   })).isRequired,
   activateModal: PropTypes.func.isRequired,
+
+  // Decorator Props
+  breakpoint: PropTypes.string.isRequired,
 };
 
 SizeGuideModal.defaultProps = {
@@ -105,4 +116,4 @@ SizeGuideModal.defaultProps = {
   activeModalId: null,
 };
 
-export default connect(stateToProps, dispatchToProps)(SizeGuideModal);
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(SizeGuideModal));

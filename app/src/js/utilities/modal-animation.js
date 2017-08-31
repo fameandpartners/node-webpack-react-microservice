@@ -14,6 +14,7 @@ export const SLIDE_UP_DEFAULT_STYLES = {
   style: {
     opacity: spring(1),
     y: spring(0),
+    x: 0,
   },
 };
 
@@ -22,6 +23,7 @@ export const SLIDE_LEFT_DEFAULT_STYLES = {
   style: {
     opacity: spring(1),
     x: spring(0),
+    y: 0,
   },
 };
 
@@ -41,11 +43,13 @@ export const STANDARD_WILL_ENTER = {
 export const SLIDE_UP_WILL_ENTER = {
   opacity: 0,
   y: 100,
+  x: 0,
 };
 
 export const SLIDE_LEFT_WILL_ENTER = {
   opacity: 0,
   x: 100,
+  y: 0,
 };
 
 export const SLIDE_OVER_WILL_ENTER = {
@@ -60,10 +64,12 @@ export const STANDARD_WILL_LEAVE = {
 
 export const SLIDE_UP_WILL_LEAVE = {
   y: spring(100),
+  x: 0,
 };
 
 export const SLIDE_LEFT_WILL_LEAVE = {
   x: spring(100),
+  y: 0,
 };
 
 export const SLIDE_OVER_WILL_LEAVE = {

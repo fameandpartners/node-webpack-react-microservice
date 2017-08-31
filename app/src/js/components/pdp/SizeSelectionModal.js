@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Components
-import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 
 // Actions
@@ -17,7 +16,6 @@ import ButtonLedge from '../generic/ButtonLedge';
 import ProductCustomizationSize from './ProductCustomizationSize';
 
 // Constants
-import ModalConstants from '../../constants/ModalConstants';
 import CustomizationConstants from '../../constants/CustomizationConstants';
 
 // CSS
@@ -89,27 +87,21 @@ class StyleSelectionModal extends PureComponent {
 
   render() {
     return (
-      <ModalContainer
-        slideUp
-        dimBackground={false}
-        modalIds={[ModalConstants.SIZE_SELECTION_MODAL]}
+      <Modal
+        handleCloseModal={this.handleCloseModal}
+        headline={CustomizationConstants.SIZE_HEADLINE}
+        modalClassName="u-flex u-flex--1"
+        modalContentClassName="u-width--full u-overflow-y--scroll"
+        modalWrapperClassName="u-flex--col"
       >
-        <Modal
-          handleCloseModal={this.handleCloseModal}
-          headline={CustomizationConstants.SIZE_HEADLINE}
-          modalClassName="u-flex u-flex--1"
-          modalContentClassName="u-width--full u-overflow-y--scroll"
-          modalWrapperClassName="u-flex--col"
-        >
-          <ProductCustomizationSize hasNavItems={false} />
-          <div className="u-position--absolute u-bottom u-width--full">
-            <ButtonLedge
-              handleLeftButtonClick={this.handleCloseModal}
-              handleRightButtonClick={this.handleSaveSizeSelection}
-            />
-          </div>
-        </Modal>
-      </ModalContainer>
+        <ProductCustomizationSize hasNavItems={false} />
+        <div className="u-position--absolute u-bottom u-width--full">
+          <ButtonLedge
+            handleLeftButtonClick={this.handleCloseModal}
+            handleRightButtonClick={this.handleSaveSizeSelection}
+          />
+        </div>
+      </Modal>
     );
   }
 }

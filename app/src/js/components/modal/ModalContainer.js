@@ -89,6 +89,7 @@ class ModalContainer extends Component {
       children,
       slideUp,
       slideLeft,
+      fullScreen,
     } = this.props;
 
     return (
@@ -109,6 +110,7 @@ class ModalContainer extends Component {
           className={classnames([
             'ModalContainer__content-wrapper u-center col',
             { ModalContainer__slideUp: slideUp || slideLeft },
+            { ModalContainer__fullScreen: fullScreen },
           ])}
           onClick={this.handleForegroundClick}
           style={{
@@ -151,6 +153,7 @@ ModalContainer.propTypes = {
   modalContainerClass: PropTypes.string,
   slideUp: PropTypes.bool,
   slideLeft: PropTypes.bool,
+  fullScreen: PropTypes.bool,
   zIndex: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   // Redux
@@ -166,6 +169,7 @@ ModalContainer.defaultProps = {
   children: null,
   slideUp: false,
   slideLeft: false,
+  fullScreen: false,
   height: null,
   modalContainerClass: '',
   zIndex: 999,
