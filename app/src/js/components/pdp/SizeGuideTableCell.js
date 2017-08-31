@@ -11,7 +11,6 @@ class SizeGuideTableCell extends PureComponent {
   }
 
   updateCoordinates() {
-    console.log(`Column: ${this.props.columnIndex}, Row: ${this.props.rowIndex}`);
     this.props.hovered(this.props.columnIndex, this.props.rowIndex);
   }
 
@@ -23,13 +22,19 @@ class SizeGuideTableCell extends PureComponent {
       rowIndex,
     } = this.props;
 
+    const inPathOfHoveredCell =
+      (hoverCoordinates.hoverColumn === columnIndex) ||
+      (hoverCoordinates.hoverRow === rowIndex);
+
+    const hoveredCell =
+      (hoverCoordinates.hoverColumn === columnIndex) &&
+      (hoverCoordinates.hoverRow === rowIndex);
+
     const cellClasses = classnames(
       'SizeGuideTable__cell',
       {
-        /* eslint-disable max-len */
-        // TO-DO: clean-up (and better names, e.g. active == onCrossPath && current == currentlyHovered)
-        'SizeGuideTable__cell--active': (hoverCoordinates.hoverColumn === columnIndex) || (hoverCoordinates.hoverRow === rowIndex),
-        'SizeGuideTable__cell--current': (hoverCoordinates.hoverColumn === columnIndex) && (hoverCoordinates.hoverRow === rowIndex),
+        'SizeGuideTable__cell--active': inPathOfHoveredCell,
+        'SizeGuideTable__cell--current': hoveredCell,
       },
     );
 

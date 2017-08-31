@@ -73,9 +73,11 @@ class SizeGuideModal extends PureComponent {
                 {
                   id: SizeGuideModalTabConstants.SIZE_GUIDE,
                   heading: 'Size Guide',
-                  content: (<SizeGuideTable
-                    sizeChart={sizeChart}
-                  />),
+                  content: (
+                    <SizeGuideTable
+                      sizeChart={sizeChart}
+                    />
+                  ),
                 },
                 {
                   id: SizeGuideModalTabConstants.MEASURING_TIPS,
