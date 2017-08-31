@@ -109,8 +109,7 @@ class ModalContainer extends Component {
         <div
           className={classnames([
             'ModalContainer__content-wrapper u-center col',
-            { ModalContainer__slideUp: slideUp || slideLeft },
-            { ModalContainer__fullScreen: fullScreen },
+            { ModalContainer__fullScreen: fullScreen || slideUp || slideLeft },
           ])}
           onClick={this.handleForegroundClick}
           style={{
