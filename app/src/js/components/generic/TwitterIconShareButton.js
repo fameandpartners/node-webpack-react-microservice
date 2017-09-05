@@ -22,7 +22,7 @@ class TwitterIconShareButton extends PureComponent {
     return (
       <TwitterShareButton
         url={url}
-        className="ShareModal__icon-button"
+        className="SocialShare__icon-button"
       >
         <IconSVG
           svgPath={TwitterShareIcon.url}

@@ -23,7 +23,7 @@ class PinterestIconShareButton extends PureComponent {
     return (
       <PinterestShareButton
         url={url}
-        className="ShareModal__icon-button"
+        className="SocialShare__icon-button"
         media={image}
       >
         <IconSVG

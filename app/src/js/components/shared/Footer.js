@@ -1,9 +1,16 @@
 import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 // Components
 import Button from '../generic/Button';
 import Input from '../form/Input';
+import IconSVG from '../generic/IconSVG';
+
+// Assets
+import PinterestShareIcon from '../../../svg/share-pinterest.svg';
+import TwitterShareIcon from '../../../svg/share-twitter.svg';
+import FacebookShareIcon from '../../../svg/share-facebook.svg';
 
 // CSS
 import '../../../css/components/Footer.scss';
@@ -41,6 +48,7 @@ class Footer extends PureComponent {
 
   render() {
     const { siteVersion, signupError } = this.state;
+    const { breakpoint } = this.props;
     return (
       <footer className="Footer">
         <div className="layout-container grid-noGutter-reverse-spaceAround">
@@ -154,12 +162,41 @@ class Footer extends PureComponent {
                 <div>
                   <Input
                     id="footer-email"
-                    placeholder="Email your email address"
+                    placeholder="Enter your email address"
                     type="email"
                     error={signupError}
                     inlineMeta={signupError ? 'Error! Something is wrong...' : null}
                   />
                 </div>
+                {
+                  breakpoint === 'desktop' ?
+                    <div className="grid">
+                      <ul className="Footer__icon-list Footer__icon-list--desktop col-12">
+                        <li className="u-float--left">
+                          <a href="https://www.facebook.com/FameandPartners">
+                            <IconSVG
+                              svgPath={FacebookShareIcon.url}
+                            />
+                          </a>
+                        </li>
+                        <li className="u-float--left">
+                          <a href="https://twitter.com/FameandPartners">
+                            <IconSVG
+                              svgPath={TwitterShareIcon.url}
+                            />
+                          </a>
+                        </li>
+                        <li className="u-float--left">
+                          <a href="https://www.pinterest.com/fameandpartners">
+                            <IconSVG
+                              svgPath={PinterestShareIcon.url}
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div> : null
+                }
+
               </div>
               <div className="col-3 padding--none">
                 <Button
@@ -171,6 +208,37 @@ class Footer extends PureComponent {
             </form>
           </div>
         </div>
+        {
+          breakpoint === 'desktop' ?
+          null :
+          <div className="grid-center-noGutter">
+            <div className="col-3_sm-6_xs-8_md-4">
+              <ul className="Footer__icon-list Footer__icon-list--mobile grid">
+                <li className="u-float--left col-4 u-mt-normal u-mb-normal">
+                  <a href="https://www.facebook.com/FameandPartners">
+                    <IconSVG
+                      svgPath={FacebookShareIcon.url}
+                    />
+                  </a>
+                </li>
+                <li className="u-float--left col-4 u-mt-normal u-mb-normal">
+                  <a href="https://twitter.com/FameandPartners">
+                    <IconSVG
+                      svgPath={TwitterShareIcon.url}
+                    />
+                  </a>
+                </li>
+                <li className="u-float--left col-4 u-mt-normal u-mb-normal">
+                  <a href="https://www.pinterest.com/fameandpartners">
+                    <IconSVG
+                      svgPath={PinterestShareIcon.url}
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        }
         <div className="layout-container grid-noGutter">
           <div className="col-12 Footer__site-version-container">
             <p className="u-user-select--none">Country: &nbsp;
@@ -187,5 +255,9 @@ class Footer extends PureComponent {
     );
   }
 }
+
+Footer.propTypes = {
+  breakpoint: PropTypes.string.isRequired,
+};
 
 export default Footer;
