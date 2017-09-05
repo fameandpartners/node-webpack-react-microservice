@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
+import classnames from 'classnames';
 
 // Components
-import Button from '../generic/Button';
 import SizeGuideTableCell from './SizeGuideTableCell';
 
 // CSS
@@ -18,8 +18,8 @@ class SizeGuideTable extends PureComponent {
     this.state = {
       centimeters: false,
       hoverCoordinates: {
-        hoverColumn: 5,
-        hoverRow: 4,
+        hoverColumn: null,
+        hoverRow: null,
       },
     };
   }
@@ -45,12 +45,28 @@ class SizeGuideTable extends PureComponent {
 
     return (
       <div className="SizeGuideTable">
-        <Button
-          text="Toggle Inches / CM"
-          handleClick={() => this.setState({ centimeters: !centimeters })}
-        />
+        <div className="SizeGuideTable__actions">
+          <a
+            className={classnames(
+              'SizeGuideTable__unit-switch',
+              { 'SizeGuideTable__unit-switch--active': centimeters === false },
+            )}
+            onClick={() => this.setState({ centimeters: false })}
+          >
+            Inches
+          </a>
+          <a
+            className={classnames(
+              'SizeGuideTable__unit-switch',
+              { 'SizeGuideTable__unit-switch--active': centimeters === true },
+            )}
+            onClick={() => this.setState({ centimeters: true })}
+          >
+            Cm
+          </a>
+        </div>
         <div className="SizeGuideTable__table">
-          <div className="SizeGuideTable__column">
+          <div className="SizeGuideTable__column SizeGuideTable__header">
             <SizeGuideTableCell
               contents="US"
               hoverCoordinates={hoverCoordinates}
