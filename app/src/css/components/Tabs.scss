@@ -1,14 +1,4 @@
-.Tabs__headings {
-  padding: 10px;
-}
-
 .Tabs__link {
   display: inline;
   cursor: pointer;
-  font-size: 2em;
-  margin: 15px 20px 5px;
-}
-
-.Tabs__link--active {
-  border-bottom: 2px solid $c-black;
 }

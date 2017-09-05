@@ -33,6 +33,8 @@ class Tabs extends PureComponent {
   render() {
     const {
       content,
+      headingClasses,
+      contentClasses,
     } = this.props;
 
     const {
@@ -43,24 +45,37 @@ class Tabs extends PureComponent {
 
     return (
       <div className="Tabs">
-        <ul className="Tabs__headings">
-          {content.map(
-            item =>
-              <li
-                key={item.id}
-                onClick={() => this.handleTabChange(item.id)}
-                className={classnames(
-                  'Tabs__link',
-                  {
-                    'Tabs__link--active': item.id === selectedTabId,
-                  },
-                )}
-              >
-                {item.heading}
-              </li>,
+        <div
+          className={classnames(
+            'Tabs__heading',
+            'Tabs__wrapper',
+            headingClasses,
           )}
-        </ul>
-        <div className="Tabs__contents">
+        >
+          <ul className="Tabs__list">
+            {content.map(
+              item =>
+                <li
+                  key={item.id}
+                  onClick={() => this.handleTabChange(item.id)}
+                  className={classnames(
+                    'Tabs__link',
+                    {
+                      'Tabs__link--active': item.id === selectedTabId,
+                    },
+                  )}
+                >
+                  {item.heading}
+                </li>,
+            )}
+          </ul>
+        </div>
+        <div
+          className={classnames(
+            'Tabs__contents',
+            contentClasses,
+          )}
+        >
           <div
             key={selectedTabObj.id}
             className="Tabs__panel"
@@ -80,6 +95,13 @@ Tabs.propTypes = {
     content: PropTypes.shape({
     }),
   })).isRequired,
+  headingClasses: PropTypes.string,
+  contentClasses: PropTypes.string,
+};
+
+Tabs.defaultProps = {
+  headingClasses: '',
+  contentClasses: '',
 };
 
 export default Tabs;
