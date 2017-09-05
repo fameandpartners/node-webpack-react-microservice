@@ -69,7 +69,7 @@ class SizeGuideModal extends PureComponent {
         modalContentClassName="u-width--full"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="SizeGuideModal grid-middle">
+        <div className="SizeGuideModal grid-middle u-text-align-left">
           <div
             className="Modal__content--med-margin-bottom Modal__layout-container col-10_sm-12"
             data-push-left="off-1_sm-0"
