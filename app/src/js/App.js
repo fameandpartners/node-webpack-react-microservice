@@ -15,7 +15,7 @@ import ProductFabricModal from './components/pdp/ProductFabricModal';
 import ColorSelectionModal from './components/pdp/ColorSelectionModal';
 import ShareModal from './components/pdp/ShareModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
-import SizeSelectionModal from './components/pdp/SizeSelectionModal';
+import SizeModals from './components/pdp/SizeModals';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -62,7 +62,7 @@ class App extends Component {
         <ColorSelectionModal />
         <ShareModal />
         <StyleSelectionModal />
-        <SizeSelectionModal />
+        <SizeModals />
       </div>
     );
   }

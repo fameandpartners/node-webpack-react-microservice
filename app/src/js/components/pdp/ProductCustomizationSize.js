@@ -16,9 +16,11 @@ import {
   // MIN_CM,
   // MAX_CM,
 } from '../../constants/ProductConstants';
+import ModalConstants from '../../constants/ModalConstants';
 
 // Actions
 import CustomizationActions from '../../actions/CustomizationActions';
+import ModalActions from '../../actions/ModalActions';
 
 // UI Components
 import ProductCustomization from './ProductCustomization';
@@ -48,11 +50,14 @@ function dispatchToProps(dispatch) {
     updateDressSizeSelection,
   } = bindActionCreators(CustomizationActions, dispatch);
 
+  const modalActions = bindActionCreators(ModalActions, dispatch);
+
   return {
     changeCustomizationDrawer,
     updateMeasurementMetric,
     updateHeightSelection,
     updateDressSizeSelection,
+    activateModal: modalActions.activateModal,
   };
 }
 
@@ -136,6 +141,12 @@ class ProductCustomizationStyle extends PureComponent {
     return () => {
       this.props.updateDressSizeSelection({ temporaryDressSize: s });
     };
+  }
+
+  handleViewSizeGuideClick() {
+    /* eslint-disable no-console */
+    console.log('Show Size Guide!');
+    this.props.activateModal({ modalId: ModalConstants.SIZE_GUIDE_MODAL });
   }
 
   /**
@@ -233,7 +244,7 @@ class ProductCustomizationStyle extends PureComponent {
           </div>
 
           <div>
-            <p className="textAlign--left">What's your size?</p>
+            <p className="textAlign--left">What&apos;s your size?</p>
             <div className="ProductCustomizationSize__size grid-12">
               { SIZES.map(s => (
                 <div key={s} className="col-3">
@@ -246,7 +257,12 @@ class ProductCustomizationStyle extends PureComponent {
                   />
                 </div>
               ))}
-              <span className="link link--static">View Size Guide</span>
+              <span
+                className="link link--static"
+                onClick={this.handleViewSizeGuideClick}
+              >
+                View Size Guide
+              </span>
             </div>
           </div>
         </div>
@@ -259,6 +275,7 @@ ProductCustomizationStyle.propTypes = {
   // Passed Props
   hasNavItems: PropTypes.bool.isRequired,
   // Redux Props
+  activateModal: PropTypes.func.isRequired,
   productCustomizationDrawer: PropTypes.string.isRequired,
   isUSSiteVersion: PropTypes.bool.isRequired,
   temporaryDressSize: PropTypes.number,

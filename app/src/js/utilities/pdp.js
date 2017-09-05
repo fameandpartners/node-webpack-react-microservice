@@ -401,6 +401,11 @@ export function transformProductTitle({ name }) {
   return title;
 }
 
+export function transformProductSizeChart({ sizeChart }) {
+  const sizes = sizeChart;
+  return sizes;
+}
+
 export function transformProductJSON(productJSON) {
   const productState = {
     currency: transformProductCurrency(productJSON.product),
@@ -417,6 +422,7 @@ export function transformProductJSON(productJSON) {
     productImages: transformProductImages(productJSON.images),
     modelDescription: transformProductModelDescription(productJSON.product),
     productTitle: transformProductTitle(productJSON.product),
+    sizeChart: transformProductSizeChart(productJSON),
   };
 
   const customizationState = {
