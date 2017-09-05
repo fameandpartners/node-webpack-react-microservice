@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-// import PropTypes from 'prop-types';
 
 import measuringImage from '../../../img/test/measuring.jpg';
 
@@ -71,8 +70,5 @@ class MeasuringTipsPanel extends PureComponent {
   }
 
 }
-MeasuringTipsPanel.propTypes = {
-  // className: PropTypes.string,
-};
 
 export default MeasuringTipsPanel;
