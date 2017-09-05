@@ -38,8 +38,7 @@ class Modal extends PureComponent {
         >
           <div
             className={classnames(
-             'Modal__content--sm-margin-bottom',
-             'u-position--absolute u-text-align-right',
+             'CancelOut__wrapper',
            )}
           >
             <CancelOut onClick={handleCloseModal} />

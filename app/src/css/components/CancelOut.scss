@@ -1,6 +1,12 @@
+.CancelOut__wrapper {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  z-index: $z-max;
+}
+
 .CancelOut {
   cursor: pointer;
-  position: relative;
   display: inline-block;
   width: 20px;
   height: 20px;
