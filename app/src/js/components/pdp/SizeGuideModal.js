@@ -21,6 +21,9 @@ import ModalActions from '../../actions/ModalActions';
 import ModalConstants from '../../constants/ModalConstants';
 import SizeGuideModalTabConstants from '../../constants/SizeGuideModalTabConstants';
 
+// CSS
+import '../../../css/components/SizeGuideModal.scss';
+
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
@@ -66,8 +69,12 @@ class SizeGuideModal extends PureComponent {
         modalContentClassName="u-width--full"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="SizeGuideModal u-text-align--center grid-middle">
-          <div className="Modal__content--med-margin-bottom">
+        <div className="SizeGuideModal grid-middle">
+          <div
+            className="Modal__content--med-margin-bottom Modal__layout-container col-10_sm-12"
+            data-push-left="off-1_sm-0"
+            data-push-right="off-1_sm-0"
+          >
             <Tabs
               content={[
                 {
@@ -85,6 +92,8 @@ class SizeGuideModal extends PureComponent {
                   content: <MeasuringTipsPanel />,
                 },
               ]}
+              headingClasses="SizeGuideTabs__heading"
+              contentClasses="SizeGuideTabs__content u-overflow-y--scroll"
             />
           </div>
         </div>
