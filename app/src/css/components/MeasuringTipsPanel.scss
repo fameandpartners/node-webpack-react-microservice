@@ -1,3 +1,15 @@
 .MeasuringTipsPanel {
-  font-size: 3em;
+  font-size: 1em;
+}
+
+.MeasuringTipsPanel__fame-tips-wrapper {
+  border-bottom: 1px solid $c-neutral-4;
+}
+
+.MeasuringTipsPanel__tip {
+  padding: 10px 20px;
+
+  @include sm {
+    padding: 20px 40px;
+  }
 }
