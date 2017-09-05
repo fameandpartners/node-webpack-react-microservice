@@ -5,17 +5,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import * as AppActions from '../../actions/AppActions';
-import * as CartActions from '../../actions/CartActions';
+import * as AppActions from '../../../actions/AppActions';
+import * as CartActions from '../../../actions/CartActions';
 
 // CSS
-import '../../../css/components/HeaderMobile.scss';
+import '../../../../css/components/HeaderMobile.scss';
 
 // Components
 import Hamburger from './Hamburger';
 
 // Assets
-import ShoppingBagIcon from '../../../svg/i-shopping-bag.svg';
+import ShoppingBagIcon from '../../../../svg/i-shopping-bag.svg';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -66,7 +66,7 @@ class HeaderMobile extends Component {
             <div className="col">
               {headerTitle}
             </div>
-            <ul className="col-2 textAlign--right">
+            <ul className="col-2 u-text-align--right">
               <li onClick={this.handleShoppingBagClick} className="Header__action">
                 { cartItemCount > 0
                   ? <span className="Header__cart-count">{cartItemCount}</span>

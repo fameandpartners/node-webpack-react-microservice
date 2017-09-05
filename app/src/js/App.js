@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import Raven from 'raven-js';
 
 // App Components
-import SideMenu from './components/shared/SideMenu';
+import SideMenu from './components/shared/side_menu/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';

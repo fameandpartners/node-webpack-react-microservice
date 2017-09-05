@@ -45,7 +45,7 @@ class ProductSecondaryActions extends Component {
     return (
       <div className="ProductSecondaryActions">
         <ul>
-          <li className="display--inline">
+          <li className="u-display--inline">
             <IconButton
               svgPath={HeartIcon.url}
               width="40px"
@@ -53,7 +53,7 @@ class ProductSecondaryActions extends Component {
               handleClick={noop}
             />
           </li>
-          <li className="display--inline">
+          <li className="u-display--inline">
             <IconButton
               svgPath={ShareIcon.url}
               width="40px"

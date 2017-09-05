@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import autoBind from 'react-autobind';
 import noop from '../../libs/noop';
 
 // CSS
@@ -12,12 +13,17 @@ import '../../../css/components/Input.scss';
 class Input extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    autoBind(this);
   }
 
   handleChange(e) {
     const { onChange, id } = this.props;
     onChange({ id, value: e.target.value });
+  }
+
+  handleBlur(e) {
+    const { onBlur, id } = this.props;
+    onBlur({ id, value: e.target.value });
   }
 
   componentDidMount() {
@@ -35,7 +41,9 @@ class Input extends Component {
       defaultValue,
       error,
       label,
+      indent,
       inlineMeta,
+      lineInput,
       placeholder,
       type,
       wrapperClassName,
@@ -58,13 +66,18 @@ class Input extends Component {
         }
         <input
           ref={c => this.input = c}
-          className="Input"
+          className={classnames(
+            'Input',
+            { 'Input--indent': indent },
+            { 'Input--line-input': lineInput },
+          )}
           id={id}
-          onChange={this.handleChange}
           placeholder={placeholder}
           type={type}
           defaultValue={defaultValue}
           readOnly={readOnly}
+          onBlur={this.handleBlur}
+          onChange={this.handleChange}
         />
         {inlineMeta && error
           ? <span className="Input__meta-label--error">{inlineMeta}</span>
@@ -89,15 +102,18 @@ Input.propTypes = {
   focusOnMount: PropTypes.bool,
   selectOnMount: PropTypes.bool,
   readOnly: PropTypes.bool,
+  indent: PropTypes.bool,
   inlineMeta: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node,
     PropTypes.instanceOf(null),
   ]),
   label: PropTypes.string,
+  lineInput: PropTypes.bool,
   placeholder: PropTypes.string,
   type: PropTypes.string,
   wrapperClassName: PropTypes.string,
+  onBlur: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
@@ -107,11 +123,14 @@ Input.defaultProps = {
   focusOnMount: false,
   selectOnMount: false,
   readOnly: false,
+  indent: false,
   inlineMeta: null,
   label: null,
+  lineInput: false,
   placeholder: '',
   type: 'input',
   wrapperClassName: '',
+  onBlur: noop,
   onChange: noop,
 };
 

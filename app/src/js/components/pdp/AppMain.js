@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
 import classnames from 'classnames';
+import ReactHoverObserver from 'react-hover-observer';
 
 // Decorators
 import Resize from '../../decorators/Resize';
@@ -31,9 +32,9 @@ import ProductPrecustomizations from './ProductPrecustomizations';
 import FameDifference from './FameDifference';
 
 // Generic UI Components
-import HeaderHider from '../shared/HeaderHider';
-import HeaderMobile from '../shared/HeaderMobile';
-import Header from '../shared/Header';
+import HeaderHider from '../shared/header/HeaderHider';
+import HeaderMobile from '../shared/header/HeaderMobile';
+import Header from '../shared/header/Header';
 import Footer from '../shared/Footer';
 
 // CSS
@@ -124,7 +125,9 @@ class AppMain extends Component {
                   <HeaderMobile headerTitle={productTitle} />
                 </HeaderHider>
                 :
-                <Header />
+                <ReactHoverObserver hoverOffDelayInMs={200}>
+                  <Header />
+                </ReactHoverObserver>
               }
 
               { breakpoint === 'mobile' || breakpoint === 'tablet'
