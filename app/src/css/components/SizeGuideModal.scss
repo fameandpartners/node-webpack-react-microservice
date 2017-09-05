@@ -15,14 +15,6 @@
   border-bottom: 2px solid $c-neutral-4;
 }
 
-.SizeGuideTable__header {
-  text-align: center;
-
-  @include sm {
-    text-align: left;
-  }
-}
-
 .SizeGuideTabs__content {
   top: 100px;
   padding: 0 20px;

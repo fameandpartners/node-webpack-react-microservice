@@ -40,6 +40,14 @@
   }
 }
 
+.SizeGuideTable__header {
+  text-align: center;
+
+  @include sm {
+    text-align: left;
+  }
+}
+
 .SizeGuideTable__header .SizeGuideTable__cell {
   font-weight: bold;
   text-align: center;
