@@ -57,9 +57,7 @@ app.use(cookieParser());
 app.get('/pdp', (req, res) => {
   const props = transformProductJSON(mockJSON);
   const store = AppStore(props);
-  const ReactRoot = render(React.createElement(Provider, { store },
-    React.createElement(App),
-  ));
+  const ReactRoot = render(React.createElement(Provider, { store }, React.createElement(App)));
   const html = template({
     root: ReactRoot,
     initialState: store.getState(),
@@ -76,9 +74,7 @@ app.post('/pdp', (req, res) => {
   try {
     const props = transformProductJSON({});
     const store = AppStore(props);
-    const ReactRoot = render(React.createElement(Provider, { store },
-      React.createElement(App),
-    ));
+    const ReactRoot = render(React.createElement(Provider, { store }, React.createElement(App)));
     const html = template({
       root: ReactRoot,
       initialState: store.getState(),
