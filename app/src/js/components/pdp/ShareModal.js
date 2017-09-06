@@ -49,6 +49,10 @@ class ShareModal extends Component {
     this.props.activateModal({ shouldAppear: false });
   }
 
+  // componentDidMount() {
+  //   this.props.activateModal({ modalId: ModalConstants.SHARE_MODAL, shouldAppear: true });
+  // }
+
   /**
    * Checks for our current color amongst images and returns that image, or default
    * @return {String} imageUrl

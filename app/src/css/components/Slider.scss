@@ -17,3 +17,11 @@
   display: inline-block;
   margin-right: 5px;
 }
+
+.Slider .Slide.Slide--full {
+  width: 100%;
+}
+
+.Slide.u-height--full.active {
+  width: 55vw;
+}
