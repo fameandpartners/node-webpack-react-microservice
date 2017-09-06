@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
 import classnames from 'classnames';
-import ReactHoverObserver from 'react-hover-observer';
 
 // Decorators
 import Resize from '../../decorators/Resize';
@@ -22,7 +21,6 @@ import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
 import AddToCartButtonLedgeMobile from './AddToCartButtonLedgeMobile';
-import CartDrawer from './CartDrawer';
 import CustomizationButtonLedge from './CustomizationButtonLedge';
 import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
@@ -30,12 +28,6 @@ import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import ProductPrecustomizations from './ProductPrecustomizations';
 import FameDifference from './FameDifference';
-
-// Generic UI Components
-import HeaderHider from '../shared/header/HeaderHider';
-import HeaderMobile from '../shared/header/HeaderMobile';
-import Header from '../shared/header/Header';
-import Footer from '../shared/Footer';
 
 // CSS
 import '../../../css/components/AppMain.scss';
@@ -94,6 +86,8 @@ class AppMain extends Component {
       sideMenuOpen,
     } = this.props;
 
+    console.log(productTitle);
+
     return (
       <Motion
         style={{
@@ -120,20 +114,11 @@ class AppMain extends Component {
                   visibility: opacity !== 0 ? 'visible' : 'hidden',
                 }}
               />
-              { breakpoint === 'mobile' || breakpoint === 'tablet' ?
-                <HeaderHider>
-                  <HeaderMobile headerTitle={productTitle} />
-                </HeaderHider>
-                :
-                <ReactHoverObserver hoverOffDelayInMs={200}>
-                  <Header />
-                </ReactHoverObserver>
-              }
 
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? <ProductDisplayOptionsTouch />
                 : (
-                  <div className="u-mt-normal">
+                  <div>
                     <ProductOptions />
                   </div>
                 )
@@ -161,13 +146,6 @@ class AppMain extends Component {
                 <FameDifference />
               </div>
 
-              <Footer />
-            </div>
-            <div
-              className="CartDrawer__wrapper"
-              style={{ transform: `translateX(${500 - (x * -1)}px)` }}
-            >
-              <CartDrawer />
             </div>
 
             <div
