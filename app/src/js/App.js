@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import Raven from 'raven-js';
 
 // App Components
-import SideMenu from './components/shared/SideMenu';
+import SideMenu from './components/shared/side_menu/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
@@ -16,7 +16,7 @@ import ColorSelectionModal from './components/pdp/ColorSelectionModal';
 import ShareModal from './components/pdp/ShareModal';
 import ZoomModal from './components/pdp/ZoomModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
-import SizeSelectionModal from './components/pdp/SizeSelectionModal';
+import SizeModals from './components/pdp/SizeModals';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -64,7 +64,7 @@ class App extends Component {
         <ShareModal />
         <ZoomModal />
         <StyleSelectionModal />
-        <SizeSelectionModal />
+        <SizeModals />
       </div>
     );
   }

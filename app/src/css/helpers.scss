@@ -10,11 +10,11 @@
   display: block;
 }
 
-.display--inline {
+.u-display--inline {
   display: inline;
 }
 
-.display--inline-block {
+.u-display--inline-block {
   display: inline-block;
 }
 
@@ -26,7 +26,7 @@
   float: right;
 }
 
-.overflow--hidden {
+.u-overflow--hidden {
   overflow: hidden;
 }
 
@@ -38,6 +38,10 @@
   position: relative;
 }
 
+.u-position--inherit {
+  position: inherit;
+}
+
 .textAlign--left {
   text-align: left;
 }
@@ -46,7 +50,7 @@
   text-align: center;
 }
 
-.textAlign--right {
+.u-text-align--right {
   text-align: right;
 }
 
@@ -57,8 +61,6 @@
 .u-user-select--none {
   user-select: none;
 }
-
-
 
 .padding--none {
   padding: 0;
@@ -76,6 +78,10 @@
 
 .u-mb-big {
   margin-bottom: 50px;
+}
+
+.u-mr-small {
+  margin-right: 15px;
 }
 
 .u-mt-small {

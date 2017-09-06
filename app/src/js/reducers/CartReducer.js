@@ -6,7 +6,6 @@ export const $$initialState = Immutable.fromJS({
   // TODO: @elgrecode Each of these individual line items will have a generated CODE
   // that will be used to generate unique urls
   // ArrayOf({
-  //   generatedId: ????
   //   productCentsBasePrice: Number,
   //   productImage: String,
   //   productTitle: String,
