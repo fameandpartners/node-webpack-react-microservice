@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { render, setCacheStrategy } = require('rapscallion');
+const chalk = require('chalk');
 // const pdpData = require('./pdp.json');
 // console.log(pdpData);
 
@@ -48,8 +49,8 @@ setCacheStrategy({ // Global Singleton for Rapscallion
 app.use(helmet());
 app.use(express.static('./build'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 
 // Rendering
@@ -70,9 +71,10 @@ app.get('/pdp', (req, res) => {
 
 app.post('/pdp', (req, res) => {
   res.header('Content-Type', 'text/html');
+  console.log(`Generate PDP for: ${chalk.yellow(req.body.data.product.name)}`);
 
   try {
-    const props = transformProductJSON({});
+    const props = transformProductJSON(req.body.data);
     const store = AppStore(props);
     const ReactRoot = render(React.createElement(Provider, { store }, React.createElement(App)));
     const html = template({
