@@ -1,4 +1,4 @@
-/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -35,11 +35,44 @@ function dispatchToProps(dispatch) {
 class ZoomModal extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      zoomStatus: false,
+      topPercent: null,
+      leftPercent: null,
+      activeIndex: null,
+      imageDimensions: null,
+    }
     autobind(this);
   }
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
+  }
+
+  getDimensions(refName) {
+    console.log("refName", refName)
+    console.log(this.imageRefs)
+    const rect = this.imageRefs[refName].getBoundingClientRect();
+    const { left, top, width, height } = rect;
+    this.setState({
+      imageDimensions: {
+        left,
+        top,
+        width,
+        height,
+      },
+    });
+  }
+  getCoords(e) {
+    const { imageDimensions } = this.state;
+    const { left, top, width, height } = imageDimensions;
+    const leftPercent = ((e.pageX - left) / width) * 90;
+    const topPercent = ((e.pageY - top) / height) * 105;
+    console.log(`${topPercent.toString()}%`, `${leftPercent.toString()}%`);
+    this.setState({
+      topPercent: `${topPercent.toString()}%`,
+      leftPercent: `${leftPercent.toString()}%`,
+    });
   }
 
   componentDidMount() {
@@ -58,6 +91,9 @@ class ZoomModal extends Component {
       // 'http://placehold.it/890x960?text=mom',
       // 'http://placehold.it/890x960?text=dog',
     ];
+    const { zoomStatus, topPercent, leftPercent, activeIndex } = this.state;
+    const zoomStyle = `${leftPercent} ${topPercent}`;
+    this.imageRefs = [];
     return (
       <ModalContainer
         modalContainerClass="grid-middle"
@@ -68,7 +104,7 @@ class ZoomModal extends Component {
           handleCloseModal={this.handleCloseModal}
         >
           <Slider winWidth={winWidth} winHeight={winHeight}>
-            { productImages.map(img => (
+            { productImages.map((img, index) => (
               <Slide
                 addPadding
                 key={img}
@@ -78,6 +114,17 @@ class ZoomModal extends Component {
                   src={img}
                   width="100%"
                   className="u-height--full"
+                  style={{
+                    transformOrigin: zoomStyle,
+                  }}
+                  onClick={() => this.setState({
+                    activeIndex: index,
+                    zoomStatus: !zoomStatus
+                  })}
+                  className={activeIndex === index && zoomStatus  ? 'zoomIn' : 'noZoom'}
+                  ref={ref => this.imageRefs[`${img}-${index}`] = ref}
+                  onMouseMove={this.getCoords}
+                  onMouseOver={() => this.getDimensions(`${img}-${index}`)}
                 />
               </Slide>
             ))}
