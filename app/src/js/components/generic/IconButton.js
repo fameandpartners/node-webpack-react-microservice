@@ -34,12 +34,13 @@ class IconButton extends PureComponent {
 
 IconButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  svgPath: PropTypes.string.isRequired,
+  svgPath: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
 };
 
 IconButton.defaultProps = {
+  svgPath: '',
   width: '40px',
   height: '40px',
 };
