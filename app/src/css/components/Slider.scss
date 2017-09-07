@@ -23,13 +23,6 @@
   width: 100%;
 }
 
-.Slider .Slide.Slide--largePadding {
-  padding: 100px 0;
-
-  @include md {
-    padding: 100px 300px;
-  }
-}
 
 .Slider__button {
   z-index: 1;

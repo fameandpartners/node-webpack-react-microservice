@@ -1,3 +1,15 @@
 .zoomIn {
   transform: scale(2.25);
 }
+
+.ZoomModal__image {
+  width: 100%;
+
+  @include md {
+    width: 75%;
+  }
+
+  @include lg {
+    width: 60%;
+  }
+}

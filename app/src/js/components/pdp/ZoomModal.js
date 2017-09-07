@@ -100,14 +100,12 @@ class ZoomModal extends Component {
           <Slider winWidth={winWidth} winHeight={winHeight} showButtons>
             { imageArray.map((img, index) => (
               <Slide
-                addPadding
                 key={img}
               >
                 <img
                   alt="Something"
                   src={img}
-                  width="100%"
-                  className="u-height--full"
+                  className="u-height--full ZoomModal__image"
                   style={{
                     transformOrigin: zoomStyle,
                   }}
@@ -115,7 +113,7 @@ class ZoomModal extends Component {
                     activeIndex: index,
                     zoomStatus: !zoomStatus
                   })}
-                  className={activeIndex === index && zoomStatus  ? 'zoomIn' : 'noZoom'}
+                  className={activeIndex === index && zoomStatus  ? 'zoomIn u-height--full ZoomModal__image' : 'noZoom u-height--full ZoomModal__image'}
                   ref={ref => this.imageRefs[`${img}-${index}`] = ref}
                   onMouseMove={this.getCoords}
                   onMouseOver={() => this.getDimensions(`${img}-${index}`)}
