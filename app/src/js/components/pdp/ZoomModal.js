@@ -66,8 +66,8 @@ class ZoomModal extends Component {
   getCoords(e) {
     const { imageDimensions } = this.state;
     const { left, top, width, height } = imageDimensions;
-    const leftPercent = ((e.pageX - left) / width) * 95;
-    const topPercent = ((e.pageY - top) / height) * 115;
+    const leftPercent = ((e.pageX - left) / width) * 100
+    const topPercent = ((e.pageY - (top - 100)) / height) * 100;
     console.log(`${topPercent.toString()}%`, `${leftPercent.toString()}%`);
     this.setState({
       topPercent: `${topPercent.toString()}%`,
