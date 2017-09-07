@@ -11,9 +11,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { render, setCacheStrategy } = require('rapscallion');
+
+// eslint-disable-next-line
 const chalk = require('chalk');
-// const pdpData = require('./pdp.json');
-// console.log(pdpData);
 
 // Assets
 const clientAssets = require('./build/asset-manifest.json');
@@ -71,7 +71,9 @@ app.get('/pdp', (req, res) => {
 
 app.post('/pdp', (req, res) => {
   res.header('Content-Type', 'text/html');
-  console.log(`Generate PDP for: ${chalk.yellow(req.body.data.product.name)}`);
+
+  // eslint-disable-next-line
+  console.log(`Generating PDP for: ${chalk.yellow(req.body.data.product.name)}`);
 
   try {
     const props = transformProductJSON(req.body.data);
@@ -93,6 +95,8 @@ app.post('/pdp', (req, res) => {
 });
 
 app.listen(process.env.PORT || 8001);
+/* eslint-disable no-console */
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
+/* eslint-enable no-console */
 module.exports = app;
