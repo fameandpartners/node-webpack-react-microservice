@@ -70,7 +70,7 @@ app.get('/pdp', (req, res) => {
 });
 
 app.post('/pdp', (req, res) => {
-  res.header('Content-Type', 'text/html');
+  res.header('Content-Type', 'application/json');
 
   // eslint-disable-next-line
   console.log(`Generating PDP for: ${chalk.yellow(req.body.data.product.name)}`);
@@ -82,12 +82,17 @@ app.post('/pdp', (req, res) => {
     const html = template({
       root: ReactRoot,
       initialState: store.getState(),
-      jsBundle: clientAssets['main.js'],
-      cssBundle: clientAssets['main.css'],
     });
 
-    // Response stream back
-    html.toStream().pipe(res);
+    html
+      .toPromise()
+      .then((htmlString) => {
+        res.send({
+          partial: htmlString,
+          jsBundle: clientAssets['main.js'],
+          cssBundle: clientAssets['main.css'],
+        });
+      });
   } catch (e) {
     // Catch errors so we don't generate malformed HTML
     res.send({ e, error: true, message: 'Incorrect Params' });
