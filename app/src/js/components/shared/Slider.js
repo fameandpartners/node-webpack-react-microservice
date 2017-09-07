@@ -12,7 +12,12 @@ class Slider extends Component {
     super(props);
     autoBind(this);
   }
-
+  previousSlide() {
+    loryInstance.prev();
+  }
+  nextSlide() {
+    loryInstance.next();
+  }
   componentDidMount() {
     loryInstance = lory(this.slider, {
       infinite: 1,
@@ -20,7 +25,6 @@ class Slider extends Component {
       classNameSlideContainer: 'Slider__slides',
     });
   }
-
   componentDidUpdate(lastProps) {
     if ((lastProps.winWidth !== this.props.winWidth)
   || (lastProps.winHeight !== this.props.winHeight)) {
@@ -43,7 +47,7 @@ class Slider extends Component {
               showButtons ?
                 <div>
                   <div
-                    onClick={() => loryInstance.prev()}
+                    onClick={this.previousSlide}
                     className="Slider__button Slider__button--left"
                   >
                     <IconSVG
@@ -55,7 +59,7 @@ class Slider extends Component {
 
                   <div
                     className="Slider__button Slider__button--right"
-                    onClick={() => loryInstance.next()}
+                    onClick={this.nextSlide}
                   >
                     <IconSVG
                       svgPath={Carat.url}
