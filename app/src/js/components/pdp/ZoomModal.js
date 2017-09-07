@@ -41,7 +41,6 @@ class ZoomModal extends Component {
       leftPercent: null,
       activeIndex: null,
       imageDimensions: null,
-      modalImages: [],
     }
     autobind(this);
   }
@@ -86,7 +85,6 @@ class ZoomModal extends Component {
           img
       ));
   }
-
   componentDidMount() {
     this.props.activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
@@ -96,8 +94,7 @@ class ZoomModal extends Component {
 
   render() {
     const { winWidth, winHeight } = this.props;
-    // const imageArray  = $$productImages._tail.array.map(p => p._root.entries[3][1])
-    const modalImages = this.getProductImages()
+    const sliderImages = this.getProductImages()
     const { zoomStatus, topPercent, leftPercent, activeIndex } = this.state;
     const zoomStyle = `${leftPercent} ${topPercent}`;
     this.imageRefs = [];
@@ -111,7 +108,7 @@ class ZoomModal extends Component {
           handleCloseModal={this.handleCloseModal}
         >
           <Slider winWidth={winWidth} winHeight={winHeight} showButtons>
-            { modalImages.map((img, index) => (
+            { sliderImages.map((img, index) => (
               <Slide
                 key={img.id}
               >
