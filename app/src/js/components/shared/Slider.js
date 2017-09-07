@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import IconSVG from '../generic/IconSVG';
 import '../../../css/components/Slider.scss';
-
+import Carat from '../../../svg/carat.svg';
 import { lory } from '../../libs/lory';
 
 let loryInstance = null;
@@ -28,7 +29,7 @@ class Slider extends Component {
   }
 
   render() {
-    const { children, sliderHeight } = this.props;
+    const { children, sliderHeight, showButtons } = this.props;
 
     return (
       <div
@@ -38,6 +39,33 @@ class Slider extends Component {
       >
         <div className="Slider__view u-height--full">
           <div className="Slider__frame u-height--full">
+            {
+              showButtons ?
+                <div>
+                  <div
+                    onClick={() => loryInstance.prev()}
+                    className="Slider__button Slider__button--left"
+                  >
+                    <IconSVG
+                      svgPath={Carat.url}
+                      width="40px"
+                      height="40px"
+                    />
+                  </div>
+
+                  <div
+                    className="Slider__button Slider__button--right"
+                    onClick={() => loryInstance.next()}
+                  >
+                    <IconSVG
+                      svgPath={Carat.url}
+                      width="40px"
+                      height="40px"
+                    />
+                  </div>
+                </div>
+                : null
+            }
             <ul className="Slider__slides u-height--full">
               { children }
             </ul>
@@ -56,11 +84,13 @@ Slider.propTypes = {
   sliderHeight: PropTypes.string.isRequired,
   winHeight: PropTypes.number,
   winWidth: PropTypes.number,
+  showButtons: PropTypes.boolean,
 };
 
 Slider.defaultProps = {
   winHeight: null,
   winWidth: null,
+  showButtons: false,
 };
 
 export default Slider;

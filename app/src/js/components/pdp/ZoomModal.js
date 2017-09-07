@@ -66,8 +66,8 @@ class ZoomModal extends Component {
   getCoords(e) {
     const { imageDimensions } = this.state;
     const { left, top, width, height } = imageDimensions;
-    const leftPercent = ((e.pageX - left) / width) * 90;
-    const topPercent = ((e.pageY - top) / height) * 105;
+    const leftPercent = ((e.pageX - left) / width) * 95;
+    const topPercent = ((e.pageY - top) / height) * 115;
     console.log(`${topPercent.toString()}%`, `${leftPercent.toString()}%`);
     this.setState({
       topPercent: `${topPercent.toString()}%`,
@@ -83,14 +83,8 @@ class ZoomModal extends Component {
   }
 
   render() {
-    const { winWidth, winHeight } = this.props;
-    const productImages = [
-      'http://www.themodelexperience.co.uk/img/experiences/doggy-style/dog3.jpg',
-      'http://fimg4.pann.com/new/download.jsp?FileID=37262551',
-      'http://4.bp.blogspot.com/-lM7gs_s56J8/UhSuLHwuAGI/AAAAAAAAAEQ/Kaata_rjxIg/s1600/Lexi.jpg',
-      // 'http://placehold.it/890x960?text=mom',
-      // 'http://placehold.it/890x960?text=dog',
-    ];
+    const { winWidth, winHeight, $$productImages } = this.props;
+    const imageArray  = $$productImages._tail.array.map(p => p._root.entries[3][1])
     const { zoomStatus, topPercent, leftPercent, activeIndex } = this.state;
     const zoomStyle = `${leftPercent} ${topPercent}`;
     this.imageRefs = [];
@@ -103,8 +97,8 @@ class ZoomModal extends Component {
         <Modal
           handleCloseModal={this.handleCloseModal}
         >
-          <Slider winWidth={winWidth} winHeight={winHeight}>
-            { productImages.map((img, index) => (
+          <Slider winWidth={winWidth} winHeight={winHeight} showButtons>
+            { imageArray.map((img, index) => (
               <Slide
                 addPadding
                 key={img}
@@ -144,7 +138,7 @@ ZoomModal.propTypes = {
 
 ZoomModal.defaultProps = {
   winHeight: 640,
-  winWidth: '100%',
+  winWidth: 320,
 };
 
 export default connect(stateToProps, dispatchToProps)(ZoomModal);
