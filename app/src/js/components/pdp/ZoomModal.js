@@ -1,15 +1,19 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { find } from 'lodash';
 import autobind from 'react-autobind';
+import classnames from 'classnames';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 import Slider from '../shared/Slider';
 import Slide from '../shared/Slide';
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -41,7 +45,7 @@ class ZoomModal extends Component {
       leftPercent: null,
       activeIndex: null,
       imageDimensions: null,
-    }
+    };
     autobind(this);
   }
 
@@ -50,8 +54,6 @@ class ZoomModal extends Component {
   }
 
   getDimensions(refName) {
-    console.log("refName", refName)
-    console.log(this.imageRefs)
     const rect = this.imageRefs[refName].getBoundingClientRect();
     const { left, top, width, height } = rect;
     this.setState({
@@ -65,10 +67,16 @@ class ZoomModal extends Component {
   }
   getCoords(e) {
     const { imageDimensions } = this.state;
+    const { breakpoint } = this.props;
+    let offSetValue = 0;
+    if (breakpoint === 'desktop') {
+      offSetValue = 150;
+    } else {
+      offSetValue = 250;
+    }
     const { left, top, width, height } = imageDimensions;
-    const leftPercent = ((e.pageX - left) / width) * 100
-    const topPercent = ((e.pageY - (top - 100)) / height) * 100;
-    console.log(`${topPercent.toString()}%`, `${leftPercent.toString()}%`);
+    const leftPercent = ((e.pageX - left) / width) * 100;
+    const topPercent = ((e.pageY - (top - offSetValue)) / height) * 100;
     this.setState({
       topPercent: `${topPercent.toString()}%`,
       leftPercent: `${leftPercent.toString()}%`,
@@ -85,16 +93,28 @@ class ZoomModal extends Component {
           img
       ));
   }
+
+  setZoomStatus(index) {
+    const { breakpoint } = this.props;
+    const { zoomStatus } = this.state;
+    if (breakpoint !== 'mobile') {
+      this.setState({
+        activeIndex: index,
+        zoomStatus: !zoomStatus,
+      });
+    }
+  }
+
   componentDidMount() {
     this.props.activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
       shouldAppear: true,
     });
-  };
+  }
 
   render() {
     const { winWidth, winHeight } = this.props;
-    const sliderImages = this.getProductImages()
+    const sliderImages = this.getProductImages();
     const { zoomStatus, topPercent, leftPercent, activeIndex } = this.state;
     const zoomStyle = `${leftPercent} ${topPercent}`;
     this.imageRefs = [];
@@ -115,18 +135,17 @@ class ZoomModal extends Component {
                 <img
                   alt="Something"
                   src={img.bigImg}
-                  className="u-height--full ZoomModal__image"
                   style={{
                     transformOrigin: zoomStyle,
                   }}
-                  onClick={() => this.setState({
-                    activeIndex: index,
-                    zoomStatus: !zoomStatus
-                  })}
-                  className={activeIndex === index && zoomStatus  ? 'zoomIn u-height--full ZoomModal__image' : 'noZoom u-height--full ZoomModal__image'}
-                  ref={ref => this.imageRefs[`${img}-${index}`] = ref}
+                  onClick={() => this.setZoomStatus(index)}
+                  className={classnames(
+                    'ZoomModal__image',
+                    { zoomIn: activeIndex === index && zoomStatus },
+                  )}
+                  ref={ref => this.imageRefs[img.id] = ref}
                   onMouseMove={this.getCoords}
-                  onMouseOver={() => this.getDimensions(`${img}-${index}`)}
+                  onMouseOver={() => this.getDimensions(img.id)}
                 />
               </Slide>
             ))}
@@ -140,13 +159,25 @@ class ZoomModal extends Component {
 ZoomModal.propTypes = {
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
+  breakpoint: PropTypes.string.isRequired,
   winHeight: PropTypes.number,
   winWidth: PropTypes.number,
+  $$productImages: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
+    id: PropTypes.number,
+    colorId: PropTypes.number,
+    smallImg: PropTypes.string,
+    bigImg: PropTypes.string,
+    height: PropTypes.number,
+    width: PropTypes.number,
+    position: PropTypes.number,
+  })).isRequired,
+  selectedColorId: PropTypes.string,
 };
 
 ZoomModal.defaultProps = {
   winHeight: 640,
   winWidth: 320,
+  selectedColorId: '',
 };
 
-export default connect(stateToProps, dispatchToProps)(ZoomModal);
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(ZoomModal));
