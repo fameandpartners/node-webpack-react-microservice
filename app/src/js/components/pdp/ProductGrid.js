@@ -1,15 +1,28 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
+
+// Actions
+import ModalActions from '../../actions/ModalActions';
+
+// Constants
+import ModalConstants from '../../constants/ModalConstants';
 
 function stateToProps(state) {
   return {
     selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
     $$productImages: state.$$productState.get('productImages'),
   };
+}
+
+function dispatchToProps(dispatch) {
+  const actions = bindActionCreators(ModalActions, dispatch);
+  return { activateModal: actions.activateModal };
 }
 
 class ProductGrid extends Component {
@@ -33,10 +46,17 @@ class ProductGrid extends Component {
       .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
       .filter((img, i) => i % 2 === remainder)
       .map(img => (
-        <div key={img.id} className="brick">
+        <div key={img.id} className="brick" onClick={this.showZoomModal}>
           <img className="u-width--full" alt="dress2" src={img.bigImg} />
         </div>
         ));
+  }
+
+  showZoomModal() {
+    this.props.activateModal({
+      modalId: ModalConstants.ZOOM_MODAL,
+      shouldAppear: true,
+    });
   }
 
   render() {
@@ -68,4 +88,4 @@ ProductGrid.propTypes = {
   })).isRequired,
 };
 
-export default connect(stateToProps)(ProductGrid);
+export default connect(stateToProps, dispatchToProps)(ProductGrid);

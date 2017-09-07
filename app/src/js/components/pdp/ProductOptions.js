@@ -16,6 +16,7 @@ import {
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
+import ModalConstants from '../../constants/ModalConstants';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
@@ -23,6 +24,8 @@ import ProductSecondaryActions from './ProductSecondaryActions';
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
+import ModalActions from '../../actions/ModalActions';
+
 // CSS
 import '../../../css/components/ProductOptions.scss';
 
@@ -60,7 +63,11 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
-  return { activateCustomizationDrawer };
+  const actions = bindActionCreators(ModalActions, dispatch);
+  return {
+    activateCustomizationDrawer,
+    activateModal: actions.activateModal,
+  };
 }
 
 class ProductOptions extends Component {
@@ -133,7 +140,12 @@ class ProductOptions extends Component {
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     return calculateSubTotal({ colorCentsTotal, productCentsBasePrice, selectedAddonOptions });
   }
-
+  showZoomModal() {
+    this.props.activateModal({
+      modalId: ModalConstants.ZOOM_MODAL,
+      shouldAppear: true,
+    });
+  }
   /**
    * Activates a drawer to a specific drawer type
    * @param  {String} drawer
@@ -168,7 +180,13 @@ class ProductOptions extends Component {
     return (
       <div className="ProductOptions grid-12-noGutter">
         <div className="ProductOptions__primary-image-container brick col-6">
-          <img className="u-width--full" alt="dress1" src={this.findColorSpecificFirstImageUrl()} />
+          <img
+            className="u-width--full"
+            alt="dress1"
+            src={this.findColorSpecificFirstImageUrl()}
+            onClick={this.showZoomModal}
+
+          />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
@@ -257,6 +275,7 @@ ProductOptions.propTypes = {
   selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number).isRequired,
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
+  activateModal: PropTypes.func,
 };
 
 ProductOptions.defaultProps = {
@@ -264,6 +283,7 @@ ProductOptions.defaultProps = {
   colorCentsTotal: 0,
   selectedDressSize: null,
   selectedHeightValue: null,
+  activateModal: () => false,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

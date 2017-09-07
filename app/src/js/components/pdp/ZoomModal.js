@@ -41,6 +41,7 @@ class ZoomModal extends Component {
       leftPercent: null,
       activeIndex: null,
       imageDimensions: null,
+      modalImages: [],
     }
     autobind(this);
   }
@@ -74,17 +75,29 @@ class ZoomModal extends Component {
       leftPercent: `${leftPercent.toString()}%`,
     });
   }
+  getProductImages() {
+    const { selectedColorId, $$productImages } = this.props;
+    const productImages = $$productImages.toJS();
+    const colorMatch = find(productImages, { colorId: selectedColorId });
+    const firstColorId = productImages[0].colorId;
+    return productImages
+      .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
+      .map(img => (
+          img
+      ));
+  }
 
   componentDidMount() {
     this.props.activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
       shouldAppear: true,
     });
-  }
+  };
 
   render() {
-    const { winWidth, winHeight, $$productImages } = this.props;
-    const imageArray  = $$productImages._tail.array.map(p => p._root.entries[3][1])
+    const { winWidth, winHeight } = this.props;
+    // const imageArray  = $$productImages._tail.array.map(p => p._root.entries[3][1])
+    const modalImages = this.getProductImages()
     const { zoomStatus, topPercent, leftPercent, activeIndex } = this.state;
     const zoomStyle = `${leftPercent} ${topPercent}`;
     this.imageRefs = [];
@@ -98,13 +111,13 @@ class ZoomModal extends Component {
           handleCloseModal={this.handleCloseModal}
         >
           <Slider winWidth={winWidth} winHeight={winHeight} showButtons>
-            { imageArray.map((img, index) => (
+            { modalImages.map((img, index) => (
               <Slide
-                key={img}
+                key={img.id}
               >
                 <img
                   alt="Something"
-                  src={img}
+                  src={img.bigImg}
                   className="u-height--full ZoomModal__image"
                   style={{
                     transformOrigin: zoomStyle,
