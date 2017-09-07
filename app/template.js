@@ -2,7 +2,7 @@
 import { template } from 'rapscallion';
 
 export default vo => template`
-  <div id="root">
+  <div id="root" class="PDP__wrapper">
     <div>${vo.root}</div>
   </div>
   <script type="text/javascript">
