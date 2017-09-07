@@ -8,7 +8,7 @@ import autobind from 'react-autobind';
 import { find } from 'lodash';
 
 // polyfills
-// import win from '../../polyfills/windowPolyfill';
+import win from '../../polyfills/windowPolyfill';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
@@ -62,7 +62,8 @@ class ShareModal extends Component {
 
   render() {
     const currentProductImage = this.findColorSpecificFirstImageUrl();
-    const currentURL = 'win.location.href';
+    // server-side-rendering workaround
+    const currentURL = win.location ? win.location.href : '';
 
     return (
       <ModalContainer
