@@ -4,6 +4,7 @@ import ModalConstants from '../constants/ModalConstants';
 export const $$initialState = Immutable.fromJS({
   modalId: null,
   shouldAppear: false,
+  activeSlideIndex: 0,
 });
 
 export default function ModalReducer($$state = $$initialState, action = null) {
@@ -13,6 +14,7 @@ export default function ModalReducer($$state = $$initialState, action = null) {
         // Do not wipe modalId, if one is not provided
         modalId: action.modalId ? action.modalId : $$state.get('modalId'),
         shouldAppear: action.shouldAppear,
+        activeSlideIndex: action.activeSlideIndex ? action.activeSlideIndex : 0,
       });
     }
     default: {
