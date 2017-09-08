@@ -94,7 +94,7 @@ class ZoomModal extends Component {
     const firstColorId = productImages[0].colorId;
     productImages = productImages
       .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
-      .map(img => (img));
+      .map(img => img);
     return this.orderImagesByIndex(productImages);
   }
   orderImagesByIndex(productImages) {
