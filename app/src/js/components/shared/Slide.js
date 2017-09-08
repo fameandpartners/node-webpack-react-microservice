@@ -24,7 +24,4 @@ Slide.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Slide.defaultProps = {
-};
-
 export default Slide;

@@ -66,7 +66,7 @@ class ZoomModal extends Component {
       },
     });
   }
-  getCoords(e) {
+  setZoomStyle(e) {
     const { imageDimensions } = this.state;
     const { breakpoint } = this.props;
     let offSetValue = 0;
@@ -144,7 +144,7 @@ class ZoomModal extends Component {
                     { zoomIn: activeIndex === index && zoomStatus },
                   )}
                   ref={ref => this.imageRefs[img.id] = ref}
-                  onMouseMove={this.getCoords}
+                  onMouseMove={this.setZoomStyle}
                   onMouseOver={() => this.getDimensions(img.id)}
                 />
               </Slide>

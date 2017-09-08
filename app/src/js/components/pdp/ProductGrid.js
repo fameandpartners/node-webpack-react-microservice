@@ -31,11 +31,6 @@ class ProductGrid extends Component {
     autoBind(this);
   }
 
-  /**
-   * Splits the product images based on color and even/oddness
-   * @param  {Number} remainder - even or odd number
-   * @return {Array} productImages
-   */
   getProductImages() {
     const { selectedColorId, $$productImages } = this.props;
     const productImages = $$productImages.toJS();
