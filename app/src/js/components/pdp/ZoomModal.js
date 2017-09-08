@@ -133,7 +133,7 @@ class ZoomModal extends Component {
               <Slide
                 key={img.id}
               >
-                <p className="ZoomModal__pagination">{index + 1}/{sliderImages.length}</p>
+                <p className="ZoomModal__pagination">{index + 1} of {sliderImages.length}</p>
                 <img
                   alt="Something"
                   src={img.bigImg}
