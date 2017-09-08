@@ -75,7 +75,11 @@ class ZoomModal extends Component {
     } else {
       offSetValue = 250;
     }
-    const { left, top, width, height } = imageDimensions;
+    const {
+      left,
+      top,
+      width,
+      height } = imageDimensions;
     const leftPercent = ((e.pageX - left) / width) * 100;
     const topPercent = ((e.pageY - (top - offSetValue)) / height) * 100;
     this.setState({
@@ -90,9 +94,7 @@ class ZoomModal extends Component {
     const firstColorId = productImages[0].colorId;
     productImages = productImages
       .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
-      .map(img => (
-          img
-      ));
+      .map(img => (img));
     return this.orderImagesByIndex(productImages);
   }
   orderImagesByIndex(productImages) {
