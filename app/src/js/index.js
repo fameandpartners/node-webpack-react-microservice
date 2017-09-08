@@ -7,12 +7,6 @@ import App from './App';
 // CSS
 import '../css/index.scss';
 
-// MOCK JSON
-import productJSON from '../mock/product.json';
-
-// Transforms
-import { transformProductJSON } from './utilities/pdp';
-
 // Store
 import AppStore from './stores/AppStore';
 
@@ -23,11 +17,9 @@ function renderApp(Component) {
   );
 }
 
-// WARN: This can not go in production, it is just to show how hydration works
 // eslint-disable-next-line
-// const hydrated = (typeof window === 'object') ? window.__data : {
-const hydrated = transformProductJSON(productJSON);
-const store = AppStore(hydrated);
+const pdpData = (typeof window === 'object') ? window.__data : null;
+const store = AppStore(pdpData);
 
 const component = <Provider store={store}><App /></Provider>;
 renderApp(component);

@@ -11,8 +11,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { render, setCacheStrategy } = require('rapscallion');
-// const pdpData = require('./pdp.json');
-// console.log(pdpData);
+
+// eslint-disable-next-line
+const chalk = require('chalk');
 
 // Assets
 const clientAssets = require('./build/asset-manifest.json');
@@ -48,8 +49,8 @@ setCacheStrategy({ // Global Singleton for Rapscallion
 app.use(helmet());
 app.use(express.static('./build'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 
 // Rendering
@@ -57,9 +58,7 @@ app.use(cookieParser());
 app.get('/pdp', (req, res) => {
   const props = transformProductJSON(mockJSON);
   const store = AppStore(props);
-  const ReactRoot = render(React.createElement(Provider, { store },
-    React.createElement(App),
-  ));
+  const ReactRoot = render(React.createElement(Provider, { store }, React.createElement(App)));
   const html = template({
     root: ReactRoot,
     initialState: store.getState(),
@@ -71,23 +70,29 @@ app.get('/pdp', (req, res) => {
 });
 
 app.post('/pdp', (req, res) => {
-  res.header('Content-Type', 'text/html');
+  res.header('Content-Type', 'application/json');
+
+  // eslint-disable-next-line
+  console.log(`Generating PDP for: ${chalk.yellow(req.body.data.product.name)}`);
 
   try {
-    const props = transformProductJSON({});
+    const props = transformProductJSON(req.body.data);
     const store = AppStore(props);
-    const ReactRoot = render(React.createElement(Provider, { store },
-      React.createElement(App),
-    ));
+    const ReactRoot = render(React.createElement(Provider, { store }, React.createElement(App)));
     const html = template({
       root: ReactRoot,
       initialState: store.getState(),
-      jsBundle: clientAssets['main.js'],
-      cssBundle: clientAssets['main.css'],
     });
 
-    // Response stream back
-    html.toStream().pipe(res);
+    html
+      .toPromise()
+      .then((htmlString) => {
+        res.send({
+          partial: htmlString,
+          jsBundle: clientAssets['main.js'],
+          cssBundle: clientAssets['main.css'],
+        });
+      });
   } catch (e) {
     // Catch errors so we don't generate malformed HTML
     res.send({ e, error: true, message: 'Incorrect Params' });
@@ -95,6 +100,8 @@ app.post('/pdp', (req, res) => {
 });
 
 app.listen(process.env.PORT || 8001);
+/* eslint-disable no-console */
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
+/* eslint-enable no-console */
 module.exports = app;
