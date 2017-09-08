@@ -54,17 +54,13 @@ class AddToCartButton extends Component {
   handleAddToBag() {
     const {
       addItemToCart,
-      activateCartDrawer,
       $$customizationState,
       $$productState,
-      shouldActivateCartDrawer,
     } = this.props;
     const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
     addItemToCart({ lineItem });
 
-    if (shouldActivateCartDrawer) {
-      activateCartDrawer({ cartDrawerOpen: true });
-    }
+    console.log(lineItem);
   }
 
   generateText() {
@@ -90,7 +86,6 @@ class AddToCartButton extends Component {
 /*  eslint-disable react/forbid-prop-types */
 AddToCartButton.propTypes = {
   // Passed Props
-  shouldActivateCartDrawer: PropTypes.bool,
   showTotal: PropTypes.bool,
   // Redux Props
   $$productState: PropTypes.object.isRequired,
@@ -100,13 +95,11 @@ AddToCartButton.propTypes = {
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   addItemToCart: PropTypes.func.isRequired,
-  activateCartDrawer: PropTypes.func.isRequired,
 };
 
 AddToCartButton.defaultProps = {
   colorCentsTotal: 0,
   selectedAddonOptions: [],
-  shouldActivateCartDrawer: false,
   showTotal: true,
 };
 

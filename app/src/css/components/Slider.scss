@@ -16,4 +16,25 @@
   color: rgb(0, 0, 0);
   display: inline-block;
   margin-right: 5px;
+  user-select: none;
+}
+
+.Slider .Slide.Slide--full {
+  width: 100%;
+}
+
+.Slider__button {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+}
+
+.Slider__button--left {
+  left: 20px;
+  transform: rotate(90deg);
+}
+
+.Slider__button--right {
+  right: 20px;
+  transform: rotate(270deg);
 }
