@@ -150,6 +150,10 @@ module.exports = {
                 },
               },
             },
+            // wrap our CSS to avoid styling conflicts in Rails app
+            {
+              loader: 'css-wrap-loader?selector=.PDP__wrapper',
+            },
             {
               loader: 'sass-loader',
               options: {

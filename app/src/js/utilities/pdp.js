@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
 import { assign } from 'lodash';
+import sanitizeHtml from 'sanitize-html';
 import { formatCents } from './accounting';
 import { UNITS } from '../constants/ProductConstants';
+
 
 export function calculateSubTotal({
   colorCentsTotal = 0,
@@ -208,7 +210,9 @@ export function transformProductDescription({ description }) {
   //   ****** into ******
   // productDescription: String
   // })
-  const productDescription = description;
+  const productDescription = sanitizeHtml(description, {
+    allowedTags: [],
+  });
   return productDescription;
 }
 
