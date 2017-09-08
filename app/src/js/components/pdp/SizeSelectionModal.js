@@ -21,6 +21,9 @@ import CustomizationConstants from '../../constants/CustomizationConstants';
 // CSS
 import '../../../css/components/ProductFabricSwatches.scss';
 
+// temp. helpers (for Rails merge)
+import { updateSizeData } from '../../utilities/cart-helper';
+
 function stateToProps(state) {
   return {
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
@@ -45,7 +48,7 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class StyleSelectionModal extends PureComponent {
+class SizeSelectionModal extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -82,6 +85,8 @@ class StyleSelectionModal extends PureComponent {
       selectedMeasurementMetric: temporaryMeasurementMetric,
     });
 
+    updateSizeData(temporaryDressSize, temporaryHeightValue, temporaryMeasurementMetric);
+
     activateModal({ shouldAppear: false });
   }
 
@@ -106,7 +111,7 @@ class StyleSelectionModal extends PureComponent {
   }
 }
 
-StyleSelectionModal.propTypes = {
+SizeSelectionModal.propTypes = {
   // Redux Props
   temporaryDressSize: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
@@ -118,10 +123,10 @@ StyleSelectionModal.propTypes = {
   updateMeasurementMetric: PropTypes.func.isRequired,
 };
 
-StyleSelectionModal.defaultProps = {
+SizeSelectionModal.defaultProps = {
   temporaryDressSize: null,
   temporaryHeightValue: null,
 };
 
 
-export default connect(stateToProps, dispatchToProps)(StyleSelectionModal);
+export default connect(stateToProps, dispatchToProps)(SizeSelectionModal);
