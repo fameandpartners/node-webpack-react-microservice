@@ -49,7 +49,6 @@ class ShareModal extends Component {
     this.props.activateModal({ shouldAppear: false });
   }
 
-
   /**
    * Checks for our current color amongst images and returns that image, or default
    * @return {String} imageUrl

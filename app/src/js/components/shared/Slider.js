@@ -33,7 +33,10 @@ class Slider extends Component {
   }
 
   render() {
-    const { children, sliderHeight, showButtons } = this.props;
+    const {
+      children,
+      sliderHeight,
+      showButtons } = this.props;
 
     return (
       <div

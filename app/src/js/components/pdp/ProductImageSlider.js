@@ -109,9 +109,7 @@ class ProductDisplayOptionsTouch extends Component {
     const firstColorId = productImages[0].colorId;
     return productImages
       .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
-      .map(img => (
-          img
-        ));
+      .map(img => (img));
   }
 
   render() {

@@ -10,9 +10,9 @@ class Slide extends PureComponent {
     return (
       <div
         className={classnames(
-        'Slide u-height--full',
-        'Slide--full',
-      )}
+          'Slide u-height--full',
+          'Slide--full',
+        )}
       >
         { children }
       </div>

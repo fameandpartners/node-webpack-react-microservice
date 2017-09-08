@@ -13,6 +13,7 @@ import {
   calculateSubTotal,
   sizingDisplayText,
 } from '../../utilities/pdp';
+import noop from '../../libs/noop';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
@@ -185,7 +186,6 @@ class ProductOptions extends Component {
             alt="dress1"
             src={this.findColorSpecificFirstImageUrl()}
             onClick={this.showZoomModal}
-
           />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
@@ -283,7 +283,7 @@ ProductOptions.defaultProps = {
   colorCentsTotal: 0,
   selectedDressSize: null,
   selectedHeightValue: null,
-  activateModal: () => false,
+  activateModal: noop,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);
