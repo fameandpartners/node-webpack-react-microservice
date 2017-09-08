@@ -26,7 +26,6 @@ import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
-import ProductPrecustomizations from './ProductPrecustomizations';
 import FameDifference from './FameDifference';
 
 // CSS
@@ -82,11 +81,8 @@ class AppMain extends Component {
     const {
       breakpoint,
       cartDrawerOpen,
-      productTitle,
       sideMenuOpen,
     } = this.props;
-
-    console.log(productTitle);
 
     return (
       <Motion
@@ -125,12 +121,9 @@ class AppMain extends Component {
               }
 
               <div className="layout-container">
-                <div className="grid-2_sm-1 AppMain__product-info">
+                <div className="grid AppMain__product-info">
                   <div className="col grid-middle">
                     <ProductDescription />
-                  </div>
-                  <div className="col grid-middle">
-                    <ProductPrecustomizations />
                   </div>
                 </div>
               </div>
@@ -166,7 +159,6 @@ AppMain.propTypes = {
   // Redux Props
   activateModal: PropTypes.func.isRequired,
   cartDrawerOpen: PropTypes.bool,
-  productTitle: PropTypes.string,
   sideMenuOpen: PropTypes.bool,
 
   // Redux Actions
@@ -179,7 +171,6 @@ AppMain.propTypes = {
 
 AppMain.defaultProps = {
   cartDrawerOpen: false,
-  productTitle: '',
   sideMenuOpen: false,
 };
 
