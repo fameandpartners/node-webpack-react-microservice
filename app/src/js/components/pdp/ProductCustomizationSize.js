@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
+import classnames from 'classnames';
 
 // Constants
 import {
@@ -39,6 +40,8 @@ function stateToProps(state) {
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
+    heightError: state.$$customizationState.get('heightError'),
+    sizeError: state.$$customizationState.get('sizeError'),
   };
 }
 
@@ -188,6 +191,8 @@ class ProductCustomizationStyle extends PureComponent {
       temporaryDressSize,
       temporaryMeasurementMetric,
       temporaryHeightValue,
+      heightError,
+      sizeError,
     } = this.props;
     const SIZES = isUSSiteVersion ? US_SIZES : AU_SIZES;
 
@@ -207,20 +212,30 @@ class ProductCustomizationStyle extends PureComponent {
             </p>
           </div>
 
-          <div className="ProductCustomizationSize__height u-mb-normal">
-            <p className="textAlign--left">How tall are you?</p>
+          <div className="ProductCustomizationSize__height u-mb-normal u-paddingLeft--small">
+            <p
+              className={classnames(
+                'textAlign--left',
+                {
+                  'u-color-red': heightError,
+                },
+              )}
+            >How tall are you?</p>
             <div className="grid">
               <div className="col-8">
                 { temporaryMeasurementMetric === UNITS.INCH ?
                   <Select
                     id="height-option-in"
                     className="sort-options"
+                    error={heightError}
                     options={this.generateInchesOptions()}
                     onChange={this.handleInchChange}
                   /> :
                   <Input
                     id="height-option-cm"
                     type="number"
+                    error={heightError}
+                    inlineMeta={heightError ? 'Please select your height' : null}
                     focusOnMount
                     onChange={this.handleCMChange}
                     defaultValue={temporaryHeightValue}
@@ -244,7 +259,7 @@ class ProductCustomizationStyle extends PureComponent {
           </div>
 
           <div>
-            <p className="textAlign--left">What&apos;s your size?</p>
+            <p className="textAlign--left u-paddingLeft--small">What&apos;s your size?</p>
             <div className="ProductCustomizationSize__size grid-12">
               { SIZES.map(s => (
                 <div key={s} className="col-3">
@@ -257,12 +272,31 @@ class ProductCustomizationStyle extends PureComponent {
                   />
                 </div>
               ))}
-              <span
-                className="link link--static"
-                onClick={this.handleViewSizeGuideClick}
-              >
-                View Size Guide
-              </span>
+            </div>
+            <div className="grid">
+              <div className="col-12">
+                {
+                  sizeError ?
+                    <p
+                      className="
+                      u-color-red
+                      textAlign--left
+                      u-paddingLeft--small"
+                    >
+                      Please select your size
+                    </p> : null
+                }
+                <p
+                  className="
+                    link
+                    link--static
+                    u-paddingLeft--small
+                    textAlign--left"
+                  onClick={this.handleViewSizeGuideClick}
+                >
+                  View Size Guide
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -281,6 +315,8 @@ ProductCustomizationStyle.propTypes = {
   temporaryDressSize: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string,
   temporaryHeightValue: PropTypes.number,
+  heightError: PropTypes.bool,
+  sizeError: PropTypes.bool,
   // Redux Actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
@@ -294,6 +330,8 @@ ProductCustomizationStyle.defaultProps = {
   temporaryDressSize: null,
   temporaryMeasurementMetric: null,
   temporaryHeightValue: null,
+  heightError: false,
+  sizeError: false,
 };
 
 
