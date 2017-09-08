@@ -4,12 +4,26 @@
 
 .ZoomModal__image {
   width: 100%;
+  padding: 0;
 
   @include md {
     width: 75%;
+    padding: 15px 0;
   }
 
   @include lg {
     width: 60%;
+    padding: 10px 0 35px;
   }
+}
+
+.ZoomModal__pagination {
+  color: $c-black;
+  position: relative;
+  left: 35%;
+  top: 13px;
+
+  @include md {
+    left: 45%;
+  };
 }

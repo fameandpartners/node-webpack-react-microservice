@@ -28,6 +28,7 @@ function stateToProps(state) {
   return {
     colorId: state.$$customizationState.get('selectedColor').get('id'),
     $$productImages: state.$$productState.get('productImages'),
+    activeSlide: state.$$modalState.get('activeSlideIndex'),
   };
 }
 
@@ -84,14 +85,19 @@ class ZoomModal extends Component {
   }
   getProductImages() {
     const { selectedColorId, $$productImages } = this.props;
-    const productImages = $$productImages.toJS();
+    let productImages = $$productImages.toJS();
     const colorMatch = find(productImages, { colorId: selectedColorId });
     const firstColorId = productImages[0].colorId;
-    return productImages
+    productImages = productImages
       .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
       .map(img => (
           img
       ));
+    return this.orderImagesByIndex(productImages);
+  }
+  orderImagesByIndex(productImages) {
+    const { activeSlide } = this.props;
+    return productImages.slice(activeSlide).concat(productImages.slice(0, activeSlide));
   }
 
   setZoomStatus(index) {
@@ -103,13 +109,6 @@ class ZoomModal extends Component {
         zoomStatus: !zoomStatus,
       });
     }
-  }
-
-  componentDidMount() {
-    this.props.activateModal({
-      modalId: ModalConstants.ZOOM_MODAL,
-      shouldAppear: true,
-    });
   }
 
   render() {
@@ -132,6 +131,7 @@ class ZoomModal extends Component {
               <Slide
                 key={img.id}
               >
+                <p className="ZoomModal__pagination">{index + 1}/{sliderImages.length}</p>
                 <img
                   alt="Something"
                   src={img.bigImg}
@@ -172,12 +172,14 @@ ZoomModal.propTypes = {
     position: PropTypes.number,
   })).isRequired,
   selectedColorId: PropTypes.string,
+  activeSlide: PropTypes.number,
 };
 
 ZoomModal.defaultProps = {
   winHeight: 640,
   winWidth: 320,
   selectedColorId: '',
+  activeSlide: 0,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(ZoomModal));

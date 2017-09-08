@@ -36,7 +36,7 @@ class ProductGrid extends Component {
    * @param  {Number} remainder - even or odd number
    * @return {Array} productImages
    */
-  splitProductImages(remainder) {
+  getProductImages() {
     const { selectedColorId, $$productImages } = this.props;
     const productImages = $$productImages.toJS();
     const colorMatch = find(productImages, { colorId: selectedColorId });
@@ -44,18 +44,20 @@ class ProductGrid extends Component {
 
     return productImages
       .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
-      .filter((img, i) => i % 2 === remainder)
-      .map(img => (
-        <div key={img.id} className="brick" onClick={this.showZoomModal}>
-          <img className="u-width--full" alt="dress2" src={img.bigImg} />
+      .map((img, index) => (
+        <div className="col-6">
+          <div key={img.id} className="brick" onClick={() => this.showZoomModal(index)}>
+            <img className="u-width--full" alt={Object.keys(img)} src={img.bigImg} />
+          </div>
         </div>
         ));
   }
 
-  showZoomModal() {
+  showZoomModal(index) {
     this.props.activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
       shouldAppear: true,
+      activeSlideIndex: index,
     });
   }
 
@@ -63,12 +65,7 @@ class ProductGrid extends Component {
     return (
       <div className="ProductGrid">
         <div className="App__photo-montage masonry grid-12">
-          <div className="col-6">
-            {this.splitProductImages(0)}
-          </div>
-          <div className="col-6">
-            {this.splitProductImages(1)}
-          </div>
+          {this.getProductImages()}
         </div>
       </div>
     );
