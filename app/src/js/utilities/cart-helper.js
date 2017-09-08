@@ -3,6 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable array-callback-return */
 /* eslint-disable radix */
+/* eslint-disable max-len */
 
 /**
  *  These actions should be in Redux, just temporarily moving into
@@ -23,6 +24,13 @@ function getDressVariantId(variants, color, size) {
 }
 
 function mapSizeIdFromSortKey(sortKey) {
+  /**
+   * Legacy code needs the size ID for mapping the dress variant ID,
+   * thought it was less intrusive to map it from the user's selected
+   * size (which is identical to the sort_key) compared to rewriting
+   * the size selection component.
+   */
+
   const sizeArr = window.PdpDataFull.product.sizes.table.default;
 
   return sizeArr.filter(i => i.table.sort_key === Number(sortKey))[0].table.id;
@@ -66,7 +74,7 @@ function transformLineItem(lineItem) {
   */
 
   const transformed = {
-    color_id: window.__userColorData.color_id,
+    color_id: window.__userColorData ? window.__userColorData.color_id : window.PdpDataFull.product.color_id,
     customizations_ids: lineItem.addons.map(a => a.id),
     dress_variant_id: getDressVariantId(
       window.PdpDataFull.product.available_options.table.variants,
