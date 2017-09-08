@@ -35,6 +35,8 @@ function stateToProps(state) {
     colorCentsTotal: selectedColor.get('centsTotal'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     selectedAddonOptions: addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1),
+    heightValue: state.$$customizationState.get('temporaryHeightValue'),
+    sizeValue: state.$$customizationState.get('selectedDressSize'),
   };
 }
 
@@ -65,15 +67,17 @@ class AddToCartButton extends Component {
       addItemToCart,
       $$customizationState,
       $$productState,
+      heightValue,
+      sizeValue,
     } = this.props;
     /* eslint-enable no-unused-vars */
-    const { temporaryHeightValue, selectedDressSize } = $$customizationState;
-    if (!temporaryHeightValue || !selectedDressSize) {
+    if (!heightValue || !sizeValue) {
       this.props.activateCustomizationDrawer({
         productCustomizationDrawer: CustomizationConstants.SIZE_CUSTOMIZE,
+        heightError: !heightValue,
+        sizeError: !sizeValue,
       });
     } else {
-      console.log(temporaryHeightValue, selectedDressSize);
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
       addToCart(lineItem);
     }
@@ -112,12 +116,16 @@ AddToCartButton.propTypes = {
   // Redux Actions
   addItemToCart: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
+  heightValue: PropTypes.string,
+  sizeValue: PropTypes.string,
 };
 
 AddToCartButton.defaultProps = {
   colorCentsTotal: 0,
   selectedAddonOptions: [],
   showTotal: true,
+  sizeValue: null,
+  heightValue: null,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));
