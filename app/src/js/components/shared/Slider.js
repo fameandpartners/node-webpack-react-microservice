@@ -91,7 +91,7 @@ Slider.propTypes = {
   sliderHeight: PropTypes.string.isRequired,
   winHeight: PropTypes.number,
   winWidth: PropTypes.number,
-  showButtons: PropTypes.boolean,
+  showButtons: PropTypes.bool,
 };
 
 Slider.defaultProps = {
