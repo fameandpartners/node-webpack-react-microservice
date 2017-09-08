@@ -13,9 +13,13 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Actions
 import * as CartActions from '../../actions/CartActions';
+import * as CustomizationActions from '../../actions/CustomizationActions';
 
 // UI
 import Button from '../generic/Button';
+
+// Constants
+import CustomizationConstants from '../../constants/CustomizationConstants';
 
 // temp. helpers (for Rails merge)
 import { addToCart } from '../../utilities/cart-helper';
@@ -36,7 +40,8 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
-  return { activateCartDrawer, addItemToCart };
+  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+  return { activateCartDrawer, activateCustomizationDrawer, addItemToCart };
 }
 
 
@@ -62,9 +67,16 @@ class AddToCartButton extends Component {
       $$productState,
     } = this.props;
     /* eslint-enable no-unused-vars */
-    const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
-    // addItemToCart({ lineItem });
-    addToCart(lineItem);
+    const { temporaryHeightValue, selectedDressSize } = $$customizationState;
+    if (!temporaryHeightValue || !selectedDressSize) {
+      this.props.activateCustomizationDrawer({
+        productCustomizationDrawer: CustomizationConstants.SIZE_CUSTOMIZE,
+      });
+    } else {
+      console.log(temporaryHeightValue, selectedDressSize);
+      const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
+      addToCart(lineItem);
+    }
   }
 
   generateText() {
@@ -99,6 +111,7 @@ AddToCartButton.propTypes = {
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   addItemToCart: PropTypes.func.isRequired,
+  activateCustomizationDrawer: PropTypes.func.isRequired,
 };
 
 AddToCartButton.defaultProps = {
