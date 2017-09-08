@@ -1,13 +1,19 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 class Slide extends PureComponent {
   render() {
     const { children } = this.props;
 
     return (
-      <div className="Slide u-height--full">
+      <div
+        className={classnames(
+          'Slide u-height--full',
+          'Slide--full',
+        )}
+      >
         { children }
       </div>
     );
