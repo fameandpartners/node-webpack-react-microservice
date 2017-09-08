@@ -24,6 +24,8 @@ import ModalConstants from '../../constants/ModalConstants';
 // CSS
 import '../../../css/components/ProductFabricSwatches.scss';
 
+// temp. helpers (for Rails merge)
+import { updateColorData } from '../../utilities/cart-helper';
 
 function stateToProps(state) {
   return {
@@ -66,6 +68,8 @@ class ProductFabricModal extends PureComponent {
       setShareableQueryParams,
       temporaryColor,
     } = this.props;
+
+    updateColorData(temporaryColor.id);
 
     selectProductColor({ selectedColor: temporaryColor });
     setShareableQueryParams({ color: temporaryColor.id });

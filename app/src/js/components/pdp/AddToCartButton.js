@@ -17,6 +17,9 @@ import * as CartActions from '../../actions/CartActions';
 // UI
 import Button from '../generic/Button';
 
+// temp. helpers (for Rails merge)
+import { addToCart } from '../../utilities/cart-helper';
+
 function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
   const selectedStyleCustomizations = state.$$customizationState.get('selectedStyleCustomizations').toJS();
@@ -52,15 +55,16 @@ class AddToCartButton extends Component {
    * Handles adding item to cart
    */
   handleAddToBag() {
+    /* eslint-disable no-unused-vars */
     const {
       addItemToCart,
       $$customizationState,
       $$productState,
     } = this.props;
+    /* eslint-enable no-unused-vars */
     const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
-    addItemToCart({ lineItem });
-
-    console.log(lineItem);
+    // addItemToCart({ lineItem });
+    addToCart(lineItem);
   }
 
   generateText() {
