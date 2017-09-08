@@ -121,7 +121,7 @@ class ZoomModal extends Component {
       <ModalContainer
         modalContainerClass="grid-middle"
         modalIds={[ModalConstants.ZOOM_MODAL]}
-        fullScreen
+        fullWidth
       >
         <Modal
           handleCloseModal={this.handleCloseModal}
