@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { find } from 'lodash';
 
 // Decorators
 import Resize from '../../decorators/Resize';
@@ -36,6 +37,7 @@ function stateToProps(state) {
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
     productImages: state.$$productState.get('productImages').toJS(),
     selectedColor: state.$$customizationState.get('selectedColor').toJS(),
+    selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
     selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
   };
 }
@@ -101,20 +103,28 @@ class ProductDisplayOptionsTouch extends Component {
     return `${sliderHeight}px`;
   }
 
+  getSliderImages() {
+    const { productImages, selectedColorId } = this.props;
+    const colorMatch = find(productImages, { colorId: selectedColorId });
+    const firstColorId = productImages[0].colorId;
+    return productImages
+      .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
+      .map(img => img);
+  }
+
   render() {
     const {
       // breakpoint,
       // fabric,
       // garmentCareInformation,
-      productImages,
       winHeight,
       winWidth,
     } = this.props;
-
+    const sliderImages = this.getSliderImages();
     return (
       <div className="ProductImageSlider">
         <Slider sliderHeight={this.calculateSliderHeight()} winWidth={winWidth} winHeight={winHeight}>
-          { productImages.map(img => (
+          { sliderImages.map(img => (
             <Slide key={img.id}>
               <img
                 alt="Something"
@@ -159,12 +169,14 @@ ProductDisplayOptionsTouch.propTypes = {
   breakpoint: PropTypes.string.isRequired,
   winHeight: PropTypes.number.isRequired,
   winWidth: PropTypes.number.isRequired,
+  selectedColorId: PropTypes.string,
 };
 ProductDisplayOptionsTouch.defaultProps = {
   garmentCareInformation: 'Professional dry-clean only.\rSee label for further details.',
   selectedStyleCustomizations: [],
   winHeight: 640,
   winWidth: 320,
+  selectedColorId: '',
 };
 
 export default
