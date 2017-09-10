@@ -1,5 +1,5 @@
 // TODO: Needs improvement
-.Select--wrapper {
+.Select__wrapper {
   position: relative;
   width: 100%;
   box-sizing: border-box;
@@ -81,6 +81,9 @@
   }
 }
 
+.Select__wrapper--error {
+    border: 1px solid $c-red;
+}
 .Select {
   top: 37px;
   width: 100%;
@@ -105,7 +108,7 @@
   }
 }
 
-.Select--wrapper.is-open {
+.Select__wrapper.is-open {
   border-color: $c-light-gray;
 
   .Select {

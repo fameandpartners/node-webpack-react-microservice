@@ -1,9 +1,16 @@
 import CustomizationConstants from '../constants/CustomizationConstants';
 
-export function activateCustomizationDrawer({ isActive = true, productCustomizationDrawer }) {
+export function activateCustomizationDrawer({
+  isActive = true,
+  productCustomizationDrawer,
+  heightError = false,
+  sizeError = false,
+}) {
   return {
     type: CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
     isActive,
+    heightError,
+    sizeError,
     productCustomizationDrawer,
   };
 }

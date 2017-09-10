@@ -13,9 +13,13 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Actions
 import * as CartActions from '../../actions/CartActions';
+import * as CustomizationActions from '../../actions/CustomizationActions';
 
 // UI
 import Button from '../generic/Button';
+
+// Constants
+import CustomizationConstants from '../../constants/CustomizationConstants';
 
 // temp. helpers (for Rails merge)
 import { addToCart } from '../../utilities/cart-helper';
@@ -31,12 +35,15 @@ function stateToProps(state) {
     colorCentsTotal: selectedColor.get('centsTotal'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     selectedAddonOptions: addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1),
+    heightValue: state.$$customizationState.get('temporaryHeightValue'),
+    sizeValue: state.$$customizationState.get('selectedDressSize'),
   };
 }
 
 function dispatchToProps(dispatch) {
   const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
-  return { activateCartDrawer, addItemToCart };
+  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+  return { activateCartDrawer, activateCustomizationDrawer, addItemToCart };
 }
 
 
@@ -60,11 +67,20 @@ class AddToCartButton extends Component {
       addItemToCart,
       $$customizationState,
       $$productState,
+      heightValue,
+      sizeValue,
     } = this.props;
     /* eslint-enable no-unused-vars */
-    const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
-    // addItemToCart({ lineItem });
-    addToCart(lineItem);
+    if (!heightValue || !sizeValue) {
+      this.props.activateCustomizationDrawer({
+        productCustomizationDrawer: CustomizationConstants.SIZE_CUSTOMIZE,
+        heightError: !heightValue,
+        sizeError: !sizeValue,
+      });
+    } else {
+      const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
+      addToCart(lineItem);
+    }
   }
 
   generateText() {
@@ -99,12 +115,17 @@ AddToCartButton.propTypes = {
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   addItemToCart: PropTypes.func.isRequired,
+  activateCustomizationDrawer: PropTypes.func.isRequired,
+  heightValue: PropTypes.string,
+  sizeValue: PropTypes.string,
 };
 
 AddToCartButton.defaultProps = {
   colorCentsTotal: 0,
   selectedAddonOptions: [],
   showTotal: true,
+  sizeValue: null,
+  heightValue: null,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));
