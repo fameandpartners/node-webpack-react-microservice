@@ -21,9 +21,6 @@ import CustomizationConstants from '../../constants/CustomizationConstants';
 // CSS
 import '../../../css/components/ProductFabricSwatches.scss';
 
-// temp. helpers (for Rails merge)
-import { updateSizeData } from '../../utilities/cart-helper';
-
 function stateToProps(state) {
   return {
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
@@ -84,8 +81,6 @@ class SizeSelectionModal extends PureComponent {
     updateMeasurementMetric({
       selectedMeasurementMetric: temporaryMeasurementMetric,
     });
-
-    updateSizeData(temporaryDressSize, temporaryHeightValue, temporaryMeasurementMetric);
 
     activateModal({ shouldAppear: false });
   }
