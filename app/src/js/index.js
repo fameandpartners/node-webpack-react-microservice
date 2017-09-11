@@ -1,4 +1,4 @@
-/* global document, window */
+/* global document */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -10,6 +10,8 @@ import '../css/index.scss';
 // Store
 import AppStore from './stores/AppStore';
 
+// polyfills
+import win from './polyfills/windowPolyfill';
 
 // ************************************************
 //                                                *
@@ -31,10 +33,10 @@ function renderApp(Component) {
 
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
-const pdpData = (typeof window === 'object')
+const pdpData = win
                   ? isDev
                   ? transformProductJSON(productJSON)
-                  : window.__data
+                  : win.__data
                   : null;
 
 const store = AppStore(pdpData);
