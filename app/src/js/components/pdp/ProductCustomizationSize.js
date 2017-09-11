@@ -1,340 +1,332 @@
-import React, { PureComponent } from 'react';
-import autoBind from 'react-autobind';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
-import classnames from 'classnames';
+
+// Utilities
+import { formatCents } from '../../utilities/accounting';
+import {
+  addonSelectionDisplayText,
+  calculateSubTotal,
+  sizingDisplayText,
+} from '../../utilities/pdp';
+import noop from '../../libs/noop';
 
 // Constants
-import {
-  CM_TO_INCHES,
-  US_SIZES,
-  AU_SIZES,
-  INCH_SIZES,
-  UNITS,
-  // TODO: Will be used for error validations
-  // MIN_CM,
-  // MAX_CM,
-} from '../../constants/ProductConstants';
+import CustomizationConstants from '../../constants/CustomizationConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
+// UI components
+import ProductOptionsRow from './ProductOptionsRow';
+import ProductSecondaryActions from './ProductSecondaryActions';
+import Checkbox from '../form/Checkbox';
+
 // Actions
-import CustomizationActions from '../../actions/CustomizationActions';
+import * as CustomizationActions from '../../actions/CustomizationActions';
 import ModalActions from '../../actions/ModalActions';
 
-// UI Components
-import ProductCustomization from './ProductCustomization';
-import Select from '../form/Select';
-import Input from '../form/Input';
-import RadioToggle from '../form/RadioToggle';
-import Button from '../generic/Button';
-
 // CSS
-import '../../../css/components/ProductCustomizationSize.scss';
+import '../../../css/components/ProductOptions.scss';
+
+// UI Components
+import AddToCartButton from './AddToCartButton';
+
 
 function stateToProps(state) {
+  // Which part of the Redux global state does our component want to receive as props?
+  const selectedColor = state.$$customizationState.get('selectedColor');
+  const addons = state.$$customizationState.get('addons');
+  const productMakingOptions = state.$$productState.get('productMakingOptions');
+
   return {
-    isUSSiteVersion: state.$$appState.get('siteVersion') === 'us',
-    productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
-    temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
-    temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
-    temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
-    heightError: state.$$customizationState.get('heightError'),
-    sizeError: state.$$customizationState.get('sizeError'),
+    // PRODUCT
+    productId: state.$$productState.get('productId'),
+    productTitle: state.$$productState.get('productTitle'),
+    productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
+    $$productImages: state.$$productState.get('productImages'),
+    fastMaking: productMakingOptions.get('fast_making'),
+
+    // COLOR
+    colorId: selectedColor.get('id'),
+    colorName: selectedColor.get('presentation'),
+    colorCentsTotal: selectedColor.get('centsTotal'),
+    colorHexValue: selectedColor.get('hexValue'),
+
+    // SELECTIONS
+    addonOptions: addons ? addons.get('addonOptions').toJS() : null,
+    selectedDressSize: state.$$customizationState.get('selectedDressSize'),
+    selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
+    selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
+    selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
   };
 }
+
 
 function dispatchToProps(dispatch) {
-  const {
-    changeCustomizationDrawer,
-    updateMeasurementMetric,
-    updateHeightSelection,
-    updateDressSizeSelection,
-  } = bindActionCreators(CustomizationActions, dispatch);
-
-  const modalActions = bindActionCreators(ModalActions, dispatch);
-
+  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+  const actions = bindActionCreators(ModalActions, dispatch);
   return {
-    changeCustomizationDrawer,
-    updateMeasurementMetric,
-    updateHeightSelection,
-    updateDressSizeSelection,
-    activateModal: modalActions.activateModal,
+    activateCustomizationDrawer,
+    activateModal: actions.activateModal,
   };
 }
 
-
-class ProductCustomizationStyle extends PureComponent {
+class ProductOptions extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
   }
 
-  handleDrawerSelection(productCustomizationDrawer) {
-    this.props.changeCustomizationDrawer({ productCustomizationDrawer });
+  retrieveSelectedAddonOptions() {
+    const { addonOptions, selectedStyleCustomizations } = this.props;
+    return addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1);
   }
 
-  /**
-   * Handler for changes of CM metric
-   * @param  {Number|String} value
-   */
-  handleCMChange({ value }) {
-    const { updateHeightSelection } = this.props;
-    const numVal = parseInt(value, 10);
+  generateColorSelectionNode() {
+    const {
+      colorCentsTotal,
+      colorName,
+      colorHexValue,
+    } = this.props;
 
-    if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
-      updateHeightSelection({
-        temporaryHeightValue: numVal,
-        temporaryHeightUnit: UNITS.CM,
-      });
-    }
-  }
-
-  /**
-   * Handles for changes of INCH metric
-   * @param  {Object} {option} - Select dropdown's option chosen
-   */
-  handleInchChange({ option }) {
-    const { updateHeightSelection } = this.props;
-    const selection = INCH_SIZES[option.id];
-
-    if (selection) {
-      const inches = (selection.ft * 12) + selection.inch;
-      updateHeightSelection({
-        temporaryHeightValue: inches,
-      });
-    }
-  }
-
-  /**
-   * Handles the toggling of a metric switch
-   * @param  {String} {value} (CM|INCH)
-   */
-  handleMetricSwitch({ value }) {
-    const { updateMeasurementMetric } = this.props;
-    updateMeasurementMetric({ temporaryMeasurementMetric: value });
-    this.handleUnitConversionUpdate(value);
-  }
-
-  /**
-   * Converts unit values on the fly
-   * @param  {String} value (CM|INCH)
-   */
-  handleUnitConversionUpdate(value) { // value
-    const { temporaryHeightValue } = this.props;
-    if (value === UNITS.CM && temporaryHeightValue) { // CM selected
-      const newVal = Math.round(temporaryHeightValue * CM_TO_INCHES);
-      this.handleCMChange({
-        value: newVal,
-      });
-    } else if (value === UNITS.INCH && temporaryHeightValue) { // INCH selected
-      const totalInches = Math.round(temporaryHeightValue / CM_TO_INCHES);
-      const option = find(INCH_SIZES, { totalInches });
-
-      this.handleInchChange({
-        option: {
-          id: option ? option.id : null,
-        },
-      });
-    }
-  }
-
-  handleDressSizeSelection(s) {
-    return () => {
-      this.props.updateDressSizeSelection({ temporaryDressSize: s });
-    };
-  }
-
-  handleViewSizeGuideClick() {
-    /* eslint-disable no-console */
-    console.log('Show Size Guide!');
-    this.props.activateModal({ modalId: ModalConstants.SIZE_GUIDE_MODAL });
-  }
-
-  /**
-   * Helper method to generate normal option for Select
-   * @param  {Number} i
-   * @param  {Number} ft
-   * @param  {Number} inch
-   * @return {Node} defaultOption
-   */
-  defaultInchOption(i, ft, inch) {
     return (
-      <div>
-        <span className="amt">{ft}</span>
-        <span className="metric">ft</span>
-        <span className="amt amt--last">{inch}</span>
-        <span className="metric">in</span>
-      </div>
+      <span>
+        <span>{colorName}</span>&nbsp;
+        { colorCentsTotal
+          ? <span>+{formatCents(colorCentsTotal, 0)}</span>
+          : null
+        }
+        <span
+          style={{ background: colorHexValue }}
+          className="ProductOptions__color-swatch u-display--inline-block"
+        />
+      </span>
     );
   }
 
+  generateAddonSelectionNode() {
+    const selectedOptions = this.retrieveSelectedAddonOptions();
+    const displayText = addonSelectionDisplayText({ selectedAddonOptions: selectedOptions });
+
+    return (
+      <span>{displayText}</span>
+    );
+  }
+
+  generateSizingNode() {
+    const {
+      selectedHeightValue,
+      selectedMeasurementMetric,
+      selectedDressSize,
+    } = this.props;
+    const sizingInformation = sizingDisplayText({
+      selectedDressSize,
+      selectedHeightValue,
+      selectedMeasurementMetric,
+    });
+
+    return sizingInformation ? (
+      <span>
+        {sizingInformation}
+      </span>
+    ) : null;
+  }
+
+  calculateSubTotal() {
+    const {
+      productCentsBasePrice,
+      colorCentsTotal,
+    } = this.props;
+
+    const selectedAddonOptions = this.retrieveSelectedAddonOptions();
+    return calculateSubTotal({ colorCentsTotal, productCentsBasePrice, selectedAddonOptions });
+  }
+  showZoomModal() {
+    this.props.activateModal({
+      modalId: ModalConstants.ZOOM_MODAL,
+      shouldAppear: true,
+    });
+  }
   /**
-   * Generates the inches options for the Select dropdown
-   * @return {Object} options
+   * Activates a drawer to a specific drawer type
+   * @param  {String} drawer
    */
-  generateInchesOptions() {
-    return INCH_SIZES.map(({ ft, inch, totalInches }, i) => ({
-      id: i,
-      name: this.defaultInchOption(i, ft, inch),
-      meta: totalInches,
-      active: totalInches === this.props.temporaryHeightValue,
-    }));
+  handleProductOptionClick(drawer) {
+    return () => {
+      this.props.activateCustomizationDrawer({
+        productCustomizationDrawer: drawer,
+      });
+    };
+  }
+
+  /**
+   * Checks for our current color amongst images and returns that image, or default
+   * @return {String} imageUrl
+   */
+  findColorSpecificFirstImageUrl() {
+    const { $$productImages, colorId } = this.props;
+    const productImages = $$productImages.toJS();
+    const hasMatch = find(productImages, { colorId });
+    return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
   }
 
   render() {
     const {
-      hasNavItems,
-      productCustomizationDrawer,
-      isUSSiteVersion,
-      temporaryDressSize,
-      temporaryMeasurementMetric,
-      temporaryHeightValue,
-      heightError,
-      sizeError,
+      productTitle,
+      selectedStyleCustomizations,
+      selectedDressSize,
+      selectedHeightValue,
+      fastMaking,
     } = this.props;
-    const SIZES = isUSSiteVersion ? US_SIZES : AU_SIZES;
 
     return (
-      <ProductCustomization
-        hasNavItems={hasNavItems}
-        handleDrawerSelection={this.handleDrawerSelection}
-        productCustomizationDrawer={productCustomizationDrawer}
-      >
-        <div className="ProductCustomizationSize__layout-container typography">
-          <div className="u-mb-big">
-            <h3 className="h3">
-              Let’s make it fit.
-            </h3>
-            <p>
-              Just tell us your height and size, and we&apos;ll take care of the tailoring.
-            </p>
-          </div>
-
-          <div className="ProductCustomizationSize__height u-mb-normal u-paddingLeft--small">
-            <p
-              className={classnames(
-                'textAlign--left',
-                {
-                  'u-color-red': heightError,
-                },
-              )}
-            >How tall are you?</p>
-            <div className="grid">
-              <div className="col-8">
-                { temporaryMeasurementMetric === UNITS.INCH ?
-                  <Select
-                    id="height-option-in"
-                    className="sort-options"
-                    error={heightError}
-                    options={this.generateInchesOptions()}
-                    onChange={this.handleInchChange}
-                  /> :
-                  <Input
-                    id="height-option-cm"
-                    type="number"
-                    error={heightError}
-                    inlineMeta={heightError ? 'Please select your height' : null}
-                    focusOnMount
-                    onChange={this.handleCMChange}
-                    defaultValue={temporaryHeightValue}
-                  />
+      <div className="ProductOptions grid-12-noGutter">
+        <div className="ProductOptions__primary-image-container brick col-6">
+          <img
+            className="u-width--full"
+            alt="dress1"
+            src={this.findColorSpecificFirstImageUrl()}
+            onClick={this.showZoomModal}
+          />
+        </div>
+        <div className="ProductOptions__col grid-middle col-6 u-center">
+          <div className="ProductOptions__container">
+            <div className="ProductOptions__content u-mb-normal typography">
+              <ProductOptionsRow
+                heading
+                leftNode={<h1 className="u-display--inline h4">{productTitle}</h1>}
+                rightNode={
+                  <span className="h4">
+                    {this.calculateSubTotal()}
+                  </span>
                 }
-              </div>
-
-              <div className="col">
-                <RadioToggle
-                  id="metric"
-                  value={temporaryMeasurementMetric}
-                  options={[
-                      { value: UNITS.INCH },
-                      { label: 'cm', value: UNITS.CM },
-                  ]}
-                  onChange={this.handleMetricSwitch}
-                />
-              </div>
+              />
+              <ProductOptionsRow
+                leftNode={<span>Color</span>}
+                leftNodeClassName="u-uppercase"
+                optionIsSelected
+                rightNode={this.generateColorSelectionNode()}
+                handleClick={this.handleProductOptionClick(CustomizationConstants.COLOR_CUSTOMIZE)}
+              />
+              <ProductOptionsRow
+                leftNode={<span>Design Customizations</span>}
+                leftNodeClassName="u-uppercase"
+                optionIsSelected={!!selectedStyleCustomizations.length}
+                rightNode={this.generateAddonSelectionNode()}
+                handleClick={this.handleProductOptionClick(CustomizationConstants.STYLE_CUSTOMIZE)}
+              />
+              <ProductOptionsRow
+                leftNode={<span>Your size</span>}
+                leftNodeClassName="u-uppercase"
+                optionIsSelected={!!(selectedDressSize && selectedHeightValue)}
+                rightNode={this.generateSizingNode()}
+                handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
+              />
             </div>
-
-          </div>
-
-          <div>
-            <p className="textAlign--left u-paddingLeft--small">What&apos;s your size?</p>
-            <div className="ProductCustomizationSize__size grid-12">
-              { SIZES.map(s => (
-                <div key={s} className="col-3">
-                  <Button
-                    tertiary
-                    selected={s === temporaryDressSize}
-                    square
-                    text={s}
-                    handleClick={this.handleDressSizeSelection(s)}
+            <div className="ProductOptions__ctas grid-1 u-mb-small">
+              <AddToCartButton showTotal={false} shouldActivateCartDrawer />
+            </div>
+            {
+              fastMaking
+              ? <div className="grid expressMaking__content u-mb-small">
+                <div className="col-1">
+                  <Checkbox
+                    id="latest_trends"
+                    label="  "
+                    wrapperClassName="Modal__content--med-margin-bottom"
+                    onChange={console.log('BROooooo')}
                   />
                 </div>
-              ))}
-            </div>
-            <div className="grid">
-              <div className="col-12">
-                { sizeError ?
-                  <p
-                    className={classnames(
-                      'u-color-red',
-                      'textAlign--left',
-                      'u-paddingLeft--small',
-                    )}
-                  >
-                    Please select your size
+                <div className="col-7 u-text-align-left">
+                  <p className="expressMaking__content--headline">
+                    Make it Express + $30
                   </p>
-                  : null
-                }
-                <p
-                  className={classnames(
-                    'link',
-                    'link--static',
-                    'textAlign--left',
-                    'u-paddingLeft--small',
-                  )}
-                  onClick={this.handleViewSizeGuideClick}
-                >
-                  View Size Guide
-                </p>
-              </div>
+                  <p className="expressMaking__content--subHeadline">
+                    Get it in 4-6 business days
+                  </p>
+                  <p className="expressMaking__content--subHeadline">
+                    Only available for Recommended Colors
+                  </p>
+                </div>
+                <div className="col-4">
+                  <div>
+                    <a
+                      href="#learn-more"
+                      className="
+                        u-text-decoration--underline
+                        expressMaking__content--link
+                      "
+                    >
+                      Learn More
+                    </a>
+                  </div>
+                </div>
+              </div> : null
+            }
+            <div className="ProductOptions__additional-info u-mb-normal">
+              <p>
+                $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
+                <a className="link link--static">Learn more</a>
+              </p>
+              <p className="u-mb-small">
+                Complimentary shipping and returns.&nbsp;
+                <a className="link link--static">Learn more</a>
+              </p>
+              <ProductSecondaryActions />
             </div>
           </div>
         </div>
-      </ProductCustomization>
+      </div>
     );
   }
 }
 
-ProductCustomizationStyle.propTypes = {
-  // Passed Props
-  hasNavItems: PropTypes.bool.isRequired,
-  // Redux Props
-  activateModal: PropTypes.func.isRequired,
-  productCustomizationDrawer: PropTypes.string.isRequired,
-  isUSSiteVersion: PropTypes.bool.isRequired,
-  temporaryDressSize: PropTypes.number,
-  temporaryMeasurementMetric: PropTypes.string,
-  temporaryHeightValue: PropTypes.number,
-  heightError: PropTypes.bool,
-  sizeError: PropTypes.bool,
-  // Redux Actions
-  changeCustomizationDrawer: PropTypes.func.isRequired,
-  updateMeasurementMetric: PropTypes.func.isRequired,
-  updateDressSizeSelection: PropTypes.func.isRequired,
-  updateHeightSelection: PropTypes.func.isRequired,
+ProductOptions.propTypes = {
+  //* Redux Properties
+  // PRODUCT
+  $$productImages: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
+    id: PropTypes.number,
+    colorId: PropTypes.number,
+    smallImg: PropTypes.string,
+    bigImg: PropTypes.string,
+    height: PropTypes.number,
+    width: PropTypes.number,
+    position: PropTypes.number,
+  })).isRequired,
+  productTitle: PropTypes.string.isRequired,
+  productCentsBasePrice: PropTypes.number.isRequired,
+  // COLOR
+  colorId: PropTypes.number.isRequired,
+  colorCentsTotal: PropTypes.number,
+  colorName: PropTypes.string.isRequired,
+  colorHexValue: PropTypes.string.isRequired,
+  // ADDONS
+  addonOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.string,
+    }),
+  ),
+  selectedDressSize: PropTypes.number,
+  selectedHeightValue: PropTypes.number,
+  selectedMeasurementMetric: PropTypes.string.isRequired,
+  selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number).isRequired,
+  fastMaking: PropTypes.bool,
+  //* Redux Actions
+  activateCustomizationDrawer: PropTypes.func.isRequired,
+  activateModal: PropTypes.func,
 };
 
-ProductCustomizationStyle.defaultProps = {
-  hasNavItems: true,
-  selectedColorId: '',
-  temporaryDressSize: null,
-  temporaryMeasurementMetric: null,
-  temporaryHeightValue: null,
-  heightError: false,
-  sizeError: false,
+ProductOptions.defaultProps = {
+  addonOptions: [],
+  colorCentsTotal: 0,
+  selectedDressSize: null,
+  selectedHeightValue: null,
+  activateModal: noop,
+  fastMaking: false,
 };
 
-
-export default connect(stateToProps, dispatchToProps)(ProductCustomizationStyle);
+export default connect(stateToProps, dispatchToProps)(ProductOptions);

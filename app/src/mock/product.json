@@ -137,7 +137,7 @@
         "variant_id": 52058
       }
     },
-    "fast_making": false,
+    "fast_making": true,
     "prices": {
       "currency": "USD",
       "original_amount": "249.0",

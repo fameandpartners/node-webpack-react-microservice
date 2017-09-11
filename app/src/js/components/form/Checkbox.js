@@ -31,14 +31,9 @@ class Checkbox extends Component {
         )}
       >
         <input className="Checkbox" id={id} type="checkbox" defaultChecked />
-        { label
-          ? (
-            <label htmlFor={id}>
-              <span className="u-vertical-align-middle">{label}</span>
-            </label>
-          )
-          : null
-        }
+        <label htmlFor={id}>
+          <span className="u-vertical-align-middle">{label || ''}</span>
+        </label>
       </div>
     );
   }

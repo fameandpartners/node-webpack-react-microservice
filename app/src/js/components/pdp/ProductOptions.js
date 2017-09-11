@@ -22,6 +22,7 @@ import ModalConstants from '../../constants/ModalConstants';
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
 import ProductSecondaryActions from './ProductSecondaryActions';
+import Checkbox from '../form/Checkbox';
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
@@ -38,6 +39,7 @@ function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   const selectedColor = state.$$customizationState.get('selectedColor');
   const addons = state.$$customizationState.get('addons');
+  const productMakingOptions = state.$$productState.get('productMakingOptions');
 
   return {
     // PRODUCT
@@ -45,6 +47,7 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
+    fastMaking: productMakingOptions.get('fast_making'),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -176,6 +179,7 @@ class ProductOptions extends Component {
       selectedStyleCustomizations,
       selectedDressSize,
       selectedHeightValue,
+      fastMaking,
     } = this.props;
 
     return (
@@ -222,9 +226,45 @@ class ProductOptions extends Component {
                 handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
             </div>
-            <div className="ProductOptions__ctas grid-1">
+            <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
+            {
+              fastMaking
+              ? <div className="grid expressMaking__content u-mb-small">
+                <div className="col-1">
+                  <Checkbox
+                    id="latest_trends"
+                    wrapperClassName="Modal__content--med-margin-bottom"
+                    onChange={console.log('BROooooo')}
+                  />
+                </div>
+                <div className="col-7 u-text-align-left">
+                  <p className="expressMaking__content--headline">
+                    Make it Express + $30
+                  </p>
+                  <p className="expressMaking__content--subHeadline">
+                    Get it in 4-6 business days
+                  </p>
+                  <p className="expressMaking__content--subHeadline">
+                    Only available for Recommended Colors
+                  </p>
+                </div>
+                <div className="col-4">
+                  <div>
+                    <a
+                      href="#learn-more"
+                      className="
+                        u-text-decoration--underline
+                        expressMaking__content--link
+                      "
+                    >
+                      Learn More
+                    </a>
+                  </div>
+                </div>
+              </div> : null
+            }
             <div className="ProductOptions__additional-info u-mb-normal">
               <p>
                 $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
@@ -273,6 +313,7 @@ ProductOptions.propTypes = {
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
   selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number).isRequired,
+  fastMaking: PropTypes.bool,
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
@@ -284,6 +325,7 @@ ProductOptions.defaultProps = {
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
+  fastMaking: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

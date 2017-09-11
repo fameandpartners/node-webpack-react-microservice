@@ -57,3 +57,22 @@
   vertical-align: middle;
   margin-left: 10px;
 }
+
+.expressMaking__content {
+  background: $c-background-gray;
+  border: $c-border-gray;
+  padding: 19px 13px 0 8px;
+}
+
+.expressMaking__content--headline {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.expressMaking__content--subHeadline {
+  font-size: 12px;
+}
+
+.expressMaking__content--link {
+  color: $c-black;
+}
