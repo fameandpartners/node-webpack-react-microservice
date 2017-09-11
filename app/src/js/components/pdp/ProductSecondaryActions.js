@@ -4,9 +4,6 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-// TEMP. (REMOVE)
-import noop from '../../libs/noop';
-
 // Components
 import IconButton from '../generic/IconButton';
 
@@ -15,7 +12,6 @@ import ModalConstants from '../../constants/ModalConstants';
 import ModalActions from '../../actions/ModalActions';
 
 // Assets
-import HeartIcon from '../../../svg/i-heart.svg';
 import ShareIcon from '../../../svg/i-share.svg';
 
 
@@ -45,14 +41,6 @@ class ProductSecondaryActions extends Component {
     return (
       <div className="ProductSecondaryActions">
         <ul>
-          <li className="u-display--inline">
-            <IconButton
-              svgPath={HeartIcon.url}
-              width="40px"
-              height="18px"
-              handleClick={noop}
-            />
-          </li>
           <li className="u-display--inline">
             <IconButton
               svgPath={ShareIcon.url}
