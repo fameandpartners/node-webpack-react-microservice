@@ -5,6 +5,9 @@ const win = typeof window === 'object'
   ? window
   : {
     document: {},
+    location: {
+      href: '',
+    },
     addEventListener: noop,
     removeEventListener: noop,
   };

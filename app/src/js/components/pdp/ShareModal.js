@@ -63,7 +63,7 @@ class ShareModal extends Component {
   render() {
     const currentProductImage = this.findColorSpecificFirstImageUrl();
     // server-side-rendering workaround
-    const currentURL = win.location ? win.location.href : '';
+    const currentURL = win.location.href;
 
     return (
       <ModalContainer
