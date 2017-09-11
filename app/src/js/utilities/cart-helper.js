@@ -41,7 +41,7 @@ function transformLineItem(lineItem) {
       size_id:            INT,
       color_id:           INT,
       variant_id:         INT,
-      making_options_ids: INT ???,
+      making_options_ids: INT,
       height_value:       INT,
       height_unit:        STRING,
       customizations_ids: ARRAY OF INT,
