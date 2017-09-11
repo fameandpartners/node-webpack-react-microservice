@@ -275,23 +275,25 @@ class ProductCustomizationStyle extends PureComponent {
             </div>
             <div className="grid">
               <div className="col-12">
-                {
-                  sizeError ?
-                    <p
-                      className="
-                      u-color-red
-                      textAlign--left
-                      u-paddingLeft--small"
-                    >
-                      Please select your size
-                    </p> : null
+                { sizeError ?
+                  <p
+                    className={classnames(
+                      'u-color-red',
+                      'textAlign--left',
+                      'u-paddingLeft--small',
+                    )}
+                  >
+                    Please select your size
+                  </p>
+                  : null
                 }
                 <p
-                  className="
-                    link
-                    link--static
-                    u-paddingLeft--small
-                    textAlign--left"
+                  className={classnames(
+                    'link',
+                    'link--static',
+                    'textAlign--left',
+                    'u-paddingLeft--small',
+                  )}
                   onClick={this.handleViewSizeGuideClick}
                 >
                   View Size Guide
