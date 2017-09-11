@@ -73,7 +73,7 @@ class ProductDisplayOptionsTouch extends Component {
             onClick={this.handleOpenModalClick(ModalConstants.COLOR_SELECTION_MODAL)}
             className={classnames(
               'ProductDisplayOptionsTouch__option u-display--inline-block u-cursor--pointer',
-              { 'ProductDisplayOptionsTouch__option--dark': isDarkLuminance(selectedColor.hexValue) },
+              { 'ProductDisplayOptionsTouch__option--dark': isDarkLuminance(selectedColor) },
             )}
             style={{ background: selectedColor.hexValue }}
           >
