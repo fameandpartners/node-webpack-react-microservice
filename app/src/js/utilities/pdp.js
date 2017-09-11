@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import { assign } from 'lodash';
-import sanitizeHtml from 'sanitize-html';
 import { formatCents } from './accounting';
 import { UNITS } from '../constants/ProductConstants';
 
@@ -216,9 +215,12 @@ export function transformProductDescription({ description }) {
   //   ****** into ******
   // productDescription: String
   // })
-  const productDescription = sanitizeHtml(description, {
-    allowedTags: [],
-  });
+  // eslint-disable-next-line
+  const div = document.createElement('div');
+  div.innerHTML = description;
+
+  const productDescription = div.textContent;
+
   return productDescription;
 }
 
