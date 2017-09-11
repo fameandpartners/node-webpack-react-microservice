@@ -1,4 +1,4 @@
-/* global document */
+/* global document, window */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -10,6 +10,18 @@ import '../css/index.scss';
 // Store
 import AppStore from './stores/AppStore';
 
+
+// ************************************************
+//                                                *
+//                  REMOVE!!!                      *
+//                                                  *
+// ***************************************************
+
+import productJSON from '../mock/product.json';
+import { transformProductJSON } from './utilities/pdp';
+
+const isDev = process.env.NODE_ENV === 'development';
+
 function renderApp(Component) {
   ReactDOM.render(
     Component,
@@ -17,8 +29,14 @@ function renderApp(Component) {
   );
 }
 
-// eslint-disable-next-line
-const pdpData = (typeof window === 'object') ? window.__data : null;
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-nested-ternary */
+const pdpData = (typeof window === 'object')
+                  ? isDev
+                  ? transformProductJSON(productJSON)
+                  : window.__data
+                  : null;
+
 const store = AppStore(pdpData);
 
 const component = <Provider store={store}><App /></Provider>;
