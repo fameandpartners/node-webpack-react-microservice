@@ -178,10 +178,10 @@ class Select extends Component {
     return (
       <div
         className={classnames(
-          'Select--wrapper',
+          'Select__wrapper',
           className,
           {
-            'Select--wrapper__error': error,
+            'Select__wrapper--error': error,
             'translate-label': label,
             'is-open': isOpen,
             'single-option': singleOption,

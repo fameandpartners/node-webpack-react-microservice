@@ -22,9 +22,6 @@ import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE, SIZE_CUSTOMIZE } from '../../constant
 // UI Components
 import ButtonLedge from '../generic/ButtonLedge';
 
-// temp. helpers (for Rails merge)
-import { updateSizeData, updateColorData } from '../../utilities/cart-helper';
-
 function stateToProps(state) {
   return {
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
@@ -69,8 +66,6 @@ class CustomizationButtonLedge extends Component {
       temporaryColor,
     } = this.props;
 
-    updateColorData(temporaryColor.id);
-
     selectProductColor({ selectedColor: temporaryColor });
     setShareableQueryParams({ color: temporaryColor.id });
     activateCustomizationDrawer({ isActive: false });
@@ -90,7 +85,7 @@ class CustomizationButtonLedge extends Component {
     activateCustomizationDrawer({ isActive: false });
   }
 
-  saveSizeSeletion() {
+  saveSizeSelection() {
     console.warn('TODO: need to check validity......');
     // Check if valid
     // If Valid
@@ -117,8 +112,6 @@ class CustomizationButtonLedge extends Component {
       selectedMeasurementMetric: temporaryMeasurementMetric,
     });
 
-    updateSizeData(temporaryDressSize, temporaryHeightValue, temporaryMeasurementMetric);
-
     activateCustomizationDrawer({ isActive: false });
   }
 
@@ -130,7 +123,7 @@ class CustomizationButtonLedge extends Component {
       case STYLE_CUSTOMIZE:
         return this.saveStyleSelection;
       case SIZE_CUSTOMIZE:
-        return this.saveSizeSeletion;
+        return this.saveSizeSelection;
       default:
         return noop;
     }

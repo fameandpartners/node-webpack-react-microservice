@@ -19,6 +19,9 @@ const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+// @dagnar -- set to wherever node server ends up being hosted
+const ASSET_PATH = 'http://localhost:8001/';
+
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
 if (env.stringified['process.env'].NODE_ENV !== '"production"') {
@@ -105,6 +108,7 @@ module.exports = {
         options: {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]',
+          publicPath: ASSET_PATH,
         },
       },
       // Process JS with Babel.

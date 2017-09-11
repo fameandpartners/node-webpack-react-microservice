@@ -128,12 +128,17 @@ class ZoomModal extends Component {
         <Modal
           handleCloseModal={this.handleCloseModal}
         >
-          <Slider winWidth={winWidth} winHeight={winHeight} showButtons>
+          <Slider
+            sliderHeight="100%"
+            winWidth={winWidth}
+            winHeight={winHeight}
+            showButtons
+          >
             { sliderImages.map((img, index) => (
               <Slide
                 key={img.id}
               >
-                <p className="ZoomModal__pagination">{index + 1}/{sliderImages.length}</p>
+                <p className="ZoomModal__pagination">{index + 1} of {sliderImages.length}</p>
                 <img
                   alt="Something"
                   src={img.bigImg}
@@ -143,6 +148,7 @@ class ZoomModal extends Component {
                   onClick={() => this.setZoomStatus(index)}
                   className={classnames(
                     'ZoomModal__image',
+                    'u-cursor--pointer',
                     { zoomIn: activeIndex === index && zoomStatus },
                   )}
                   ref={ref => this.imageRefs[img.id] = ref}

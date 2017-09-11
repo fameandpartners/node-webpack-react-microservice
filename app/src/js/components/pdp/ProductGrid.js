@@ -40,8 +40,8 @@ class ProductGrid extends Component {
     return productImages
       .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
       .map((img, index) => (
-        <div className="col-6">
-          <div key={img.id} className="brick" onClick={() => this.showZoomModal(index)}>
+        <div className="col-6" key={img.id}>
+          <div className="brick u-cursor--pointer" onClick={() => this.showZoomModal(index)}>
             <img className="u-width--full" alt={Object.keys(img)} src={img.bigImg} />
           </div>
         </div>

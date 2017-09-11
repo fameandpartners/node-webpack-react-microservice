@@ -96,6 +96,10 @@
   margin-top: 50px;
 }
 
+.u-paddingLeft--small {
+  padding-left: 10px;
+}
+
 .u-bottom {
   bottom: 0;
 }
@@ -162,4 +166,9 @@
 
 .u-flex--1 {
   flex: 1;
+}
+
+// Colors
+.u-color-red {
+  color: $c-red;
 }

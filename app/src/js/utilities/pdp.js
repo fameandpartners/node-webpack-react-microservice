@@ -76,6 +76,10 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const selectedStyleCustomizations = $$customizationState.get('selectedStyleCustomizations').toJS();
   const addonOptions = $$customizationState.get('addons').get('addonOptions').toJS();
   const addons = filterSelectedAddons(addonOptions, selectedStyleCustomizations);
+  const selectedDressSize = $$customizationState.get('selectedDressSize');
+  const selectedHeightValue = $$customizationState.get('selectedHeightValue');
+  const selectedMeasurementMetric = $$customizationState.get('selectedMeasurementMetric');
+
 
   return {
     productId,
@@ -84,6 +88,9 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
     productCentsBasePrice,
     color,
     addons,
+    selectedDressSize,
+    selectedHeightValue,
+    selectedMeasurementMetric,
   };
 }
 
