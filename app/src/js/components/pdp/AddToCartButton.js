@@ -112,7 +112,7 @@ AddToCartButton.propTypes = {
   productCentsBasePrice: PropTypes.number.isRequired,
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
-  addItemToCart: PropTypes.func.isRequired,
+  // addItemToCart: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
   heightValue: PropTypes.string,
   sizeValue: PropTypes.string,
