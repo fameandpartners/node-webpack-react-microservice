@@ -3,15 +3,26 @@ import CustomizationConstants from '../constants/CustomizationConstants';
 export function activateCustomizationDrawer({
   isActive = true,
   productCustomizationDrawer,
-  heightError = false,
-  sizeError = false,
 }) {
   return {
     type: CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
     isActive,
+    productCustomizationDrawer,
+  };
+}
+
+export function setSizeProfileError({
+  productCustomizationDrawer,
+  heightError = false,
+  sizeError = false,
+  isActive = true,
+}) {
+  return {
+    type: CustomizationConstants.SET_SIZE_PROFILE_ERROR,
     heightError,
     sizeError,
     productCustomizationDrawer,
+    isActive,
   };
 }
 
