@@ -54,7 +54,7 @@ class App extends Component {
   render() {
     const { lockBody } = this.props;
     return (
-      <div className={`App ${lockBody ? 'App--scroll-lock' : ''}`}>
+      <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
         <SideMenu />
         <CustomizationDrawer />
         <AppMain />
