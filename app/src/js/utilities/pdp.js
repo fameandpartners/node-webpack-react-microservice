@@ -4,7 +4,6 @@ import sanitizeHtml from 'sanitize-html';
 import { formatCents } from './accounting';
 import { UNITS } from '../constants/ProductConstants';
 
-
 export function calculateSubTotal({
   colorCentsTotal = 0,
   productCentsBasePrice = 0,
@@ -417,6 +416,15 @@ export function transformProductSizeChart({ sizeChart }) {
   return sizes;
 }
 
+export function transformProductMakingOptions({ fast_making, making_option_id }) {
+  const making = {
+    fast_making,
+    making_option_id,
+  };
+
+  return making;
+}
+
 export function transformProductJSON(productJSON) {
   const productState = {
     currency: transformProductCurrency(productJSON.product),
@@ -434,6 +442,7 @@ export function transformProductJSON(productJSON) {
     modelDescription: transformProductModelDescription(productJSON.product),
     productTitle: transformProductTitle(productJSON.product),
     sizeChart: transformProductSizeChart(productJSON),
+    productMakingOptions: transformProductMakingOptions(productJSON.product),
   };
 
   const customizationState = {
