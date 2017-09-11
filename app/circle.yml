@@ -4,6 +4,10 @@ machine:
 
 dependencies:
 
+test:
+  override:
+    - echo 'tests are for children and clowns'
+
 deployment:
   branch: crushit
   commands:
