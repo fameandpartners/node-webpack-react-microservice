@@ -3,10 +3,12 @@ machine:
     version: 7.6.0
 
 dependencies:
+  override:
+    - npm install
 
 test:
   override:
-    - echo 'tests are for children and clowns'
+    - node scripts/test.js --env=jsdom --notify
 
 deployment:
   branch: crushit
