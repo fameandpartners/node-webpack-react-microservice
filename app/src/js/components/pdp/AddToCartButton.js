@@ -42,8 +42,8 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
-  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
-  return { activateCartDrawer, activateCustomizationDrawer, addItemToCart };
+  const { setSizeProfileError } = bindActionCreators(CustomizationActions, dispatch);
+  return { activateCartDrawer, setSizeProfileError, addItemToCart };
 }
 
 
@@ -62,17 +62,15 @@ class AddToCartButton extends Component {
    * Handles adding item to cart
    */
   handleAddToBag() {
-    /* eslint-disable no-unused-vars */
     const {
-      addItemToCart,
+      // addItemToCart,
       $$customizationState,
       $$productState,
       heightValue,
       sizeValue,
     } = this.props;
-    /* eslint-enable no-unused-vars */
     if (!heightValue || !sizeValue) {
-      this.props.activateCustomizationDrawer({
+      this.props.setSizeProfileError({
         productCustomizationDrawer: CustomizationConstants.SIZE_CUSTOMIZE,
         heightError: !heightValue,
         sizeError: !sizeValue,
@@ -114,10 +112,10 @@ AddToCartButton.propTypes = {
   productCentsBasePrice: PropTypes.number.isRequired,
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
-  addItemToCart: PropTypes.func.isRequired,
-  activateCustomizationDrawer: PropTypes.func.isRequired,
-  heightValue: PropTypes.string,
-  sizeValue: PropTypes.string,
+  // addItemToCart: PropTypes.func.isRequired,
+  setSizeProfileError: PropTypes.func.isRequired,
+  heightValue: PropTypes.number,
+  sizeValue: PropTypes.number,
 };
 
 AddToCartButton.defaultProps = {

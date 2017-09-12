@@ -10,12 +10,10 @@ export function luminanceFromHex(hexStr) {
   const r = (rgb >> 16) & 0xff;  // bitwise extract red
   const g = (rgb >> 8) & 0xff;  // bitwise extract green
   const b = (rgb >> 0) & 0xff;  // bitwise extract blue
-  console.log((0.2126 * r) + (0.7152 * g) + (0.0722 * b));
   return (0.2126 * r) + (0.7152 * g) + (0.0722 * b); // per ITU-R BT.709
 }
 
 export function isDarkLuminance(hexStr) {
-  console.log(hexStr.presentation);
   return luminanceFromHex(hexStr.hexValue) < 70;
 }
 
