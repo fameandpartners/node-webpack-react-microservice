@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import Clipboard from 'clipboard';
-import classnames from 'classnames';
 
 // Components
 import Button from '../generic/Button';
@@ -67,12 +66,7 @@ class CopyLink extends Component {
           tall
           secondary={!copySuccess}
           passedRef={i => this.copyTrigger = i}
-          className={
-            classnames(
-              'CopyLinkButton',
-              'Modal__content--med-margin-bottom',
-            )
-          }
+          className="CopyLinkButton Modal__content--med-margin-bottom"
           text={copyLinkText}
           handleClick={this.handleCopyLinkClick}
         />
