@@ -49,6 +49,7 @@ function stateToProps(state) {
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
     expressMakingAvailable: productMakingOptions.get('fast_making'),
+    productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -180,6 +181,10 @@ class ProductOptions extends Component {
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
   }
 
+  isExpressEligible(colorId, defaultColors) {
+    return defaultColors.filter(color => color.id === colorId).length > 0;
+  }
+
   setExpressStatus() {
     const { expressMakingStatus } = this.props;
     this.props.setExpressMakingStatus(!expressMakingStatus);
@@ -192,6 +197,8 @@ class ProductOptions extends Component {
       selectedDressSize,
       selectedHeightValue,
       expressMakingAvailable,
+      colorId,
+      productDefaultColors,
     } = this.props;
 
     return (
@@ -246,10 +253,9 @@ class ProductOptions extends Component {
               ? <div className="grid expressMaking__content u-mb-small">
                 <div className="col-1">
                   <Checkbox
-                    id="latest_trends"
-                    checked={false}
-                    wrapperClassName="Modal__content--med-margin-bottom"
+                    id="express_making"
                     onChange={this.setExpressStatus}
+                    disabled={!this.isExpressEligible(colorId, productDefaultColors)}
                   />
                 </div>
                 <div className="col-7 u-text-align-left">
@@ -259,7 +265,14 @@ class ProductOptions extends Component {
                   <p className="expressMaking__content--subHeadline">
                     Get it in 4-6 business days
                   </p>
-                  <p className="expressMaking__content--subHeadline">
+                  <p
+                    className={classnames(
+                      'expressMaking__content--subHeadline',
+                      {
+                        'expressMaking__content--error': colorId && !this.isExpressEligible(colorId, productDefaultColors),
+                      },
+                  )}
+                  >
                     Only available for Recommended Colors
                   </p>
                 </div>
@@ -332,6 +345,7 @@ ProductOptions.propTypes = {
   setExpressMakingStatus: PropTypes.func,
   expressMakingStatus: PropTypes.bool,
   expressMakingAvailable: PropTypes.bool,
+  productDefaultColors: PropTypes.arrayOf(PropTypes.object),
 };
 
 ProductOptions.defaultProps = {
@@ -343,6 +357,7 @@ ProductOptions.defaultProps = {
   setExpressMakingStatus: noop,
   expressMakingStatus: false,
   expressMakingAvailable: false,
+  productDefaultColors: [],
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

@@ -22,8 +22,24 @@ class Checkbox extends Component {
       label,
       wrapperClassName,
       showChecked,
+      disabled,
     } = this.props;
-
+    if (disabled) {
+      return (
+        <div>
+          <input
+            className="Checkbox"
+            id={id}
+            type="checkbox"
+            checked={false}
+            disabled
+          />
+          <label htmlFor={id}>
+            <span className="u-vertical-align-middle">{label || ''}</span>
+          </label>
+        </div>
+      );
+    }
     return (
       <div
         className={classnames(
@@ -52,12 +68,14 @@ Checkbox.propTypes = {
   wrapperClassName: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   showChecked: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 Checkbox.defaultProps = {
   label: null,
   wrapperClassName: '',
   showChecked: false,
+  disabled: false,
 };
 
 export default Checkbox;
