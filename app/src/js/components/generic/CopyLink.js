@@ -27,7 +27,7 @@ class CopyLink extends Component {
   handleCopyLinkClick() {
     this.setState({
       copySuccess: true,
-      copyLinkText: 'Copied!',
+      copyLinkText: 'Copied Link!',
     });
   }
 
