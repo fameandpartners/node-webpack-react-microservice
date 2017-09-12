@@ -253,9 +253,12 @@ class ProductCustomizationStyle extends Component {
     }
     return (
       /* eslint-disable max-len */
-      <div
-        className="ProductCustomizationStyle__cad-layer ProductCustomizationStyle__cad-layer--legacy"
-      />
+      <div className="ProductCustomizationStyle__cad-layer--legacy grid-middle-center u-width--full">
+        <div>
+          <h3 className="h4 u-mb-small">Design Customizations</h3>
+          <h6>Select as many as you want</h6>
+        </div>
+      </div>
     );
   }
 
