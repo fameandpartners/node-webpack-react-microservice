@@ -40,14 +40,13 @@ function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
   const addons = state.$$customizationState.get('addons');
   const productMakingOptions = state.$$productState.get('productMakingOptions');
-
   return {
     // PRODUCT
     productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
-    fastMaking: productMakingOptions.get('fast_making'),
+    fastMakingAvailable: productMakingOptions.get('fast_making'),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -61,15 +60,19 @@ function stateToProps(state) {
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
     selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
+    fastMakingStatus: state.$$customizationState.get('fast_making_selected'),
   };
 }
 
 
 function dispatchToProps(dispatch) {
-  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+  const {
+    activateCustomizationDrawer,
+    setFastMakingStatus } = bindActionCreators(CustomizationActions, dispatch);
   const actions = bindActionCreators(ModalActions, dispatch);
   return {
     activateCustomizationDrawer,
+    setFastMakingStatus,
     activateModal: actions.activateModal,
   };
 }
@@ -173,13 +176,19 @@ class ProductOptions extends Component {
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
   }
 
+  setExpressStatus() {
+    const { fastMakingStatus } = this.props;
+    console.log(fastMakingStatus);
+    this.props.setFastMakingStatus(!fastMakingStatus);
+  }
+
   render() {
     const {
       productTitle,
       selectedStyleCustomizations,
       selectedDressSize,
       selectedHeightValue,
-      fastMaking,
+      fastMakingAvailable,
     } = this.props;
 
     return (
@@ -230,13 +239,14 @@ class ProductOptions extends Component {
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
             {
-              fastMaking
+              fastMakingAvailable
               ? <div className="grid expressMaking__content u-mb-small">
                 <div className="col-1">
                   <Checkbox
                     id="latest_trends"
+                    checked={false}
                     wrapperClassName="Modal__content--med-margin-bottom"
-                    onChange={console.log('BROooooo')}
+                    onChange={this.setExpressStatus}
                   />
                 </div>
                 <div className="col-7 u-text-align-left">
@@ -244,7 +254,7 @@ class ProductOptions extends Component {
                     Make it Express + $30
                   </p>
                   <p className="expressMaking__content--subHeadline">
-                    Get it in 4-6 business days
+                    Gettt it in 4-6 business days
                   </p>
                   <p className="expressMaking__content--subHeadline">
                     Only available for Recommended Colors
@@ -253,7 +263,7 @@ class ProductOptions extends Component {
                 <div className="col-4">
                   <div>
                     <a
-                      href="#learn-more"
+                      href="/terms#collapse-shipping"
                       className="
                         u-text-decoration--underline
                         expressMaking__content--link
@@ -313,10 +323,12 @@ ProductOptions.propTypes = {
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
   selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number).isRequired,
-  fastMaking: PropTypes.bool,
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
+  setFastMakingStatus: PropTypes.func,
+  fastMakingStatus: PropTypes.bool,
+  fastMakingAvailable: PropTypes.bool,
 };
 
 ProductOptions.defaultProps = {
@@ -325,7 +337,9 @@ ProductOptions.defaultProps = {
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
-  fastMaking: false,
+  setFastMakingStatus: noop,
+  fastMakingStatus: false,
+  fastMakingAvailable: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

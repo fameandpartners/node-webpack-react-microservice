@@ -90,6 +90,7 @@ class SignupModal extends Component {
               label="Get emails on latest updates"
               wrapperClassName="Modal__content--med-margin-bottom"
               onChange={this.handleTrendUpdateCheck()}
+              showChecked
             />
           </div>
           <Button

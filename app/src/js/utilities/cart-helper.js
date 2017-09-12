@@ -51,7 +51,6 @@ function transformLineItem(lineItem) {
       dress_variant_id:   INT,
     }
   */
-
   const sizeId = mapSizeIdFromSortKey(lineItem.selectedDressSize);
 
   const transformed = {
@@ -63,7 +62,7 @@ function transformLineItem(lineItem) {
       sizeId),
     height_unit: lineItem.selectedMeasurementMetric,
     height_value: lineItem.selectedHeightValue,
-    making_options_ids: null,
+    making_options_ids: [lineItem.fastMakingID],
     size_id: sizeId,
     variant_id: win ? win.PdpDataFull.product.master_id : null,
   };
