@@ -186,8 +186,16 @@ class ProductOptions extends Component {
   }
 
   setExpressStatus() {
-    const { expressMakingStatus } = this.props;
-    this.props.setExpressMakingStatus(!expressMakingStatus);
+    const { expressMakingStatus, colorId, productDefaultColors } = this.props;
+    if (this.isExpressEligible(colorId, productDefaultColors)) {
+      this.props.setExpressMakingStatus(!expressMakingStatus);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.colorId !== this.props.colorId) {
+      this.props.setExpressMakingStatus(false);
+    }
   }
 
   render() {
@@ -324,10 +332,10 @@ ProductOptions.propTypes = {
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   // COLOR
-  colorId: PropTypes.number.isRequired,
+  colorId: PropTypes.number,
   colorCentsTotal: PropTypes.number,
-  colorName: PropTypes.string.isRequired,
-  colorHexValue: PropTypes.string.isRequired,
+  colorName: PropTypes.string,
+  colorHexValue: PropTypes.string,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -358,6 +366,9 @@ ProductOptions.defaultProps = {
   expressMakingStatus: false,
   expressMakingAvailable: false,
   productDefaultColors: [],
+  colorId: null,
+  colorName: '',
+  colorHexValue: '',
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

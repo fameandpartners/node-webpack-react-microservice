@@ -32,6 +32,7 @@ class Checkbox extends Component {
             id={id}
             type="checkbox"
             checked={false}
+            onChange={this.handleChange}
             disabled
           />
           <label htmlFor={id}>
