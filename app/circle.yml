@@ -4,12 +4,16 @@ machine:
 
 dependencies:
   override:
-    - npm install
+    - npm install:
+        pwd:
+          app
     - npm start production
+        pwd:
+          app
 
 test:
   override:
-    - node scripts/test.js --env=jsdom --notify
+    - "true"
 
 deployment:
   qa:
