@@ -17,7 +17,7 @@ class ProductCrossSell extends PureComponent {
               <span className="ProductCrossSell__price display--block">
                 {formatCents(p.centsPrice, 0)}
               </span>
-              <span className="ProductCrossSell__cta link link--static display--block">
+              <span className="ProductCrossSell__cta link display--block">
                 Add to Cart
               </span>
             </div>

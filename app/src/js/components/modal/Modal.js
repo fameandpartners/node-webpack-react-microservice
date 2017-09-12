@@ -30,7 +30,7 @@ class Modal extends PureComponent {
       >
         <div
           className={classnames(
-            'Modal__header Modal__layout-container',
+            'Modal__header h4 Modal__layout-container',
             {
               'Modal__header--headline': !!headline,
             },

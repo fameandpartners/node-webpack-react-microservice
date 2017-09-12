@@ -50,10 +50,10 @@
 .RadioToggle:after {
   content: '';
   position: absolute;
-  top: 1px;
+  top: 2px;
   left: 1px;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   transition: all 0.2s ease-in-out;
   border-radius: 50%;
   background: $c-text-gray;
@@ -67,5 +67,5 @@
 }
 
 .RadioToggle.right:after {
-  transform: translateX(17px);
+  transform: translateX(19px);
 }

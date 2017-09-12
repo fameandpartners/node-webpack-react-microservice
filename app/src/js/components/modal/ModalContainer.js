@@ -96,7 +96,7 @@ class ModalContainer extends Component {
     return (
       <div
         className={classnames([
-          'ModalContainer u-center',
+          'ModalContainer u-center typography',
           modalContainerClass,
           {
             'ModalContainer--dim-background': dimBackground,
