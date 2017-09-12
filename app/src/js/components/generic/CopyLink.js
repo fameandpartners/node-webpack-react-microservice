@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import Clipboard from 'clipboard';
+import classnames from 'classnames';
 
 // Components
 import Button from '../generic/Button';
 import Input from '../form/Input';
 
+// CSS
+import '../../../css/components/CopyLink.scss';
 
 class CopyLink extends Component {
   constructor(props) {
@@ -14,6 +17,8 @@ class CopyLink extends Component {
 
     this.state = {
       clipboardError: false,
+      copySuccess: false,
+      copyLinkText: 'Copy Link',
     };
 
     autobind(this);
@@ -23,7 +28,10 @@ class CopyLink extends Component {
     /* eslint-disable no-console */
     console.log(`Copied Share Link: ${this.props.url}`);
     /* eslint-enable no-console */
-    // TO-DO: Link Mike's Success Toast
+    this.setState({
+      copySuccess: true,
+      copyLinkText: 'Copied!',
+    });
   }
 
   handleCopyLinkClickError() {
@@ -52,16 +60,23 @@ class CopyLink extends Component {
 
     const {
       clipboardError,
+      copySuccess,
+      copyLinkText,
     } = this.state;
 
     return (
       <div>
         <Button
           tall
-          secondary
+          secondary={!copySuccess}
           passedRef={i => this.copyTrigger = i}
-          className="Modal__content--med-margin-bottom"
-          text="Copy Link"
+          className={
+            classnames(
+              'CopyLinkButton',
+              'Modal__content--med-margin-bottom',
+            )
+          }
+          text={copyLinkText}
           handleClick={this.handleCopyLinkClick}
         />
         {
