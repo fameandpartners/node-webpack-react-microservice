@@ -31,7 +31,7 @@ class ProductOptionsRow extends PureComponent {
         className={classnames(
           'ProductOptionsRow',
           'ProductOptions__ProductOptionsRow',
-          'grid-spaceBetween',
+          'grid-spaceBetween-noGutter',
           {
             'ProductOptionsRow--heading': heading,
           },

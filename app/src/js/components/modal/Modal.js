@@ -30,7 +30,7 @@ class Modal extends PureComponent {
       >
         <div
           className={classnames(
-            'Modal__header Modal__layout-container',
+            'Modal__header h4 Modal__layout-container',
             {
               'Modal__header--headline': !!headline,
             },
@@ -43,7 +43,7 @@ class Modal extends PureComponent {
           >
             <CancelOut onClick={handleCloseModal} />
           </div>
-          <h3 className="h5">{headline}</h3>
+          <h3 className="h6">{headline}</h3>
         </div>
 
         <div

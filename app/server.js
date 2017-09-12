@@ -56,6 +56,7 @@ app.use(cookieParser());
 // Rendering
 // *****************************************************************************
 app.get('/pdp', (req, res) => {
+  res.header('Content-Type', 'text/html');
   const props = transformProductJSON(mockJSON);
   const store = AppStore(props);
   const ReactRoot = render(React.createElement(Provider, { store }, React.createElement(App)));

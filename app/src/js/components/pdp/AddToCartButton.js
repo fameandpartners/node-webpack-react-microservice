@@ -93,6 +93,7 @@ class AddToCartButton extends Component {
     return (
       <Button
         tall
+        uppercase
         className="AddToCartButton"
         text={this.generateText()}
         handleClick={this.handleAddToBag}

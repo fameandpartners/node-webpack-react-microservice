@@ -31,7 +31,7 @@ class ProductDescription extends Component {
     const { productDescription, modelDescription } = this.props;
     return (
       <div className="ProductDescription u-center">
-        <div dangerouslySetInnerHTML={{ __html: productDescription }} />
+        <p dangerouslySetInnerHTML={{ __html: productDescription }} />
         <p>-</p>
         <p dangerouslySetInnerHTML={{ __html: modelDescription }} />
       </div>
