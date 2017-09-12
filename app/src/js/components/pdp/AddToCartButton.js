@@ -42,8 +42,8 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
-  const { setSizeProfileError } = bindActionCreators(CustomizationActions, dispatch);
-  return { activateCartDrawer, setSizeProfileError, addItemToCart };
+  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+  return { activateCartDrawer, activateCustomizationDrawer, addItemToCart };
 }
 
 
@@ -70,7 +70,7 @@ class AddToCartButton extends Component {
       sizeValue,
     } = this.props;
     if (!heightValue || !sizeValue) {
-      this.props.setSizeProfileError({
+      this.props.activateCustomizationDrawer({
         productCustomizationDrawer: CustomizationConstants.SIZE_CUSTOMIZE,
         heightError: !heightValue,
         sizeError: !sizeValue,
@@ -93,6 +93,7 @@ class AddToCartButton extends Component {
     return (
       <Button
         tall
+        uppercase
         className="AddToCartButton"
         text={this.generateText()}
         handleClick={this.handleAddToBag}
@@ -113,9 +114,9 @@ AddToCartButton.propTypes = {
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   // addItemToCart: PropTypes.func.isRequired,
-  setSizeProfileError: PropTypes.func.isRequired,
-  heightValue: PropTypes.number,
-  sizeValue: PropTypes.number,
+  activateCustomizationDrawer: PropTypes.func.isRequired,
+  heightValue: PropTypes.string,
+  sizeValue: PropTypes.string,
 };
 
 AddToCartButton.defaultProps = {

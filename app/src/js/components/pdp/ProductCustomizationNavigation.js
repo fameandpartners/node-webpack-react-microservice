@@ -33,7 +33,7 @@ class ProductCustomizationNavigation extends PureComponent {
           <ul className="ProductCustomizationNavigation__nav-list u-uppercase u-text-align-right">
             <li
               onClick={this.handleDrawerSelection(COLOR_CUSTOMIZE)}
-              className="ProductCustomizationNavigation__nav-item u-cursor--pointer"
+              className="ProductCustomizationNavigation__nav-item u-cursor--pointer u-mb-big"
             >
               <span
                 className={classnames(
@@ -45,7 +45,7 @@ class ProductCustomizationNavigation extends PureComponent {
             </li>
             <li
               onClick={this.handleDrawerSelection(STYLE_CUSTOMIZE)}
-              className="ProductCustomizationNavigation__nav-item u-cursor--pointer"
+              className="ProductCustomizationNavigation__nav-item u-cursor--pointer u-mb-big"
             >
               <span
                 className={classnames(
@@ -56,7 +56,7 @@ class ProductCustomizationNavigation extends PureComponent {
             </li>
             <li
               onClick={this.handleDrawerSelection(SIZE_CUSTOMIZE)}
-              className="ProductCustomizationNavigation__nav-item u-cursor--pointer"
+              className="ProductCustomizationNavigation__nav-item u-cursor--pointer u-mb-big"
             >
               <span
                 className={classnames(

@@ -78,7 +78,7 @@ class ProductDisplayOptionsTouch extends Component {
             style={{ background: selectedColor.hexValue }}
           >
             <div className="grid-middle-noGutter u-height--full">
-              <div className="col">
+              <div className="col h6">
                 <span>Color</span><br />
                 <span>{selectedColor.presentation}</span>
               </div>

@@ -33,7 +33,7 @@ class ColorSwatches extends PureComponent {
         key={color.id}
         className={classnames(
           'col-4',
-          { 'u-mb-normal': isTouch },
+          { 'u-mb-big': isTouch },
         )}
       >
         <div
@@ -61,9 +61,9 @@ class ColorSwatches extends PureComponent {
                       'u-width--full u-position--absolute u-left',
                     )}
                   >
-                    <span>{color.presentation}</span>
+                    <h6>{color.presentation}</h6>
                     { price
-                      ? <span>&nbsp;{formatCents(price, 0)}</span>
+                      ? <h6>&nbsp;{formatCents(price, 0)}</h6>
                       : null
                     }
                   </span>
@@ -71,12 +71,11 @@ class ColorSwatches extends PureComponent {
                 : (
                   <div className="u-center u-text-align--center">
                     <span>
-                      <span>{color.presentation}</span>
-                      <br />
+                      <h6>{color.presentation}</h6>
                       { price
-                      ? <span>{formatCents(price, 0)}</span>
-                      : null
-                    }
+                        ? <h6>{formatCents(price, 0)}</h6>
+                        : null
+                      }
                     </span>
                   </div>
                 )
@@ -107,15 +106,15 @@ class ColorSwatches extends PureComponent {
             },
         )}
       >
-        <h3 className="u-mb-small textAlign--left">
+        <h5 className="u-mb-small textAlign--left">
           Fame Recommends
-        </h3>
+        </h5>
         <div className="u-mb-normal grid-12">
           { productDefaultColors.map(c => this.generateColorSwatch(c, 0, isTouch))}
         </div>
-        <h3 className="u-mb-small textAlign--left">
+        <h5 className="u-mb-small textAlign--left">
           Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
-        </h3>
+        </h5>
         <div className="u-mb-normal grid-12">
           { productSecondaryColors.map(c =>
             this.generateColorSwatch(c, productSecondaryColorsCentsPrice, isTouch))

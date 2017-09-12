@@ -36,7 +36,7 @@ class ProductPrecustomizations extends Component {
           { preCustomizations.map(pc => (
             <div key={`pc-${pc.id}`} className="ProductPrecustomizations__product-wrapper col-4">
               <img className="u-width--full" alt={`Customize it ${pc.description}`} src={pc.smallImg} />
-              <span className="link--static">{pc.description}</span>
+              <span className="link">{pc.description}</span>
             </div>
           ))}
         </div>

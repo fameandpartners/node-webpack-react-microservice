@@ -5,18 +5,19 @@
 
 
 $link-visited-color: rgb(12, 50, 8);
-$link-hover-color: saturate($c-link, 20%);
+$link-hover-color: $c-text-gray;
 
-$base-font-family: sans-serif;
+$base-font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
 $base-font-size: 14px;
-$base-font-weight: 300;
+$base-font-weight: 400;
 
 $fixed-font-family: monospace;
 $fixed-font-size: 14px;
 $fixed-line-height: 1.2;
 
 $heading-font-family: sans-serif;
-$heading-font-weight: 700;
+$heading-font-weight: 500;
+// $secondary-font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
 
 
 /*
@@ -24,6 +25,7 @@ $heading-font-weight: 700;
  */
 
 body {
+  color: $c-text-gray;
   font-size: $base-font-size;
   font-family: $base-font-family;
   font-weight: $base-font-weight;
@@ -37,9 +39,8 @@ body {
 .link {
   cursor: pointer;
   color: $c-link;
-  text-decoration: none;
-  font-weight: 400;
-  transition: 500ms color;
+  text-decoration: underline;
+  transition: $standard-transition-time color;
 
   &:visited {
     color: $c-link;
@@ -54,8 +55,7 @@ body {
 }
 
 .link--static {
-  text-decoration: underline;
-  color: inherit;
+  color: $c-text-gray;
 }
 
 .link--static:hover {
@@ -68,14 +68,16 @@ body {
 }
 
 .bold {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 a,
 p,
 li,
 span {
-  line-height: 1.9em;
+  font-family: $base-font-family;
+  line-height: 1.43em; // 20/14
+  letter-spacing: 0.02em;
 }
 
 .h1,
@@ -84,7 +86,9 @@ span {
 .h4,
 .h5,
 .h6 {
-  font-family: $heading-font-family;
+  letter-spacing: 0.01em;
+  color: $c-black;
+  font-family: $base-font-family;
   font-weight: $heading-font-weight;
 }
 
@@ -113,15 +117,17 @@ span {
 }
 
 .h4 {
-  font-size: 180%;
+  font-size: 142.85%; // 20/14
 }
 
 .h5 {
-  font-size: 130%;
+  font-size: 114.2%;
 }
 
 .h6 {
+  // line-height: 1.43em; // 20/14
   font-size: 100%;
+  font-weight: 400;
 }
 
 .typography {
@@ -145,37 +151,37 @@ span {
   h1,
   .h1 {
 
-    @extend .h1; margin: 0.5em 0 0.5em;
+    @extend .h1;
   }
 
   h2,
   .h2 {
 
-    @extend .h2; margin: 0.5em 0 0.5em;
+    @extend .h2;
   }
 
   h3,
   .h3 {
 
-    @extend .h3; margin: 0.5em 0 0.5em;
+    @extend .h3;
   }
 
   h4,
   .h4 {
 
-    @extend .h4; margin: 0.5em 0 0.5em;
+    @extend .h4;
   }
 
   h5,
   .h5 {
 
-    @extend .h5; margin: 0.5em 0 0.5em;
+    @extend .h5;
   }
 
   h6,
   .h6 {
 
-    @extend .h6; margin: 0.5em 0 0.5em;
+    @extend .h6;
   }
 
 }
