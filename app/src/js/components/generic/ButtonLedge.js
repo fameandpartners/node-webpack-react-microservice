@@ -44,9 +44,10 @@ class ButtonLedge extends Component {
             ? (
               <div className="col-6">
                 <Button
-                  tall
                   secondary
+                  tall
                   text={leftText}
+                  uppercase
                   handleClick={handleLeftButtonClick}
                 />
               </div>
@@ -62,6 +63,7 @@ class ButtonLedge extends Component {
                     <Button
                       tall
                       text={rightText}
+                      uppercase
                       handleClick={handleRightButtonClick}
                     />
                   )
