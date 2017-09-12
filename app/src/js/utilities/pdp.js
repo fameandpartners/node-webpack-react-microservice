@@ -215,11 +215,7 @@ export function transformProductDescription({ description }) {
   //   ****** into ******
   // productDescription: String
   // })
-
-  // bad, but the only real sans-dependency SSR solution
-  const productDescription = description.replace(/<\/?p[^>]*>/g, '');
-
-  return productDescription;
+  return description;
 }
 
 export function transformProductDefaultColors({ colors = {} }) {
