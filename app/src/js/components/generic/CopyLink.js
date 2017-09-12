@@ -25,9 +25,6 @@ class CopyLink extends Component {
   }
 
   handleCopyLinkClick() {
-    /* eslint-disable no-console */
-    console.log(`Copied Share Link: ${this.props.url}`);
-    /* eslint-enable no-console */
     this.setState({
       copySuccess: true,
       copyLinkText: 'Copied!',
