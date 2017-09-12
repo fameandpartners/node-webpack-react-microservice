@@ -215,11 +215,9 @@ export function transformProductDescription({ description }) {
   //   ****** into ******
   // productDescription: String
   // })
-  // eslint-disable-next-line
-  const div = document.createElement('div');
-  div.innerHTML = description;
 
-  const productDescription = div.textContent;
+  // bad, but the only real sans-dependency SSR solution
+  const productDescription = description.replace(/<\/?p[^>]*>/g, '');
 
   return productDescription;
 }
