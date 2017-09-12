@@ -78,11 +78,11 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const selectedDressSize = $$customizationState.get('selectedDressSize');
   const selectedHeightValue = $$customizationState.get('selectedHeightValue');
   const selectedMeasurementMetric = $$customizationState.get('selectedMeasurementMetric');
-  const fastMaking = $$customizationState.get('fast_making_selected');
-  let fastMakingID = 0;
-  if (fastMaking) {
+  const expressMaking = $$customizationState.get('express_making_selected');
+  let expressMakingID = 0;
+  if (expressMaking) {
     const productMakingOptions = $$productState.get('productMakingOptions');
-    fastMakingID = productMakingOptions.get('making_option_id');
+    expressMakingID = productMakingOptions.get('making_option_id');
   }
   return {
     productId,
@@ -94,8 +94,8 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
     selectedDressSize,
     selectedHeightValue,
     selectedMeasurementMetric,
-    fastMaking,
-    fastMakingID,
+    expressMaking,
+    expressMakingID,
   };
 }
 

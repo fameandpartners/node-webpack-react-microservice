@@ -49,7 +49,7 @@ export const $$initialState = Immutable.fromJS({
   //   addonsBasesComputed: Array,
   // })
   addons: null,
-  fast_making_selected: false,
+  express_making_selected: false,
 });
 
 export default function CartReducer($$state = $$initialState, action = null) {
@@ -135,9 +135,9 @@ export default function CartReducer($$state = $$initialState, action = null) {
         addons: $$state.get('addons').merge({ baseSelected: action.baseSelected }),
       });
     }
-    case CustomizationConstants.SET_FAST_MAKING_STATUS: {
+    case CustomizationConstants.SET_EXPRESS_MAKING_STATUS: {
       return $$state.merge({
-        fast_making_selected: action.status,
+        express_making_selected: action.status,
       });
     }
     default: {

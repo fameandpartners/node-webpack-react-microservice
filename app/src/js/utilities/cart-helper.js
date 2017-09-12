@@ -62,7 +62,7 @@ function transformLineItem(lineItem) {
       sizeId),
     height_unit: lineItem.selectedMeasurementMetric,
     height_value: lineItem.selectedHeightValue,
-    making_options_ids: [lineItem.fastMakingID],
+    making_options_ids: [lineItem.expressMakingID],
     size_id: sizeId,
     variant_id: win ? win.PdpDataFull.product.master_id : null,
   };

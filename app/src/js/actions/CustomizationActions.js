@@ -76,8 +76,8 @@ export function setAddonBaseLayer(baseSelected) {
   return { type: CustomizationConstants.SET_ADDON_BASE_LAYER, baseSelected };
 }
 
-export function setFastMakingStatus(status) {
-  return { type: CustomizationConstants.SET_FAST_MAKING_STATUS, status };
+export function setExpressMakingStatus(status) {
+  return { type: CustomizationConstants.SET_EXPRESS_MAKING_STATUS, status };
 }
 
 export default {
