@@ -2,10 +2,10 @@
 /* stylelint-disable color-no-hex */
 $c-black: #000;
 $c-red: #F70913;
-$c-hover-gray: #1F1F1F;
+$c-hover-gray: #333333;
 $c-disabled: #ccc;
 $c-light-gray: #ddd;
-$c-text-gray: #979797;
+$c-text-gray: #585858;
 $c-background-gray: #f5f5f5;
 $c-border-gray: #d8d8d8;
 $c-super-light-gray: #eee;
@@ -35,7 +35,7 @@ $c-dim-background: rgba(10, 10, 10, 0.3);
 $c-facebook: rgb(59, 89, 152);
 $c-elem-focus: rgb(51, 51, 51);
 $button-height--tall: 56px;
-$c-link: rgb(113, 181, 218);
+$c-link: $c-black;
 
 // Z-Index Values
 $z-max: 99999;

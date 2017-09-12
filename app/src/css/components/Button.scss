@@ -21,6 +21,10 @@
     vertical-align: middle;
   }
 
+  &--uppercase {
+    text-transform: uppercase;
+  }
+
   &--secondary {
     background-color: $c-white;
     color: $c-black;

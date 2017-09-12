@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
-import { assign } from 'lodash';
-import sanitizeHtml from 'sanitize-html';
+import { assign, find } from 'lodash';
+import queryString from 'query-string';
 import { formatCents } from './accounting';
 import { UNITS } from '../constants/ProductConstants';
+import win from '../polyfills/windowPolyfill';
 
 export function calculateSubTotal({
   colorCentsTotal = 0,
@@ -222,10 +223,7 @@ export function transformProductDescription({ description }) {
   //   ****** into ******
   // productDescription: String
   // })
-  const productDescription = sanitizeHtml(description, {
-    allowedTags: [],
-  });
-  return productDescription;
+  return description;
 }
 
 export function transformProductDefaultColors({ colors = {} }) {
@@ -431,6 +429,23 @@ export function transformProductMakingOptions({ fast_making, making_option_id })
   return making;
 }
 
+function extractQueryStringCustomizations(colors) {
+  const queryStringCustomizations = {
+    selectedColor: {},
+    selectedStyleCustomizations: [],
+  };
+  if (!win.isMockWindow && win.location.search) {
+    const parsed = queryString.parse(win.location.search);
+    const foundColor = (parsed.clr) ? find(colors, { id: parseInt(parsed.clr, 10) }) : null;
+    queryStringCustomizations.selectedColor = foundColor || colors[0];
+    queryStringCustomizations.selectedStyleCustomizations = (parsed.cus)
+      ? parsed.cus.map(c => parseInt(c, 10))
+      : [];
+  }
+
+  return queryStringCustomizations;
+}
+
 export function transformProductJSON(productJSON) {
   const productState = {
     currency: transformProductCurrency(productJSON.product),
@@ -451,10 +466,15 @@ export function transformProductJSON(productJSON) {
     productMakingOptions: transformProductMakingOptions(productJSON.product),
   };
 
+  const { selectedColor, selectedStyleCustomizations } =
+    extractQueryStringCustomizations(productState.productDefaultColors.concat(productState.productSecondaryColors));
+
   const customizationState = {
     addons: transformAddons(productJSON),
-    selectedColor: productState.productDefaultColors[0],
-    temporaryColor: productState.productDefaultColors[0],
+    selectedColor,
+    temporaryColor: selectedColor, // productState.productDefaultColors[0]
+    selectedStyleCustomizations,
+    temporaryStyleCustomizations: selectedStyleCustomizations,
   };
 
   return {

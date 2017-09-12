@@ -116,9 +116,11 @@ class ProductOptions extends Component {
     const selectedOptions = this.retrieveSelectedAddonOptions();
     const displayText = addonSelectionDisplayText({ selectedAddonOptions: selectedOptions });
 
-    return (
+    return displayText
+    ? (
       <span>{displayText}</span>
-    );
+    )
+    : null;
   }
 
   generateSizingNode() {
