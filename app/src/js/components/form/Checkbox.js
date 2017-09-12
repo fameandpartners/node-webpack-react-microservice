@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import noop from '../../libs/noop';
 
 // CSS
 import '../../../css/components/Checkbox.scss';
@@ -51,7 +50,7 @@ Checkbox.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
   wrapperClassName: PropTypes.string,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   showChecked: PropTypes.bool,
 };
 
@@ -59,7 +58,6 @@ Checkbox.defaultProps = {
   label: null,
   wrapperClassName: '',
   showChecked: false,
-  onChange: noop,
 };
 
 export default Checkbox;

@@ -5,6 +5,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
+import classnames from 'classnames';
 
 // Utilities
 import { formatCents } from '../../utilities/accounting';
@@ -40,7 +41,7 @@ function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
   const addons = state.$$customizationState.get('addons');
   const productMakingOptions = state.$$productState.get('productMakingOptions');
-  console.log(productMakingOptions.get('fast_making'));
+
   return {
     // PRODUCT
     productId: state.$$productState.get('productId'),
@@ -179,7 +180,6 @@ class ProductOptions extends Component {
 
   setExpressStatus() {
     const { expressMakingStatus } = this.props;
-    console.log(expressMakingStatus);
     this.props.setExpressMakingStatus(!expressMakingStatus);
   }
 
@@ -265,10 +265,10 @@ class ProductOptions extends Component {
                   <div>
                     <a
                       href="/terms#collapse-shipping"
-                      className="
-                        u-text-decoration--underline
-                        expressMaking__content--link
-                      "
+                      className={classnames(
+                        'u-text-decoration--underline',
+                        'expressMaking__content--link',
+                      )}
                     >
                       Learn More
                     </a>

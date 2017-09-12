@@ -79,7 +79,7 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const selectedHeightValue = $$customizationState.get('selectedHeightValue');
   const selectedMeasurementMetric = $$customizationState.get('selectedMeasurementMetric');
   const expressMaking = $$customizationState.get('express_making_selected');
-  let expressMakingID = 0;
+  let expressMakingID = null;
   if (expressMaking) {
     const productMakingOptions = $$productState.get('productMakingOptions');
     expressMakingID = productMakingOptions.get('making_option_id');
