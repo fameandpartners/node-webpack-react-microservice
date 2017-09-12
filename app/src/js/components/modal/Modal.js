@@ -43,7 +43,7 @@ class Modal extends PureComponent {
           >
             <CancelOut onClick={handleCloseModal} />
           </div>
-          <h3 className="h5">{headline}</h3>
+          <h3 className="h6">{headline}</h3>
         </div>
 
         <div
