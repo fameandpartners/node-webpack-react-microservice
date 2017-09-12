@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import { assign, find } from 'lodash';
-import sanitizeHtml from 'sanitize-html';
 import queryString from 'query-string';
 import { formatCents } from './accounting';
 import { UNITS } from '../constants/ProductConstants';
@@ -218,10 +217,7 @@ export function transformProductDescription({ description }) {
   //   ****** into ******
   // productDescription: String
   // })
-  const productDescription = sanitizeHtml(description, {
-    allowedTags: [],
-  });
-  return productDescription;
+  return description;
 }
 
 export function transformProductDefaultColors({ colors = {} }) {
