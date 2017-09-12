@@ -255,7 +255,7 @@ class ProductOptions extends Component {
                     Make it Express + $30
                   </p>
                   <p className="expressMaking__content--subHeadline">
-                    Gettt it in 4-6 business days
+                    Get it in 4-6 business days
                   </p>
                   <p className="expressMaking__content--subHeadline">
                     Only available for Recommended Colors
