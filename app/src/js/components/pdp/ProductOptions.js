@@ -108,9 +108,11 @@ class ProductOptions extends Component {
     const selectedOptions = this.retrieveSelectedAddonOptions();
     const displayText = addonSelectionDisplayText({ selectedAddonOptions: selectedOptions });
 
-    return (
+    return displayText
+    ? (
       <span>{displayText}</span>
-    );
+    )
+    : null;
   }
 
   generateSizingNode() {
@@ -222,7 +224,7 @@ class ProductOptions extends Component {
                 handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
             </div>
-            <div className="ProductOptions__ctas grid-1">
+            <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
             <div className="ProductOptions__additional-info u-mb-normal">

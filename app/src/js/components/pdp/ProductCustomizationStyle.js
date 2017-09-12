@@ -384,7 +384,7 @@ class ProductCustomizationStyle extends Component {
                 (
                   <span
                     onClick={this.handleClearAddonSelections}
-                    className="link link--static"
+                    className="link"
                   >
                     Clear All
                   </span>
