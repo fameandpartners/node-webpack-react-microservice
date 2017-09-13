@@ -18,6 +18,9 @@ import ZoomModal from './components/pdp/ZoomModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
 
+// polyfills
+import win from './polyfills/windowPolyfill';
+
 // Global Styles
 import '../css/global/variables.scss';
 import '../css/reset.scss';
@@ -37,9 +40,10 @@ function stateToProps(state) {
   const sideMenuOpen = state.$$appState.get('sideMenuOpen');
   const modalOpen = state.$$modalState.get('shouldAppear');
   const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
+  const customizationDrawerOpen = state.$$customizationState.get('productCustomizationDrawerOpen');
 
   return {
-    lockBody: (sideMenuOpen || modalOpen || cartDrawerOpen),
+    lockBody: (sideMenuOpen || modalOpen || cartDrawerOpen || customizationDrawerOpen),
   };
 }
 
@@ -49,6 +53,14 @@ class App extends Component {
     super(props);
     this.state = { isOpen: false };
     autoBind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.props.lockBody) {
+      win.document.body.style.overflow = 'hidden';
+    } else {
+      win.document.body.style.overflow = 'visible';
+    }
   }
 
   render() {
