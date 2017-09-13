@@ -39,7 +39,6 @@ function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   const selectedColor = state.$$customizationState.get('selectedColor');
   const addons = state.$$customizationState.get('addons');
-  const productMakingOptions = state.$$productState.get('productMakingOptions');
 
   return {
     // PRODUCT
@@ -47,7 +46,6 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
-    expressMakingAvailable: productMakingOptions.get('fast_making'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
 
     // COLOR
@@ -186,7 +184,6 @@ class ProductOptions extends Component {
       selectedStyleCustomizations,
       selectedDressSize,
       selectedHeightValue,
-      expressMakingAvailable,
     } = this.props;
 
     return (
@@ -236,10 +233,7 @@ class ProductOptions extends Component {
             <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
-            {
-              expressMakingAvailable
-              ? <ExpressMaking /> : null
-            }
+            <ExpressMaking />
             <div className="ProductOptions__additional-info u-mb-normal">
               <p>
                 $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
@@ -291,7 +285,6 @@ ProductOptions.propTypes = {
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
-  expressMakingAvailable: PropTypes.bool,
 };
 
 ProductOptions.defaultProps = {
@@ -300,7 +293,6 @@ ProductOptions.defaultProps = {
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
-  expressMakingAvailable: false,
   colorId: null,
   colorName: '',
   colorHexValue: '',
