@@ -19,4 +19,4 @@ deployment:
       - zip -r -q node_deploy.zip . -x \*node_modules\*
       - aws s3 cp node_deploy.zip s3://dev-fameandpartners-website/deploy/pdpode/node_deployebs.$CIRCLE_BUILD_NUM.zip
       - aws elasticbeanstalk create-application-version --application-name pdpode --version-label $CIRCLE_BUILD_NUM --source-bundle S3Bucket=dev-fameandpartners-website,S3Key=deploy/pdpode/node_deployebs.$CIRCLE_BUILD_NUM.zip --region us-east-1
-      - aws elasticbeanstalk update-environment --environment-name nodey-dev --version-label $CIRCLE_BUILD_NUM --region us-east-1
+      - aws elasticbeanstalk update-environment --environment-name nodey-prod --version-label $CIRCLE_BUILD_NUM --region us-east-1
