@@ -47,8 +47,6 @@ class Tabs extends PureComponent {
       <div className="Tabs">
         <div
           className={classnames(
-            'Tabs__heading',
-            'Tabs__wrapper',
             headingClasses,
           )}
         >
@@ -72,13 +70,11 @@ class Tabs extends PureComponent {
         </div>
         <div
           className={classnames(
-            'Tabs__contents',
             contentClasses,
           )}
         >
           <div
             key={selectedTabObj.id}
-            className="Tabs__panel"
           >
             {selectedTabObj.content}
           </div>
