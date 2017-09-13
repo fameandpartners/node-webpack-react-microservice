@@ -4,13 +4,6 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { formatCents } from '../../utilities/accounting';
 
-// Decorators
-import Resize from '../../decorators/Resize';
-import PDPBreakpoints from '../../libs/PDPBreakpoints';
-
-// Utilities
-import { isDarkLuminance } from '../../utilities/color';
-
 // CSS
 import '../../../css/components/ColorSwatches.scss';
 
@@ -24,17 +17,14 @@ class ColorSwatches extends PureComponent {
     return () => { this.props.handleColorSelection(color); };
   }
 
-  generateColorSwatch(color, price = 0, isTouch) {
+  generateColorSwatch(color, price = 0) {
     const { temporaryColorId } = this.props;
     const isActive = temporaryColorId === color.id;
 
     return (
       <div
         key={color.id}
-        className={classnames(
-          'col-4',
-          { 'u-mb-big': isTouch },
-        )}
+        className="col-4 u-mb-big"
       >
         <div
           onClick={this.handleColorSelection(color)}
@@ -42,44 +32,21 @@ class ColorSwatches extends PureComponent {
             'ColorSwatches__wrapper',
             'col u-cursor--pointer u-height--full u-position--relative',
             { 'ColorSwatches__wrapper--active': isActive },
-            { 'ColorSwatches__wrapper--touch': isTouch },
           ])}
           style={{ background: color.hexValue }}
         >
-          <div
-            className={classnames(
-              'ColorSwatches__swatch u-flex',
-              { 'ColorSwatches__swatch--dark': !isTouch && isDarkLuminance(color) },
-              { 'u-flex--center': !isTouch },
-            )}
-          >
-            { isTouch
-                ? (
-                  <span
-                    className={classnames(
-                      'ColorSwatches__touch-display-text',
-                      'u-width--full u-position--absolute u-left',
-                    )}
-                  >
-                    <h6>{color.presentation}</h6>
-                    { price
-                      ? <h6>&nbsp;{formatCents(price, 0)}</h6>
-                      : null
-                    }
-                  </span>
-                )
-                : (
-                  <div className="u-center u-text-align--center">
-                    <span>
-                      <h6>{color.presentation}</h6>
-                      { price
-                        ? <h6>{formatCents(price, 0)}</h6>
-                        : null
-                      }
-                    </span>
-                  </div>
-                )
-              }
+          <div className="ColorSwatches__swatch u-flex">
+            <span
+              className={classnames(
+                'ColorSwatches__touch-display-text',
+                'u-width--full u-position--absolute u-left',
+              )}
+            >
+              <h6>
+                {color.presentation}
+                {price ? <span>&nbsp;{formatCents(price, 0)}</span> : null }
+              </h6>
+            </span>
           </div>
         </div>
       </div>
@@ -88,36 +55,27 @@ class ColorSwatches extends PureComponent {
 
   render() {
     const {
-      breakpoint,
       productDefaultColors,
       productSecondaryColors,
       productSecondaryColorsCentsPrice,
     } = this.props;
-    const isTouch = (breakpoint === 'mobile' || breakpoint === 'tablet');
 
     return (
       <div
-        className={
-          classnames(
-            'ColorSwatches u-mt-normal',
-            {
-              'u-text-align-center': isTouch,
-              'u-text-align-left': !isTouch,
-            },
-        )}
+        className="ColorSwatches u-mt-normal u-text-align-left"
       >
         <h5 className="u-mb-small textAlign--left">
           Fame Recommends
         </h5>
-        <div className="u-mb-normal grid-12">
-          { productDefaultColors.map(c => this.generateColorSwatch(c, 0, isTouch))}
+        <div className="grid-12">
+          { productDefaultColors.map(c => this.generateColorSwatch(c, 0))}
         </div>
         <h5 className="u-mb-small textAlign--left">
           Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
         </h5>
         <div className="u-mb-normal grid-12">
           { productSecondaryColors.map(c =>
-            this.generateColorSwatch(c, productSecondaryColorsCentsPrice, isTouch))
+            this.generateColorSwatch(c, productSecondaryColorsCentsPrice))
           }
         </div>
       </div>
@@ -126,8 +84,6 @@ class ColorSwatches extends PureComponent {
 }
 
 ColorSwatches.propTypes = {
-  // Decorator Props
-  breakpoint: PropTypes.string.isRequired,
   // Passed Props
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
@@ -150,4 +106,4 @@ ColorSwatches.propTypes = {
 ColorSwatches.defaultProps = {};
 
 
-export default Resize(PDPBreakpoints)(ColorSwatches);
+export default ColorSwatches;
