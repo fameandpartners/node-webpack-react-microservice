@@ -143,7 +143,7 @@ ExpressMaking.propTypes = {
   setExpressMakingStatus: PropTypes.func,
   expressMakingStatus: PropTypes.bool,
   expressMakingAvailable: PropTypes.bool,
-  productDefaultColors: PropTypes.arrayOf(PropTypes.obj),
+  productDefaultColors: PropTypes.arrayOf(PropTypes.object),
   colorId: PropTypes.string,
   mobile: PropTypes.bool,
 };
