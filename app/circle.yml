@@ -5,12 +5,7 @@ machine:
 dependencies:
   override:
     # - npm install -g npm
-    - npm install:
-        pwd:
-          app
-    - npm start production
-        pwd:
-          app
+    - echo 'yicky'
 
 test:
   override:
