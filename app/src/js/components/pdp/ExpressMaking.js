@@ -73,12 +73,9 @@ class ExpressMaking extends Component {
       productDefaultColors,
       mobile,
     } = this.props;
-
-    return (
-      <div>
-        {
-        expressMakingAvailable
-        ? <div className="grid-center-spaceAround ExpressMaking__content u-mb-small">
+    if (expressMakingAvailable) {
+      return (
+        <div className="grid-center-spaceAround ExpressMaking__content u-mb-small">
           <div className="col-1">
             <Checkbox
               id="express_making"
@@ -103,18 +100,19 @@ class ExpressMaking extends Component {
             >
               Only available for Recommended Colors
             </p>
-            <p
-              className={classnames({
-                'u-display--none': !mobile,
-              })}
-            >
-              <a
-                href="/terms#collapse-shipping"
-                className="u-text-decoration--underline ExpressMaking__content--link"
-              >
-                Learn More
-              </a>
-            </p>
+            {
+            mobile ?
+              <p>
+                <a
+                  href="/terms#collapse-shipping"
+                  className="u-text-decoration--underline ExpressMaking__content--link"
+                >
+                  Learn More
+                </a>
+              </p> :
+               null
+            }
+
           </div>
           <div className="col-3_sm-9">
             <div
@@ -132,13 +130,12 @@ class ExpressMaking extends Component {
               </a>
             </div>
           </div>
-        </div> : null
-      }
-      </div>
-    );
+        </div>
+      );
+    }
+    return <div />;
   }
 }
-
 ExpressMaking.propTypes = {
   setExpressMakingStatus: PropTypes.func,
   expressMakingStatus: PropTypes.bool,
