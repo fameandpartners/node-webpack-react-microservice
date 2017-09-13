@@ -40,6 +40,9 @@ function stateToProps(state) {
   const addons = state.$$customizationState.get('addons');
 
   return {
+    // APP
+    auSite: state.$$productState.get('siteVersion') === 'Australia',
+
     // PRODUCT
     productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
@@ -178,6 +181,7 @@ class ProductOptions extends Component {
       selectedStyleCustomizations,
       selectedDressSize,
       selectedHeightValue,
+      auSite,
     } = this.props;
 
     return (
@@ -228,6 +232,12 @@ class ProductOptions extends Component {
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
             <div className="ProductOptions__additional-info u-mb-normal">
+              { auSite ?
+                (
+                  <p>AfterPay!</p>
+                )
+                : null
+              }
               <p>
                 $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
                 <a className="link link--static">Learn more</a>
@@ -271,6 +281,7 @@ ProductOptions.propTypes = {
       name: PropTypes.string,
     }),
   ),
+  auSite: PropTypes.string.isRequired,
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,

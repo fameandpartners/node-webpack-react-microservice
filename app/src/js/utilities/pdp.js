@@ -423,6 +423,10 @@ export function transformProductMakingOptions({ fast_making, making_option_id })
   return making;
 }
 
+export function transformProductSiteVersion({ siteVersion }) {
+  return siteVersion;
+}
+
 function extractQueryStringCustomizations(colors) {
   const queryStringCustomizations = {
     selectedColor: {},
@@ -458,6 +462,7 @@ export function transformProductJSON(productJSON) {
     productTitle: transformProductTitle(productJSON.product),
     sizeChart: transformProductSizeChart(productJSON),
     productMakingOptions: transformProductMakingOptions(productJSON.product),
+    siteVersion: transformProductSiteVersion(productJSON),
   };
 
   const { selectedColor, selectedStyleCustomizations } =
