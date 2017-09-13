@@ -1,18 +1,17 @@
-.SizeGuideTabs__heading,
-.SizeGuideTabs__content {
+.SizeGuideTabs__heading {
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
 }
 
 .SizeGuideTabs__heading {
-  padding: 10px;
+  padding: 22px 10px 14px 10px;
+  background: $c-white;
   border-bottom: 2px solid $c-neutral-4;
 }
 
 .SizeGuideTabs__content {
-  top: 100px;
+  margin-top: 86px;
   padding: 0 20px;
 
   @include sm {
@@ -21,13 +20,14 @@
 }
 
 .SizeGuideTabs__heading .Tabs__list {
+  text-align: left;
   width: 400px;
 }
 
 .SizeGuideTabs__heading .Tabs__link {
   font-size: 1.4em;
   margin: 15px 20px 5px;
-  padding-bottom: 15px;
+  padding-bottom: 12px;
 }
 
 .SizeGuideTabs__heading .Tabs__link--active {

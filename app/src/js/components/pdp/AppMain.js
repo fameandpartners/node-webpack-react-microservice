@@ -26,7 +26,7 @@ import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
-import FameDifference from './FameDifference';
+// import FameDifference from './FameDifference';
 
 // CSS
 import '../../../css/components/AppMain.scss';
@@ -135,10 +135,6 @@ class AppMain extends Component {
                 }
               </div>
 
-              <div className="layout-container">
-                <FameDifference />
-              </div>
-
             </div>
 
             <div
@@ -175,3 +171,7 @@ AppMain.defaultProps = {
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AppMain));
+
+// <div className="layout-container">
+//   <FameDifference />
+// </div>

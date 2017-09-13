@@ -62,15 +62,13 @@ class AddToCartButton extends Component {
    * Handles adding item to cart
    */
   handleAddToBag() {
-    /* eslint-disable no-unused-vars */
     const {
-      addItemToCart,
+      // addItemToCart,
       $$customizationState,
       $$productState,
       heightValue,
       sizeValue,
     } = this.props;
-    /* eslint-enable no-unused-vars */
     if (!heightValue || !sizeValue) {
       this.props.activateCustomizationDrawer({
         productCustomizationDrawer: CustomizationConstants.SIZE_CUSTOMIZE,
@@ -95,6 +93,7 @@ class AddToCartButton extends Component {
     return (
       <Button
         tall
+        uppercase
         className="AddToCartButton"
         text={this.generateText()}
         handleClick={this.handleAddToBag}
@@ -114,7 +113,7 @@ AddToCartButton.propTypes = {
   productCentsBasePrice: PropTypes.number.isRequired,
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
-  addItemToCart: PropTypes.func.isRequired,
+  // addItemToCart: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
   heightValue: PropTypes.string,
   sizeValue: PropTypes.string,

@@ -204,10 +204,10 @@ class ProductCustomizationStyle extends PureComponent {
       >
         <div className="ProductCustomizationSize__layout-container typography">
           <div className="u-mb-big">
-            <h3 className="h3">
+            <h3 className="h4 u-mb-small">
               Let’s make it fit.
             </h3>
-            <p>
+            <p className="h6 ProductCustomizationSize__sub-heading">
               Just tell us your height and size, and we&apos;ll take care of the tailoring.
             </p>
           </div>
@@ -215,7 +215,7 @@ class ProductCustomizationStyle extends PureComponent {
           <div className="ProductCustomizationSize__height u-mb-normal u-paddingLeft--small">
             <p
               className={classnames(
-                'textAlign--left',
+                'h6 u-mb-xs textAlign--left',
                 {
                   'u-color-red': heightError,
                 },
@@ -259,7 +259,9 @@ class ProductCustomizationStyle extends PureComponent {
           </div>
 
           <div>
-            <p className="textAlign--left u-paddingLeft--small">What&apos;s your size?</p>
+            <p className="h6 u-mb-xs textAlign--left u-paddingLeft--small">
+              What&apos;s your size?
+            </p>
             <div className="ProductCustomizationSize__size grid-12">
               { SIZES.map(s => (
                 <div key={s} className="col-3">
@@ -278,7 +280,7 @@ class ProductCustomizationStyle extends PureComponent {
                 { sizeError ?
                   <p
                     className={classnames(
-                      'u-color-red',
+                      'h6 u-color-red',
                       'textAlign--left',
                       'u-paddingLeft--small',
                     )}
@@ -290,7 +292,6 @@ class ProductCustomizationStyle extends PureComponent {
                 <p
                   className={classnames(
                     'link',
-                    'link--static',
                     'textAlign--left',
                     'u-paddingLeft--small',
                   )}

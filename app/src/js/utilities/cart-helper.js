@@ -4,6 +4,9 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable radix */
 
+// polyfills
+import win from '../polyfills/windowPolyfill';
+
 /**
  *  This helper file handles the legacy checkout code POST.
  */
@@ -29,7 +32,7 @@ function mapSizeIdFromSortKey(sortKey) {
    *  rewriting the size selection component.
    */
 
-  const sizeArr = window.PdpDataFull.product.sizes.table.default;
+  const sizeArr = win.PdpDataFull.product.sizes.table.default;
 
   return sizeArr.filter(i => i.table.sort_key === Number(sortKey))[0].table.id;
 }
@@ -55,29 +58,25 @@ function transformLineItem(lineItem) {
     color_id: lineItem.color.id,
     customizations_ids: lineItem.addons.map(a => a.id),
     dress_variant_id: getDressVariantId(
-      window.PdpDataFull.product.available_options.table.variants,
+      win.PdpDataFull.product.available_options.table.variants,
       lineItem.color.id,
       sizeId),
     height_unit: lineItem.selectedMeasurementMetric,
     height_value: lineItem.selectedHeightValue,
     making_options_ids: null,
     size_id: sizeId,
-    variant_id: window ? window.PdpDataFull.product.master_id : null,
+    variant_id: win ? win.PdpDataFull.product.master_id : null,
   };
-
-  console.group('transformLineItem()');
-  console.log(lineItem);
-  console.groupEnd();
 
   return transformed;
 }
 
 export function addToCart(item) {
-  if (window.app && window.app.shopping_cart) {
+  if (win.app && win.app.shopping_cart) {
     const transformedLineItem = transformLineItem(item);
     console.log(transformedLineItem);
 
-    window.app.shopping_cart.addProduct(transformedLineItem);
+    win.app.shopping_cart.addProduct(transformedLineItem);
   }
 }
 

@@ -28,6 +28,7 @@ class Button extends Component {
       tall,
       tertiary,
       text,
+      uppercase,
       handleClick,
       passedRef,
     } = this.props;
@@ -47,6 +48,7 @@ class Button extends Component {
               'Button--square': square,
               'Button--tall': tall,
               'Button--tertiary': tertiary,
+              'Button--uppercase': uppercase,
             },
           )
         }
@@ -72,6 +74,7 @@ Button.propTypes = {
   tall: PropTypes.bool,
   tertiary: PropTypes.bool,
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  uppercase: PropTypes.bool,
   handleClick: PropTypes.func.isRequired,
 };
 
@@ -86,6 +89,7 @@ Button.defaultProps = {
   tall: false,
   text: 'Submit',
   tertiary: false,
+  uppercase: false,
 };
 
 export default Button;
