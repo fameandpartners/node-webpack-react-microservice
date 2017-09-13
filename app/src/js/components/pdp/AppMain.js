@@ -114,9 +114,7 @@ class AppMain extends Component {
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? <ProductDisplayOptionsTouch />
                 : (
-                  <div>
-                    <ProductOptions />
-                  </div>
+                  <ProductOptions />
                 )
               }
 

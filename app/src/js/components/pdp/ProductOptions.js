@@ -5,7 +5,6 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
-import classnames from 'classnames';
 
 // Utilities
 import { formatCents } from '../../utilities/accounting';
@@ -22,8 +21,8 @@ import ModalConstants from '../../constants/ModalConstants';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
+import ExpressMaking from './ExpressMaking';
 import ProductSecondaryActions from './ProductSecondaryActions';
-import Checkbox from '../form/Checkbox';
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
@@ -205,8 +204,6 @@ class ProductOptions extends Component {
       selectedDressSize,
       selectedHeightValue,
       expressMakingAvailable,
-      colorId,
-      productDefaultColors,
     } = this.props;
 
     return (
@@ -258,46 +255,7 @@ class ProductOptions extends Component {
             </div>
             {
               expressMakingAvailable
-              ? <div className="grid expressMaking__content u-mb-small">
-                <div className="col-1">
-                  <Checkbox
-                    id="express_making"
-                    onChange={this.setExpressStatus}
-                    disabled={!this.isExpressEligible(colorId, productDefaultColors)}
-                  />
-                </div>
-                <div className="col-7 u-text-align-left">
-                  <p className="expressMaking__content--headline">
-                    Make it Express + $30
-                  </p>
-                  <p className="expressMaking__content--subHeadline">
-                    Get it in 4-6 business days
-                  </p>
-                  <p
-                    className={classnames(
-                      'expressMaking__content--subHeadline',
-                      {
-                        'expressMaking__content--error': colorId && !this.isExpressEligible(colorId, productDefaultColors),
-                      },
-                  )}
-                  >
-                    Only available for Recommended Colors
-                  </p>
-                </div>
-                <div className="col-4">
-                  <div>
-                    <a
-                      href="/terms#collapse-shipping"
-                      className={classnames(
-                        'u-text-decoration--underline',
-                        'expressMaking__content--link',
-                      )}
-                    >
-                      Learn More
-                    </a>
-                  </div>
-                </div>
-              </div> : null
+              ? <ExpressMaking /> : null
             }
             <div className="ProductOptions__additional-info u-mb-normal">
               <p>

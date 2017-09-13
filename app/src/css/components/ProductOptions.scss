@@ -73,6 +73,11 @@
 
 .expressMaking__content--link {
   color: $c-black;
+  font-size: 12px;
+
+  @include md {
+    font-size: 14px;
+  };
 }
 
 .expressMaking__content--error {
