@@ -180,23 +180,6 @@ class ProductOptions extends Component {
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
   }
 
-  isExpressEligible(colorId, defaultColors) {
-    return defaultColors.filter(color => color.id === colorId).length > 0;
-  }
-
-  setExpressStatus() {
-    const { expressMakingStatus, colorId, productDefaultColors } = this.props;
-    if (this.isExpressEligible(colorId, productDefaultColors)) {
-      this.props.setExpressMakingStatus(!expressMakingStatus);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.colorId !== this.props.colorId) {
-      this.props.setExpressMakingStatus(false);
-    }
-  }
-
   render() {
     const {
       productTitle,
@@ -308,10 +291,7 @@ ProductOptions.propTypes = {
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
-  setExpressMakingStatus: PropTypes.func,
-  expressMakingStatus: PropTypes.bool,
   expressMakingAvailable: PropTypes.bool,
-  productDefaultColors: PropTypes.arrayOf(PropTypes.object),
 };
 
 ProductOptions.defaultProps = {
@@ -320,10 +300,7 @@ ProductOptions.defaultProps = {
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
-  setExpressMakingStatus: noop,
-  expressMakingStatus: false,
   expressMakingAvailable: false,
-  productDefaultColors: [],
   colorId: null,
   colorName: '',
   colorHexValue: '',
