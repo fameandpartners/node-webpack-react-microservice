@@ -20,6 +20,8 @@ class ColorSwatches extends PureComponent {
   generateColorSwatch(color, price = 0) {
     const { temporaryColorId } = this.props;
     const isActive = temporaryColorId === color.id;
+    const hasPatternUrl = !!color.patternUrl;
+    const background = hasPatternUrl ? `url(${color.patternUrl})` : color.hexValue;
 
     return (
       <div
@@ -33,9 +35,14 @@ class ColorSwatches extends PureComponent {
             'col u-cursor--pointer u-height--full u-position--relative',
             { 'ColorSwatches__wrapper--active': isActive },
           ])}
-          style={{ background: color.hexValue }}
+          style={{ background }}
         >
-          <div className="ColorSwatches__swatch u-flex">
+          <div
+            className={classnames(
+              'ColorSwatches__swatch u-flex',
+              { 'ColorSwatches__swatch--pattern': hasPatternUrl },
+            )}
+          >
             <span
               className={classnames(
                 'ColorSwatches__touch-display-text',

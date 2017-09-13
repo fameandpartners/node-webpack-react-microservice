@@ -8,8 +8,16 @@
   content: '';
 }
 
+.ColorSwatches__swatch--pattern::after {
+  padding-top: 20%;
+}
+
 .ColorSwatches__swatch--dark {
   color: $c-white;
+}
+
+.ColorSwatches__wrapper {
+  background-size: cover;
 }
 
 .ColorSwatches__wrapper--active {

@@ -51,6 +51,7 @@ function stateToProps(state) {
     colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
+    patternUrl: selectedColor.get('patternUrl'),
 
     // SELECTIONS
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
@@ -87,7 +88,9 @@ class ProductOptions extends Component {
       colorCentsTotal,
       colorName,
       colorHexValue,
+      patternUrl,
     } = this.props;
+    const background = patternUrl ? `url(${patternUrl})` : colorHexValue;
 
     return (
       <span>
@@ -97,7 +100,7 @@ class ProductOptions extends Component {
           : null
         }
         <span
-          style={{ background: colorHexValue }}
+          style={{ background }}
           className="ProductOptions__color-swatch u-display--inline-block"
         />
       </span>
@@ -264,6 +267,7 @@ ProductOptions.propTypes = {
   colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
+  patternUrl: PropTypes.string.isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({

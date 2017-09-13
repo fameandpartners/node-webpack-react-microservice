@@ -95,9 +95,9 @@ class App extends Component {
       const { color, customizations } = extractAndWhitelistQueryStringCustomizations(
         $$productDefaultColors.toJS().concat($$productSecondaryColors.toJS()),
         $$addonOptions.toJS(),
-    );
+      );
 
-      if (color.id) {
+      if (color && color.id) {
         selectProductColor({ selectedColor: color });
       }
 
@@ -138,9 +138,9 @@ class App extends Component {
 
 App.propTypes = {
   lockBody: PropTypes.bool.isRequired,
-  $$addonOptions: ImmutablePropTypes.map.isRequired,
-  $$productDefaultColors: ImmutablePropTypes.map.isRequired,
-  $$productSecondaryColors: ImmutablePropTypes.map.isRequired,
+  $$addonOptions: ImmutablePropTypes.list.isRequired,
+  $$productDefaultColors: ImmutablePropTypes.list.isRequired,
+  $$productSecondaryColors: ImmutablePropTypes.list.isRequired,
   selectProductColor: PropTypes.func.isRequired,
   setShareableQueryParams: PropTypes.func.isRequired,
   updateCustomizationStyleSelection: PropTypes.func.isRequired,

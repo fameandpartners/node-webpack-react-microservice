@@ -1,163 +1,135 @@
 {
   "paths": {
-    "79": "/dresses/dress-the-lee-dress-1611?color=pale-blue",
-    "default": "/dresses/dress-the-lee-dress-1611?color=pale-blue"
+    "368": "/dresses/dress-rosalita-dress-1125?clr=368&color=rosewater-floral",
+    "default": "/dresses/dress-rosalita-dress-1125?clr=368"
   },
   "product": {
-    "id": 1611,
-    "sku": "fp2578",
-    "name": "The Lee Dress",
+    "price": {
+      "price": {
+        "amount": "299.0",
+        "currency": "USD",
+        "id": 69634,
+        "variant_id": 44276
+      }
+    },
     "images": [
       {
         "table": {
-          "id": 37619,
+          "id": 31519,
           "position": 0,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/original/fp2578-pale_blue-front.jpg?1500591656",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/product/fp2578-pale_blue-front.jpg?1500591656",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/large/fp2578-pale_blue-front.jpg?1500591656",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/xlarge/fp2578-pale_blue-front.jpg?1500591656",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/small/fp2578-pale_blue-front.jpg?1500591656",
-          "color": "pale-blue",
-          "color_id": 79,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/original/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/product/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/large/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/xlarge/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/small/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+          "color": "rosewater-floral",
+          "color_id": 368,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37623,
+          "id": 31514,
           "position": 1,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37623/original/fp2578-pale_blue-1.jpg?1500591659",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37623/product/fp2578-pale_blue-1.jpg?1500591659",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37623/large/fp2578-pale_blue-1.jpg?1500591659",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37623/xlarge/fp2578-pale_blue-1.jpg?1500591659",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37623/small/fp2578-pale_blue-1.jpg?1500591659",
-          "color": "pale-blue",
-          "color_id": 79,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31514/original/fp2050-rosewater_floral-2.jpg?1471292809",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31514/product/fp2050-rosewater_floral-2.jpg?1471292809",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31514/large/fp2050-rosewater_floral-2.jpg?1471292809",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31514/xlarge/fp2050-rosewater_floral-2.jpg?1471292809",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31514/small/fp2050-rosewater_floral-2.jpg?1471292809",
+          "color": "rosewater-floral",
+          "color_id": 368,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37622,
+          "id": 31187,
           "position": 2,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37622/original/fp2578-pale_blue-2.jpg?1500591658",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37622/product/fp2578-pale_blue-2.jpg?1500591658",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37622/large/fp2578-pale_blue-2.jpg?1500591658",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37622/xlarge/fp2578-pale_blue-2.jpg?1500591658",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37622/small/fp2578-pale_blue-2.jpg?1500591658",
-          "color": "pale-blue",
-          "color_id": 79,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31187/original/fp2050-rosewater_floral-3.jpg?1471291831",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31187/product/fp2050-rosewater_floral-3.jpg?1471291831",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31187/large/fp2050-rosewater_floral-3.jpg?1471291831",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31187/xlarge/fp2050-rosewater_floral-3.jpg?1471291831",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31187/small/fp2050-rosewater_floral-3.jpg?1471291831",
+          "color": "rosewater-floral",
+          "color_id": 368,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37624,
+          "id": 31513,
           "position": 3,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37624/original/fp2578-pale_blue-3.jpg?1500591660",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37624/product/fp2578-pale_blue-3.jpg?1500591660",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37624/large/fp2578-pale_blue-3.jpg?1500591660",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37624/xlarge/fp2578-pale_blue-3.jpg?1500591660",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37624/small/fp2578-pale_blue-3.jpg?1500591660",
-          "color": "pale-blue",
-          "color_id": 79,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31513/original/fp2050-rosewater_floral-front.jpg?1471292808",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31513/product/fp2050-rosewater_floral-front.jpg?1471292808",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31513/large/fp2050-rosewater_floral-front.jpg?1471292808",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31513/xlarge/fp2050-rosewater_floral-front.jpg?1471292808",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31513/small/fp2050-rosewater_floral-front.jpg?1471292808",
+          "color": "rosewater-floral",
+          "color_id": 368,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37621,
+          "id": 31515,
           "position": 4,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37621/original/fp2578-pale_blue-4.jpg?1500591657",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37621/product/fp2578-pale_blue-4.jpg?1500591657",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37621/large/fp2578-pale_blue-4.jpg?1500591657",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37621/xlarge/fp2578-pale_blue-4.jpg?1500591657",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37621/small/fp2578-pale_blue-4.jpg?1500591657",
-          "color": "pale-blue",
-          "color_id": 79,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31515/original/fp2050-rosewater_floral-crop.jpg?1471292810",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31515/product/fp2050-rosewater_floral-crop.jpg?1471292810",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31515/large/fp2050-rosewater_floral-crop.jpg?1471292810",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31515/xlarge/fp2050-rosewater_floral-crop.jpg?1471292810",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31515/small/fp2050-rosewater_floral-crop.jpg?1471292810",
+          "color": "rosewater-floral",
+          "color_id": 368,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37618,
+          "id": 31517,
           "position": 5,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37618/original/fp2578-pale_blue-front-crop.jpg?1500591655",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37618/product/fp2578-pale_blue-front-crop.jpg?1500591655",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37618/large/fp2578-pale_blue-front-crop.jpg?1500591655",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37618/xlarge/fp2578-pale_blue-front-crop.jpg?1500591655",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37618/small/fp2578-pale_blue-front-crop.jpg?1500591655",
-          "color": "pale-blue",
-          "color_id": 79,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31517/original/fp2050-rosewater_floral-4.jpg?1471292811",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31517/product/fp2050-rosewater_floral-4.jpg?1471292811",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31517/large/fp2050-rosewater_floral-4.jpg?1471292811",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31517/xlarge/fp2050-rosewater_floral-4.jpg?1471292811",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31517/small/fp2050-rosewater_floral-4.jpg?1471292811",
+          "color": "rosewater-floral",
+          "color_id": 368,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37625,
-          "position": 5,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37625/original/fp2578-pale_blue-5.jpg?1500591660",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37625/product/fp2578-pale_blue-5.jpg?1500591660",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37625/large/fp2578-pale_blue-5.jpg?1500591660",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37625/xlarge/fp2578-pale_blue-5.jpg?1500591660",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37625/small/fp2578-pale_blue-5.jpg?1500591660",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 37620,
+          "id": 31518,
           "position": 6,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37620/original/fp2578-pale_blue-crop.jpg?1500591657",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37620/product/fp2578-pale_blue-crop.jpg?1500591657",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37620/large/fp2578-pale_blue-crop.jpg?1500591657",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37620/xlarge/fp2578-pale_blue-crop.jpg?1500591657",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37620/small/fp2578-pale_blue-crop.jpg?1500591657",
-          "color": "pale-blue",
-          "color_id": 79,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31518/original/fp2050-rosewater_floral-1.jpg?1471292812",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31518/product/fp2050-rosewater_floral-1.jpg?1471292812",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31518/large/fp2050-rosewater_floral-1.jpg?1471292812",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31518/xlarge/fp2050-rosewater_floral-1.jpg?1471292812",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31518/small/fp2050-rosewater_floral-1.jpg?1471292812",
+          "color": "rosewater-floral",
+          "color_id": 368,
           "size": null,
           "size_id": null
         }
       }
     ],
-    "price": {
-      "price": {
-        "amount": "249.0",
-        "currency": "USD",
-        "id": 85092,
-        "variant_id": 52058
-      }
-    },
-    "fast_making": false,
-    "prices": {
-      "currency": "USD",
-      "original_amount": "249.0",
-      "sale_amount": null,
-      "discount_amount": null,
-      "original_string": "$249.00",
-      "sale_string": null,
-      "discount_string": null
-    },
     "default_image": {
       "table": {
-        "id": 37619,
+        "id": 31519,
         "position": 0,
-        "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/original/fp2578-pale_blue-front.jpg?1500591656",
-        "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/product/fp2578-pale_blue-front.jpg?1500591656",
-        "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/large/fp2578-pale_blue-front.jpg?1500591656",
-        "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/xlarge/fp2578-pale_blue-front.jpg?1500591656",
-        "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/small/fp2578-pale_blue-front.jpg?1500591656",
-        "color": "pale-blue",
-        "color_id": 79,
+        "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/original/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/product/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/large/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/xlarge/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/small/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "color": "rosewater-floral",
+        "color_id": 368,
         "size": null,
         "size_id": null
       }
@@ -166,162 +138,189 @@
       {
         "taxon": {
           "taxon": {
-            "created_at": "2015-10-13T16:07:29.716-07:00",
+            "created_at": "2017-03-24T09:57:29.601-07:00",
             "delivery_period": "7 - 10 business days",
             "description": "",
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 258,
-            "lft": 330,
+            "id": 383,
+            "lft": 248,
             "meta_description": "",
             "meta_keywords": null,
             "meta_title": "",
-            "name": "New This Week",
-            "parent_id": 32,
-            "permalink": "edits/new-this-week",
-            "position": 39,
-            "published_at": "2015-10-12T17:00:00.000-07:00",
-            "rgt": 331,
-            "taxonomy_id": 8,
+            "name": "Dress",
+            "parent_id": 23,
+            "permalink": "style/dress",
+            "position": 103,
+            "published_at": "2017-03-19T00:00:00.000-07:00",
+            "rgt": 249,
+            "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.588-07:00"
+            "updated_at": "2017-08-21T15:59:42.386-07:00"
           }
         }
       },
       {
         "taxon": {
           "taxon": {
-            "created_at": "2017-06-28T10:12:40.902-07:00",
-            "delivery_period": "12 - 15 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 389,
-            "lft": 370,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "",
-            "name": "NO KEEP SAMPLES",
-            "parent_id": 32,
-            "permalink": "edits/no-keep-samples",
-            "position": 58,
-            "published_at": "2017-07-06T00:00:00.000-07:00",
-            "rgt": 371,
-            "taxonomy_id": 8,
-            "title": null,
-            "updated_at": "2017-07-07T09:47:00.024-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2016-09-28T11:43:48.435-07:00",
+            "created_at": "2015-09-19T04:04:58.904-07:00",
             "delivery_period": "7 - 10 business days",
             "description": null,
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 360,
-            "lft": 216,
+            "id": 249,
+            "lft": 32,
             "meta_description": null,
             "meta_keywords": null,
             "meta_title": null,
-            "name": "Cotton",
-            "parent_id": 23,
-            "permalink": "style/cotton",
-            "position": 88,
+            "name": "Long ",
+            "parent_id": 17,
+            "permalink": "collection/long",
+            "position": 0,
             "published_at": null,
-            "rgt": 217,
-            "taxonomy_id": 7,
+            "rgt": 33,
+            "taxonomy_id": 6,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.849-07:00"
+            "updated_at": "2017-08-21T15:59:42.844-07:00"
           }
         }
       },
       {
         "taxon": {
           "taxon": {
-            "created_at": "2015-03-31T16:46:57.578-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": null,
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 227,
-            "lft": 100,
-            "meta_description": null,
-            "meta_keywords": null,
-            "meta_title": null,
-            "name": "Midi",
-            "parent_id": 23,
-            "permalink": "style/midi",
-            "position": 31,
-            "published_at": null,
-            "rgt": 101,
-            "taxonomy_id": 7,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.745-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2016-09-16T11:11:35.027-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": null,
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 332,
-            "lft": 166,
-            "meta_description": null,
-            "meta_keywords": null,
-            "meta_title": null,
-            "name": "buttons",
-            "parent_id": 23,
-            "permalink": "style/buttons",
-            "position": 65,
-            "published_at": null,
-            "rgt": 167,
-            "taxonomy_id": 7,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.670-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2014-02-19T05:12:59.486-08:00",
+            "created_at": "2014-08-06T05:35:57.271-07:00",
             "delivery_period": "7 - 10 business days",
             "description": "",
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 120,
-            "lft": 212,
+            "id": 155,
+            "lft": 56,
+            "meta_description": "",
+            "meta_keywords": null,
+            "meta_title": "Long Dresses, long formal dresses, high quality formal dresses.",
+            "name": "Long",
+            "parent_id": 23,
+            "permalink": "style/long",
+            "position": 0,
+            "published_at": "2015-09-28T17:00:00.000-07:00",
+            "rgt": 57,
+            "taxonomy_id": 7,
+            "title": null,
+            "updated_at": "2017-08-21T15:59:42.751-07:00"
+          }
+        }
+      },
+      {
+        "taxon": {
+          "taxon": {
+            "created_at": "2015-03-25T02:53:43.956-07:00",
+            "delivery_period": "7 - 10 business days",
+            "description": "",
+            "icon_content_type": null,
+            "icon_file_name": null,
+            "icon_file_size": null,
+            "icon_updated_at": null,
+            "id": 215,
+            "lft": 18,
             "meta_description": "",
             "meta_keywords": null,
             "meta_title": "",
-            "name": "V-Neck",
+            "name": "Evening",
+            "parent_id": 17,
+            "permalink": "collection/evening",
+            "position": 0,
+            "published_at": "2017-02-23T00:00:00.000-08:00",
+            "rgt": 19,
+            "taxonomy_id": 6,
+            "title": null,
+            "updated_at": "2017-08-21T15:59:42.603-07:00"
+          }
+        }
+      },
+      {
+        "taxon": {
+          "taxon": {
+            "created_at": "2017-02-15T15:23:31.229-08:00",
+            "delivery_period": "7 - 10 business days",
+            "description": "",
+            "icon_content_type": null,
+            "icon_file_name": null,
+            "icon_file_size": null,
+            "icon_updated_at": null,
+            "id": 377,
+            "lft": 242,
+            "meta_description": "",
+            "meta_keywords": null,
+            "meta_title": "",
+            "name": "Evening-Shop-Embellished",
             "parent_id": 23,
-            "permalink": "style/v-neck",
-            "position": 90,
-            "published_at": "2015-06-23T21:04:42.651-07:00",
-            "rgt": 213,
+            "permalink": "style/evening-shop-embellished",
+            "position": 100,
+            "published_at": "2017-02-15T00:00:00.000-08:00",
+            "rgt": 243,
             "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.894-07:00"
+            "updated_at": "2017-08-21T15:59:42.775-07:00"
+          }
+        }
+      },
+      {
+        "taxon": {
+          "taxon": {
+            "created_at": "2017-02-15T15:23:19.537-08:00",
+            "delivery_period": "7 - 10 business days",
+            "description": "",
+            "icon_content_type": null,
+            "icon_file_name": null,
+            "icon_file_size": null,
+            "icon_updated_at": null,
+            "id": 376,
+            "lft": 240,
+            "meta_description": "",
+            "meta_keywords": null,
+            "meta_title": "",
+            "name": "Evening-Shop-Plunging",
+            "parent_id": 23,
+            "permalink": "style/evening-shop-plunging",
+            "position": 99,
+            "published_at": "2017-02-15T00:00:00.000-08:00",
+            "rgt": 241,
+            "taxonomy_id": 7,
+            "title": null,
+            "updated_at": "2017-08-21T15:59:42.393-07:00"
+          }
+        }
+      },
+      {
+        "taxon": {
+          "taxon": {
+            "created_at": "2014-02-17T04:32:26.905-08:00",
+            "delivery_period": "7 - 10 business days",
+            "description": "",
+            "icon_content_type": null,
+            "icon_file_name": null,
+            "icon_file_size": null,
+            "icon_updated_at": null,
+            "id": 102,
+            "lft": 74,
+            "meta_description": "",
+            "meta_keywords": null,
+            "meta_title": "",
+            "name": "Long Sleeve",
+            "parent_id": 23,
+            "permalink": "style/long-sleeve",
+            "position": 0,
+            "published_at": "2016-07-25T00:00:00.000-07:00",
+            "rgt": 75,
+            "taxonomy_id": 7,
+            "title": null,
+            "updated_at": "2017-08-21T15:59:42.796-07:00"
           }
         }
       },
@@ -355,54 +354,135 @@
       {
         "taxon": {
           "taxon": {
-            "created_at": "2016-07-22T08:54:47.126-07:00",
+            "created_at": "2015-03-31T16:47:20.991-07:00",
             "delivery_period": "7 - 10 business days",
             "description": "",
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 298,
-            "lft": 120,
+            "id": 228,
+            "lft": 102,
             "meta_description": "",
             "meta_keywords": null,
             "meta_title": "",
-            "name": "Fit and Flare",
+            "name": "Maxi",
             "parent_id": 23,
-            "permalink": "style/fit-and-flare",
-            "position": 42,
-            "published_at": "2016-07-21T00:00:00.000-07:00",
-            "rgt": 121,
+            "permalink": "style/maxi",
+            "position": 32,
+            "published_at": "2015-09-30T17:00:00.000-07:00",
+            "rgt": 103,
             "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.734-07:00"
+            "updated_at": "2017-08-21T15:59:42.762-07:00"
           }
         }
       },
       {
         "taxon": {
           "taxon": {
-            "created_at": "2017-03-24T09:57:29.601-07:00",
+            "created_at": "2015-07-22T02:18:05.404-07:00",
+            "delivery_period": "12 - 15 business days",
+            "description": "",
+            "icon_content_type": null,
+            "icon_file_name": null,
+            "icon_file_size": null,
+            "icon_updated_at": null,
+            "id": 242,
+            "lft": 26,
+            "meta_description": "",
+            "meta_keywords": null,
+            "meta_title": "",
+            "name": "Print",
+            "parent_id": 17,
+            "permalink": "collection/print",
+            "position": 0,
+            "published_at": "2015-09-28T00:00:00.000-07:00",
+            "rgt": 27,
+            "taxonomy_id": 6,
+            "title": null,
+            "updated_at": "2017-03-15T14:38:31.885-07:00"
+          }
+        }
+      },
+      {
+        "taxon": {
+          "taxon": {
+            "created_at": "2015-03-25T02:49:34.524-07:00",
+            "delivery_period": "7 - 10 business days",
+            "description": null,
+            "icon_content_type": null,
+            "icon_file_name": null,
+            "icon_file_size": null,
+            "icon_updated_at": null,
+            "id": 210,
+            "lft": 8,
+            "meta_description": null,
+            "meta_keywords": null,
+            "meta_title": null,
+            "name": "Cut Out",
+            "parent_id": 17,
+            "permalink": "collection/cut-out",
+            "position": 0,
+            "published_at": null,
+            "rgt": 9,
+            "taxonomy_id": 6,
+            "title": null,
+            "updated_at": "2017-08-21T15:59:42.846-07:00"
+          }
+        }
+      },
+      {
+        "taxon": {
+          "taxon": {
+            "created_at": "2015-11-03T17:16:55.293-08:00",
             "delivery_period": "7 - 10 business days",
             "description": "",
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 383,
-            "lft": 248,
+            "id": 268,
+            "lft": 422,
             "meta_description": "",
             "meta_keywords": null,
             "meta_title": "",
-            "name": "Dress",
-            "parent_id": 23,
-            "permalink": "style/dress",
-            "position": 103,
-            "published_at": "2017-03-19T00:00:00.000-07:00",
-            "rgt": 249,
-            "taxonomy_id": 7,
+            "name": "Wedding Guests",
+            "parent_id": 184,
+            "permalink": "event/wedding-guests",
+            "position": 19,
+            "published_at": "2015-11-30T16:00:00.000-08:00",
+            "rgt": 423,
+            "taxonomy_id": 10,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.386-07:00"
+            "updated_at": "2017-08-21T15:59:42.684-07:00"
+          }
+        }
+      },
+      {
+        "taxon": {
+          "taxon": {
+            "created_at": "2014-08-06T05:35:57.830-07:00",
+            "delivery_period": "7 - 10 business days",
+            "description": "Find your perfect formal dress.",
+            "icon_content_type": null,
+            "icon_file_name": null,
+            "icon_file_size": null,
+            "icon_updated_at": null,
+            "id": 158,
+            "lft": 388,
+            "meta_description": "",
+            "meta_keywords": null,
+            "meta_title": "Bespoke formal dresses",
+            "name": "formal",
+            "parent_id": 184,
+            "permalink": "event/formal",
+            "position": 0,
+            "published_at": "2015-06-23T17:00:00.000-07:00",
+            "rgt": 389,
+            "taxonomy_id": 10,
+            "title": null,
+            "updated_at": "2017-08-21T15:59:42.600-07:00"
           }
         }
       }
@@ -411,152 +491,67 @@
       {
         "product": {
           "product": {
-            "available_on": "2017-05-17T14:11:32.848-07:00",
+            "available_on": "2016-08-14T00:00:00.000-07:00",
             "count_on_hand": 120,
-            "created_at": "2017-05-18T14:11:54.392-07:00",
+            "created_at": "2016-08-15T13:07:58.446-07:00",
             "deleted_at": null,
-            "description": "<p>Float like a butterfly. The Ortiz is a cotton poplin wrap-style midi dress featuring voluminous sleeves, a plunging neckline, and a kercheif hem. It has an invisible zipper and hook and eye closure.</p>",
+            "description": "<p>Lace up and step out. The Siana is a heavy georgette maxi with an invisible zipper and hook and eye closure.</p>",
             "fabric_card_id": null,
             "factory_id": 3,
             "featured": false,
             "hidden": false,
-            "id": 1526,
-            "meta_description": null,
-            "meta_keywords": null,
-            "name": "The Ortiz Dress",
-            "on_demand": true,
-            "permalink": "the_ortiz_dress",
-            "position": 0,
-            "shipping_category_id": null,
-            "size_chart": "2016_v2",
-            "tax_category_id": null,
-            "updated_at": "2017-06-02T16:17:31.784-07:00"
-          }
-        },
-        "price": {
-          "price": {
-            "amount": "269.0",
-            "currency": "USD",
-            "id": 82067,
-            "variant_id": 50545
-          }
-        },
-        "presenter": {
-          "price": {
-            "price": {
-              "amount": "269.0",
-              "currency": "USD",
-              "id": 82067,
-              "variant_id": 50545
-            }
-          },
-          "product": {
-            "product": {
-              "available_on": "2017-05-17T14:11:32.848-07:00",
-              "count_on_hand": 120,
-              "created_at": "2017-05-18T14:11:54.392-07:00",
-              "deleted_at": null,
-              "description": "<p>Float like a butterfly. The Ortiz is a cotton poplin wrap-style midi dress featuring voluminous sleeves, a plunging neckline, and a kercheif hem. It has an invisible zipper and hook and eye closure.</p>",
-              "fabric_card_id": null,
-              "factory_id": 3,
-              "featured": false,
-              "hidden": false,
-              "id": 1526,
-              "meta_description": null,
-              "meta_keywords": null,
-              "name": "The Ortiz Dress",
-              "on_demand": true,
-              "permalink": "the_ortiz_dress",
-              "position": 0,
-              "shipping_category_id": null,
-              "size_chart": "2016_v2",
-              "tax_category_id": null,
-              "updated_at": "2017-06-02T16:17:31.784-07:00"
-            }
-          }
-        },
-        "site_version": {
-          "site_version": {
-            "active": false,
-            "created_at": "2013-11-21T12:31:12.191-08:00",
-            "currency": "USD",
-            "default": true,
-            "domain": "www.fameandpartners.com",
-            "exchange_rate": "1.0",
-            "exchange_rate_timestamp": "2012-11-21",
-            "id": 2,
-            "locale": "en-US",
-            "name": "USA",
-            "permalink": "us",
-            "updated_at": "2015-08-02T16:13:32.508-07:00",
-            "zone_id": 4
-          }
-        }
-      },
-      {
-        "product": {
-          "product": {
-            "available_on": "2017-05-03T00:00:00.000-07:00",
-            "count_on_hand": 240,
-            "created_at": "2017-05-04T09:28:47.657-07:00",
-            "deleted_at": null,
-            "description": "<p>Command attention. The Irina is a cotton mini dress featuring structured pleating across the hips and a flared skirt. It has an invisible zipper and hook and eye closure.</p>",
-            "fabric_card_id": null,
-            "factory_id": 3,
-            "featured": false,
-            "hidden": false,
-            "id": 1435,
+            "id": 1126,
             "meta_description": "",
             "meta_keywords": null,
-            "name": "The Irina Dress",
+            "name": "Siana Dress",
             "on_demand": true,
-            "permalink": "the_irina_dress",
+            "permalink": "siana_dress",
             "position": 0,
             "shipping_category_id": null,
             "size_chart": "2016_v2",
             "tax_category_id": null,
-            "updated_at": "2017-06-05T11:12:15.936-07:00"
+            "updated_at": "2017-06-02T16:16:30.381-07:00"
           }
         },
         "price": {
           "price": {
-            "amount": "269.0",
+            "amount": "259.0",
             "currency": "USD",
-            "id": 79197,
-            "variant_id": 49110
+            "id": 69660,
+            "variant_id": 44289
           }
         },
         "presenter": {
-          "price": {
-            "price": {
-              "amount": "269.0",
-              "currency": "USD",
-              "id": 79197,
-              "variant_id": 49110
-            }
-          },
           "product": {
             "product": {
-              "available_on": "2017-05-03T00:00:00.000-07:00",
-              "count_on_hand": 240,
-              "created_at": "2017-05-04T09:28:47.657-07:00",
+              "available_on": "2016-08-14T00:00:00.000-07:00",
+              "count_on_hand": 120,
+              "created_at": "2016-08-15T13:07:58.446-07:00",
               "deleted_at": null,
-              "description": "<p>Command attention. The Irina is a cotton mini dress featuring structured pleating across the hips and a flared skirt. It has an invisible zipper and hook and eye closure.</p>",
+              "description": "<p>Lace up and step out. The Siana is a heavy georgette maxi with an invisible zipper and hook and eye closure.</p>",
               "fabric_card_id": null,
               "factory_id": 3,
               "featured": false,
               "hidden": false,
-              "id": 1435,
+              "id": 1126,
               "meta_description": "",
               "meta_keywords": null,
-              "name": "The Irina Dress",
+              "name": "Siana Dress",
               "on_demand": true,
-              "permalink": "the_irina_dress",
+              "permalink": "siana_dress",
               "position": 0,
               "shipping_category_id": null,
               "size_chart": "2016_v2",
               "tax_category_id": null,
-              "updated_at": "2017-06-05T11:12:15.936-07:00"
+              "updated_at": "2017-06-02T16:16:30.381-07:00"
+            }
+          },
+          "price": {
+            "price": {
+              "amount": "259.0",
+              "currency": "USD",
+              "id": 69660,
+              "variant_id": 44289
             }
           }
         },
@@ -581,67 +576,67 @@
       {
         "product": {
           "product": {
-            "available_on": "2017-07-19T15:57:58.462-07:00",
-            "count_on_hand": 10,
-            "created_at": "2017-07-20T15:58:06.935-07:00",
+            "available_on": "2016-07-21T00:00:00.000-07:00",
+            "count_on_hand": 240,
+            "created_at": "2016-07-22T08:55:46.329-07:00",
             "deleted_at": null,
-            "description": "<p>Power stance. The Bisset is a cotton sateen maxi jumpsuit featuring flowing sleeves, side cut-outs, an open back, and a wide-leg fit. It has an invisible zipper with a hook and eye closure.</p>",
+            "description": "<p>She's come undone. The Oscar is a matte satin gown with a single off-the-shoulder, ruffled arm band and a layered, asymmetrical hem. It has an invisible zipper and hook and eye closure.</p>",
             "fabric_card_id": null,
             "factory_id": 3,
             "featured": false,
             "hidden": false,
-            "id": 1602,
-            "meta_description": null,
+            "id": 1099,
+            "meta_description": "",
             "meta_keywords": null,
-            "name": "The Bisset Jumpsuit",
+            "name": "Oscar Dress",
             "on_demand": true,
-            "permalink": "the_bisset_jumpsuit",
+            "permalink": "oscar-dress",
             "position": 0,
             "shipping_category_id": null,
             "size_chart": "2016_v2",
             "tax_category_id": null,
-            "updated_at": "2017-07-20T15:58:10.099-07:00"
+            "updated_at": "2017-06-02T16:16:26.076-07:00"
           }
         },
         "price": {
           "price": {
             "amount": "299.0",
             "currency": "USD",
-            "id": 84738,
-            "variant_id": 51881
+            "id": 68526,
+            "variant_id": 43722
           }
         },
         "presenter": {
-          "price": {
-            "price": {
-              "amount": "299.0",
-              "currency": "USD",
-              "id": 84738,
-              "variant_id": 51881
-            }
-          },
           "product": {
             "product": {
-              "available_on": "2017-07-19T15:57:58.462-07:00",
-              "count_on_hand": 10,
-              "created_at": "2017-07-20T15:58:06.935-07:00",
+              "available_on": "2016-07-21T00:00:00.000-07:00",
+              "count_on_hand": 240,
+              "created_at": "2016-07-22T08:55:46.329-07:00",
               "deleted_at": null,
-              "description": "<p>Power stance. The Bisset is a cotton sateen maxi jumpsuit featuring flowing sleeves, side cut-outs, an open back, and a wide-leg fit. It has an invisible zipper with a hook and eye closure.</p>",
+              "description": "<p>She's come undone. The Oscar is a matte satin gown with a single off-the-shoulder, ruffled arm band and a layered, asymmetrical hem. It has an invisible zipper and hook and eye closure.</p>",
               "fabric_card_id": null,
               "factory_id": 3,
               "featured": false,
               "hidden": false,
-              "id": 1602,
-              "meta_description": null,
+              "id": 1099,
+              "meta_description": "",
               "meta_keywords": null,
-              "name": "The Bisset Jumpsuit",
+              "name": "Oscar Dress",
               "on_demand": true,
-              "permalink": "the_bisset_jumpsuit",
+              "permalink": "oscar-dress",
               "position": 0,
               "shipping_category_id": null,
               "size_chart": "2016_v2",
               "tax_category_id": null,
-              "updated_at": "2017-07-20T15:58:10.099-07:00"
+              "updated_at": "2017-06-02T16:16:26.076-07:00"
+            }
+          },
+          "price": {
+            "price": {
+              "amount": "299.0",
+              "currency": "USD",
+              "id": 68526,
+              "variant_id": 43722
             }
           }
         },
@@ -666,67 +661,152 @@
       {
         "product": {
           "product": {
-            "available_on": "2017-05-03T00:00:00.000-07:00",
-            "count_on_hand": 240,
-            "created_at": "2017-05-04T09:29:40.518-07:00",
+            "available_on": "2016-11-17T00:00:00.000-08:00",
+            "count_on_hand": 120,
+            "created_at": "2016-11-18T07:12:46.220-08:00",
             "deleted_at": null,
-            "description": "<p>Keep cool in The Candella. This is a cotton dress featuring button detailing down the body, splits at either side, and side cutouts. </p>",
+            "description": "<p>Show off them shoulders, girl. The Aurelia is a heavy georgette mermaid-style gown in an exclusive digital print. It features shoulder cutouts, a keyhole neckline, and ties at the nape of the neck and back of the waist. It has an invisible zipper and hook and eye closure. </p>",
             "fabric_card_id": null,
             "factory_id": 3,
             "featured": false,
             "hidden": false,
-            "id": 1454,
+            "id": 1275,
             "meta_description": "",
             "meta_keywords": null,
-            "name": "The Candella Dress",
+            "name": "Aurelia Dress",
             "on_demand": true,
-            "permalink": "the_candella_dress",
+            "permalink": "aurelia_dress",
             "position": 0,
             "shipping_category_id": null,
             "size_chart": "2016_v2",
             "tax_category_id": null,
-            "updated_at": "2017-06-05T11:13:25.680-07:00"
+            "updated_at": "2017-06-02T16:16:53.068-07:00"
           }
         },
         "price": {
           "price": {
-            "amount": "229.0",
+            "amount": "279.0",
             "currency": "USD",
-            "id": 79763,
-            "variant_id": 49393
+            "id": 74469,
+            "variant_id": 46694
           }
         },
         "presenter": {
-          "price": {
-            "price": {
-              "amount": "229.0",
-              "currency": "USD",
-              "id": 79763,
-              "variant_id": 49393
-            }
-          },
           "product": {
             "product": {
-              "available_on": "2017-05-03T00:00:00.000-07:00",
-              "count_on_hand": 240,
-              "created_at": "2017-05-04T09:29:40.518-07:00",
+              "available_on": "2016-11-17T00:00:00.000-08:00",
+              "count_on_hand": 120,
+              "created_at": "2016-11-18T07:12:46.220-08:00",
               "deleted_at": null,
-              "description": "<p>Keep cool in The Candella. This is a cotton dress featuring button detailing down the body, splits at either side, and side cutouts. </p>",
+              "description": "<p>Show off them shoulders, girl. The Aurelia is a heavy georgette mermaid-style gown in an exclusive digital print. It features shoulder cutouts, a keyhole neckline, and ties at the nape of the neck and back of the waist. It has an invisible zipper and hook and eye closure. </p>",
               "fabric_card_id": null,
               "factory_id": 3,
               "featured": false,
               "hidden": false,
-              "id": 1454,
+              "id": 1275,
               "meta_description": "",
               "meta_keywords": null,
-              "name": "The Candella Dress",
+              "name": "Aurelia Dress",
               "on_demand": true,
-              "permalink": "the_candella_dress",
+              "permalink": "aurelia_dress",
               "position": 0,
               "shipping_category_id": null,
               "size_chart": "2016_v2",
               "tax_category_id": null,
-              "updated_at": "2017-06-05T11:13:25.680-07:00"
+              "updated_at": "2017-06-02T16:16:53.068-07:00"
+            }
+          },
+          "price": {
+            "price": {
+              "amount": "279.0",
+              "currency": "USD",
+              "id": 74469,
+              "variant_id": 46694
+            }
+          }
+        },
+        "site_version": {
+          "site_version": {
+            "active": false,
+            "created_at": "2013-11-21T12:31:12.191-08:00",
+            "currency": "USD",
+            "default": true,
+            "domain": "www.fameandpartners.com",
+            "exchange_rate": "1.0",
+            "exchange_rate_timestamp": "2012-11-21",
+            "id": 2,
+            "locale": "en-US",
+            "name": "USA",
+            "permalink": "us",
+            "updated_at": "2015-08-02T16:13:32.508-07:00",
+            "zone_id": 4
+          }
+        }
+      },
+      {
+        "product": {
+          "product": {
+            "available_on": "2016-03-21T00:00:00.000-07:00",
+            "count_on_hand": 120,
+            "created_at": "2015-03-25T02:47:18.730-07:00",
+            "deleted_at": null,
+            "description": "<p>You're a rose among the thorns — now's your time to bloom.</p>\r\n\r\n<p>Rose Floral Two Piece is a lightweight georgette design featuring a solid crop top with a gathered crossover bodice, side cutouts and an exposed back with criss-cross straps. The floral-print skirt has a fitted waistband and elegant box pleats for added volume. </p>",
+            "fabric_card_id": null,
+            "factory_id": 3,
+            "featured": false,
+            "hidden": false,
+            "id": 478,
+            "meta_description": "",
+            "meta_keywords": "",
+            "name": "Rose Floral Two Piece",
+            "on_demand": true,
+            "permalink": "rose_floral_two_piece",
+            "position": 119,
+            "shipping_category_id": null,
+            "size_chart": "2016_v2",
+            "tax_category_id": null,
+            "updated_at": "2017-08-09T15:04:08.290-07:00"
+          }
+        },
+        "price": {
+          "price": {
+            "amount": "299.0",
+            "currency": "USD",
+            "id": 21901,
+            "variant_id": 21454
+          }
+        },
+        "presenter": {
+          "product": {
+            "product": {
+              "available_on": "2016-03-21T00:00:00.000-07:00",
+              "count_on_hand": 120,
+              "created_at": "2015-03-25T02:47:18.730-07:00",
+              "deleted_at": null,
+              "description": "<p>You're a rose among the thorns — now's your time to bloom.</p>\r\n\r\n<p>Rose Floral Two Piece is a lightweight georgette design featuring a solid crop top with a gathered crossover bodice, side cutouts and an exposed back with criss-cross straps. The floral-print skirt has a fitted waistband and elegant box pleats for added volume. </p>",
+              "fabric_card_id": null,
+              "factory_id": 3,
+              "featured": false,
+              "hidden": false,
+              "id": 478,
+              "meta_description": "",
+              "meta_keywords": "",
+              "name": "Rose Floral Two Piece",
+              "on_demand": true,
+              "permalink": "rose_floral_two_piece",
+              "position": 119,
+              "shipping_category_id": null,
+              "size_chart": "2016_v2",
+              "tax_category_id": null,
+              "updated_at": "2017-08-09T15:04:08.290-07:00"
+            }
+          },
+          "price": {
+            "price": {
+              "amount": "299.0",
+              "currency": "USD",
+              "id": 21901,
+              "variant_id": 21454
             }
           }
         },
@@ -758,13 +838,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52059,
+          "id": 44277,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 1,
-          "product_id": 1611,
-          "sku": "FP2578US0AU4C79",
+          "product_id": 1125,
+          "sku": "FP2050US0AU4C368",
           "weight": null,
           "width": null
         }
@@ -777,13 +857,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52060,
+          "id": 44278,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 2,
-          "product_id": 1611,
-          "sku": "FP2578US2AU6C79",
+          "product_id": 1125,
+          "sku": "FP2050US2AU6C368",
           "weight": null,
           "width": null
         }
@@ -796,13 +876,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52061,
+          "id": 44279,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 3,
-          "product_id": 1611,
-          "sku": "FP2578US4AU8C79",
+          "product_id": 1125,
+          "sku": "FP2050US4AU8C368",
           "weight": null,
           "width": null
         }
@@ -815,13 +895,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52062,
+          "id": 44280,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 4,
-          "product_id": 1611,
-          "sku": "FP2578US6AU10C79",
+          "product_id": 1125,
+          "sku": "FP2050US6AU10C368",
           "weight": null,
           "width": null
         }
@@ -834,13 +914,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52063,
+          "id": 44281,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 5,
-          "product_id": 1611,
-          "sku": "FP2578US8AU12C79",
+          "product_id": 1125,
+          "sku": "FP2050US8AU12C368",
           "weight": null,
           "width": null
         }
@@ -853,13 +933,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52064,
+          "id": 44282,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 6,
-          "product_id": 1611,
-          "sku": "FP2578US10AU14C79",
+          "product_id": 1125,
+          "sku": "FP2050US10AU14C368",
           "weight": null,
           "width": null
         }
@@ -872,13 +952,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52065,
+          "id": 44283,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 7,
-          "product_id": 1611,
-          "sku": "FP2578US12AU16C79",
+          "product_id": 1125,
+          "sku": "FP2050US12AU16C368",
           "weight": null,
           "width": null
         }
@@ -891,13 +971,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52066,
+          "id": 44284,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 8,
-          "product_id": 1611,
-          "sku": "FP2578US14AU18C79",
+          "product_id": 1125,
+          "sku": "FP2050US14AU18C368",
           "weight": null,
           "width": null
         }
@@ -910,13 +990,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52067,
+          "id": 44285,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 9,
-          "product_id": 1611,
-          "sku": "FP2578US16AU20C79",
+          "product_id": 1125,
+          "sku": "FP2050US16AU20C368",
           "weight": null,
           "width": null
         }
@@ -929,13 +1009,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52068,
+          "id": 44286,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 10,
-          "product_id": 1611,
-          "sku": "FP2578US18AU22C79",
+          "product_id": 1125,
+          "sku": "FP2050US18AU22C368",
           "weight": null,
           "width": null
         }
@@ -948,13 +1028,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52069,
+          "id": 44287,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 11,
-          "product_id": 1611,
-          "sku": "FP2578US20AU24C79",
+          "product_id": 1125,
+          "sku": "FP2050US20AU24C368",
           "weight": null,
           "width": null
         }
@@ -967,13 +1047,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 52070,
+          "id": 44288,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 12,
-          "product_id": 1611,
-          "sku": "FP2578US22AU26C79",
+          "product_id": 1125,
+          "sku": "FP2050US22AU26C368",
           "weight": null,
           "width": null
         }
@@ -985,9 +1065,9 @@
         "variants": [
           {
             "table": {
-              "id": 52070,
+              "id": 44288,
               "size_id": 145,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -995,9 +1075,9 @@
           },
           {
             "table": {
-              "id": 52069,
+              "id": 44287,
               "size_id": 146,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1005,9 +1085,9 @@
           },
           {
             "table": {
-              "id": 52068,
+              "id": 44286,
               "size_id": 147,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1015,9 +1095,9 @@
           },
           {
             "table": {
-              "id": 52067,
+              "id": 44285,
               "size_id": 148,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1025,9 +1105,9 @@
           },
           {
             "table": {
-              "id": 52066,
+              "id": 44284,
               "size_id": 149,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1035,9 +1115,9 @@
           },
           {
             "table": {
-              "id": 52065,
+              "id": 44283,
               "size_id": 24,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1045,9 +1125,9 @@
           },
           {
             "table": {
-              "id": 52064,
+              "id": 44282,
               "size_id": 23,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1055,9 +1135,9 @@
           },
           {
             "table": {
-              "id": 52063,
+              "id": 44281,
               "size_id": 22,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1065,9 +1145,9 @@
           },
           {
             "table": {
-              "id": 52062,
+              "id": 44280,
               "size_id": 21,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1075,9 +1155,9 @@
           },
           {
             "table": {
-              "id": 52061,
+              "id": 44279,
               "size_id": 20,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1085,9 +1165,9 @@
           },
           {
             "table": {
-              "id": 52060,
+              "id": 44278,
               "size_id": 34,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1095,9 +1175,9 @@
           },
           {
             "table": {
-              "id": 52059,
+              "id": 44277,
               "size_id": 86,
-              "color_id": 79,
+              "color_id": 368,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1280,135 +1360,22 @@
             "default": [
               {
                 "option_value": {
-                  "created_at": "2013-08-08T23:58:38.640-07:00",
-                  "id": 79,
+                  "created_at": "2016-08-15T13:06:52.601-07:00",
+                  "id": 368,
                   "image_content_type": null,
                   "image_file_name": null,
                   "image_file_size": null,
-                  "name": "pale-blue",
+                  "name": "rosewater-floral",
                   "option_type_id": 8,
-                  "position": 36,
-                  "presentation": "Pale Blue",
-                  "updated_at": "2017-01-30T00:55:44.066-08:00",
-                  "use_in_customisation": true,
-                  "value": "#BBD0ED"
-                }
-              }
-            ],
-            "extra": [
-              {
-                "option_value": {
-                  "created_at": "2013-08-06T19:15:45.519-07:00",
-                  "id": 25,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "black",
-                  "option_type_id": 8,
-                  "position": 0,
-                  "presentation": "Black",
-                  "updated_at": "2015-03-25T18:32:56.780-07:00",
-                  "use_in_customisation": true,
-                  "value": "#000000"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2015-11-17T21:02:01.024-08:00",
-                  "id": 283,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "dark-tan",
-                  "option_type_id": 8,
-                  "position": 147,
-                  "presentation": "Dark Tan",
-                  "updated_at": "2016-01-04T15:06:00.767-08:00",
+                  "position": 229,
+                  "presentation": "Rosewater Floral",
+                  "updated_at": "2017-05-23T13:36:09.621-07:00",
                   "use_in_customisation": false,
                   "value": ""
                 }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:26:58.201-07:00",
-                  "id": 70,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "navy",
-                  "option_type_id": 8,
-                  "position": 29,
-                  "presentation": "Navy",
-                  "updated_at": "2017-01-30T00:55:43.623-08:00",
-                  "use_in_customisation": true,
-                  "value": "#0E0E47"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2015-06-04T22:37:57.980-07:00",
-                  "id": 245,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "olive",
-                  "option_type_id": 8,
-                  "position": 117,
-                  "presentation": "Olive",
-                  "updated_at": "2015-06-23T23:01:10.168-07:00",
-                  "use_in_customisation": false,
-                  "value": ""
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2017-01-10T07:49:30.225-08:00",
-                  "id": 388,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "pretty-pink",
-                  "option_type_id": 8,
-                  "position": 248,
-                  "presentation": "Pretty Pink",
-                  "updated_at": "2017-01-10T07:49:30.225-08:00",
-                  "use_in_customisation": false,
-                  "value": "#F7DBE9"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-06T19:15:45.526-07:00",
-                  "id": 26,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "red",
-                  "option_type_id": 8,
-                  "position": 1,
-                  "presentation": "Red",
-                  "updated_at": "2017-01-30T00:55:44.007-08:00",
-                  "use_in_customisation": true,
-                  "value": "#E01B1B"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:02:47.921-07:00",
-                  "id": 38,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "white",
-                  "option_type_id": 8,
-                  "position": 6,
-                  "presentation": "White",
-                  "updated_at": "2014-03-04T12:40:15.476-08:00",
-                  "use_in_customisation": true,
-                  "value": "#FFFFFF"
-                }
               }
             ],
+            "extra": [],
             "default_extra_price": {
               "price": {
                 "amount": "16.0",
@@ -1424,12 +1391,12 @@
             "all": [
               {
                 "table": {
-                  "id": 4613,
-                  "name": "Add Ruffle Arm Bands",
-                  "image": "logo_empty.png",
+                  "id": 2854,
+                  "name": "Long Sleeves",
+                  "image": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/2854/original/1.png",
                   "display_price": {
                     "money": {
-                      "fractional": "900.0",
+                      "fractional": "999.0",
                       "currency": {
                         "id": "aud",
                         "priority": 4,
@@ -1466,12 +1433,12 @@
               },
               {
                 "table": {
-                  "id": 4614,
-                  "name": "Lower Back Neckline",
-                  "image": "logo_empty.png",
+                  "id": 2855,
+                  "name": "Remove Neck Band",
+                  "image": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/2855/original/2.png",
                   "display_price": {
                     "money": {
-                      "fractional": "900.0",
+                      "fractional": "0.0",
                       "currency": {
                         "id": "aud",
                         "priority": 4,
@@ -1508,12 +1475,12 @@
               },
               {
                 "table": {
-                  "id": 4615,
-                  "name": "Make Knee Length",
-                  "image": "logo_empty.png",
+                  "id": 2856,
+                  "name": "Add V Neckline",
+                  "image": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/2856/original/3.png",
                   "display_price": {
                     "money": {
-                      "fractional": "0.0",
+                      "fractional": "999.0",
                       "currency": {
                         "id": "aud",
                         "priority": 4,
@@ -1547,55 +1514,12 @@
                   },
                   "position": 3
                 }
-              },
-              {
-                "table": {
-                  "id": 4616,
-                  "name": "Add Separate Waist Tie",
-                  "image": "logo_empty.png",
-                  "display_price": {
-                    "money": {
-                      "fractional": "900.0",
-                      "currency": {
-                        "id": "aud",
-                        "priority": 4,
-                        "iso_code": "AUD",
-                        "name": "Australian Dollar",
-                        "symbol": "$",
-                        "alternate_symbols": [
-                          "A$"
-                        ],
-                        "subunit": "Cent",
-                        "subunit_to_unit": 100,
-                        "symbol_first": true,
-                        "html_entity": "$",
-                        "decimal_mark": ".",
-                        "thousands_separator": ",",
-                        "iso_numeric": "036"
-                      },
-                      "bank": {
-                        "rounding_method": null,
-                        "rates": {},
-                        "mutex": {}
-                      }
-                    },
-                    "options": {
-                      "with_currency": false,
-                      "symbol_position": "before",
-                      "no_cents": false,
-                      "decimal_mark": ".",
-                      "thousands_separator": ","
-                    }
-                  },
-                  "position": 4
-                }
               }
             ],
             "incompatibilities": {
-              "4613": [],
-              "4614": [],
-              "4615": [],
-              "4616": []
+              "2854": [],
+              "2855": [],
+              "2856": []
             },
             "is_free": false
           }
@@ -1605,77 +1529,15 @@
             "product_making_option": {
               "active": true,
               "currency": "USD",
-              "id": 1803,
+              "id": 1312,
               "option_type": "slow_making",
               "price": "-0.1",
-              "product_id": 1611,
+              "product_id": 1125,
               "variant_id": null
             }
           }
-        ],
-        "addons": {
-          "base_images": [
-            {
-              "name": "FP2578_base-2.png",
-              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1611/cads/1516/web/base-2.png?1500591568",
-              "position": 4,
-              "bit_array": [
-                false,
-                false,
-                true,
-                false
-              ]
-            },
-            {
-              "name": "FP2578_base.png",
-              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1611/cads/1517/web/base-.png?1500591569",
-              "position": 5,
-              "bit_array": [
-                false,
-                false,
-                false,
-                false
-              ]
-            }
-          ],
-          "layer_images": [
-            {
-              "name": "FP2578_layer-3.png",
-              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1611/cads/1513/web/layer-3.png?1500591566",
-              "position": 1,
-              "bit_array": [
-                false,
-                false,
-                false,
-                true
-              ]
-            },
-            {
-              "name": "FP2578_layer-1.png",
-              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1611/cads/1514/web/layer-1.png?1500591567",
-              "position": 2,
-              "bit_array": [
-                false,
-                true,
-                false,
-                false
-              ]
-            },
-            {
-              "name": "FP2578_layer-0.png",
-              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1611/cads/1515/web/layer-0.png?1500591567",
-              "position": 3,
-              "bit_array": [
-                true,
-                false,
-                false,
-                false
-              ]
-            }
-          ]
-        }
-      },
-      "modifiable": true
+        ]
+      }
     },
     "moodboard": {
       "table": {
@@ -1687,24 +1549,55 @@
         },
         "celebrity_item": {
           "table": {
-            "image_url": null,
-            "source": null
+            "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12897/product/celeb.jpg?1471293138",
+            "source": ""
           }
         },
-        "items": []
+        "items": [
+          {
+            "table": {
+              "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12901/product/a190c47d08da5d5459b06a7cfceadf83.jpg?1471293141",
+              "source": ""
+            }
+          },
+          {
+            "table": {
+              "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12900/product/36147e27fe4b30eded46a28624e1e84e.jpg?1471293140",
+              "source": ""
+            }
+          },
+          {
+            "table": {
+              "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12899/product/db423f62e4c0d099e28a0b9e020a60b8.jpg?1471293139",
+              "source": ""
+            }
+          },
+          {
+            "table": {
+              "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12898/product/b98ddae984fe89c883e1e77d10426032.jpg?1471293139",
+              "source": ""
+            }
+          }
+        ]
       }
     },
     "render3d_images": [],
-    "master_id": 52058,
-    "description": "<p>Simple and sweet. The Lee is a cotton sateen midi dress featuring knot detailing at the straps, wooden buttons down the front, and a fit-and-flare skirt.</p>",
+    "id": 1125,
+    "master_id": 44276,
+    "sku": "fp2050",
+    "name": "Rosalita Dress",
+    "description": "<p>Florals from head to toe. The Rosalita is a heavy georgette maxi in an exclusive digital print. It has an invisible zipper and hook and eye closure.</p>",
     "meta_description": "",
-    "permalink": "the_lee_dress",
+    "permalink": "rosalita_dress",
     "is_active": true,
     "is_deleted": false,
     "height_customisable": true,
-    "fabric": "Main: 97% cotton, 3% elastane cotton sateen Trim: button front closure",
-    "fit": "Patricija's measurements are:\nBust: 31in\nWaist: 23in\nHips: 34in\nHeight: 5'11\n\nShe wears a size 2 (AU 6)",
+    "fabric": "Main: 100% polyester heavy georgetteLining: 100% polyester heavy georgette",
+    "fit": "Bianca wears a size AU8/US4 and skirt tall length, her measurements are:Bust: 86cmWaist: 61cmHips: 86cmHeight: 180cm",
+    "size": "Skirt length: 110cm",
+    "style_notes": "",
     "size_chart": "2016_v2",
+    "fast_making": false,
     "standard_days_for_making": "5",
     "customised_days_for_making": "10",
     "default_standard_days_for_making": 5,
@@ -1712,143 +1605,39 @@
     "delivery_period": "12 - 15 business days",
     "fast_making_delivery_period": "4 - 6 business days",
     "cny_delivery_delays": false,
-    "color_id": 79,
-    "color_name": "pale-blue",
-    "making_option_id": 1803,
+    "color_id": 368,
+    "color_name": "rosewater-floral",
+    "making_option_id": 1312,
+    "prices": {
+      "currency": "USD",
+      "original_amount": "299.0",
+      "sale_amount": null,
+      "discount_amount": null,
+      "original_string": "$299.00",
+      "sale_string": null,
+      "discount_string": null
+    },
     "colors": {
       "table": {
         "default": [
           {
             "option_value": {
-              "created_at": "2013-08-08T23:58:38.640-07:00",
-              "id": 79,
+              "created_at": "2016-08-15T13:06:52.601-07:00",
+              "id": 368,
               "image_content_type": null,
               "image_file_name": null,
               "image_file_size": null,
-              "name": "pale-blue",
+              "name": "rosewater-floral",
               "option_type_id": 8,
-              "position": 36,
-              "presentation": "Pale Blue",
-              "updated_at": "2017-01-30T00:55:44.066-08:00",
-              "use_in_customisation": true,
-              "value": "#BBD0ED"
+              "position": 229,
+              "presentation": "Rosewater Floral",
+              "updated_at": "2017-05-23T13:36:09.621-07:00",
+              "use_in_customisation": false,
+              "value": "RosewaterFloral.png"
             }
           }
         ],
-        "extra": [
-          {
-            "option_value": {
-              "created_at": "2013-08-06T19:15:45.519-07:00",
-              "id": 25,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "black",
-              "option_type_id": 8,
-              "position": 0,
-              "presentation": "Black",
-              "updated_at": "2015-03-25T18:32:56.780-07:00",
-              "use_in_customisation": true,
-              "value": "#000000"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2015-11-17T21:02:01.024-08:00",
-              "id": 283,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "dark-tan",
-              "option_type_id": 8,
-              "position": 147,
-              "presentation": "Dark Tan",
-              "updated_at": "2016-01-04T15:06:00.767-08:00",
-              "use_in_customisation": false,
-              "value": ""
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:26:58.201-07:00",
-              "id": 70,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "navy",
-              "option_type_id": 8,
-              "position": 29,
-              "presentation": "Navy",
-              "updated_at": "2017-01-30T00:55:43.623-08:00",
-              "use_in_customisation": true,
-              "value": "#0E0E47"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2015-06-04T22:37:57.980-07:00",
-              "id": 245,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "olive",
-              "option_type_id": 8,
-              "position": 117,
-              "presentation": "Olive",
-              "updated_at": "2015-06-23T23:01:10.168-07:00",
-              "use_in_customisation": false,
-              "value": ""
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2017-01-10T07:49:30.225-08:00",
-              "id": 388,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "pretty-pink",
-              "option_type_id": 8,
-              "position": 248,
-              "presentation": "Pretty Pink",
-              "updated_at": "2017-01-10T07:49:30.225-08:00",
-              "use_in_customisation": false,
-              "value": "#F7DBE9"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-06T19:15:45.526-07:00",
-              "id": 26,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "red",
-              "option_type_id": 8,
-              "position": 1,
-              "presentation": "Red",
-              "updated_at": "2017-01-30T00:55:44.007-08:00",
-              "use_in_customisation": true,
-              "value": "#E01B1B"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:02:47.921-07:00",
-              "id": 38,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "white",
-              "option_type_id": 8,
-              "position": 6,
-              "presentation": "White",
-              "updated_at": "2014-03-04T12:40:15.476-08:00",
-              "use_in_customisation": true,
-              "value": "#FFFFFF"
-            }
-          }
-        ],
+        "extra": [],
         "default_extra_price": {
           "price": {
             "amount": "16.0",
@@ -1861,15 +1650,15 @@
     },
     "featured_image": {
       "table": {
-        "id": 37619,
+        "id": 31519,
         "position": 0,
-        "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/original/fp2578-pale_blue-front.jpg?1500591656",
-        "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/product/fp2578-pale_blue-front.jpg?1500591656",
-        "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/large/fp2578-pale_blue-front.jpg?1500591656",
-        "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/xlarge/fp2578-pale_blue-front.jpg?1500591656",
-        "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/small/fp2578-pale_blue-front.jpg?1500591656",
-        "color": "pale-blue",
-        "color_id": 79,
+        "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/original/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/product/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/large/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/xlarge/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31519/small/fp2050-rosewater_floral-front-crop.jpg?1471292813",
+        "color": "rosewater-floral",
+        "color_id": 368,
         "size": null,
         "size_id": null
       }
@@ -2053,46 +1842,39 @@
   },
   "images": [
     {
-      "id": 37619,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/original/fp2578-pale_blue-front.jpg?1500591656",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37619/product/fp2578-pale_blue-front.jpg?1500591656",
-      "color_id": 79,
-      "alt": "The Lee Dress"
+      "id": 31514,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31514/original/fp2050-rosewater_floral-2.jpg?1471292809",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31514/product/fp2050-rosewater_floral-2.jpg?1471292809",
+      "color_id": 368,
+      "alt": "Rosalita Dress"
     },
     {
-      "id": 37623,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37623/original/fp2578-pale_blue-1.jpg?1500591659",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37623/product/fp2578-pale_blue-1.jpg?1500591659",
-      "color_id": 79,
-      "alt": "The Lee Dress"
+      "id": 31187,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31187/original/fp2050-rosewater_floral-3.jpg?1471291831",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31187/product/fp2050-rosewater_floral-3.jpg?1471291831",
+      "color_id": 368,
+      "alt": "Rosalita Dress"
     },
     {
-      "id": 37622,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37622/original/fp2578-pale_blue-2.jpg?1500591658",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37622/product/fp2578-pale_blue-2.jpg?1500591658",
-      "color_id": 79,
-      "alt": "The Lee Dress"
+      "id": 31513,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31513/original/fp2050-rosewater_floral-front.jpg?1471292808",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31513/product/fp2050-rosewater_floral-front.jpg?1471292808",
+      "color_id": 368,
+      "alt": "Rosalita Dress"
     },
     {
-      "id": 37624,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37624/original/fp2578-pale_blue-3.jpg?1500591660",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37624/product/fp2578-pale_blue-3.jpg?1500591660",
-      "color_id": 79,
-      "alt": "The Lee Dress"
+      "id": 31517,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31517/original/fp2050-rosewater_floral-4.jpg?1471292811",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31517/product/fp2050-rosewater_floral-4.jpg?1471292811",
+      "color_id": 368,
+      "alt": "Rosalita Dress"
     },
     {
-      "id": 37621,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37621/original/fp2578-pale_blue-4.jpg?1500591657",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37621/product/fp2578-pale_blue-4.jpg?1500591657",
-      "color_id": 79,
-      "alt": "The Lee Dress"
-    },
-    {
-      "id": 37625,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37625/original/fp2578-pale_blue-5.jpg?1500591660",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37625/product/fp2578-pale_blue-5.jpg?1500591660",
-      "color_id": 79,
-      "alt": "The Lee Dress"
+      "id": 31518,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31518/original/fp2050-rosewater_floral-1.jpg?1471292812",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31518/product/fp2050-rosewater_floral-1.jpg?1471292812",
+      "color_id": 368,
+      "alt": "Rosalita Dress"
     }
   ],
   "sizeChart": [
