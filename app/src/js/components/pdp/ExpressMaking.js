@@ -12,6 +12,7 @@ import Checkbox from '../form/Checkbox';
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
 // CSS
+import '../../../css/components/ExpressMaking.scss';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
