@@ -1,0 +1,27 @@
+.ExpressMaking__content {
+  background: $c-background-gray;
+  border: $c-border-gray;
+  padding: 19px 13px 0 8px;
+}
+
+.ExpressMaking__content--headline {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ExpressMaking__content--subHeadline {
+  font-size: 12px;
+}
+
+.ExpressMaking__content--link {
+  color: $c-black;
+  font-size: 12px;
+
+  @include md {
+    font-size: 14px;
+  };
+}
+
+.ExpressMaking__content--error {
+  color: $c-red;
+}

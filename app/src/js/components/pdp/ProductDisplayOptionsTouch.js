@@ -12,6 +12,7 @@ import { addonSelectionDisplayText } from '../../utilities/pdp';
 
 // UI Components
 import ProductImageSlider from './ProductImageSlider';
+import ExpressMaking from './ExpressMaking';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -100,6 +101,13 @@ class ProductDisplayOptionsTouch extends Component {
             </div>
           </div>
         </div>
+
+        <div className="grid-center">
+          <div className="col-11">
+            <ExpressMaking mobile />
+          </div>
+        </div>
+
       </div>
     );
   }

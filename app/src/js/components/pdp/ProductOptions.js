@@ -21,6 +21,7 @@ import ModalConstants from '../../constants/ModalConstants';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
+import ExpressMaking from './ExpressMaking';
 import ProductSecondaryActions from './ProductSecondaryActions';
 
 // Actions
@@ -45,6 +46,7 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
+    productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -58,12 +60,15 @@ function stateToProps(state) {
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
     selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
+    expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
   };
 }
 
 
 function dispatchToProps(dispatch) {
-  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+  const {
+    activateCustomizationDrawer,
+  } = bindActionCreators(CustomizationActions, dispatch);
   const actions = bindActionCreators(ModalActions, dispatch);
   return {
     activateCustomizationDrawer,
@@ -227,6 +232,7 @@ class ProductOptions extends Component {
             <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
+            <ExpressMaking />
             <div className="ProductOptions__additional-info u-mb-normal">
               <p>
                 $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
@@ -260,10 +266,10 @@ ProductOptions.propTypes = {
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   // COLOR
-  colorId: PropTypes.number.isRequired,
+  colorId: PropTypes.number,
   colorCentsTotal: PropTypes.number,
-  colorName: PropTypes.string.isRequired,
-  colorHexValue: PropTypes.string.isRequired,
+  colorName: PropTypes.string,
+  colorHexValue: PropTypes.string,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -286,6 +292,9 @@ ProductOptions.defaultProps = {
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
+  colorId: null,
+  colorName: '',
+  colorHexValue: '',
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);
