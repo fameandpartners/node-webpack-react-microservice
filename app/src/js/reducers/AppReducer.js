@@ -23,8 +23,7 @@ function setURLQueryParams(queryStr) {
     const baseUrl = `${win.location.protocol}//${win.location.host}${win.location.pathname}`;
     const baseQuery = queryStr ? `?${queryStr}` : '';
     const newUrl = baseUrl + baseQuery;
-    // TODO: @elgrecode IF we don't want to add a history state we can use replaceState
-    win.history.pushState({ path: newUrl }, '', newUrl);
+    win.history.replaceState({ path: newUrl }, '', newUrl);
   }
 }
 
