@@ -60,7 +60,7 @@ function stateToProps(state) {
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
     selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
-    expressMakingStatus: state.$$customizationState.get('express_making_selected'),
+    expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
   };
 }
 

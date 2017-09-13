@@ -28,7 +28,7 @@ function stateToProps(state) {
     colorId: selectedColor.get('id'),
 
     // SELECTIONS
-    expressMakingStatus: state.$$customizationState.get('express_making_selected'),
+    expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
   };
 }
 
@@ -115,20 +115,18 @@ class ExpressMaking extends Component {
 
           </div>
           <div className="col-3_sm-9">
-            <div
-              className={classnames(
-                {
-                  'u-display--none': mobile,
-                },
-            )}
-            >
-              <a
-                href="/terms#collapse-shipping"
-                className="u-text-decoration--underline ExpressMaking__content--link"
-              >
-                Learn More
-              </a>
-            </div>
+            {
+            !mobile ?
+              <div>
+                <a
+                  href="/terms#collapse-shipping"
+                  className="u-text-decoration--underline ExpressMaking__content--link"
+                >
+                  Learn More
+                </a>
+              </div>
+              : null
+          }
           </div>
         </div>
       );
