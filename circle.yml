@@ -1,6 +1,13 @@
 dependencies:
   pre:
     - npm install -g npm
+  override:
+    - npm install:
+        pwd:
+          app
+    - npm build
+        pwd:
+          app
 
 machine:
   node:
@@ -8,7 +15,7 @@ machine:
 
 test:
   override:
-    - echo "done"
+    - "true"
 
 deployment:
   qa:
