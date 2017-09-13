@@ -7,6 +7,8 @@ import Clipboard from 'clipboard';
 import Button from '../generic/Button';
 import Input from '../form/Input';
 
+// CSS
+import '../../../css/components/CopyLink.scss';
 
 class CopyLink extends Component {
   constructor(props) {
@@ -14,16 +16,18 @@ class CopyLink extends Component {
 
     this.state = {
       clipboardError: false,
+      copySuccess: false,
+      copyLinkText: 'Copy Link',
     };
 
     autobind(this);
   }
 
   handleCopyLinkClick() {
-    /* eslint-disable no-console */
-    console.log(`Copied Share Link: ${this.props.url}`);
-    /* eslint-enable no-console */
-    // TO-DO: Link Mike's Success Toast
+    this.setState({
+      copySuccess: true,
+      copyLinkText: 'Copied Link!',
+    });
   }
 
   handleCopyLinkClickError() {
@@ -52,16 +56,18 @@ class CopyLink extends Component {
 
     const {
       clipboardError,
+      copySuccess,
+      copyLinkText,
     } = this.state;
 
     return (
       <div>
         <Button
           tall
-          secondary
+          secondary={!copySuccess}
           passedRef={i => this.copyTrigger = i}
-          className="Modal__content--med-margin-bottom"
-          text="Copy Link"
+          className="CopyLinkButton Modal__content--med-margin-bottom"
+          text={copyLinkText}
           handleClick={this.handleCopyLinkClick}
         />
         {
