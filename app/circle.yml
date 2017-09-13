@@ -1,14 +1,6 @@
 dependencies:
   pre:
     - npm install -g npm
-  override:
-    - npm install -g npm
-    - npm install:
-        pwd:
-          app
-    - npm build
-        pwd:
-          app
 
 machine:
   node:
