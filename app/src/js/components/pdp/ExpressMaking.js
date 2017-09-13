@@ -78,7 +78,7 @@ class ExpressMaking extends Component {
       <div>
         {
         expressMakingAvailable
-        ? <div className="grid-center-spaceAround expressMaking__content u-mb-small">
+        ? <div className="grid-center-spaceAround ExpressMaking__content u-mb-small">
           <div className="col-1">
             <Checkbox
               id="express_making"
@@ -87,17 +87,17 @@ class ExpressMaking extends Component {
             />
           </div>
           <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
-            <p className="expressMaking__content--headline">
+            <p className="ExpressMaking__content--headline">
               Make it Express + $30
             </p>
-            <p className="expressMaking__content--subHeadline">
+            <p className="ExpressMaking__content--subHeadline">
               Get it in 4-6 business days
             </p>
             <p
               className={classnames(
-                'expressMaking__content--subHeadline',
+                'ExpressMaking__content--subHeadline',
                 {
-                  'expressMaking__content--error': colorId && !this.isExpressEligible(colorId, productDefaultColors),
+                  'ExpressMaking__content--error': colorId && !this.isExpressEligible(colorId, productDefaultColors),
                 },
             )}
             >
@@ -110,7 +110,7 @@ class ExpressMaking extends Component {
             >
               <a
                 href="/terms#collapse-shipping"
-                className="u-text-decoration--underline expressMaking__content--link"
+                className="u-text-decoration--underline ExpressMaking__content--link"
               >
             Learn More
           </a>
@@ -126,7 +126,7 @@ class ExpressMaking extends Component {
             >
               <a
                 href="/terms#collapse-shipping"
-                className="u-text-decoration--underline expressMaking__content--link"
+                className="u-text-decoration--underline ExpressMaking__content--link"
               >
                 Learn More
               </a>
