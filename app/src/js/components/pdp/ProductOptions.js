@@ -68,11 +68,10 @@ function stateToProps(state) {
 function dispatchToProps(dispatch) {
   const {
     activateCustomizationDrawer,
-    setExpressMakingStatus } = bindActionCreators(CustomizationActions, dispatch);
+  } = bindActionCreators(CustomizationActions, dispatch);
   const actions = bindActionCreators(ModalActions, dispatch);
   return {
     activateCustomizationDrawer,
-    setExpressMakingStatus,
     activateModal: actions.activateModal,
   };
 }
