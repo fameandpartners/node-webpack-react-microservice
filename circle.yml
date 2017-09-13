@@ -4,7 +4,13 @@ machine:
 
 dependencies:
   override:
-    # - npm install -g npm
+    - npm install -g npm
+    - npm install:
+        pwd:
+          app
+    - npm run build:
+        pwd:
+          app
     - echo 'yicky'
 
 test:
