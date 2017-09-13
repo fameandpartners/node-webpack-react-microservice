@@ -65,38 +65,30 @@ class SizeGuideModal extends PureComponent {
           :
             this.handleCloseModal
         }
-        modalClassName="grid-middle u-flex--1"
-        modalContentClassName="u-width--full"
+        modalClassName="u-flex u-flex--1"
+        modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="SizeGuideModal grid-middle u-text-align-left">
-          <div
-            className="Modal__content--med-margin-bottom Modal__layout-container col-10_sm-12"
-            data-push-left="off-1_sm-0"
-            data-push-right="off-1_sm-0"
-          >
-            <Tabs
-              content={[
-                {
-                  id: SizeGuideModalTabConstants.SIZE_GUIDE,
-                  heading: 'Size Guide',
-                  content: (
-                    <SizeGuideTable
-                      sizeChart={sizeChart}
-                    />
-                  ),
-                },
-                {
-                  id: SizeGuideModalTabConstants.MEASURING_TIPS,
-                  heading: 'Measuring Tips',
-                  content: <MeasuringTipsPanel />,
-                },
-              ]}
-              headingClasses="SizeGuideTabs__heading"
-              contentClasses="SizeGuideTabs__content u-overflow-y--scroll"
-            />
-          </div>
-        </div>
+        <Tabs
+          content={[
+            {
+              id: SizeGuideModalTabConstants.SIZE_GUIDE,
+              heading: 'Size Guide',
+              content: (
+                <SizeGuideTable
+                  sizeChart={sizeChart}
+                />
+              ),
+            },
+            {
+              id: SizeGuideModalTabConstants.MEASURING_TIPS,
+              heading: 'Measuring Tips',
+              content: <MeasuringTipsPanel />,
+            },
+          ]}
+          headingClasses="SizeGuideTabs__heading"
+          contentClasses="SizeGuideTabs__content"
+        />
       </Modal>
     );
   }

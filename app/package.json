@@ -11,7 +11,8 @@
     "production": "node scripts/build.js && node server.js",
     "local_production": "node scripts/build.js && nodemon server.js",
     "precommit": "yarn test:once",
-    "prepush": "yarn test:once"
+    "prepush": "yarn test:once",
+    "start": "node scripts/build.js && node server.js"
   },
   "keywords": [
     "react",
@@ -94,10 +95,10 @@
     "react-immutable-proptypes": "^2.1.0",
     "react-motion": "^0.5.0",
     "react-redux": "^5.0.4",
-    "redis": "^2.7.1",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
+    "sanitize-html": "^1.14.1",
     "sass-loader": "^6.0.3",
     "shallowequal": "^1.0.1"
   },
