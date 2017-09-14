@@ -82,6 +82,7 @@ class AfterpayModal extends PureComponent {
                 <br />
                 <a
                   className="link link--static"
+                  href="http://www.afterpay.com.au/terms"
                 >
                   www.afterpay.com.au/terms
                 </a>
