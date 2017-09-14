@@ -21,7 +21,7 @@ function stateToProps(state) {
 
   return {
     // PRODUCT
-    expressMakingAvailable: productMakingOptions.get('fast_making'),
+    expressMakingAvailable: productMakingOptions.get('fastMaking'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
 
     // COLOR

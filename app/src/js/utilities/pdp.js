@@ -422,7 +422,7 @@ export function transformProductSizeChart({ sizeChart }) {
 
 export function transformProductMakingOptions({ fast_making, making_option_id }) {
   const making = {
-    fast_making,
+    fastMaking: fast_making,
     making_option_id,
   };
 
