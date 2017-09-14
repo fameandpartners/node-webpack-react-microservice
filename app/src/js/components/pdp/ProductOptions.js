@@ -7,13 +7,14 @@ import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
 
 // Utilities
+import noop from '../../libs/noop';
 import { formatCents } from '../../utilities/accounting';
+import { generateBackgroundValueFromColor } from '../../utilities/color';
 import {
   addonSelectionDisplayText,
   calculateSubTotal,
   sizingDisplayText,
 } from '../../utilities/pdp';
-import noop from '../../libs/noop';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
@@ -90,7 +91,10 @@ class ProductOptions extends Component {
       colorHexValue,
       patternUrl,
     } = this.props;
-    const background = patternUrl ? `url(${patternUrl})` : colorHexValue;
+    const background = generateBackgroundValueFromColor({
+      hexValue: colorHexValue,
+      patternUrl,
+    });
 
     return (
       <span>

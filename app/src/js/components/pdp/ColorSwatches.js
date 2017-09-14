@@ -2,7 +2,10 @@ import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+
+// Utilities
 import { formatCents } from '../../utilities/accounting';
+import { generateBackgroundValueFromColor } from '../../utilities/color';
 
 // CSS
 import '../../../css/components/ColorSwatches.scss';
@@ -20,8 +23,7 @@ class ColorSwatches extends PureComponent {
   generateColorSwatch(color, price = 0) {
     const { temporaryColorId } = this.props;
     const isActive = temporaryColorId === color.id;
-    const hasPatternUrl = !!color.patternUrl;
-    const background = hasPatternUrl ? `url(${color.patternUrl})` : color.hexValue;
+    const background = generateBackgroundValueFromColor(color);
 
     return (
       <div
@@ -40,7 +42,7 @@ class ColorSwatches extends PureComponent {
           <div
             className={classnames(
               'ColorSwatches__swatch u-flex',
-              { 'ColorSwatches__swatch--pattern': hasPatternUrl },
+              { 'ColorSwatches__swatch--pattern': !!color.patternUrl },
             )}
           >
             <span
@@ -77,14 +79,21 @@ class ColorSwatches extends PureComponent {
         <div className="grid-12">
           { productDefaultColors.map(c => this.generateColorSwatch(c, 0))}
         </div>
-        <h5 className="u-mb-small textAlign--left">
-          Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
-        </h5>
-        <div className="u-mb-normal grid-12">
-          { productSecondaryColors.map(c =>
-            this.generateColorSwatch(c, productSecondaryColorsCentsPrice))
-          }
-        </div>
+
+        { productSecondaryColors.length
+          ? (
+            <div>
+              <h5 className="u-mb-small textAlign--left">
+              Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
+              </h5>
+              <div className="u-mb-normal grid-12">
+                { productSecondaryColors.map(c =>
+                this.generateColorSwatch(c, productSecondaryColorsCentsPrice))
+              }
+              </div>
+            </div>
+          ) : null
+        }
       </div>
     );
   }
