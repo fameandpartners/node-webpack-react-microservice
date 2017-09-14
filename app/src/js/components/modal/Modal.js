@@ -19,6 +19,7 @@ class Modal extends PureComponent {
       modalClassName,
       modalContentClassName,
       modalWrapperClassName,
+      onMouseMove,
     } = this.props;
 
     return (
@@ -27,6 +28,7 @@ class Modal extends PureComponent {
           'Modal__wrapper u-height--full',
           modalWrapperClassName,
         ])}
+        onMouseMove={onMouseMove}
       >
         <div
           className={classnames(
@@ -73,6 +75,7 @@ Modal.propTypes = {
   modalClassName: PropTypes.string,
   modalContentClassName: PropTypes.string,
   modalWrapperClassName: PropTypes.string,
+  onMouseMove: PropTypes.func,
 };
 
 Modal.defaultProps = {
@@ -81,6 +84,7 @@ Modal.defaultProps = {
   modalClassName: '',
   modalContentClassName: '',
   modalWrapperClassName: '',
+  onMouseMove: noop,
 };
 
 export default Modal;

@@ -1,20 +1,10 @@
-.zoomIn {
-  transform: scale(2.25);
+.ZoomModal__image {
+  cursor: zoom-in;
 }
 
-.ZoomModal__image {
-  width: 100%;
-  padding: 0;
-
-  @include md {
-    width: 75%;
-    padding: 15px 0;
-  }
-
-  @include lg {
-    width: 60%;
-    padding: 10px 0 35px;
-  }
+.ZoomModal__image--activeZoom {
+  transform: scale(2);
+  cursor: zoom-out;
 }
 
 .ZoomModal__pagination {
