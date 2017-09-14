@@ -35,7 +35,7 @@ measureFileSizesBeforeBuild(paths.appBuild).then(previousFileSizes => {
   // if you're in it, you don't end up in Trash
   fs.emptyDirSync(paths.appBuild);
 
-  Start the webpack build
+  // Start the webpack build
   build(previousFileSizes);
 
   // Merge with the public folder
