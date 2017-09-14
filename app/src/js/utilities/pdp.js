@@ -9,19 +9,18 @@ export function calculateSubTotal({
   colorCentsTotal = 0,
   productCentsBasePrice = 0,
   selectedAddonOptions = [],
-}, divisor) {
-  const d = divisor || 1;
+}, divisor = 1) {
   const customizationStyleCents = selectedAddonOptions
     .reduce((prev, curr) => prev + parseInt(curr.centsTotal, 10), 0);
 
   let precision = 0;
 
-  if (d !== 1) {
+  if (divisor !== 1) {
     precision = 2;
   }
 
   return formatCents(
-    ((parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice) / d),
+    ((parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice) / divisor),
     precision,
   );
 }

@@ -140,7 +140,7 @@ class ProductOptions extends Component {
     ) : null;
   }
 
-  calculateSubTotal(divisor) {
+  calculateSubTotal(divisor = 1) {
     const {
       productCentsBasePrice,
       colorCentsTotal,
@@ -149,7 +149,7 @@ class ProductOptions extends Component {
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     return calculateSubTotal(
       { colorCentsTotal, productCentsBasePrice, selectedAddonOptions },
-      (divisor || 1),
+      divisor,
     );
   }
 
