@@ -215,7 +215,7 @@ class ProductCustomizationStyle extends PureComponent {
           <div className="ProductCustomizationSize__height u-mb-normal u-paddingLeft--small">
             <p
               className={classnames(
-                'h6 u-mb-xs textAlign--left',
+                'h6 u-mb-xs u-text-align--left',
                 {
                   'u-color-red': heightError,
                 },
@@ -259,7 +259,7 @@ class ProductCustomizationStyle extends PureComponent {
           </div>
 
           <div>
-            <p className="h6 u-mb-xs textAlign--left u-paddingLeft--small">
+            <p className="h6 u-mb-xs u-text-align--left u-paddingLeft--small">
               What&apos;s your size?
             </p>
             <div className="ProductCustomizationSize__size grid-12">
@@ -281,7 +281,7 @@ class ProductCustomizationStyle extends PureComponent {
                   <p
                     className={classnames(
                       'h6 u-color-red',
-                      'textAlign--left',
+                      'u-text-align--left',
                       'u-paddingLeft--small',
                     )}
                   >
@@ -292,7 +292,7 @@ class ProductCustomizationStyle extends PureComponent {
                 <p
                   className={classnames(
                     'link',
-                    'textAlign--left',
+                    'u-text-align--left',
                     'u-paddingLeft--small',
                   )}
                   onClick={this.handleViewSizeGuideClick}

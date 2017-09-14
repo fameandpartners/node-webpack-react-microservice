@@ -53,7 +53,7 @@ class Cart extends Component {
           <div className="col-5">
             <img className="u-width--full" alt="dress1" src={productImage} />
           </div>
-          <div className="col-7 textAlign--left">
+          <div className="col-7 u-text-align--left">
             <span className="Cart__line-description">
               <span>{productTitle}</span> - <span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>

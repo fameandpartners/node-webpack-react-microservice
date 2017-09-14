@@ -106,13 +106,13 @@ class ColorSwatches extends PureComponent {
             },
         )}
       >
-        <h5 className="u-mb-small textAlign--left">
+        <h5 className="u-mb-small u-text-align--left">
           Fame Recommends
         </h5>
         <div className="u-mb-normal grid-12">
           { productDefaultColors.map(c => this.generateColorSwatch(c, 0, isTouch))}
         </div>
-        <h5 className="u-mb-small textAlign--left">
+        <h5 className="u-mb-small u-text-align--left">
           Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
         </h5>
         <div className="u-mb-normal grid-12">

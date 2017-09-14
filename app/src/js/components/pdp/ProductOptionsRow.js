@@ -40,7 +40,7 @@ class ProductOptionsRow extends PureComponent {
       >
         <span
           className={classnames(
-            'ProductOptionsRow__left textAlign--left',
+            'ProductOptionsRow__left u-text-align--left',
             leftNodeClassName,
           )}
         >
