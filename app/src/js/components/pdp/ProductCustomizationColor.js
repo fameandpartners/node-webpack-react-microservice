@@ -12,6 +12,9 @@ import CustomizationActions from '../../actions/CustomizationActions';
 import ColorSwatches from './ColorSwatches';
 import ProductCustomization from './ProductCustomization';
 
+// Utilities
+import noop from '../../libs/noop';
+
 function stateToProps(state) {
   return {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
@@ -51,8 +54,20 @@ class ProductCustomizationColor extends PureComponent {
     this.props.activateModal({ shouldAppear: false });
   }
 
+  isExpressEligible(colorId, defaultColors) {
+    return defaultColors.filter(color => color.id === colorId).length > 0;
+  }
+
   handleColorSelection(temporaryColor) {
-    this.props.selectProductColor({ temporaryColor });
+    const {
+      selectProductColor,
+      productDefaultColors,
+      setExpressMakingStatus,
+    } = this.props;
+    if (!this.isExpressEligible(temporaryColor.id, productDefaultColors)) {
+      setExpressMakingStatus(false);
+    }
+    selectProductColor({ temporaryColor });
   }
 
   render() {
@@ -106,6 +121,7 @@ ProductCustomizationColor.propTypes = {
   activateModal: PropTypes.func.isRequired,
   changeCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
+  setExpressMakingStatus: PropTypes.func,
 };
 
 ProductCustomizationColor.defaultProps = {
@@ -113,6 +129,7 @@ ProductCustomizationColor.defaultProps = {
   productCustomizationDrawer: null,
   productSecondaryColorsCentsPrice: 0,
   temporaryColorId: '',
+  setExpressMakingStatus: noop,
 };
 
 
