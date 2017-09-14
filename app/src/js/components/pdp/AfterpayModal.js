@@ -15,6 +15,9 @@ import ModalActions from '../../actions/ModalActions';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
+// Utilities
+import objnoop from '../../libs/objnoop';
+
 // Assets
 import afterpayImage from '../../../img/test/afterpay.png';
 
@@ -23,7 +26,7 @@ import '../../../css/components/AfterpayModal.scss';
 
 
 function stateToProps() {
-  return {};
+  return objnoop;
 }
 
 function dispatchToProps(dispatch) {
@@ -64,16 +67,16 @@ class AfterpayModal extends PureComponent {
               </h4>
             </div>
             <ul className="AfterpayModal__content-block">
-              <li>How it works.</li>
+              <li className="bold">How it works.</li>
               <li>Select Afterpay as your payment method when you check out.</li>
               <li>Use your existing debit or credit card.</li>
               <li>Completed your check.</li>
-              <li>No long forms, instant approval online</li>
+              <li>No long forms, instant approval online.</li>
               <li>Pay over 4 equal installments.</li>
               <li>Pay fortnightly, enjoy your purchase straight away!</li>
             </ul>
             <ul className="AfterpayModal__content-block">
-              <li>You simply need</li>
+              <li className="bold">You simply need</li>
               <li>A debit card or credit card</li>
               <li>To be over 18 years of age</li>
               <li>To live in Australia</li>

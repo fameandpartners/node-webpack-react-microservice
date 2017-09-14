@@ -266,7 +266,7 @@ class ProductOptions extends Component {
                       className="link link--static"
                       onClick={this.handleOpenAfterpayModalClick}
                     >
-                      info
+                      Info
                     </a>
                   </p>
                 )
