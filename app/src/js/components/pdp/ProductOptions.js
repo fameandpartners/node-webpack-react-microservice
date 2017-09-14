@@ -272,10 +272,6 @@ class ProductOptions extends Component {
                 )
                 : null
               }
-              <p>
-                $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
-                <a className="link link--static">Learn more</a>
-              </p>
               <p className="u-mb-small">
                 Complimentary shipping and returns.&nbsp;
                 <a className="link link--static">Learn more</a>
