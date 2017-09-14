@@ -23,7 +23,7 @@ export function separateHexColorsInString(hexStr = '') {
 }
 
 function generateDuoToneSwatchBackground(start, end) {
-  return `linear-gradient(-45deg, ${end} 0%, ${end} 50%, ${start} 51%, ${start} 100%)`;
+  return `linear-gradient(45deg, ${end} 0%, ${end} 50%, ${start} 51%, ${start} 100%)`;
 }
 
 export function generateBackgroundValueFromColor({ patternUrl, hexValue }) {
@@ -44,4 +44,5 @@ export default {
   luminanceFromHex,
   isDarkLuminance,
   generateBackgroundValueFromColor,
+  separateHexColorsInString,
 };
