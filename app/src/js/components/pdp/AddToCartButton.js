@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 // Utilities
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
+import noop from '../../libs/noop';
 
 // Breakpoint Decoration
 import Resize from '../../decorators/Resize';
@@ -42,8 +43,10 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
-  const { setSizeProfileError } = bindActionCreators(CustomizationActions, dispatch);
-  return { activateCartDrawer, setSizeProfileError, addItemToCart };
+  const {
+    setSizeProfileError,
+    activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+  return { activateCartDrawer, setSizeProfileError, addItemToCart, activateCustomizationDrawer };
 }
 
 
@@ -68,10 +71,14 @@ class AddToCartButton extends Component {
       $$productState,
       heightValue,
       sizeValue,
+      setSizeProfileError,
+      activateCustomizationDrawer,
     } = this.props;
     if (!heightValue || !sizeValue) {
-      this.props.setSizeProfileError({
+      activateCustomizationDrawer({
         productCustomizationDrawer: CustomizationConstants.SIZE_CUSTOMIZE,
+      });
+      setSizeProfileError({
         heightError: !heightValue,
         sizeError: !sizeValue,
       });
@@ -114,6 +121,7 @@ AddToCartButton.propTypes = {
   // Redux Actions
   // addItemToCart: PropTypes.func.isRequired,
   setSizeProfileError: PropTypes.func.isRequired,
+  activateCustomizationDrawer: PropTypes.func,
   heightValue: PropTypes.number,
   sizeValue: PropTypes.number,
 };
@@ -124,6 +132,7 @@ AddToCartButton.defaultProps = {
   showTotal: true,
   sizeValue: null,
   heightValue: null,
+  activateCustomizationDrawer: noop,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));
