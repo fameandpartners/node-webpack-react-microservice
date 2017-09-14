@@ -21,26 +21,9 @@ class Checkbox extends Component {
       id,
       label,
       wrapperClassName,
-      showChecked,
       disabled,
+      showChecked,
     } = this.props;
-    if (disabled) {
-      return (
-        <div>
-          <input
-            className="Checkbox"
-            id={id}
-            type="checkbox"
-            checked={false}
-            onChange={this.handleChange}
-            disabled
-          />
-          <label htmlFor={id}>
-            <span className="u-vertical-align-middle">{label || ''}</span>
-          </label>
-        </div>
-      );
-    }
     return (
       <div
         className={classnames(
@@ -49,10 +32,12 @@ class Checkbox extends Component {
         )}
       >
         <input
-          onChange={this.handleChange}
           className="Checkbox"
           id={id}
           type="checkbox"
+          checked={!disabled && showChecked}
+          onChange={this.handleChange}
+          disabled={disabled}
           defaultChecked={showChecked}
         />
         <label htmlFor={id}>

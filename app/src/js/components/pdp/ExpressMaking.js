@@ -71,6 +71,7 @@ class ExpressMaking extends Component {
       expressMakingAvailable,
       colorId,
       productDefaultColors,
+      expressMakingStatus,
       mobile,
     } = this.props;
     if (expressMakingAvailable) {
@@ -80,6 +81,7 @@ class ExpressMaking extends Component {
             <Checkbox
               id="express_making"
               onChange={this.setExpressStatus}
+              showChecked={expressMakingStatus}
               disabled={!this.isExpressEligible(colorId, productDefaultColors)}
             />
           </div>
