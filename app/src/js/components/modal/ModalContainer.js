@@ -6,11 +6,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
+// Polyfills
+import win from '../../polyfills/windowPolyfill';
+
 // Actions
 import * as ModalActions from '../../actions/ModalActions';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
+import KEYS from '../../constants/keys';
 
 // CSS
 import '../../../css/components/Modal.scss';
@@ -80,6 +84,11 @@ class ModalContainer extends Component {
     return shouldAppear && modalIds.indexOf(activeModalId) > -1;
   }
 
+  handleEscapeKeydown(evt) {
+    const { activateModal } = this.props;
+    if (evt.keyCode === KEYS.ESC) activateModal({ shouldAppear: false });
+  }
+
   renderModalContainer(key, style) {
     const {
       dimBackground,
@@ -128,6 +137,16 @@ class ModalContainer extends Component {
     );
   }
 
+  componentDidMount() {
+    if (this.props.closeOnEscapeKey) {
+      win.document.addEventListener('keydown', this.handleEscapeKeydown);
+    }
+  }
+
+  componentWillUnmount() {
+    win.document.removeEventListener('keydown', this.handleEscapeKeydown);
+  }
+
   render() {
     return (
       <TransitionMotion
@@ -151,6 +170,7 @@ class ModalContainer extends Component {
 
 ModalContainer.propTypes = {
   closeOnBackgroundClick: PropTypes.bool,
+  closeOnEscapeKey: PropTypes.bool,
   dimBackground: PropTypes.bool,
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   modalContainerClass: PropTypes.string,
@@ -169,6 +189,7 @@ ModalContainer.propTypes = {
 
 ModalContainer.defaultProps = {
   closeOnBackgroundClick: true,
+  closeOnEscapeKey: true,
   dimBackground: true,
   children: null,
   slideUp: false,
