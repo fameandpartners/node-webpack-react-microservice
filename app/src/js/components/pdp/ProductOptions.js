@@ -268,8 +268,8 @@ ProductOptions.propTypes = {
   // COLOR
   colorId: PropTypes.number,
   colorCentsTotal: PropTypes.number,
-  colorName: PropTypes.string,
-  colorHexValue: PropTypes.string,
+  colorName: PropTypes.string.isRequired,
+  colorHexValue: PropTypes.string.isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -293,8 +293,6 @@ ProductOptions.defaultProps = {
   selectedHeightValue: null,
   activateModal: noop,
   colorId: null,
-  colorName: '',
-  colorHexValue: '',
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);
