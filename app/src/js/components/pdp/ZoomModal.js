@@ -41,10 +41,10 @@ class ZoomModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      zoomStatus: false,
+      isZoomActive: false,
       topPercent: null,
       leftPercent: null,
-      activeIndex: null,
+      activeZoomIndex: null,
       imageDimensions: null,
     };
     autobind(this);
@@ -54,8 +54,8 @@ class ZoomModal extends Component {
     this.props.activateModal({ shouldAppear: false });
   }
 
-  getDimensions(refName) {
-    const rect = this.imageRefs[refName].getBoundingClientRect();
+  setDimensions(imgId) {
+    const rect = this.imageRefs[imgId].getBoundingClientRect();
     const { left, top, width, height } = rect;
     this.setState({
       imageDimensions: {
@@ -66,27 +66,21 @@ class ZoomModal extends Component {
       },
     });
   }
+
   setZoomStyle(e) {
-    const { imageDimensions } = this.state;
-    const { breakpoint } = this.props;
-    let offSetValue = 0;
-    if (breakpoint === 'desktop') {
-      offSetValue = 150;
-    } else {
-      offSetValue = 250;
-    }
     const {
-      left,
-      top,
       width,
-      height } = imageDimensions;
-    const leftPercent = ((e.pageX - left) / width) * 100;
-    const topPercent = ((e.pageY - (top - offSetValue)) / height) * 100;
+      height,
+    } = this.state.imageDimensions;
+    const leftPercent = ((e.pageX) / width) * 100;
+    const topPercent = ((e.pageY) / height) * 100;
     this.setState({
       topPercent: `${topPercent.toString()}%`,
       leftPercent: `${leftPercent.toString()}%`,
     });
   }
+
+
   getProductImages() {
     const { selectedColorId, $$productImages } = this.props;
     let productImages = $$productImages.toJS();
@@ -97,26 +91,41 @@ class ZoomModal extends Component {
       .map(img => img);
     return this.orderImagesByIndex(productImages);
   }
+
   orderImagesByIndex(productImages) {
     const { activeSlide } = this.props;
     return productImages.slice(activeSlide).concat(productImages.slice(0, activeSlide));
   }
 
-  setZoomStatus(index) {
+  handleImageMouseover(e) {
+    const { imageDimensions, isZoomActive } = this.state;
+    if (imageDimensions && isZoomActive) {
+      this.setZoomStyle(e);
+    }
+  }
+
+  handleImageClick(e, index, imgId) {
     const { breakpoint } = this.props;
-    const { zoomStatus } = this.state;
-    if (breakpoint !== 'mobile') {
-      this.setState({
-        activeIndex: index,
-        zoomStatus: !zoomStatus,
-      });
+    const { isZoomActive } = this.state;
+
+    if (isZoomActive) { // TURN OFF ZOOM
+      this.setState({ isZoomActive: !isZoomActive });
+    } else { // TURN ON ZOOM
+      this.setDimensions(imgId);
+      if (breakpoint !== 'mobile') {
+        this.setState({
+          activeZoomIndex: index,
+          isZoomActive: !isZoomActive,
+        });
+        this.setZoomStyle(e);
+      }
     }
   }
 
   render() {
     const { winWidth, winHeight } = this.props;
     const sliderImages = this.getProductImages();
-    const { zoomStatus, topPercent, leftPercent, activeIndex } = this.state;
+    const { isZoomActive, topPercent, leftPercent, activeZoomIndex } = this.state;
     const zoomStyle = `${leftPercent} ${topPercent}`;
     this.imageRefs = [];
     return (
@@ -124,10 +133,19 @@ class ZoomModal extends Component {
         modalContainerClass="grid-middle"
         modalIds={[ModalConstants.ZOOM_MODAL]}
         fullWidth
+        fullScreen
       >
         <Modal
+          modalClassName="u-height--full"
+          modalContentClassName="u-height--full"
           handleCloseModal={this.handleCloseModal}
+          onMouseMove={this.handleImageMouseover}
         >
+          {
+            // <p className="ZoomModal__pagination u-mb-normal">
+            //   {activeZoomIndex + 1} of {sliderImages.length}
+            // </p>
+          }
           <Slider
             sliderHeight="100%"
             winWidth={winWidth}
@@ -138,22 +156,18 @@ class ZoomModal extends Component {
               <Slide
                 key={img.id}
               >
-                <p className="ZoomModal__pagination">{index + 1} of {sliderImages.length}</p>
                 <img
-                  alt="Something"
+                  alt={`Product Dress ${index + 1}`}
                   src={img.bigImg}
                   style={{
                     transformOrigin: zoomStyle,
                   }}
-                  onClick={() => this.setZoomStatus(index)}
+                  onClick={e => this.handleImageClick(e, index, img.id)}
                   className={classnames(
-                    'ZoomModal__image',
-                    'u-cursor--pointer',
-                    { zoomIn: activeIndex === index && zoomStatus },
+                    'ZoomModal__image u-height--full',
+                    { 'ZoomModal__image--activeZoom': activeZoomIndex === index && isZoomActive },
                   )}
                   ref={ref => this.imageRefs[img.id] = ref}
-                  onMouseMove={this.setZoomStyle}
-                  onMouseOver={() => this.getDimensions(img.id)}
                 />
               </Slide>
             ))}
