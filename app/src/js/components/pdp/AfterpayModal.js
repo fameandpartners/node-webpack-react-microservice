@@ -16,7 +16,7 @@ import ModalActions from '../../actions/ModalActions';
 import ModalConstants from '../../constants/ModalConstants';
 
 // Assets
-import afterpayImage from '../../../img/test/afterpay-lg.png';
+import afterpayImage from '../../../img/test/afterpay.png';
 
 // CSS
 import '../../../css/components/AfterpayModal.scss';
