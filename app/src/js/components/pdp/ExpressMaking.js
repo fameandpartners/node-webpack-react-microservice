@@ -106,7 +106,7 @@ class ExpressMaking extends Component {
               <p>
                 <a
                   href="/terms#collapse-shipping"
-                  className="u-text-decoration--underline ExpressMaking__content--link"
+                  className="u-text-decoration--underline ExpressMaking__content-link"
                 >
                   Learn More
                 </a>
@@ -121,7 +121,7 @@ class ExpressMaking extends Component {
               <div>
                 <a
                   href="/terms#collapse-shipping"
-                  className="u-text-decoration--underline ExpressMaking__content--link"
+                  className="u-text-decoration--underline ExpressMaking__content-link"
                 >
                   Learn More
                 </a>

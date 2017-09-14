@@ -102,10 +102,8 @@ class ProductDisplayOptionsTouch extends Component {
           </div>
         </div>
 
-        <div className="grid-center">
-          <div className="col-11">
-            <ExpressMaking mobile />
-          </div>
+        <div className="layout-container">
+          <ExpressMaking mobile />
         </div>
 
       </div>
