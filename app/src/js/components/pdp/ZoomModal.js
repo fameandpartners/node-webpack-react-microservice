@@ -68,6 +68,7 @@ class ZoomModal extends Component {
   }
 
   setZoomStyle(e) {
+    if (!this.state.imageDimensions) return;
     const {
       width,
       height,
