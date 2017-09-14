@@ -12,17 +12,13 @@ export function activateCustomizationDrawer({
 }
 
 export function setSizeProfileError({
-  productCustomizationDrawer,
   heightError = false,
   sizeError = false,
-  isActive = true,
 }) {
   return {
     type: CustomizationConstants.SET_SIZE_PROFILE_ERROR,
     heightError,
     sizeError,
-    productCustomizationDrawer,
-    isActive,
   };
 }
 
