@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import win from '../../polyfills/windowPolyfill';
 import IconSVG from '../generic/IconSVG';
 import '../../../css/components/Slider.scss';
 import Carat from '../../../svg/carat.svg';
 import { lory } from '../../libs/lory';
+import KEYS from '../../constants/keys';
 
 let loryInstance = null;
 class Slider extends Component {
@@ -12,24 +14,58 @@ class Slider extends Component {
     super(props);
     autoBind(this);
   }
+
   previousSlide() {
     loryInstance.prev();
   }
+
   nextSlide() {
     loryInstance.next();
   }
+
+  handleKeydowns(evt) {
+    switch (evt.keyCode) {
+      case KEYS.ARROW_LEFT:
+        evt.preventDefault();
+        this.previousSlide();
+        return null;
+      case KEYS.ARROW_RIGHT:
+        evt.preventDefault();
+        this.nextSlide();
+        return null;
+      default:
+        return null;
+    }
+  }
+
+  setUpEventHandler() {
+    win.document.addEventListener('keydown', this.handleKeydowns);
+  }
+
+  removeEventHandler() {
+    win.document.removeEventListener('keydown', this.handleKeydowns);
+  }
+
   componentDidMount() {
     loryInstance = lory(this.slider, {
       infinite: 1,
       classNameFrame: 'Slider__frame',
       classNameSlideContainer: 'Slider__slides',
     });
+
+    this.setUpEventHandler();
   }
+
   componentDidUpdate(lastProps) {
     if ((lastProps.winWidth !== this.props.winWidth)
   || (lastProps.winHeight !== this.props.winHeight)) {
       loryInstance.reset();
     }
+  }
+
+  componentWillUnmount() {
+    this.removeEventHandler();
+    loryInstance.destroy();
   }
 
   render() {
