@@ -7,6 +7,7 @@ import '../../../css/components/Slider.scss';
 import Carat from '../../../svg/carat.svg';
 import { lory } from '../../libs/lory';
 import KEYS from '../../constants/keys';
+import noop from '../../libs/noop';
 
 let loryInstance = null;
 class Slider extends Component {
@@ -38,8 +39,14 @@ class Slider extends Component {
     }
   }
 
-  setUpEventHandler() {
+  handleBeforeSlide(loryEventData) {
+    this.props.handleBeforeSlide(loryEventData);
+  }
+
+  setUpEventHandlers() {
+    // Window keydown for arrow keys
     win.document.addEventListener('keydown', this.handleKeydowns);
+    this.slider.addEventListener('before.lory.slide', this.handleBeforeSlide);
   }
 
   removeEventHandler() {
@@ -53,7 +60,7 @@ class Slider extends Component {
       classNameSlideContainer: 'Slider__slides',
     });
 
-    this.setUpEventHandler();
+    this.setUpEventHandlers();
   }
 
   componentDidUpdate(lastProps) {
@@ -72,7 +79,8 @@ class Slider extends Component {
     const {
       children,
       sliderHeight,
-      showButtons } = this.props;
+      showButtons,
+    } = this.props;
 
     return (
       <div
@@ -91,7 +99,7 @@ class Slider extends Component {
                   >
                     <IconSVG
                       svgPath={Carat.url}
-                      width="40px"
+                      width="28px"
                       height="40px"
                     />
                   </div>
@@ -102,7 +110,7 @@ class Slider extends Component {
                   >
                     <IconSVG
                       svgPath={Carat.url}
-                      width="40px"
+                      width="28px"
                       height="40px"
                     />
                   </div>
@@ -128,12 +136,16 @@ Slider.propTypes = {
   winHeight: PropTypes.number,
   winWidth: PropTypes.number,
   showButtons: PropTypes.bool,
+  handleBeforeSlide: PropTypes.func,
 };
 
 Slider.defaultProps = {
+  // Redux Props
   winHeight: null,
   winWidth: null,
   showButtons: false,
+  // Redux Actions
+  handleBeforeSlide: noop,
 };
 
 export default Slider;

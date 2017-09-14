@@ -8,12 +8,8 @@
 }
 
 .ZoomModal__pagination {
-  color: $c-black;
-  position: relative;
-  left: 35%;
-  top: 13px;
-
-  @include md {
-    left: 45%;
-  };
+  position: absolute;
+  z-index: 1;
+  right: 70px;
+  top: 21px;
 }
