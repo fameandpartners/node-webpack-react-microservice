@@ -44,6 +44,7 @@ class ZoomModal extends Component {
       isZoomActive: false,
       topPercent: null,
       leftPercent: null,
+      activeImageIndex: null,
       activeZoomIndex: null,
       imageDimensions: null,
     };
@@ -54,8 +55,8 @@ class ZoomModal extends Component {
     this.props.activateModal({ shouldAppear: false });
   }
 
-  setDimensions(imgId) {
-    const rect = this.imageRefs[imgId].getBoundingClientRect();
+  setDimensions(imgIndex) {
+    const rect = this.imageRefs[imgIndex].getBoundingClientRect();
     const { left, top, width, height } = rect;
     this.setState({
       imageDimensions: {
@@ -105,14 +106,14 @@ class ZoomModal extends Component {
     }
   }
 
-  handleImageClick(e, index, imgId) {
+  handleImageClick(e, index) {
     const { breakpoint } = this.props;
     const { isZoomActive } = this.state;
 
     if (isZoomActive) { // TURN OFF ZOOM
       this.setState({ isZoomActive: !isZoomActive });
     } else { // TURN ON ZOOM
-      this.setDimensions(imgId);
+      this.setDimensions(index);
       if (breakpoint !== 'mobile') {
         this.setState({
           activeZoomIndex: index,
@@ -123,10 +124,22 @@ class ZoomModal extends Component {
     }
   }
 
+  swapProductImageIndex(loryEventData) {
+    const toSlide = loryEventData.detail.nextSlide;
+    const adjustedRemainder = toSlide % this.getProductImages().length;
+    this.setState({ activeImageIndex: adjustedRemainder });
+  }
+
   render() {
     const { winWidth, winHeight } = this.props;
+    const {
+      activeImageIndex,
+      activeZoomIndex,
+      isZoomActive,
+      topPercent,
+      leftPercent,
+    } = this.state;
     const sliderImages = this.getProductImages();
-    const { isZoomActive, topPercent, leftPercent, activeZoomIndex } = this.state;
     const zoomStyle = `${leftPercent} ${topPercent}`;
     this.imageRefs = [];
     return (
@@ -137,21 +150,20 @@ class ZoomModal extends Component {
         fullScreen
       >
         <Modal
-          modalClassName="u-height--full"
+          modalClassName="u-height--full typography"
           modalContentClassName="u-height--full"
           handleCloseModal={this.handleCloseModal}
           onMouseMove={this.handleImageMouseover}
         >
-          {
-            // <p className="ZoomModal__pagination u-mb-normal">
-            //   {activeZoomIndex + 1} of {sliderImages.length}
-            // </p>
-          }
+          <p className="ZoomModal__pagination h4 u-mb-normal">
+            {activeImageIndex + 1} of {sliderImages.length}
+          </p>
           <Slider
             sliderHeight="100%"
             winWidth={winWidth}
             winHeight={winHeight}
             showButtons
+            handleBeforeSlide={this.swapProductImageIndex}
           >
             { sliderImages.map((img, index) => (
               <Slide
@@ -163,12 +175,12 @@ class ZoomModal extends Component {
                   style={{
                     transformOrigin: zoomStyle,
                   }}
-                  onClick={e => this.handleImageClick(e, index, img.id)}
+                  onClick={e => this.handleImageClick(e, index)}
                   className={classnames(
                     'ZoomModal__image u-height--full',
                     { 'ZoomModal__image--activeZoom': activeZoomIndex === index && isZoomActive },
                   )}
-                  ref={ref => this.imageRefs[img.id] = ref}
+                  ref={ref => this.imageRefs[index] = ref}
                 />
               </Slide>
             ))}
