@@ -84,12 +84,12 @@ class ColorSwatches extends PureComponent {
           ? (
             <div>
               <h5 className="u-mb-small textAlign--left">
-              Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
+                Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
               </h5>
               <div className="u-mb-normal grid-12">
                 { productSecondaryColors.map(c =>
-                this.generateColorSwatch(c, productSecondaryColorsCentsPrice))
-              }
+                  this.generateColorSwatch(c, productSecondaryColorsCentsPrice))
+                }
               </div>
             </div>
           ) : null
