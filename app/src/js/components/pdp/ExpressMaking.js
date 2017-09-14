@@ -59,12 +59,6 @@ class ExpressMaking extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.colorId !== this.props.colorId) {
-      this.props.setExpressMakingStatus(false);
-    }
-  }
-
   render() {
     const {
       expressMakingAvailable,

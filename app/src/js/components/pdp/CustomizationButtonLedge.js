@@ -31,6 +31,8 @@ function stateToProps(state) {
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
     temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
+    // COLOR
+    productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
   };
 }
 
@@ -45,6 +47,7 @@ function dispatchToProps(dispatch) {
     updateHeightSelection: customizationActions.updateHeightSelection,
     updateMeasurementMetric: customizationActions.updateMeasurementMetric,
     updateCustomizationStyleSelection: customizationActions.updateCustomizationStyleSelection,
+    setExpressMakingStatus: customizationActions.setExpressMakingStatus,
   };
 }
 
@@ -58,14 +61,22 @@ class CustomizationButtonLedge extends Component {
     this.props.activateCustomizationDrawer({ isActive: false });
   }
 
+  isExpressEligible(colorId, defaultColors) {
+    return defaultColors.filter(color => color.id === colorId).length > 0;
+  }
+
   saveColorSelection() {
     const {
       activateCustomizationDrawer,
       selectProductColor,
       setShareableQueryParams,
       temporaryColor,
+      productDefaultColors,
+      setExpressMakingStatus,
     } = this.props;
-
+    if (!this.isExpressEligible(temporaryColor.id, productDefaultColors)) {
+      setExpressMakingStatus(false);
+    }
     selectProductColor({ selectedColor: temporaryColor });
     setShareableQueryParams({ color: temporaryColor.id });
     activateCustomizationDrawer({ isActive: false });
@@ -203,6 +214,8 @@ CustomizationButtonLedge.propTypes = {
   updateHeightSelection: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
   updateCustomizationStyleSelection: PropTypes.func.isRequired,
+  productDefaultColors: PropTypes.arrayOf(PropTypes.object),
+  setExpressMakingStatus: PropTypes.func,
 };
 
 CustomizationButtonLedge.defaultProps = {
@@ -212,6 +225,9 @@ CustomizationButtonLedge.defaultProps = {
   temporaryDressSize: null,
   temporaryHeightValue: null,
   temporaryStyleCustomizations: [],
+  productDefaultColors: [],
+  setExpressMakingStatus: noop,
+
 };
 
 export default connect(stateToProps, dispatchToProps)(CustomizationButtonLedge);
