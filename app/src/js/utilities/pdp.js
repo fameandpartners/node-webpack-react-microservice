@@ -82,8 +82,7 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const expressMaking = $$customizationState.get('expressMakingSelected');
   let expressMakingID = null;
   if (expressMaking) {
-    const productMakingOptions = $$productState.get('productMakingOptions');
-    expressMakingID = productMakingOptions.get('making_option_id');
+    expressMakingID = $$productState.get('makingOptionId').get('making_option_id');
   }
   return {
     productId,
@@ -420,13 +419,16 @@ export function transformProductSizeChart({ sizeChart }) {
   return sizes;
 }
 
-export function transformProductMakingOptions({ fast_making, making_option_id }) {
+export function transformProductMakingOptionId({ making_option_id }) {
   const making = {
-    fastMaking: fast_making,
     making_option_id,
   };
 
   return making;
+}
+
+export function transformProductFastMaking({ fast_making }) {
+  return { fast_making };
 }
 
 function extractQueryStringCustomizations(colors) {
@@ -463,7 +465,8 @@ export function transformProductJSON(productJSON) {
     modelDescription: transformProductModelDescription(productJSON.product),
     productTitle: transformProductTitle(productJSON.product),
     sizeChart: transformProductSizeChart(productJSON),
-    productMakingOptions: transformProductMakingOptions(productJSON.product),
+    makingOptionId: transformProductMakingOptionId(productJSON.product),
+    fastMaking: transformProductFastMaking(productJSON.product),
   };
 
   const { selectedColor, selectedStyleCustomizations } =

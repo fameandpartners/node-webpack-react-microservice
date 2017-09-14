@@ -17,11 +17,10 @@ import '../../../css/components/ExpressMaking.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   const selectedColor = state.$$customizationState.get('selectedColor');
-  const productMakingOptions = state.$$productState.get('productMakingOptions');
 
   return {
     // PRODUCT
-    expressMakingAvailable: productMakingOptions.get('fastMaking'),
+    expressMakingAvailable: state.$$productState.get('fastMaking'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
 
     // COLOR
