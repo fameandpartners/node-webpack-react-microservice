@@ -15,9 +15,6 @@ import {
 } from '../../utilities/pdp';
 import noop from '../../libs/noop';
 
-// Assets
-import afterpayImage from '../../../img/test/afterpay.png';
-
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
 import ModalConstants from '../../constants/ModalConstants';
@@ -32,6 +29,9 @@ import ModalActions from '../../actions/ModalActions';
 
 // CSS
 import '../../../css/components/ProductOptions.scss';
+
+// Assets
+import afterpayImage from '../../../img/test/afterpay.png';
 
 // UI Components
 import AddToCartButton from './AddToCartButton';

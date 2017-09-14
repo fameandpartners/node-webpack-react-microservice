@@ -1,0 +1,21 @@
+.AfterpayModal {
+  margin: 50px 0;
+}
+
+.AfterpayModal__header .AfterPay__image-logo {
+  position: relative;
+  left: -2px;
+  padding: 10px 0;
+}
+
+.AfterpayModal__content-block {
+  margin: 14px 0;
+}
+
+.AfterpayModal__content-block li {
+  font-size: 1.1em;
+
+  &:first-of-type {
+    font-weight: bold;
+  }
+}
