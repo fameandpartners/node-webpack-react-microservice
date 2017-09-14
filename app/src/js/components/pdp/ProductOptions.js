@@ -15,6 +15,9 @@ import {
 } from '../../utilities/pdp';
 import noop from '../../libs/noop';
 
+// Assets
+import afterpayImage from '../../../img/test/afterpay.png';
+
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
 import ModalConstants from '../../constants/ModalConstants';
@@ -137,15 +140,19 @@ class ProductOptions extends Component {
     ) : null;
   }
 
-  calculateSubTotal() {
+  calculateSubTotal(divisor) {
     const {
       productCentsBasePrice,
       colorCentsTotal,
     } = this.props;
 
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
-    return calculateSubTotal({ colorCentsTotal, productCentsBasePrice, selectedAddonOptions });
+    return calculateSubTotal(
+      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions },
+      (divisor || 1),
+    );
   }
+
   showZoomModal() {
     this.props.activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
@@ -234,7 +241,22 @@ class ProductOptions extends Component {
             <div className="ProductOptions__additional-info u-mb-normal">
               { auSite ?
                 (
-                  <p>AfterPay!</p>
+                  <p
+                    className="AfterPay__message"
+                  >
+                    4 easy payments of {this.calculateSubTotal(4)} with
+                    <img
+                      alt="AfterPay Logo"
+                      className="AfterPay__image-logo"
+                      src={afterpayImage}
+                    />
+                    <a
+                      className="link link--static"
+                      onClick={() => console.log('Open AfterPay modal...')}
+                    >
+                      info
+                    </a>
+                  </p>
                 )
                 : null
               }
