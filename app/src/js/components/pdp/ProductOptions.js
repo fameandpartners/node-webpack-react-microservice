@@ -303,7 +303,7 @@ ProductOptions.propTypes = {
       name: PropTypes.string,
     }),
   ),
-  auSite: PropTypes.string.isRequired,
+  auSite: PropTypes.bool.isRequired,
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
