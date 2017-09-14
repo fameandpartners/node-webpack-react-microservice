@@ -17,6 +17,7 @@ import ShareModal from './components/pdp/ShareModal';
 import ZoomModal from './components/pdp/ZoomModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
+import AfterpayModal from './components/pdp/AfterpayModal';
 
 // polyfills
 import win from './polyfills/windowPolyfill';
@@ -77,6 +78,7 @@ class App extends Component {
         <ZoomModal />
         <StyleSelectionModal />
         <SizeModals />
+        <AfterpayModal />
       </div>
     );
   }

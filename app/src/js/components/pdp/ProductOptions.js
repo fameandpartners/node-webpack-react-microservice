@@ -153,12 +153,20 @@ class ProductOptions extends Component {
     );
   }
 
+  handleOpenAfterpayModalClick(e) {
+    e.preventDefault();
+    this.props.activateModal({
+      modalId: ModalConstants.AFTERPAY_MODAL,
+    });
+  }
+
   showZoomModal() {
     this.props.activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
       shouldAppear: true,
     });
   }
+
   /**
    * Activates a drawer to a specific drawer type
    * @param  {String} drawer
@@ -252,7 +260,7 @@ class ProductOptions extends Component {
                     />
                     <a
                       className="link link--static"
-                      onClick={() => console.log('Open AfterPay modal...')}
+                      onClick={this.handleOpenAfterpayModalClick}
                     >
                       info
                     </a>
