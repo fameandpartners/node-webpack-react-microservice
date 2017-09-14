@@ -140,7 +140,7 @@ class ProductOptions extends Component {
     ) : null;
   }
 
-  calculateSubTotal(divisor = 1) {
+  calculateSubTotal(currencySymbol) {
     const {
       productCentsBasePrice,
       colorCentsTotal,
@@ -149,8 +149,12 @@ class ProductOptions extends Component {
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     return calculateSubTotal(
       { colorCentsTotal, productCentsBasePrice, selectedAddonOptions },
-      divisor,
+      currencySymbol,
     );
+  }
+
+  calculateInstallment(divisor, currencySymbol) {
+    return currencySymbol + (Number(this.calculateSubTotal()) / divisor).toFixed(2);
   }
 
   handleOpenAfterpayModalClick(e) {
@@ -217,7 +221,7 @@ class ProductOptions extends Component {
                 leftNode={<h1 className="u-display--inline h4">{productTitle}</h1>}
                 rightNode={
                   <span className="h4">
-                    {this.calculateSubTotal()}
+                    {this.calculateSubTotal('$')}
                   </span>
                 }
               />
@@ -252,7 +256,7 @@ class ProductOptions extends Component {
                   <p
                     className="AfterPay__message"
                   >
-                    4 easy payments of {this.calculateSubTotal(4)} with
+                    4 easy payments of {this.calculateInstallment(4, '$')} with
                     <img
                       alt="AfterPay Logo"
                       className="AfterPay__image-logo"
