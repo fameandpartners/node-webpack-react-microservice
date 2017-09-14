@@ -241,7 +241,7 @@ export function transformProductColors(colors = []) {
   // })
   return colors.map((c) => {
     const optionValue = c.option_value;
-    const hasPatternImage = optionValue.value.indexOf('.') > -1;
+    const hasPatternImage = optionValue.value ? optionValue.value.indexOf('.') > -1 : false;
     const ASSET_BASE_PATH = 'https://d1msb7dh8kb0o9.cloudfront.net/assets/product-color-images';
 
     return {
