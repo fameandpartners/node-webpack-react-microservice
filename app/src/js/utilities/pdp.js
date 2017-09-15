@@ -248,7 +248,7 @@ export function transformProductColors(colors = []) {
       id: optionValue.id,
       name: optionValue.name,
       presentation: optionValue.presentation,
-      hexValue: hasPatternImage ? '' : optionValue.value,
+      hexValue: hasPatternImage ? '' : (optionValue.value || ''),
       patternUrl: hasPatternImage ? `${ASSET_BASE_PATH}/${optionValue.value}` : '',
     };
   });
