@@ -33,7 +33,7 @@ class MeasuringTipsPanel extends PureComponent {
         <div className="col-6_sm-12">
           <img className="u-width--full" src={measuringImage} alt="Measuring info" />
         </div>
-        <div className="col-6_sm-12">
+        <div className="col-6_sm-12 MeasuringTipsPanel__tips-list">
           <ul className="MeasuringTipsPanel__tip">
             <li>
               <div className="h6">Bust</div>
