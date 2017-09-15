@@ -65,7 +65,7 @@ class Slider extends Component {
 
   componentDidUpdate(lastProps) {
     if ((lastProps.winWidth !== this.props.winWidth)
-  || (lastProps.winHeight !== this.props.winHeight)) {
+    || (lastProps.winHeight !== this.props.winHeight)) {
       loryInstance.reset();
     }
   }
