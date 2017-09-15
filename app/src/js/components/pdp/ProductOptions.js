@@ -281,7 +281,12 @@ class ProductOptions extends Component {
               }
               <p className="u-mb-small">
                 Complimentary shipping and returns.&nbsp;
-                <a className="link link--static">Learn more</a>
+                <a
+                  className="link link--static"
+                  href="/iequalchange"
+                >
+                  Learn more
+                </a>
               </p>
               <ProductSecondaryActions />
             </div>
