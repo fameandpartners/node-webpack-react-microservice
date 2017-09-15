@@ -1,4 +1,5 @@
 .ProductDisplayOptionsTouch__option {
+  color: $c-black;
   width: 150px;
   height: 125px;
   margin: 0 15px;
@@ -11,4 +12,10 @@
 
 .ProductDisplayOptionsTouch__option--dark {
   color: $c-white;
+}
+
+.ProductDisplayOptionsTouch__background-text {
+  color: $c-white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
 }

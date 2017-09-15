@@ -1,9 +1,7 @@
 /* eslint-disable max-len */
-import { assign, find } from 'lodash';
-import queryString from 'query-string';
+import { assign } from 'lodash';
 import { formatCents } from './accounting';
 import { UNITS } from '../constants/ProductConstants';
-import win from '../polyfills/windowPolyfill';
 
 export function calculateSubTotal({
   colorCentsTotal = 0,
@@ -220,9 +218,7 @@ export function transformProductDescription({ description }) {
   return description;
 }
 
-export function transformProductDefaultColors({ colors = {} }) {
-  console.warn('NEED A WAY TO RECIVE patternUrl');
-  const defaultColors = colors.table.default || [];
+export function transformProductColors(colors = []) {
   // "created_at": String,
   // "id": Number,
   // "image_content_type": null,
@@ -243,48 +239,18 @@ export function transformProductDefaultColors({ colors = {} }) {
   //   hexValue: String,
   //   patternUrl: String,
   // })
-  return defaultColors.map((c) => {
+  return colors.map((c) => {
     const optionValue = c.option_value;
-    return {
-      id: optionValue.id,
-      name: optionValue.name,
-      presentation: optionValue.presentation,
-      hexValue: optionValue.value,
-      patternUrl: 'this-does-not-exist-yet.png',
-    };
-  });
-}
+    const optionValueVal = optionValue.value || '';
+    const hasPatternImage = optionValueVal ? optionValueVal.indexOf('.') > -1 : false;
+    const ASSET_BASE_PATH = 'https://d1msb7dh8kb0o9.cloudfront.net/assets/product-color-images';
 
-export function transformProductSecondaryColors({ colors = {} }) {
-  const secondaryColors = colors.table.extra || [];
-  // "created_at": String,
-  // "id": Number,
-  // "image_content_type": null,
-  // "image_file_name": null,
-  // "image_file_size": null,
-  // "name": String,
-  // "option_type_id": Number,
-  // "position": Number,
-  // "presentation": String,
-  // "updated_at": String,
-  // "use_in_customisation": Boolean,
-  // "value": String
-  //   ****** into ******
-  // ArrayOf({
-  //   id: Number,
-  //   name: String,
-  //   presentation: String,
-  //   hexValue: String,
-  //   patternUrl: String,
-  // })
-  return secondaryColors.map((c) => {
-    const optionValue = c.option_value;
     return {
       id: optionValue.id,
       name: optionValue.name,
       presentation: optionValue.presentation,
-      hexValue: optionValue.value,
-      patternUrl: 'this-does-not-exist-yet.png',
+      hexValue: hasPatternImage ? '' : optionValueVal,
+      patternUrl: hasPatternImage ? `${ASSET_BASE_PATH}/${optionValueVal}` : '',
     };
   });
 }
@@ -423,23 +389,6 @@ export function transformProductMakingOptions({ fast_making, making_option_id })
   return making;
 }
 
-function extractQueryStringCustomizations(colors) {
-  const queryStringCustomizations = {
-    selectedColor: {},
-    selectedStyleCustomizations: [],
-  };
-  if (!win.isMockWindow && win.location.search) {
-    const parsed = queryString.parse(win.location.search);
-    const foundColor = (parsed.clr) ? find(colors, { id: parseInt(parsed.clr, 10) }) : null;
-    queryStringCustomizations.selectedColor = foundColor || colors[0];
-    queryStringCustomizations.selectedStyleCustomizations = (parsed.cus)
-      ? parsed.cus.map(c => parseInt(c, 10))
-      : [];
-  }
-
-  return queryStringCustomizations;
-}
-
 export function transformProductJSON(productJSON) {
   const productState = {
     currency: transformProductCurrency(productJSON.product),
@@ -449,8 +398,8 @@ export function transformProductJSON(productJSON) {
     preCustomizations: transformProductPreCustomizations(),
     productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
     productDescription: transformProductDescription(productJSON.product),
-    productDefaultColors: transformProductDefaultColors(productJSON.product),
-    productSecondaryColors: transformProductSecondaryColors(productJSON.product),
+    productDefaultColors: transformProductColors(productJSON.product.colors.table.default),
+    productSecondaryColors: transformProductColors(productJSON.product.colors.table.extra),
     productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
     productId: transformProductId(productJSON.product),
     productImages: transformProductImages(productJSON.images),
@@ -460,15 +409,10 @@ export function transformProductJSON(productJSON) {
     productMakingOptions: transformProductMakingOptions(productJSON.product),
   };
 
-  const { selectedColor, selectedStyleCustomizations } =
-    extractQueryStringCustomizations(productState.productDefaultColors.concat(productState.productSecondaryColors));
-
   const customizationState = {
     addons: transformAddons(productJSON),
-    selectedColor,
-    temporaryColor: selectedColor, // productState.productDefaultColors[0]
-    selectedStyleCustomizations,
-    temporaryStyleCustomizations: selectedStyleCustomizations,
+    selectedColor: productState.productDefaultColors[0],
+    temporaryColor: productState.productDefaultColors[0],
   };
 
   return {
@@ -487,9 +431,8 @@ export default {
   transformProductCentsBasePrice,
   transformProductComplementaryProducts,
   transformProductCurrency,
-  transformProductDefaultColors,
+  transformProductColors,
   transformProductDescription,
-  transformProductSecondaryColors,
   transformProductSecondaryColorsCentsPrice,
   transformProductFabric,
   transformProductGarmentInformation,
