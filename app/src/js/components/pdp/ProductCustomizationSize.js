@@ -269,7 +269,7 @@ class ProductCustomizationStyle extends PureComponent {
                     tertiary
                     selected={s === temporaryDressSize}
                     square
-                    text={s}
+                    text={isUSSiteVersion ? `US ${s}` : `AU ${s}`}
                     handleClick={this.handleDressSizeSelection(s)}
                   />
                 </div>
