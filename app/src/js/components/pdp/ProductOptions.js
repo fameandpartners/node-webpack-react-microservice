@@ -154,7 +154,7 @@ class ProductOptions extends Component {
   }
 
   calculateInstallment(divisor, currencySymbol) {
-    return currencySymbol + (Number(this.calculateSubTotal()) / divisor).toFixed(2);
+    return currencySymbol + (Number(this.calculateSubTotal('')) / divisor).toFixed(2);
   }
 
   handleOpenAfterpayModalClick(e) {
@@ -221,7 +221,7 @@ class ProductOptions extends Component {
                 leftNode={<h1 className="u-display--inline h4">{productTitle}</h1>}
                 rightNode={
                   <span className="h4">
-                    {this.calculateSubTotal('$')}
+                    {this.calculateSubTotal()}
                   </span>
                 }
               />
