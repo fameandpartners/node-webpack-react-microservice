@@ -75,7 +75,7 @@ class SizeGuideTable extends PureComponent {
               hovered={this.handleHover}
             />
             <SizeGuideTableCell
-              contents="AU"
+              contents="AU/UK"
               hoverCoordinates={hoverCoordinates}
               columnIndex={0}
               rowIndex={1}
