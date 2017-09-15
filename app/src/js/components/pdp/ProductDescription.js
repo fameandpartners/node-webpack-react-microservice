@@ -33,7 +33,12 @@ class ProductDescription extends Component {
       <div className="u-center">
         <p>
           $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
-          <a className="link link--static">Learn more</a>
+          <a
+            className="link link--static"
+            href="/faqs#collapse-free-shipping"
+          >
+            Learn more
+          </a>
         </p>
         <div className="ProductDescription u-center">
           <p dangerouslySetInnerHTML={{ __html: productDescription }} />
