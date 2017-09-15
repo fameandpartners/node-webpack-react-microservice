@@ -31,7 +31,7 @@ class ProductDescription extends Component {
     const { productDescription, modelDescription } = this.props;
     return (
       <div className="u-center">
-        <p>
+        <p className="ProductCharity__message">
           $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
           <a
             className="link link--static"
