@@ -176,3 +176,8 @@
 .u-color-red {
   color: $c-red;
 }
+
+// Z-Index Helpers
+.u-z-index--max {
+  z-index: $z-max;
+}
