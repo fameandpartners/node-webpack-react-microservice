@@ -63,6 +63,20 @@ class MeasuringTipsPanel extends PureComponent {
                 ladies can take this measurement from 20cm/8in below the waistline.
               </p>
             </li>
+            <li>
+              <div className="h6">Dress Length</div>
+              <p>
+                Stand with your heels together and measure from your shoulders
+                to the floor, keeping the tape straight and perpendicular to the floor.
+              </p>
+            </li>
+            <li>
+              <div className="h6">Skirt Length</div>
+              <p>
+                Stand with your heels together and measure from your natural waistline
+                to the floor, keeping the tape straight and perpendicular to the floor.
+              </p>
+            </li>
           </ul>
         </div>
       </div>
