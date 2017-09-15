@@ -56,7 +56,7 @@
   }
 
   .Select__list-item {
-    padding: 0 25px;
+    padding: 0 16px;
     color: $c-neutral-10;
     cursor: default;
     line-height: 42px;
@@ -128,6 +128,6 @@
 }
 
 .Select-item-text div {
-  font-size: 1.2em;
-  padding: 9px 12px;
+  color: $c-black;
+  padding: 10px 2px;
 }
