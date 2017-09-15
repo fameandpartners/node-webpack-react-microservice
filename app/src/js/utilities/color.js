@@ -17,8 +17,32 @@ export function isDarkLuminance(hexStr) {
   return luminanceFromHex(hexStr.hexValue) < 70;
 }
 
+export function separateHexColorsInString(hexStr = '') {
+  const re = /#(\w+)(?!\w)/g;
+  return hexStr.match(re);
+}
+
+function generateDuoToneSwatchBackground(start, end) {
+  return `linear-gradient(45deg, ${end} 0%, ${end} 50%, ${start} 51%, ${start} 100%)`;
+}
+
+export function generateBackgroundValueFromColor({ patternUrl, hexValue }) {
+  if (patternUrl) {
+    return `url(${patternUrl})`;
+  }
+
+  const hexValArr = separateHexColorsInString(hexValue);
+  if (hexValArr && hexValArr.length === 2) {
+    return generateDuoToneSwatchBackground(hexValArr[0], hexValArr[1]);
+  }
+
+  return hexValue;
+}
+
 
 export default {
   luminanceFromHex,
   isDarkLuminance,
+  generateBackgroundValueFromColor,
+  separateHexColorsInString,
 };

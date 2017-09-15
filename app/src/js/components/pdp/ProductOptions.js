@@ -7,13 +7,14 @@ import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
 
 // Utilities
+import noop from '../../libs/noop';
 import { formatCents } from '../../utilities/accounting';
+import { generateBackgroundValueFromColor } from '../../utilities/color';
 import {
   addonSelectionDisplayText,
   calculateSubTotal,
   sizingDisplayText,
 } from '../../utilities/pdp';
-import noop from '../../libs/noop';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
@@ -57,6 +58,7 @@ function stateToProps(state) {
     colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
+    patternUrl: selectedColor.get('patternUrl'),
 
     // SELECTIONS
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
@@ -93,7 +95,12 @@ class ProductOptions extends Component {
       colorCentsTotal,
       colorName,
       colorHexValue,
+      patternUrl,
     } = this.props;
+    const background = generateBackgroundValueFromColor({
+      hexValue: colorHexValue,
+      patternUrl,
+    });
 
     return (
       <span>
@@ -103,7 +110,7 @@ class ProductOptions extends Component {
           : null
         }
         <span
-          style={{ background: colorHexValue }}
+          style={{ background }}
           className="ProductOptions__color-swatch u-display--inline-block"
         />
       </span>
@@ -304,6 +311,7 @@ ProductOptions.propTypes = {
   colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
+  patternUrl: PropTypes.string.isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({

@@ -8,8 +8,16 @@
   content: '';
 }
 
+.ColorSwatches__swatch--pattern::after {
+  padding-top: 20%;
+}
+
 .ColorSwatches__swatch--dark {
   color: $c-white;
+}
+
+.ColorSwatches__wrapper {
+  background-size: cover;
 }
 
 .ColorSwatches__wrapper--active {
@@ -18,16 +26,11 @@
 }
 
 .ColorSwatches__swatch {
-  opacity: 0;
+  opacity: 1;
   transition: $standard-transition-time opacity;
   font-weight: 500;
 }
 
-.ColorSwatches__wrapper--touch .ColorSwatches__swatch,
-.ColorSwatches__wrapper:hover .ColorSwatches__swatch {
-  opacity: 1;
-}
-
 .ColorSwatches__touch-display-text {
-  bottom: -45px;
+  bottom: -30px;
 }
