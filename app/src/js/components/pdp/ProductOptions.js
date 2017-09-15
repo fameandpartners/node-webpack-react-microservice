@@ -9,6 +9,7 @@ import { find } from 'lodash';
 // Utilities
 import noop from '../../libs/noop';
 import { formatCents } from '../../utilities/accounting';
+import { sizeProfilePresence } from '../../utilities/pdpValidations';
 import { generateBackgroundValueFromColor } from '../../utilities/color';
 import {
   addonSelectionDisplayText,
@@ -249,7 +250,7 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 leftNode={<span>Your size</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={!!(selectedDressSize && selectedHeightValue)}
+                optionIsSelected={sizeProfilePresence(selectedDressSize, selectedHeightValue)}
                 rightNode={this.generateSizingNode()}
                 handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />

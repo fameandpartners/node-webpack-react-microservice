@@ -2,6 +2,7 @@
 import { assign } from 'lodash';
 import { formatCents } from './accounting';
 import { UNITS } from '../constants/ProductConstants';
+import { sizeProfilePresence } from './pdpValidations';
 
 export function calculateSubTotal({
   colorCentsTotal = 0,
@@ -34,7 +35,7 @@ export function sizingDisplayText({
   selectedDressSize }) {
   let sizingInformation = null;
 
-  if (selectedHeightValue && selectedDressSize) {
+  if (sizeProfilePresence(selectedDressSize, selectedHeightValue)) {
     if (selectedMeasurementMetric === UNITS.INCH) {
       // INCH
       const ft = Math.floor(selectedHeightValue / 12);
