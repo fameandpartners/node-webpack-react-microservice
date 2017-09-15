@@ -241,15 +241,16 @@ export function transformProductColors(colors = []) {
   // })
   return colors.map((c) => {
     const optionValue = c.option_value;
-    const hasPatternImage = optionValue.value ? optionValue.value.indexOf('.') > -1 : false;
+    const optionValueVal = optionValue.value || '';
+    const hasPatternImage = optionValueVal ? optionValueVal.indexOf('.') > -1 : false;
     const ASSET_BASE_PATH = 'https://d1msb7dh8kb0o9.cloudfront.net/assets/product-color-images';
 
     return {
       id: optionValue.id,
       name: optionValue.name,
       presentation: optionValue.presentation,
-      hexValue: hasPatternImage ? '' : (optionValue.value || ''),
-      patternUrl: hasPatternImage ? `${ASSET_BASE_PATH}/${optionValue.value}` : '',
+      hexValue: hasPatternImage ? '' : optionValueVal,
+      patternUrl: hasPatternImage ? `${ASSET_BASE_PATH}/${optionValueVal}` : '',
     };
   });
 }
