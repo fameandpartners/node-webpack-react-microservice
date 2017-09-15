@@ -7,13 +7,14 @@ export function calculateSubTotal({
   colorCentsTotal = 0,
   productCentsBasePrice = 0,
   selectedAddonOptions = [],
-}) {
+}, currencySymbol = '$') {
   const customizationStyleCents = selectedAddonOptions
     .reduce((prev, curr) => prev + parseInt(curr.centsTotal, 10), 0);
 
   return formatCents(
-    parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice,
+    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice),
     0,
+    (currencySymbol || ''),
   );
 }
 
@@ -389,6 +390,10 @@ export function transformProductMakingOptions({ fast_making, making_option_id })
   return making;
 }
 
+export function transformProductSiteVersion({ siteVersion }) {
+  return siteVersion;
+}
+
 export function transformProductJSON(productJSON) {
   const productState = {
     currency: transformProductCurrency(productJSON.product),
@@ -407,6 +412,7 @@ export function transformProductJSON(productJSON) {
     productTitle: transformProductTitle(productJSON.product),
     sizeChart: transformProductSizeChart(productJSON),
     productMakingOptions: transformProductMakingOptions(productJSON.product),
+    siteVersion: transformProductSiteVersion(productJSON),
   };
 
   const customizationState = {

@@ -19,6 +19,7 @@ const modalIds = assign({},
     'ZOOM_MODAL',
     'SIGN_UP_MODAL',
     'SIZE_GUIDE_MODAL',
+    'AFTERPAY_MODAL',
   ]),
 );
 
