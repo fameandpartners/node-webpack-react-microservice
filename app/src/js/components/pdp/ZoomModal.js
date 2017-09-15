@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
@@ -21,12 +22,15 @@ import ModalActions from '../../actions/ModalActions';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
+// Polyfills
+import win from '../../polyfills/windowPolyfill';
+
 // CSS
 import '../../../css/components/ZoomModal.scss';
 
 function stateToProps(state) {
   return {
-    colorId: state.$$customizationState.get('selectedColor').get('id'),
+    selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
     $$productImages: state.$$productState.get('productImages'),
     activeSlide: state.$$modalState.get('activeSlideIndex'),
   };
@@ -46,7 +50,6 @@ class ZoomModal extends Component {
       leftPercent: null,
       activeImageIndex: null,
       activeZoomIndex: null,
-      imageDimensions: null,
     };
     autobind(this);
   }
@@ -55,27 +58,11 @@ class ZoomModal extends Component {
     this.props.activateModal({ shouldAppear: false });
   }
 
-  setDimensions(imgIndex) {
-    const rect = this.imageRefs[imgIndex].getBoundingClientRect();
-    const { left, top, width, height } = rect;
-    this.setState({
-      imageDimensions: {
-        left,
-        top,
-        width,
-        height,
-      },
-    });
-  }
-
   setZoomStyle(e) {
-    if (!this.state.imageDimensions) return;
-    const {
-      width,
-      height,
-    } = this.state.imageDimensions;
-    const leftPercent = ((e.pageX) / width) * 100;
-    const topPercent = ((e.pageY) / height) * 100;
+    const scrollOffset = win.document.body.getBoundingClientRect().top;
+    const leftPercent = ((e.pageX) / win.innerWidth) * 100;
+    const topPercent = ((e.pageY + scrollOffset) / win.innerHeight) * 100;
+
     this.setState({
       topPercent: `${topPercent.toString()}%`,
       leftPercent: `${leftPercent.toString()}%`,
@@ -100,8 +87,7 @@ class ZoomModal extends Component {
   }
 
   handleImageMouseover(e) {
-    const { imageDimensions, isZoomActive } = this.state;
-    if (imageDimensions && isZoomActive) {
+    if (this.state.isZoomActive) {
       this.setZoomStyle(e);
     }
   }
@@ -112,15 +98,12 @@ class ZoomModal extends Component {
 
     if (isZoomActive) { // TURN OFF ZOOM
       this.setState({ isZoomActive: !isZoomActive });
-    } else { // TURN ON ZOOM
-      this.setDimensions(index);
-      if (breakpoint !== 'mobile') {
-        this.setState({
-          activeZoomIndex: index,
-          isZoomActive: !isZoomActive,
-        });
-        this.setZoomStyle(e);
-      }
+    } else if (breakpoint !== 'mobile') { // TURN ON ZOOM
+      this.setState({
+        activeZoomIndex: index,
+        isZoomActive: !isZoomActive,
+      });
+      this.setZoomStyle(e);
     }
   }
 
@@ -206,7 +189,7 @@ ZoomModal.propTypes = {
     width: PropTypes.number,
     position: PropTypes.number,
   })).isRequired,
-  selectedColorId: PropTypes.string,
+  selectedColorId: PropTypes.number,
   activeSlide: PropTypes.number,
 };
 
