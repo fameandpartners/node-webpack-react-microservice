@@ -132,7 +132,6 @@ class ExpressMaking extends Component {
 ExpressMaking.propTypes = {
   setExpressMakingStatus: PropTypes.func,
   expressMakingStatus: PropTypes.bool,
-  expressMakingAvailable: PropTypes.bool,
   productDefaultColors: PropTypes.arrayOf(PropTypes.object),
   colorId: PropTypes.string,
   mobile: PropTypes.bool,
