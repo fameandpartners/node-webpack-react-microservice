@@ -15,6 +15,13 @@ export function setShareableQueryParams({ color, customizations }) {
   };
 }
 
+export function setGallerySlideActiveIndex({ index = 0 }) {
+  return {
+    type: AppConstants.SET_GALLERY_SLIDE_ACTIVE_INDEX,
+    index,
+  };
+}
+
 export default {
   activateSideMenu,
   setShareableQueryParams,

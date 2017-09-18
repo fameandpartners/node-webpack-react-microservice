@@ -17,11 +17,11 @@ class Slider extends Component {
   }
 
   previousSlide() {
-    loryInstance.prev();
+    this.props.handlePrev();
   }
 
   nextSlide() {
-    loryInstance.next();
+    this.props.handleNext();
   }
 
   handleKeydowns(evt) {
@@ -39,14 +39,9 @@ class Slider extends Component {
     }
   }
 
-  handleBeforeSlide(loryEventData) {
-    this.props.handleBeforeSlide(loryEventData);
-  }
-
   setUpEventHandlers() {
     // Window keydown for arrow keys
     win.document.addEventListener('keydown', this.handleKeydowns);
-    this.slider.addEventListener('before.lory.slide', this.handleBeforeSlide);
   }
 
   removeEventHandler() {
@@ -61,12 +56,19 @@ class Slider extends Component {
     });
 
     this.setUpEventHandlers();
+    if (typeof this.props.activeIndex === 'number') {
+      loryInstance.slideTo(this.props.activeIndex);
+    }
   }
 
   componentDidUpdate(lastProps) {
     if ((lastProps.winWidth !== this.props.winWidth)
     || (lastProps.winHeight !== this.props.winHeight)) {
       loryInstance.reset();
+    }
+
+    if (lastProps.activeIndex !== this.props.activeIndex) {
+      loryInstance.slideTo(this.props.activeIndex);
     }
   }
 
@@ -128,6 +130,7 @@ class Slider extends Component {
 }
 
 Slider.propTypes = {
+  activeIndex: PropTypes.number,
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.node,
@@ -136,15 +139,19 @@ Slider.propTypes = {
   winHeight: PropTypes.number,
   winWidth: PropTypes.number,
   showButtons: PropTypes.bool,
-  handleBeforeSlide: PropTypes.func,
+  handlePrev: PropTypes.func,
+  handleNext: PropTypes.func,
 };
 
 Slider.defaultProps = {
   // Redux Props
+  activeIndex: 0,
   winHeight: null,
   winWidth: null,
   showButtons: false,
   // Redux Actions
+  handlePrev: noop,
+  handleNext: noop,
   handleBeforeSlide: noop,
 };
 

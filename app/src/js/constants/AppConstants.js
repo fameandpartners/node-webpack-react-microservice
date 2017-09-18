@@ -6,6 +6,7 @@ const actionTypes = assign({},
     'ACTIVATE_SIDE_MENU',
     'ACTIVATE_CART_DRAWER',
     'SET_SHAREABLE_QUERY_PARAMS',
+    'SET_GALLERY_SLIDE_ACTIVE_INDEX',
   ]),
 );
 

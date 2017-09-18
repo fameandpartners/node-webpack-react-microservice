@@ -8,7 +8,8 @@ import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
 
 // Actions
-import ModalActions from '../../actions/ModalActions';
+import * as ModalActions from '../../actions/ModalActions';
+import * as AppActions from '../../actions/AppActions';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -21,8 +22,12 @@ function stateToProps(state) {
 }
 
 function dispatchToProps(dispatch) {
-  const actions = bindActionCreators(ModalActions, dispatch);
-  return { activateModal: actions.activateModal };
+  const modalActions = bindActionCreators(ModalActions, dispatch);
+  const appActions = bindActionCreators(AppActions, dispatch);
+  return {
+    activateModal: modalActions.activateModal,
+    setGallerySlideActiveIndex: appActions.setGallerySlideActiveIndex,
+  };
 }
 
 class ProductGrid extends Component {
@@ -39,20 +44,24 @@ class ProductGrid extends Component {
 
     return productImages
       .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
-      .map((img, index) => (
+      .filter((img, i) => i !== 0) // slice off first image
+      .map((img, idx) => (
         <div className="col-6" key={img.id}>
-          <div className="brick u-cursor--pointer" onClick={() => this.showZoomModal(index)}>
-            <img className="u-width--full" alt={Object.keys(img)} src={img.bigImg} />
+          <div className="brick u-cursor--pointer" onClick={() => this.showImageLightboxModal(idx)}>
+            <img className="u-width--full" alt={`Dress photo ${idx+1}`} src={img.bigImg} />
           </div>
         </div>
         ));
   }
 
-  showZoomModal(index) {
-    this.props.activateModal({
+  showImageLightboxModal(idx) {
+    const { activateModal, setGallerySlideActiveIndex} = this.props;
+    setGallerySlideActiveIndex({
+      index: idx + 1,
+    });
+    activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
       shouldAppear: true,
-      activeSlideIndex: index,
     });
   }
 
@@ -78,6 +87,8 @@ ProductGrid.propTypes = {
     width: PropTypes.number,
     position: PropTypes.number,
   })).isRequired,
+  // Redux Actions
+  setGallerySlideActiveIndex: PropTypes.func.isRequired,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductGrid);
