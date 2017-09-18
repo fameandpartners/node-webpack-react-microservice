@@ -19,6 +19,7 @@ import ShareModal from './components/pdp/ShareModal';
 import ImageLightboxModal from './components/pdp/ImageLightboxModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
+import AfterpayModal from './components/pdp/AfterpayModal';
 
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
@@ -131,6 +132,7 @@ class App extends Component {
         <ImageLightboxModal />
         <StyleSelectionModal />
         <SizeModals />
+        <AfterpayModal />
       </div>
     );
   }

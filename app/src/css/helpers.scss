@@ -42,7 +42,7 @@
   position: inherit;
 }
 
-.textAlign--left {
+.u-text-align--left {
   text-align: left;
 }
 
@@ -175,4 +175,9 @@
 // Colors
 .u-color-red {
   color: $c-red;
+}
+
+// Z-Index Helpers
+.u-z-index--max {
+  z-index: $z-max;
 }

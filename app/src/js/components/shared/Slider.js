@@ -39,14 +39,9 @@ class Slider extends Component {
     }
   }
 
-  handleBeforeSlide(loryEventData) {
-    this.props.handleBeforeSlide(loryEventData);
-  }
-
   setUpEventHandlers() {
     // Window keydown for arrow keys
     win.document.addEventListener('keydown', this.handleKeydowns);
-    // this.slider.addEventListener('before.lory.slide', this.handleBeforeSlide);
   }
 
   removeEventHandler() {
@@ -146,7 +141,6 @@ Slider.propTypes = {
   showButtons: PropTypes.bool,
   handlePrev: PropTypes.func,
   handleNext: PropTypes.func,
-  handleBeforeSlide: PropTypes.func,
 };
 
 Slider.defaultProps = {

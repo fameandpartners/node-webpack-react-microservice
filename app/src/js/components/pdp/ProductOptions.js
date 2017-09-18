@@ -9,6 +9,7 @@ import { find } from 'lodash';
 // Utilities
 import noop from '../../libs/noop';
 import { formatCents } from '../../utilities/accounting';
+import { sizeProfilePresence } from '../../utilities/pdpValidations';
 import { generateBackgroundValueFromColor } from '../../utilities/color';
 import {
   addonSelectionDisplayText,
@@ -31,6 +32,9 @@ import ModalActions from '../../actions/ModalActions';
 // CSS
 import '../../../css/components/ProductOptions.scss';
 
+// Assets
+import afterpayImage from '../../../img/test/afterpay.png';
+
 // UI Components
 import AddToCartButton from './AddToCartButton';
 
@@ -41,6 +45,9 @@ function stateToProps(state) {
   const addons = state.$$customizationState.get('addons');
 
   return {
+    // APP
+    auSite: state.$$productState.get('siteVersion').toLowerCase() === 'australia',
+
     // PRODUCT
     productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
@@ -141,14 +148,28 @@ class ProductOptions extends Component {
     ) : null;
   }
 
-  calculateSubTotal() {
+  calculateSubTotal(currencySymbol) {
     const {
       productCentsBasePrice,
       colorCentsTotal,
     } = this.props;
 
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
-    return calculateSubTotal({ colorCentsTotal, productCentsBasePrice, selectedAddonOptions });
+    return calculateSubTotal(
+      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions },
+      currencySymbol,
+    );
+  }
+
+  calculateInstallment(divisor, currencySymbol) {
+    return currencySymbol + (Number(this.calculateSubTotal('')) / divisor).toFixed(2);
+  }
+
+  handleOpenAfterpayModalClick(e) {
+    e.preventDefault();
+    this.props.activateModal({
+      modalId: ModalConstants.AFTERPAY_MODAL,
+    });
   }
 
   showImageLightboxModal() {
@@ -157,6 +178,7 @@ class ProductOptions extends Component {
       shouldAppear: true,
     });
   }
+
   /**
    * Activates a drawer to a specific drawer type
    * @param  {String} drawer
@@ -186,6 +208,7 @@ class ProductOptions extends Component {
       selectedStyleCustomizations,
       selectedDressSize,
       selectedHeightValue,
+      auSite,
     } = this.props;
 
     return (
@@ -227,7 +250,7 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 leftNode={<span>Your size</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={!!(selectedDressSize && selectedHeightValue)}
+                optionIsSelected={sizeProfilePresence(selectedDressSize, selectedHeightValue)}
                 rightNode={this.generateSizingNode()}
                 handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
@@ -236,13 +259,35 @@ class ProductOptions extends Component {
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
             <div className="ProductOptions__additional-info u-mb-normal">
-              <p>
-                $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
-                <a className="link link--static">Learn&nbsp;more</a>
-              </p>
+              { auSite ?
+                (
+                  <p
+                    className="AfterPay__message"
+                  >
+                    4 easy payments of {this.calculateInstallment(4, '$')} with
+                    <img
+                      alt="AfterPay Logo"
+                      className="AfterPay__image-logo"
+                      src={afterpayImage}
+                    />
+                    <a
+                      className="link link--static"
+                      onClick={this.handleOpenAfterpayModalClick}
+                    >
+                      Info
+                    </a>
+                  </p>
+                )
+                : null
+              }
               <p className="u-mb-small">
                 Complimentary shipping and returns.&nbsp;
-                <a className="link link--static">Learn&nbsp;more</a>
+                <a
+                  className="link link--static"
+                  href="/iequalchange"
+                >
+                  Learn&nbsp;more
+                </a>
               </p>
               <ProductSecondaryActions />
             </div>
@@ -280,6 +325,7 @@ ProductOptions.propTypes = {
       name: PropTypes.string,
     }),
   ),
+  auSite: PropTypes.bool.isRequired,
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,

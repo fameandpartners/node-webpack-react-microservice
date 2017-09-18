@@ -73,7 +73,7 @@ class ColorSwatches extends PureComponent {
       <div
         className="ColorSwatches u-mt-normal u-text-align-left"
       >
-        <h5 className="u-mb-small textAlign--left">
+        <h5 className="u-mb-small u-text-align--left">
           Fame Recommends
         </h5>
         <div className="grid-12">

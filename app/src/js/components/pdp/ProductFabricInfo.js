@@ -19,14 +19,14 @@ class ProductFabricInfo extends PureComponent {
         ])}
       >
         <div className="u-mb-normal">
-          <h4>Fabric</h4>
+          <h4 className="u-mb-xs">Fabric</h4>
           {fabric.description.split('\n').map(
             (item, key) =>
               <span key={`fd-${key}`}>{item}<br /></span>,
             )
           }
         </div>
-        <h4>Garment Care</h4>
+        <h4 className="u-mb-xs">Garment Care</h4>
         {garmentCareInformation.split('\n').map(
           (item, key) =>
             <span key={`fd-${key}`}>{item}<br /></span>,

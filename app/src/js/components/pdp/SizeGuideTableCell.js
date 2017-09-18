@@ -43,7 +43,11 @@ class SizeGuideTableCell extends PureComponent {
         className={cellClasses}
         onMouseOver={this.updateCoordinates}
       >
-        {contents}
+        <span
+          className="u-text-align--center"
+        >
+          {contents}
+        </span>
       </div>
     );
   }

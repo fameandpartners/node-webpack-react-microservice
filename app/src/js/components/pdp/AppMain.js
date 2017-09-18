@@ -26,6 +26,8 @@ import ProductDescription from './ProductDescription';
 import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
+import ProductFabricInfo from './ProductFabricInfo';
+
 // import FameDifference from './FameDifference';
 
 // CSS
@@ -37,6 +39,8 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
+    fabric: state.$$productState.get('fabric').toJS(),
+    garmentCareInformation: state.$$productState.get('garmentCareInformation'),
   };
 }
 
@@ -82,6 +86,8 @@ class AppMain extends Component {
       breakpoint,
       cartDrawerOpen,
       sideMenuOpen,
+      fabric,
+      garmentCareInformation,
     } = this.props;
 
     return (
@@ -121,9 +127,16 @@ class AppMain extends Component {
               }
 
               <div className="layout-container">
-                <div className="grid AppMain__product-info">
+                <div className="grid-2_sm-1 AppMain__product-info">
                   <div className="col grid-middle">
                     <ProductDescription />
+                  </div>
+                  <div className="col grid-middle">
+                    <ProductFabricInfo
+                      className="u-center"
+                      fabric={fabric}
+                      garmentCareInformation={garmentCareInformation}
+                    />
                   </div>
                 </div>
               </div>
@@ -138,7 +151,7 @@ class AppMain extends Component {
             </div>
 
             <div
-              className="u-position--fixed u-width--full u-bottom"
+              className="u-position--fixed u-width--full u-bottom u-z-index--max"
               style={{ transform: `translateX(${x}px)` }}
             >
               <AddToCartButtonLedgeMobile />
@@ -156,6 +169,13 @@ AppMain.propTypes = {
   activateModal: PropTypes.func.isRequired,
   cartDrawerOpen: PropTypes.bool,
   sideMenuOpen: PropTypes.bool,
+  fabric: PropTypes.shape({
+    id: PropTypes.string,
+    smallImg: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+  }).isRequired,
+  garmentCareInformation: PropTypes.string.isRequired,
 
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,

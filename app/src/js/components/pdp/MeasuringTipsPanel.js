@@ -21,7 +21,7 @@ class MeasuringTipsPanel extends PureComponent {
           </div>
           <div className="col-6_sm-12">
             <div className="MeasuringTipsPanel__tip">
-              <div className="h6">Fame Tips</div>
+              <h6 className="h6">Fame Tips</h6>
               <p>
                 Measure yourself in your underwear and, if possible,
                 the bra you’d like to wear with the dress. Stand tall
@@ -33,34 +33,48 @@ class MeasuringTipsPanel extends PureComponent {
         <div className="col-6_sm-12">
           <img className="u-width--full" src={measuringImage} alt="Measuring info" />
         </div>
-        <div className="col-6_sm-12">
+        <div className="col-6_sm-12 u-text-align--left">
           <ul className="MeasuringTipsPanel__tip">
             <li>
-              <div className="h6">Bust</div>
+              <h6 className="h6">Bust</h6>
               <p>
                 Measure around the fullest part of your chest, keeping
                 the tape level to the floor.
               </p>
             </li>
             <li>
-              <div className="h6">Underbust</div>
+              <h6 className="h6">Underbust</h6>
               <p>
                 Measure directly under your bust (around your rib cage,
                 where your bra band sits), keeping the tape level to the floor.
               </p>
             </li>
             <li>
-              <div className="h6">Waist</div>
+              <h6 className="h6">Waist</h6>
               <p>
                 Measure around your natural waistline (the smallest part
                 of your waist).
               </p>
             </li>
             <li>
-              <div className="h6">Hips</div>
+              <h6 className="h6">Hips</h6>
               <p>
                 Measure around the fullest part of your hips. Slim-hipped
                 ladies can take this measurement from 20cm/8in below the waistline.
+              </p>
+            </li>
+            <li>
+              <h6 className="h6">Dress Length</h6>
+              <p>
+                Stand with your heels together and measure from your shoulders
+                to the floor, keeping the tape straight and perpendicular to the floor.
+              </p>
+            </li>
+            <li>
+              <h6 className="h6">Skirt Length</h6>
+              <p>
+                Stand with your heels together and measure from your natural waistline
+                to the floor, keeping the tape straight and perpendicular to the floor.
               </p>
             </li>
           </ul>
