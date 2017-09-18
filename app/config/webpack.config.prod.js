@@ -105,7 +105,7 @@ module.exports = {
         options: {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]',
-          publicPath: 'https://content-dev.fameandgroups.com/',
+          // publicPath: 'https://content-dev.fameandgroups.com/',
         },
       },
       // Process JS with Babel.
