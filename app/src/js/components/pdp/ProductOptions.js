@@ -150,7 +150,8 @@ class ProductOptions extends Component {
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     return calculateSubTotal({ colorCentsTotal, productCentsBasePrice, selectedAddonOptions });
   }
-  showZoomModal() {
+
+  showImageLightboxModal() {
     this.props.activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
       shouldAppear: true,
@@ -194,7 +195,7 @@ class ProductOptions extends Component {
             className="u-width--full"
             alt="dress1"
             src={this.findColorSpecificFirstImageUrl()}
-            onClick={this.showZoomModal}
+            onClick={this.showImageLightboxModal}
           />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
@@ -237,11 +238,11 @@ class ProductOptions extends Component {
             <div className="ProductOptions__additional-info u-mb-normal">
               <p>
                 $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
-                <a className="link link--static">Learn more</a>
+                <a className="link link--static">Learn&nbsp;more</a>
               </p>
               <p className="u-mb-small">
                 Complimentary shipping and returns.&nbsp;
-                <a className="link link--static">Learn more</a>
+                <a className="link link--static">Learn&nbsp;more</a>
               </p>
               <ProductSecondaryActions />
             </div>

@@ -1,13 +1,13 @@
-.ZoomModal__image {
+.ImageLightboxModal__image {
   cursor: zoom-in;
 }
 
-.ZoomModal__image--activeZoom {
+.ImageLightboxModal__image--activeZoom {
   transform: scale(2);
   cursor: zoom-out;
 }
 
-.ZoomModal__pagination {
+.ImageLightboxModal__pagination {
   position: absolute;
   z-index: 1;
   right: 70px;

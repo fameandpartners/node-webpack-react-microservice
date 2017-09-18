@@ -16,7 +16,7 @@ import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import ColorSelectionModal from './components/pdp/ColorSelectionModal';
 import ShareModal from './components/pdp/ShareModal';
-import ZoomModal from './components/pdp/ZoomModal';
+import ImageLightboxModal from './components/pdp/ImageLightboxModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
 
@@ -128,7 +128,7 @@ class App extends Component {
         <ProductFabricModal />
         <ColorSelectionModal />
         <ShareModal />
-        <ZoomModal />
+        <ImageLightboxModal />
         <StyleSelectionModal />
         <SizeModals />
       </div>
