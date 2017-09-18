@@ -79,14 +79,21 @@ class ModalContainer extends Component {
     e.stopPropagation();
   }
 
+  modalIsActive() {
+    const { activeModalId, modalIds } = this.props;
+    return modalIds.indexOf(activeModalId) > -1;
+  }
+
   hasActivatedModal() {
-    const { activeModalId, modalIds, shouldAppear } = this.props;
-    return shouldAppear && modalIds.indexOf(activeModalId) > -1;
+    const { shouldAppear } = this.props;
+    return shouldAppear && this.modalIsActive();
   }
 
   handleEscapeKeydown(evt) {
     const { activateModal } = this.props;
-    if (evt.keyCode === KEYS.ESC) activateModal({ shouldAppear: false });
+    if (evt.keyCode === KEYS.ESC && this.modalIsActive()) {
+      activateModal({ shouldAppear: false });
+    }
   }
 
   renderModalContainer(key, style) {
