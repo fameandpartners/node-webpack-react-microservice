@@ -10,7 +10,7 @@ class MeasuringTipsPanel extends PureComponent {
   render() {
     return (
       <div className="MeasuringTipsPanel typography grid-noGutter">
-        <div className="MeasuringTipsPanel__fame-tips-wrapper grid-noGutter">
+        <div className="MeasuringTipsPanel__fame-tips-wrapper grid-noGutter u-width--full">
           <div className="col-6_sm-12 u-text-align--center">
             <div className="MeasuringTipsPanel__tip">
               <p>
