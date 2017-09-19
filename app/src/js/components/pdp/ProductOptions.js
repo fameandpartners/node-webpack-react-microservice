@@ -280,20 +280,22 @@ class ProductOptions extends Component {
                 )
                 : null
               }
-              {
-                selectedStyleCustomizations.length === 0 ?
-                  <p className="u-mb-small">
-                    Complimentary shipping and returns.&nbsp;
-                    <a
-                      className="link link--staic"
-                      href="/iequalchange"
-                    >
-                      Learn more
-                    </a>
-                  </p>
-                : null
-               }
-
+              <p className="u-mb-small">
+                {
+                  selectedStyleCustomizations.length === 0 ?
+                    'Shipping and returns are free.'
+                  : 'Shipping is free on your customized item.'
+                } &nbsp;
+                <a
+                  className="link link--static"
+                  href="/faqs#collapse-returns-policy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Learn more
+                </a> <br />
+                Estimated delivery 12- 15 business days.
+              </p>
               <ProductSecondaryActions />
             </div>
           </div>
