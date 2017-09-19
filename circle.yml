@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   override:
-    - ./build-dev.sh
+    - sh ./build-dev.sh
     # - npm install -g npm
     # - npm install:
     #     pwd:
