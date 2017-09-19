@@ -5,7 +5,10 @@ import classnames from 'classnames';
 
 // Utilities
 import { formatCents } from '../../utilities/accounting';
-import { generateBackgroundValueFromColor } from '../../utilities/color';
+import {
+  generateBackgroundValueFromColor,
+  isExtremeLightLuminance,
+} from '../../utilities/color';
 
 // CSS
 import '../../../css/components/ColorSwatches.scss';
@@ -39,24 +42,28 @@ class ColorSwatches extends PureComponent {
           ])}
           style={{ background }}
         >
-          <div
-            className={classnames(
-              'ColorSwatches__swatch u-flex',
-              { 'ColorSwatches__swatch--pattern': !!color.patternUrl },
-            )}
-          >
-            <span
+          <div className="ColorSwatches__transform-wrapper">
+            <div
               className={classnames(
-                'ColorSwatches__touch-display-text',
-                'u-width--full u-position--absolute u-left',
-              )}
-            >
-              <h6>
-                {color.presentation}
-                {price ? <span>&nbsp;{formatCents(price, 0)}</span> : null }
-              </h6>
-            </span>
+              'ColorSwatches__swatch u-flex',
+                {
+                  'ColorSwatches__swatch--pattern': !!color.patternUrl,
+                  'ColorSwatches__swatch--extreme-light': isExtremeLightLuminance(color),
+                },
+            )}
+            />
           </div>
+          <span
+            className={classnames(
+            'ColorSwatches__touch-display-text',
+            'u-width--full u-position--absolute u-left',
+          )}
+          >
+            <h6>
+              {color.presentation}
+              {price ? <span>&nbsp;{formatCents(price, 0)}</span> : null }
+            </h6>
+          </span>
         </div>
       </div>
     );
