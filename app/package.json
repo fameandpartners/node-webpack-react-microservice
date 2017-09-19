@@ -10,8 +10,6 @@
     "server_test": "NODE_ENV='production' mocha --compilers js:babel-register --require ./src/lib/testNullCompiler.js && jest --coverage",
     "production": "node server.js && node scripts/clear_cache.js",
     "local_production": "node scripts/build.js && nodemon server.js",
-    "precommit": "yarn test:once",
-    "prepush": "yarn test:once",
     "start": "node server.js"
   },
   "keywords": [
