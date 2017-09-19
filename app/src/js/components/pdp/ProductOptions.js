@@ -46,7 +46,7 @@ function stateToProps(state) {
 
   return {
     // APP
-    auSite: state.$$productState.get('siteVersion').toLowerCase() === 'australia',
+    auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
 
     // PRODUCT
     productId: state.$$productState.get('productId'),
@@ -284,7 +284,9 @@ class ProductOptions extends Component {
                 Complimentary shipping and returns.&nbsp;
                 <a
                   className="link link--static"
-                  href="/iequalchange"
+                  href="/faqs#collapse-returns-policy"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Learn&nbsp;more
                 </a>

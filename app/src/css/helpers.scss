@@ -186,6 +186,10 @@
 }
 
 // Z-Index Helpers
+.u-z-index--mid {
+  z-index: $z-mid;
+}
+
 .u-z-index--max {
   z-index: $z-max;
 }

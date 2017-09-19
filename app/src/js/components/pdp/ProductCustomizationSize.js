@@ -34,7 +34,7 @@ import '../../../css/components/ProductCustomizationSize.scss';
 
 function stateToProps(state) {
   return {
-    isUSSiteVersion: state.$$appState.get('siteVersion') === 'us',
+    isUSSiteVersion: state.$$appState.get('siteVersion').toLowerCase() === 'usa',
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),

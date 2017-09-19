@@ -153,7 +153,7 @@ class AppMain extends Component {
             </div>
 
             <div
-              className="u-position--fixed u-width--full u-bottom u-z-index--max"
+              className="u-position--fixed u-width--full u-bottom u-z-index--mid"
               style={{ transform: `translateX(${x}px)` }}
             >
               <AddToCartButtonLedgeMobile />
