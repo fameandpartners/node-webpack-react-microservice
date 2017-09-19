@@ -53,6 +53,7 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
+    deliveryCopy: state.$$productState.get('deliveryCopy'),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -209,6 +210,7 @@ class ProductOptions extends Component {
       selectedDressSize,
       selectedHeightValue,
       auSite,
+      deliveryCopy,
     } = this.props;
 
     return (
@@ -294,7 +296,7 @@ class ProductOptions extends Component {
                 >
                   Learn more
                 </a> <br />
-                Estimated delivery 12- 15 business days.
+                Estimated delivery { deliveryCopy }.
               </p>
               <ProductSecondaryActions />
             </div>
@@ -340,6 +342,7 @@ ProductOptions.propTypes = {
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
+  deliveryCopy: PropTypes.string,
 };
 
 ProductOptions.defaultProps = {
@@ -348,6 +351,7 @@ ProductOptions.defaultProps = {
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
+  deliveryCopy: '',
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);
