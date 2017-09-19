@@ -17,7 +17,17 @@ import * as AppActions from '../../actions/AppActions';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
-import { COLOR_CUSTOMIZE, STYLE_CUSTOMIZE, SIZE_CUSTOMIZE } from '../../constants/CustomizationConstants';
+import {
+  COLOR_CUSTOMIZE,
+  STYLE_CUSTOMIZE,
+  SIZE_CUSTOMIZE,
+} from '../../constants/CustomizationConstants';
+
+import {
+  UNITS,
+  MIN_CM,
+  MAX_CM,
+} from '../../constants/ProductConstants';
 
 // UI Components
 import ButtonLedge from '../generic/ButtonLedge';
@@ -41,6 +51,7 @@ function dispatchToProps(dispatch) {
     activateCustomizationDrawer: customizationActions.activateCustomizationDrawer,
     selectProductColor: customizationActions.selectProductColor,
     setShareableQueryParams: appActions.setShareableQueryParams,
+    setSizeProfileError: customizationActions.setSizeProfileError,
     updateDressSizeSelection: customizationActions.updateDressSizeSelection,
     updateHeightSelection: customizationActions.updateHeightSelection,
     updateMeasurementMetric: customizationActions.updateMeasurementMetric,
@@ -85,6 +96,34 @@ class CustomizationButtonLedge extends Component {
     activateCustomizationDrawer({ isActive: false });
   }
 
+  hasHeightError() {
+    const {
+     temporaryMeasurementMetric,
+     temporaryHeightValue,
+   } = this.props;
+
+    return (
+     !(temporaryHeightValue && temporaryMeasurementMetric) || // Not Present
+     (temporaryMeasurementMetric === UNITS.CM &&
+     (temporaryHeightValue < MIN_CM || temporaryHeightValue > MAX_CM))
+    );
+  }
+
+  validateSizeSelection() {
+    const { setSizeProfileError, temporaryDressSize } = this.props;
+    const errors = { heightError: false, sizeError: false };
+
+    if (this.hasHeightError() || !temporaryDressSize) {
+      if (this.hasHeightError()) { errors.heightError = true; }
+      if (!temporaryDressSize) { errors.sizeError = true; }
+      setSizeProfileError(errors);
+      return false;
+    }
+
+    setSizeProfileError(errors);
+    return true;
+  }
+
   saveSizeSelection() {
     console.warn('TODO: need to check validity......');
     // Check if valid
@@ -98,7 +137,7 @@ class CustomizationButtonLedge extends Component {
       updateHeightSelection,
       updateMeasurementMetric,
     } = this.props;
-
+    if (!this.validateSizeSelection()) return null;
 
     updateDressSizeSelection({
       selectedDressSize: temporaryDressSize,
@@ -113,6 +152,7 @@ class CustomizationButtonLedge extends Component {
     });
 
     activateCustomizationDrawer({ isActive: false });
+    return null;
   }
 
   chooseCustomizationCallback() {
@@ -199,6 +239,7 @@ CustomizationButtonLedge.propTypes = {
   activateCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
   setShareableQueryParams: PropTypes.func.isRequired,
+  setSizeProfileError: PropTypes.func.isRequired,
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
