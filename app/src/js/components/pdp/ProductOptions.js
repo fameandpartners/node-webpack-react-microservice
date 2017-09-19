@@ -280,15 +280,20 @@ class ProductOptions extends Component {
                 )
                 : null
               }
-              <p className="u-mb-small">
-                Complimentary shipping and returns.&nbsp;
-                <a
-                  className="link link--static"
-                  href="/iequalchange"
-                >
-                  Learn more
-                </a>
-              </p>
+              {
+                selectedStyleCustomizations.length === 0 ?
+                  <p className="u-mb-small">
+                    Complimentary shipping and returns.&nbsp;
+                    <a
+                      className="link link--staic"
+                      href="/iequalchange"
+                    >
+                      Learn more
+                    </a>
+                  </p>
+                : null
+               }
+
               <ProductSecondaryActions />
             </div>
           </div>
