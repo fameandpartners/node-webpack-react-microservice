@@ -25,6 +25,10 @@ class ProductFabricInfo extends PureComponent {
               <span key={`fd-${key}`}>{item}<br /></span>,
             )
           }
+          <span>
+            Due to dying process, product hue may<br />
+            look slightly different from image.
+          </span>
         </div>
         <h4 className="u-mb-xs">Garment Care</h4>
         {garmentCareInformation.split('\n').map(
