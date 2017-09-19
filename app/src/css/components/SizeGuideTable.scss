@@ -1,3 +1,12 @@
+.SizeGuideTable {
+  width: 100%;
+  margin: 0 auto;
+
+  @include sm {
+    width: 958px;
+  }
+}
+
 .SizeGuideTable__actions {
   width: 100%;
   text-align: right;
@@ -30,20 +39,24 @@
   box-sizing: border-box;
   flex-grow: 1;
   width: 100%;
-  padding: 0.8em 1.2em;
+  padding: 0.6em 1em;
   overflow: hidden;
   list-style: none;
   display: flex;
+  justify-content: center;
 
   @include sm {
     display: block;
+    width: 62px;
   }
 }
 
 .SizeGuideTable__header {
   text-align: center;
+  font-size: 0.85em;
 
   @include sm {
+    font-size: 1em;
     text-align: left;
   }
 }
@@ -51,6 +64,7 @@
 .SizeGuideTable__header .SizeGuideTable__cell {
   font-weight: bold;
   text-align: center;
+  width: 84px;
 
   @include sm {
     text-align: right;

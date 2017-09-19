@@ -19,6 +19,7 @@ class Modal extends PureComponent {
       modalClassName,
       modalContentClassName,
       modalWrapperClassName,
+      onMouseMove,
     } = this.props;
 
     return (
@@ -27,10 +28,11 @@ class Modal extends PureComponent {
           'Modal__wrapper u-height--full',
           modalWrapperClassName,
         ])}
+        onMouseMove={onMouseMove}
       >
         <div
           className={classnames(
-            'Modal__header Modal__layout-container',
+            'Modal__header h4 Modal__layout-container',
             {
               'Modal__header--headline': !!headline,
             },
@@ -43,7 +45,7 @@ class Modal extends PureComponent {
           >
             <CancelOut onClick={handleCloseModal} />
           </div>
-          <h3 className="h5">{headline}</h3>
+          <h3 className="h6">{headline}</h3>
         </div>
 
         <div
@@ -73,6 +75,7 @@ Modal.propTypes = {
   modalClassName: PropTypes.string,
   modalContentClassName: PropTypes.string,
   modalWrapperClassName: PropTypes.string,
+  onMouseMove: PropTypes.func,
 };
 
 Modal.defaultProps = {
@@ -81,6 +84,7 @@ Modal.defaultProps = {
   modalClassName: '',
   modalContentClassName: '',
   modalWrapperClassName: '',
+  onMouseMove: noop,
 };
 
 export default Modal;

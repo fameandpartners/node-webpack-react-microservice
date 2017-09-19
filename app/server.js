@@ -6,7 +6,7 @@ const logger = require('morgan');
 const React = require('react');
 const Provider = require('react-redux').Provider;
 const Promise = require('bluebird');
-const redis = require('redis');
+// const redis = require('redis');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
@@ -33,16 +33,16 @@ const AppStore = require('./src/js/stores/AppStore');
 // Set up Express + Redis
 // *****************************************************************************
 const app = express();
-const redisClient = redis.createClient({
-  host: process.env.REDIS_HOST || '127.0.0.1',
-  port: process.env.REDIS_PORT || 6379,
-});
-const redisGet = Promise.promisify(redisClient.get, { context: redisClient });
-const redisSet = Promise.promisify(redisClient.set, { context: redisClient });
-setCacheStrategy({ // Global Singleton for Rapscallion
-  get: key => redisGet(key).then(val => (val && JSON.parse(val)) || null),
-  set: (key, val) => redisSet(key, JSON.stringify(val)),
-});
+// const redisClient = redis.createClient({
+//   host: process.env.REDIS_HOST || '127.0.0.1',
+//   port: process.env.REDIS_PORT || 6379,
+// });
+// const redisGet = Promise.promisify(redisClient.get, { context: redisClient });
+// const redisSet = Promise.promisify(redisClient.set, { context: redisClient });
+// setCacheStrategy({ // Global Singleton for Rapscallion
+//   get: key => redisGet(key).then(val => (val && JSON.parse(val)) || null),
+//   set: (key, val) => redisSet(key, JSON.stringify(val)),
+// });
 
 // Middleware
 // *****************************************************************************
@@ -56,6 +56,7 @@ app.use(cookieParser());
 // Rendering
 // *****************************************************************************
 app.get('/pdp', (req, res) => {
+  res.header('Content-Type', 'text/html');
   const props = transformProductJSON(mockJSON);
   const store = AppStore(props);
   const ReactRoot = render(React.createElement(Provider, { store }, React.createElement(App)));

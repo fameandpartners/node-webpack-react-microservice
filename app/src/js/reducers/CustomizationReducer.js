@@ -105,7 +105,7 @@ export default function CartReducer($$state = $$initialState, action = null) {
       });
     }
     case CustomizationConstants.UPDATE_DRESS_SIZE_SELECTION: {
-      if (action.selectedDressSize) {
+      if (typeof action.selectedDressSize === 'number') {
         return $$state.merge({
           selectedDressSize: action.selectedDressSize,
           temporaryDressSize: action.selectedDressSize,

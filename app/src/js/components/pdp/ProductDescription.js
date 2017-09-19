@@ -30,10 +30,21 @@ class ProductDescription extends Component {
   render() {
     const { productDescription, modelDescription } = this.props;
     return (
-      <div className="ProductDescription u-center">
-        <div dangerouslySetInnerHTML={{ __html: productDescription }} />
-        <p>-</p>
-        <p dangerouslySetInnerHTML={{ __html: modelDescription }} />
+      <div className="u-center">
+        <p className="ProductCharity__message">
+          $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
+          <a
+            className="link link--static"
+            href="/faqs#collapse-free-shipping"
+          >
+            Learn more
+          </a>
+        </p>
+        <div className="ProductDescription u-center">
+          <p dangerouslySetInnerHTML={{ __html: productDescription }} />
+          <p>-</p>
+          <p dangerouslySetInnerHTML={{ __html: modelDescription }} />
+        </div>
       </div>
     );
   }

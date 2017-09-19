@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
 // Utilities
-import { isDarkLuminance } from '../../utilities/color';
+import { isDarkLuminance, generateBackgroundValueFromColor, separateHexColorsInString } from '../../utilities/color';
 import { addonSelectionDisplayText } from '../../utilities/pdp';
 
 // UI Components
@@ -62,6 +62,10 @@ class ProductDisplayOptionsTouch extends Component {
   render() {
     const { selectedColor } = this.props;
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
+    const background = generateBackgroundValueFromColor(selectedColor);
+    const hasDuoTone = selectedColor.hexValue
+      ? separateHexColorsInString(selectedColor.hexValue).length === 2
+      : false;
 
     return (
       <div className="ProductDisplayOptionsTouch">
@@ -75,12 +79,19 @@ class ProductDisplayOptionsTouch extends Component {
               'ProductDisplayOptionsTouch__option u-display--inline-block u-cursor--pointer',
               { 'ProductDisplayOptionsTouch__option--dark': isDarkLuminance(selectedColor) },
             )}
-            style={{ background: selectedColor.hexValue }}
+            style={{ background }}
           >
             <div className="grid-middle-noGutter u-height--full">
               <div className="col">
-                <span>Color</span><br />
-                <span>{selectedColor.presentation}</span>
+                <div
+                  className={classnames(
+                  { 'ProductDisplayOptionsTouch__background-text': !!selectedColor.patternUrl || hasDuoTone },
+                )}
+                >
+                  <span>Color</span><br />
+                  <span>{selectedColor.presentation}</span>
+
+                </div>
               </div>
             </div>
           </div>

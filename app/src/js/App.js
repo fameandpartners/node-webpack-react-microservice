@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Sentry Error Tracking
 import Raven from 'raven-js';
 
-// App Components
+// Components
 import SideMenu from './components/shared/side_menu/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import CustomizationDrawer from './components/pdp/CustomizationDrawer';
@@ -17,6 +19,17 @@ import ShareModal from './components/pdp/ShareModal';
 import ZoomModal from './components/pdp/ZoomModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
+import AfterpayModal from './components/pdp/AfterpayModal';
+
+// Utilities
+import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
+
+// Actions
+import * as AppActions from './actions/AppActions';
+import * as CustomizationActions from './actions/CustomizationActions';
+
+// Polyfills
+import win from './polyfills/windowPolyfill';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -37,18 +50,72 @@ function stateToProps(state) {
   const sideMenuOpen = state.$$appState.get('sideMenuOpen');
   const modalOpen = state.$$modalState.get('shouldAppear');
   const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
+  const customizationDrawerOpen = state.$$customizationState.get('productCustomizationDrawerOpen');
 
   return {
-    lockBody: (sideMenuOpen || modalOpen || cartDrawerOpen),
+    $$productDefaultColors: state.$$productState.get('productDefaultColors'),
+    $$productSecondaryColors: state.$$productState.get('productSecondaryColors'),
+    $$addonOptions: state.$$customizationState.get('addons').get('addonOptions'),
+    lockBody: (sideMenuOpen || modalOpen || cartDrawerOpen || customizationDrawerOpen),
   };
 }
 
+function dispatchToProps(dispatch) {
+  const { setShareableQueryParams } = bindActionCreators(AppActions, dispatch);
+  const {
+    selectProductColor,
+    updateCustomizationStyleSelection,
+  } = bindActionCreators(CustomizationActions, dispatch);
+
+  return {
+    selectProductColor,
+    setShareableQueryParams,
+    updateCustomizationStyleSelection,
+  };
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { isOpen: false };
     autoBind(this);
+  }
+
+  componentWillMount() {
+    // HYDRATION OF COLOR SELECTION AND CUSTOMIZATIONS FROM QUERY PARAMS
+    // ONLY ON CLIENT SIDE
+    if (!win.isMockWindow) {
+      const {
+      $$addonOptions,
+      $$productDefaultColors,
+      $$productSecondaryColors,
+      selectProductColor,
+      setShareableQueryParams,
+      updateCustomizationStyleSelection,
+    } = this.props;
+      const { color, customizations } = extractAndWhitelistQueryStringCustomizations(
+        $$productDefaultColors.toJS().concat($$productSecondaryColors.toJS()),
+        $$addonOptions.toJS(),
+      );
+
+      if (color && color.id) {
+        selectProductColor({ selectedColor: color });
+      }
+
+      if (customizations.length) {
+        updateCustomizationStyleSelection({ selectedStyleCustomizations: customizations });
+      }
+
+      setShareableQueryParams({ color: color.id, customizations });
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.lockBody) {
+      win.document.body.style.overflow = 'hidden';
+    } else {
+      win.document.body.style.overflow = 'visible';
+    }
   }
 
   render() {
@@ -65,6 +132,7 @@ class App extends Component {
         <ZoomModal />
         <StyleSelectionModal />
         <SizeModals />
+        <AfterpayModal />
       </div>
     );
   }
@@ -72,6 +140,12 @@ class App extends Component {
 
 App.propTypes = {
   lockBody: PropTypes.bool.isRequired,
+  $$addonOptions: ImmutablePropTypes.list.isRequired,
+  $$productDefaultColors: ImmutablePropTypes.list.isRequired,
+  $$productSecondaryColors: ImmutablePropTypes.list.isRequired,
+  selectProductColor: PropTypes.func.isRequired,
+  setShareableQueryParams: PropTypes.func.isRequired,
+  updateCustomizationStyleSelection: PropTypes.func.isRequired,
 };
 
-export default connect(stateToProps)(App);
+export default connect(stateToProps, dispatchToProps)(App);

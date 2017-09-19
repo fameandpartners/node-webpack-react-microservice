@@ -8,7 +8,6 @@
 }
 
 .ProductOptionsRow {
-  color: $c-text-gray;
   padding: 1em 0;
   border-bottom: 1px solid $c-light-gray;
   transition: 500ms all ease-in-out;
@@ -22,7 +21,6 @@
 
 // TODO: @Elgrecode, this is a little overwritey, consider revising
 .ProductOptionsRow--heading {
-  color: $c-black;
   cursor: default;
 
   &:hover {
@@ -56,4 +54,11 @@
   border-radius: 50%;
   vertical-align: middle;
   margin-left: 10px;
+}
+
+.AfterPay__image-logo {
+  position: relative;
+  top: 8px;
+  padding: 0 5px;
+  width: 100px;
 }

@@ -42,7 +42,7 @@
   position: inherit;
 }
 
-.textAlign--left {
+.u-text-align--left {
   text-align: left;
 }
 
@@ -68,6 +68,10 @@
 
 // NOTE: Nav, we will need to merge these :(
 // Global Margins
+.u-mb-xs {
+  margin-bottom: 6px;
+}
+
 .u-mb-small {
   margin-bottom: 15px;
 }
@@ -171,4 +175,9 @@
 // Colors
 .u-color-red {
   color: $c-red;
+}
+
+// Z-Index Helpers
+.u-z-index--max {
+  z-index: $z-max;
 }

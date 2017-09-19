@@ -246,10 +246,10 @@ class ProductCustomizationStyle extends PureComponent {
       >
         <div className="ProductCustomizationSize__layout-container typography">
           <div className="u-mb-big">
-            <h3 className="h3">
+            <h3 className="h4 u-mb-small">
               Let’s make it fit.
             </h3>
-            <p>
+            <p className="h6 ProductCustomizationSize__sub-heading">
               Just tell us your height and size, and we&apos;ll take care of the tailoring.
             </p>
           </div>
@@ -257,7 +257,7 @@ class ProductCustomizationStyle extends PureComponent {
           <div className="ProductCustomizationSize__height u-mb-normal">
             <p
               className={classnames(
-                'textAlign--left',
+                'h6 u-mb-xs u-text-align--left',
                 {
                   'u-color-red': heightError,
                 },
@@ -303,7 +303,7 @@ class ProductCustomizationStyle extends PureComponent {
           </div>
 
           <div>
-            <p className="textAlign--left">What&apos;s your size?</p>
+            <p className="h6 u-text-align-left u-mb-xs">What&apos;s your size?</p>
             <div className="ProductCustomizationSize__size grid-12-spaceBetween">
               { SIZES.map(s => (
                 <div key={s} className="col-3">
@@ -311,7 +311,7 @@ class ProductCustomizationStyle extends PureComponent {
                     tertiary
                     tall
                     selected={s === temporaryDressSize}
-                    text={s}
+                    text={isUSSiteVersion ? `US ${s}` : `AU ${s}`}
                     handleClick={this.handleDressSizeSelection(s)}
                   />
                 </div>
@@ -319,7 +319,7 @@ class ProductCustomizationStyle extends PureComponent {
             </div>
             { sizeError ?
               <div className="ProductCustomizationSize__size-error-text">
-                <p className="p u-color-red textAlign--left">
+                <p className="p u-color-red u-text-align-left">
                   Please select a size
                 </p>
               </div>
@@ -331,7 +331,7 @@ class ProductCustomizationStyle extends PureComponent {
                   className={classnames(
                     'link',
                     'link--static',
-                    'textAlign--left',
+                    'u-text-align-left',
                   )}
                   onClick={this.handleViewSizeGuideClick}
                 >

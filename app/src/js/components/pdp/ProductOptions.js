@@ -7,13 +7,15 @@ import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
 
 // Utilities
+import noop from '../../libs/noop';
 import { formatCents } from '../../utilities/accounting';
+import { sizeProfilePresence } from '../../utilities/pdpValidations';
+import { generateBackgroundValueFromColor } from '../../utilities/color';
 import {
   addonSelectionDisplayText,
   calculateSubTotal,
   sizingDisplayText,
 } from '../../utilities/pdp';
-import noop from '../../libs/noop';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
@@ -30,6 +32,9 @@ import ModalActions from '../../actions/ModalActions';
 // CSS
 import '../../../css/components/ProductOptions.scss';
 
+// Assets
+import afterpayImage from '../../../img/test/afterpay.png';
+
 // UI Components
 import AddToCartButton from './AddToCartButton';
 
@@ -40,6 +45,9 @@ function stateToProps(state) {
   const addons = state.$$customizationState.get('addons');
 
   return {
+    // APP
+    auSite: state.$$productState.get('siteVersion').toLowerCase() === 'australia',
+
     // PRODUCT
     productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
@@ -51,6 +59,7 @@ function stateToProps(state) {
     colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
+    patternUrl: selectedColor.get('patternUrl'),
 
     // SELECTIONS
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
@@ -87,7 +96,12 @@ class ProductOptions extends Component {
       colorCentsTotal,
       colorName,
       colorHexValue,
+      patternUrl,
     } = this.props;
+    const background = generateBackgroundValueFromColor({
+      hexValue: colorHexValue,
+      patternUrl,
+    });
 
     return (
       <span>
@@ -97,7 +111,7 @@ class ProductOptions extends Component {
           : null
         }
         <span
-          style={{ background: colorHexValue }}
+          style={{ background }}
           className="ProductOptions__color-swatch u-display--inline-block"
         />
       </span>
@@ -108,9 +122,11 @@ class ProductOptions extends Component {
     const selectedOptions = this.retrieveSelectedAddonOptions();
     const displayText = addonSelectionDisplayText({ selectedAddonOptions: selectedOptions });
 
-    return (
+    return displayText
+    ? (
       <span>{displayText}</span>
-    );
+    )
+    : null;
   }
 
   generateSizingNode() {
@@ -132,21 +148,37 @@ class ProductOptions extends Component {
     ) : null;
   }
 
-  calculateSubTotal() {
+  calculateSubTotal(currencySymbol) {
     const {
       productCentsBasePrice,
       colorCentsTotal,
     } = this.props;
 
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
-    return calculateSubTotal({ colorCentsTotal, productCentsBasePrice, selectedAddonOptions });
+    return calculateSubTotal(
+      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions },
+      currencySymbol,
+    );
   }
+
+  calculateInstallment(divisor, currencySymbol) {
+    return currencySymbol + (Number(this.calculateSubTotal('')) / divisor).toFixed(2);
+  }
+
+  handleOpenAfterpayModalClick(e) {
+    e.preventDefault();
+    this.props.activateModal({
+      modalId: ModalConstants.AFTERPAY_MODAL,
+    });
+  }
+
   showZoomModal() {
     this.props.activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
       shouldAppear: true,
     });
   }
+
   /**
    * Activates a drawer to a specific drawer type
    * @param  {String} drawer
@@ -176,6 +208,7 @@ class ProductOptions extends Component {
       selectedStyleCustomizations,
       selectedDressSize,
       selectedHeightValue,
+      auSite,
     } = this.props;
 
     return (
@@ -217,22 +250,44 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 leftNode={<span>Your size</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={!!(selectedDressSize && selectedHeightValue)}
+                optionIsSelected={sizeProfilePresence(selectedDressSize, selectedHeightValue)}
                 rightNode={this.generateSizingNode()}
                 handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
             </div>
-            <div className="ProductOptions__ctas grid-1">
+            <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
             <div className="ProductOptions__additional-info u-mb-normal">
-              <p>
-                $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
-                <a className="link link--static">Learn more</a>
-              </p>
+              { auSite ?
+                (
+                  <p
+                    className="AfterPay__message"
+                  >
+                    4 easy payments of {this.calculateInstallment(4, '$')} with
+                    <img
+                      alt="AfterPay Logo"
+                      className="AfterPay__image-logo"
+                      src={afterpayImage}
+                    />
+                    <a
+                      className="link link--static"
+                      onClick={this.handleOpenAfterpayModalClick}
+                    >
+                      Info
+                    </a>
+                  </p>
+                )
+                : null
+              }
               <p className="u-mb-small">
                 Complimentary shipping and returns.&nbsp;
-                <a className="link link--static">Learn more</a>
+                <a
+                  className="link link--static"
+                  href="/iequalchange"
+                >
+                  Learn more
+                </a>
               </p>
               <ProductSecondaryActions />
             </div>
@@ -262,6 +317,7 @@ ProductOptions.propTypes = {
   colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
+  patternUrl: PropTypes.string.isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -269,6 +325,7 @@ ProductOptions.propTypes = {
       name: PropTypes.string,
     }),
   ),
+  auSite: PropTypes.bool.isRequired,
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,

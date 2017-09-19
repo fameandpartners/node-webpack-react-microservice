@@ -42,7 +42,7 @@ class ProductFabric extends PureComponent {
         >
 
           <ProductFabricInfo
-            className="textAlign--left"
+            className="u-text-align--left"
             fabric={fabric}
             garmentCareInformation={garmentCareInformation}
           />
