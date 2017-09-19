@@ -35,7 +35,9 @@ class ProductDescription extends Component {
           $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
           <a
             className="link link--static"
-            href="/faqs#collapse-free-shipping"
+            href="/iequalchange"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Learn more
           </a>
