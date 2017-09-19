@@ -15,9 +15,12 @@ export function extractAndWhitelistQueryStringCustomizations(colors, addonOption
     const parsed = queryString.parse(win.location.search);
 
     // COLOR
-    const foundColor = (parsed[QUERY_PARAMS.color])
-      ? find(colors, { id: parseInt(parsed[QUERY_PARAMS.color], 10) })
-      : null;
+    let foundColor = null;
+    if (parsed[QUERY_PARAMS.legacyColor]) { // LEGACY COLOR SYSTEM
+      foundColor = find(colors, { name: parsed[QUERY_PARAMS.legacyColor] });
+    } else if (parsed[QUERY_PARAMS.color]) { // NEW COLOR SYSTEM
+      foundColor = find(colors, { id: parseInt(parsed[QUERY_PARAMS.color], 10) });
+    }
     queryStringCustomizations.color = foundColor || colors[0];
 
     // CUSTOMIZATIONS

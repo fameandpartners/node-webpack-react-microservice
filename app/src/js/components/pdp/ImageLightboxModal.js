@@ -86,6 +86,7 @@ class ImageLightboxModal extends Component {
 
   handlePrev() {
     const { gallerySlideActiveIndex, setGallerySlideActiveIndex } = this.props;
+    this.setState({ isZoomActive: false });
     if (gallerySlideActiveIndex - 1 < 0) {
       const imageCount = this.getProductImages().length;
       setGallerySlideActiveIndex({ index: imageCount - 1 });
@@ -97,6 +98,7 @@ class ImageLightboxModal extends Component {
   handleNext() {
     const { gallerySlideActiveIndex, setGallerySlideActiveIndex } = this.props;
     const imageCount = this.getProductImages().length;
+    this.setState({ isZoomActive: false });
     if (gallerySlideActiveIndex + 1 > imageCount - 1) {
       setGallerySlideActiveIndex({ index: 0 });
     } else {

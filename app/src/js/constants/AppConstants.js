@@ -12,6 +12,7 @@ const actionTypes = assign({},
 
 const queryParams = {
   QUERY_PARAMS: {
+    legacyColor: 'color',
     color: 'clr',
     customizations: 'cus',
   },
