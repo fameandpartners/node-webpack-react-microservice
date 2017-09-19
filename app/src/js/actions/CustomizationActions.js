@@ -3,17 +3,14 @@ import CustomizationConstants from '../constants/CustomizationConstants';
 export function activateCustomizationDrawer({
   isActive = true,
   productCustomizationDrawer,
-  heightError = false,
-  sizeError = false,
 }) {
   return {
     type: CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER,
     isActive,
-    heightError,
-    sizeError,
     productCustomizationDrawer,
   };
 }
+
 
 export function changeCustomizationDrawer({ productCustomizationDrawer }) {
   return {
@@ -27,6 +24,17 @@ export function selectProductColor({ selectedColor, temporaryColor }) {
     type: CustomizationConstants.SELECT_PRODUCT_COLOR,
     selectedColor,
     temporaryColor,
+  };
+}
+
+export function setSizeProfileError({
+  heightError = false,
+  sizeError = false,
+}) {
+  return {
+    type: CustomizationConstants.SET_SIZE_PROFILE_ERROR,
+    heightError,
+    sizeError,
   };
 }
 
@@ -80,6 +88,7 @@ export default {
   activateCustomizationDrawer,
   changeCustomizationDrawer,
   selectProductColor,
+  setSizeProfileError,
   updateCustomizationStyleSelection,
   setActiveAddonImageLayers,
   setAddonBaseLayer,

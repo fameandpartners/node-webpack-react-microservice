@@ -67,7 +67,7 @@ class Input extends Component {
         <input
           ref={c => this.input = c}
           className={classnames(
-            'Input',
+            'Input u-mb-xs',
             { 'Input--indent': indent },
             { 'Input--line-input': lineInput },
           )}
