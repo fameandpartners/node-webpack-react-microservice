@@ -15,7 +15,7 @@ function clearRailsCache() {
     }
 
     var req = https.request(options, function(res) {
-      console.log('Cache Clear Status: ' + res.statusCode);
+      console.warn('Cache Clear Status: ' + res.statusCode);
     });
     req.end();
     req.on('error', function(e) {

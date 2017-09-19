@@ -18,8 +18,8 @@ export function isDarkLuminance(hexStr) {
 }
 
 export function separateHexColorsInString(hexStr = '') {
-  const rex = /#(\w+)(?!\w)/g;
-  return hexStr.match(rex);
+  const rexi = /#(\w+)(?!\w)/g;
+  return hexStr.match(rexi);
 }
 
 function generateDuoToneSwatchBackground(start, end) {
