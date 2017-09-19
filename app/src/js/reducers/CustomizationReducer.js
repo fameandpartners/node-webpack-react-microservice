@@ -58,6 +58,10 @@ export default function CartReducer($$state = $$initialState, action = null) {
       return $$state.merge({
         productCustomizationDrawer: action.productCustomizationDrawer,
         productCustomizationDrawerOpen: action.isActive,
+      });
+    }
+    case CustomizationConstants.SET_SIZE_PROFILE_ERROR: {
+      return $$state.merge({
         heightError: action.heightError,
         sizeError: action.sizeError,
       });

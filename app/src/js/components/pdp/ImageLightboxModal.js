@@ -17,7 +17,8 @@ import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Actions
-import ModalActions from '../../actions/ModalActions';
+import * as ModalActions from '../../actions/ModalActions';
+import * as AppActions from '../../actions/AppActions';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -26,29 +27,32 @@ import ModalConstants from '../../constants/ModalConstants';
 import win from '../../polyfills/windowPolyfill';
 
 // CSS
-import '../../../css/components/ZoomModal.scss';
+import '../../../css/components/ImageLightboxModal.scss';
 
 function stateToProps(state) {
   return {
     selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
     $$productImages: state.$$productState.get('productImages'),
-    activeSlide: state.$$modalState.get('activeSlideIndex'),
+    gallerySlideActiveIndex: state.$$appState.get('gallerySlideActiveIndex'),
   };
 }
 
 function dispatchToProps(dispatch) {
-  const actions = bindActionCreators(ModalActions, dispatch);
-  return { activateModal: actions.activateModal };
+  const modalActions = bindActionCreators(ModalActions, dispatch);
+  const appActions = bindActionCreators(AppActions, dispatch);
+  return {
+    activateModal: modalActions.activateModal,
+    setGallerySlideActiveIndex: appActions.setGallerySlideActiveIndex,
+  };
 }
 
-class ZoomModal extends Component {
+class ImageLightboxModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isZoomActive: false,
       topPercent: null,
       leftPercent: null,
-      activeImageIndex: null,
       activeZoomIndex: null,
     };
     autobind(this);
@@ -69,7 +73,6 @@ class ZoomModal extends Component {
     });
   }
 
-
   getProductImages() {
     const { selectedColorId, $$productImages } = this.props;
     let productImages = $$productImages.toJS();
@@ -78,12 +81,27 @@ class ZoomModal extends Component {
     productImages = productImages
       .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
       .map(img => img);
-    return this.orderImagesByIndex(productImages);
+    return productImages;
   }
 
-  orderImagesByIndex(productImages) {
-    const { activeSlide } = this.props;
-    return productImages.slice(activeSlide).concat(productImages.slice(0, activeSlide));
+  handlePrev() {
+    const { gallerySlideActiveIndex, setGallerySlideActiveIndex } = this.props;
+    if (gallerySlideActiveIndex - 1 < 0) {
+      const imageCount = this.getProductImages().length;
+      setGallerySlideActiveIndex({ index: imageCount - 1 });
+    } else {
+      setGallerySlideActiveIndex({ index: gallerySlideActiveIndex - 1 });
+    }
+  }
+
+  handleNext() {
+    const { gallerySlideActiveIndex, setGallerySlideActiveIndex } = this.props;
+    const imageCount = this.getProductImages().length;
+    if (gallerySlideActiveIndex + 1 > imageCount - 1) {
+      setGallerySlideActiveIndex({ index: 0 });
+    } else {
+      setGallerySlideActiveIndex({ index: gallerySlideActiveIndex + 1 });
+    }
   }
 
   handleImageMouseover(e) {
@@ -110,13 +128,18 @@ class ZoomModal extends Component {
   swapProductImageIndex(loryEventData) {
     const toSlide = loryEventData.detail.nextSlide;
     const adjustedRemainder = toSlide % this.getProductImages().length;
-    this.setState({ activeImageIndex: adjustedRemainder });
+
+    this.props.setGallerySlideActiveIndex({ index: adjustedRemainder });
   }
 
   render() {
-    const { winWidth, winHeight } = this.props;
     const {
-      activeImageIndex,
+      gallerySlideActiveIndex,
+      winWidth,
+      winHeight,
+    } = this.props;
+
+    const {
       activeZoomIndex,
       isZoomActive,
       topPercent,
@@ -138,14 +161,17 @@ class ZoomModal extends Component {
           handleCloseModal={this.handleCloseModal}
           onMouseMove={this.handleImageMouseover}
         >
-          <p className="ZoomModal__pagination h4 u-mb-normal">
-            {activeImageIndex + 1} of {sliderImages.length}
+          <p className="ImageLightboxModal__pagination h4 u-mb-normal u-user-select--none">
+            {gallerySlideActiveIndex + 1} of {sliderImages.length}
           </p>
           <Slider
+            activeIndex={gallerySlideActiveIndex}
             sliderHeight="100%"
             winWidth={winWidth}
             winHeight={winHeight}
             showButtons
+            handlePrev={this.handlePrev}
+            handleNext={this.handleNext}
             handleBeforeSlide={this.swapProductImageIndex}
           >
             { sliderImages.map((img, index) => (
@@ -160,8 +186,8 @@ class ZoomModal extends Component {
                   }}
                   onClick={e => this.handleImageClick(e, index)}
                   className={classnames(
-                    'ZoomModal__image u-height--full',
-                    { 'ZoomModal__image--activeZoom': activeZoomIndex === index && isZoomActive },
+                    'ImageLightboxModal__image u-height--full',
+                    { 'ImageLightboxModal__image--activeZoom': activeZoomIndex === index && isZoomActive },
                   )}
                   ref={ref => this.imageRefs[index] = ref}
                 />
@@ -174,12 +200,12 @@ class ZoomModal extends Component {
   }
 }
 
-ZoomModal.propTypes = {
-  // Redux Actions
-  activateModal: PropTypes.func.isRequired,
+ImageLightboxModal.propTypes = {
+  // Decorator Props
   breakpoint: PropTypes.string.isRequired,
   winHeight: PropTypes.number,
   winWidth: PropTypes.number,
+  // Redux Props
   $$productImages: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
     id: PropTypes.number,
     colorId: PropTypes.number,
@@ -190,14 +216,17 @@ ZoomModal.propTypes = {
     position: PropTypes.number,
   })).isRequired,
   selectedColorId: PropTypes.number,
-  activeSlide: PropTypes.number,
+  gallerySlideActiveIndex: PropTypes.number,
+  // Redux Actions
+  activateModal: PropTypes.func.isRequired,
+  setGallerySlideActiveIndex: PropTypes.func.isRequired,
 };
 
-ZoomModal.defaultProps = {
+ImageLightboxModal.defaultProps = {
   winHeight: 640,
   winWidth: 320,
   selectedColorId: '',
-  activeSlide: 0,
+  gallerySlideActiveIndex: 0,
 };
 
-export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(ZoomModal));
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(ImageLightboxModal));

@@ -173,7 +173,7 @@ class ProductOptions extends Component {
     });
   }
 
-  showZoomModal() {
+  showImageLightboxModal() {
     this.props.activateModal({
       modalId: ModalConstants.ZOOM_MODAL,
       shouldAppear: true,
@@ -220,7 +220,7 @@ class ProductOptions extends Component {
             className="u-width--full"
             alt="dress1"
             src={this.findColorSpecificFirstImageUrl()}
-            onClick={this.showZoomModal}
+            onClick={this.showImageLightboxModal}
           />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
@@ -294,7 +294,7 @@ class ProductOptions extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Learn more
+                  Learn&nbsp;more
                 </a> <br />
                 Estimated delivery { deliveryCopy }.
               </p>
