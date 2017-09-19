@@ -46,7 +46,7 @@ function stateToProps(state) {
 
   return {
     // APP
-    auSite: state.$$productState.get('siteVersion').toLowerCase() === 'australia',
+    auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
 
     // PRODUCT
     productId: state.$$productState.get('productId'),
