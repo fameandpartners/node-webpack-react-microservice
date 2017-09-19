@@ -7,8 +7,8 @@
   text-align: left;
 }
 
-.Input__wrapper__error input,
-.Input__wrapper__error input:focus {
+.Input__wrapper.Input__wrapper__error Input,
+.Input__wrapper.Input__wrapper__error Input:focus {
   border-color: $c-red;
 }
 
