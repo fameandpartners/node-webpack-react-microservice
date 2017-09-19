@@ -10,7 +10,7 @@ class MeasuringTipsPanel extends PureComponent {
   render() {
     return (
       <div className="MeasuringTipsPanel typography grid-noGutter">
-        <div className="MeasuringTipsPanel__fame-tips-wrapper grid-noGutter">
+        <div className="MeasuringTipsPanel__fame-tips-wrapper grid-noGutter u-width--full">
           <div className="col-6_sm-12 u-text-align--center">
             <div className="MeasuringTipsPanel__tip">
               <p>
@@ -20,7 +20,7 @@ class MeasuringTipsPanel extends PureComponent {
             </div>
           </div>
           <div className="col-6_sm-12">
-            <div className="MeasuringTipsPanel__tip">
+            <div className="MeasuringTipsPanel__tip u-text-align--left">
               <h6 className="h6">Fame Tips</h6>
               <p>
                 Measure yourself in your underwear and, if possible,
@@ -61,20 +61,6 @@ class MeasuringTipsPanel extends PureComponent {
               <p>
                 Measure around the fullest part of your hips. Slim-hipped
                 ladies can take this measurement from 20cm/8in below the waistline.
-              </p>
-            </li>
-            <li>
-              <h6 className="h6">Dress Length</h6>
-              <p>
-                Stand with your heels together and measure from your shoulders
-                to the floor, keeping the tape straight and perpendicular to the floor.
-              </p>
-            </li>
-            <li>
-              <h6 className="h6">Skirt Length</h6>
-              <p>
-                Stand with your heels together and measure from your natural waistline
-                to the floor, keeping the tape straight and perpendicular to the floor.
               </p>
             </li>
           </ul>

@@ -34,7 +34,7 @@ import '../../../css/components/ProductCustomizationSize.scss';
 
 function stateToProps(state) {
   return {
-    isUSSiteVersion: state.$$appState.get('siteVersion') === 'us',
+    isUSSiteVersion: state.$$appState.get('siteVersion').toLowerCase() === 'usa',
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
@@ -244,7 +244,7 @@ class ProductCustomizationStyle extends PureComponent {
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        <div className="ProductCustomizationSize__layout-container typography">
+        <div className="ProductCustomizationSize__layout-container typography u-mt-normal">
           <div className="u-mb-big">
             <h3 className="h4 u-mb-small">
               Let’s make it fit.
@@ -328,11 +328,7 @@ class ProductCustomizationStyle extends PureComponent {
             <div className="grid-noGutter">
               <div className="col-12">
                 <p
-                  className={classnames(
-                    'link',
-                    'link--static',
-                    'u-text-align-left',
-                  )}
+                  className="link u-mb-huge link--static u-text-align-left"
                   onClick={this.handleViewSizeGuideClick}
                 >
                   View Size Guide
