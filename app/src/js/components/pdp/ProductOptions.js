@@ -282,8 +282,8 @@ class ProductOptions extends Component {
               }
               <p className="u-mb-small">
                 {
-                  selectedStyleCustomizations.length === 0 ?
-                    'Shipping and returns are free.'
+                  selectedStyleCustomizations.length === 0
+                  ? 'Shipping and returns are free.'
                   : 'Shipping is free on your customized item.'
                 } &nbsp;
                 <a
