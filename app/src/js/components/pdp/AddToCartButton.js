@@ -15,12 +15,14 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 // Actions
 import * as CartActions from '../../actions/CartActions';
 import * as CustomizationActions from '../../actions/CustomizationActions';
+import * as ModalActions from '../../actions/ModalActions';
 
 // UI
 import Button from '../generic/Button';
 
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
+import ModalConstants from '../../constants/ModalConstants';
 
 // temp. helpers (for Rails merge)
 import { addToCart } from '../../utilities/cart-helper';
@@ -43,6 +45,7 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
+  const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const {
     setSizeProfileError,
     activateCustomizationDrawer,
@@ -50,6 +53,7 @@ function dispatchToProps(dispatch) {
 
   return {
     activateCartDrawer,
+    activateModal,
     addItemToCart,
     setSizeProfileError,
     activateCustomizationDrawer,
@@ -80,15 +84,21 @@ class AddToCartButton extends Component {
       sizeValue,
       setSizeProfileError,
       activateCustomizationDrawer,
+      breakpoint,
+      activateModal,
     } = this.props;
     if (!heightValue || !sizeValue) {
-      activateCustomizationDrawer({
-        productCustomizationDrawer: CustomizationConstants.SIZE_CUSTOMIZE,
-      });
       setSizeProfileError({
         heightError: !heightValue,
         sizeError: !sizeValue,
       });
+      if (breakpoint === 'mobile') {
+        activateModal({ modalId: ModalConstants.SIZE_SELECTION_MODAL });
+      } else {
+        activateCustomizationDrawer({
+          productCustomizationDrawer: CustomizationConstants.SIZE_CUSTOMIZE,
+        });
+      }
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
       addToCart(lineItem);
@@ -130,8 +140,10 @@ AddToCartButton.propTypes = {
   // addItemToCart: PropTypes.func.isRequired,
   setSizeProfileError: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func,
+  activateModal: PropTypes.func,
   heightValue: PropTypes.number,
   sizeValue: PropTypes.number,
+  breakpoint: PropTypes.string,
 };
 
 AddToCartButton.defaultProps = {
@@ -141,6 +153,8 @@ AddToCartButton.defaultProps = {
   sizeValue: null,
   heightValue: null,
   activateCustomizationDrawer: noop,
+  activateModal: noop,
+  breakpoint: '',
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));

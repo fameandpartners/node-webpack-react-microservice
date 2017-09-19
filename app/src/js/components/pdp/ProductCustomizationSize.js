@@ -263,7 +263,7 @@ class ProductCustomizationStyle extends PureComponent {
                 },
               )}
             >
-              How tall are you?
+              What's your height?
             </p>
             <div className="grid-noGutter">
               <div className="col-8">
@@ -272,6 +272,7 @@ class ProductCustomizationStyle extends PureComponent {
                     id="height-option-in"
                     className="sort-options"
                     error={heightError}
+                    inlineMeta={heightError ? 'Please select your height' : null}
                     options={this.generateInchesOptions()}
                     onChange={this.handleInchChange}
                   /> :
@@ -279,7 +280,7 @@ class ProductCustomizationStyle extends PureComponent {
                     id="height-option-cm"
                     type="number"
                     error={heightError}
-                    inlineMeta={heightError ? 'Please enter a valid height' : null}
+                    inlineMeta={heightError ? 'Please select your height' : null}
                     focusOnMount
                     onChange={this.handleCMChange}
                     defaultValue={temporaryHeightValue}
@@ -319,7 +320,7 @@ class ProductCustomizationStyle extends PureComponent {
             </div>
             { sizeError ?
               <div className="ProductCustomizationSize__size-error-text">
-                <p className="p u-color-red u-text-align-left">
+                <p className="p u-color-red u-text-align-left u-mb-small u-mt-small">
                   Please select a size
                 </p>
               </div>

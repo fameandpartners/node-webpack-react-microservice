@@ -33,6 +33,7 @@ const propTypes = {
     active: PropTypes.bool,
   })),
   onChange: PropTypes.func,
+  inlineMeta: PropTypes.string,
 };
 
 const defaultProps = {
@@ -41,6 +42,7 @@ const defaultProps = {
   label: '',
   options: [],
   onChange: noop,
+  inlineMeta: null,
 };
 
 class Select extends Component {
@@ -168,6 +170,7 @@ class Select extends Component {
       error,
       label,
       className,
+      inlineMeta,
     } = this.props;
     const { isOpen } = this.state;
     const contents = this.buildDropdown();
@@ -176,43 +179,60 @@ class Select extends Component {
     const singleOption = options.length === 1;
 
     return (
-      <div
-        className={classnames(
-          'Select__wrapper',
-          className,
-          {
-            'Select__wrapper--error': error,
-            'translate-label': label,
-            'is-open': isOpen,
-            'single-option': singleOption,
-            'is-set': activeOption.active,
-          },
-        )}
-        ref={c => this.selectWrapper = c}
-        onClick={this.toggleDropdown}
-        onBlur={this.closeDropdown}
-        onFocus={this.openDropdown}
-        onKeyDown={this.handleKeyboardActions}
-        tabIndex={isOpen ? '-1' : '0'}
-      >
-        {label
-          ? <span className="Select-label noSelect">{label}</span>
-          : null
-        }
-        <span className="Select-item-text noSelect">{spanText}</span>
-        <IconSVG
-          svgPath={Carat.url}
-          className="Select__carat"
-          width="15px"
-          height="15px"
-        />
-        <div className="Select">
-          <div className="Select-list-wrapper">
-            <ul className="Select-list">
-              {contents}
-            </ul>
+      <div>
+        <div
+          className={classnames(
+            'Select__wrapper',
+            className,
+            {
+              'Select__wrapper--error': error,
+              'translate-label': label,
+              'is-open': isOpen,
+              'single-option': singleOption,
+              'is-set': activeOption.active,
+            },
+          )}
+          ref={c => this.selectWrapper = c}
+          onClick={this.toggleDropdown}
+          onBlur={this.closeDropdown}
+          onFocus={this.openDropdown}
+          onKeyDown={this.handleKeyboardActions}
+          tabIndex={isOpen ? '-1' : '0'}
+        >
+          {label
+            ? <span className="Select-label noSelect">{label}</span>
+            : null
+          }
+          <span className="Select-item-text noSelect">{spanText}</span>
+          <IconSVG
+            svgPath={Carat.url}
+            className="Select__carat"
+            width="15px"
+            height="15px"
+          />
+          <div className="Select">
+            <div className="Select-list-wrapper">
+              <ul className="Select-list">
+                {contents}
+              </ul>
+            </div>
           </div>
         </div>
+        {
+          inlineMeta
+          ? <p
+            className={classnames(
+              'u-text-align--left',
+              'u-mt-small',
+              {
+                'Select__meta-label--error': error,
+              },
+            )}
+          >
+            {inlineMeta}
+          </p>
+          : null
+        }
       </div>
     );
   }
