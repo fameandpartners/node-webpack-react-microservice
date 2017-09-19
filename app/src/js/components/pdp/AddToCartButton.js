@@ -45,8 +45,15 @@ function dispatchToProps(dispatch) {
   const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
   const {
     setSizeProfileError,
-    activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
-  return { activateCartDrawer, setSizeProfileError, addItemToCart, activateCustomizationDrawer };
+    activateCustomizationDrawer,
+  } = bindActionCreators(CustomizationActions, dispatch);
+
+  return {
+    activateCartDrawer,
+    addItemToCart,
+    setSizeProfileError,
+    activateCustomizationDrawer,
+  };
 }
 
 
