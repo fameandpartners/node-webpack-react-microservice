@@ -215,7 +215,7 @@ class ProductOptions extends Component {
       <div className="ProductOptions grid-12-noGutter">
         <div className="ProductOptions__primary-image-container brick col-6">
           <img
-            className="u-width--full"
+            className="u-width--full u-height--full"
             alt="dress1"
             src={this.findColorSpecificFirstImageUrl()}
             onClick={this.showImageLightboxModal}

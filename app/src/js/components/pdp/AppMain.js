@@ -141,12 +141,14 @@ class AppMain extends Component {
                 </div>
               </div>
 
-              <div className="layout-container u-mb-normal">
-                { breakpoint === 'mobile' || breakpoint === 'tablet'
+              { breakpoint === 'mobile' || breakpoint === 'tablet'
                   ? null
-                  : <ProductGrid />
+                  : (
+                    <div className="u-gray-border--top layout-container u-mb-normal">
+                      <ProductGrid />
+                    </div>
+                  )
                 }
-              </div>
 
             </div>
 
