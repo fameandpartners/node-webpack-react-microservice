@@ -53,8 +53,6 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
-    productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
-    productSecondaryColorsCentsPrice: state.$$productState.get('productSecondaryColorsCentsPrice'),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -69,7 +67,6 @@ function stateToProps(state) {
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
     selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
-    selectedColor: state.$$customizationState.get('selectedColor').toJS(),
   };
 }
 
@@ -154,13 +151,8 @@ class ProductOptions extends Component {
   calculateSubTotal(currencySymbol) {
     const {
       productCentsBasePrice,
-      productSecondaryColors,
-      productSecondaryColorsCentsPrice,
-      selectedColor,
+      colorCentsTotal,
     } = this.props;
-
-    const hasSelectedSecondaryColor = find(productSecondaryColors, selectedColor);
-    const colorCentsTotal = hasSelectedSecondaryColor ? productSecondaryColorsCentsPrice : 0;
 
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     return calculateSubTotal(
@@ -328,23 +320,6 @@ ProductOptions.propTypes = {
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
   patternUrl: PropTypes.string.isRequired,
-  productSecondaryColors: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      presentation: PropTypes.string,
-      hexValue: PropTypes.string,
-      patternUrl: PropTypes.string,
-    }),
-  ),
-  productSecondaryColorsCentsPrice: PropTypes.number,
-  selectedColor: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    presentation: PropTypes.string,
-    hexValue: PropTypes.string,
-    patternUrl: PropTypes.string,
-  }).isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -364,8 +339,6 @@ ProductOptions.propTypes = {
 
 ProductOptions.defaultProps = {
   addonOptions: [],
-  productSecondaryColors: [],
-  productSecondaryColorsCentsPrice: 0,
   colorCentsTotal: 0,
   selectedDressSize: null,
   selectedHeightValue: null,

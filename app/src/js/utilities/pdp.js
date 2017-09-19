@@ -220,7 +220,7 @@ export function transformProductDescription({ description }) {
   return description;
 }
 
-export function transformProductColors(colors = []) {
+export function transformProductColors(data, key) {
   // "created_at": String,
   // "id": Number,
   // "image_content_type": null,
@@ -241,6 +241,15 @@ export function transformProductColors(colors = []) {
   //   hexValue: String,
   //   patternUrl: String,
   // })
+
+  const colors = data.product.colors.table[key] || [];
+  let price = 0;
+
+  if (key === 'extra') {
+    price = data.product.colors.table.default_extra_price.price.amount;
+    price = (parseInt(price, 10) * 100);
+  }
+
   return colors.map((c) => {
     const optionValue = c.option_value;
     const optionValueVal = optionValue.value || '';
@@ -253,6 +262,7 @@ export function transformProductColors(colors = []) {
       presentation: optionValue.presentation,
       hexValue: hasPatternImage ? '' : optionValueVal,
       patternUrl: hasPatternImage ? `${ASSET_BASE_PATH}/${optionValueVal}` : '',
+      centsTotal: price,
     };
   });
 }
@@ -400,8 +410,8 @@ export function transformProductJSON(productJSON) {
     preCustomizations: transformProductPreCustomizations(),
     productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
     productDescription: transformProductDescription(productJSON.product),
-    productDefaultColors: transformProductColors(productJSON.product.colors.table.default),
-    productSecondaryColors: transformProductColors(productJSON.product.colors.table.extra),
+    productDefaultColors: transformProductColors(productJSON, 'default'),
+    productSecondaryColors: transformProductColors(productJSON, 'extra'),
     productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
     productId: transformProductId(productJSON.product),
     productImages: transformProductImages(productJSON.images),

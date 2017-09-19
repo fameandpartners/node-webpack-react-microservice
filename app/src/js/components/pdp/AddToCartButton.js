@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { find } from 'lodash';
 
 // Utilities
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
@@ -26,19 +25,18 @@ import CustomizationConstants from '../../constants/CustomizationConstants';
 import { addToCart } from '../../utilities/cart-helper';
 
 function stateToProps(state) {
+  const selectedColor = state.$$customizationState.get('selectedColor');
   const selectedStyleCustomizations = state.$$customizationState.get('selectedStyleCustomizations').toJS();
   const addonOptions = state.$$customizationState.get('addons').get('addonOptions').toJS();
 
   return {
     $$productState: state.$$productState,
     $$customizationState: state.$$customizationState,
+    colorCentsTotal: selectedColor.get('centsTotal'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     selectedAddonOptions: addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1),
     heightValue: state.$$customizationState.get('temporaryHeightValue'),
     sizeValue: state.$$customizationState.get('selectedDressSize'),
-    productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
-    productSecondaryColorsCentsPrice: state.$$productState.get('productSecondaryColorsCentsPrice'),
-    selectedColor: state.$$customizationState.get('selectedColor').toJS(),
   };
 }
 
@@ -56,17 +54,7 @@ class AddToCartButton extends Component {
   }
 
   subTotal() {
-    const {
-      productCentsBasePrice,
-      selectedAddonOptions,
-      productSecondaryColors,
-      productSecondaryColorsCentsPrice,
-      selectedColor,
-    } = this.props;
-
-    const hasSelectedSecondaryColor = find(productSecondaryColors, selectedColor);
-    const colorCentsTotal = hasSelectedSecondaryColor ? productSecondaryColorsCentsPrice : 0;
-
+    const { productCentsBasePrice, colorCentsTotal, selectedAddonOptions } = this.props;
     return calculateSubTotal({ productCentsBasePrice, colorCentsTotal, selectedAddonOptions });
   }
 
@@ -121,25 +109,9 @@ AddToCartButton.propTypes = {
   // Redux Props
   $$productState: PropTypes.object.isRequired,
   $$customizationState: PropTypes.object.isRequired,
+  colorCentsTotal: PropTypes.number,
   productCentsBasePrice: PropTypes.number.isRequired,
   selectedAddonOptions: PropTypes.array,
-  productSecondaryColors: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      presentation: PropTypes.string,
-      hexValue: PropTypes.string,
-      patternUrl: PropTypes.string,
-    }),
-  ),
-  productSecondaryColorsCentsPrice: PropTypes.number,
-  selectedColor: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    presentation: PropTypes.string,
-    hexValue: PropTypes.string,
-    patternUrl: PropTypes.string,
-  }).isRequired,
   // Redux Actions
   // addItemToCart: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
@@ -148,8 +120,7 @@ AddToCartButton.propTypes = {
 };
 
 AddToCartButton.defaultProps = {
-  productSecondaryColors: [],
-  productSecondaryColorsCentsPrice: 0,
+  colorCentsTotal: 0,
   selectedAddonOptions: [],
   showTotal: true,
   sizeValue: null,
