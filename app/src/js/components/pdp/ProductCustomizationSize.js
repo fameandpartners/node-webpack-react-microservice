@@ -12,10 +12,9 @@ import {
   US_SIZES,
   AU_SIZES,
   INCH_SIZES,
+  MIN_CM,
+  MAX_CM,
   UNITS,
-  // TODO: Will be used for error validations
-  // MIN_CM,
-  // MAX_CM,
 } from '../../constants/ProductConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
@@ -48,15 +47,18 @@ function stateToProps(state) {
 function dispatchToProps(dispatch) {
   const {
     changeCustomizationDrawer,
+    setSizeProfileError,
     updateMeasurementMetric,
     updateHeightSelection,
     updateDressSizeSelection,
   } = bindActionCreators(CustomizationActions, dispatch);
 
+
   const modalActions = bindActionCreators(ModalActions, dispatch);
 
   return {
     changeCustomizationDrawer,
+    setSizeProfileError,
     updateMeasurementMetric,
     updateHeightSelection,
     updateDressSizeSelection,
@@ -75,18 +77,54 @@ class ProductCustomizationStyle extends PureComponent {
     this.props.changeCustomizationDrawer({ productCustomizationDrawer });
   }
 
+  hasHeightError({ temporaryHeightValue, temporaryMeasurementMetric }) {
+    return (
+     !(temporaryHeightValue && temporaryMeasurementMetric) || // Not Present
+     (temporaryMeasurementMetric === UNITS.CM &&
+     (temporaryHeightValue < MIN_CM || temporaryHeightValue > MAX_CM))
+    );
+  }
+
+  validateSizeSelection({ temporaryHeightValue, temporaryMeasurementMetric }) {
+    const { setSizeProfileError, temporaryDressSize } = this.props;
+    const errors = { heightError: false, sizeError: false };
+
+    if (this.hasHeightError({
+      temporaryHeightValue, temporaryMeasurementMetric },
+    ) || !temporaryDressSize) {
+      if (this.hasHeightError(
+        { temporaryHeightValue, temporaryMeasurementMetric },
+      )) {
+        errors.heightError = true;
+      }
+
+      if (!temporaryDressSize) { errors.sizeError = true; }
+      setSizeProfileError(errors);
+      return false;
+    }
+
+    setSizeProfileError(errors);
+    return true;
+  }
+
   /**
    * Handler for changes of CM metric
    * @param  {Number|String} value
    */
   handleCMChange({ value }) {
-    const { updateHeightSelection } = this.props;
+    const { heightError, updateHeightSelection } = this.props;
     const numVal = parseInt(value, 10);
 
     if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
+      if (heightError) { // Only validate if there is an error
+        this.validateSizeSelection({
+          temporaryHeightValue: numVal,
+          temporaryMeasurementMetric: UNITS.CM,
+        });
+      }
       updateHeightSelection({
         temporaryHeightValue: numVal,
-        temporaryHeightUnit: UNITS.CM,
+        temporaryMeasurementMetric: UNITS.CM,
       });
     }
   }
@@ -96,11 +134,17 @@ class ProductCustomizationStyle extends PureComponent {
    * @param  {Object} {option} - Select dropdown's option chosen
    */
   handleInchChange({ option }) {
-    const { updateHeightSelection } = this.props;
+    const { updateHeightSelection, heightError } = this.props;
     const selection = INCH_SIZES[option.id];
 
     if (selection) {
       const inches = (selection.ft * 12) + selection.inch;
+      if (heightError) {
+        this.validateSizeSelection({
+          temporaryHeightValue: inches,
+          temporaryMeasurementMetric: UNITS.INCH,
+        });
+      }
       updateHeightSelection({
         temporaryHeightValue: inches,
       });
@@ -147,8 +191,6 @@ class ProductCustomizationStyle extends PureComponent {
   }
 
   handleViewSizeGuideClick() {
-    /* eslint-disable no-console */
-    console.log('Show Size Guide!');
     this.props.activateModal({ modalId: ModalConstants.SIZE_GUIDE_MODAL });
   }
 
@@ -212,7 +254,7 @@ class ProductCustomizationStyle extends PureComponent {
             </p>
           </div>
 
-          <div className="ProductCustomizationSize__height u-mb-normal u-paddingLeft--small">
+          <div className="ProductCustomizationSize__height u-mb-normal">
             <p
               className={classnames(
                 'textAlign--left',
@@ -220,8 +262,10 @@ class ProductCustomizationStyle extends PureComponent {
                   'u-color-red': heightError,
                 },
               )}
-            >How tall are you?</p>
-            <div className="grid">
+            >
+              How tall are you?
+            </p>
+            <div className="grid-noGutter">
               <div className="col-8">
                 { temporaryMeasurementMetric === UNITS.INCH ?
                   <Select
@@ -235,7 +279,7 @@ class ProductCustomizationStyle extends PureComponent {
                     id="height-option-cm"
                     type="number"
                     error={heightError}
-                    inlineMeta={heightError ? 'Please select your height' : null}
+                    inlineMeta={heightError ? 'Please enter a valid height' : null}
                     focusOnMount
                     onChange={this.handleCMChange}
                     defaultValue={temporaryHeightValue}
@@ -248,8 +292,8 @@ class ProductCustomizationStyle extends PureComponent {
                   id="metric"
                   value={temporaryMeasurementMetric}
                   options={[
-                      { value: UNITS.INCH },
-                      { label: 'cm', value: UNITS.CM },
+                    { value: UNITS.INCH },
+                    { label: 'cm', value: UNITS.CM },
                   ]}
                   onChange={this.handleMetricSwitch}
                 />
@@ -259,40 +303,35 @@ class ProductCustomizationStyle extends PureComponent {
           </div>
 
           <div>
-            <p className="textAlign--left u-paddingLeft--small">What&apos;s your size?</p>
-            <div className="ProductCustomizationSize__size grid-12">
+            <p className="textAlign--left">What&apos;s your size?</p>
+            <div className="ProductCustomizationSize__size grid-12-spaceBetween">
               { SIZES.map(s => (
                 <div key={s} className="col-3">
                   <Button
                     tertiary
+                    tall
                     selected={s === temporaryDressSize}
-                    square
                     text={s}
                     handleClick={this.handleDressSizeSelection(s)}
                   />
                 </div>
               ))}
             </div>
-            <div className="grid">
+            { sizeError ?
+              <div className="ProductCustomizationSize__size-error-text">
+                <p className="p u-color-red textAlign--left">
+                  Please select a size
+                </p>
+              </div>
+              : null
+            }
+            <div className="grid-noGutter">
               <div className="col-12">
-                { sizeError ?
-                  <p
-                    className={classnames(
-                      'u-color-red',
-                      'textAlign--left',
-                      'u-paddingLeft--small',
-                    )}
-                  >
-                    Please select your size
-                  </p>
-                  : null
-                }
                 <p
                   className={classnames(
                     'link',
                     'link--static',
                     'textAlign--left',
-                    'u-paddingLeft--small',
                   )}
                   onClick={this.handleViewSizeGuideClick}
                 >
@@ -321,6 +360,7 @@ ProductCustomizationStyle.propTypes = {
   sizeError: PropTypes.bool,
   // Redux Actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
+  setSizeProfileError: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
