@@ -8,7 +8,7 @@ dependencies:
     - npm install:
         pwd:
           app
-    - npm run build:
+    - set PUBLIC_URL=https://content-dev.fameandgroups.com/ && npm run build:
         pwd:
           app
     - echo 'yicky'
