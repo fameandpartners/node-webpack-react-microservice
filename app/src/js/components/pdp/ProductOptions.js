@@ -227,10 +227,7 @@ class ProductOptions extends Component {
           <div
             className="ProductOptions__primary-image-wrapper"
             style={{
-              background: `url(${this.findColorSpecificFirstImageUrl()})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundImage: `url(${this.findColorSpecificFirstImageUrl()})`,
             }}
             onClick={this.showImageLightboxModal}
           />

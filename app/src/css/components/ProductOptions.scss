@@ -9,13 +9,16 @@
 
 .ProductOptions__primary-image-wrapper {
   height: 600px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 
   @include md {
-    height: 680px;
+    height: 650px;
   }
 
   @include lg {
-    height: 800px;
+    height: 730px;
   }
 }
 
