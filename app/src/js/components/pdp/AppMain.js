@@ -41,6 +41,7 @@ function stateToProps(state) {
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
+    sku: state.$$productState.get('sku'),
   };
 }
 
@@ -88,6 +89,7 @@ class AppMain extends Component {
       sideMenuOpen,
       fabric,
       garmentCareInformation,
+      sku,
     } = this.props;
 
     return (
@@ -138,6 +140,13 @@ class AppMain extends Component {
                       garmentCareInformation={garmentCareInformation}
                     />
                   </div>
+                  {
+                    sku
+                      ? <div className="col grid-middle">
+                        <p className="u-center">SKU {sku}</p>
+                      </div>
+                      : null
+                  }
                 </div>
               </div>
 
@@ -178,6 +187,7 @@ AppMain.propTypes = {
     description: PropTypes.string,
   }).isRequired,
   garmentCareInformation: PropTypes.string.isRequired,
+  sku: PropTypes.string,
 
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
@@ -190,6 +200,7 @@ AppMain.propTypes = {
 AppMain.defaultProps = {
   cartDrawerOpen: false,
   sideMenuOpen: false,
+  sku: null,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AppMain));
