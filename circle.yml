@@ -5,14 +5,6 @@ machine:
 dependencies:
     override:
       - if [ $CIRCLE_BRANCH = 'master' ]; then sh ./build-prod.sh; else sh ./build-dev.sh; fi
-    # - npm install -g npm
-    # - npm install:
-    #     pwd:
-    #       app
-    # - set PUBLIC_URL=https://content-dev.fameandgroups.com/ && echo $PUBLIC_URL && npm run build:
-    #     pwd:
-    #       app
-    # - echo 'yicky'
 
 test:
   override:
