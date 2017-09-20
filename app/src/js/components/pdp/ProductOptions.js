@@ -79,6 +79,7 @@ function stateToProps(state) {
 function dispatchToProps(dispatch) {
   const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
   const actions = bindActionCreators(ModalActions, dispatch);
+
   return {
     activateCustomizationDrawer,
     activateModal: actions.activateModal,
