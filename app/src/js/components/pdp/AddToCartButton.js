@@ -92,7 +92,7 @@ class AddToCartButton extends Component {
         heightError: !heightValue,
         sizeError: !sizeValue,
       });
-      if (breakpoint === 'mobile') {
+      if (breakpoint === 'mobile' || breakpoint === 'tablet') {
         activateModal({ modalId: ModalConstants.SIZE_SELECTION_MODAL });
       } else {
         activateCustomizationDrawer({
