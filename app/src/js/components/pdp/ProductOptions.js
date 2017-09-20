@@ -296,7 +296,12 @@ class ProductOptions extends Component {
                 >
                   Learn&nbsp;more
                 </a> <br />
-                Estimated delivery { deliveryCopy }.
+                {
+                deliveryCopy
+                ? `Estimated delivery ${deliveryCopy}.`
+                : null
+              }
+
               </p>
               <ProductSecondaryActions />
             </div>
