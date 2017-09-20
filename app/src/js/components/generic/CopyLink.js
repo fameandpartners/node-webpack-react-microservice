@@ -7,8 +7,8 @@ import Clipboard from 'clipboard';
 import Button from '../generic/Button';
 import Input from '../form/Input';
 
-// CSS
-import '../../../css/components/CopyLink.scss';
+const DEFAULT_TEXT = 'Copy Link';
+const SUCCESS_TEXT = 'Copied Link!';
 
 class CopyLink extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class CopyLink extends Component {
     this.state = {
       clipboardError: false,
       copySuccess: false,
-      copyLinkText: 'Copy Link',
+      copyLinkText: DEFAULT_TEXT,
     };
 
     autobind(this);
@@ -26,8 +26,13 @@ class CopyLink extends Component {
   handleCopyLinkClick() {
     this.setState({
       copySuccess: true,
-      copyLinkText: 'Copied Link!',
+      copyLinkText: SUCCESS_TEXT,
     });
+
+    setTimeout(() => this.setState({
+      copyLinkText: DEFAULT_TEXT,
+      copySuccess: false,
+    }), 2000);
   }
 
   handleCopyLinkClickError() {
@@ -62,14 +67,6 @@ class CopyLink extends Component {
 
     return (
       <div>
-        <Button
-          tall
-          secondary={!copySuccess}
-          passedRef={i => this.copyTrigger = i}
-          className="CopyLinkButton Modal__content--med-margin-bottom"
-          text={copyLinkText}
-          handleClick={this.handleCopyLinkClick}
-        />
         {
           clipboardError ?
           (
@@ -81,7 +78,15 @@ class CopyLink extends Component {
               readOnly
               wrapperClassName="Modal__content--med-margin-bottom"
             />
-          ) : null
+          ) :
+            <Button
+              tall
+              secondary={copySuccess}
+              passedRef={i => this.copyTrigger = i}
+              className="CopyLinkButton Modal__content--med-margin-bottom"
+              text={copyLinkText}
+              handleClick={this.handleCopyLinkClick}
+            />
         }
       </div>
     );

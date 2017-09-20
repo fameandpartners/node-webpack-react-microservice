@@ -97,7 +97,7 @@ class Slider extends Component {
                 <div>
                   <div
                     onClick={this.previousSlide}
-                    className="Slider__button Slider__button--left"
+                    className="Slider__button Slider__button--left u-cursor--pointer"
                   >
                     <IconSVG
                       svgPath={Carat.url}
@@ -107,7 +107,7 @@ class Slider extends Component {
                   </div>
 
                   <div
-                    className="Slider__button Slider__button--right"
+                    className="Slider__button Slider__button--right u-cursor--pointer"
                     onClick={this.nextSlide}
                   >
                     <IconSVG

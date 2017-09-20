@@ -5,12 +5,16 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
+import classnames from 'classnames';
 
 // Utilities
 import noop from '../../libs/noop';
 import { formatCents } from '../../utilities/accounting';
 import { sizeProfilePresence } from '../../utilities/pdpValidations';
-import { generateBackgroundValueFromColor } from '../../utilities/color';
+import {
+  isExtremeLightLuminance,
+  generateBackgroundValueFromColor,
+} from '../../utilities/color';
 import {
   addonSelectionDisplayText,
   calculateSubTotal,
@@ -112,7 +116,10 @@ class ProductOptions extends Component {
         }
         <span
           style={{ background }}
-          className="ProductOptions__color-swatch u-display--inline-block"
+          className={classnames(
+            'ProductOptions__color-swatch u-display--inline-block',
+            { 'ProductOptions__color-swatch--extreme-light': isExtremeLightLuminance({ hexValue: colorHexValue }) },
+          )}
         />
       </span>
     );

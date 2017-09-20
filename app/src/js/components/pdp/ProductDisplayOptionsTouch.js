@@ -7,7 +7,12 @@ import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
 // Utilities
-import { isDarkLuminance, generateBackgroundValueFromColor, separateHexColorsInString } from '../../utilities/color';
+import {
+  isDarkLuminance,
+  isExtremeLightLuminance,
+  generateBackgroundValueFromColor,
+  separateHexColorsInString,
+} from '../../utilities/color';
 import { addonSelectionDisplayText } from '../../utilities/pdp';
 
 // UI Components
@@ -78,6 +83,7 @@ class ProductDisplayOptionsTouch extends Component {
             className={classnames(
               'ProductDisplayOptionsTouch__option u-display--inline-block u-cursor--pointer',
               { 'ProductDisplayOptionsTouch__option--dark': isDarkLuminance(selectedColor) },
+              { 'ProductDisplayOptionsTouch__option--extreme-light': isExtremeLightLuminance(selectedColor) },
             )}
             style={{ background }}
           >
