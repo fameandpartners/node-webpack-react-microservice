@@ -37,7 +37,8 @@ class ProductCustomizationNavigation extends PureComponent {
             >
               <span
                 className={classnames(
-                { 'ProductCustomizationNavigation__nav-item--active': productCustomizationDrawer === COLOR_CUSTOMIZE },
+                  'ProductCustomizationNavigation__nav-item-text',
+                { 'ProductCustomizationNavigation__nav-item-text--active': productCustomizationDrawer === COLOR_CUSTOMIZE },
               )}
               >
                 Color
@@ -49,8 +50,8 @@ class ProductCustomizationNavigation extends PureComponent {
             >
               <span
                 className={classnames(
-                'ProductCustomizationNavigation__nav-item u-cursor--pointer',
-                { 'ProductCustomizationNavigation__nav-item--active': productCustomizationDrawer === STYLE_CUSTOMIZE },
+                'ProductCustomizationNavigation__nav-item-text',
+                { 'ProductCustomizationNavigation__nav-item-text--active': productCustomizationDrawer === STYLE_CUSTOMIZE },
               )}
               >Design&nbsp;Customizations</span>
             </li>
@@ -60,8 +61,8 @@ class ProductCustomizationNavigation extends PureComponent {
             >
               <span
                 className={classnames(
-                'ProductCustomizationNavigation__nav-item u-cursor--pointer',
-                { 'ProductCustomizationNavigation__nav-item--active': productCustomizationDrawer === SIZE_CUSTOMIZE },
+                'ProductCustomizationNavigation__nav-item-text',
+                { 'ProductCustomizationNavigation__nav-item-text--active': productCustomizationDrawer === SIZE_CUSTOMIZE },
               )}
               >Your&nbsp;Size</span>
             </li>

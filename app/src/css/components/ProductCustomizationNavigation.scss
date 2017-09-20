@@ -13,11 +13,11 @@
   transition: $fast-transition-time all ease-in-out;
 }
 
-.ProductCustomizationNavigation__nav-item:hover {
-  transform: translateX(-5px);
+.ProductCustomizationNavigation__nav-item:hover .ProductCustomizationNavigation__nav-item-text {
+  border-bottom: 1px solid $c-text-gray;
 }
 
-.ProductCustomizationNavigation__nav-item--active {
+.ProductCustomizationNavigation__nav-item-text--active {
   font-weight: 500;
   border-bottom: 1px solid $c-black;
   color: $c-black;
