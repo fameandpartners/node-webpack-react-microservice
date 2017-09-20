@@ -18,8 +18,8 @@ class SizeGuideTable extends PureComponent {
     this.state = {
       centimeters: false,
       hoverCoordinates: {
-        hoverColumn: null,
-        hoverRow: null,
+        hoverColumn: 0,
+        hoverRow: 4,
       },
     };
   }
@@ -45,6 +45,12 @@ class SizeGuideTable extends PureComponent {
 
     return (
       <div className="SizeGuideTable">
+        <div className="SizeGuideTable__message u-text-align--left">
+          <p className="bold">
+            If your measurements aren't consistent within a single column,<br />
+            use your waist measurement to determine your ideal size.
+          </p>
+        </div>
         <div className="SizeGuideTable__actions">
           <a
             className={classnames(

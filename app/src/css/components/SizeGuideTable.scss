@@ -7,6 +7,14 @@
   }
 }
 
+.SizeGuideTable__message {
+  display: none;
+
+  @include sm {
+    display: block;
+  }
+}
+
 .SizeGuideTable__actions {
   width: 100%;
   text-align: right;
