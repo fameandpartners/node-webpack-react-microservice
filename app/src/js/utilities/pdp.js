@@ -416,10 +416,18 @@ export function transformProductJSON(productJSON) {
     siteVersion: transformProductSiteVersion(productJSON),
   };
 
+  let measurementMetric = 'inch';
+
+  if (productJSON.siteVersion.toLowerCase() === 'australia') {
+    measurementMetric = 'cm';
+  }
+
   const customizationState = {
     addons: transformAddons(productJSON),
     selectedColor: productState.productDefaultColors[0],
     temporaryColor: productState.productDefaultColors[0],
+    temporaryMeasurementMetric: measurementMetric,
+    selectedMeasurementMetric: measurementMetric,
   };
 
   return {

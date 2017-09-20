@@ -72,15 +72,11 @@ function stateToProps(state) {
 
 
 function dispatchToProps(dispatch) {
-  const {
-    activateCustomizationDrawer,
-    updateMeasurementMetric,
-  } = bindActionCreators(CustomizationActions, dispatch);
+  const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
   const actions = bindActionCreators(ModalActions, dispatch);
 
   return {
     activateCustomizationDrawer,
-    updateMeasurementMetric,
     activateModal: actions.activateModal,
   };
 }
@@ -205,19 +201,6 @@ class ProductOptions extends Component {
     const productImages = $$productImages.toJS();
     const hasMatch = find(productImages, { colorId });
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
-  }
-
-  componentWillMount() {
-    const {
-      auSite,
-      updateMeasurementMetric,
-    } = this.props;
-
-    if (auSite) {
-      updateMeasurementMetric({
-        selectedMeasurementMetric: 'cm',
-      });
-    }
   }
 
   render() {
@@ -351,7 +334,6 @@ ProductOptions.propTypes = {
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
-  updateMeasurementMetric: PropTypes.func.isRequired,
 };
 
 ProductOptions.defaultProps = {
