@@ -4,7 +4,10 @@ machine:
 
 dependencies:
   override:
-    - sh ./build-dev.sh
+    branch: /release.*/
+      - sh ./build-dev.sh
+    branch: master
+      - sh ./build-prod.sh
     # - npm install -g npm
     # - npm install:
     #     pwd:
