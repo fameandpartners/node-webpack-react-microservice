@@ -3,10 +3,11 @@ machine:
     version: 8.1.4
 
 dependencies:
-  override:
-    branch: /release.*/
+  branch: /release.*/
+    override:
       - sh ./build-dev.sh
-    branch: master
+  branch: master
+    override:
       - sh ./build-prod.sh
     # - npm install -g npm
     # - npm install:
