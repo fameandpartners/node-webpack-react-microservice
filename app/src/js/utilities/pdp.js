@@ -80,7 +80,6 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const selectedHeightValue = $$customizationState.get('selectedHeightValue');
   const selectedMeasurementMetric = $$customizationState.get('selectedMeasurementMetric');
 
-
   return {
     productId,
     productImage,
@@ -401,6 +400,14 @@ export function transformProductMakingOptions({ fast_making, making_option_id })
   return making;
 }
 
+export function transformDeliveryCopy({ delivery_period: deliveryPeriod }) {
+  return deliveryPeriod;
+}
+
+export function transformProductSiteVersion({ siteVersion }) {
+  return siteVersion;
+}
+
 export function transformProductJSON(productJSON) {
   const productState = {
     currency: transformProductCurrency(productJSON.product),
@@ -419,6 +426,8 @@ export function transformProductJSON(productJSON) {
     productTitle: transformProductTitle(productJSON.product),
     sizeChart: transformProductSizeChart(productJSON),
     productMakingOptions: transformProductMakingOptions(productJSON.product),
+    deliveryCopy: transformDeliveryCopy(productJSON.product),
+    siteVersion: transformProductSiteVersion(productJSON),
   };
 
   const customizationState = {

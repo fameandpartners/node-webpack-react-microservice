@@ -57,6 +57,7 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
+    deliveryCopy: state.$$productState.get('deliveryCopy'),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -216,6 +217,7 @@ class ProductOptions extends Component {
       selectedDressSize,
       selectedHeightValue,
       auSite,
+      deliveryCopy,
     } = this.props;
 
     return (
@@ -288,7 +290,11 @@ class ProductOptions extends Component {
                 : null
               }
               <p className="u-mb-small">
-                Complimentary shipping and returns.&nbsp;
+                {
+                  selectedStyleCustomizations.length === 0
+                  ? 'Shipping and returns are free.'
+                  : 'Shipping is free on your customized item.'
+                } &nbsp;
                 <a
                   className="link link--static"
                   href="/faqs#collapse-returns-policy"
@@ -296,7 +302,13 @@ class ProductOptions extends Component {
                   rel="noopener noreferrer"
                 >
                   Learn&nbsp;more
-                </a>
+                </a> <br />
+                {
+                  deliveryCopy
+                    ? `Estimated delivery ${deliveryCopy}.`
+                    : null
+                }
+
               </p>
               <ProductSecondaryActions />
             </div>
@@ -342,6 +354,7 @@ ProductOptions.propTypes = {
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
+  deliveryCopy: PropTypes.string,
 };
 
 ProductOptions.defaultProps = {
@@ -350,6 +363,7 @@ ProductOptions.defaultProps = {
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
+  deliveryCopy: '',
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);
