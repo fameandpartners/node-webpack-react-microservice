@@ -3,12 +3,8 @@ machine:
     version: 8.1.4
 
 dependencies:
-  branch: /release.*/
     override:
-      - sh ./build-dev.sh
-  branch: master
-    override:
-      - sh ./build-prod.sh
+      - if [ $CIRCLE_BRANCH = 'master' ]; then sh ./build-prod.sh; else sh ./build-dev.sh; fi
     # - npm install -g npm
     # - npm install:
     #     pwd:
