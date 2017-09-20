@@ -38,6 +38,7 @@ import '../css/gridlex.scss';
 import '../css/helpers.scss';
 import '../css/layout.scss';
 import '../css/typography.scss';
+import '../css/animations.scss';
 import '../css/components/App.scss';
 
 // Configure Error Tracking

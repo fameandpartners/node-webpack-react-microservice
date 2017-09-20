@@ -123,7 +123,12 @@ class ProductDisplayOptionsTouch extends Component {
     const sliderImages = this.getSliderImages();
     return (
       <div className="ProductImageSlider">
-        <Slider sliderHeight={this.calculateSliderHeight()} winWidth={winWidth} winHeight={winHeight}>
+        <Slider
+          nudgeOnMount
+          sliderHeight={this.calculateSliderHeight()}
+          winWidth={winWidth}
+          winHeight={winHeight}
+        >
           { sliderImages.map(img => (
             <Slide key={img.id}>
               <img

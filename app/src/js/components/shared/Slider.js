@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import classnames from 'classnames';
+
 import win from '../../polyfills/windowPolyfill';
 import IconSVG from '../generic/IconSVG';
 import '../../../css/components/Slider.scss';
@@ -80,6 +82,7 @@ class Slider extends Component {
   render() {
     const {
       children,
+      nudgeOnMount,
       sliderHeight,
       showButtons,
     } = this.props;
@@ -91,37 +94,47 @@ class Slider extends Component {
         style={{ height: sliderHeight }}
       >
         <div className="Slider__view u-height--full">
-          <div className="Slider__frame u-height--full">
-            {
-              showButtons ?
-                <div>
-                  <div
-                    onClick={this.previousSlide}
-                    className="Slider__button Slider__button--left u-cursor--pointer"
-                  >
-                    <IconSVG
-                      svgPath={Carat.url}
-                      width="28px"
-                      height="40px"
-                    />
-                  </div>
+          <div
+            className="Slider__frame u-height--full"
+          >
+            <div
+              className={classnames(
+                'Slider__contents u-height--full',
+                { 'delayed-nudge': nudgeOnMount },
+              )}
+            >
+              {
+                showButtons ?
+                  <div>
+                    <div
+                      onClick={this.previousSlide}
+                      className="Slider__button Slider__button--left u-cursor--pointer"
+                    >
+                      <IconSVG
+                        svgPath={Carat.url}
+                        width="28px"
+                        height="40px"
+                      />
+                    </div>
 
-                  <div
-                    className="Slider__button Slider__button--right u-cursor--pointer"
-                    onClick={this.nextSlide}
-                  >
-                    <IconSVG
-                      svgPath={Carat.url}
-                      width="28px"
-                      height="40px"
-                    />
+                    <div
+                      className="Slider__button Slider__button--right u-cursor--pointer"
+                      onClick={this.nextSlide}
+                    >
+                      <IconSVG
+                        svgPath={Carat.url}
+                        width="28px"
+                        height="40px"
+                      />
+                    </div>
                   </div>
-                </div>
                 : null
-            }
-            <ul className="Slider__slides u-height--full">
-              { children }
-            </ul>
+              }
+              <ul className="Slider__slides u-height--full">
+                { children }
+              </ul>
+
+            </div>
           </div>
         </div>
       </div>
@@ -135,6 +148,7 @@ Slider.propTypes = {
     PropTypes.array,
     PropTypes.node,
   ]).isRequired,
+  nudgeOnMount: PropTypes.bool,
   sliderHeight: PropTypes.string.isRequired,
   winHeight: PropTypes.number,
   winWidth: PropTypes.number,
@@ -148,6 +162,7 @@ Slider.defaultProps = {
   activeIndex: 0,
   winHeight: null,
   winWidth: null,
+  nudgeOnMount: false,
   showButtons: false,
   // Redux Actions
   handlePrev: noop,
