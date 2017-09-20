@@ -79,13 +79,17 @@ class Input extends Component {
           onBlur={this.handleBlur}
           onChange={this.handleChange}
         />
-        {inlineMeta && error
-          ? <span className="Input__meta-label--error">{inlineMeta}</span>
+        {
+            inlineMeta
+            ? <span
+              className={classnames(
+                {
+                  'Input__meta-label--error': inlineMeta && error,
+                  'Input__meta-label': inlineMeta && !error,
+                },
+          )}
+            >{inlineMeta}</span>
           : null
-        }
-        {inlineMeta && !error
-            ? <span className="Input__meta-label">{inlineMeta}</span>
-            : null
         }
       </div>
     );
