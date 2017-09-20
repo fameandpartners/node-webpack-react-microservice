@@ -7,6 +7,18 @@
   max-width: 450px;
 }
 
+.ProductOptions__primary-image-wrapper {
+  height: 600px;
+
+  @include md {
+    height: 680px;
+  }
+
+  @include lg {
+    height: 800px;
+  }
+}
+
 .ProductOptions .ProductOptions__primary-image-container {
   padding-bottom: 0;
 }

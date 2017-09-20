@@ -280,7 +280,7 @@ class ProductCustomizationStyle extends PureComponent {
                     id="height-option-cm"
                     type="number"
                     error={heightError}
-                    inlineMeta={heightError ? 'Please select your height' : null}
+                    inlineMeta={heightError ? 'Please enter a valid height' : null}
                     focusOnMount
                     onChange={this.handleCMChange}
                     defaultValue={temporaryHeightValue}

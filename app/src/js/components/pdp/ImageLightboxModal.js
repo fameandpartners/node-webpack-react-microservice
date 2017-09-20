@@ -178,6 +178,7 @@ class ImageLightboxModal extends Component {
           >
             { sliderImages.map((img, index) => (
               <Slide
+                fullSlide
                 key={img.id}
               >
                 <img
