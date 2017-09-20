@@ -3,15 +3,8 @@ machine:
     version: 8.1.4
 
 dependencies:
-  override:
-    - npm install -g npm
-    - npm install:
-        pwd:
-          app
-    - npm run build:
-        pwd:
-          app
-    - echo 'yicky'
+    override:
+      - if [ $CIRCLE_BRANCH = 'master' ]; then sh ./build-prod.sh; else sh ./build-dev.sh; fi
 
 test:
   override:

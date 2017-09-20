@@ -13,13 +13,17 @@ export function luminanceFromHex(hexStr) {
   return (0.2126 * r) + (0.7152 * g) + (0.0722 * b); // per ITU-R BT.709
 }
 
-export function isDarkLuminance(hexStr) {
-  return luminanceFromHex(hexStr.hexValue) < 70;
+export function isDarkLuminance({ hexValue }) {
+  return luminanceFromHex(hexValue) < 70;
+}
+
+export function isExtremeLightLuminance({ hexValue }) {
+  return luminanceFromHex(hexValue) > 240;
 }
 
 export function separateHexColorsInString(hexStr = '') {
-  const re = /#(\w+)(?!\w)/g;
-  return hexStr.match(re);
+  const rexi = /#(\w+)(?!\w)/g;
+  return hexStr.match(rexi);
 }
 
 function generateDuoToneSwatchBackground(start, end) {
@@ -43,6 +47,7 @@ export function generateBackgroundValueFromColor({ patternUrl, hexValue }) {
 export default {
   luminanceFromHex,
   isDarkLuminance,
+  isExtremeLightLuminance,
   generateBackgroundValueFromColor,
   separateHexColorsInString,
 };

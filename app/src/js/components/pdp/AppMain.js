@@ -141,17 +141,19 @@ class AppMain extends Component {
                 </div>
               </div>
 
-              <div className="layout-container u-mb-normal">
-                { breakpoint === 'mobile' || breakpoint === 'tablet'
+              { breakpoint === 'mobile' || breakpoint === 'tablet'
                   ? null
-                  : <ProductGrid />
+                  : (
+                    <div className="u-gray-border--top layout-container u-mb-normal">
+                      <ProductGrid />
+                    </div>
+                  )
                 }
-              </div>
 
             </div>
 
             <div
-              className="u-position--fixed u-width--full u-bottom u-z-index--max"
+              className="u-position--fixed u-width--full u-bottom u-z-index--mid"
               style={{ transform: `translateX(${x}px)` }}
             >
               <AddToCartButtonLedgeMobile />
