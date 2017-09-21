@@ -408,6 +408,13 @@ export function transformProductSiteVersion({ siteVersion }) {
   return siteVersion;
 }
 
+export function transformSKU({ sku }) {
+  if (typeof sku !== 'string') {
+    return false;
+  }
+  return sku.toUpperCase();
+}
+
 export function transformProductJSON(productJSON) {
   const productState = {
     currency: transformProductCurrency(productJSON.product),
@@ -427,6 +434,7 @@ export function transformProductJSON(productJSON) {
     sizeChart: transformProductSizeChart(productJSON),
     productMakingOptions: transformProductMakingOptions(productJSON.product),
     deliveryCopy: transformDeliveryCopy(productJSON.product),
+    sku: transformSKU(productJSON.product),
     siteVersion: transformProductSiteVersion(productJSON),
   };
 
