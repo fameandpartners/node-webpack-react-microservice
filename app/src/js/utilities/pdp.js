@@ -32,18 +32,21 @@ function filterSelectedAddons(addonOptions, selectedStyleCustomizations) {
 export function sizingDisplayText({
   selectedHeightValue,
   selectedMeasurementMetric,
-  selectedDressSize }) {
+  selectedDressSize,
+  auSite }) {
   let sizingInformation = null;
+
+  const REGION = auSite ? 'AU' : 'US';
 
   if (sizeProfilePresence(selectedDressSize, selectedHeightValue)) {
     if (selectedMeasurementMetric === UNITS.INCH) {
       // INCH
       const ft = Math.floor(selectedHeightValue / 12);
       const inch = selectedHeightValue % 12;
-      sizingInformation = `${ft}ft ${inch}in / ${selectedDressSize}`;
+      sizingInformation = `${ft}ft ${inch}in / ${REGION} ${selectedDressSize}`;
     } else {
       // CM
-      sizingInformation = `${selectedHeightValue} ${selectedMeasurementMetric.toLowerCase()} / ${selectedDressSize}`;
+      sizingInformation = `${selectedHeightValue} ${selectedMeasurementMetric.toLowerCase()} / ${REGION} ${selectedDressSize}`;
     }
   }
   return sizingInformation;
