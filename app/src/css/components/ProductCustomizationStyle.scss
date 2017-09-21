@@ -51,16 +51,16 @@
 
   @include xs {
     background-size: 100%;
-    height: 450px;
+    height: 270px;
   }
 
   @include sm {
-    background-size: 80%;
-    height: 380px;
+    background-size: 90%;
+    height: 260px;
   }
 
   @include md {
-    background-size: 90%;
-    height: 470px;
+    background-size: 85%;
+    height: 320px;
   }
 }
