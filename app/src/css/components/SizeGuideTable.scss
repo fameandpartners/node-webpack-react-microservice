@@ -32,13 +32,15 @@
 }
 
 .SizeGuideTable__table {
-  display: flex;
+  display: block;
   flex-wrap: wrap;
   margin: 0 0 3em 0;
   padding: 0;
   flex-direction: column;
+  width: 100%;
 
   @include sm {
+    display: flex;
     flex-direction: row;
   }
 }
