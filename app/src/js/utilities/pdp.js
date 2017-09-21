@@ -214,12 +214,16 @@ export function transformProductComplementaryProducts() {
   return complementaryProducts;
 }
 
+function removeCommaWhiteSpace(word) {
+  return word.replace(/ +,/g, ', ');
+}
+
 export function transformProductDescription({ description }) {
   // "description": String,
   //   ****** into ******
   // productDescription: String
   // })
-  return description;
+  return removeCommaWhiteSpace(description);
 }
 
 export function transformProductColors(data, key) {
@@ -377,7 +381,7 @@ export function transformProductModelDescription({ fit }) {
   //   "fit": String,
   //   ****** into ******
   //   modelDescription: String,
-  const modelDescription = fit;
+  const modelDescription = removeCommaWhiteSpace(fit);
   return modelDescription;
 }
 
