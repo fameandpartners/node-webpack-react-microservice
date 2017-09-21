@@ -12,6 +12,7 @@ class IconButton extends PureComponent {
   render() {
     const {
       handleClick,
+      svgId,
       svgPath,
       width,
       height,
@@ -23,6 +24,7 @@ class IconButton extends PureComponent {
         className="IconButton"
       >
         <IconSVG
+          svgId={svgId}
           svgPath={svgPath}
           width={width}
           height={height}
@@ -34,12 +36,14 @@ class IconButton extends PureComponent {
 
 IconButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
+  svgId: PropTypes.string,
   svgPath: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
 };
 
 IconButton.defaultProps = {
+  svgId: '',
   svgPath: '',
   width: '40px',
   height: '40px',
