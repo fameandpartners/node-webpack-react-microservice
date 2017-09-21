@@ -5,9 +5,9 @@ import { QUERY_PARAMS } from '../constants/AppConstants';
 // polyfills
 import win from '../polyfills/windowPolyfill';
 
-export function extractAndWhitelistQueryStringCustomizations(colors, addonOptions) {
+export function extractAndWhitelistQueryStringCustomizations(defaultColor, colors, addonOptions) {
   const queryStringCustomizations = {
-    color: colors[0],
+    color: defaultColor || colors[0],
     customizations: [],
   };
 
@@ -21,7 +21,7 @@ export function extractAndWhitelistQueryStringCustomizations(colors, addonOption
     } else if (parsed[QUERY_PARAMS.color]) { // NEW COLOR SYSTEM
       foundColor = find(colors, { id: parseInt(parsed[QUERY_PARAMS.color], 10) });
     }
-    queryStringCustomizations.color = foundColor || colors[0];
+    queryStringCustomizations.color = foundColor || defaultColor || colors[0];
 
     // CUSTOMIZATIONS
     const queryCustomizations = parsed[QUERY_PARAMS.customizations];
