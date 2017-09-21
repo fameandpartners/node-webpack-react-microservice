@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 // Utilities
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
+import { sizeProfilePresence } from '../../utilities/pdpValidations';
 import noop from '../../libs/noop';
 
 // Breakpoint Decoration
@@ -87,7 +88,7 @@ class AddToCartButton extends Component {
       breakpoint,
       activateModal,
     } = this.props;
-    if (!heightValue || !sizeValue) {
+    if (!sizeProfilePresence(sizeValue, heightValue)) {
       setSizeProfileError({
         heightError: !heightValue,
         sizeError: !sizeValue,
