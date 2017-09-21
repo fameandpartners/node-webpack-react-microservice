@@ -109,7 +109,6 @@ class CustomizationButtonLedge extends Component {
       if (this.hasHeightError()) { errors.heightError = true; }
       if (!temporaryDressSize) { errors.sizeError = true; }
       setSizeProfileError(errors);
-      console.log('has errors', errors);
       return false;
     }
 
