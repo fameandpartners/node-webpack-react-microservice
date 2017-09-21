@@ -28,8 +28,8 @@ const productCustomizationDrawers = assign({},
 
 const productCustomizationHeadlines = {
   COLOR_HEADLINE: 'Color',
-  STYLE_HEADLINE: 'Design Customizations',
-  SIZE_HEADLINE: 'Your Size',
+  STYLE_HEADLINE: 'Customizations',
+  SIZE_HEADLINE: 'Size',
 };
 
 export default assign({},

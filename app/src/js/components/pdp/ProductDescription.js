@@ -32,7 +32,7 @@ class ProductDescription extends Component {
     return (
       <div className="u-center">
         <p className="ProductCharity__message">
-          $5 of each sale funds a women&apos;s empowerment charity.&nbsp;
+          $5 of each sale is donated to UN Women and Plan International&nbsp;
           <a
             className="link link--static"
             href="/iequalchange"

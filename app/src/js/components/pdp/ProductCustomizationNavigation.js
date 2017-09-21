@@ -8,6 +8,9 @@ import {
   COLOR_CUSTOMIZE,
   STYLE_CUSTOMIZE,
   SIZE_CUSTOMIZE,
+  COLOR_HEADLINE,
+  STYLE_HEADLINE,
+  SIZE_HEADLINE,
 } from '../../constants/CustomizationConstants';
 
 // CSS
@@ -41,7 +44,7 @@ class ProductCustomizationNavigation extends PureComponent {
                 { 'ProductCustomizationNavigation__nav-item-text--active': productCustomizationDrawer === COLOR_CUSTOMIZE },
               )}
               >
-                Color
+                {COLOR_HEADLINE}
               </span>
             </li>
             <li
@@ -53,7 +56,7 @@ class ProductCustomizationNavigation extends PureComponent {
                 'ProductCustomizationNavigation__nav-item-text',
                 { 'ProductCustomizationNavigation__nav-item-text--active': productCustomizationDrawer === STYLE_CUSTOMIZE },
               )}
-              >Design&nbsp;Customizations</span>
+              >{STYLE_HEADLINE}</span>
             </li>
             <li
               onClick={this.handleDrawerSelection(SIZE_CUSTOMIZE)}
@@ -64,7 +67,7 @@ class ProductCustomizationNavigation extends PureComponent {
                 'ProductCustomizationNavigation__nav-item-text',
                 { 'ProductCustomizationNavigation__nav-item-text--active': productCustomizationDrawer === SIZE_CUSTOMIZE },
               )}
-              >Your&nbsp;Size</span>
+              >{SIZE_HEADLINE}</span>
             </li>
           </ul>
         </div>
