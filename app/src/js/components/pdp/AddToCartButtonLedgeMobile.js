@@ -24,6 +24,9 @@ import { sizingDisplayText } from '../../utilities/pdp';
 
 function stateToProps(state) {
   return {
+    // APP
+    auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
+
     // SELECTIONS
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
@@ -51,11 +54,13 @@ class AddToCartButtonLedgeMobile extends Component {
       selectedHeightValue,
       selectedMeasurementMetric,
       selectedDressSize,
+      auSite,
     } = this.props;
     const sizingInformation = sizingDisplayText({
       selectedDressSize,
       selectedHeightValue,
       selectedMeasurementMetric,
+      auSite,
     });
     if (sizingInformation) {
       return `${CustomizationConstants.SIZE_HEADLINE} - ${sizingInformation}`;
@@ -84,6 +89,7 @@ AddToCartButtonLedgeMobile.propTypes = {
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
   // Redux Props
+  auSite: PropTypes.bool.isRequired,
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
