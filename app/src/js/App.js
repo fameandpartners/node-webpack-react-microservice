@@ -38,6 +38,7 @@ import '../css/gridlex.scss';
 import '../css/helpers.scss';
 import '../css/layout.scss';
 import '../css/typography.scss';
+import '../css/animations.scss';
 import '../css/components/App.scss';
 
 // Configure Error Tracking
@@ -53,6 +54,7 @@ function stateToProps(state) {
   const customizationDrawerOpen = state.$$customizationState.get('productCustomizationDrawerOpen');
 
   return {
+    selectedColor: state.$$customizationState.get('selectedColor'),
     $$productDefaultColors: state.$$productState.get('productDefaultColors'),
     $$productSecondaryColors: state.$$productState.get('productSecondaryColors'),
     $$addonOptions: state.$$customizationState.get('addons').get('addonOptions'),
@@ -89,11 +91,13 @@ class App extends Component {
       $$addonOptions,
       $$productDefaultColors,
       $$productSecondaryColors,
+      selectedColor,
       selectProductColor,
       setShareableQueryParams,
       updateCustomizationStyleSelection,
     } = this.props;
       const { color, customizations } = extractAndWhitelistQueryStringCustomizations(
+        selectedColor,
         $$productDefaultColors.toJS().concat($$productSecondaryColors.toJS()),
         $$addonOptions.toJS(),
       );
@@ -138,11 +142,13 @@ class App extends Component {
   }
 }
 
+/* eslint-disable react/forbid-prop-types */
 App.propTypes = {
   lockBody: PropTypes.bool.isRequired,
   $$addonOptions: ImmutablePropTypes.list.isRequired,
   $$productDefaultColors: ImmutablePropTypes.list.isRequired,
   $$productSecondaryColors: ImmutablePropTypes.list.isRequired,
+  selectedColor: PropTypes.object.isRequired,
   selectProductColor: PropTypes.func.isRequired,
   setShareableQueryParams: PropTypes.func.isRequired,
   updateCustomizationStyleSelection: PropTypes.func.isRequired,

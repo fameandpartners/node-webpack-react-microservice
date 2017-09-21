@@ -80,8 +80,8 @@ class ProductDisplayOptionsTouch extends Component {
 
   calculateSliderHeight() {
     const { breakpoint, winHeight } = this.props;
-    const MOBILE_HEIGHT_ELEMS = 301; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER
-    const TABLET_HEIGHT_ELEMS = 301; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER
+    const MOBILE_HEIGHT_ELEMS = 355; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER + 45 LOCALE
+    const TABLET_HEIGHT_ELEMS = 355; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER + 45 LOCALE
     const MAX_HEIGHT = 740;
     const MIN_HEIGHT = 350;
     let sliderHeight = MIN_HEIGHT;
@@ -123,7 +123,12 @@ class ProductDisplayOptionsTouch extends Component {
     const sliderImages = this.getSliderImages();
     return (
       <div className="ProductImageSlider">
-        <Slider sliderHeight={this.calculateSliderHeight()} winWidth={winWidth} winHeight={winHeight}>
+        <Slider
+          nudgeOnMount
+          sliderHeight={this.calculateSliderHeight()}
+          winWidth={winWidth}
+          winHeight={winHeight}
+        >
           { sliderImages.map(img => (
             <Slide key={img.id}>
               <img

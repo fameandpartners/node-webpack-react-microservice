@@ -8,11 +8,9 @@ import { bindActionCreators } from 'redux';
 import Modal from '../modal/Modal';
 
 // Actions
-import CustomizationActions from '../../actions/CustomizationActions';
 import ModalActions from '../../actions/ModalActions';
 
 // Components
-import ButtonLedge from '../generic/ButtonLedge';
 import ProductCustomizationSize from './ProductCustomizationSize';
 
 // Constants
@@ -30,18 +28,10 @@ function stateToProps(state) {
 }
 
 function dispatchToProps(dispatch) {
-  const {
-    updateDressSizeSelection,
-    updateHeightSelection,
-    updateMeasurementMetric,
-  } = bindActionCreators(CustomizationActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
 
   return {
     activateModal,
-    updateDressSizeSelection,
-    updateHeightSelection,
-    updateMeasurementMetric,
   };
 }
 
@@ -55,36 +45,6 @@ class SizeSelectionModal extends PureComponent {
     this.props.activateModal({ shouldAppear: false });
   }
 
-  handleSaveSizeSelection() {
-    console.warn('TODO: need to check validity......');
-    // Check if valid
-    // If Valid
-    const {
-      activateModal,
-      temporaryDressSize,
-      temporaryMeasurementMetric,
-      temporaryHeightValue,
-      updateDressSizeSelection,
-      updateHeightSelection,
-      updateMeasurementMetric,
-    } = this.props;
-
-
-    updateDressSizeSelection({
-      selectedDressSize: temporaryDressSize,
-    });
-
-    updateHeightSelection({
-      selectedHeightValue: temporaryHeightValue,
-    });
-
-    updateMeasurementMetric({
-      selectedMeasurementMetric: temporaryMeasurementMetric,
-    });
-
-    activateModal({ shouldAppear: false });
-  }
-
   render() {
     return (
       <Modal
@@ -95,27 +55,14 @@ class SizeSelectionModal extends PureComponent {
         modalWrapperClassName="u-flex--col"
       >
         <ProductCustomizationSize hasNavItems={false} />
-        <div className="u-position--absolute u-bottom u-width--full">
-          <ButtonLedge
-            handleLeftButtonClick={this.handleCloseModal}
-            handleRightButtonClick={this.handleSaveSizeSelection}
-          />
-        </div>
       </Modal>
     );
   }
 }
 
 SizeSelectionModal.propTypes = {
-  // Redux Props
-  temporaryDressSize: PropTypes.number,
-  temporaryHeightValue: PropTypes.number,
-  temporaryMeasurementMetric: PropTypes.string.isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
-  updateDressSizeSelection: PropTypes.func.isRequired,
-  updateHeightSelection: PropTypes.func.isRequired,
-  updateMeasurementMetric: PropTypes.func.isRequired,
 };
 
 SizeSelectionModal.defaultProps = {

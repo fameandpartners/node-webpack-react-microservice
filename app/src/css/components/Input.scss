@@ -13,7 +13,6 @@
 }
 
 .Input {
-  font-size: 14px;
   border: 1px solid;
   border-radius: 2px;
   border-color: $c-light-gray;
@@ -63,12 +62,10 @@
 
 .Input__label {
   display: inline-block;
-  font-size: 0.875rem;
   margin-bottom: 3px;
 }
 
 .Input__meta-label {
-  font-size: 0.875rem;
   position: absolute;
   right: 2px;
   top: 28px;
@@ -91,6 +88,5 @@
   left: -10px;
   width: 100%;
   padding-right: 0;
-  font-size: 12px;
   padding-top: 10px;
 }

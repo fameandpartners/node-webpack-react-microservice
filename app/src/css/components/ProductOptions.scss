@@ -7,6 +7,21 @@
   max-width: 450px;
 }
 
+.ProductOptions__primary-image-wrapper {
+  height: 600px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @include md {
+    height: 650px;
+  }
+
+  @include lg {
+    height: 730px;
+  }
+}
+
 .ProductOptions .ProductOptions__primary-image-container {
   padding-bottom: 0;
 }

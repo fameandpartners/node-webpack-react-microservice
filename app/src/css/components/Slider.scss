@@ -13,14 +13,16 @@
 
 .Slider .Slide {
   width: 85%;
+  margin-right: 20px;
+  overflow: hidden;
   color: rgb(0, 0, 0);
   display: inline-block;
-  margin-right: 5px;
   user-select: none;
 }
 
 .Slider .Slide.Slide--full {
   width: 100%;
+  margin-right: 5px;
 }
 
 .Slider__button {

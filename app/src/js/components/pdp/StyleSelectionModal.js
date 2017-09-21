@@ -9,12 +9,9 @@ import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 
 // Actions
-import AppActions from '../../actions/AppActions';
-import CustomizationActions from '../../actions/CustomizationActions';
 import ModalActions from '../../actions/ModalActions';
 
 // Components
-import ButtonLedge from '../generic/ButtonLedge';
 import ProductCustomizationStyle from './ProductCustomizationStyle';
 
 // Constants
@@ -32,17 +29,9 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  const { setShareableQueryParams } = bindActionCreators(AppActions, dispatch);
-  const {
-    activateCustomizationDrawer,
-    updateCustomizationStyleSelection,
-  } = bindActionCreators(CustomizationActions, dispatch);
 
   return {
     activateModal,
-    activateCustomizationDrawer,
-    setShareableQueryParams,
-    updateCustomizationStyleSelection,
   };
 }
 
@@ -54,21 +43,6 @@ class StyleSelectionModal extends PureComponent {
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
-  }
-
-  handleSaveStyleSelection() {
-    const {
-      activateModal,
-      setShareableQueryParams,
-      temporaryStyleCustomizations,
-      updateCustomizationStyleSelection,
-    } = this.props;
-
-    updateCustomizationStyleSelection({
-      selectedStyleCustomizations: temporaryStyleCustomizations,
-    });
-    setShareableQueryParams({ customizations: temporaryStyleCustomizations });
-    activateModal({ shouldAppear: false });
   }
 
   /**
@@ -94,12 +68,6 @@ class StyleSelectionModal extends PureComponent {
           modalWrapperClassName="u-flex--col"
         >
           <ProductCustomizationStyle hasNavItems={false} clearAll={false} />
-          <div className="u-position--absolute u-bottom u-width--full">
-            <ButtonLedge
-              handleLeftButtonClick={this.handleCloseModal}
-              handleRightButtonClick={this.handleSaveStyleSelection}
-            />
-          </div>
         </Modal>
       </ModalContainer>
     );
@@ -107,12 +75,8 @@ class StyleSelectionModal extends PureComponent {
 }
 
 StyleSelectionModal.propTypes = {
-  // Redux Props
-  temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
-  setShareableQueryParams: PropTypes.func.isRequired,
-  updateCustomizationStyleSelection: PropTypes.func.isRequired,
 };
 
 StyleSelectionModal.defaultProps = {

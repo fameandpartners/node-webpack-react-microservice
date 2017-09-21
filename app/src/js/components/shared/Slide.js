@@ -5,13 +5,15 @@ import classnames from 'classnames';
 
 class Slide extends PureComponent {
   render() {
-    const { children } = this.props;
+    const { children, fullSlide } = this.props;
 
     return (
       <div
         className={classnames(
           'Slide u-height--full',
-          'Slide--full',
+          {
+            'Slide--full': fullSlide,
+          },
         )}
       >
         { children }
@@ -21,7 +23,12 @@ class Slide extends PureComponent {
 }
 
 Slide.propTypes = {
+  fullSlide: PropTypes.bool,
   children: PropTypes.node.isRequired,
+};
+
+Slide.defaultProps = {
+  fullSlide: false,
 };
 
 export default Slide;

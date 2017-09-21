@@ -223,7 +223,6 @@ class Select extends Component {
           ? <p
             className={classnames(
               'u-text-align--left',
-              'u-mt-small',
               {
                 'Select__meta-label--error': error,
               },

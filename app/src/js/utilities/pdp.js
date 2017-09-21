@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { assign } from 'lodash';
+import { assign, find } from 'lodash';
 import { formatCents } from './accounting';
 import { UNITS } from '../constants/ProductConstants';
 import { sizeProfilePresence } from './pdpValidations';
@@ -408,6 +408,20 @@ export function transformProductSiteVersion({ siteVersion }) {
   return siteVersion;
 }
 
+function selectMeasurementMetric({ siteVersion = 'usa' }) {
+  let measurementMetric = 'inch';
+
+  if (siteVersion.toLowerCase() === 'australia') {
+    measurementMetric = 'cm';
+  }
+  return measurementMetric;
+}
+
+function selectDefaultColor({ color_id: colorId, color_name: colorName }, colors) {
+  const foundColor = find(colors, { id: colorId });
+  return foundColor || colors[0];
+}
+
 export function transformSKU({ sku }) {
   if (typeof sku !== 'string') {
     return false;
@@ -438,16 +452,12 @@ export function transformProductJSON(productJSON) {
     siteVersion: transformProductSiteVersion(productJSON),
   };
 
-  let measurementMetric = 'inch';
-
-  if (productJSON.siteVersion.toLowerCase() === 'australia') {
-    measurementMetric = 'cm';
-  }
-
+  const measurementMetric = selectMeasurementMetric(productJSON);
+  const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors);
   const customizationState = {
     addons: transformAddons(productJSON),
-    selectedColor: productState.productDefaultColors[0],
-    temporaryColor: productState.productDefaultColors[0],
+    selectedColor,
+    temporaryColor: selectedColor,
     temporaryMeasurementMetric: measurementMetric,
     selectedMeasurementMetric: measurementMetric,
   };

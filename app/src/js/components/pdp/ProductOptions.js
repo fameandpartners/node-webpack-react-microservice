@@ -224,10 +224,11 @@ class ProductOptions extends Component {
     return (
       <div className="ProductOptions grid-12-noGutter">
         <div className="ProductOptions__primary-image-container brick col-6">
-          <img
-            className="u-width--full u-height--full"
-            alt="dress1"
-            src={this.findColorSpecificFirstImageUrl()}
+          <div
+            className="ProductOptions__primary-image-wrapper u-cursor--pointer"
+            style={{
+              backgroundImage: `url(${this.findColorSpecificFirstImageUrl()})`,
+            }}
             onClick={this.showImageLightboxModal}
           />
         </div>
@@ -244,21 +245,21 @@ class ProductOptions extends Component {
                 }
               />
               <ProductOptionsRow
-                leftNode={<span>Color</span>}
+                leftNode={<span>{CustomizationConstants.COLOR_HEADLINE}</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected
                 rightNode={this.generateColorSelectionNode()}
                 handleClick={this.handleProductOptionClick(CustomizationConstants.COLOR_CUSTOMIZE)}
               />
               <ProductOptionsRow
-                leftNode={<span>Design Customizations</span>}
+                leftNode={<span>{CustomizationConstants.STYLE_HEADLINE}</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={!!selectedStyleCustomizations.length}
                 rightNode={this.generateAddonSelectionNode()}
                 handleClick={this.handleProductOptionClick(CustomizationConstants.STYLE_CUSTOMIZE)}
               />
               <ProductOptionsRow
-                leftNode={<span>Your size</span>}
+                leftNode={<span>{CustomizationConstants.SIZE_HEADLINE}</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={sizeProfilePresence(selectedDressSize, selectedHeightValue)}
                 rightNode={this.generateSizingNode()}

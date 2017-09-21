@@ -42,12 +42,7 @@ body {
   text-decoration: underline;
   transition: $standard-transition-time color;
 
-  &:visited {
-    color: $c-link;
-  }
-
-  &:hover,
-  &:visited:hover {
+  &:hover {
     color: $link-hover-color;
     text-decoration: underline;
   }

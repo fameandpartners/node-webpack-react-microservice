@@ -1,3 +1,7 @@
 .ButtonLedge--height {
-  height: 100px;
+  height: auto;
+
+  @include xs {
+    height: 100px;
+  }
 }

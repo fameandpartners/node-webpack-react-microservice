@@ -9,12 +9,7 @@ import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 import ProductCustomizationColor from '../pdp/ProductCustomizationColor';
 
-// Components
-import ButtonLedge from '../generic/ButtonLedge';
-
 // Actions
-import AppActions from '../../actions/AppActions';
-import CustomizationActions from '../../actions/CustomizationActions';
 import ModalActions from '../../actions/ModalActions';
 
 // Constants
@@ -32,13 +27,9 @@ function stateToProps(state) {
 
 
 function dispatchToProps(dispatch) {
-  const { setShareableQueryParams } = bindActionCreators(AppActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  const { selectProductColor } = bindActionCreators(CustomizationActions, dispatch);
   return {
     activateModal,
-    selectProductColor,
-    setShareableQueryParams,
   };
 }
 
@@ -50,25 +41,6 @@ class ProductFabricModal extends PureComponent {
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
-  }
-
-  handleColorSelection(color) {
-    const { selectProductColor } = this.props;
-    selectProductColor({ color });
-    this.handleCloseModal();
-  }
-
-  handleSaveColorSelection() {
-    const {
-      activateModal,
-      selectProductColor,
-      setShareableQueryParams,
-      temporaryColor,
-    } = this.props;
-
-    selectProductColor({ selectedColor: temporaryColor });
-    setShareableQueryParams({ color: temporaryColor.id });
-    activateModal({ shouldAppear: false });
   }
 
   render() {
@@ -89,12 +61,6 @@ class ProductFabricModal extends PureComponent {
           <ProductCustomizationColor
             hasNavItems={false}
           />
-          <div className="u-position--absolute u-bottom u-width--full">
-            <ButtonLedge
-              handleLeftButtonClick={this.handleCloseModal}
-              handleRightButtonClick={this.handleSaveColorSelection}
-            />
-          </div>
         </Modal>
       </ModalContainer>
     );
@@ -103,17 +69,8 @@ class ProductFabricModal extends PureComponent {
 
 ProductFabricModal.propTypes = {
   // Redux Props
-  temporaryColor: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    centsTotal: PropTypes.number,
-    hexValue: PropTypes.string,
-    patternUrl: PropTypes.string,
-  }).isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
-  selectProductColor: PropTypes.func.isRequired,
-  setShareableQueryParams: PropTypes.func.isRequired,
 };
 
 ProductFabricModal.defaultProps = {

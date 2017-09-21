@@ -14,8 +14,10 @@ import noop from '../../libs/noop';
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
 import * as AppActions from '../../actions/AppActions';
+import * as ModalActions from '../../actions/ModalActions';
 
 // Constants
+import ModalConstants from '../../constants/ModalConstants';
 import * as modalAnimations from '../../utilities/modal-animation';
 import {
   COLOR_CUSTOMIZE,
@@ -34,6 +36,10 @@ import ButtonLedge from '../generic/ButtonLedge';
 
 function stateToProps(state) {
   return {
+    // Modal State
+    modalIsOpen: state.$$modalState.get('shouldAppear'),
+    activeModalId: state.$$modalState.get('modalId'),
+    // Customziation State
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
@@ -45,9 +51,11 @@ function stateToProps(state) {
 }
 
 function dispatchToProps(dispatch) {
-  const customizationActions = bindActionCreators(CustomizationActions, dispatch);
   const appActions = bindActionCreators(AppActions, dispatch);
+  const customizationActions = bindActionCreators(CustomizationActions, dispatch);
+  const modalActions = bindActionCreators(ModalActions, dispatch);
   return {
+    activateModal: modalActions.activateModal,
     activateCustomizationDrawer: customizationActions.activateCustomizationDrawer,
     selectProductColor: customizationActions.selectProductColor,
     setShareableQueryParams: appActions.setShareableQueryParams,
@@ -67,34 +75,18 @@ class CustomizationButtonLedge extends Component {
 
   handleLeftButtonClick() {
     this.props.activateCustomizationDrawer({ isActive: false });
+    this.closeCustomization({ shouldAppear: false });
   }
 
-  saveColorSelection() {
-    const {
-      activateCustomizationDrawer,
-      selectProductColor,
-      setShareableQueryParams,
-      temporaryColor,
-    } = this.props;
-
-    selectProductColor({ selectedColor: temporaryColor });
-    setShareableQueryParams({ color: temporaryColor.id });
-    activateCustomizationDrawer({ isActive: false });
+  closeCustomization() {
+    const { activateModal, activateCustomizationDrawer } = this.props;
+    if (this.isCustomizationModalOpen()) {
+      activateModal({ shouldAppear: false });
+    } else {
+      activateCustomizationDrawer({ isActive: false });
+    }
   }
 
-  saveStyleSelection() {
-    const {
-      activateCustomizationDrawer,
-      setShareableQueryParams,
-      temporaryStyleCustomizations,
-      updateCustomizationStyleSelection,
-    } = this.props;
-    updateCustomizationStyleSelection({
-      selectedStyleCustomizations: temporaryStyleCustomizations,
-    });
-    setShareableQueryParams({ customizations: temporaryStyleCustomizations });
-    activateCustomizationDrawer({ isActive: false });
-  }
 
   hasHeightError() {
     const {
@@ -124,12 +116,33 @@ class CustomizationButtonLedge extends Component {
     return true;
   }
 
-  saveSizeSelection() {
-    console.warn('TODO: need to check validity......');
-    // Check if valid
-    // If Valid
+  saveColorSelection() {
     const {
-      activateCustomizationDrawer,
+      selectProductColor,
+      setShareableQueryParams,
+      temporaryColor,
+    } = this.props;
+
+    selectProductColor({ selectedColor: temporaryColor });
+    setShareableQueryParams({ color: temporaryColor.id });
+    this.closeCustomization();
+  }
+
+  saveStyleSelection() {
+    const {
+      setShareableQueryParams,
+      temporaryStyleCustomizations,
+      updateCustomizationStyleSelection,
+    } = this.props;
+    updateCustomizationStyleSelection({
+      selectedStyleCustomizations: temporaryStyleCustomizations,
+    });
+    setShareableQueryParams({ customizations: temporaryStyleCustomizations });
+    this.closeCustomization();
+  }
+
+  saveSizeSelection() {
+    const {
       temporaryDressSize,
       temporaryMeasurementMetric,
       temporaryHeightValue,
@@ -151,22 +164,52 @@ class CustomizationButtonLedge extends Component {
       selectedMeasurementMetric: temporaryMeasurementMetric,
     });
 
-    activateCustomizationDrawer({ isActive: false });
+    this.closeCustomization();
     return null;
   }
 
   chooseCustomizationCallback() {
-    const { productCustomizationDrawer } = this.props;
-    switch (productCustomizationDrawer) {
-      case COLOR_CUSTOMIZE:
-        return this.saveColorSelection;
-      case STYLE_CUSTOMIZE:
-        return this.saveStyleSelection;
-      case SIZE_CUSTOMIZE:
-        return this.saveSizeSelection;
-      default:
-        return noop;
+    const { activeModalId, productCustomizationDrawer } = this.props;
+    if (
+      activeModalId === ModalConstants.COLOR_SELECTION_MODAL
+      || productCustomizationDrawer === COLOR_CUSTOMIZE
+    ) {
+      return this.saveColorSelection;
     }
+
+    if (
+      activeModalId === ModalConstants.STYLE_SELECTION_MODAL
+      || productCustomizationDrawer === STYLE_CUSTOMIZE
+    ) {
+      return this.saveStyleSelection;
+    }
+
+    if (
+      activeModalId === ModalConstants.SIZE_SELECTION_MODAL
+      || productCustomizationDrawer === SIZE_CUSTOMIZE
+    ) {
+      return this.saveSizeSelection;
+    }
+
+    return noop;
+  }
+
+  isCustomizationModalOpen() {
+    const {
+      modalIsOpen,
+      activeModalId,
+    } = this.props;
+
+    return modalIsOpen
+    && (
+      (activeModalId === ModalConstants.COLOR_SELECTION_MODAL)
+      || (activeModalId === ModalConstants.STYLE_SELECTION_MODAL)
+      || (activeModalId === ModalConstants.SIZE_SELECTION_MODAL)
+    );
+  }
+
+  isCustomizationOpen() {
+    return this.props.productCustomizationDrawerOpen || this.isCustomizationModalOpen();
   }
 
   defaultStyles() {
@@ -182,12 +225,9 @@ class CustomizationButtonLedge extends Component {
   }
 
   render() {
-    const {
-      productCustomizationDrawerOpen,
-    } = this.props;
     return (
       <TransitionMotion
-        styles={productCustomizationDrawerOpen ? [this.defaultStyles()] : []}
+        styles={this.isCustomizationOpen() ? [this.defaultStyles()] : []}
         willEnter={this.willEnter}
         willLeave={this.willLeave}
       >
@@ -221,6 +261,10 @@ class CustomizationButtonLedge extends Component {
 
 CustomizationButtonLedge.propTypes = {
   // Redux Props
+  // -- Modal
+  modalIsOpen: PropTypes.bool.isRequired,
+  activeModalId: PropTypes.string,
+  // -- Customizations
   productCustomizationDrawerOpen: PropTypes.bool,
   productCustomizationDrawer: PropTypes.string,
   temporaryColor: PropTypes.shape({
@@ -236,6 +280,7 @@ CustomizationButtonLedge.propTypes = {
   temporaryMeasurementMetric: PropTypes.string.isRequired,
   temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
+  activateModal: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
   setShareableQueryParams: PropTypes.func.isRequired,
@@ -247,6 +292,7 @@ CustomizationButtonLedge.propTypes = {
 };
 
 CustomizationButtonLedge.defaultProps = {
+  activeModalId: null,
   productCustomizationDrawerOpen: false,
   productCustomizationDrawer: null,
   temporaryColor: null,
