@@ -14,7 +14,6 @@ import ModalActions from '../../actions/ModalActions';
 // Assets
 import ShareIcon from '../../../svg/i-share.svg';
 
-
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
@@ -43,6 +42,7 @@ class ProductSecondaryActions extends Component {
         <ul>
           <li className="u-display--inline">
             <IconButton
+              svgId={ShareIcon.id}
               svgPath={ShareIcon.url}
               width="40px"
               height="18px"

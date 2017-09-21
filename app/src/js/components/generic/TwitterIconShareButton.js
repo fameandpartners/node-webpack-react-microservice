@@ -25,6 +25,7 @@ class TwitterIconShareButton extends PureComponent {
         className="ShareModal__icon-button"
       >
         <IconSVG
+          svgId={TwitterShareIcon.id}
           svgPath={TwitterShareIcon.url}
           width="40px"
           height="40px"
