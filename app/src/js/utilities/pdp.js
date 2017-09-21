@@ -422,6 +422,13 @@ function selectDefaultColor({ color_id: colorId, color_name: colorName }, colors
   return foundColor || colors[0];
 }
 
+export function transformSKU({ sku }) {
+  if (typeof sku !== 'string') {
+    return false;
+  }
+  return sku.toUpperCase();
+}
+
 export function transformProductJSON(productJSON) {
   const productState = {
     currency: transformProductCurrency(productJSON.product),
@@ -441,6 +448,7 @@ export function transformProductJSON(productJSON) {
     sizeChart: transformProductSizeChart(productJSON),
     productMakingOptions: transformProductMakingOptions(productJSON.product),
     deliveryCopy: transformDeliveryCopy(productJSON.product),
+    sku: transformSKU(productJSON.product),
     siteVersion: transformProductSiteVersion(productJSON),
   };
 
