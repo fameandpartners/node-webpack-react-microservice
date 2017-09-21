@@ -27,10 +27,6 @@ class ProductDescription extends Component {
     autoBind(this);
   }
 
-  removeCommaWhiteSpace(word) {
-    return word.replace(/ +,/g, ', ');
-  }
-
   render() {
     const { productDescription, modelDescription } = this.props;
     return (
@@ -47,9 +43,9 @@ class ProductDescription extends Component {
           </a>
         </p>
         <div className="ProductDescription u-center">
-          <p dangerouslySetInnerHTML={{ __html: this.removeCommaWhiteSpace(productDescription) }} />
+          <p dangerouslySetInnerHTML={{ __html: productDescription }} />
           <p>-</p>
-          <p dangerouslySetInnerHTML={{ __html: this.removeCommaWhiteSpace(modelDescription) }} />
+          <p dangerouslySetInnerHTML={{ __html: modelDescription }} />
         </div>
       </div>
     );
