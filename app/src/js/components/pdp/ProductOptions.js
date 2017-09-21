@@ -28,6 +28,7 @@ import ModalConstants from '../../constants/ModalConstants';
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
 import ProductSecondaryActions from './ProductSecondaryActions';
+import ExpressMaking from './ExpressMaking';
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
@@ -57,6 +58,7 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
+    productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     deliveryCopy: state.$$productState.get('deliveryCopy'),
 
     // COLOR
@@ -65,6 +67,7 @@ function stateToProps(state) {
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
     patternUrl: selectedColor.get('patternUrl'),
+    expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
 
     // SELECTIONS
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
@@ -269,6 +272,7 @@ class ProductOptions extends Component {
             <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
+            <ExpressMaking />
             <div className="ProductOptions__additional-info u-mb-normal">
               { auSite ?
                 (

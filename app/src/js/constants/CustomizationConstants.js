@@ -15,6 +15,7 @@ const actionTypes = assign({},
     'UPDATE_DRESS_SIZE_SELECTION',
     'UPDATE_MEASUREMENT_METRIC',
     'UPDATE_HEIGHT_SELECTION',
+    'SET_EXPRESS_MAKING_STATUS',
   ]),
 );
 
