@@ -1,11 +1,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+function stateToProps(state) {
+  return {
+    svgSpriteDirectory: state.$$appState.get('svgSpriteDirectory'),
+  };
+}
 
 /* eslint-disable react/prefer-stateless-function */
 class IconSVG extends PureComponent {
   render() {
     const {
       svgPath,
+      svgSpriteDirectory,
       className,
       width,
       height,
@@ -16,7 +24,7 @@ class IconSVG extends PureComponent {
         style={{ width, height }}
         className={className}
       >
-        <use xlinkHref={svgPath} />
+        <use xlinkHref={`${svgSpriteDirectory}${svgPath}`} />
       </svg>
     );
   }
@@ -24,6 +32,7 @@ class IconSVG extends PureComponent {
 
 IconSVG.propTypes = {
   svgPath: PropTypes.string,
+  svgSpriteDirectory: PropTypes.string.isRequired,
   className: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
@@ -36,4 +45,4 @@ IconSVG.defaultProps = {
   height: '40px',
 };
 
-export default IconSVG;
+export default connect(stateToProps)(IconSVG);
