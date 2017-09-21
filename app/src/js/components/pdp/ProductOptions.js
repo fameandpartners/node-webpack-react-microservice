@@ -146,11 +146,13 @@ class ProductOptions extends Component {
       selectedHeightValue,
       selectedMeasurementMetric,
       selectedDressSize,
+      auSite,
     } = this.props;
     const sizingInformation = sizingDisplayText({
       selectedDressSize,
       selectedHeightValue,
       selectedMeasurementMetric,
+      auSite,
     });
 
     return sizingInformation ? (

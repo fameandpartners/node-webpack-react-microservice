@@ -4,7 +4,7 @@ import { UNITS } from '../constants/ProductConstants';
 
 export const $$initialState = Immutable.fromJS({
   // String ['COLOR_CUSTOMIZE', 'STYLE_CUSTOMIZE', 'SIZE_PROFILE']
-  productCustomizationDrawer: CustomizationConstants.COLOR_CUSTOMIZE,
+  productCustomizationDrawer: null,
 
   // Bool
   productCustomizationDrawerOpen: false,

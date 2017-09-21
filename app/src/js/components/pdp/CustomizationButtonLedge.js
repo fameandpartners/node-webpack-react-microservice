@@ -10,6 +10,7 @@ import '../../../css/components/CustomizationButtonLedge.scss';
 
 // Utilities
 import noop from '../../libs/noop';
+import { dressSizePresence } from '../../utilities/pdpValidations';
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
@@ -110,7 +111,7 @@ class CustomizationButtonLedge extends Component {
     const { setSizeProfileError, temporaryDressSize } = this.props;
     const errors = { heightError: false, sizeError: false };
 
-    if (this.hasHeightError() || !temporaryDressSize) {
+    if (this.hasHeightError() || !dressSizePresence(temporaryDressSize)) {
       if (this.hasHeightError()) { errors.heightError = true; }
       if (!temporaryDressSize) { errors.sizeError = true; }
       setSizeProfileError(errors);
