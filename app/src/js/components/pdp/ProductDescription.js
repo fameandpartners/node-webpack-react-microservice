@@ -28,7 +28,7 @@ class ProductDescription extends Component {
   }
 
   removeCommaWhiteSpace(word) {
-    return word.replace(/\s*,\s*/g, ', ');
+    return word.replace(/ +,/g, ', ');
   }
 
   render() {
