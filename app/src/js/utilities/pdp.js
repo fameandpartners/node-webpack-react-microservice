@@ -83,6 +83,12 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const selectedHeightValue = $$customizationState.get('selectedHeightValue');
   const selectedMeasurementMetric = $$customizationState.get('selectedMeasurementMetric');
 
+  const expressMaking = $$customizationState.get('expressMakingSelected');
+  let expressMakingID = null;
+  if (expressMaking) {
+    expressMakingID = $$productState.get('makingOptionId');
+  }
+
   return {
     productId,
     productImage,
@@ -93,6 +99,8 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
     selectedDressSize,
     selectedHeightValue,
     selectedMeasurementMetric,
+    expressMaking,
+    expressMakingID,
   };
 }
 
@@ -398,13 +406,12 @@ export function transformProductSizeChart({ sizeChart }) {
   return sizes;
 }
 
-export function transformProductMakingOptions({ fast_making, making_option_id }) {
-  const making = {
-    fast_making,
-    making_option_id,
-  };
-
+export function transformProductMakingOptionId({ making_option_id: making }) {
   return making;
+}
+
+export function transformProductFastMaking({ fast_making: fastMaking }) {
+  return fastMaking;
 }
 
 export function transformDeliveryCopy({ delivery_period: deliveryPeriod }) {
@@ -453,7 +460,8 @@ export function transformProductJSON(productJSON) {
     modelDescription: transformProductModelDescription(productJSON.product),
     productTitle: transformProductTitle(productJSON.product),
     sizeChart: transformProductSizeChart(productJSON),
-    productMakingOptions: transformProductMakingOptions(productJSON.product),
+    makingOptionId: transformProductMakingOptionId(productJSON.product),
+    fastMaking: transformProductFastMaking(productJSON.product),
     deliveryCopy: transformDeliveryCopy(productJSON.product),
     sku: transformSKU(productJSON.product),
     siteVersion: transformProductSiteVersion(productJSON),

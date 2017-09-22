@@ -3,6 +3,7 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import noop from '../../libs/noop';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -52,7 +53,19 @@ class ProductCustomizationColor extends PureComponent {
   }
 
   handleColorSelection(temporaryColor) {
-    this.props.selectProductColor({ temporaryColor });
+    const {
+      selectProductColor,
+      productDefaultColors,
+      setExpressMakingStatus,
+    } = this.props;
+    if (!this.isExpressEligible(temporaryColor.id, productDefaultColors)) {
+      setExpressMakingStatus(false);
+    }
+    selectProductColor({ temporaryColor });
+  }
+
+  isExpressEligible(colorId, defaultColors) {
+    return defaultColors.filter(color => color.id === colorId).length > 0;
   }
 
   render() {
@@ -106,6 +119,7 @@ ProductCustomizationColor.propTypes = {
   activateModal: PropTypes.func.isRequired,
   changeCustomizationDrawer: PropTypes.func.isRequired,
   selectProductColor: PropTypes.func.isRequired,
+  setExpressMakingStatus: PropTypes.func,
 };
 
 ProductCustomizationColor.defaultProps = {
@@ -113,6 +127,7 @@ ProductCustomizationColor.defaultProps = {
   productCustomizationDrawer: null,
   productSecondaryColorsCentsPrice: 0,
   temporaryColorId: '',
+  setExpressMakingStatus: noop,
 };
 
 
