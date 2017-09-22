@@ -38,17 +38,19 @@ class ColorSwatches extends PureComponent {
           className={classnames([
             'ColorSwatches__wrapper',
             'col u-cursor--pointer u-height--full u-position--relative',
-            { 'ColorSwatches__wrapper--active': isActive },
+            {
+              'ColorSwatches__wrapper--active': isActive,
+              'ColorSwatches__wrapper--extreme-light': isExtremeLightLuminance(color),
+            },
           ])}
           style={{ background }}
         >
           <div className="ColorSwatches__transform-wrapper">
             <div
               className={classnames(
-              'ColorSwatches__swatch u-flex',
+              'ColorSwatches__swatch',
                 {
                   'ColorSwatches__swatch--pattern': !!color.patternUrl,
-                  'ColorSwatches__swatch--extreme-light': isExtremeLightLuminance(color),
                 },
             )}
             />

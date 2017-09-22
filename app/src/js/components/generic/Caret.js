@@ -23,7 +23,7 @@ class Caret extends PureComponent {
 
     return (
       <IconSVG
-        svgId={Caret.id}
+        svgId={Carat.id}
         svgPath={Carat.url}
         className={classnames(
           'Caret',
