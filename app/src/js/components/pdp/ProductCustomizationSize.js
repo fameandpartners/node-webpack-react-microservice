@@ -329,7 +329,7 @@ class ProductCustomizationStyle extends PureComponent {
             <div className="grid-noGutter">
               <div className="col-12">
                 <p
-                  className="link u-mb-huge link--static u-text-align-left"
+                  className="link link--static u-text-align-left"
                   onClick={this.handleViewSizeGuideClick}
                 >
                   View Size Guide

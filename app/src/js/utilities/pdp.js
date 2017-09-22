@@ -132,7 +132,13 @@ export function transformAddons(productJSON) {
       selectedAddonImageLayers: [],
       addonOptions: allCustomizations.map(
         (ao, i) => {
-          const mappedImageLayer = addons.layer_images.find(img => (img.bit_array[i] ? img : null));
+          let mappedImageLayer = null;
+          for (let j = 0; j < addons.layer_images.length; j += 1) {
+            if (addons.layer_images[j].bit_array[i]) {
+              mappedImageLayer = addons.layer_images[j];
+            }
+          }
+
           return assign({}, {
             id: ao.table.id,
             description: ao.table.name,

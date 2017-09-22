@@ -39,7 +39,7 @@ class ProductDescription extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn more
+            Learn&nbsp;more
           </a>
         </p>
         <div className="ProductDescription u-center">

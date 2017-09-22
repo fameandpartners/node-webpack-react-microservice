@@ -51,6 +51,7 @@
 .ProductOptionsRow__right {
   opacity: 0;
   transition: 300ms opacity ease-in-out;
+  width: 65%;
 }
 
 .ProductOptionsRow:hover .ProductOptionsRow__right,
