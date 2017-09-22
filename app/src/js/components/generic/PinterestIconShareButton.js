@@ -27,6 +27,7 @@ class PinterestIconShareButton extends PureComponent {
         media={image}
       >
         <IconSVG
+          svgId={PinterestShareIcon.id}
           svgPath={PinterestShareIcon.url}
           width="40px"
           height="40px"

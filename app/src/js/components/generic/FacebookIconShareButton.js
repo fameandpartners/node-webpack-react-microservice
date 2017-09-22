@@ -25,6 +25,7 @@ class FacebookIconShareButton extends PureComponent {
         className="SocialShare__icon-button"
       >
         <IconSVG
+          svgId={FacebookShareIcon.id}
           svgPath={FacebookShareIcon.url}
           width="40px"
           height="40px"

@@ -10,6 +10,7 @@ import '../../../css/components/CustomizationButtonLedge.scss';
 
 // Utilities
 import noop from '../../libs/noop';
+import { dressSizePresence } from '../../utilities/pdpValidations';
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
@@ -42,6 +43,7 @@ function stateToProps(state) {
     // Customziation State
     productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
+    productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
@@ -64,6 +66,7 @@ function dispatchToProps(dispatch) {
     updateHeightSelection: customizationActions.updateHeightSelection,
     updateMeasurementMetric: customizationActions.updateMeasurementMetric,
     updateCustomizationStyleSelection: customizationActions.updateCustomizationStyleSelection,
+    setExpressMakingStatus: customizationActions.setExpressMakingStatus,
   };
 }
 
@@ -87,6 +90,9 @@ class CustomizationButtonLedge extends Component {
     }
   }
 
+  isExpressEligible(colorId, defaultColors) {
+    return defaultColors.filter(color => color.id === colorId).length > 0;
+  }
 
   hasHeightError() {
     const {
@@ -105,7 +111,7 @@ class CustomizationButtonLedge extends Component {
     const { setSizeProfileError, temporaryDressSize } = this.props;
     const errors = { heightError: false, sizeError: false };
 
-    if (this.hasHeightError() || !temporaryDressSize) {
+    if (this.hasHeightError() || !dressSizePresence(temporaryDressSize)) {
       if (this.hasHeightError()) { errors.heightError = true; }
       if (!temporaryDressSize) { errors.sizeError = true; }
       setSizeProfileError(errors);
@@ -121,8 +127,12 @@ class CustomizationButtonLedge extends Component {
       selectProductColor,
       setShareableQueryParams,
       temporaryColor,
+      productDefaultColors,
+      setExpressMakingStatus,
     } = this.props;
-
+    if (!this.isExpressEligible(temporaryColor.id, productDefaultColors)) {
+      setExpressMakingStatus(false);
+    }
     selectProductColor({ selectedColor: temporaryColor });
     setShareableQueryParams({ color: temporaryColor.id });
     this.closeCustomization();
@@ -289,6 +299,8 @@ CustomizationButtonLedge.propTypes = {
   updateHeightSelection: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
   updateCustomizationStyleSelection: PropTypes.func.isRequired,
+  productDefaultColors: PropTypes.arrayOf(PropTypes.object),
+  setExpressMakingStatus: PropTypes.func,
 };
 
 CustomizationButtonLedge.defaultProps = {
@@ -299,6 +311,8 @@ CustomizationButtonLedge.defaultProps = {
   temporaryDressSize: null,
   temporaryHeightValue: null,
   temporaryStyleCustomizations: [],
+  productDefaultColors: [],
+  setExpressMakingStatus: noop,
 };
 
 export default connect(stateToProps, dispatchToProps)(CustomizationButtonLedge);

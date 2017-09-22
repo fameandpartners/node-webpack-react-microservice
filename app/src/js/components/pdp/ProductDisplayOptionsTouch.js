@@ -5,7 +5,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
-
+import ExpressMaking from './ExpressMaking';
 // Utilities
 import {
   isDarkLuminance,
@@ -116,6 +116,9 @@ class ProductDisplayOptionsTouch extends Component {
               </div>
             </div>
           </div>
+        </div>
+        <div className="layout-container">
+          <ExpressMaking mobile />
         </div>
       </div>
     );

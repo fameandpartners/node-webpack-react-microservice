@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 // Utilities
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
+import { sizeProfilePresence } from '../../utilities/pdpValidations';
 import noop from '../../libs/noop';
 
 // Breakpoint Decoration
@@ -40,6 +41,7 @@ function stateToProps(state) {
     selectedAddonOptions: addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1),
     heightValue: state.$$customizationState.get('temporaryHeightValue'),
     sizeValue: state.$$customizationState.get('selectedDressSize'),
+    expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
   };
 }
 
@@ -68,8 +70,18 @@ class AddToCartButton extends Component {
   }
 
   subTotal() {
-    const { productCentsBasePrice, colorCentsTotal, selectedAddonOptions } = this.props;
-    return calculateSubTotal({ productCentsBasePrice, colorCentsTotal, selectedAddonOptions });
+    const {
+      productCentsBasePrice,
+      colorCentsTotal,
+      selectedAddonOptions,
+      expressMakingSelected,
+    } = this.props;
+    return calculateSubTotal({
+      productCentsBasePrice,
+      colorCentsTotal,
+      selectedAddonOptions,
+      expressMakingSelected,
+    });
   }
 
   /**
@@ -87,7 +99,7 @@ class AddToCartButton extends Component {
       breakpoint,
       activateModal,
     } = this.props;
-    if (!heightValue || !sizeValue) {
+    if (!sizeProfilePresence(sizeValue, heightValue)) {
       setSizeProfileError({
         heightError: !heightValue,
         sizeError: !sizeValue,
@@ -144,6 +156,7 @@ AddToCartButton.propTypes = {
   heightValue: PropTypes.number,
   sizeValue: PropTypes.number,
   breakpoint: PropTypes.string,
+  expressMakingSelected: PropTypes.bool,
 };
 
 AddToCartButton.defaultProps = {
@@ -155,6 +168,7 @@ AddToCartButton.defaultProps = {
   activateCustomizationDrawer: noop,
   activateModal: noop,
   breakpoint: '',
+  expressMakingSelected: false,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));

@@ -1,19 +1,21 @@
 /* eslint-disable max-len */
 import { assign, find } from 'lodash';
 import { formatCents } from './accounting';
-import { UNITS } from '../constants/ProductConstants';
+import { UNITS, EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
 import { sizeProfilePresence } from './pdpValidations';
 
 export function calculateSubTotal({
   colorCentsTotal = 0,
   productCentsBasePrice = 0,
   selectedAddonOptions = [],
+  expressMakingSelected = false,
 }, currencySymbol = '$') {
+  const expressMakingCharge = expressMakingSelected ? EXPRESS_MAKING_PRICE_CENTS : 0;
   const customizationStyleCents = selectedAddonOptions
     .reduce((prev, curr) => prev + parseInt(curr.centsTotal, 10), 0);
 
   return formatCents(
-    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice),
+    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice + expressMakingCharge),
     0,
     (currencySymbol || ''),
   );
@@ -32,18 +34,21 @@ function filterSelectedAddons(addonOptions, selectedStyleCustomizations) {
 export function sizingDisplayText({
   selectedHeightValue,
   selectedMeasurementMetric,
-  selectedDressSize }) {
+  selectedDressSize,
+  auSite }) {
   let sizingInformation = null;
+
+  const REGION = auSite ? 'AU' : 'US';
 
   if (sizeProfilePresence(selectedDressSize, selectedHeightValue)) {
     if (selectedMeasurementMetric === UNITS.INCH) {
       // INCH
       const ft = Math.floor(selectedHeightValue / 12);
       const inch = selectedHeightValue % 12;
-      sizingInformation = `${ft}ft ${inch}in / ${selectedDressSize}`;
+      sizingInformation = `${ft}ft ${inch}in / ${REGION} ${selectedDressSize}`;
     } else {
       // CM
-      sizingInformation = `${selectedHeightValue} ${selectedMeasurementMetric.toLowerCase()} / ${selectedDressSize}`;
+      sizingInformation = `${selectedHeightValue} ${selectedMeasurementMetric.toLowerCase()} / ${REGION} ${selectedDressSize}`;
     }
   }
   return sizingInformation;
@@ -80,6 +85,12 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const selectedHeightValue = $$customizationState.get('selectedHeightValue');
   const selectedMeasurementMetric = $$customizationState.get('selectedMeasurementMetric');
 
+  const expressMaking = $$customizationState.get('expressMakingSelected');
+  let expressMakingID = null;
+  if (expressMaking) {
+    expressMakingID = $$productState.get('makingOptionId');
+  }
+
   return {
     productId,
     productImage,
@@ -90,6 +101,8 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
     selectedDressSize,
     selectedHeightValue,
     selectedMeasurementMetric,
+    expressMaking,
+    expressMakingID,
   };
 }
 
@@ -217,12 +230,16 @@ export function transformProductComplementaryProducts() {
   return complementaryProducts;
 }
 
+function removeCommaWhiteSpace(word) {
+  return word.replace(/ +,/g, ', ');
+}
+
 export function transformProductDescription({ description }) {
   // "description": String,
   //   ****** into ******
   // productDescription: String
   // })
-  return description;
+  return removeCommaWhiteSpace(description);
 }
 
 export function transformProductColors(data, key) {
@@ -380,7 +397,7 @@ export function transformProductModelDescription({ fit }) {
   //   "fit": String,
   //   ****** into ******
   //   modelDescription: String,
-  const modelDescription = fit;
+  const modelDescription = removeCommaWhiteSpace(fit);
   return modelDescription;
 }
 
@@ -397,13 +414,12 @@ export function transformProductSizeChart({ sizeChart }) {
   return sizes;
 }
 
-export function transformProductMakingOptions({ fast_making, making_option_id }) {
-  const making = {
-    fast_making,
-    making_option_id,
-  };
-
+export function transformProductMakingOptionId({ making_option_id: making }) {
   return making;
+}
+
+export function transformProductFastMaking({ fast_making: fastMaking }) {
+  return fastMaking;
 }
 
 export function transformDeliveryCopy({ delivery_period: deliveryPeriod }) {
@@ -452,7 +468,8 @@ export function transformProductJSON(productJSON) {
     modelDescription: transformProductModelDescription(productJSON.product),
     productTitle: transformProductTitle(productJSON.product),
     sizeChart: transformProductSizeChart(productJSON),
-    productMakingOptions: transformProductMakingOptions(productJSON.product),
+    makingOptionId: transformProductMakingOptionId(productJSON.product),
+    fastMaking: transformProductFastMaking(productJSON.product),
     deliveryCopy: transformDeliveryCopy(productJSON.product),
     sku: transformSKU(productJSON.product),
     siteVersion: transformProductSiteVersion(productJSON),
@@ -470,6 +487,7 @@ export function transformProductJSON(productJSON) {
 
   return {
     $$appState: {
+      svgSpritePath: productJSON.svgSpritePath,
       siteVersion: productJSON.siteVersion,
     },
     $$productState: productState,

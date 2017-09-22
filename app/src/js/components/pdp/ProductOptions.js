@@ -28,6 +28,7 @@ import ModalConstants from '../../constants/ModalConstants';
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
 import ProductSecondaryActions from './ProductSecondaryActions';
+import ExpressMaking from './ExpressMaking';
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
@@ -57,6 +58,7 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
+    productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     deliveryCopy: state.$$productState.get('deliveryCopy'),
 
     // COLOR
@@ -65,9 +67,11 @@ function stateToProps(state) {
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
     patternUrl: selectedColor.get('patternUrl'),
+    expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
 
     // SELECTIONS
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
+    expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
@@ -143,11 +147,13 @@ class ProductOptions extends Component {
       selectedHeightValue,
       selectedMeasurementMetric,
       selectedDressSize,
+      auSite,
     } = this.props;
     const sizingInformation = sizingDisplayText({
       selectedDressSize,
       selectedHeightValue,
       selectedMeasurementMetric,
+      auSite,
     });
 
     return sizingInformation ? (
@@ -161,11 +167,11 @@ class ProductOptions extends Component {
     const {
       productCentsBasePrice,
       colorCentsTotal,
+      expressMakingSelected,
     } = this.props;
-
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     return calculateSubTotal(
-      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions },
+      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions, expressMakingSelected },
       currencySymbol,
     );
   }
@@ -209,6 +215,11 @@ class ProductOptions extends Component {
     const productImages = $$productImages.toJS();
     const hasMatch = find(productImages, { colorId });
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
+  }
+
+  generateDeliveryCopy() {
+    const { deliveryCopy, expressMakingSelected } = this.props;
+    return expressMakingSelected ? '4-6 business days' : deliveryCopy;
   }
 
   render() {
@@ -269,6 +280,7 @@ class ProductOptions extends Component {
             <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
+            <ExpressMaking />
             <div className="ProductOptions__additional-info u-mb-normal">
               { auSite ?
                 (
@@ -307,7 +319,7 @@ class ProductOptions extends Component {
                 </a> <br />
                 {
                   deliveryCopy
-                    ? `Estimated delivery ${deliveryCopy}.`
+                    ? `Estimated delivery ${this.generateDeliveryCopy()}.`
                     : null
                 }
 
@@ -357,6 +369,8 @@ ProductOptions.propTypes = {
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
   deliveryCopy: PropTypes.string,
+  expressMakingSelected: PropTypes.bool,
+
 };
 
 ProductOptions.defaultProps = {
@@ -366,6 +380,8 @@ ProductOptions.defaultProps = {
   selectedHeightValue: null,
   activateModal: noop,
   deliveryCopy: '',
+  expressMakingSelected: false,
+
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);
