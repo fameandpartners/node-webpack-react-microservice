@@ -9,12 +9,12 @@
 
 
   // Box hover
-  &:hover + label:before {
+  &:hover + .Checkbox__label:before {
     box-shadow: 0 0 0 1px $c-elem-focus;
   }
 
   // Checkmark. Could be replaced with an image
-  &:checked + label:after {
+  &:checked + .Checkbox__label:after {
     content: '';
     position: absolute;
     left: 5px;
@@ -33,22 +33,22 @@
   }
 }
 
-.Checkbox + label {
+.Checkbox + .Checkbox__label {
   position: relative;
   cursor: pointer;
   padding: 0;
 }
 
-.Checkbox.disabled + label {
+.Checkbox.disabled + .Checkbox__label {
   cursor: not-allowed;
 }
 
-.Checkbox.disabled + label:before {
+.Checkbox.disabled + .Checkbox__label:before {
   box-shadow: 0 0 0 1px $c-light-gray;
 }
 
 // Box.
-.Checkbox + label:before {
+.Checkbox + .Checkbox__label:before {
   content: '';
   margin-right: 10px;
   display: inline-block;
