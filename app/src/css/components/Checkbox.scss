@@ -39,6 +39,14 @@
   padding: 0;
 }
 
+.Checkbox.disabled + label {
+  cursor: not-allowed;
+}
+
+.Checkbox.disabled + label:before {
+  box-shadow: 0 0 0 1px $c-light-gray;
+}
+
 // Box.
 .Checkbox + label:before {
   content: '';

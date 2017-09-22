@@ -71,6 +71,7 @@ function stateToProps(state) {
 
     // SELECTIONS
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
+    expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
@@ -166,11 +167,11 @@ class ProductOptions extends Component {
     const {
       productCentsBasePrice,
       colorCentsTotal,
+      expressMakingSelected,
     } = this.props;
-
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     return calculateSubTotal(
-      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions },
+      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions, expressMakingSelected },
       currencySymbol,
     );
   }
@@ -214,6 +215,11 @@ class ProductOptions extends Component {
     const productImages = $$productImages.toJS();
     const hasMatch = find(productImages, { colorId });
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
+  }
+
+  generateDeliveryCopy() {
+    const { deliveryCopy, expressMakingSelected } = this.props;
+    return expressMakingSelected ? '4-6 business days' : deliveryCopy;
   }
 
   render() {
@@ -313,7 +319,7 @@ class ProductOptions extends Component {
                 </a> <br />
                 {
                   deliveryCopy
-                    ? `Estimated delivery ${deliveryCopy}.`
+                    ? `Estimated delivery ${this.generateDeliveryCopy()}.`
                     : null
                 }
 
@@ -363,6 +369,8 @@ ProductOptions.propTypes = {
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
   deliveryCopy: PropTypes.string,
+  expressMakingSelected: PropTypes.bool,
+
 };
 
 ProductOptions.defaultProps = {
@@ -372,6 +380,8 @@ ProductOptions.defaultProps = {
   selectedHeightValue: null,
   activateModal: noop,
   deliveryCopy: '',
+  expressMakingSelected: false,
+
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

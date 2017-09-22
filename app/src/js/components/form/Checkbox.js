@@ -32,7 +32,12 @@ class Checkbox extends Component {
         )}
       >
         <input
-          className="Checkbox"
+          className={classnames(
+            'Checkbox',
+            {
+              disabled,
+            },
+          )}
           id={id}
           type="checkbox"
           checked={!disabled && showChecked}

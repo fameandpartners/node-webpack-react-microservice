@@ -41,6 +41,7 @@ function stateToProps(state) {
     selectedAddonOptions: addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1),
     heightValue: state.$$customizationState.get('temporaryHeightValue'),
     sizeValue: state.$$customizationState.get('selectedDressSize'),
+    expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
   };
 }
 
@@ -69,8 +70,18 @@ class AddToCartButton extends Component {
   }
 
   subTotal() {
-    const { productCentsBasePrice, colorCentsTotal, selectedAddonOptions } = this.props;
-    return calculateSubTotal({ productCentsBasePrice, colorCentsTotal, selectedAddonOptions });
+    const {
+      productCentsBasePrice,
+      colorCentsTotal,
+      selectedAddonOptions,
+      expressMakingSelected,
+    } = this.props;
+    return calculateSubTotal({
+      productCentsBasePrice,
+      colorCentsTotal,
+      selectedAddonOptions,
+      expressMakingSelected,
+    });
   }
 
   /**
@@ -145,6 +156,7 @@ AddToCartButton.propTypes = {
   heightValue: PropTypes.number,
   sizeValue: PropTypes.number,
   breakpoint: PropTypes.string,
+  expressMakingSelected: PropTypes.bool,
 };
 
 AddToCartButton.defaultProps = {
@@ -156,6 +168,7 @@ AddToCartButton.defaultProps = {
   activateCustomizationDrawer: noop,
   activateModal: noop,
   breakpoint: '',
+  expressMakingSelected: false,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));
