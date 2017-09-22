@@ -33,6 +33,7 @@ const constants = assign({},
       INCH: 'inch',
       CM: 'cm',
     },
+    EXPRESS_MAKING_PRICE_CENTS: 3000,
   },
 );
 
