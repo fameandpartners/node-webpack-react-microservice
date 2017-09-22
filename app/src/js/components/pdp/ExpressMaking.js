@@ -35,7 +35,8 @@ function stateToProps(state) {
 function dispatchToProps(dispatch) {
   const {
     activateCustomizationDrawer,
-    setExpressMakingStatus } = bindActionCreators(CustomizationActions, dispatch);
+    setExpressMakingStatus,
+  } = bindActionCreators(CustomizationActions, dispatch);
   return {
     activateCustomizationDrawer,
     setExpressMakingStatus,
@@ -53,7 +54,11 @@ class ExpressMaking extends Component {
   }
 
   setExpressStatus() {
-    const { expressMakingStatus, colorId, productDefaultColors } = this.props;
+    const {
+      expressMakingStatus,
+      colorId,
+      productDefaultColors,
+    } = this.props;
     if (this.isExpressEligible(colorId, productDefaultColors)) {
       this.props.setExpressMakingStatus(!expressMakingStatus);
     }
@@ -104,8 +109,8 @@ class ExpressMaking extends Component {
                 >
                   Learn More
                 </a>
-              </p> :
-               null
+              </p>
+              : null
             }
 
           </div>

@@ -41,7 +41,11 @@ class Checkbox extends Component {
           defaultChecked={showChecked}
         />
         <label htmlFor={id}>
-          <span className="u-vertical-align-middle">{label || ''}</span>
+          {
+            label
+            ? <span className="u-vertical-align-middle">{label}</span>
+            : null
+          }
         </label>
       </div>
     );
