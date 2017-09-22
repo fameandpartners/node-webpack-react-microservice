@@ -410,8 +410,8 @@ export function transformProductMakingOptionId({ making_option_id: making }) {
   return making;
 }
 
-export function transformProductFastMaking({ fast_making }) {
-  return { fast_making };
+export function transformProductFastMaking({ fast_making: fastMaking }) {
+  return fastMaking;
 }
 
 export function transformDeliveryCopy({ delivery_period: deliveryPeriod }) {
