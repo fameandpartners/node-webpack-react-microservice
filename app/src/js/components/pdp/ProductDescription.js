@@ -83,7 +83,8 @@ class ProductDescription extends Component {
       deliveryCopy,
       breakpoint,
       auSite,
-      selectedStyleCustomizations } = this.props;
+      selectedStyleCustomizations,
+    } = this.props;
     return (
       <div className="u-center">
         { auSite && (breakpoint === 'mobile' || breakpoint === 'tablet') ?
@@ -124,7 +125,7 @@ class ProductDescription extends Component {
               selectedStyleCustomizations.length === 0
               ? 'Shipping and returns are free.'
               : 'Shipping is free on your customized item.'
-             }
+            }
              &nbsp; Estimated <br /> delivery {this.generateDeliveryCopy()}.
              &nbsp;
              <a
@@ -133,7 +134,7 @@ class ProductDescription extends Component {
                className="link link--static"
                rel="noopener noreferrer"
              >
-                Learn more
+               Learn more
              </a>
           </p>)
           : null
