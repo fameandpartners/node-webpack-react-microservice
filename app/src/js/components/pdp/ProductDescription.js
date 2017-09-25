@@ -121,19 +121,20 @@ class ProductDescription extends Component {
         { deliveryCopy && (breakpoint === 'mobile' || breakpoint === 'tablet') ?
           (<p className="u-mt-small ProductDescription__copy">
             {
-                  selectedStyleCustomizations.length === 0
-                  ? 'Shipping and returns are free.'
-                  : 'Shipping is free on your customized item.'
-                } &nbsp; Estimated <br />
-                delivery {this.generateDeliveryCopy()}. &nbsp;
-                  <a
-                    href="/faqs#collapse-what-express-making"
-                    target="_blank"
-                    className="link link--static"
-                    rel="noopener noreferrer"
-                  >
-                    Learn more
-                 </a>
+              selectedStyleCustomizations.length === 0
+              ? 'Shipping and returns are free.'
+              : 'Shipping is free on your customized item.'
+             }
+             &nbsp; Estimated <br /> delivery {this.generateDeliveryCopy()}.
+             &nbsp;
+             <a
+               href="/faqs#collapse-what-express-making"
+               target="_blank"
+               className="link link--static"
+               rel="noopener noreferrer"
+             >
+                Learn more
+             </a>
           </p>)
           : null
           }
