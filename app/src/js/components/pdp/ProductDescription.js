@@ -21,6 +21,7 @@ function stateToProps(state) {
     productDescription: state.$$productState.get('productDescription'),
     modelDescription: state.$$productState.get('modelDescription'),
     deliveryCopy: state.$$productState.get('deliveryCopy'),
+    expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
   };
 }
 
