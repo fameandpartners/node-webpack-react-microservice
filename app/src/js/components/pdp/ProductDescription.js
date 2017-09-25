@@ -54,8 +54,15 @@ class ProductDescription extends Component {
         {
           deliveryCopy && (breakpoint === 'mobile' || breakpoint === 'tablet')
             ? <p className="u-mt-small ProductDescription__shippingEstimate">
-                Estimated delivery {this.generateDeliveryCopy()}.
-              </p>
+                Shipping and returns are free. Estimated <br />
+              delivery {this.generateDeliveryCopy()}. &nbsp;
+                <a
+                  href="/faqs#collapse-what-express-making"
+                  target="_blank"
+                  className="link link--static"
+                  rel="noopener noreferrer"
+                >Learn more</a>
+            </p>
             : null
         }
         <div className="ProductDescription u-center">
