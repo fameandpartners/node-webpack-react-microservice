@@ -11,6 +11,8 @@ import Carat from '../../../svg/carat.svg';
 // CSS
 import '../../../css/components/Caret.scss';
 
+
+console.log('Carat', Carat);
 /* eslint-disable react/prefer-stateless-function */
 class Caret extends PureComponent {
   render() {

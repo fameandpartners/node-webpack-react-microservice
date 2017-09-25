@@ -205,6 +205,7 @@ class Select extends Component {
           }
           <span className="Select-item-text noSelect">{spanText}</span>
           <IconSVG
+            svgId={Carat.id}
             svgPath={Carat.url}
             className="Select__carat"
             width="15px"
