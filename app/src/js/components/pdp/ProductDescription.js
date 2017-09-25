@@ -25,9 +25,12 @@ import {
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   const selectedColor = state.$$customizationState.get('selectedColor');
+  const addons = state.$$customizationState.get('addons');
+
   return {
     auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
     // SELECTIONS
+    addonOptions: addons ? addons.get('addonOptions').toJS() : null,
     deliveryCopy: state.$$productState.get('deliveryCopy'),
     expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
     selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
@@ -77,7 +80,7 @@ class ProductDescription extends Component {
     const { productDescription, modelDescription, deliveryCopy, breakpoint, auSite } = this.props;
     return (
       <div className="u-center">
-        { auSite ?
+        { auSite && (breakpoint === 'mobile' || breakpoint === 'tablet') ?
           (
             <p
               className="AfterPay__message u-mb-small ProductDescription__copy"
