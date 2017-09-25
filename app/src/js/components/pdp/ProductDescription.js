@@ -106,23 +106,24 @@ class ProductDescription extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn more
+              Learn more
           </a>
         </p>
-        {
-          deliveryCopy && (breakpoint === 'mobile' || breakpoint === 'tablet')
-            ? <p className="u-mt-small ProductDescription__copy">
-                Shipping and returns are free. Estimated <br />
-              delivery {this.generateDeliveryCopy()}. &nbsp;
-                <a
-                  href="/faqs#collapse-what-express-making"
-                  target="_blank"
-                  className="link link--static"
-                  rel="noopener noreferrer"
-                >Learn more</a>
-            </p>
-            : null
-        }
+        { deliveryCopy && (breakpoint === 'mobile' || breakpoint === 'tablet') ?
+          <p className="u-mt-small ProductDescription__copy">
+                  Shipping and returns are free. Estimated <br />
+                delivery {this.generateDeliveryCopy()}. &nbsp;
+                  <a
+                    href="/faqs#collapse-what-express-making"
+                    target="_blank"
+                    className="link link--static"
+                    rel="noopener noreferrer"
+                  >
+                    Learn more
+                 </a>
+          </p>
+          : null
+          }
         <div className="ProductDescription u-center">
           <p dangerouslySetInnerHTML={{ __html: productDescription }} />
           <p>-</p>
