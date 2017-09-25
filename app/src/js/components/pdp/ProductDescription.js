@@ -110,7 +110,7 @@ class ProductDescription extends Component {
           </a>
         </p>
         { deliveryCopy && (breakpoint === 'mobile' || breakpoint === 'tablet') ?
-          <p className="u-mt-small ProductDescription__copy">
+          (<p className="u-mt-small ProductDescription__copy">
                   Shipping and returns are free. Estimated <br />
                 delivery {this.generateDeliveryCopy()}. &nbsp;
                   <a
@@ -121,7 +121,7 @@ class ProductDescription extends Component {
                   >
                     Learn more
                  </a>
-          </p>
+          </p>)
           : null
           }
         <div className="ProductDescription u-center">
