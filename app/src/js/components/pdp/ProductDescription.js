@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import objnoop from '../../libs/objnoop';
 // import { bindActionCreators } from 'redux';
 
+// Breakpoint Decoration
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
 // Actions
 // import * as AppActions from '../../actions/AppActions';
 
@@ -17,6 +20,7 @@ function stateToProps(state) {
   return {
     productDescription: state.$$productState.get('productDescription'),
     modelDescription: state.$$productState.get('modelDescription'),
+    deliveryCopy: state.$$productState.get('deliveryCopy'),
   };
 }
 
@@ -27,8 +31,13 @@ class ProductDescription extends Component {
     autoBind(this);
   }
 
+  generateDeliveryCopy() {
+    const { deliveryCopy, expressMakingSelected } = this.props;
+    return expressMakingSelected ? '4-6 business days' : deliveryCopy;
+  }
+
   render() {
-    const { productDescription, modelDescription } = this.props;
+    const { productDescription, modelDescription, deliveryCopy, breakpoint } = this.props;
     return (
       <div className="u-center">
         <p className="ProductCharity__message">
@@ -42,6 +51,13 @@ class ProductDescription extends Component {
             Learn more
           </a>
         </p>
+        {
+          deliveryCopy && (breakpoint === 'mobile' || breakpoint === 'tablet')
+            ? <p className="u-mt-small ProductDescription__shippingEstimate">
+                Estimated delivery {this.generateDeliveryCopy()}.
+              </p>
+            : null
+        }
         <div className="ProductDescription u-center">
           <p dangerouslySetInnerHTML={{ __html: productDescription }} />
           <p>-</p>
@@ -55,6 +71,15 @@ class ProductDescription extends Component {
 ProductDescription.propTypes = {
   productDescription: PropTypes.string.isRequired,
   modelDescription: PropTypes.string.isRequired,
+  deliveryCopy: PropTypes.string,
+  expressMakingSelected: PropTypes.bool,
+  breakpoint: PropTypes.string,
 };
 
-export default connect(stateToProps, objnoop)(ProductDescription);
+ProductDescription.defaultProps = {
+  deliveryCopy: null,
+  expressMakingSelected: false,
+  breakpoint: '',
+};
+
+export default Resize(PDPBreakpoints)(connect(stateToProps, objnoop)(ProductDescription));
