@@ -21,6 +21,10 @@ export function calculateSubTotal({
   );
 }
 
+export function retrieveSelectedAddonOptions(addonOptions, selectedStyleCustomizations) {
+  return addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1);
+}
+
 function filterSelectedAddons(addonOptions, selectedStyleCustomizations) {
   return addonOptions
     .filter(a => selectedStyleCustomizations.indexOf(a.id) > -1)

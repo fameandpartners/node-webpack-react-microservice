@@ -19,6 +19,7 @@ import {
   addonSelectionDisplayText,
   calculateSubTotal,
   sizingDisplayText,
+  retrieveSelectedAddonOptions,
 } from '../../utilities/pdp';
 
 // Constants
@@ -96,11 +97,6 @@ class ProductOptions extends Component {
     autoBind(this);
   }
 
-  retrieveSelectedAddonOptions() {
-    const { addonOptions, selectedStyleCustomizations } = this.props;
-    return addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1);
-  }
-
   generateColorSelectionNode() {
     const {
       colorCentsTotal,
@@ -132,7 +128,11 @@ class ProductOptions extends Component {
   }
 
   generateAddonSelectionNode() {
-    const selectedOptions = this.retrieveSelectedAddonOptions();
+    const {
+      addonOptions,
+      selectedStyleCustomizations,
+    } = this.props;
+    const selectedOptions = retrieveSelectedAddonOptions(addonOptions, selectedStyleCustomizations);
     const displayText = addonSelectionDisplayText({ selectedAddonOptions: selectedOptions });
 
     return displayText
@@ -168,8 +168,13 @@ class ProductOptions extends Component {
       productCentsBasePrice,
       colorCentsTotal,
       expressMakingSelected,
+      addonOptions,
+      selectedStyleCustomizations,
     } = this.props;
-    const selectedAddonOptions = this.retrieveSelectedAddonOptions();
+    const selectedAddonOptions = retrieveSelectedAddonOptions(
+      addonOptions,
+      selectedStyleCustomizations,
+    );
     return calculateSubTotal(
       { colorCentsTotal, productCentsBasePrice, selectedAddonOptions, expressMakingSelected },
       currencySymbol,

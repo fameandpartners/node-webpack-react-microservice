@@ -105,7 +105,7 @@ class ExpressMaking extends Component {
               <p>
                 <a
                   href="/terms#collapse-shipping"
-                  className="u-text-decoration--underline"
+                  className="u-text-decoration--underline link link--static"
                   target="noopener noreferrer"
                 >
                   Learn More
