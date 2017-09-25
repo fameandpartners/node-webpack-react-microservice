@@ -15,7 +15,8 @@ class ButtonCol extends PureComponent {
     } = this.props;
 
     return (
-      <button
+      <div
+        role="Button"
         onClick={handleClick}
         className={classnames(
           'Button Button--tertiary ButtonCol grid-middle-noGutter noselect',
@@ -26,7 +27,7 @@ class ButtonCol extends PureComponent {
       >
         <div className="col-6 u-text-align-left">{left}</div>
         <div className="col-6 u-text-align-right">{right}</div>
-      </button>
+      </div>
     );
   }
 }

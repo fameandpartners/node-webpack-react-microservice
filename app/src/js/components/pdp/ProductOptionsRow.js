@@ -40,7 +40,7 @@ class ProductOptionsRow extends PureComponent {
       >
         <span
           className={classnames(
-            'ProductOptionsRow__left u-text-align--left',
+            'ProductOptionsRow__left u-text-align--left col-6',
             leftNodeClassName,
           )}
         >
@@ -49,7 +49,7 @@ class ProductOptionsRow extends PureComponent {
 
         <span
           className={classnames(
-            'ProductOptionsRow__right u-text-align--right',
+            'ProductOptionsRow__right u-text-align--right col-6',
             rightNodeClassName,
             {
               'ProductOptionsRow__right--fade-in': optionIsSelected || heading || rightNode,
