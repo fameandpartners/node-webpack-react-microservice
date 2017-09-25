@@ -77,7 +77,14 @@ class ProductDescription extends Component {
   }
 
   render() {
-    const { productDescription, modelDescription, deliveryCopy, breakpoint, auSite } = this.props;
+    const {
+      productDescription,
+      modelDescription,
+      deliveryCopy,
+      breakpoint,
+      auSite,
+      selectedStyleCustomizations,
+    } = this.props;
     return (
       <div className="u-center">
         { auSite && (breakpoint === 'mobile' || breakpoint === 'tablet') ?
@@ -114,16 +121,21 @@ class ProductDescription extends Component {
         </p>
         { deliveryCopy && (breakpoint === 'mobile' || breakpoint === 'tablet') ?
           (<p className="u-mt-small ProductDescription__copy">
-                  Shipping and returns are free. Estimated <br />
-                delivery {this.generateDeliveryCopy()}. &nbsp;
-                  <a
-                    href="/faqs#collapse-what-express-making"
-                    target="_blank"
-                    className="link link--static"
-                    rel="noopener noreferrer"
-                  >
-                    Learn more
-                 </a>
+            {
+              selectedStyleCustomizations.length === 0
+              ? 'Shipping and returns are free.'
+              : 'Shipping is free on your customized item.'
+            }
+             &nbsp; Estimated <br /> delivery {this.generateDeliveryCopy()}.
+             &nbsp;
+             <a
+               href="/faqs#collapse-what-express-making"
+               target="_blank"
+               className="link link--static"
+               rel="noopener noreferrer"
+             >
+               Learn more
+             </a>
           </p>)
           : null
           }

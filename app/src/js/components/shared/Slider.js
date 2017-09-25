@@ -111,6 +111,7 @@ class Slider extends Component {
                       className="Slider__button Slider__button--left u-cursor--pointer"
                     >
                       <IconSVG
+                        svgId={Carat.id}
                         svgPath={Carat.url}
                         width="28px"
                         height="40px"
@@ -122,6 +123,7 @@ class Slider extends Component {
                       onClick={this.nextSlide}
                     >
                       <IconSVG
+                        svgId={Carat.id}
                         svgPath={Carat.url}
                         width="28px"
                         height="40px"
