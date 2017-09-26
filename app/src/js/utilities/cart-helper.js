@@ -24,7 +24,7 @@ function getDressVariantId(variants, color, size) {
   return id;
 }
 
-function mapSizeIdFromSortKey(sortKey) {
+function mapSizeIdFromSortKey(sortKey, auSite) {
   /**
    *  Legacy checkout code needs the size ID for mapping the dress,
    *  variant ID, thought it was less intrusive to map it from the
@@ -32,12 +32,20 @@ function mapSizeIdFromSortKey(sortKey) {
    *  rewriting the size selection component.
    */
 
+  let sizeKey;
+
+  if (auSite) {
+    sizeKey = Number(sortKey) - 4;
+  } else {
+    sizeKey = Number(sortKey);
+  }
+
   const sizeArr = win.PdpDataFull.product.sizes.table.default;
 
-  return sizeArr.filter(i => i.table.sort_key === Number(sortKey))[0].table.id;
+  return sizeArr.filter(i => i.table.sort_key === sizeKey)[0].table.id;
 }
 
-function transformLineItem(lineItem) {
+function transformLineItem(lineItem, auSite) {
   /*
     POST for legacy checkout code expects object in the following format:
     {
@@ -52,7 +60,7 @@ function transformLineItem(lineItem) {
     }
   */
 
-  const sizeId = mapSizeIdFromSortKey(lineItem.selectedDressSize);
+  const sizeId = mapSizeIdFromSortKey(lineItem.selectedDressSize, auSite);
 
   const transformed = {
     color_id: lineItem.color.id,
@@ -71,9 +79,9 @@ function transformLineItem(lineItem) {
   return transformed;
 }
 
-export function addToCart(item) {
+export function addToCart(item, auSite) {
   if (win.app && win.app.shopping_cart) {
-    const transformedLineItem = transformLineItem(item);
+    const transformedLineItem = transformLineItem(item, auSite);
     console.log(transformedLineItem);
 
     win.app.shopping_cart.addProduct(transformedLineItem);

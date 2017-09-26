@@ -34,6 +34,9 @@ function stateToProps(state) {
   const addonOptions = state.$$customizationState.get('addons').get('addonOptions').toJS();
 
   return {
+    // APP
+    auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
+
     $$productState: state.$$productState,
     $$customizationState: state.$$customizationState,
     colorCentsTotal: selectedColor.get('centsTotal'),
@@ -90,6 +93,7 @@ class AddToCartButton extends Component {
   handleAddToBag() {
     const {
       // addItemToCart,
+      auSite,
       $$customizationState,
       $$productState,
       heightValue,
@@ -113,7 +117,7 @@ class AddToCartButton extends Component {
       }
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
-      addToCart(lineItem);
+      addToCart(lineItem, auSite);
     }
   }
 
@@ -143,6 +147,7 @@ AddToCartButton.propTypes = {
   // Passed Props
   showTotal: PropTypes.bool,
   // Redux Props
+  auSite: PropTypes.string.isRequired,
   $$productState: PropTypes.object.isRequired,
   $$customizationState: PropTypes.object.isRequired,
   colorCentsTotal: PropTypes.number,
