@@ -58,11 +58,6 @@
     box-shadow: inset 0 0 0 2px $c-hover-gray;
   }
 
-  &--disabled {
-    background-color: $c-disabled;
-    cursor: not-allowed;
-  }
-
   &--facebook {
     background-color: $c-facebook;
   }
@@ -73,5 +68,15 @@
 
   @include xs {
     height: $button-height--tall;
+  }
+}
+
+.Button--disabled {
+  color: $c-black;
+  background-color: $c-background-gray;
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: $c-background-gray;
   }
 }

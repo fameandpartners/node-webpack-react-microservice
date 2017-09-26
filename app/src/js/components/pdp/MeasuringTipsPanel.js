@@ -11,7 +11,7 @@ class MeasuringTipsPanel extends PureComponent {
     return (
       <div className="MeasuringTipsPanel typography grid-noGutter">
         <div className="MeasuringTipsPanel__fame-tips-wrapper grid-noGutter u-width--full">
-          <div className="col-6_sm-12 u-text-align--center">
+          <div className="col-7_sm-12 u-text-align--center">
             <div className="MeasuringTipsPanel__tip">
               <p>
                 FYI - Your results will be the most accurate if
@@ -19,7 +19,7 @@ class MeasuringTipsPanel extends PureComponent {
               </p>
             </div>
           </div>
-          <div className="col-6_sm-12">
+          <div className="col-5_sm-12">
             <div className="MeasuringTipsPanel__tip u-text-align--left">
               <h6 className="h6">Fame Tips</h6>
               <p>
@@ -30,10 +30,10 @@ class MeasuringTipsPanel extends PureComponent {
             </div>
           </div>
         </div>
-        <div className="col-6_sm-12">
+        <div className="col-7_sm-12">
           <img className="u-width--full" src={measuringImage} alt="Measuring info" />
         </div>
-        <div className="col-6_sm-12 u-text-align--left">
+        <div className="col-5_sm-12 u-text-align--left">
           <ul className="MeasuringTipsPanel__tip">
             <li>
               <h6 className="h6">Bust</h6>

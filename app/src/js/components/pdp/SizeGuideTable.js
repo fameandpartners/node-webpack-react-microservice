@@ -117,53 +117,52 @@ class SizeGuideTable extends PureComponent {
             />
           </div>
           {sizeChart.map(
-            (item, key) =>
-              <div key={`replace-with-actual-key-${key}`}>
-                <div className="SizeGuideTable__column">
-                  <SizeGuideTableCell
-                    contents={item['Size US']}
-                    hoverCoordinates={hoverCoordinates}
-                    columnIndex={key + 1}
-                    rowIndex={0}
-                    hovered={this.handleHover}
-                  />
-                  <SizeGuideTableCell
-                    contents={item['Size Aus/UK']}
-                    hoverCoordinates={hoverCoordinates}
-                    columnIndex={key + 1}
-                    rowIndex={1}
-                    hovered={this.handleHover}
-                  />
-                  <SizeGuideTableCell
-                    contents={centimeters ? item['Bust cm'] : item['Bust Inches']}
-                    hoverCoordinates={hoverCoordinates}
-                    columnIndex={key + 1}
-                    rowIndex={2}
-                    hovered={this.handleHover}
-                  />
-                  <SizeGuideTableCell
-                    contents={centimeters ? item['Underbust cm'] : item['Underbust Inches']}
-                    hoverCoordinates={hoverCoordinates}
-                    columnIndex={key + 1}
-                    rowIndex={3}
-                    hovered={this.handleHover}
-                  />
-                  <SizeGuideTableCell
-                    contents={centimeters ? item['Waist cm'] : item['Waist Inches']}
-                    hoverCoordinates={hoverCoordinates}
-                    columnIndex={key + 1}
-                    rowIndex={4}
-                    hovered={this.handleHover}
-                  />
-                  <SizeGuideTableCell
-                    contents={centimeters ? item['Hip cm'] : item['Hip Inches']}
-                    hoverCoordinates={hoverCoordinates}
-                    columnIndex={key + 1}
-                    rowIndex={5}
-                    hovered={this.handleHover}
-                  />
-                </div>
-              </div>,
+            (item, key) => (
+              <div key={`size-guide-table-col-${key}`} className="SizeGuideTable__column">
+                <SizeGuideTableCell
+                  contents={item['Size US']}
+                  hoverCoordinates={hoverCoordinates}
+                  columnIndex={key + 1}
+                  rowIndex={0}
+                  hovered={this.handleHover}
+                />
+                <SizeGuideTableCell
+                  contents={item['Size Aus/UK']}
+                  hoverCoordinates={hoverCoordinates}
+                  columnIndex={key + 1}
+                  rowIndex={1}
+                  hovered={this.handleHover}
+                />
+                <SizeGuideTableCell
+                  contents={centimeters ? item['Bust cm'] : item['Bust Inches']}
+                  hoverCoordinates={hoverCoordinates}
+                  columnIndex={key + 1}
+                  rowIndex={2}
+                  hovered={this.handleHover}
+                />
+                <SizeGuideTableCell
+                  contents={centimeters ? item['Underbust cm'] : item['Underbust Inches']}
+                  hoverCoordinates={hoverCoordinates}
+                  columnIndex={key + 1}
+                  rowIndex={3}
+                  hovered={this.handleHover}
+                />
+                <SizeGuideTableCell
+                  contents={centimeters ? item['Waist cm'] : item['Waist Inches']}
+                  hoverCoordinates={hoverCoordinates}
+                  columnIndex={key + 1}
+                  rowIndex={4}
+                  hovered={this.handleHover}
+                />
+                <SizeGuideTableCell
+                  contents={centimeters ? item['Hip cm'] : item['Hip Inches']}
+                  hoverCoordinates={hoverCoordinates}
+                  columnIndex={key + 1}
+                  rowIndex={5}
+                  hovered={this.handleHover}
+                />
+              </div>
+            ),
           )}
         </div>
       </div>

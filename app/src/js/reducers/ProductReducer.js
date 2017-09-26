@@ -85,6 +85,10 @@ export const $$initialState = Immutable.fromJS({
   // })
   productImages: [],
 
+  // Bool
+  // Whether or not this product can be actively sold
+  isActive: true,
+
   // String
   modelDescription: null,
 });

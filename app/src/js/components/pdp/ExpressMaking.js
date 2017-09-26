@@ -22,6 +22,7 @@ function stateToProps(state) {
     // PRODUCT
     expressMakingAvailable: state.$$productState.get('fastMaking'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
+    isActive: state.$$productState.get('isActive'),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -68,11 +69,12 @@ class ExpressMaking extends Component {
     const {
       expressMakingAvailable,
       colorId,
-      productDefaultColors,
       expressMakingStatus,
+      productDefaultColors,
+      isActive,
       mobile,
     } = this.props;
-    if (expressMakingAvailable) {
+    if (expressMakingAvailable && isActive) {
       return (
         <div className="grid-center-spaceAround ExpressMaking__content u-mb-small">
           <div className="col-1">
@@ -115,7 +117,7 @@ class ExpressMaking extends Component {
             }
 
           </div>
-          <div className="col-3_sm-9">
+          <div className="col-3_sm-9 u-text-align--right">
             {
             !mobile ?
               <div>
@@ -140,6 +142,7 @@ ExpressMaking.propTypes = {
   expressMakingStatus: PropTypes.bool,
   expressMakingAvailable: PropTypes.bool,
   productDefaultColors: PropTypes.arrayOf(PropTypes.object),
+  isActive: PropTypes.bool.isRequired,
   colorId: PropTypes.number,
   mobile: PropTypes.bool,
 };

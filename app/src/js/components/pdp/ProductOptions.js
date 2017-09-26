@@ -55,12 +55,13 @@ function stateToProps(state) {
     auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
 
     // PRODUCT
+    deliveryCopy: state.$$productState.get('deliveryCopy'),
     productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
-    deliveryCopy: state.$$productState.get('deliveryCopy'),
+    isActive: state.$$productState.get('isActive'),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -229,12 +230,13 @@ class ProductOptions extends Component {
 
   render() {
     const {
+      auSite,
+      deliveryCopy,
       productTitle,
+      isActive,
       selectedStyleCustomizations,
       selectedDressSize,
       selectedHeightValue,
-      auSite,
-      deliveryCopy,
     } = this.props;
 
     return (
@@ -286,51 +288,54 @@ class ProductOptions extends Component {
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
             <ExpressMaking />
-            <div className="ProductOptions__additional-info u-mb-normal">
-              { auSite ?
-                (
-                  <p
-                    className="AfterPay__message"
-                  >
-                    4 easy payments of {this.calculateInstallment(4, '$')} with
+
+
+            {isActive ?
+              <div className="ProductOptions__additional-info u-mb-normal">
+                { auSite ?
+                  (
+                    <p
+                      className="AfterPay__message"
+                    >
+                      4 easy payments of {this.calculateInstallment(4, '$')} with
                     <img
                       alt="AfterPay Logo"
                       className="AfterPay__image-logo"
                       src={afterpayImage}
                     />
-                    <a
-                      className="link link--static"
-                      onClick={this.handleOpenAfterpayModalClick}
-                    >
-                      Info
-                    </a>
-                  </p>
-                )
-                : null
-              }
-              <p className="u-mb-small">
-                {
-                  selectedStyleCustomizations.length === 0
-                  ? 'Shipping and returns are free.'
-                  : 'Shipping is free on your customized item.'
-                } &nbsp;
-                <a
-                  className="link link--static"
-                  href="/faqs#collapse-returns-policy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                      <a
+                        className="link link--static"
+                        onClick={this.handleOpenAfterpayModalClick}
+                      >
+                        Info
+                      </a>
+                    </p>
+                  ) : null
+                }
+                <p className="u-mb-small">
+                  {
+                    selectedStyleCustomizations.length === 0
+                    ? 'Shipping and returns are free.'
+                    : 'Shipping is free on your customized item.'
+                  } &nbsp;
+                  <a
+                    className="link link--static"
+                    href="/faqs#collapse-returns-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                   Learn&nbsp;more
-                </a> <br />
-                {
-                  deliveryCopy
+                  </a> <br />
+                  {
+                    deliveryCopy
                     ? `Estimated delivery ${this.generateDeliveryCopy()}.`
                     : null
-                }
+                  }
 
-              </p>
-              <ProductSecondaryActions />
-            </div>
+                </p>
+                <ProductSecondaryActions />
+              </div> : null
+            }
           </div>
         </div>
       </div>
@@ -340,6 +345,7 @@ class ProductOptions extends Component {
 
 ProductOptions.propTypes = {
   //* Redux Properties
+  auSite: PropTypes.bool.isRequired,
   // PRODUCT
   $$productImages: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
     id: PropTypes.number,
@@ -352,6 +358,7 @@ ProductOptions.propTypes = {
   })).isRequired,
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
   // COLOR
   colorId: PropTypes.number.isRequired,
   colorCentsTotal: PropTypes.number,
@@ -365,7 +372,6 @@ ProductOptions.propTypes = {
       name: PropTypes.string,
     }),
   ),
-  auSite: PropTypes.bool.isRequired,
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
