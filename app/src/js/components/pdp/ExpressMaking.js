@@ -115,7 +115,7 @@ class ExpressMaking extends Component {
             }
 
           </div>
-          <div className="col-3_sm-9">
+          <div className="col-3_sm-9 u-text-align--right">
             {
             !mobile ?
               <div>
@@ -140,7 +140,7 @@ ExpressMaking.propTypes = {
   expressMakingStatus: PropTypes.bool,
   expressMakingAvailable: PropTypes.bool,
   productDefaultColors: PropTypes.arrayOf(PropTypes.object),
-  colorId: PropTypes.number,
+  colorId: PropTypes.string,
   mobile: PropTypes.bool,
 };
 

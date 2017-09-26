@@ -219,7 +219,13 @@ class CustomizationButtonLedge extends Component {
   }
 
   isCustomizationOpen() {
-    return this.props.productCustomizationDrawerOpen || this.isCustomizationModalOpen();
+    const { activeModalId, modalIsOpen } = this.props;
+    if (modalIsOpen && activeModalId === ModalConstants.SIZE_GUIDE_MODAL) {
+      return false;
+    }
+    return (
+      this.props.productCustomizationDrawerOpen || this.isCustomizationModalOpen()
+    );
   }
 
   defaultStyles() {
