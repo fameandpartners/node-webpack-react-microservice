@@ -297,7 +297,7 @@ class ProductOptions extends Component {
                     <p
                       className="AfterPay__message"
                     >
-                    4 easy payments of {this.calculateInstallment(4, '$')} with
+                      4 easy payments of {this.calculateInstallment(4, '$')} with
                     <img
                       alt="AfterPay Logo"
                       className="AfterPay__image-logo"
@@ -307,8 +307,8 @@ class ProductOptions extends Component {
                         className="link link--static"
                         onClick={this.handleOpenAfterpayModalClick}
                       >
-                    Info
-                    </a>
+                        Info
+                      </a>
                     </p>
                   ) : null
                 }
