@@ -14,6 +14,7 @@ import {
   separateHexColorsInString,
 } from '../../utilities/color';
 import { addonSelectionDisplayText } from '../../utilities/pdp';
+import { formatCents } from '../../utilities/accounting';
 
 // UI Components
 import ProductImageSlider from './ProductImageSlider';
@@ -29,11 +30,13 @@ import '../../../css/components/ProductDisplayOptionsTouch.scss';
 
 
 function stateToProps(state) {
+  const selectedColor = state.$$customizationState.get('selectedColor');
   // Which part of the Redux global state does our component want to receive as props?
   return {
     addonOptions: state.$$customizationState.get('addons').get('addonOptions').toJS(),
     selectedColor: state.$$customizationState.get('selectedColor').toJS(),
     selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
+    colorCentsTotal: selectedColor.get('centsTotal'),
   };
 }
 
@@ -65,7 +68,7 @@ class ProductDisplayOptionsTouch extends Component {
   }
 
   render() {
-    const { selectedColor } = this.props;
+    const { selectedColor, colorCentsTotal } = this.props;
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     const background = generateBackgroundValueFromColor(selectedColor);
     const hasDuoTone = selectedColor.hexValue
@@ -95,7 +98,13 @@ class ProductDisplayOptionsTouch extends Component {
                 )}
                 >
                   <span>Color</span><br />
-                  <span>{selectedColor.presentation}</span>
+                  <span>{selectedColor.presentation} &nbsp;
+                    {
+                      colorCentsTotal ?
+                      `(${formatCents(colorCentsTotal, 0)})`
+                      : null
+                    }
+                  </span>
 
                 </div>
               </div>
@@ -138,9 +147,11 @@ ProductDisplayOptionsTouch.propTypes = {
   selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
+  colorCentsTotal: PropTypes.number,
 };
 ProductDisplayOptionsTouch.defaultProps = {
   selectedStyleCustomizations: [],
+  colorCentsTotal: 0,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductDisplayOptionsTouch);
