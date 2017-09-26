@@ -456,7 +456,6 @@ export function transformSKU({ sku }) {
 }
 
 export function transformProductJSON(productJSON) {
-  console.log('productJSON', productJSON);
   const productState = {
     currency: transformProductCurrency(productJSON.product),
     complementaryProducts: transformProductComplementaryProducts(),
