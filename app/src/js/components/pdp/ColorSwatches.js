@@ -58,7 +58,7 @@ class ColorSwatches extends PureComponent {
           <span
             className={classnames(
             'ColorSwatches__touch-display-text',
-            'u-width--full u-position--absolute u-left',
+            'u-width--full u-left u-flex',
           )}
           >
             <h6>
