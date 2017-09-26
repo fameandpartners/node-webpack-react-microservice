@@ -101,7 +101,7 @@ class ProductDisplayOptionsTouch extends Component {
                   <span>{selectedColor.presentation} &nbsp;
                     {
                       colorCentsTotal ?
-                      `(${formatCents(colorCentsTotal, 0)})`
+                      `+(${formatCents(colorCentsTotal, 0)})`
                       : null
                     }
                   </span>
