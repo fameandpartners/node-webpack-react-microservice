@@ -143,7 +143,7 @@ ExpressMaking.propTypes = {
   expressMakingAvailable: PropTypes.bool,
   productDefaultColors: PropTypes.arrayOf(PropTypes.object),
   isActive: PropTypes.bool.isRequired,
-  colorId: PropTypes.string,
+  colorId: PropTypes.number,
   mobile: PropTypes.bool,
 };
 

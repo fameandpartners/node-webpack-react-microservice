@@ -40,7 +40,7 @@ class ButtonLedge extends Component {
             'ButtonLedge__button-wrapper grid-center-middle-noGutter u-height--full',
           )}
         >
-          {handleLeftButtonClick
+          {typeof handleLeftButtonClick === 'function'
             ? (
               <div className="col-6">
                 <Button
@@ -57,7 +57,7 @@ class ButtonLedge extends Component {
 
           {handleRightButtonClick || rightNode
             ? (
-              <div className="col-6">
+              <div className="col">
                 { rightNode ||
                   (
                     <Button
@@ -92,7 +92,7 @@ ButtonLedge.defaultProps = {
   leftText: 'Cancel',
   rightNode: null,
   rightText: 'Save',
-  handleLeftButtonClick: noop,
+  handleLeftButtonClick: null,
   handleRightButtonClick: noop,
 };
 

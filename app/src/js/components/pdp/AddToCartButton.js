@@ -155,7 +155,7 @@ AddToCartButton.propTypes = {
   // Passed Props
   showTotal: PropTypes.bool,
   // Redux Props
-  auSite: PropTypes.string.isRequired,
+  auSite: PropTypes.bool.isRequired,
   $$productState: PropTypes.object.isRequired,
   $$customizationState: PropTypes.object.isRequired,
   colorCentsTotal: PropTypes.number,

@@ -72,10 +72,11 @@
 }
 
 .Button--disabled {
-  background-color: $c-disabled;
+  color: $c-black;
+  background-color: $c-background-gray;
   cursor: not-allowed;
 
   &:hover {
-    background-color: $c-disabled;
+    background-color: $c-background-gray;
   }
 }

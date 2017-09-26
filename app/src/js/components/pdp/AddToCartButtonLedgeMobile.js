@@ -31,6 +31,7 @@ function stateToProps(state) {
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
+    isActive: state.$$productState.get('isActive'),
   };
 }
 
@@ -51,10 +52,10 @@ class AddToCartButtonLedgeMobile extends Component {
 
   generateSizingButtonText() {
     const {
+      auSite,
       selectedHeightValue,
       selectedMeasurementMetric,
       selectedDressSize,
-      auSite,
     } = this.props;
     const sizingInformation = sizingDisplayText({
       selectedDressSize,
@@ -68,6 +69,13 @@ class AddToCartButtonLedgeMobile extends Component {
     return CustomizationConstants.SIZE_HEADLINE;
   }
 
+  leftNodeSizeClick() {
+    if (this.props.isActive) {
+      return this.handleSizeClick;
+    }
+    return null;
+  }
+
   render() {
     const { breakpoint } = this.props;
 
@@ -77,7 +85,7 @@ class AddToCartButtonLedgeMobile extends Component {
         <ButtonLedge
           leftText={this.generateSizingButtonText()}
           rightNode={(<AddToCartButton />)}
-          handleLeftButtonClick={this.handleSizeClick}
+          handleLeftButtonClick={this.leftNodeSizeClick()}
         />
       </div>
     ) : null;
@@ -93,6 +101,7 @@ AddToCartButtonLedgeMobile.propTypes = {
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
+  isActive: PropTypes.string.isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
 };
