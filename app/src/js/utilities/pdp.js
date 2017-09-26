@@ -456,10 +456,13 @@ export function transformSKU({ sku }) {
 }
 
 export function transformProductJSON(productJSON) {
+  console.log('productJSON', productJSON);
   const productState = {
     currency: transformProductCurrency(productJSON.product),
     complementaryProducts: transformProductComplementaryProducts(),
+    deliveryCopy: transformDeliveryCopy(productJSON.product),
     fabric: transformProductFabric(productJSON.product),
+    fastMaking: transformProductFastMaking(productJSON.product),
     garmentCareInformation: transformProductGarmentInformation(),
     preCustomizations: transformProductPreCustomizations(),
     productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
@@ -469,14 +472,13 @@ export function transformProductJSON(productJSON) {
     productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
     productId: transformProductId(productJSON.product),
     productImages: transformProductImages(productJSON.images),
-    modelDescription: transformProductModelDescription(productJSON.product),
     productTitle: transformProductTitle(productJSON.product),
-    sizeChart: transformProductSizeChart(productJSON),
+    isActive: productJSON.product.is_active,
     makingOptionId: transformProductMakingOptionId(productJSON.product),
-    fastMaking: transformProductFastMaking(productJSON.product),
-    deliveryCopy: transformDeliveryCopy(productJSON.product),
-    sku: transformSKU(productJSON.product),
+    modelDescription: transformProductModelDescription(productJSON.product),
     siteVersion: transformProductSiteVersion(productJSON),
+    sizeChart: transformProductSizeChart(productJSON),
+    sku: transformSKU(productJSON.product),
   };
 
   const measurementMetric = selectMeasurementMetric(productJSON);

@@ -41,6 +41,7 @@ function stateToProps(state) {
     $$customizationState: state.$$customizationState,
     colorCentsTotal: selectedColor.get('centsTotal'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
+    isActive: state.$$productState.get('isActive'),
     selectedAddonOptions: addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1),
     heightValue: state.$$customizationState.get('temporaryHeightValue'),
     sizeValue: state.$$customizationState.get('selectedDressSize'),
@@ -92,17 +93,18 @@ class AddToCartButton extends Component {
    */
   handleAddToBag() {
     const {
-      // addItemToCart,
       auSite,
+      activateModal,
+      activateCustomizationDrawer,
+      breakpoint,
       $$customizationState,
       $$productState,
       heightValue,
+      isActive,
       sizeValue,
       setSizeProfileError,
-      activateCustomizationDrawer,
-      breakpoint,
-      activateModal,
     } = this.props;
+    if (!isActive) { return; }
     if (!sizeProfilePresence(sizeValue, heightValue)) {
       setSizeProfileError({
         heightError: !heightValue,
@@ -122,7 +124,11 @@ class AddToCartButton extends Component {
   }
 
   generateText() {
-    if (this.props.showTotal) {
+    const { isActive, showTotal } = this.props;
+    if (!isActive) {
+      return 'Sorry, this product is currently unavailable';
+    }
+    if (showTotal) {
       return `${this.subTotal()} - Add to Bag`;
     }
 
@@ -130,10 +136,12 @@ class AddToCartButton extends Component {
   }
 
   render() {
+    const { isActive } = this.props;
     return (
       <Button
         tall
-        uppercase
+        disabled={!isActive}
+        uppercase={isActive}
         className="AddToCartButton"
         text={this.generateText()}
         handleClick={this.handleAddToBag}
@@ -152,6 +160,7 @@ AddToCartButton.propTypes = {
   $$customizationState: PropTypes.object.isRequired,
   colorCentsTotal: PropTypes.number,
   productCentsBasePrice: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   // addItemToCart: PropTypes.func.isRequired,
