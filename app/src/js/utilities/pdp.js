@@ -397,7 +397,9 @@ export function transformProductPreCustomizations() {
   return preCustomizations;
 }
 
-export function transformProductModelDescription({ fit }) {
+export function transformProductModelDescription(productJSON) {
+  const fit = productJSON.product && productJSON.product.fit
+    ? productJSON.product.fit : '';
   //   "fit": String,
   //   ****** into ******
   //   modelDescription: String,
