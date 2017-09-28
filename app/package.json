@@ -98,7 +98,8 @@
     "redux-thunk": "^2.2.0",
     "sanitize-html": "^1.14.1",
     "sass-loader": "^6.0.3",
-    "shallowequal": "^1.0.1"
+    "shallowequal": "^1.0.1",
+    "webpack-dev-middleware": "^1.12.0"
   },
   "devDependencies": {
     "autoprefixer": "6.7.2",
@@ -141,8 +142,8 @@
     "stylelint-webpack-plugin": "^0.7.1",
     "svg-sprite-loader": "^3.0.5",
     "url-loader": "0.5.7",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1",
     "webpack-manifest-plugin": "1.1.0",
     "whatwg-fetch": "2.0.2"
   },
