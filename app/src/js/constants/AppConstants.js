@@ -5,10 +5,17 @@ const actionTypes = assign({},
   mirrorCreator([
     'ACTIVATE_SIDE_MENU',
     'ACTIVATE_CART_DRAWER',
+    'SET_APP_LOADING_STATE',
     'SET_SHAREABLE_QUERY_PARAMS',
     'SET_GALLERY_SLIDE_ACTIVE_INDEX',
   ]),
 );
+
+const loadingIds = {
+  LOADING_IDS: mirrorCreator([
+    'ADD_TO_CART_LOADING',
+  ]),
+};
 
 const queryParams = {
   QUERY_PARAMS: {
@@ -191,6 +198,7 @@ const configuration = assign({},
 
 export default assign({},
   actionTypes,
+  loadingIds,
   navigationContainers,
   navigationLinks,
   queryParams,

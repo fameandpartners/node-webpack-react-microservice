@@ -14,6 +14,7 @@ import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Actions
+import * as AppActions from '../../actions/AppActions';
 import * as CartActions from '../../actions/CartActions';
 import * as CustomizationActions from '../../actions/CustomizationActions';
 import * as ModalActions from '../../actions/ModalActions';
@@ -22,6 +23,7 @@ import * as ModalActions from '../../actions/ModalActions';
 import Button from '../generic/Button';
 
 // Constants
+import { LOADING_IDS } from '../../constants/AppConstants';
 import CustomizationConstants from '../../constants/CustomizationConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
@@ -36,7 +38,7 @@ function stateToProps(state) {
   return {
     // APP
     auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
-
+    addToCartLoading: state.$$appState.get('loadingId') === LOADING_IDS.ADD_TO_CART_LOADING,
     $$productState: state.$$productState,
     $$customizationState: state.$$customizationState,
     colorCentsTotal: selectedColor.get('centsTotal'),
@@ -52,6 +54,8 @@ function stateToProps(state) {
 function dispatchToProps(dispatch) {
   const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
+  const { setAppLoadingState } = bindActionCreators(AppActions, dispatch);
+
   const {
     setSizeProfileError,
     activateCustomizationDrawer,
@@ -61,6 +65,7 @@ function dispatchToProps(dispatch) {
     activateCartDrawer,
     activateModal,
     addItemToCart,
+    setAppLoadingState,
     setSizeProfileError,
     activateCustomizationDrawer,
   };
@@ -93,6 +98,7 @@ class AddToCartButton extends Component {
    */
   handleAddToBag() {
     const {
+      addToCartLoading,
       auSite,
       activateModal,
       activateCustomizationDrawer,
@@ -102,9 +108,11 @@ class AddToCartButton extends Component {
       heightValue,
       isActive,
       sizeValue,
+      setAppLoadingState,
       setSizeProfileError,
     } = this.props;
-    if (!isActive) { return; }
+    if (!isActive || addToCartLoading) { return; }
+
     if (!sizeProfilePresence(sizeValue, heightValue)) {
       setSizeProfileError({
         heightError: !heightValue,
@@ -119,6 +127,7 @@ class AddToCartButton extends Component {
       }
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
+      setAppLoadingState({ loadingId: LOADING_IDS.ADD_TO_CART_LOADING });
       addToCart(lineItem, auSite);
     }
   }
@@ -136,10 +145,11 @@ class AddToCartButton extends Component {
   }
 
   render() {
-    const { isActive } = this.props;
+    const { addToCartLoading, isActive } = this.props;
     return (
       <Button
         tall
+        isLoading={addToCartLoading}
         disabled={!isActive}
         uppercase={isActive}
         className="AddToCartButton"
@@ -156,24 +166,27 @@ AddToCartButton.propTypes = {
   showTotal: PropTypes.bool,
   // Redux Props
   auSite: PropTypes.bool.isRequired,
+  addToCartLoading: PropTypes.bool,
   $$productState: PropTypes.object.isRequired,
   $$customizationState: PropTypes.object.isRequired,
   colorCentsTotal: PropTypes.number,
-  productCentsBasePrice: PropTypes.number.isRequired,
+  expressMakingSelected: PropTypes.bool,
   isActive: PropTypes.bool.isRequired,
+  productCentsBasePrice: PropTypes.number.isRequired,
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   // addItemToCart: PropTypes.func.isRequired,
-  setSizeProfileError: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func,
   activateModal: PropTypes.func,
+  setAppLoadingState: PropTypes.func.isRequired,
   heightValue: PropTypes.number,
+  setSizeProfileError: PropTypes.func.isRequired,
   sizeValue: PropTypes.number,
   breakpoint: PropTypes.string,
-  expressMakingSelected: PropTypes.bool,
 };
 
 AddToCartButton.defaultProps = {
+  addToCartLoading: null,
   colorCentsTotal: 0,
   selectedAddonOptions: [],
   showTotal: true,
