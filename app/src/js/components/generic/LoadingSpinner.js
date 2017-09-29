@@ -1,6 +1,4 @@
 import React, { PureComponent } from 'react';
-// import PropTypes from 'prop-types';
-// import classnames from 'classnames';
 
 // CSS
 import '../../../css/components/LoadingSpinner.scss';
@@ -13,9 +11,5 @@ class LoadingSpinner extends PureComponent {
     );
   }
 }
-
-LoadingSpinner.propTypes = {};
-
-LoadingSpinner.defaultProps = {};
 
 export default LoadingSpinner;
