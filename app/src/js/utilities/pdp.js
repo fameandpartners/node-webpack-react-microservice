@@ -494,7 +494,6 @@ export function transformProductJSON(productJSON) {
 
   return {
     $$appState: {
-      svgSpritePath: productJSON.svgSpritePath,
       siteVersion: productJSON.siteVersion,
     },
     $$productState: productState,

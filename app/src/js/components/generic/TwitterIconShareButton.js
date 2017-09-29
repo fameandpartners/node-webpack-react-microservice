@@ -2,9 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import TwitterShareButton from '../react-share/TwitterShareButton';
 
-// Components
-import IconSVG from '../generic/IconSVG';
-
 // Assets
 import TwitterShareIcon from '../../../svg/share-twitter.svg';
 
@@ -22,11 +19,9 @@ class TwitterIconShareButton extends PureComponent {
     return (
       <TwitterShareButton
         url={url}
-        className="ShareModal__icon-button"
+        className="SocialShare__icon-button"
       >
-        <IconSVG
-          svgId={TwitterShareIcon.id}
-          svgPath={TwitterShareIcon.url}
+        <TwitterShareIcon
           width="40px"
           height="40px"
         />

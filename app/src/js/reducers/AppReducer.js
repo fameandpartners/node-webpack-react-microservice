@@ -9,7 +9,6 @@ export const $$initialState = Immutable.fromJS({
   gallerySlideActiveIndex: 0,
   siteVersion: 'us',
   sideMenuOpen: false,
-  svgSpritePath: '',
   queryStr: null,
   queryParams: {
     [QUERY_PARAMS.color]: undefined,
