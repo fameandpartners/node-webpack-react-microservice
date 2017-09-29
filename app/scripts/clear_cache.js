@@ -1,23 +1,24 @@
-const https = require('https');
+clearRailsCache();
 
-export default function clearRailsCache() {
-  if (!process.env.RAIL_SERVERS) { return; }
-  const serverUrls = process.env.RAIL_SERVERS.split(',');
 
-  serverUrls.forEach((url) => {
-    const options = {
+function clearRailsCache() {
+  var server_urls = process.env.RAIL_SERVERS.split(',');
+  var https = require('https');
+
+  server_urls.forEach(function(url) {
+    var options = {
       host: url,
       port: 443,
       auth: 'fandpstaging:auth4fandpstaging',
       path: '/api/v1/rails_cache?systems_key=f3UwF9ftw',
-      method: 'DELETE',
-    };
+      method: 'DELETE'
+    }
 
-    const req = https.request(options, (res) => {
-      console.warn(`Cache Clear Status: ${res.statusCode}`);
+    var req = https.request(options, function(res) {
+      console.warn('Cache Clear Status: ' + res.statusCode);
     });
     req.end();
-    req.on('error', (e) => {
+    req.on('error', function(e) {
       console.error(e);
     });
   });
