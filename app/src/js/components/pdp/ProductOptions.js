@@ -252,7 +252,7 @@ class ProductOptions extends Component {
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
-            <div className="ProductOptions__content u-mb-normal typography">
+            <div className="ProductOptions__content u-mb-small typography">
               <ProductOptionsRow
                 heading
                 leftNode={<h1 className="u-display--inline h4">{productTitle}</h1>}
@@ -284,19 +284,16 @@ class ProductOptions extends Component {
                 handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
             </div>
+            <ExpressMaking />
             <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
-            <ExpressMaking />
-
 
             {isActive ?
               <div className="ProductOptions__additional-info u-mb-normal">
                 { auSite ?
                   (
-                    <p
-                      className="AfterPay__message"
-                    >
+                    <p className="AfterPay__message">
                       4 easy payments of {this.calculateInstallment(4, '$')} with
                     <img
                       alt="AfterPay Logo"

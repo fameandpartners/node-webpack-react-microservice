@@ -4,7 +4,6 @@ import autoBind from 'react-autobind';
 import classnames from 'classnames';
 
 import win from '../../polyfills/windowPolyfill';
-import IconSVG from '../generic/IconSVG';
 import '../../../css/components/Slider.scss';
 import Carat from '../../../svg/carat.svg';
 import { lory } from '../../libs/lory';
@@ -110,9 +109,7 @@ class Slider extends Component {
                       onClick={this.previousSlide}
                       className="Slider__button Slider__button--left u-cursor--pointer"
                     >
-                      <IconSVG
-                        svgId={Carat.id}
-                        svgPath={Carat.url}
+                      <Carat
                         width="28px"
                         height="40px"
                       />
@@ -122,9 +119,7 @@ class Slider extends Component {
                       className="Slider__button Slider__button--right u-cursor--pointer"
                       onClick={this.nextSlide}
                     >
-                      <IconSVG
-                        svgId={Carat.id}
-                        svgPath={Carat.url}
+                      <Carat
                         width="28px"
                         height="40px"
                       />

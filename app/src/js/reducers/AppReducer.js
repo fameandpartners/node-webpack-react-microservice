@@ -5,10 +5,10 @@ import win from '../polyfills/windowPolyfill';
 
 export const $$initialState = Immutable.fromJS({
   defaultValue: [],
+  loadingId: null,
   gallerySlideActiveIndex: 0,
   siteVersion: 'us',
   sideMenuOpen: false,
-  svgSpritePath: '',
   queryStr: null,
   queryParams: {
     [QUERY_PARAMS.color]: undefined,
@@ -47,6 +47,11 @@ export default function AppReducer($$state = $$initialState, action = null) {
     case AppConstants.ACTIVATE_SIDE_MENU: {
       return $$state.merge({
         sideMenuOpen: action.sideMenuOpen,
+      });
+    }
+    case AppConstants.SET_APP_LOADING_STATE: {
+      return $$state.merge({
+        loadingId: action.loadingId,
       });
     }
     case AppConstants.SET_GALLERY_SLIDE_ACTIVE_INDEX: {

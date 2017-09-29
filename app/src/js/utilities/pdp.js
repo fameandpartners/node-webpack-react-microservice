@@ -476,7 +476,7 @@ export function transformProductJSON(productJSON) {
     productTitle: transformProductTitle(productJSON.product),
     isActive: productJSON.product.is_active,
     makingOptionId: transformProductMakingOptionId(productJSON.product),
-    modelDescription: transformProductModelDescription(productJSON.product),
+    modelDescription: transformProductModelDescription(productJSON),
     siteVersion: transformProductSiteVersion(productJSON),
     sizeChart: transformProductSizeChart(productJSON),
     sku: transformSKU(productJSON.product),
@@ -494,7 +494,6 @@ export function transformProductJSON(productJSON) {
 
   return {
     $$appState: {
-      svgSpritePath: productJSON.svgSpritePath,
       siteVersion: productJSON.siteVersion,
     },
     $$productState: productState,
