@@ -1,6 +1,5 @@
 require('ignore-styles');
 require('babel-register');
-require('./scripts/clear_cache')();
 
 const express = require('express');
 const logger = require('morgan');
@@ -104,6 +103,7 @@ app.post('/pdp', (req, res) => {
 
 app.listen(process.env.PORT || 8001);
 
+require('./scripts/clear_cache')();
 /* eslint-disable no-console */
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
