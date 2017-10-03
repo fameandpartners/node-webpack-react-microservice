@@ -1,8 +1,6 @@
-/* eslint-disable no-console */
-/* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable array-callback-return */
-/* eslint-disable radix */
+// X-CSRF-Token
+import axios from 'axios';
 
 // polyfills
 import win from '../polyfills/windowPolyfill';
@@ -14,9 +12,9 @@ import win from '../polyfills/windowPolyfill';
 function getDressVariantId(variants, color, size) {
   let id;
 
-  variants.map((val) => {
-    if (parseInt(val.table.color_id) === parseInt(color)
-      && parseInt(val.table.size_id) === parseInt(size)) {
+  variants.forEach((val) => {
+    if (parseInt(val.table.color_id, 10) === parseInt(color, 10)
+      && parseInt(val.table.size_id, 10) === parseInt(size, 10)) {
       id = val.table.id;
     }
   });
@@ -80,12 +78,27 @@ function transformLineItem(lineItem, auSite) {
 }
 
 export function addToCart(item, auSite) {
-  if (win.app && win.app.shopping_cart) {
-    const transformedLineItem = transformLineItem(item, auSite);
-    console.log(transformedLineItem);
-
-    win.app.shopping_cart.addProduct(transformedLineItem);
-  }
+  const transformedLineItem = transformLineItem(item, auSite);
+  console.log(transformedLineItem);
+  const csrf = win.document.querySelector('meta[name="csrf-token"]');
+  const token = csrf ? csrf.content : '';
+  // if (win.app && win.app.shopping_cart) {
+  //
+  //   win.app.shopping_cart.addProduct(transformedLineItem);
+  // }
+  axios({
+    method: 'post',
+    url: '/api/v1/user_cart/products',
+    data: transformLineItem,
+    headers: {
+      'X-CSRF-Token': token,
+      'Content-Type': 'application/json',
+    },
+  })
+  .then((response) => {
+    console.log('response', response);
+  });
+  // headers: { Authorization: localStorage.getItem('token') }
 }
 
 export default {

@@ -9,15 +9,15 @@ import '../../../css/components/RadioToggle.scss';
 const propTypes = {
   id: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
-    label: React.PropTypes.string,
-    value: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.bool,
+    label: PropTypes.string,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
     ]),
   })).isRequired,
   value: PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.bool,
+    PropTypes.string,
+    PropTypes.bool,
   ]),
   onChange: PropTypes.func.isRequired,
 };
