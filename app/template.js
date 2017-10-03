@@ -1,7 +1,6 @@
 // template.js
-import { template } from 'rapscallion';
 
-export default vo => template`
+export default vo => `
   <div id="root" class="PDP__wrapper">
     <div>${vo.root}</div>
   </div>

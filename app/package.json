@@ -6,13 +6,10 @@
     "dev": "PORT=3030 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom --notify",
-    "test:once": "CI=true yarn test -- --coverage",
+    "test:once": "CI=true node test -- --coverage",
     "server_test": "NODE_ENV='production' mocha --compilers js:babel-register --require ./src/lib/testNullCompiler.js && jest --coverage",
     "production": "node server.js",
-    "precommit": "yarn test:once",
-    "prepush": "yarn test:once",
-    "local_production": "node scripts/build.js && nodemon server.js",
-    "start": "node server.js"
+    "local_production": "node scripts/build.js && nodemon server.js"
   },
   "keywords": [
     "react",
