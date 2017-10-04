@@ -12,6 +12,8 @@ import Onboarding from './Onboarding';
 // Polyfills
 import win from '../../polyfills/windowPolyfill';
 
+import '../../../css/components/shopping_spree.scss';
+
 class ShoppingSpree extends Component {
   constructor(props) {
     super(props);
@@ -143,7 +145,7 @@ class ShoppingSpree extends Component {
 
             }
         {
-          this.state.display === 'chat' &&
+          this.state.display !== 'chat' &&
             <Drawer
               firebaseAPI={this.props.firebaseAPI}
               firebaseDatabase={this.props.firebaseDatabase}
