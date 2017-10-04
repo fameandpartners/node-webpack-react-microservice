@@ -1,3 +1,4 @@
+/* eslint-disable */
 require('ignore-styles');
 require('babel-register');
 
@@ -62,13 +63,13 @@ app.get('/pdp', (req, res) => {
   const props = transformProductJSON(mockJSON);
   const store = AppStore(props);
   const ReactRoot = ReactDOMServer.renderToString(
-    React.createElement(Provider, { store }, React.createElement(App)),
+    React.createElement(Provider, { store }, React.createElement(App))
   );
   const html = template({
     root: ReactRoot,
     initialState: store.getState(),
     jsBundle: clientAssets['main.js'],
-    cssBundle: clientAssets['main.css'],
+    cssBundle: clientAssets['main.css']
   });
 
   res.send(html);
@@ -84,17 +85,17 @@ app.post('/pdp', (req, res) => {
     const props = transformProductJSON(req.body.data);
     const store = AppStore(props);
     const ReactRoot = ReactDOMServer.renderToString(
-      React.createElement(Provider, { store }, React.createElement(App)),
+      React.createElement(Provider, { store }, React.createElement(App))
     );
     const html = template({
       root: ReactRoot,
-      initialState: store.getState(),
+      initialState: store.getState()
     });
 
     res.send({
       partial: html,
       jsBundle: clientAssets['main.js'],
-      cssBundle: clientAssets['main.css'],
+      cssBundle: clientAssets['main.css']
     });
   } catch (e) {
     // Catch errors so we don't generate malformed HTML
