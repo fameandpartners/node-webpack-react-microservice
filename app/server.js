@@ -5,12 +5,13 @@ const express = require('express');
 const logger = require('morgan');
 const React = require('react');
 const Provider = require('react-redux').Provider;
-const Promise = require('bluebird');
+// const Promise = require('bluebird');
 // const redis = require('redis');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const { render, setCacheStrategy } = require('rapscallion');
+// const { render, setCacheStrategy } = require('rapscallion');
+const ReactDOMServer = require('react-dom/server');
 
 // eslint-disable-next-line
 const chalk = require('chalk');
@@ -60,7 +61,9 @@ app.get('/pdp', (req, res) => {
   res.header('Content-Type', 'text/html');
   const props = transformProductJSON(mockJSON);
   const store = AppStore(props);
-  const ReactRoot = render(React.createElement(Provider, { store }, React.createElement(App)));
+  const ReactRoot = ReactDOMServer.renderToString(
+    React.createElement(Provider, { store }, React.createElement(App)),
+  );
   const html = template({
     root: ReactRoot,
     initialState: store.getState(),
@@ -68,7 +71,7 @@ app.get('/pdp', (req, res) => {
     cssBundle: clientAssets['main.css'],
   });
 
-  html.toStream().pipe(res);
+  res.send(html);
 });
 
 app.post('/pdp', (req, res) => {
@@ -80,24 +83,22 @@ app.post('/pdp', (req, res) => {
   try {
     const props = transformProductJSON(req.body.data);
     const store = AppStore(props);
-    const ReactRoot = render(React.createElement(Provider, { store }, React.createElement(App)));
+    const ReactRoot = ReactDOMServer.renderToString(
+      React.createElement(Provider, { store }, React.createElement(App)),
+    );
     const html = template({
       root: ReactRoot,
       initialState: store.getState(),
     });
 
-    html
-      .toPromise()
-      .then((htmlString) => {
-        res.send({
-          partial: htmlString,
-          jsBundle: clientAssets['main.js'],
-          cssBundle: clientAssets['main.css'],
-        });
-      });
+    res.send({
+      partial: html,
+      jsBundle: clientAssets['main.js'],
+      cssBundle: clientAssets['main.css'],
+    });
   } catch (e) {
     // Catch errors so we don't generate malformed HTML
-    res.send({ e, error: true, message: 'Incorrect Params' });
+    res.status(500).send({ e, error: true, message: 'Incorrect Params' });
   }
 });
 
@@ -105,8 +106,6 @@ app.listen(process.env.PORT || 8001);
 
 // reset the rails cache, have to do it here cause ebs environment variables are lies
 require('./scripts/clear_cache');
-/* eslint-disable no-console */
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
-/* eslint-enable no-console */
 module.exports = app;
