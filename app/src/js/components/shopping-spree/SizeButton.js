@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 
 const SizeButton = props => (
-  <div onClick={() => this.props.selectionCallback(this.props.size)} className={`size-box${this.props.selectedSize === this.props.size ? ' selected' : ''}`}>
-    <div className="size-inner">{this.props.size}</div>
+  <div onClick={() => props.selectionCallback(props.size)} className={`size-box${props.selectedSize === props.size ? ' selected' : ''}`}>
+    <div className="size-inner">{props.size}</div>
   </div>
   );
 

@@ -254,6 +254,20 @@ AddToCartModal.propTypes = {
       price: PropTypes.string.isRequired,
       size: PropTypes.string.isRequired,
     },
-    ).isRequired,
+  ),
   closeModal: PropTypes.func.isRequired,
+};
+
+AddToCartModal.defaultProps = {
+  dress: PropTypes.shape(
+    {
+      image: 'test',
+      name: 'test',
+      url: 'test',
+      fabric: 'test',
+      length: 'test',
+      price: 'test',
+      size: 'test',
+    },
+  ),
 };

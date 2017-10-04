@@ -17,7 +17,6 @@ class ShoppingSpree extends Component {
     super(props);
     autoBind(this);
     this.cookies = new Cookies();
-    console.log(this.cookies);
     this.state = {
       showAddingToCartModal: false,
     };

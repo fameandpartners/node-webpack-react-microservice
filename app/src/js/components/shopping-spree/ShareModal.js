@@ -1,5 +1,5 @@
 import React from 'react';
-import Clipboard from 'clipboard';
+// import Clipboard from 'clipboard';
 import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
@@ -10,13 +10,14 @@ export default class ShareModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: `${win.location.protocol}//${win.location.hostname}${win.location.port ? `:${win.location.port}` : ''}/shopping_sprees/${this.props.firebaseNodeId}/join`,
-      clipboard: new Clipboard(this.copyTrigger, {
-        text: () => this.state.url,
-      }),
+      url: `${win.location.protocol}/${win.location.hostname}${win.location.port ? `:${win.location.port}` : ''}/shopping_sprees/${this.props.firebaseNodeId}/join`,
     };
   }
-
+  // clipboard: new Clipboard(this.copyTrigger, {
+  //   text: () =>
+  // `${win.location.protocol}//${win.location.hostname}${win.location.port ? `
+  // : ${win.location.port}` : ''}/shopping_sprees/${this.props.firebaseNodeId}/join`,
+  // }),
   render() {
     return (
       <div>
@@ -80,10 +81,11 @@ export default class ShareModal extends React.Component {
 
 
 ShareModal.propTypes = {
-  firebaseNodeId: PropTypes.string.isRequired,
+  firebaseNodeId: PropTypes.string,
   nextStep: PropTypes.func,
 };
 
 ShareModal.defaultProps = {
   nextStep: noop,
+  firebaseNodeId: 'test',
 };

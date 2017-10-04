@@ -29,23 +29,25 @@ export default class FirebaseComponent extends React.Component {
 
   createFamebotMessage(text) {
     console.log(text, 'FOR FAMEBOT');
-    // this.createTextMessage(text, 'Fame Bot', 'help@fameandpartners.com', 20);
+    this.createTextMessage(text, 'Fame Bot', 'help@fameandpartners.com', 20);
   }
 
-  // createTextMessage(text, name, email, icon) {
-  //   const newMessage = this.databaseRef('chats').push();
-  //   newMessage.set({ type: 'text',
-  //     value: text,
-  //     created_at: firebase.database.ServerValue.TIMESTAMP,
-  //     from:
-  //     {
-  //       name,
-  //       email,
-  //       icon,
-  //     },
-  //   });
-  // }
-  // databaseRef(name) {
-  //   return firebase.apps[0].database().ref(`${this.props.firebaseNodeId}/${name}`);
-  // }
+  createTextMessage(text, name = 'Mike', email = 'test@gmail.com', icon = 'http://placehold.it/50') {
+    const newMessage = this.databaseRef('chats').push();
+    console.log(text, name, email, icon);
+    console.log(this.databaseRef());
+    newMessage.set({ type: 'text',
+      value: text,
+      created_at: firebase.database.ServerValue.TIMESTAMP,
+      from:
+      {
+        name,
+        email,
+        icon,
+      },
+    });
+  }
+  databaseRef(name) {
+    return firebase.apps[0].database().ref(`test/${name}`);
+  }
 }
