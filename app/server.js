@@ -71,7 +71,7 @@ app.get('/pdp', (req, res) => {
     cssBundle: clientAssets['main.css'],
   });
 
-  html.toStream().pipe(res);
+  res.send(html);
 });
 
 app.post('/pdp', (req, res) => {
@@ -91,27 +91,21 @@ app.post('/pdp', (req, res) => {
       initialState: store.getState(),
     });
 
-    html
-      .toPromise()
-      .then((htmlString) => {
-        res.send({
-          partial: htmlString,
-          jsBundle: clientAssets['main.js'],
-          cssBundle: clientAssets['main.css'],
-        });
-      });
+    res.send({
+      partial: html,
+      jsBundle: clientAssets['main.js'],
+      cssBundle: clientAssets['main.css'],
+    });
   } catch (e) {
     // Catch errors so we don't generate malformed HTML
-    res.send({ e, error: true, message: 'Incorrect Params' });
+    res.status(500).send({ e, error: true, message: 'Incorrect Params' });
   }
 });
 
 app.listen(process.env.PORT || 8001);
 
 // reset the rails cache, have to do it here cause ebs environment variables are lies
-// require('./scripts/clear_cache');
-/* eslint-disable no-console */
+require('./scripts/clear_cache');
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
-/* eslint-enable no-console */
 module.exports = app;
