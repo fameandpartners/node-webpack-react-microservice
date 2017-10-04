@@ -1,37 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class ToastTextMessage extends React.Component
-{
+export default class ToastTextMessage extends React.Component {
 
-    constructor( props )
-    {
-        super( props );
-        this.remove = this.remove.bind( this );
-    }
-    
-    componentDidMount()
-    {
-        this.timer = setTimeout( this.remove, 5000 );
-    }
+  constructor(props) {
+    super(props);
+    this.remove = this.remove.bind(this);
+  }
 
-    remove()
-    {
-        this.props.removeToast( this );
-    }
-    render()
-    {
-        return(
-                <li className='toast-text'>
-                {this.props.name} said "{this.props.text}"
+  componentDidMount() {
+    this.timer = setTimeout(this.remove, 5000);
+  }
+
+  remove() {
+    this.props.removeToast(this);
+  }
+  render() {
+    return (
+      <li className="toast-text">
+        {this.props.name} said "{this.props.text}"
                 </li>
-        );
-    }
+    );
+  }
 }
 
 ToastTextMessage.propTypes = {
-    text: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired,
-    iconNumber: React.PropTypes.number.isRequired,
-    removeToast: React.PropTypes.func.isRequired    
-}
+  text: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  removeToast: PropTypes.func.isRequired,
+};

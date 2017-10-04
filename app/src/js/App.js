@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
@@ -9,6 +10,7 @@ import { bindActionCreators } from 'redux';
 import Raven from 'raven-js';
 
 // Components
+import ShoppingSpree from './components/shopping-spree/App';
 import SideMenu from './components/shared/side_menu/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import CustomizationDrawer from './components/pdp/CustomizationDrawer';
@@ -126,6 +128,7 @@ class App extends Component {
     const { lockBody } = this.props;
     return (
       <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
+        <ShoppingSpree />
         <SideMenu />
         <CustomizationDrawer />
         <AppMain />
