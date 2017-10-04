@@ -1,205 +1,198 @@
-import React from 'react';
-import Drawer from './Drawer';
-import Onboarding from './Onboarding';
-import ShareModal from './ShareModal';
-import AddToCartModal from './AddToCartModal';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import autoBind from 'react-autobind';
 import Cookies from 'universal-cookie';
 
-export default class ShoppingSpree extends React.Component
-{
-    constructor(props)
-    {
-        super(props);
-        this.cookies = new Cookies();
-        this.setInitialState();
+// Components
+import AddToCartModal from './AddToCartModal';
+import Drawer from './Drawer';
+import ShareModal from './ShareModal';
+import Onboarding from './Onboarding';
 
-        this.doneOnboarding = this.doneOnboarding.bind(this);
-        this.doneSharing = this.doneSharing.bind(this);
-        this.showAddToCartModal = this.showAddToCartModal.bind(this);
-        this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
-        this.doneShoppingSpree = this.doneShoppingSpree.bind(this);
-        this.showShareModal = this.showShareModal.bind(this);
-        this.startOnboarding = this.startOnboarding.bind(this);
-        this.closeOnboarding = this.closeOnboarding.bind(this);
-        this.hideZopim = this.hideZopim.bind(this);        
-        window.startShoppingSpree = this.startOnboarding;
+// Polyfills
+import win from '../../polyfills/windowPolyfill';
+
+import '../../../css/components/shopping_spree.scss';
+
+class ShoppingSpree extends Component {
+  constructor(props) {
+    super(props);
+    autoBind(this);
+    this.cookies = new Cookies();
+    this.state = {
+      showAddingToCartModal: false,
+    };
+  }
+  fetchAndClearStartingState() {
+    const toReturn = this.cookies.get('shopping_spree_starting_state');
+    this.cookies.remove('shopping_spree_starting_state');
+    return toReturn;
+  }
+
+  setInitialState() {
+    const startingState = this.fetchAndClearStartingState();
+    const name = this.cookies.get('shopping_spree_name');
+    const icon = parseInt(this.cookies.get('shopping_spree_icon'), 10);
+    const email = this.cookies.get('shopping_spree_email');
+    const firebaseId = this.cookies.get('shopping_spree_id');
+
+    let display = 'none';
+    let minimize = false;
+
+    if (startingState) {
+      display = startingState;
+    } else if (firebaseId) {
+      display = 'chat';
+      minimize = true;
     }
 
-    fetchAndClearStartingState()
+    this.state =
     {
-        const toReturn = this.cookies.get('shopping_spree_starting_state');
-        this.cookies.remove('shopping_spree_starting_state');
-        return toReturn;
+      display,
+      name,
+      email,
+      icon,
+      firebaseNodeId: firebaseId,
+      minimize,
+      showAddToCartModal: false,
+      dressAddingToCart: null,
+    };
+  }
+
+  startOnboarding() {
+    console.log('start onboarding');
+    this.setState({
+      display: 'onboarding',
+    });
+  }
+  showAddToCartModal(dress) {
+    this.setState({
+      showAddingToCartModal: true,
+      dressAddingToCart: dress,
+    });
+  }
+
+  closeAddToCartModal() {
+    this.setState({
+      showAddingToCartModal: false,
+      dressAddingToCart: null,
+    });
+  }
+
+  doneShoppingSpree() {
+    this.cookies.remove('shopping_spree_name');
+    this.cookies.remove('shopping_spree_email');
+    this.cookies.remove('shopping_spree_id');
+    this.setState({
+      display: 'none',
+    });
+  }
+
+  showShareModal() {
+    this.setState({
+      display: 'share',
+    });
+  }
+
+  closeOnboarding() {
+    this.setState({
+      display: 'none',
+    });
+  }
+
+  doneOnboarding(email, name, icon, shoppingSpreeId) {
+    this.setState({
+      display: 'share',
+      name,
+      email,
+      icon,
+      firebaseNodeId: shoppingSpreeId,
+    });
+  }
+
+  doneSharing() {
+    this.setState({
+      display: 'chat',
+    });
+  }
+
+  hideZopim() {
+    if (win.$zopim && win.$zopim.livechat) {
+      win.$zopim.livechat.hideAll();
+    } else {
+      win.requestAnimationFrame(this.hideZopim);
     }
+  }
 
-    setInitialState()
-    {
-        const startingState = this.fetchAndClearStartingState();
-        const name = this.cookies.get('shopping_spree_name');
-        const icon = parseInt(this.cookies.get('shopping_spree_icon'));
-        const email = this.cookies.get('shopping_spree_email');
-        const firebaseId = this.cookies.get('shopping_spree_id');
-
-        let display = 'none';
-        let minimize = false;
-
-        if (startingState)
+  componentDidMount() {
+    this.hideZopim();
+  }
+  render() {
+    return (
+      <div>
         {
-            display = startingState;
-        } else if (firebaseId)
+          this.state.showAddingToCartModal &&
+            <AddToCartModal
+              dress={this.state.dressAddingToCart}
+              firebaseAPI={this.props.firebaseAPI}
+              firebaseDatabase={this.props.firebaseDatabase}
+              firebaseNodeId={this.state.firebaseNodeId}
+              name={this.state.name}
+              email={this.state.email}
+              icon={this.state.icon}
+              closeModal={this.closeAddToCartModal}
+            />
+
+            }
         {
-            display = 'chat';
-            minimize = true;
+          this.state.display !== 'chat' &&
+            <Drawer
+              firebaseAPI={this.props.firebaseAPI}
+              firebaseDatabase={this.props.firebaseDatabase}
+              firebaseNodeId={this.state.firebaseNodeId}
+              name={this.state.name}
+              email={this.state.email}
+              icon={this.state.icon}
+              closed={this.state.minimize}
+              showAddToCartModal={this.showAddToCartModal}
+              doneShoppingSpree={this.doneShoppingSpree}
+              showShareModal={this.showShareModal}
+            />
+
         }
-
-        this.state =
-            {
-                display,
-                name,
-                email,
-                icon,
-                firebaseNodeId: firebaseId,
-                minimize,
-                showAddToCartModal: false,
-                dressAddingToCart: null,
-            };
-    }
-
-    startOnboarding()
-    {
-        console.log('start onboarding');
-        this.setState(
-            {
-                display: 'onboarding',
-            },
-        );
-    }
-    showAddToCartModal(dress)
-    {
-        this.setState(
-            {
-                showAddingToCartModal: true,
-                dressAddingToCart: dress,
-            },
-        );
-    }
-
-    closeAddToCartModal()
-    {
-        this.setState(
-            {
-                showAddingToCartModal: false,
-                dressAddingToCart: null,
-            },
-        );
-    }
-
-    doneShoppingSpree()
-    {
-        this.cookies.remove('shopping_spree_name');
-        this.cookies.remove('shopping_spree_email');
-        this.cookies.remove('shopping_spree_id');
-        this.setState(
-            {
-                display: 'none',
-            },
-        );
-    }
-
-    showShareModal()
-    {
-        this.setState(
-            {
-                display: 'share',
-            },
-        );
-    }
-    
-    closeOnboarding()
-    {
-        this.setState(
-            {
-                display: 'none',
-            },
-        );
-    }
-
-    doneOnboarding(email, name, icon, shoppingSpreeId)
-    {
-        this.setState(
-            {
-                display: 'share',
-                name,
-                email,
-                icon,
-                firebaseNodeId: shoppingSpreeId,
-            },
-        );
-    }
-
-    doneSharing()
-    {
-        this.setState(
-            {
-                display: 'chat',
-            },
-        );
-    }
-
-    hideZopim()
-    {
-        if( window.$zopim && window.$zopim.livechat )
         {
-            window.$zopim.livechat.hideAll();
-        } else
-        {
-            window.requestAnimationFrame( this.hideZopim );
+            this.state.display === 'share' &&
+              <ShareModal
+                nextStep={this.doneSharing}
+                firebaseNodeId={this.state.firebaseNodeId}
+              />
         }
-    }
-
-    componentDidMount()
-    {
-        this.hideZopim();
-    }
-    
-    render()
-    {
-        return (
-                <div>
-                {
-                    this.state.showAddingToCartModal && <AddToCartModal dress={this.state.dressAddingToCart} firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closeModal={this.closeAddToCartModal} />
-
-                }
-            {
-                this.state.display === 'chat' &&
-                    <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closed={this.state.minimize} showAddToCartModal={this.showAddToCartModal} doneShoppingSpree={this.doneShoppingSpree} showShareModal={this.showShareModal} />
-
-            }
-            {
-                this.state.display === 'share' &&
-                    <ShareModal nextStep={this.doneSharing} firebaseNodeId={this.state.firebaseNodeId} />
-            }
-
-            {
-                this.state.display === 'onboarding' &&
-                    <Onboarding doneOnboarding={this.doneOnboarding} close={this.closeOnboarding} shoppingSpreeId={this.state.firebaseNodeId} />
-            }
-            </div>
-        );
-    }
-
-
+        {
+            this.state.display === 'onboarding' &&
+              <Onboarding
+                doneOnboarding={this.doneOnboarding}
+                close={this.closeOnboarding}
+                shoppingSpreeId={this.state.firebaseNodeId}
+              />
+        }
+      </div>
+    );
+  }
 }
 
-
 ShoppingSpree.propTypes = {
-    firebaseAPI: React.PropTypes.string.isRequired,
-    firebaseDatabase: React.PropTypes.string.isRequired,
+  firebaseAPI: PropTypes.string,
+  firebaseDatabase: PropTypes.string.isRequired,
 };
 
 ShoppingSpree.defaultProps = {
-    name: null,
-    icon: 0,
-    email: null,
-    firebaseId: null,
+  name: null,
+  icon: 0,
+  email: null,
+  firebaseId: null,
+  firebaseAPI: 'AIzaSyDhbuF98kzK0KouFeasDELcOKJ4q7DzhHY',
+  firebaseDatabase: 'shopping-spree-85d74',
 };
+
+
+export default ShoppingSpree;

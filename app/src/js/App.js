@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 import Raven from 'raven-js';
 
 // Components
-import ShoppingSpree from './components/shopping-spree/App';
+import ShoppingSpree from './components/shopping-spree/ShoppingSpree';
 import SideMenu from './components/shared/side_menu/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import CustomizationDrawer from './components/pdp/CustomizationDrawer';
