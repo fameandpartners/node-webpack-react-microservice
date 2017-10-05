@@ -1,11 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import * as firebase from 'firebase';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import FirebaseComponent from './FirebaseComponent';
 import SizeButton from './SizeButton';
 
-export default class AddToCartModal extends FirebaseComponent {
+function stateToProps(state) {
+  return {
+    $$productState: state.$$productState,
+  };
+}
+
+
+class AddToCartModal extends FirebaseComponent {
 
   constructor(props) {
     super(props);
@@ -15,6 +23,7 @@ export default class AddToCartModal extends FirebaseComponent {
       height: null,
       showHeightError: false,
       showSizeError: null,
+      dress: this.props.$$productState,
     };
     this.initializeFirebase();
   }
@@ -22,25 +31,20 @@ export default class AddToCartModal extends FirebaseComponent {
 
   addToCart() {
     if (this.state.height == null) {
-      this.setState(
-        {
-          showHeightError: true,
-        },
-            );
+      this.setState({
+        showHeightError: true,
+      });
     }
 
     if (this.state.selectedSize == null) {
-      this.setState(
-        {
-          showSizeError: true,
-        },
-            );
+      this.setState({
+        showSizeError: true,
+      });
     }
 
     if (this.state.height && this.state.selectedSize) {
       this.createFirebaseCartItem();
       this.createFirebaseFamebotMessage();
-
       this.props.closeModal();
     }
   }
@@ -63,18 +67,18 @@ export default class AddToCartModal extends FirebaseComponent {
 
   createFirebaseCartItem() {
     const newMessage = this.cartDB.push();
-    console.log(this.props.dress);
+    console.log(this.state.dress.get('description'));
     newMessage.set({ created_at: firebase.database.ServerValue.TIMESTAMP,
       dress:
       {
         size: this.state.selectedSize,
         height: this.state.height,
-        description: this.props.dress.description,
-        image: this.props.dress.image,
-        name: this.props.dress.name,
-        price: this.props.dress.price,
-        product_id: this.props.dress.product_id,
-        url: this.props.dress.url,
+        description: this.state.dress.productDescription,
+        image: this.state.dress.image,
+        name: this.state.dress.name,
+        price: this.state.dress.price,
+        product_id: this.state.dress.product_id,
+        url: this.state.dress.url,
       },
       entry_for:
       {
@@ -123,6 +127,7 @@ export default class AddToCartModal extends FirebaseComponent {
   }
 
   render() {
+    console.log('Adding to cart');
     return (
       <div>
         <div className="shopping-spree-share-modal-background shopping-spree" />
@@ -253,21 +258,23 @@ AddToCartModal.propTypes = {
       length: PropTypes.string.isRequired,
       price: PropTypes.string.isRequired,
       size: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
     },
   ),
   closeModal: PropTypes.func.isRequired,
 };
 
 AddToCartModal.defaultProps = {
-  dress: PropTypes.shape(
-    {
-      image: 'test',
-      name: 'test',
-      url: 'test',
-      fabric: 'test',
-      length: 'test',
-      price: 'test',
-      size: 'test',
-    },
-  ),
+  dress: {
+    image: 'test',
+    name: 'test',
+    url: 'test',
+    fabric: 'test',
+    length: 'test',
+    price: 'test',
+    size: 'test',
+    description: 'test',
+  },
 };
+
+export default connect(stateToProps)(AddToCartModal);

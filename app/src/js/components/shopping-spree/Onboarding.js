@@ -11,21 +11,20 @@ export default class Onboarding extends React.Component {
 
   join() {
     const context = this;
+    console.log('Adding', this.nameInput.value, this.emailInput.value, 'to', this.props.shoppingSpreeId);
     request.post('/shopping_sprees')
             .set('Content-Type', 'application/json')
-            .send(
-      {
-        name: this.nameInput.value,
-        email: this.emailInput.value,
-        shoppingSpreeId: this.props.shoppingSpreeId,
-      },
-            ).end((error, response) => {
-              context.props.doneOnboarding(response.body.name,
-                                                  response.body.email,
-                                                  response.body.icon,
-                                                  response.body.id);
-            },
-                 );
+            .send({
+              name: this.nameInput.value,
+              email: this.emailInput.value,
+              shoppingSpreeId: this.props.shoppingSpreeId,
+            }).end((error, response) => {
+              context.props.doneOnboarding(
+                response.body.name,
+                response.body.email,
+                response.body.icon,
+                response.body.id);
+            });
   }
 
   render() {

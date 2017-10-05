@@ -21,6 +21,15 @@ class ShoppingSpree extends Component {
     this.cookies = new Cookies();
     this.state = {
       showAddingToCartModal: false,
+      // firebaseNodeId: this.cookies.get('shopping_spree_id'),
+      firebaseNodeId: 'test',
+      email: this.cookies.get('shopping_spree_email'),
+      icon: parseInt(this.cookies.get('shopping_spree_icon'), 10),
+      name: this.cookies.get('shopping_spree_name'),
+      display: this.cookies.get('shopping_spree_id') !== null,
+      minimize: this.cookies.get('shopping_spree_id') !== null,
+      showAddToCartModal: false,
+      dressAddingToCart: null,
     };
   }
   fetchAndClearStartingState() {
@@ -29,35 +38,29 @@ class ShoppingSpree extends Component {
     return toReturn;
   }
 
-  setInitialState() {
-    const startingState = this.fetchAndClearStartingState();
-    const name = this.cookies.get('shopping_spree_name');
-    const icon = parseInt(this.cookies.get('shopping_spree_icon'), 10);
-    const email = this.cookies.get('shopping_spree_email');
-    const firebaseId = this.cookies.get('shopping_spree_id');
-
-    let display = 'none';
-    let minimize = false;
-
-    if (startingState) {
-      display = startingState;
-    } else if (firebaseId) {
-      display = 'chat';
-      minimize = true;
-    }
-
-    this.state =
-    {
-      display,
-      name,
-      email,
-      icon,
-      firebaseNodeId: firebaseId,
-      minimize,
-      showAddToCartModal: false,
-      dressAddingToCart: null,
-    };
-  }
+  // setInitialState() {
+  //   const startingState = this.fetchAndClearStartingState();
+  //   const email = this.cookies.get('shopping_spree_email');
+  //
+  //   let display = 'none';
+  //   let minimize = false;
+  //
+  //   if (startingState) {
+  //     display = startingState;
+  //   } else if (firebaseId) {
+  //     display = 'chat';
+  //     minimize = true;
+  //   }
+  //
+  //   this.state = {
+  //     display,
+  //     name,
+  //     email,
+  //     icon,
+  //     firebaseNodeId: firebaseId,
+  //     minimize,
+  //   };
+  // }
 
   startOnboarding() {
     console.log('start onboarding');
@@ -142,10 +145,9 @@ class ShoppingSpree extends Component {
               icon={this.state.icon}
               closeModal={this.closeAddToCartModal}
             />
-
-            }
+        }
         {
-          this.state.display !== 'chat' &&
+          this.state.display === 'chat' &&
             <Drawer
               firebaseAPI={this.props.firebaseAPI}
               firebaseDatabase={this.props.firebaseDatabase}
@@ -189,7 +191,7 @@ ShoppingSpree.defaultProps = {
   name: null,
   icon: 0,
   email: null,
-  firebaseId: null,
+  firebaseId: 'test',
   firebaseAPI: 'AIzaSyDhbuF98kzK0KouFeasDELcOKJ4q7DzhHY',
   firebaseDatabase: 'shopping-spree-85d74',
 };
