@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 // X-CSRF-Token
-import axios from 'axios';
+import request from 'superagent';
 
 // polyfills
 import win from '../polyfills/windowPolyfill';
@@ -78,27 +78,21 @@ function transformLineItem(lineItem, auSite) {
 }
 
 export function addToCart(item, auSite) {
+  // TODO: Initalize superagent with default REST API Json values
   const transformedLineItem = transformLineItem(item, auSite);
-  console.log(transformedLineItem);
   const csrf = win.document.querySelector('meta[name="csrf-token"]');
   const token = csrf ? csrf.content : '';
-  // if (win.app && win.app.shopping_cart) {
-  //
-  //   win.app.shopping_cart.addProduct(transformedLineItem);
-  // }
-  axios({
-    method: 'post',
-    url: '/api/v1/user_cart/products',
-    data: transformLineItem,
-    headers: {
-      'X-CSRF-Token': token,
-      'Content-Type': 'application/json',
-    },
-  })
-  .then((response) => {
-    console.log('response', response);
-  });
-  // headers: { Authorization: localStorage.getItem('token') }
+
+  request
+    .post('/user_cart/products')
+    .send(transformedLineItem)
+    .set('X-CSRF-Token', token)
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      // TODO: Send to cart
+      console.log('err', err);
+      console.log('res', res);
+    });
 }
 
 export default {

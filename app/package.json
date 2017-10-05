@@ -55,7 +55,6 @@
   },
   "dependencies": {
     "accounting": "^0.4.1",
-    "axios": "^0.16.2",
     "babel-cli": "^6.24.0",
     "babel-core": "6.22.1",
     "babel-eslint": "^7.2.3",
@@ -101,7 +100,8 @@
     "redux-thunk": "^2.2.0",
     "sanitize-html": "^1.14.1",
     "sass-loader": "^6.0.3",
-    "shallowequal": "^1.0.1"
+    "shallowequal": "^1.0.1",
+    "superagent": "^3.6.3"
   },
   "devDependencies": {
     "autoprefixer": "6.7.2",
