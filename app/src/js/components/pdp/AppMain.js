@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
 import classnames from 'classnames';
+import ReactHoverObserver from 'react-hover-observer';
 
 // Decorators
 import Resize from '../../decorators/Resize';
@@ -27,6 +28,13 @@ import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import ProductFabricInfo from './ProductFabricInfo';
+import CartDrawer from './CartDrawer';
+
+// Generic UI Components
+import HeaderHider from '../shared/header/HeaderHider';
+import HeaderMobile from '../shared/header/HeaderMobile';
+import Header from '../shared/header/Header';
+// import Footer from '../shared/Footer';
 
 // import FameDifference from './FameDifference';
 
@@ -89,6 +97,7 @@ class AppMain extends Component {
       sideMenuOpen,
       fabric,
       garmentCareInformation,
+      productTitle,
       sku,
     } = this.props;
 
@@ -118,6 +127,16 @@ class AppMain extends Component {
                   visibility: opacity !== 0 ? 'visible' : 'hidden',
                 }}
               />
+
+              { breakpoint === 'mobile' || breakpoint === 'tablet' ?
+                <HeaderHider>
+                  <HeaderMobile headerTitle={productTitle} />
+                </HeaderHider>
+                :
+                <ReactHoverObserver hoverOffDelayInMs={120}>
+                  <Header />
+                </ReactHoverObserver>
+              }
 
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? <ProductDisplayOptionsTouch />
@@ -162,6 +181,13 @@ class AppMain extends Component {
             </div>
 
             <div
+              className="CartDrawer__wrapper"
+              style={{ transform: `translateX(${500 - (x * -1)}px)` }}
+            >
+              <CartDrawer />
+            </div>
+
+            <div
               className="u-position--fixed u-width--full u-bottom u-z-index--mid"
               style={{ transform: `translateX(${x}px)` }}
             >
@@ -188,6 +214,7 @@ AppMain.propTypes = {
   }).isRequired,
   garmentCareInformation: PropTypes.string.isRequired,
   sku: PropTypes.string,
+  productTitle: PropTypes.string.isRequired,
 
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
