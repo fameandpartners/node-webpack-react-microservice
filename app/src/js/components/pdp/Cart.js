@@ -122,7 +122,9 @@ Cart.propTypes = {
       centsTotal: PropTypes.number,
       hexValue: PropTypes.string,
     }),
+    productCentsBasePrice: PropTypes.number,
     productImage: PropTypes.string,
+    productTitle: PropTypes.string,
   })).isRequired,
 };
 

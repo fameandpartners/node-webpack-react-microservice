@@ -83,16 +83,11 @@ export function addToCart(item, auSite) {
   const csrf = win.document.querySelector('meta[name="csrf-token"]');
   const token = csrf ? csrf.content : '';
 
-  request
+  return request
     .post('/user_cart/products')
     .send(transformedLineItem)
     .set('X-CSRF-Token', token)
-    .set('Accept', 'application/json')
-    .end((err, res) => {
-      // TODO: Send to cart
-      console.log('err', err);
-      console.log('res', res);
-    });
+    .set('Accept', 'application/json');
 }
 
 export default {

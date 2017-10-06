@@ -50,8 +50,12 @@ function stateToProps(state) {
 }
 
 function dispatchToProps(dispatch) {
-  const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
+  const {
+    activateCartDrawer,
+    addItemToCart,
+    setCartContents,
+  } = bindActionCreators(CartActions, dispatch);
   const {
     setSizeProfileError,
     activateCustomizationDrawer,
@@ -61,6 +65,7 @@ function dispatchToProps(dispatch) {
     activateCartDrawer,
     activateModal,
     addItemToCart,
+    setCartContents,
     setSizeProfileError,
     activateCustomizationDrawer,
   };
@@ -85,6 +90,19 @@ class AddToCartButton extends Component {
       colorCentsTotal,
       selectedAddonOptions,
       expressMakingSelected,
+    });
+  }
+
+  handleAddToBagCallback(req) {
+    const { activateCartDrawer, setCartContents } = this.props;
+    req.end((err, res) => {
+      if (err) {
+        return console.log('error adding something to the cart');
+      }
+
+      setCartContents({ cart: res.body });
+      activateCartDrawer({ cartDrawerOpen: true });
+      return null;
     });
   }
 
@@ -119,7 +137,7 @@ class AddToCartButton extends Component {
       }
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
-      addToCart(lineItem, auSite);
+      this.handleAddToBagCallback(addToCart(lineItem, auSite));
     }
   }
 
@@ -164,10 +182,12 @@ AddToCartButton.propTypes = {
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   // addItemToCart: PropTypes.func.isRequired,
-  setSizeProfileError: PropTypes.func.isRequired,
+  activateCartDrawer: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func,
   activateModal: PropTypes.func,
   heightValue: PropTypes.number,
+  setSizeProfileError: PropTypes.func.isRequired,
+  setCartContents: PropTypes.func.isRequired,
   sizeValue: PropTypes.number,
   breakpoint: PropTypes.string,
   expressMakingSelected: PropTypes.bool,
