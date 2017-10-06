@@ -34,7 +34,7 @@ import CartDrawer from './CartDrawer';
 import HeaderHider from '../shared/header/HeaderHider';
 import HeaderMobile from '../shared/header/HeaderMobile';
 import Header from '../shared/header/Header';
-// import Footer from '../shared/Footer';
+import Footer from '../shared/Footer';
 
 // import FameDifference from './FameDifference';
 
@@ -178,6 +178,7 @@ class AppMain extends Component {
                   )
                 }
 
+              <Footer />
             </div>
 
             <div

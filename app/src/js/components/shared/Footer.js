@@ -50,32 +50,34 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a href="/faqs#collapse-delivery-how-long">Shipping Info</a>
+                <a className="link--static" href="/faqs#collapse-delivery-how-long">
+                  Shipping Info
+                </a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/faqs#collapse-returns-policy">Returns Policy</a>
+                <a className="link--static" href="/faqs#collapse-returns-policy">Returns Policy</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/contact">Fame Contact Us</a>
+                <a className="link--static" href="/contact">Fame Contact Us</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/faqs">FAQs</a>
+                <a className="link--static" href="/faqs">FAQs</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/size-guide">Size Guide</a>
+                <a className="link--static" href="/size-guide">Size Guide</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/faqs#collapse-orders-track">Track My Order</a>
+                <a className="link--static" href="/faqs#collapse-orders-track">Track My Order</a>
               </p>
             </li>
           </ul>
@@ -83,32 +85,32 @@ class Footer extends PureComponent {
             <li><p className="Footer__category-title">About</p></li>
             <li>
               <p>
-                <a href="/why-us">Why shop with us</a>
+                <a className="link--static" href="/why-us">Why shop with us</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/about">About us</a>
+                <a className="link--static" href="/about">About us</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/fame-society-application">Fame Society</a>
+                <a className="link--static" href="/fame-society-application">Fame Society</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/from-our-ceo">From our CEO</a>
+                <a className="link--static" href="/from-our-ceo">From our CEO</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/privacy">Privacy Policy</a>
+                <a className="link--static" href="/privacy">Privacy Policy</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/terms">Terms</a>
+                <a className="link--static" href="/terms">Terms</a>
               </p>
             </li>
           </ul>
@@ -116,32 +118,32 @@ class Footer extends PureComponent {
             <li><p className="Footer__category-title">Shop By</p></li>
             <li>
               <p>
-                <a href="/dresses/best-sellers">Best Sellers</a>
+                <a className="link--static" href="/dresses/best-sellers">Best Sellers</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/dresses?order=newest">What's new</a>
+                <a className="link--static" href="/dresses?order=newest">What's new</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/getitquick">Made in 48 Hours</a>
+                <a className="link--static" href="/getitquick">Made in 48 Hours</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/dresses/formal">Formal</a>
+                <a className="link--static" href="/dresses/formal">Formal</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/dresses/prom">Prom</a>
+                <a className="link--static" href="/dresses/prom">Prom</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/dresses">View All Dresses</a>
+                <a className="link--static" href="/dresses">View All Dresses</a>
               </p>
             </li>
           </ul>
