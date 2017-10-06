@@ -111,16 +111,20 @@ class AppMain extends Component {
         }}
       >
         {({ opacity, x }) =>
-          <div className="AppMain__wrapper">
+          <div
+            className={
+            classnames(
+              'AppMain__wrapper',
+              { 'AppMain__wrapper--cart-drawer-open': cartDrawerOpen },
+            )
+          }
+          >
             <div
               className="AppMain u-height--full"
               style={{ transform: `translateX(${x}px)` }}
             >
               <div
-                className={classnames(
-                  'App__blanket u-height--full u-width--full',
-                  { 'App__blanket--open': sideMenuOpen },
-                )}
+                className="App__blanket u-height--full u-width--full"
                 onClick={this.handleCloseMenu}
                 style={{
                   opacity: opacity / 100,

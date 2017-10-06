@@ -38,6 +38,7 @@ class Cart extends Component {
 
     return lineItems.map((lineItem) => {
       const {
+        id,
         color,
         productCentsBasePrice,
         productImage,
@@ -47,8 +48,8 @@ class Cart extends Component {
       } = lineItem;
       return (
         <div
-          key={Math.random()}
-          className="Cart__single-product-description u-mt-normal grid-12"
+          key={id}
+          className="Cart__single-product-description grid-12"
         >
           <div className="col-5">
             <img className="u-width--full" alt="dress1" src={productImage} />
@@ -72,28 +73,32 @@ class Cart extends Component {
   render() {
     const { complementaryProducts } = this.props;
     return (
-      <div className="Cart u-overflow-y--scroll">
-        <div className="Cart__contents">
+      <div className="Cart u-flex u-flex--1">
+        <div className="Cart__contents u-flex--col">
+
           <div className="Cart__layout-container">
-
-            { this.generateLineItems() }
-
-
-            <div className="Cart__subtotal u-text-align--center">
-              <span>Subtotal</span>
-              <span className="Cart__subtotal-price">
+            <div className="Cart__subtotal u-text-align--center grid-12 u-mt-small">
+              <span className="col-6 u-text-align--left">Subtotal</span>
+              <span className="col-6 Cart__subtotal-price u-text-align--right">
                 { formatCents(this.subTotal(), 2) }
               </span>
             </div>
             <Button
               tall
               className="u-mb-normal"
-              handleClick={() => { console.warn('TODO: SUBMIT API REQUEST'); }}
+              url="/checkout"
               text="Checkout"
             />
           </div>
-          <div className="Cart__layout-container">
-            <ProductCrossSell complementaryProducts={complementaryProducts} />
+
+
+          <div className="u-flex u-flex--1">
+            <div className="Cart__layout-container u-overflow-y--scroll">
+              <div className="Cart__line-item-wrapper">
+                { this.generateLineItems() }
+              </div>
+              <ProductCrossSell complementaryProducts={complementaryProducts} />
+            </div>
           </div>
 
         </div>

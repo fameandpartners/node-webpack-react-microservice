@@ -26,6 +26,7 @@ export const $$initialState = Immutable.fromJS({
 
 function transformCartDataLineItems(lineItems) {
   return lineItems.map(li => ({
+    id: li.line_item_id,
     productCentsBasePrice: (parseInt(li.price.amount, 10) * 100),
     productImage: li.image.original,
     productTitle: li.name,

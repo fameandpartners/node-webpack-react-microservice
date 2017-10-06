@@ -17,7 +17,7 @@ class Button extends Component {
     }
   }
 
-  render() {
+  renderButton() {
     const {
       className,
       disabled,
@@ -61,6 +61,19 @@ class Button extends Component {
       </button>
     );
   }
+
+  render() {
+    const { url } = this.props;
+    return (
+      url
+      ? (
+        <a href={url}>
+          {this.renderButton()}
+        </a>
+        )
+      : this.renderButton()
+    );
+  }
 }
 
 Button.propTypes = {
@@ -75,6 +88,7 @@ Button.propTypes = {
   tertiary: PropTypes.bool,
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   uppercase: PropTypes.bool,
+  url: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
 };
 
@@ -90,6 +104,7 @@ Button.defaultProps = {
   text: 'Submit',
   tertiary: false,
   uppercase: false,
+  url: null,
 };
 
 export default Button;

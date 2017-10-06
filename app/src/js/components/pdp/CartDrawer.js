@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
-import objnoop from '../../libs/objnoop';
+import { bindActionCreators } from 'redux';
 
 // UI Components
 import CartEmpty from './CartEmpty';
 import Cart from './Cart';
+import CancelOut from '../shared/CancelOut';
+
+// Actions
+import * as CartActions from '../../actions/CartActions';
 
 // CSS
 import '../../../css/components/Cart.scss';
@@ -20,6 +24,11 @@ function stateToProps(state) {
   };
 }
 
+function dispatchToProps(dispatch) {
+  const { activateCartDrawer } = bindActionCreators(CartActions, dispatch);
+  return { activateCartDrawer };
+}
+
 
 class CartDrawer extends Component {
   constructor(props) {
@@ -27,21 +36,8 @@ class CartDrawer extends Component {
     autoBind(this);
   }
 
-  subTotal() {
-    const { lineItems } = this.props;
-    if (lineItems.length > 0) {
-      // Reduces subTotal based on base price, colors, and addons chosen
-      return lineItems.reduce(
-        (prevTotal, currLineItem) => {
-          const lineItemTotal
-            = currLineItem.color.centsTotal
-            + currLineItem.productCentsBasePrice
-            + currLineItem.addons.reduce((subTotal, c) => subTotal + c.centsTotal, 0);
-          return prevTotal + lineItemTotal;
-        }, 0,
-      );
-    }
-    return '';
+  handleShoppingBagClose() {
+    this.props.activateCartDrawer({ cartDrawerOpen: false });
   }
 
   render() {
@@ -49,19 +45,28 @@ class CartDrawer extends Component {
 
     return (
       <div className="CartDrawer u-flex--col u-height--full">
-        <div className="CartDrawer__header">
-          <h4>Shopping Bag</h4>
+        <div className="CartDrawer__header Cart__layout-container header-wrapper">
+          <div className="u-position--relative">
+            <span
+              onClick={this.handleShoppingBagClose}
+              className="CartDrawer__hidden-close u-cursor--pointer"
+            >
+              <CancelOut />
+            </span>
+            <h4>Shopping Bag</h4>
+          </div>
+          { lineItems.length > 0
+            ? <Cart complementaryProducts={complementaryProducts} lineItems={lineItems} />
+            : <CartEmpty />
+          }
         </div>
-        { lineItems.length > 0
-          ? <Cart complementaryProducts={complementaryProducts} lineItems={lineItems} />
-          : <CartEmpty />
-        }
       </div>
     );
   }
 }
 
 CartDrawer.propTypes = {
+  // Redux Props
   complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
     centsPrice: PropTypes.number,
     smallImg: PropTypes.string,
@@ -82,7 +87,9 @@ CartDrawer.propTypes = {
       centsTotal: PropTypes.number,
     })),
   })).isRequired,
+  // Redux Actions
+  activateCartDrawer: PropTypes.func.isRequired,
   // modelDescription: PropTypes.string.isRequired,
 };
 
-export default connect(stateToProps, objnoop)(CartDrawer);
+export default connect(stateToProps, dispatchToProps)(CartDrawer);
