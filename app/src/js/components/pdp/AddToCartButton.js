@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
 
 // Utilities
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
@@ -70,6 +71,12 @@ class AddToCartButton extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+
+    const cookies = new Cookies();
+
+    this.state = {
+      inShoppingSpree: cookies.get('shopping_spree_id') != null,
+    };
   }
 
   subTotal() {
@@ -103,6 +110,7 @@ class AddToCartButton extends Component {
       breakpoint,
       activateModal,
     } = this.props;
+
     if (!sizeProfilePresence(sizeValue, heightValue)) {
       setSizeProfileError({
         heightError: !heightValue,
@@ -117,11 +125,20 @@ class AddToCartButton extends Component {
       }
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
-      addToCart(lineItem, auSite);
+
+      if (this.state.inShoppingSpree) {
+        console.log('Add to Clique... clicked.');
+      } else {
+        addToCart(lineItem, auSite);
+      }
     }
   }
 
   generateText() {
+    if (this.state.inShoppingSpree) {
+      return 'Add to Clique';
+    }
+
     if (this.props.showTotal) {
       return `${this.subTotal()} - Add to Bag`;
     }
