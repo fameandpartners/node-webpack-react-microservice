@@ -48,8 +48,7 @@ export default class ShoppingSpree extends React.Component {
       minimize = true;
     }
 
-    this.state =
-    {
+    this.state = {
       display,
       name,
       email,
@@ -62,12 +61,11 @@ export default class ShoppingSpree extends React.Component {
   }
 
   startOnboarding() {
-    console.log('start onboarding');
     this.setState(
       {
         display: 'onboarding',
       },
-        );
+    );
   }
   showAddToCartModal(dress) {
     this.setState(
@@ -126,11 +124,29 @@ export default class ShoppingSpree extends React.Component {
         );
   }
 
+<<<<<<< HEAD
   doneSharing() {
     this.setState(
       {
         display: 'chat',
       },
+=======
+    doneOnboarding(email, name, icon, shoppingSpreeId)
+    {
+        this.cookies.set('shopping_spree_name', name);
+        this.cookies.set('shopping_spree_icon', icon);
+        this.cookies.set('shopping_spree_email', email);
+        this.cookies.set('shopping_spree_id', shoppingSpreeId);
+        
+        this.setState(
+            {
+                display: 'share',
+                name,
+                email,
+                icon,
+                firebaseNodeId: shoppingSpreeId,
+            },
+>>>>>>> refs/subrepo/app/src/shopping-spree/fetch
         );
   }
 
@@ -165,7 +181,11 @@ export default class ShoppingSpree extends React.Component {
 
         {
                 this.state.display === 'onboarding' &&
+<<<<<<< HEAD
                 <Onboarding doneOnboarding={this.doneOnboarding} close={this.closeOnboarding} shoppingSpreeId={this.state.firebaseNodeId} />
+=======
+                    <Onboarding firebaseDatabase={this.props.firebaseDatabase} doneOnboarding={this.doneOnboarding} close={this.closeOnboarding} shoppingSpreeId={this.state.firebaseNodeId} />
+>>>>>>> refs/subrepo/app/src/shopping-spree/fetch
             }
       </div>
     );
