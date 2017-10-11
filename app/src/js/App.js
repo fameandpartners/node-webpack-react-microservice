@@ -124,11 +124,21 @@ class App extends Component {
     }
   }
 
+  loadShoppingSpree()
+    {
+        if( win.ShoppingSpreeData ) {
+            return( <ShoppingSpree firebaseAPI={win.ShoppingSpreeData.firebaseAPI}
+                    firebaseDatabase={win.ShoppingSpreeData.firebaseDatabase}/> );
+        } else {
+            return;            
+        }
+  }
+
   render() {
     const { lockBody } = this.props;
     return (
-      <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
-        <ShoppingSpree />
+        <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
+        {this.loadShoppingSpree()}
         <SideMenu />
         <CustomizationDrawer />
         <AppMain />
