@@ -78,7 +78,7 @@ export default class Drawer extends React.Component
 
               <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.state.display === 'cart' ? " hidden" : "")}>
                 <div className="row header">
-                  <div role="button" className="row" onClick={this.handleToggle}>
+                  <div role="button" className="u-width--full" onClick={this.handleToggle}>
                     <div className="col-xs-2">
                       <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
                     </div>
@@ -100,6 +100,7 @@ export default class Drawer extends React.Component
                   showAddToCartModal={this.props.showAddToCartModal}
                   name={this.state.name}
                   doneShoppingSpree={this.props.doneShoppingSpree}
+                  updateExitModalStatus={this.props.updateExitModalStatus}
                   showShareModal={this.props.showShareModal}
                   />
                 <ChatBar
