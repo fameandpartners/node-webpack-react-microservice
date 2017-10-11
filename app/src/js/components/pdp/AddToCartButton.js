@@ -138,6 +138,7 @@ class AddToCartButton extends Component {
     const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
     win.addToShoppingSpree(lineItem.productId,
                            lineItem.productTitle,
+                           win.PdpDataFull.product.master_id,
                            'description',
                            Math.round(lineItem.productCentsBasePrice / 100),
                            lineItem.productImage,
