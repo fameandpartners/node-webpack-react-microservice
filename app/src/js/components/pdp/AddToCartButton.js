@@ -125,12 +125,15 @@ class AddToCartButton extends Component {
       }
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
+      addToCart(lineItem, auSite);
+    }
+  }
 
-      if (this.state.inShoppingSpree) {
-        console.log('Add to Clique... clicked.');
-      } else {
-        addToCart(lineItem, auSite);
-      }
+  handleAddButtonClick() {
+    if (this.state.inShoppingSpree) {
+      console.log('Add to Clique... clicked.');
+    } else {
+      this.handleAddToBag();
     }
   }
 
@@ -153,7 +156,7 @@ class AddToCartButton extends Component {
         uppercase
         className="AddToCartButton"
         text={this.generateText()}
-        handleClick={this.handleAddToBag}
+        handleClick={this.handleAddButtonClick}
       />
     );
   }
