@@ -28,6 +28,7 @@ import ModalConstants from '../../constants/ModalConstants';
 
 // temp. helpers (for Rails merge)
 import { addToCart } from '../../utilities/cart-helper';
+import win from '../../polyfills/windowPolyfill';
 
 function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
@@ -129,9 +130,25 @@ class AddToCartButton extends Component {
     }
   }
 
+  handleAddToShoppingSpree() {
+    const {
+        $$customizationState,
+        $$productState,
+    } = this.props;
+    const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
+    win.addToShoppingSpree(lineItem.productId,
+                           lineItem.productTitle,
+                           'description',
+                           Math.round(lineItem.productCentsBasePrice / 100),
+                           lineItem.productImage,
+                           win.location.href,
+                           lineItem.color,
+                           null);
+  }
+
   handleAddButtonClick() {
     if (this.state.inShoppingSpree) {
-      console.log('Add to Clique... clicked.');
+      this.handleAddToShoppingSpree();
     } else {
       this.handleAddToBag();
     }
