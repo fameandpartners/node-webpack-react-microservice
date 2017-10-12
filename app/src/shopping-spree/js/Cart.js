@@ -80,10 +80,55 @@ export default class Cart extends FirebaseComponent
     let index = -1;
     for( let i = 0; i < this.state.myItems.length && index === -1; i++ )
     {
-      if( this.state.myItems[i].props.firebaseKey == firebaseKey )
-      {
-        index = i;
-      }
+        return(
+                <div className="shopping-spree-cart">
+                <div className="row header vertical-align">
+                <div className="header__inner">
+                <div className="back-to-spree col-md-4 col-xs-4" onClick={this.props.transitionToChat}>
+                <div className="left-caret"></div>
+                <div className="back-to-spree-text shopping-spree-headline">
+                    Back to spree
+                </div>
+                </div>
+                <div className="col-xs-4 col-md-4 text-center">
+                  Your Bag
+                </div>
+                <div className="col-xs-4 col-md-4 text-right">
+                  {this.state.discount} off
+                </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="no-left-gutter col-xs-push-1 col-xs-4">{this.state.discount} off
+            </div>
+                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
+                ${this.state.totalOff.toFixed(2)}
+            </div>
+                </div>
+                <div className="row">
+                <div className="no-left-gutter col-xs-push-1 col-xs-4">
+                <strong>Total</strong>
+                </div>
+                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
+                <strong>${(this.state.totalInMyCart - this.state.totalOff).toFixed(2)}</strong>
+                </div>
+              </div>
+
+              <div className="row checkout-btn">
+                <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a onClick={this.checkout} className="center-block btn btn-black btn-lrg">Checkout</a></div>
+              </div>
+              <div className="shopping-spree-contents">
+                <div className="row">
+                <div className="col-xs-18">
+                <ul className="cart-item-list">
+                {this.state.myItems}
+            </ul>
+                </div>
+                </div>
+                </div>
+                </div>
+        );
     }
     this.state.myItems.splice( index, 1 );
     this.setState (
