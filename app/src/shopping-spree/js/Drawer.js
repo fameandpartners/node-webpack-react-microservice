@@ -73,6 +73,7 @@ export default class Drawer extends React.Component
                       name={this.state.name}
                       email={this.state.email}
                       updateDiscount={this.updateDiscountOnDrawer}
+                      doneShoppingSpree={this.props.doneShoppingSpree}
                       />
               </div>
 
