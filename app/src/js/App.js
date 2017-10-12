@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { render } from 'react-dom';
 
 // Sentry Error Tracking
 import Raven from 'raven-js';
@@ -124,21 +125,22 @@ class App extends Component {
     }
   }
 
-  loadShoppingSpree()
-    {
-        if( win.ShoppingSpreeData ) {
-            return( <ShoppingSpree firebaseAPI={win.ShoppingSpreeData.firebaseAPI}
-                    firebaseDatabase={win.ShoppingSpreeData.firebaseDatabase}/> );
-        } else {
-            return;            
-        }
+  componentDidMount(){
+    // IF SHOPPING SPREE IS AVAILBLE, BUILD IT
+    if( win.ShoppingSpreeData ) {
+      render(
+          <ShoppingSpree firebaseAPI={window.ShoppingSpreeData.firebaseAPI}
+                         firebaseDatabase={window.ShoppingSpreeData.firebaseDatabase}/>,
+
+          document.getElementById( 'shopping-spree' )
+      );
+    }
   }
 
   render() {
     const { lockBody } = this.props;
     return (
         <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
-        {this.loadShoppingSpree()}
         <SideMenu />
         <CustomizationDrawer />
         <AppMain />
