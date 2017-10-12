@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:fameandpartners/shopping-spree.git
 	branch = master
-	commit = 1c532026d3a28c6a50277737895de3d9f5e856b2
-	parent = 60621940ed50ab98cf4076b18189893d8b84a992
+	commit = c1e7660e5f257ef3d76b0dcc82eef874232faaee
+	parent = 1785e5535fe6626b8de576b9e59ad810f5d06c8f
 	cmdver = 0.4.0
 	method = merge
