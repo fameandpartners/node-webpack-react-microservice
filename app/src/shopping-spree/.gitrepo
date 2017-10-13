@@ -7,6 +7,6 @@
 	remote = git@github.com:fameandpartners/shopping-spree.git
 	branch = master
 	commit = c1e7660e5f257ef3d76b0dcc82eef874232faaee
-	parent = 1785e5535fe6626b8de576b9e59ad810f5d06c8f
+	parent = 38a484a06b0353833d5e4482dfeeddc2bb4bfba8
 	cmdver = 0.4.0
 	method = merge
