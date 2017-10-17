@@ -25,6 +25,7 @@ export default class AddToCartModal extends FirebaseComponent
         this.heightSelected = this.heightSelected.bind(this);
         this.initializeFirebase = this.initializeFirebase.bind(this);
         this.sumCartData = this.sumCartData.bind(this);
+        this.createFirebaseCartItem = this.createFirebaseCartItem.bind(this);
 
         this.initializeFirebase();
 
@@ -54,38 +55,51 @@ export default class AddToCartModal extends FirebaseComponent
         if( this.state.height && this.state.selectedSize )
         {
             this.createFirebaseCartItem();
-            this.createFirebaseFamebotMessage();
+            this.createFirebaseFamebotMessage(this.props.dress);
 
             this.props.closeModal();
         }
     }
 
-    sumCartData( snapshot )
+    sumCartData( dress, snapshot )
     {
         let data = snapshot.val();
-        let keys = Object.keys( data );
-        let cartTotal = 0;
-        for( let i = 0; i < keys.length; i += 1 )
-        {
-            let dress = data[keys[i]];
-            cartTotal += parseInt( dress['dress']['price'] );
-        }
+        let cartItemsCount = Object.keys( data ).length;
 
-        this.createFamebotMessage( this.props.name + " just added " + this.props.dress['name'] + " to their cart.  You are now getting " + this.calculateDiscount( cartTotal ) +  "% off", "discount" );
+        this.createFamebotMessage(
+          this.props.name + " just added " + dress['name'] + " to their cart.  You are now getting " + this.calculateDiscount({totalItems: cartItemsCount}) +  "% off", "discount",
+          "discount", // type
+        );
+
 
     }
 
-    createFirebaseFamebotMessage()
+    recalculateDiscount()
     {
-        this.databaseRef( "cart" ).once('value').then( this.sumCartData );
+        let discount = this.calculateDiscount({
+          totalItems: this.state.myItems.length
+        });
+
+        this.setState(
+            {
+                discount: discount + "%",
+                totalOff: (discount / 100.0) * this.state.totalInMyCart
+            }
+        );
+
+        this.props.updateDiscount(discount);
+    }
+
+    createFirebaseFamebotMessage(dress)
+    {
+        this.databaseRef( "cart" ).once('value').then(
+          (snapshot) => { this.sumCartData(dress, snapshot) }
+        );
     }
 
     createFirebaseCartItem()
   {
-    console.log( 'adding item to firebase cart' );
-    console.log( this.props.dress );
         let newMessage = this.cartDB.push();
-        console.log( this.props.dress );
         newMessage.set( { created_at: firebase.database.ServerValue.TIMESTAMP,
                           dress:
                           {

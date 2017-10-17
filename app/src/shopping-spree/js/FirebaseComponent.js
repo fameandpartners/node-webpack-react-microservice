@@ -6,26 +6,24 @@ import * as firebase from 'firebase';
 export default class FirebaseComponent extends React.Component
 {
     constructor( props )
-    { 
+    {
         super( props );
         this.firebaseNodeId = this.props.firebaseNodeId;
-        console.log( this.firebaseNodeId );
     }
 
-    calculateDiscount( total )
+    calculateDiscount({totalItems = 0})
     {
-        let initialDiscount = (total - 200) / 100;
-        initialDiscount = Math.round( initialDiscount );
-        if( initialDiscount < 0 )
-        {
-            return 0;
-        } else if( initialDiscount > 30 )
-        {
-            return 30;
-        } else
-        {
-            return initialDiscount;
+        const SOLE_DISCOUNT = 5;
+        if (totalItems === 1){
+          return SOLE_DISCOUNT;
         }
+
+        if (totalItems > 1){
+          const discount = SOLE_DISCOUNT + ((totalItems - 1) * 2.5);
+          return discount >= 40 ? 40 : discount;
+        }
+
+        return 0;
     }
 
     connectToFirebase()
@@ -76,7 +74,7 @@ export default class FirebaseComponent extends React.Component
                                       20,
                                       productID,
                                       productVariantId,
-                                      productName,                                      
+                                      productName,
                                       productDescription,
                                       productPrice,
                                       productImage,

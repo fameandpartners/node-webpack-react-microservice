@@ -23,13 +23,13 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.doneSharing = this.doneSharing.bind(this);
     this.showAddToCartModal = this.showAddToCartModal.bind(this);
     this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
+    this.changeDisplayStatus = this.changeDisplayStatus.bind(this);
     this.doneShoppingSpree = this.doneShoppingSpree.bind(this);
     this.updateExitModalStatus = this.updateExitModalStatus.bind(this);
     this.showShareModal = this.showShareModal.bind(this);
     this.startOnboarding = this.startOnboarding.bind(this);
     this.closeOnboarding = this.closeOnboarding.bind(this);
     this.hideZopim = this.hideZopim.bind(this);
-    this.notify = this.notify.bind(this);
     this.showValues = this.showValues.bind(this);
     this.addChatMessage = this.addChatMessage.bind(this);
     win.startShoppingSpree = this.startOnboarding;
@@ -37,9 +37,8 @@ export default class ShoppingSpree extends FirebaseComponent {
 
   componentWillMount() {
     const { firebaseNodeId } = this.state;
-    console.log("firebaseNodeId", firebaseNodeId)
     super.connectToFirebase();
-    const spreeFirebase = firebase.apps[0].database()
+    const spreeFirebase = firebase.apps[0].database();
     this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
     this.chatsDB.on( 'child_added', this.addChatMessage );
     this.chatsDB.once( 'value', this.showValues );
@@ -50,24 +49,40 @@ export default class ShoppingSpree extends FirebaseComponent {
     const chatValues = data.val();
     const chatKeys = Object.keys(chatValues);
     if(chatValues) {
-      console.log("chatValues", chatValues);
       const lastChatTime = Math.max(...chatKeys.map(k => chatValues[k].created_at));
-      console.log(lastChatTime)
       this.setState({
         lastChatTime
       });
     }
   }
+
+  renderToast({type, from, value}){
+    switch (type) {
+      case 'share_dress':
+        return (
+          <span>
+            <img className="toast-img" src={value.image} />
+            <span>{from.name} added a style to chat</span>
+          </span>
+        );
+      case 'discount':
+        return (<span>{value}</span>);
+      case 'text':
+      default:
+        return (<span>{from.name} said "{value}"</span>);
+      }
+  }
+
   addChatMessage(data, prevChildKey) {
-    console.log(data.val()['created_at'])
-    console.log(data.val()['created_at'] > this.state.lastChatTime)
+    const dataVal = data.val();
     if(data.val()['created_at'] > this.state.lastChatTime) {
-      toast("The Supreme Leader.", {
-        closeButton: <span className="ToastAlert__closeButton">&times;</span>
+      toast(this.renderToast(dataVal), {
+        closeButton: <span className="ToastAlert__closeButton">&times;</span>,
+        className: `ToastAlert__${dataVal.type}`
       });
     }
-    console.log(prevChildKey)
   }
+
   fetchAndClearStartingState() {
     const toReturn = this.cookies.get('shopping_spree_starting_state');
     this.cookies.remove('shopping_spree_starting_state');
@@ -113,12 +128,10 @@ export default class ShoppingSpree extends FirebaseComponent {
     );
   }
   showAddToCartModal(dress) {
-    this.setState(
-      {
-        showAddingToCartModal: true,
-        dressAddingToCart: dress,
-      },
-        );
+    this.setState({
+      showAddingToCartModal: true,
+      dressAddingToCart: dress,
+    });
   }
 
   closeAddToCartModal() {
@@ -126,6 +139,8 @@ export default class ShoppingSpree extends FirebaseComponent {
       {
         showAddingToCartModal: false,
         dressAddingToCart: null,
+        display: 'cart',
+        minimize: false,
       },
     );
   }
@@ -174,6 +189,12 @@ export default class ShoppingSpree extends FirebaseComponent {
     )
   }
 
+  changeDisplayStatus(display){
+    this.setState({
+      display
+    })
+  }
+
   doneOnboarding(email, name, icon, shoppingSpreeId)
   {
       this.cookies.set('shopping_spree_name', name);
@@ -204,20 +225,10 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.hideZopim();
   }
 
-  notify() {
-    console.log("TOASTINNN")
-    toast("The Supreme Leader.", {
-      closeButton: <span className="ToastAlert__closeButton">&times;</span>,
-      className: 'test',
-    });
-  }
-
   render() {
-    console.log('inita', this.state);
     return (
       <div>
           <div>
-            <button onClick={this.notify}>Notify !</button>
             <div className="ToastAlert__container">
               <ToastContainer
                 position="top-right"
@@ -228,34 +239,37 @@ export default class ShoppingSpree extends FirebaseComponent {
                 closeOnClick
                 pauseOnHover
               />
-              <ToastContainer
-                position="top-left"
-                type="default"
-                autoClose={50000}
-                hideProgressBar
-                newestOnTop={false}
-                closeOnClick
-                pauseOnHover
-              />
             </div>
           </div>
         {
-                    this.state.showAddingToCartModal && <AddToCartModal dress={this.state.dressAddingToCart} firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closeModal={this.closeAddToCartModal} />
-
-                }
-        {
-                this.state.display === 'chat' &&
-                <Drawer
+              this.state.showAddingToCartModal && (
+                <AddToCartModal
+                  dress={this.state.dressAddingToCart}
                   firebaseAPI={this.props.firebaseAPI}
                   firebaseDatabase={this.props.firebaseDatabase}
                   firebaseNodeId={this.state.firebaseNodeId}
                   name={this.state.name}
                   email={this.state.email}
                   icon={this.state.icon}
+                  closeModal={this.closeAddToCartModal}
+                />
+              )
+          }
+        {
+                (this.state.display === 'chat' || this.state.display === 'cart') &&
+                <Drawer
+                  firebaseAPI={this.props.firebaseAPI}
+                  firebaseDatabase={this.props.firebaseDatabase}
+                  firebaseNodeId={this.state.firebaseNodeId}
+                  name={this.state.name}
+                  display={this.state.display}
+                  email={this.state.email}
+                  icon={this.state.icon}
                   closed={this.state.minimize}
                   showAddToCartModal={this.showAddToCartModal}
                   doneShoppingSpree={this.doneShoppingSpree}
                   showShareModal={this.showShareModal}
+                  changeDisplayStatus={this.changeDisplayStatus}
                   updateExitModalStatus={this.updateExitModalStatus} />
 
             }
