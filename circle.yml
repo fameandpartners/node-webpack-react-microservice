@@ -3,6 +3,8 @@ machine:
     version: 8.1.4
 
 dependencies:
+    pre:
+      - cd app/src/shopping-spree && npm install
     override:
       - if [ $CIRCLE_BRANCH = 'master' ]; then sh ./build-prod.sh; else sh ./build-dev.sh; fi
 

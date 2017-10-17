@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
 
 // Utilities
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
@@ -29,6 +30,7 @@ import ModalConstants from '../../constants/ModalConstants';
 
 // temp. helpers (for Rails merge)
 import { addToCart } from '../../utilities/cart-helper';
+import win from '../../polyfills/windowPolyfill';
 
 function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
@@ -76,6 +78,12 @@ class AddToCartButton extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+
+    const cookies = new Cookies();
+
+    this.state = {
+      inShoppingSpree: cookies.get('shopping_spree_id') != null,
+    };
   }
 
   subTotal() {
@@ -132,8 +140,37 @@ class AddToCartButton extends Component {
     }
   }
 
+  handleAddToShoppingSpree() {
+    const {
+        $$customizationState,
+        $$productState,
+    } = this.props;
+    const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
+    win.addToShoppingSpree(lineItem.productId,
+                           win.PdpDataFull.product.master_id,
+                           lineItem.productTitle,
+                           'description',
+                           Math.round(lineItem.productCentsBasePrice / 100),
+                           lineItem.productImage,
+                           win.location.href,
+                           lineItem.color,
+                           null);
+  }
+
+  handleAddButtonClick() {
+    if (this.state.inShoppingSpree) {
+      this.handleAddToShoppingSpree();
+    } else {
+      this.handleAddToBag();
+    }
+  }
+
   generateText() {
     const { isActive, showTotal } = this.props;
+    if (this.state.inShoppingSpree) {
+      return 'Add to Clique';
+    }
+
     if (!isActive) {
       return 'Sorry, this product is currently unavailable';
     }
@@ -154,7 +191,7 @@ class AddToCartButton extends Component {
         uppercase={isActive}
         className="AddToCartButton"
         text={this.generateText()}
-        handleClick={this.handleAddToBag}
+        handleClick={this.handleAddButtonClick}
       />
     );
   }
