@@ -11,7 +11,7 @@ import { render } from 'react-dom';
 import Raven from 'raven-js';
 
 // Components
-import ShoppingSpree from './components/shopping-spree/ShoppingSpree';
+import ShoppingSpree from '../shopping-spree/js/ShoppingSpree';
 import SideMenu from './components/shared/side_menu/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import CustomizationDrawer from './components/pdp/CustomizationDrawer';
