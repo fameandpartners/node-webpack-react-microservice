@@ -46,7 +46,7 @@ class SideMenuActionButtons extends Component {
 
     return (
       <div>
-        <div className="SideMenuActionButtons__body u-center u-position--relative">
+        <div className="SideMenuActionButtons__body u-position--relative">
           <ul>
             <li
               className="u-cursor--pointer"

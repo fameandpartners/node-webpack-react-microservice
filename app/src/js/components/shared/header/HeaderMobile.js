@@ -55,7 +55,7 @@ class HeaderMobile extends Component {
     const { cartItemCount, headerTitle } = this.props;
     return (
       <header className="Header HeaderMobile u-width--full">
-        <div className="layout-container">
+        <div className="layout-container typography">
           <nav className="grid-noGutter">
             <div className="col-2">
               <Hamburger
@@ -64,7 +64,7 @@ class HeaderMobile extends Component {
               />
             </div>
             <div className="col">
-              {headerTitle}
+              <h1 className="h4">{headerTitle}</h1>
             </div>
             <ul className="col-2 u-text-align--right">
               <li onClick={this.handleShoppingBagClick} className="Header__action">
