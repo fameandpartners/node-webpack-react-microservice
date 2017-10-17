@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+// Components
+import LoadingSpinner from './LoadingSpinner';
 // CSS
 import '../../../css/components/Button.scss';
 
-class Button extends Component {
+class Button extends PureComponent {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -21,6 +23,7 @@ class Button extends Component {
     const {
       className,
       disabled,
+      isLoading,
       metaIcon,
       secondary,
       selected,
@@ -57,7 +60,10 @@ class Button extends Component {
           ? <span className="Button__meta">{metaIcon}</span>
           : null
         }
-        <span>{text}</span>
+        { isLoading
+          ? <LoadingSpinner />
+          : <span>{text}</span>
+        }
       </button>
     );
   }
@@ -68,6 +74,7 @@ Button.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   metaIcon: PropTypes.node,
+  isLoading: PropTypes.bool,
   secondary: PropTypes.bool,
   selected: PropTypes.bool,
   square: PropTypes.bool,
@@ -82,6 +89,7 @@ Button.defaultProps = {
   passedRef: null,
   className: '',
   disabled: false,
+  isLoading: false,
   metaIcon: null,
   secondary: false,
   selected: false,

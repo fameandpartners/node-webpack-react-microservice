@@ -3,7 +3,8 @@
   margin: 0 auto;
 
   @include sm {
-    width: 958px;
+    min-width: 910px;
+    max-width: 1240px;
   }
 }
 
@@ -57,24 +58,12 @@
 
   @include sm {
     display: block;
-    width: 62px;
-  }
-}
-
-.SizeGuideTable__header {
-  text-align: center;
-  font-size: 0.85em;
-
-  @include sm {
-    font-size: 1em;
-    text-align: left;
   }
 }
 
 .SizeGuideTable__header .SizeGuideTable__cell {
   font-weight: bold;
   text-align: center;
-  width: 84px;
 
   @include sm {
     text-align: right;
@@ -92,8 +81,20 @@
 .SizeGuideTable__column {
   flex-flow: row;
   display: flex;
+  flex-grow: 1;
 
   @include sm {
     flex-flow: column;
+  }
+}
+
+.SizeGuideTable__header {
+  text-align: center;
+  font-size: 0.85em;
+  flex-grow: initial;
+
+  @include sm {
+    font-size: 1em;
+    text-align: left;
   }
 }

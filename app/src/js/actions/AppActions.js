@@ -7,6 +7,13 @@ export function activateSideMenu({ sideMenuOpen }) {
   };
 }
 
+export function setAppLoadingState({ loadingId }) {
+  return {
+    type: AppConstants.SET_APP_LOADING_STATE,
+    loadingId,
+  };
+}
+
 export function setShareableQueryParams({ color, customizations }) {
   return {
     type: AppConstants.SET_SHAREABLE_QUERY_PARAMS,

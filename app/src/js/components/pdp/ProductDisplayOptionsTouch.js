@@ -101,7 +101,7 @@ class ProductDisplayOptionsTouch extends Component {
                   <span>{selectedColor.presentation} &nbsp;
                     {
                       colorCentsTotal ?
-                      `(+${formatCents(colorCentsTotal, 0)})`
+                      `+(${formatCents(colorCentsTotal, 0)})`
                       : null
                     }
                   </span>
@@ -120,7 +120,7 @@ class ProductDisplayOptionsTouch extends Component {
           >
             <div className="grid-middle-noGutter u-height--full">
               <div className="col">
-                <span>Style Addons</span><br />
+                <span>Customizations</span><br />
                 <span>{this.generateAddonButtonText(selectedAddonOptions)}</span>
               </div>
             </div>

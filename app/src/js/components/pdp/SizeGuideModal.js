@@ -87,7 +87,7 @@ class SizeGuideModal extends PureComponent {
             },
           ]}
           headingClasses="SizeGuideTabs__heading"
-          contentClasses="SizeGuideTabs__content"
+          contentClasses="SizeGuideTabs__content layout-container"
         />
       </Modal>
     );

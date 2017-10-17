@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+/* eslint-disable no-throw-literal */
 import { assign, find } from 'lodash';
 import { formatCents } from './accounting';
 import { UNITS, EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
@@ -397,7 +398,9 @@ export function transformProductPreCustomizations() {
   return preCustomizations;
 }
 
-export function transformProductModelDescription({ fit }) {
+export function transformProductModelDescription(productJSON) {
+  const fit = productJSON.product && productJSON.product.fit
+    ? productJSON.product.fit : '';
   //   "fit": String,
   //   ****** into ******
   //   modelDescription: String,
@@ -456,42 +459,54 @@ export function transformSKU({ sku }) {
 }
 
 export function transformProductJSON(productJSON) {
-  const productState = {
-    currency: transformProductCurrency(productJSON.product),
-    complementaryProducts: transformProductComplementaryProducts(),
-    fabric: transformProductFabric(productJSON.product),
-    garmentCareInformation: transformProductGarmentInformation(),
-    preCustomizations: transformProductPreCustomizations(),
-    productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
-    productDescription: transformProductDescription(productJSON.product),
-    productDefaultColors: transformProductColors(productJSON, 'default'),
-    productSecondaryColors: transformProductColors(productJSON, 'extra'),
-    productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
-    productId: transformProductId(productJSON.product),
-    productImages: transformProductImages(productJSON.images),
-    modelDescription: transformProductModelDescription(productJSON.product),
-    productTitle: transformProductTitle(productJSON.product),
-    sizeChart: transformProductSizeChart(productJSON),
-    makingOptionId: transformProductMakingOptionId(productJSON.product),
-    fastMaking: transformProductFastMaking(productJSON.product),
-    deliveryCopy: transformDeliveryCopy(productJSON.product),
-    sku: transformSKU(productJSON.product),
-    siteVersion: transformProductSiteVersion(productJSON),
-  };
+  let productState;
+  let customizationState;
+  try {
+    productState = {
+      currency: transformProductCurrency(productJSON.product),
+      complementaryProducts: transformProductComplementaryProducts(),
+      deliveryCopy: transformDeliveryCopy(productJSON.product),
+      fabric: transformProductFabric(productJSON.product),
+      fastMaking: transformProductFastMaking(productJSON.product),
+      garmentCareInformation: transformProductGarmentInformation(),
+      preCustomizations: transformProductPreCustomizations(),
+      productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
+      productDescription: transformProductDescription(productJSON.product),
+      productDefaultColors: transformProductColors(productJSON, 'default'),
+      productSecondaryColors: transformProductColors(productJSON, 'extra'),
+      productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
+      productId: transformProductId(productJSON.product),
+      productImages: transformProductImages(productJSON.images),
+      productTitle: transformProductTitle(productJSON.product),
+      isActive: productJSON.product.is_active,
+      makingOptionId: transformProductMakingOptionId(productJSON.product),
+      modelDescription: transformProductModelDescription(productJSON),
+      siteVersion: transformProductSiteVersion(productJSON),
+      sizeChart: transformProductSizeChart(productJSON),
+      sku: transformSKU(productJSON.product),
+    };
+  } catch (e) {
+    throw ({ e, message: 'Product state has incorrect parameters' });
+  }
 
-  const measurementMetric = selectMeasurementMetric(productJSON);
-  const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors);
-  const customizationState = {
-    addons: transformAddons(productJSON),
-    selectedColor,
-    temporaryColor: selectedColor,
-    temporaryMeasurementMetric: measurementMetric,
-    selectedMeasurementMetric: measurementMetric,
-  };
 
+  try {
+    const measurementMetric = selectMeasurementMetric(productJSON);
+    const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors);
+    customizationState = {
+      addons: transformAddons(productJSON),
+      selectedColor,
+      temporaryColor: selectedColor,
+      temporaryMeasurementMetric: measurementMetric,
+      selectedMeasurementMetric: measurementMetric,
+    };
+  } catch (e) {
+    throw ({ e, message: 'Customization State has incorrect params' });
+  }
+
+  console.log('SUCCESSFULLY transformed data and is now hydrating app');
   return {
     $$appState: {
-      svgSpritePath: productJSON.svgSpritePath,
       siteVersion: productJSON.siteVersion,
     },
     $$productState: productState,

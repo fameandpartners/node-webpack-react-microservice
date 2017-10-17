@@ -42,7 +42,8 @@
   border: 1px solid $c-neutral-4;
 }
 
-.ColorSwatches__wrapper--active {
+.ColorSwatches__wrapper.ColorSwatches__wrapper--active {
+  // Necessary double class for IE Bug which doesn't respect specificity
   outline: 3px solid $c-hover-gray;
   outline-offset: 3px;
 }
@@ -55,6 +56,12 @@
 
 .ColorSwatches__touch-display-text {
   padding-top: 10px;
-  margin-bottom: -30px;
+  margin-bottom: -60px;
   display: block;
+  line-height: 1;
+}
+
+.ColorSwatches__text {
+  display: inline-block;
+  padding-top: 10px;
 }

@@ -7,7 +7,6 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -175,15 +174,6 @@ module.exports = {
           {
             loader: 'babel-loader',
           },
-          {
-            loader: 'svg-sprite-loader',
-            options: {
-              extract: true,
-              runtimeOptions: {
-                spriteFilename: 'sprite-[hash:6].svg',
-              },
-            },
-          },
         ],
       },
       // ** STOP ** Are you adding a new loader?
@@ -191,6 +181,8 @@ module.exports = {
     ],
   },
   plugins: [
+    // Scope Hoisting for optimizing builds
+    // new webpack.optimize.ModuleConcatenationPlugin(),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
@@ -237,8 +229,6 @@ module.exports = {
     extractSass,
     // Uglifies/Minifies CSS
     new OptimizeCssAssetsPlugin(),
-    // Creates Sprite SVG
-    new SpriteLoaderPlugin(),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
