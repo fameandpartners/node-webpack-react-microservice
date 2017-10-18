@@ -8,5 +8,6 @@ cd shopping-spree
 npm install
 export PUBLIC_URL=https://content-dev.fameandgroups.com/
 echo $PUBLIC_URL
+cd ....
 npm run build
 echo 'build it...and they will come'
