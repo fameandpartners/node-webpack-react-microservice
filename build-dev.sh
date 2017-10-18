@@ -4,7 +4,7 @@ npm install -g npm
 cd app
 npm install
 cd src
-cd shopping_spree
+cd shopping-spree
 npm install
 export PUBLIC_URL=https://content-dev.fameandgroups.com/
 echo $PUBLIC_URL
