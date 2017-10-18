@@ -27,7 +27,7 @@ class NavLinkCol extends Component {
         <ul>
           { links.map(l => (
             <li key={l.text} className="NavLinkCol__li u-width--full u-mb-small">
-              <a className="link NavLinkCol__link" href={l.url}>{l.text}</a>
+              <a className="link link--static link--no-underline" href={l.url}>{l.text}</a>
             </li>
           ))}
         </ul>

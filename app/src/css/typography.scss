@@ -46,7 +46,10 @@ body {
     color: $link-hover-color;
     text-decoration: underline;
   }
+}
 
+.link--no-underline {
+  text-decoration: none;
 }
 
 .link--static {
