@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import SearchBarExpander from '../../generic/SearchBarExpander';
+import win from '../../../polyfills/windowPolyfill';
 
 // Assets
 import Carat from '../../../../svg/carat.svg';
@@ -32,6 +33,11 @@ class SideMenuActionButtons extends Component {
 
   handleSearchIconClickClose() {
     this.setState({ searchBarActive: false });
+  }
+
+  handleDressSearch(evt, data) {
+    const location = `${win.location.origin}/search?q=${win.encodeURI(data)}`;
+    win.location = location;
   }
 
   bindActionClick(subNavigationContainer) {
@@ -78,9 +84,11 @@ class SideMenuActionButtons extends Component {
                 />
               </span>
             </li>
-            <li><span>Account</span></li>
+            <li>
+              <a className="link link--static link--no-underline" href="/profile">Account</a>
+            </li>
             <li className="u-mb-normal">
-              <span>Orders</span>
+              <a className="link link--static link--no-underline" href="/view-orders">Orders</a>
             </li>
             <li>
               <span
@@ -97,6 +105,7 @@ class SideMenuActionButtons extends Component {
               <SearchBarExpander
                 handleSearchIconClick={this.handleSearchIconClick}
                 onBlur={this.handleSearchIconClickClose}
+                onSubmit={this.handleDressSearch}
                 isActive={searchBarActive}
               />
             </li>

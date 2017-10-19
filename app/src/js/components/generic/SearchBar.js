@@ -11,9 +11,13 @@ class SearchBar extends Component {
     autoBind(this);
   }
 
-  onKeypress(evt) {
+  handleKeyPress(evt, val) {
+    console.log('keypress', evt.which);
+    console.log('keypress', evt.keyCode);
     if (evt.which === 13 || evt.keyCode === 13) {
-      this.props.onSubmit(evt);
+      evt.preventDefault();
+      console.log('this.input', this.inputEl);
+      this.props.onSubmit(evt, val);
     }
   }
 
@@ -28,9 +32,8 @@ class SearchBar extends Component {
           focusOnMount
           lineInput
           indent
-          ref={c => this.input = c}
           onBlur={onBlur}
-          onKeypress={this.onKeypress}
+          onKeyPress={this.handleKeyPress}
         />
       </div>
     );

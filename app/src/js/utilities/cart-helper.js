@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-// X-CSRF-Token
 import request from 'superagent';
 
 // polyfills

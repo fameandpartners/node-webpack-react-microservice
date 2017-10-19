@@ -26,6 +26,11 @@ class Input extends Component {
     onBlur({ id, value: e.target.value });
   }
 
+  handleKeyPress(e) {
+    const { onKeyPress } = this.props;
+    onKeyPress(e, this.input.value);
+  }
+
   componentDidMount() {
     if (this.props.focusOnMount) {
       this.input.focus();
@@ -78,6 +83,7 @@ class Input extends Component {
           readOnly={readOnly}
           onBlur={this.handleBlur}
           onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
         />
         {
             inlineMeta
@@ -119,6 +125,7 @@ Input.propTypes = {
   wrapperClassName: PropTypes.string,
   onBlur: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -128,6 +135,7 @@ Input.defaultProps = {
   selectOnMount: false,
   readOnly: false,
   indent: false,
+  inputRef: noop,
   inlineMeta: null,
   label: null,
   lineInput: false,
@@ -136,6 +144,7 @@ Input.defaultProps = {
   wrapperClassName: '',
   onBlur: noop,
   onChange: noop,
+  onKeyPress: noop,
 };
 
 export default Input;

@@ -4,6 +4,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+import win from '../../../polyfills/windowPolyfill';
 
 // Actions
 import * as CartActions from '../../../actions/CartActions';
@@ -58,6 +59,11 @@ class Header extends Component {
     this.setState({ searchBarActive: true });
   }
 
+  handleDressSearch(evt, data) {
+    const location = `${win.location.origin}/search?q=${win.encodeURI(data)}`;
+    win.location = location;
+  }
+
   render() {
     const { cartItemCount } = this.props;
     const { searchBarActive } = this.state;
@@ -98,6 +104,7 @@ class Header extends Component {
           <SearchBarExpander
             isActive={searchBarActive}
             onBlur={this.handleSearchBarClose}
+            onSubmit={this.handleDressSearch}
           />
         </li>
 

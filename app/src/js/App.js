@@ -24,6 +24,9 @@ import AfterpayModal from './components/pdp/AfterpayModal';
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
 
+// Services
+import { getUserCart } from './services/UserService';
+
 // Actions
 import * as AppActions from './actions/AppActions';
 import * as CustomizationActions from './actions/CustomizationActions';
@@ -120,6 +123,13 @@ class App extends Component {
     } else {
       win.document.body.style.overflow = 'visible';
     }
+  }
+
+  componentDidMount() {
+    getUserCart().end((err, res) => {
+      console.log('res', res);
+      // Do something
+    });
   }
 
   render() {
