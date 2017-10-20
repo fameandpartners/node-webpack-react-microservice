@@ -290,7 +290,7 @@ class ProductOptions extends Component {
             </div>
 
             {isActive ?
-              <div className="ProductOptions__additional-info u-mb-normal">
+              <div className="ProductOptions__additional-info u-mt-small u-mb-normal">
                 { auSite ?
                   (
                     <p className="AfterPay__message">
