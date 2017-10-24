@@ -96,6 +96,7 @@
     "sanitize-html": "^1.14.1",
     "sass-loader": "^6.0.3",
     "shallowequal": "^1.0.1",
+    "superagent": "^3.7.0",
     "webpack-dev-middleware": "^1.12.0"
   },
   "devDependencies": {
@@ -145,6 +146,6 @@
     "whatwg-fetch": "2.0.2"
   },
   "engines": {
-    "node": "7.6.0"
+    "node": ">=7.6.0"
   }
 }

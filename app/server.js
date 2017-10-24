@@ -28,6 +28,7 @@ const { transformProductJSON } = require('./src/js/utilities/pdp');
 // Components
 const App = require('./src/js/App');
 const mockJSON = require('./src/mock/product.json');
+const request = require('superagent');
 
 // Store
 const AppStore = require('./src/js/stores/AppStore');
@@ -58,6 +59,30 @@ app.use(cookieParser());
 
 // Rendering
 // *****************************************************************************
+app.get('/dresses/dress-:productSlug', (req, res) => {
+  res.header('Content-Type', 'text/html');
+  request.get(`http://localhost:9292/react-api/dresses/${req.params.productSlug}?color=navy`).end((err, data) => {
+    json = data.body
+    console.log(json);
+    // console.log("ERROR");
+    // console.log(err);
+    const props = transformProductJSON(json);
+    const store = AppStore(props);
+    const ReactRoot = ReactDOMServer.renderToString(
+      React.createElement(Provider, { store }, React.createElement(App))
+    );
+    const html = template({
+      root: ReactRoot,
+      initialState: store.getState(),
+      jsBundle: clientAssets['main.js'],
+      cssBundle: clientAssets['main.css']
+    });
+
+    res.send(html);
+  });
+});
+
+
 app.get('/pdp', (req, res) => {
   res.header('Content-Type', 'text/html');
   const props = transformProductJSON(mockJSON);
@@ -106,7 +131,7 @@ app.post('/pdp', (req, res) => {
 app.listen(process.env.PORT || 8001);
 
 // reset the rails cache, have to do it here cause ebs environment variables are lies
-require('./scripts/clear_cache');
+// require('./scripts/clear_cache');
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
 module.exports = app;
