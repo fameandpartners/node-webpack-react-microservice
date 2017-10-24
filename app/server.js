@@ -18,7 +18,7 @@ const ReactDOMServer = require('react-dom/server');
 const chalk = require('chalk');
 
 // Assets
-const clientAssets = require('./build/asset-manifest.json');
+const clientAssets = require('./build/webpack/asset-manifest.json');
 const template = require('./template');
 
 
@@ -82,6 +82,13 @@ app.get('/dresses/dress-:productSlug', (req, res) => {
   });
 });
 
+app.get('/webpack/asset-manifest', (req, res) => {
+  var asset_paths = {
+    jsBundle: clientAssets['main.js'],
+    cssBundle: clientAssets['main.css']
+  }
+  res.send(asset_paths);
+});
 
 app.get('/pdp', (req, res) => {
   res.header('Content-Type', 'text/html');

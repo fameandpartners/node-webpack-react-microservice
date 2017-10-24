@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
@@ -63,7 +64,7 @@ module.exports = {
     // This does not produce a real file. It's just the virtual path that is
     // served by WebpackDevServer in development. This is the JS bundle
     // containing code from all our entry points, and the Webpack runtime.
-    filename: 'static/js/bundle.js',
+    filename: 'webpack/static/js/bundle.js',
     // This is the URL that app is served from. We use "/" in development.
     publicPath,
   },
@@ -215,6 +216,9 @@ module.exports = {
     new StyleLintPlugin({
       files: 'src/css/**/*.scss',
       syntax: 'scss',
+    }),
+    new ManifestPlugin({
+      fileName: 'webpack/asset-manifest.json',
     }),
   ],
   // Some libraries import Node modules but don't use them in the browser.

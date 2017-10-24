@@ -19,10 +19,7 @@ import win from './polyfills/windowPolyfill';
 //                                                  *
 // ***************************************************
 
-import productJSON from '../mock/product.json';
 import { transformProductJSON } from './utilities/pdp';
-
-const isDev = process.env.NODE_ENV === 'development';
 
 function renderApp(Component) {
   ReactDOM.render(
@@ -33,11 +30,7 @@ function renderApp(Component) {
 
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
-const pdpData = win
-                  ? isDev
-                  ? transformProductJSON(productJSON)
-                  : win.__data
-                  : null;
+const pdpData = win ? transformProductJSON(win.__data) : null;
 
 const store = AppStore(pdpData);
 

@@ -233,7 +233,7 @@ module.exports = {
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
     new ManifestPlugin({
-      fileName: 'asset-manifest.json',
+      fileName: 'webpack/asset-manifest.json',
     }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
