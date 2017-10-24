@@ -28,6 +28,7 @@ export default class FirebaseComponent extends React.Component
 
     connectToFirebase()
     {
+        
         if( firebase.apps.length === 0 )
         {
             var config =
@@ -36,8 +37,9 @@ export default class FirebaseComponent extends React.Component
                     authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
                     databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
                     projectId: this.props.firebaseDatabase,
-                    storageBucket: this.props.firebaseDatabase + ".appspot.com"
-                }
+                    storageBucket: this.props.firebaseDatabase + ".appspot.com",
+                    messagingSenderId: "868619391913"
+                };
             firebase.initializeApp( config );
        }
     }
@@ -51,9 +53,26 @@ export default class FirebaseComponent extends React.Component
                    firebase.database.ServerValue.TIMESTAMP } );
         this.firebaseNodeId = ref.key;
 
-        return ref.key
+        return ref.key;
     }
 
+    createJoinedMessage( name, email, icon )
+    {
+        console.log( 'creating joined message' );
+        console.log( this.firebaseNodeId );
+        let newMessage = this.databaseRef( 'chats' ).push();
+        newMessage.set({ type: 'joined',
+                         created_at: firebase.database.ServerValue.TIMESTAMP,
+                         from:
+                         {
+                             email: email,
+                             icon: icon,
+                             name: name
+                         }
+                       }
+                      );
+        
+    }
     createFamebotMessage( text, type )
     {
         this.createTextMessage( text, 'Fame Bot', 'help@fameandpartners.com', 20, type );
@@ -126,6 +145,12 @@ export default class FirebaseComponent extends React.Component
     }
 
 
+    printError( error )
+    {
+        console.log( "Firebase error " );
+        console.log( error );
+    }
+    
     createTextMessage( text, name, email, icon, type = 'text' )
     {
         let newMessage = this.databaseRef( 'chats' ).push();
@@ -138,7 +163,7 @@ export default class FirebaseComponent extends React.Component
                               email: email,
                               icon: icon
                           }
-                        }
+                        }, this.printError
                       );
 
     }
