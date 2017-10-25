@@ -85,7 +85,7 @@ app.get('/dresses/dress-:productSlug', (req, res) => {
 app.get('/webpack/asset-manifest', (req, res) => {
   var asset_paths = {
     jsBundle: clientAssets['main.js'],
-    cssBundle: clientAssets['main.css']
+    cssBundle: clientAssets['main.css'],
   }
   res.send(asset_paths);
 });
