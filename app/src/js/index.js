@@ -24,7 +24,7 @@ import { transformProductJSON } from './utilities/pdp';
 function renderApp(Component) {
   ReactDOM.render(
     Component,
-    document.getElementById('root'),
+    document.getElementById('react-pdp'),
   );
 }
 
