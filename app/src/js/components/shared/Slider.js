@@ -63,6 +63,13 @@ class Slider extends Component {
   }
 
   componentDidUpdate(lastProps) {
+    loryInstance.destroy();
+    loryInstance = null;
+    loryInstance = lory(this.slider, {
+      infinite: 1,
+      classNameFrame: 'Slider__frame',
+      classNameSlideContainer: 'Slider__slides',
+    });
     if ((lastProps.winWidth !== this.props.winWidth)
     || (lastProps.winHeight !== this.props.winHeight)) {
       loryInstance.reset();
