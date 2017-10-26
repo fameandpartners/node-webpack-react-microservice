@@ -11,3 +11,8 @@
 .ExpressMaking__content--error {
   color: $c-red;
 }
+
+// overly specific to override the .PDP__wrapper / [class*=grid] CSS issue
+.ExpressMaking__content.u-mb-small {
+  margin-bottom: 15px;
+}
