@@ -20,7 +20,7 @@ export default class FirebaseComponent extends React.Component
 
         if (totalItems > 1){
           const discount = SOLE_DISCOUNT + ((totalItems - 1) * 2.5);
-          return discount >= 40 ? 40 : discount;
+          return discount >= 25 ? 25 : discount;
         }
 
         return 0;
@@ -28,7 +28,7 @@ export default class FirebaseComponent extends React.Component
 
     connectToFirebase()
     {
-        
+
         if( firebase.apps.length === 0 )
         {
             var config =
@@ -40,7 +40,9 @@ export default class FirebaseComponent extends React.Component
                     storageBucket: this.props.firebaseDatabase + ".appspot.com",
                     messagingSenderId: "868619391913"
                 };
-            firebase.initializeApp( config );
+            console.log( 'connecting to firebase' );
+//            firebase.database.enableLogging(true)
+            console.log( firebase.initializeApp( config ) );
        }
     }
 
@@ -71,7 +73,7 @@ export default class FirebaseComponent extends React.Component
                          }
                        }
                       );
-        
+
     }
     createFamebotMessage( text, type )
     {
@@ -145,12 +147,12 @@ export default class FirebaseComponent extends React.Component
     }
 
 
-    printError( error )
+    printError( error, data )
     {
         console.log( "Firebase error " );
         console.log( error );
     }
-    
+
     createTextMessage( text, name, email, icon, type = 'text' )
     {
         let newMessage = this.databaseRef( 'chats' ).push();
