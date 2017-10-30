@@ -165,9 +165,10 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   doneShoppingSpree() {
-    this.cookies.remove('shopping_spree_name');
-    this.cookies.remove('shopping_spree_email');
-    this.cookies.remove('shopping_spree_id');
+    console.log( 'done with shopping spree' );
+    this.cookies.remove('shopping_spree_name', { path: '/', secure: false });
+    this.cookies.remove('shopping_spree_email', { path: '/', secure: false });
+    this.cookies.remove('shopping_spree_id', { path: '/', secure: false });
     this.setState(
       {
         display: 'none',
