@@ -49,13 +49,16 @@ class Slider extends Component {
     win.document.removeEventListener('keydown', this.handleKeydowns);
   }
 
-  componentDidMount() {
+  initializeLory() {
     loryInstance = lory(this.slider, {
       infinite: 1,
       classNameFrame: 'Slider__frame',
       classNameSlideContainer: 'Slider__slides',
     });
+  }
 
+  componentDidMount() {
+    this.initializeLory();
     this.setUpEventHandlers();
     if (typeof this.props.activeIndex === 'number') {
       loryInstance.slideTo(this.props.activeIndex);
@@ -63,13 +66,12 @@ class Slider extends Component {
   }
 
   componentDidUpdate(lastProps) {
+    // Hack to fix a mobile bug that requires deleting and reinstantiating lory
+    // lory appears to strongly attach to dom elements that get mixed up with react
     loryInstance.destroy();
     loryInstance = null;
-    loryInstance = lory(this.slider, {
-      infinite: 1,
-      classNameFrame: 'Slider__frame',
-      classNameSlideContainer: 'Slider__slides',
-    });
+    this.initializeLory();
+
     if ((lastProps.winWidth !== this.props.winWidth)
     || (lastProps.winHeight !== this.props.winHeight)) {
       loryInstance.reset();
@@ -92,6 +94,9 @@ class Slider extends Component {
       sliderHeight,
       showButtons,
     } = this.props;
+
+    console.log('Children');
+    console.log(children);
 
     return (
       <div

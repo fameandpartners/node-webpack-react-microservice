@@ -112,6 +112,12 @@ class ProductDisplayOptionsTouch extends Component {
       .map(img => img);
   }
 
+  componentDidUpdate(lastProps) {
+    if (lastProps.selectedColorId !== this.props.selectedColorId) {
+      console.log('Color changed');
+    }
+  }
+
   render() {
     const {
       // breakpoint,
@@ -121,6 +127,7 @@ class ProductDisplayOptionsTouch extends Component {
       winWidth,
     } = this.props;
     const sliderImages = this.getSliderImages();
+    console.log(sliderImages);
     return (
       <div className="ProductImageSlider">
         <Slider
@@ -174,7 +181,7 @@ ProductDisplayOptionsTouch.propTypes = {
   breakpoint: PropTypes.string.isRequired,
   winHeight: PropTypes.number.isRequired,
   winWidth: PropTypes.number.isRequired,
-  selectedColorId: PropTypes.string,
+  selectedColorId: PropTypes.number,
 };
 ProductDisplayOptionsTouch.defaultProps = {
   garmentCareInformation: 'Professional dry-clean only.\rSee label for further details.',
