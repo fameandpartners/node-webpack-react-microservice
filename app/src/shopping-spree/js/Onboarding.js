@@ -13,7 +13,6 @@ export default class Onboarding extends FirebaseComponent
 
     join(evt)
     {
-        console.log('happdning', evt);
         evt.preventDefault();
         let context = this;
 

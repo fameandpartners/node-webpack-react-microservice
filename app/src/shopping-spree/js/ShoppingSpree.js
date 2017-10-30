@@ -38,7 +38,6 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   startListeningForToast() {
-    console.log( "Listening for toast" );
     super.connectToFirebase();
     const { firebaseNodeId } = this.state;    
     const spreeFirebase = firebase.apps[0].database();
@@ -165,7 +164,6 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   doneShoppingSpree() {
-    console.log( 'done with shopping spree' );
     this.cookies.remove('shopping_spree_name', { path: '/', secure: false });
     this.cookies.remove('shopping_spree_email', { path: '/', secure: false });
     this.cookies.remove('shopping_spree_id', { path: '/', secure: false });
