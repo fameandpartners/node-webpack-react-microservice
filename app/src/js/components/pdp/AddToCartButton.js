@@ -69,11 +69,8 @@ function dispatchToProps(dispatch) {
     activateCartDrawer,
     activateModal,
     addItemToCart,
-<<<<<<< HEAD
     setCartContents,
-=======
     setAppLoadingState,
->>>>>>> master
     setSizeProfileError,
     activateCustomizationDrawer,
   };
@@ -197,19 +194,13 @@ AddToCartButton.propTypes = {
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   // addItemToCart: PropTypes.func.isRequired,
-<<<<<<< HEAD
   activateCartDrawer: PropTypes.func.isRequired,
-=======
->>>>>>> master
   activateCustomizationDrawer: PropTypes.func,
   activateModal: PropTypes.func,
   setAppLoadingState: PropTypes.func.isRequired,
   heightValue: PropTypes.number,
   setSizeProfileError: PropTypes.func.isRequired,
-<<<<<<< HEAD
   setCartContents: PropTypes.func.isRequired,
-=======
->>>>>>> master
   sizeValue: PropTypes.number,
   breakpoint: PropTypes.string,
 };
