@@ -2,9 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import PinterestShareButton from '../react-share/PinterestShareButton';
 
-// Components
-import IconSVG from '../generic/IconSVG';
-
 // Assets
 import PinterestShareIcon from '../../../svg/share-pinterest.svg';
 
@@ -23,12 +20,10 @@ class PinterestIconShareButton extends PureComponent {
     return (
       <PinterestShareButton
         url={url}
-        className="ShareModal__icon-button"
+        className="SocialShare__icon-button"
         media={image}
       >
-        <IconSVG
-          svgId={PinterestShareIcon.id}
-          svgPath={PinterestShareIcon.url}
+        <PinterestShareIcon
           width="40px"
           height="40px"
         />

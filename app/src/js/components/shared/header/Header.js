@@ -13,7 +13,6 @@ import * as CartActions from '../../../actions/CartActions';
 // Components
 import HeaderActionButtons from './HeaderActionButtons';
 import HeaderNavigation from './HeaderNavigation';
-import IconSVG from '../../generic/IconSVG';
 
 // CSS
 import '../../../../css/components/Header.scss';
@@ -85,8 +84,7 @@ class Header extends Component {
               </li>
             </ul>
             <div className="col-4 u-text-align--center">
-              <IconSVG
-                svgPath={FameLogo.url}
+              <FameLogo
                 width="200px"
                 height="26px"
               />

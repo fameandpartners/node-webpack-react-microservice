@@ -92,7 +92,6 @@ class AddToCartButtonLedgeMobile extends Component {
   }
 }
 
-/*  eslint-disable react/forbid-prop-types */
 AddToCartButtonLedgeMobile.propTypes = {
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
@@ -101,7 +100,7 @@ AddToCartButtonLedgeMobile.propTypes = {
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedMeasurementMetric: PropTypes.string.isRequired,
-  isActive: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
 };

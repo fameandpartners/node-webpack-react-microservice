@@ -58,10 +58,10 @@ class ColorSwatches extends PureComponent {
           <span
             className={classnames(
             'ColorSwatches__touch-display-text',
-            'u-width--full u-left u-flex',
+            'u-width--full u-left',
           )}
           >
-            <h6>
+            <h6 className="ColorSwatches__text">
               {color.presentation}
               {price ? <span>&nbsp;{formatCents(price, 0)}</span> : null }
             </h6>

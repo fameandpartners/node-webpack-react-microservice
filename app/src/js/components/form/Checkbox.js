@@ -43,7 +43,6 @@ class Checkbox extends Component {
           checked={!disabled && showChecked}
           onChange={this.handleChange}
           disabled={disabled}
-          defaultChecked={showChecked}
         />
         <label htmlFor={id} className="Checkbox__label">
           {

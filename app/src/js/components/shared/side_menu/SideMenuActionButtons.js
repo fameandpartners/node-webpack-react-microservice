@@ -12,9 +12,6 @@ import SearchIcon from '../../../../svg/i-search.svg';
 // Constants
 import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
 
-// Components
-import IconSVG from '../../generic/IconSVG';
-
 // CSS
 import '../../../../css/components/SideMenuActionButtons.scss';
 
@@ -62,8 +59,7 @@ class SideMenuActionButtons extends Component {
             >
               <span className="SideMenuActionButtons--mr-caret-bump">Shop all</span>
               <span className="u-position--relative u-u-display--inline">
-                <IconSVG
-                  svgPath={Carat.url}
+                <Carat
                   className="SideMenuActionButtons__caret--right"
                   width="10px"
                   height="10px"
@@ -77,8 +73,7 @@ class SideMenuActionButtons extends Component {
             >
               <span className="SideMenuActionButtons--mr-caret-bump">Who We Are</span>
               <span>
-                <IconSVG
-                  svgPath={Carat.url}
+                <Carat
                   className="SideMenuActionButtons__caret--right u-position--inherit"
                   width="10px"
                   height="10px"
@@ -99,9 +94,8 @@ class SideMenuActionButtons extends Component {
                 )}
                 onClick={this.handleSearchIconClick}
               >
-                <IconSVG
-                  className="SearchBarExpander__icon u-cursor--pointer"
-                  svgPath={SearchIcon.url}
+                <SearchIcon
+                  className="SearchBarExpander__icon u-cursor--pointer u-position--absolute"
                   width="18px"
                   height="26px"
                 />

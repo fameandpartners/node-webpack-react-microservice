@@ -12,7 +12,6 @@ import * as AppActions from '../../../actions/AppActions';
 import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
 
 // Components
-import IconSVG from '../../generic/IconSVG';
 import ContainerDividerToggle from '../ContainerDividerToggle';
 import SideMenuActionButtons from './SideMenuActionButtons';
 import SideMenuSubNavigation from './SideMenuSubNavigation';
@@ -89,8 +88,7 @@ class SideMenu extends Component {
                 handleClick={this.handleCloseMenu}
               />
               <div className="col-4 u-text-align--center">
-                <IconSVG
-                  svgPath={FameLogo.url}
+                <FameLogo
                   width="200px"
                   height="26px"
                 />

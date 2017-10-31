@@ -1,5 +1,5 @@
 .SocialShare__icon-button {
-  transition: $fastest-transition-time all;
+  transition: $slow-transition-time all;
 
   &:before {
     content: "";
@@ -13,6 +13,6 @@
   }
 
   &:hover {
-    opacity: 0.3;
+    opacity: 0.5;
   }
 }

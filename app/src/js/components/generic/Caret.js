@@ -2,9 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-// Components
-import IconSVG from '../generic/IconSVG';
-
 // Assets
 import Carat from '../../../svg/carat.svg';
 
@@ -23,9 +20,7 @@ class Caret extends PureComponent {
     } = this.props;
 
     return (
-      <IconSVG
-        svgId={Carat.id}
-        svgPath={Carat.url}
+      <Carat
         className={classnames(
           'Caret',
           {

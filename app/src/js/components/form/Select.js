@@ -13,9 +13,6 @@ import classnames from 'classnames';
 import noop from '../../libs/noop';
 import KEYS from '../../constants/keys';
 
-// Components
-import IconSVG from '../generic/IconSVG';
-
 // CSS
 import '../../../css/components/Select.scss';
 import Carat from '../../../svg/carat.svg';
@@ -204,10 +201,8 @@ class Select extends Component {
             : null
           }
           <span className="Select-item-text noSelect">{spanText}</span>
-          <IconSVG
-            svgId={Carat.id}
-            svgPath={Carat.url}
-            className="Select__carat"
+          <Carat
+            className="Select__carat u-cursor--pointer"
             width="15px"
             height="15px"
           />

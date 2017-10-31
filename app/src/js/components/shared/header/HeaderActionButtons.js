@@ -12,7 +12,6 @@ import * as CartActions from '../../../actions/CartActions';
 // Components
 import CancelOut from '../CancelOut';
 import SearchBarExpander from '../../generic/SearchBarExpander';
-import IconSVG from '../../generic/IconSVG';
 
 // CSS
 import '../../../../css/components/Header.scss';
@@ -72,8 +71,7 @@ class Header extends Component {
       <ul className="col-4 u-text-align--right">
         { searchBarActive ? null : (
           <li className="Header__action">
-            <IconSVG
-              svgPath={AccountIcon.url}
+            <AccountIcon
               width="18px"
               height="26px"
               onClick={this.handleSearchOpenClick}
@@ -92,8 +90,7 @@ class Header extends Component {
             role="button"
             onClick={this.handleSearchOpenClick}
           >
-            <IconSVG
-              svgPath={SearchIcon.url}
+            <SearchIcon
               width="18px"
               height="26px"
             />
@@ -126,8 +123,7 @@ class Header extends Component {
                 role="button"
                 onClick={this.handleShoppingBagClick}
               >
-                <IconSVG
-                  svgPath={ShoppingBagIcon.url}
+                <ShoppingBagIcon
                   width="18px"
                   height="26px"
                 />
