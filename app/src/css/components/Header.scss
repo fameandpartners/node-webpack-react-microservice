@@ -9,7 +9,7 @@
 }
 
 .Header__content-padding {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .Header__link {
@@ -23,6 +23,7 @@
   margin-left: 2rem;
   z-index: 1;
   transition: $fast-transition-time margin;
+  vertical-align: middle;
 }
 
 .Header__action--active-search-left {

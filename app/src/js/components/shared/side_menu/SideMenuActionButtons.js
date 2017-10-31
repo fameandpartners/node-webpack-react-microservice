@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import classnames from 'classnames';
 import SearchBarExpander from '../../generic/SearchBarExpander';
 import win from '../../../polyfills/windowPolyfill';
 
@@ -92,11 +93,14 @@ class SideMenuActionButtons extends Component {
             </li>
             <li>
               <span
-                className="SideMenuActionButtons__icon-wrapper"
+                className={classnames(
+                  'SideMenuActionButtons__icon-wrapper u-display--inline-block u-vertical-align--middle',
+                  { 'SideMenuActionButtons__icon-wrapper--active': searchBarActive },
+                )}
                 onClick={this.handleSearchIconClick}
               >
                 <IconSVG
-                  className="SearchBarExpander__icon u-cursor--pointer u-position--absolute"
+                  className="SearchBarExpander__icon u-cursor--pointer"
                   svgPath={SearchIcon.url}
                   width="18px"
                   height="26px"
@@ -104,7 +108,6 @@ class SideMenuActionButtons extends Component {
               </span>
               <SearchBarExpander
                 handleSearchIconClick={this.handleSearchIconClick}
-                onBlur={this.handleSearchIconClickClose}
                 onSubmit={this.handleDressSearch}
                 isActive={searchBarActive}
               />

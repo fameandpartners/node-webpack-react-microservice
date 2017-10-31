@@ -113,7 +113,6 @@ class Header extends Component {
             'Header__action',
             { 'Header__action--active-search-right': searchBarActive },
           )}
-          onClick={this.handleShoppingBagClick}
         >
           { cartItemCount > 0 && !searchBarActive
             ? <span className="Header__cart-count">{cartItemCount}</span>
@@ -125,6 +124,7 @@ class Header extends Component {
               <span
                 className="Header__icon-click-wrapper"
                 role="button"
+                onClick={this.handleShoppingBagClick}
               >
                 <IconSVG
                   svgPath={ShoppingBagIcon.url}

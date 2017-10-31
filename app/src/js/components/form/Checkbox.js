@@ -48,7 +48,7 @@ class Checkbox extends Component {
         <label htmlFor={id} className="Checkbox__label">
           {
             label
-            ? <span className="u-vertical-align-middle">{label}</span>
+            ? <span className="u-vertical-align--middle">{label}</span>
             : null
           }
         </label>

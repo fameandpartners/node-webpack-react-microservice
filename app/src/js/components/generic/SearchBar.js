@@ -12,11 +12,8 @@ class SearchBar extends Component {
   }
 
   handleKeyPress(evt, val) {
-    console.log('keypress', evt.which);
-    console.log('keypress', evt.keyCode);
     if (evt.which === 13 || evt.keyCode === 13) {
       evt.preventDefault();
-      console.log('this.input', this.inputEl);
       this.props.onSubmit(evt, val);
     }
   }
