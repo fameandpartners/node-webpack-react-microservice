@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 
 // Do this as the first thing so that any code reading it knows the right env.
@@ -21,7 +22,7 @@ var FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 var measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
 var printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 
-var useYarn = fs.existsSync(paths.yarnLockFile);
+var useYarn = false;
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
@@ -156,5 +157,3 @@ function copyPublicFolder() {
     filter: file => file !== paths.appHtml
   });
 }
-
-

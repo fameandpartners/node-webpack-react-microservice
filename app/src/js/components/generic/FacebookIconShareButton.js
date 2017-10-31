@@ -2,9 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FacebookShareButton from '../react-share/FacebookShareButton';
 
-// Components
-import IconSVG from '../generic/IconSVG';
-
 // Assets
 import FacebookShareIcon from '../../../svg/share-facebook.svg';
 
@@ -24,9 +21,7 @@ class FacebookIconShareButton extends PureComponent {
         url={url}
         className="SocialShare__icon-button"
       >
-        <IconSVG
-          svgId={FacebookShareIcon.id}
-          svgPath={FacebookShareIcon.url}
+        <FacebookShareIcon
           width="40px"
           height="40px"
         />

@@ -4,9 +4,6 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-// Components
-import IconButton from '../generic/IconButton';
-
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 import ModalActions from '../../actions/ModalActions';
@@ -40,13 +37,11 @@ class ProductSecondaryActions extends Component {
     return (
       <div className="ProductSecondaryActions">
         <ul>
-          <li className="u-display--inline">
-            <IconButton
-              svgId={ShareIcon.id}
-              svgPath={ShareIcon.url}
+          <li className="u-cursor--pointer u-display--inline">
+            <ShareIcon
+              onClick={this.handleOpenShareModalClick}
               width="40px"
               height="18px"
-              handleClick={this.handleOpenShareModalClick}
             />
           </li>
         </ul>

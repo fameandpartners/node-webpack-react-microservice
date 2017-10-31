@@ -72,9 +72,7 @@ class HeaderMobile extends Component {
                   ? <span className="Header__cart-count">{cartItemCount}</span>
                   : null
                 }
-                <img
-                  src={ShoppingBagIcon.url}
-                  alt="Shopping Bag Icon"
+                <ShoppingBagIcon
                   width="26px"
                   height="26px"
                 />

@@ -6,7 +6,6 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
 
@@ -178,15 +177,6 @@ module.exports = {
           {
             loader: 'babel-loader',
           },
-          {
-            loader: 'svg-sprite-loader',
-            options: {
-              extract: true,
-              runtimeOptions: {
-                spriteFilename: 'sprite-[hash:6].svg',
-              },
-            },
-          },
         ],
       },
       // ** STOP ** Are you adding a new loader?
@@ -194,6 +184,8 @@ module.exports = {
     ],
   },
   plugins: [
+    // Scope Hoisting for optimizing builds
+    new webpack.optimize.ModuleConcatenationPlugin(),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
@@ -224,8 +216,6 @@ module.exports = {
       files: 'src/css/**/*.scss',
       syntax: 'scss',
     }),
-    // Creates Sprite SVG
-    new SpriteLoaderPlugin(),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
