@@ -57,30 +57,6 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 
-// Rendering
-// *****************************************************************************
-app.get('/dresses/dress-:productSlug', (req, res) => {
-  res.header('Content-Type', 'text/html');
-  request.get(`http://localhost:9292/react-api/dresses/${req.params.productSlug}?color=navy`).end((err, data) => {
-    json = data.body
-    console.log(json);
-    // console.log("ERROR");
-    // console.log(err);
-    const props = transformProductJSON(json);
-    const store = AppStore(props);
-    const ReactRoot = ReactDOMServer.renderToString(
-      React.createElement(Provider, { store }, React.createElement(App))
-    );
-    const html = template({
-      root: ReactRoot,
-      initialState: store.getState(),
-      jsBundle: clientAssets['main.js'],
-      cssBundle: clientAssets['main.css']
-    });
-
-    res.send(html);
-  });
-});
 
 app.get('/webpack/asset-manifest', (req, res) => {
   var asset_paths = {

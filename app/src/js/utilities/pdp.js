@@ -459,9 +459,6 @@ export function transformSKU({ sku }) {
 }
 
 export function transformProductJSON(productJSON) {
-  console.log('PRODUCT JSON **********');
-  console.log(productJSON);
-
   let productState;
   let customizationState;
   try {
