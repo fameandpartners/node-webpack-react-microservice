@@ -12,7 +12,9 @@ class ProductCrossSell extends PureComponent {
         <div className="ProductCrossSell__wrapper grid-12">
           { complementaryProducts.map(p => (
             <div key={p.productId} className="col-6">
-              <img className="u-width--full" alt="dress1" src={p.smallImg} />
+              <a href={p.url}>
+                <img className="u-width--full" alt="dress1" src={p.smallImg} />
+              </a>
               <span className="ProductCrossSell__title">{p.productTitle}</span>
               <span className="ProductCrossSell__price display--block">
                 {formatCents(p.centsPrice, 0)}
