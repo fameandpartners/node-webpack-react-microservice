@@ -17,8 +17,11 @@ class ProductCrossSell extends PureComponent {
               <span className="ProductCrossSell__price display--block">
                 {formatCents(p.centsPrice, 0)}
               </span>
-              <span className="ProductCrossSell__cta link display--block">
-                Add to Cart
+              <span
+                className="ProductCrossSell__cta link display--block"
+                onClick={() => console.log(`Add Complementary w/ID: ${p.productId} to cart...`)}
+              >
+                  Add to Cart
               </span>
             </div>
             ))}
@@ -32,7 +35,7 @@ ProductCrossSell.propTypes = {
   complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
     centsPrice: PropTypes.number,
     smallImg: PropTypes.string,
-    productId: PropTypes.string,
+    productId: PropTypes.number,
     productTitle: PropTypes.string,
     url: PropTypes.string,
   })).isRequired,
