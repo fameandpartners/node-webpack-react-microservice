@@ -8,7 +8,7 @@ class Slide extends PureComponent {
     const { children, fullSlide } = this.props;
 
     return (
-      <div
+      <li
         className={classnames(
           'Slide u-height--full',
           {
@@ -17,7 +17,7 @@ class Slide extends PureComponent {
         )}
       >
         { children }
-      </div>
+      </li>
     );
   }
 }

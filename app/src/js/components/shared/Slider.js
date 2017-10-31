@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
@@ -72,6 +74,8 @@ class Slider extends Component {
     loryInstance = null;
     this.initializeLory();
 
+    console.log('component did update');
+
     if ((lastProps.winWidth !== this.props.winWidth)
     || (lastProps.winHeight !== this.props.winHeight)) {
       loryInstance.reset();
@@ -94,9 +98,6 @@ class Slider extends Component {
       sliderHeight,
       showButtons,
     } = this.props;
-
-    console.log('Children');
-    console.log(children);
 
     return (
       <div

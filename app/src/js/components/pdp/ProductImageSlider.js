@@ -47,7 +47,7 @@ function dispatchToProps(dispatch) {
   return { activateModal };
 }
 
-class ProductDisplayOptionsTouch extends Component {
+class ProductImageSlider extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -127,7 +127,6 @@ class ProductDisplayOptionsTouch extends Component {
       winWidth,
     } = this.props;
     const sliderImages = this.getSliderImages();
-    console.log(sliderImages);
     return (
       <div className="ProductImageSlider">
         <Slider
@@ -163,7 +162,7 @@ class ProductDisplayOptionsTouch extends Component {
 }
 
 /* eslint-disable react/forbid-prop-types */
-ProductDisplayOptionsTouch.propTypes = {
+ProductImageSlider.propTypes = {
   // Redux Properties
   addonOptions: PropTypes.array.isRequired,
   // fabric: PropTypes.shape({
@@ -183,7 +182,7 @@ ProductDisplayOptionsTouch.propTypes = {
   winWidth: PropTypes.number.isRequired,
   selectedColorId: PropTypes.number,
 };
-ProductDisplayOptionsTouch.defaultProps = {
+ProductImageSlider.defaultProps = {
   garmentCareInformation: 'Professional dry-clean only.\rSee label for further details.',
   selectedStyleCustomizations: [],
   winHeight: 640,
@@ -196,4 +195,4 @@ Resize(
   PDPBreakpoints,
 )(connect(
   stateToProps, dispatchToProps,
-)(ProductDisplayOptionsTouch));
+)(ProductImageSlider));
