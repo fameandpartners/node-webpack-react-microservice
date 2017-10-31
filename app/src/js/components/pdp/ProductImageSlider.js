@@ -112,12 +112,6 @@ class ProductImageSlider extends Component {
       .map(img => img);
   }
 
-  componentDidUpdate(lastProps) {
-    if (lastProps.selectedColorId !== this.props.selectedColorId) {
-      console.log('Color changed');
-    }
-  }
-
   render() {
     const {
       // breakpoint,
