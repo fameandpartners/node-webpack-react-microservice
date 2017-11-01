@@ -102,6 +102,7 @@ class SideMenuActionButtons extends Component {
               </span>
               <SearchBarExpander
                 handleSearchIconClick={this.handleSearchIconClick}
+                onBlur={this.handleSearchIconClickClose}
                 onSubmit={this.handleDressSearch}
                 isActive={searchBarActive}
               />
