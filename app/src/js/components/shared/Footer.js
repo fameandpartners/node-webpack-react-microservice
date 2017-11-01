@@ -1,6 +1,13 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { redirectSiteVersion } from '../../utilities/helpers';
+
+// Polyfills
+import win from '../../polyfills/windowPolyfill';
+
 // Components
 import Button from '../generic/Button';
 import Input from '../form/Input';
@@ -8,13 +15,19 @@ import Input from '../form/Input';
 // CSS
 import '../../../css/components/Footer.scss';
 
+function stateToProps(state) {
+  return {
+    // APP
+    auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
+  };
+}
+
 /* eslint-disable react/prefer-stateless-function */
 class Footer extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
     this.state = {
-      siteVersion: 'US',
       signupError: false,
     };
   }
@@ -26,21 +39,18 @@ class Footer extends PureComponent {
     });
   }
   changeSiteVersion() {
-    // Presentaional only, will actually change stuff in the future
-    const { siteVersion } = this.state;
-    if (siteVersion === 'AU') {
-      this.setState({
-        siteVersion: 'US',
-      });
-    } else {
-      this.setState({
-        siteVersion: 'AU',
-      });
-    }
+    redirectSiteVersion(win.location.href);
   }
 
   render() {
-    const { siteVersion, signupError } = this.state;
+    const {
+      signupError,
+    } = this.state;
+
+    const {
+      auSite,
+    } = this.props;
+
     return (
       <footer className="Footer">
         <div className="layout-container grid-noGutter-reverse-spaceAround">
@@ -180,7 +190,10 @@ class Footer extends PureComponent {
                 className="u-text-decoration--underline u-cursor--pointer"
                 onClick={this.changeSiteVersion}
               >
-                {siteVersion}
+                { auSite
+                  ? 'Australia'
+                  : 'U.S.'
+                }
               </span>
             </p>
           </div>
@@ -190,4 +203,9 @@ class Footer extends PureComponent {
   }
 }
 
-export default Footer;
+Footer.propTypes = {
+  // Redux Props
+  auSite: PropTypes.bool.isRequired,
+};
+
+export default connect(stateToProps)(Footer);
