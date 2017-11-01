@@ -117,14 +117,6 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.lockBody) {
-      win.document.body.style.overflow = 'hidden';
-    } else {
-      win.document.body.style.overflow = 'visible';
-    }
-  }
-
   componentDidMount() {
     getUserCart().end((err, res) => {
       console.log('res', res);
