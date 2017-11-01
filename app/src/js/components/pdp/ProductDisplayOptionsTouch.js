@@ -21,6 +21,11 @@ import ProductImageSlider from './ProductImageSlider';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
+import {
+  COLOR_HEADLINE,
+  STYLE_HEADLINE,
+} from '../../constants/CustomizationConstants';
+
 
 // Actions
 import * as ModalActions from '../../actions/ModalActions';
@@ -97,7 +102,7 @@ class ProductDisplayOptionsTouch extends Component {
                   { 'ProductDisplayOptionsTouch__background-text': !!selectedColor.patternUrl || hasDuoTone },
                 )}
                 >
-                  <span>Color</span><br />
+                  <span>{COLOR_HEADLINE}</span><br />
                   <span>{selectedColor.presentation} &nbsp;
                     {
                       colorCentsTotal ?
@@ -120,7 +125,7 @@ class ProductDisplayOptionsTouch extends Component {
           >
             <div className="grid-middle-noGutter u-height--full">
               <div className="col">
-                <span>Customizations</span><br />
+                <span>{STYLE_HEADLINE}</span><br />
                 <span>{this.generateAddonButtonText(selectedAddonOptions)}</span>
               </div>
             </div>

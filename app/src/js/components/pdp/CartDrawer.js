@@ -70,7 +70,7 @@ CartDrawer.propTypes = {
   complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
     centsPrice: PropTypes.number,
     smallImg: PropTypes.string,
-    productId: PropTypes.string,
+    productId: PropTypes.number,
     productTitle: PropTypes.string,
     url: PropTypes.string,
   })).isRequired,

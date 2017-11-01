@@ -147,6 +147,6 @@
     "whatwg-fetch": "2.0.2"
   },
   "engines": {
-    "node": "7.6.0"
+    "node": ">=7.6.0"
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { formatCents } from '../../utilities/accounting';
+import noop from '../../libs/noop';
 
 // UI Components
 import Button from '../generic/Button';
@@ -88,6 +89,7 @@ class Cart extends Component {
               className="u-mb-normal"
               url="/checkout"
               text="Checkout"
+              handleClick={noop}
             />
           </div>
 
@@ -111,7 +113,7 @@ Cart.propTypes = {
   complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
     centsPrice: PropTypes.number,
     smallImg: PropTypes.string,
-    productId: PropTypes.string,
+    productId: PropTypes.number,
     productTitle: PropTypes.string,
     url: PropTypes.string,
   })).isRequired,
