@@ -71,11 +71,12 @@ class Header extends Component {
       <ul className="col-4 u-text-align--right">
         { searchBarActive ? null : (
           <li className="Header__action">
-            <AccountIcon
-              width="18px"
-              height="26px"
-              onClick={this.handleSearchOpenClick}
-            />
+            <a href="/profile">
+              <AccountIcon
+                width="18px"
+                height="26px"
+              />
+            </a>
           </li>
         )}
 
