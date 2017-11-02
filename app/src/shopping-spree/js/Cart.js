@@ -66,20 +66,26 @@ export default class Cart extends FirebaseComponent
       
       const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
 
+      let toSend =           {
+        variant_id: dress.product_variant_id,
+        dress_variant_id: dress.product_variant_id,
+        size: "US" + dress.size + "/AU" + (parseInt(dress.size) + 4),
+        color_id: dress.color['id'],
+        height_value: dress.height,
+        height_unit: 'inch',
+        shopping_spree_total: this.state.totalInSharedCart
+      };
+
+      if( position + 1 >= this.state.myItems.length )
+      {
+        toSend['shopping_spree_item_count' ] =  this.state.myItems.length;
+      }
+      
       request.post('/user_cart/products')
         .withCredentials()
         .set( 'X-CSRF-TOKEN', csrfToken )
         .send(
-          {
-            variant_id: dress.product_variant_id,
-            dress_variant_id: dress.product_variant_id,
-            size: "US" + dress.size + "/AU" + (parseInt(dress.size) + 4),
-            color_id: dress.color['id'],
-            height_value: dress.height,
-            height_unit: 'inch',
-            shopping_spree_total: this.state.totalInSharedCart,
-            shopping_spree_item_count: this.state.myItems.length
-          }
+          toSend
         ).end((error, response) => {
           console.log( 'done with  add' );
           context.checkoutOneItem( position + 1, agent );
@@ -93,7 +99,7 @@ export default class Cart extends FirebaseComponent
       {
         checkingOut: true
       }
-    )
+    );
     this.checkoutOneItem( 0, null );
   }
 
