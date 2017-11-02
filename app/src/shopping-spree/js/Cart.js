@@ -21,7 +21,8 @@ export default class Cart extends FirebaseComponent
         totalInSharedCart: 0,
         totalInMyCart: 0,
         myItems: [],
-        totalOff: 0
+        totalOff: 0,
+        checkoutOut: false
 
       };
     this.addToCart = this.addToCart.bind(this);
