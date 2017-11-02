@@ -22,7 +22,7 @@ export default class Cart extends FirebaseComponent
         totalInMyCart: 0,
         myItems: [],
         totalOff: 0,
-        checkoutOut: false
+        checkingOut: false
 
       };
     this.addToCart = this.addToCart.bind(this);
@@ -89,6 +89,11 @@ export default class Cart extends FirebaseComponent
 
   checkout()
   {
+    this.setState(
+      {
+        checkingOut: true
+      }
+    )
     this.checkoutOneItem( 0, null );
   }
 
@@ -202,7 +207,8 @@ export default class Cart extends FirebaseComponent
         </div>
 
         <div className="row checkout-btn">
-          <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a onClick={this.checkout} className="center-block btn btn-black btn-lrg">Checkout</a></div>
+          { !this.state.checkingOut && <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a onClick={this.checkout} className="center-block btn btn-black btn-lrg">Checkout</a></div> }
+          { this.state.checkingOut && <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a  className="center-block btn btn-black btn-lrg">Checking Out...</a></div> }
         </div>
         <div className="shopping-spree-contents">
           <div className="row">
