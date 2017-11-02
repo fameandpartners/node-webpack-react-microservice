@@ -18,7 +18,7 @@ const ReactDOMServer = require('react-dom/server');
 const chalk = require('chalk');
 
 // Assets
-const clientAssets = require('./build/asset-manifest.json');
+const clientAssets = require('./build/webpack/asset-manifest.json');
 const template = require('./template');
 
 
@@ -28,6 +28,7 @@ const { transformProductJSON } = require('./src/js/utilities/pdp');
 // Components
 const App = require('./src/js/App');
 const mockJSON = require('./src/mock/product.json');
+const request = require('superagent');
 
 // Store
 const AppStore = require('./src/js/stores/AppStore');
@@ -56,8 +57,15 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 
-// Rendering
-// *****************************************************************************
+
+app.get('/webpack/asset-manifest', (req, res) => {
+  var asset_paths = {
+    jsBundle: clientAssets['main.js'],
+    cssBundle: clientAssets['main.css'],
+  }
+  res.send(asset_paths);
+});
+
 app.get('/pdp', (req, res) => {
   res.header('Content-Type', 'text/html');
   const props = transformProductJSON(mockJSON);
