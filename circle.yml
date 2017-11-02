@@ -3,8 +3,8 @@ machine:
     version: 8.1.4
 
 dependencies:
-    override:
-      - if [ $CIRCLE_BRANCH = 'master' ]; then sh ./build-prod.sh; else sh ./build-dev.sh; fi
+  override:
+    - if [ $CIRCLE_BRANCH = 'master' ]; then sh ./build-prod.sh; else sh ./build-dev.sh; fi
 
 test:
   override:
