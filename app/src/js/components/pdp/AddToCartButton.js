@@ -99,12 +99,17 @@ class AddToCartButton extends Component {
   }
 
   handleAddToBagCallback(req) {
-    const { activateCartDrawer, setCartContents } = this.props;
+    const {
+      activateCartDrawer,
+      setAppLoadingState,
+      setCartContents,
+    } = this.props;
     req.end((err, res) => {
       if (err) {
         return console.log('error adding something to the cart');
       }
 
+      setAppLoadingState({ loadingId: LOADING_IDS.ADD_TO_CART_LOADING });
       setCartContents({ cart: res.body });
       activateCartDrawer({ cartDrawerOpen: true });
       return null;
