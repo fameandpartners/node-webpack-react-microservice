@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
 import classnames from 'classnames';
-import ReactHoverObserver from 'react-hover-observer';
 
 // Decorators
 import Resize from '../../decorators/Resize';
@@ -31,9 +30,7 @@ import ProductFabricInfo from './ProductFabricInfo';
 import CartDrawer from './CartDrawer';
 
 // Generic UI Components
-import HeaderHider from '../shared/header/HeaderHider';
-import HeaderMobile from '../shared/header/HeaderMobile';
-import Header from '../shared/header/Header';
+import HeaderWrapper from '../shared/header/HeaderWrapper';
 import Footer from '../shared/Footer';
 
 // import FameDifference from './FameDifference';
@@ -97,7 +94,6 @@ class AppMain extends Component {
       sideMenuOpen,
       fabric,
       garmentCareInformation,
-      productTitle,
       sku,
     } = this.props;
 
@@ -132,15 +128,7 @@ class AppMain extends Component {
                 }}
               />
 
-              { breakpoint === 'mobile' || breakpoint === 'tablet' ?
-                <HeaderHider>
-                  <HeaderMobile headerTitle={productTitle} />
-                </HeaderHider>
-                :
-                <ReactHoverObserver hoverOffDelayInMs={120}>
-                  <Header />
-                </ReactHoverObserver>
-              }
+              <HeaderWrapper />
 
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? <ProductDisplayOptionsTouch />
@@ -219,7 +207,6 @@ AppMain.propTypes = {
   }).isRequired,
   garmentCareInformation: PropTypes.string.isRequired,
   sku: PropTypes.string,
-  productTitle: PropTypes.string.isRequired,
 
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
@@ -236,7 +223,3 @@ AppMain.defaultProps = {
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AppMain));
-
-// <div className="layout-container">
-//   <FameDifference />
-// </div>

@@ -146,44 +146,44 @@ module.exports = {
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
       {
-              test: /\.scss$/,
-              use: extractSass.extract({
-                use: [
+        test: /\.scss$/,
+        use: extractSass.extract({
+          use: [
                   { loader: 'css-loader' },
-                  {
-                    loader: 'postcss-loader',
-                    options: {
-                      ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                      plugins() {
-                        return [
-                          autoprefixer({
-                            browsers: [
-                              '>1%',
-                              'last 4 versions',
-                              'Firefox ESR',
-                              'not ie < 9', // React doesn't support IE8 anyway
-                            ],
-                          }),
-                        ];
-                      },
-                    },
-                  },
-                  // wrap our CSS to avoid styling conflicts in Rails app
-                  {
-                    loader: 'css-wrap-loader?selector=.PDP__wrapper',
-                  },
-                  {
-                    loader: 'sass-loader',
-                    options: {
-                      data: '@import "variables";',
-                      includePaths: [paths.cssSrc],
-                    },
-                  },
-                ],
-                      // use style-loader in development
-                fallback: 'style-loader',
-              }),
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                plugins() {
+                  return [
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                    }),
+                  ];
+                },
+              },
             },
+            // wrap our CSS to avoid styling conflicts in Rails app
+            // {
+            //   loader: 'css-wrap-loader?selector=.PDP__wrapper',
+            // },
+            {
+              loader: 'sass-loader',
+              options: {
+                data: '@import "variables";',
+                includePaths: [paths.cssSrc],
+              },
+            },
+          ],
+                      // use style-loader in development
+          fallback: 'style-loader',
+        }),
+      },
       // "babel" loader needed to parse Icon.js file
       // "svg-sprite" loader used to generate and swap JSX component for svg
       {

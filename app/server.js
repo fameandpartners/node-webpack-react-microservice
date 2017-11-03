@@ -18,7 +18,6 @@ const ReactDOMServer = require('react-dom/server');
 const chalk = require('chalk');
 
 // Assets
-const clientAssets = require('./build/webpack/asset-manifest.json');
 const template = require('./template');
 
 
@@ -59,6 +58,7 @@ app.use(cookieParser());
 
 
 app.get('/webpack/asset-manifest', (req, res) => {
+  const clientAssets = require('./build/webpack/asset-manifest.json');
   var asset_paths = {
     jsBundle: clientAssets['main.js'],
     cssBundle: clientAssets['main.css'],
