@@ -18,8 +18,8 @@ export default class Cart extends FirebaseComponent
     this.state =
       {
         discount: "0%",
+        totalItemsInSharedCart: 0,
         totalInSharedCart: 0,
-        totalInMyCart: 0,
         myItems: [],
         totalOff: 0,
         checkingOut: false
@@ -28,6 +28,8 @@ export default class Cart extends FirebaseComponent
     this.addToCart = this.addToCart.bind(this);
     this.recalculateDiscount = this.recalculateDiscount.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.handleValueChanges = this.handleValueChanges.bind(this);
+    this.calculateCartTotal = this.calculateCartTotal.bind(this);
     this.checkout = this.checkout.bind(this);
   }
 
@@ -44,8 +46,8 @@ export default class Cart extends FirebaseComponent
       this.setState(
         {
           myItems: this.state.myItems.concat( [
-              <CartItem key={data.key} firebaseKey={data.key} dress={data.val().dress} delete={this.deleteItem}/>] ),
-          totalInMyCart: this.state.totalInMyCart + Math.round(data.val().dress.price)
+              <CartItem key={data.key} firebaseKey={data.key} dress={data.val().dress} delete={this.deleteItem}/>]
+          ),
         }
       );
     }
@@ -63,7 +65,7 @@ export default class Cart extends FirebaseComponent
     {
       let dress = this.state.myItems[position].props.dress;
       let context = this;
-      
+
       const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
 
       let toSend =           {
@@ -81,7 +83,7 @@ export default class Cart extends FirebaseComponent
       {
         toSend['shopping_spree_item_count' ] =  this.state.myItems.length;
       }
-      
+
       request.post('/user_cart/products')
         .withCredentials()
         .set( 'X-CSRF-TOKEN', csrfToken )
@@ -104,8 +106,8 @@ export default class Cart extends FirebaseComponent
     this.checkoutOneItem( 0, null );
   }
 
-  deleteItem( firebaseKey )
-  {
+  deleteItem( firebaseKey ){
+    const { totalItemsInSharedCart, myItems } = this.state;
     let index = -1;
     for( let i = 0; i < this.state.myItems.length && index === -1; i++ )
     {
@@ -114,7 +116,7 @@ export default class Cart extends FirebaseComponent
         index = i;
       }
     }
-    this.state.myItems.splice( index, 1 );
+    myItems.splice( index, 1 );
     this.setState (
       {
         myItems: this.state.myItems
@@ -122,11 +124,20 @@ export default class Cart extends FirebaseComponent
     );
 
     this.cartDB.child( firebaseKey ).remove();
-    this.recalculateDiscount();
+    this.recalculateDiscount(this.state.myItems.length);
     this.createFamebotMessage(
-      "Oh No! " + this.props.name + " just removed an item from their cart.  You are now getting " + this.calculateDiscount({totalItems: this.state.myItems.length}) +  "% off", "discount",
+      "Oh No! "
+      + this.props.name + " just removed an item from their cart.  You are now getting "
+      + this.calculateDiscount({totalItems: totalItemsInSharedCart - 1})
+      + "% off", "discount",
       "discount", // type
     );
+  }
+
+  calculateCartTotal(myItems = this.state.myItems){
+    return myItems.reduce((accum, curr) => {
+      return accum + curr.props.dress.price;
+    }, 0);
   }
 
   recalculateDiscount(count)
@@ -138,15 +149,19 @@ export default class Cart extends FirebaseComponent
     this.setState(
       {
         discount: discount + "%",
-        totalOff: (discount / 100.0) * this.state.totalInMyCart
+        totalOff: (discount / 100.0) * this.calculateCartTotal()
       }
     );
 
     this.props.updateDiscount(discount);
   }
 
-  valueAdded(data){
-    this.recalculateDiscount
+  handleValueChanges(data){
+     if( data && data.val) {
+       const count = data.val() ? Object.keys(data.val()).length : 0;
+       this.recalculateDiscount(count);
+       this.setState({totalItemsInSharedCart: count})
+     }
   }
 
   startListeningToFirebase()
@@ -154,7 +169,7 @@ export default class Cart extends FirebaseComponent
     super.connectToFirebase();
     this.cartDB = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
     this.cartDB.on( 'child_added', this.addToCart );
-    this.cartDB.on( 'value', (data) => { if( data && data.val() && Object.keys(data.val()) ) { this.recalculateDiscount(Object.keys(data.val()).length) } });
+    this.cartDB.on( 'value', this.handleValueChanges);
   }
 
 
@@ -209,7 +224,7 @@ export default class Cart extends FirebaseComponent
             <strong>Total</strong>
           </div>
           <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
-            <strong>${(this.state.totalInMyCart - this.state.totalOff).toFixed(2)}</strong>
+            <strong>${(this.calculateCartTotal(this.state.myItems) - this.state.totalOff).toFixed(2)}</strong>
           </div>
         </div>
 
