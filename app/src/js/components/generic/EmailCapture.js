@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 
+// Polyfills
+import win from '../../polyfills/windowPolyfill';
+
 // Components
 import Button from '../generic/Button';
 import Input from '../form/Input';
@@ -33,6 +36,12 @@ class EmailCapture extends PureComponent {
     return re.test(this.state.userEmail);
   }
 
+  // TODO: probably should be a helper too? or at least pulled from appState...
+  isDev() {
+    const url = win.location.href;
+    return !url.includes('www.fameandpartners');
+  }
+
   handleSignupClick(e) {
     e.preventDefault();
 
@@ -49,10 +58,13 @@ class EmailCapture extends PureComponent {
     const { service } = this.props;
     const { userEmail } = this.state;
 
+    if (this.isDev()) {
+      console.log('DEV: Successfully "subscribed"!');
+      return;
+    }
+
     if (service === 'bronto') {
-      // TODO: check if dev (vs. prod) & use dummy URL
-      const directAddUrl = `http://testurl/&email=${userEmail}`;
-      // const directAddUrl = `http://hello.fameandpartners.com/public/?q=direct_add&fn=Public_DirectAddForm&id=bdgojucscmxsxluwqpqutjwzwwfhbah&email=${userEmail}&createCookie=1`;
+      const directAddUrl = `http://hello.fameandpartners.com/public/?q=direct_add&fn=Public_DirectAddForm&id=bdgojucscmxsxluwqpqutjwzwwfhbah&email=${userEmail}&createCookie=1`;
       const brontoImgEl = `<img src="${directAddUrl}" width="0" height="0" border="0" alt="" />`;
 
       this.brontoSuccessNode.innerHTML = brontoImgEl;
@@ -73,7 +85,7 @@ class EmailCapture extends PureComponent {
               placeholder="Email your email address"
               type="email"
               error={signupError}
-              inlineMeta={signupError ? 'Error! Something is wrong...' : null}
+              inlineMeta={signupError ? 'Please enter a valid email...' : null}
               onChange={this.handleInputEmailChange}
             />
           </div>
