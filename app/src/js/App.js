@@ -127,18 +127,20 @@ class App extends Component {
   render() {
     const { lockBody } = this.props;
     return (
-      <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
-        <SideMenu />
-        <CustomizationDrawer />
-        <AppMain />
-        <OnboardingModal />
-        <ProductFabricModal />
-        <ColorSelectionModal />
-        <ShareModal />
-        <ImageLightboxModal />
-        <StyleSelectionModal />
-        <SizeModals />
-        <AfterpayModal />
+      <div className="__react_root__">
+        <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
+          <SideMenu />
+          <CustomizationDrawer />
+          <AppMain />
+          <OnboardingModal />
+          <ProductFabricModal />
+          <ColorSelectionModal />
+          <ShareModal />
+          <ImageLightboxModal />
+          <StyleSelectionModal />
+          <SizeModals />
+          <AfterpayModal />
+        </div>
       </div>
     );
   }

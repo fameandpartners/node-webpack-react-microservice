@@ -76,7 +76,7 @@ class AppMain extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="__react_root__">
         { breakpoint === 'mobile' || breakpoint === 'tablet' ?
           <HeaderHider>
             <HeaderMobile headerTitle={productTitle} />

@@ -151,6 +151,9 @@ module.exports = {
               },
             },
             {
+              loader: 'css-wrap-loader?selector=.__react_root__',
+            },
+            {
               loader: 'sass-loader',
               options: {
                 data: '@import "variables";',

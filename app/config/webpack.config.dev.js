@@ -169,9 +169,9 @@ module.exports = {
               },
             },
             // wrap our CSS to avoid styling conflicts in Rails app
-            // {
-            //   loader: 'css-wrap-loader?selector=.PDP__wrapper',
-            // },
+            {
+              loader: 'css-wrap-loader?selector=.__react_root__',
+            },
             {
               loader: 'sass-loader',
               options: {

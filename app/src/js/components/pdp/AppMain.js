@@ -41,7 +41,6 @@ import '../../../css/components/AppMain.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    productTitle: state.$$productState.get('productTitle'),
     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
     fabric: state.$$productState.get('fabric').toJS(),

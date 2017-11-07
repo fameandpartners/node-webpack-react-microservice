@@ -2,10 +2,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import win from './polyfills/windowPolyfill';
 
 // Components
-import App from './App';
+import App from './App'; // Current Pdp, poor name
+
+// Standard Components that will be included in old site
 import HeaderWrapper from './components/shared/header/HeaderWrapper';
+import SideMenu from './components/shared/side_menu/SideMenu';
 
 // CSS
 import '../css/index.scss';
@@ -13,10 +17,8 @@ import '../css/index.scss';
 // Store
 import AppStore from './stores/AppStore';
 
-// polyfills
-import win from './polyfills/windowPolyfill';
-
-// import { transformProductJSON } from './utilities/pdp';
+// Utilities
+import { transformProductJSON } from './utilities/pdp';
 
 function renderComponent(Component, idSelectorStr) {
   const el = document.getElementById(idSelectorStr);
@@ -30,12 +32,9 @@ function renderComponent(Component, idSelectorStr) {
   }
 }
 
-
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-nested-ternary */
 // MAIN PDP
-console.log('win.__data', win.__data);
-const pdpData = {};
+// eslint-disable-next-line
+const pdpData = win.__data ? transformProductJSON(win.__data) : {};
 const store = AppStore(pdpData);
 const AppComponent = <Provider store={store}><App /></Provider>;
 renderComponent(AppComponent, 'react-pdp');
@@ -43,6 +42,10 @@ renderComponent(AppComponent, 'react-pdp');
 // HEADER
 const HeaderComponent = <Provider store={store}><HeaderWrapper /></Provider>;
 renderComponent(HeaderComponent, 'react-header');
+
+// SIDE MENU
+const SideMenuComponent = <Provider store={store}><SideMenu /></Provider>;
+renderComponent(SideMenuComponent, 'react-menu');
 
 // FOOTER
 
