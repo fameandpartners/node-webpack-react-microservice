@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import win from '../../polyfills/windowPolyfill';
 
 
 // Actions
@@ -35,6 +36,11 @@ class CliqueCallout extends Component {
     autoBind(this);
   }
 
+  handleStartCliqueToBuy() {
+    if (win.startShoppingSpree) {
+      win.startShoppingSpree();
+    }
+  }
 
   generateCliqueCallout(isCliqueActive) {
     if (!isCliqueActive) return null;
