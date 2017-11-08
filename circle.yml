@@ -4,7 +4,7 @@ machine:
 
 dependencies:
     override:
-      - if [ $CIRCLE_BRANCH = 'master' ]; then echo "master"; elif [[$CIRCLE_BRANCH =~ *release2* ]]; then echo 2; else echo 1; fi
+      - if [ $CIRCLE_BRANCH = 'master' ]; then echo "master"; elif [["$CIRCLE_BRANCH" =~ *release2* ]]; then echo 2; else echo 1; fi
 
 test:
   override:
