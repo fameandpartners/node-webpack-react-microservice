@@ -20,6 +20,7 @@ class EmailCapture extends PureComponent {
     this.state = {
       userEmail: null,
       signupError: false,
+      signupSuccess: null,
     };
   }
 
@@ -60,6 +61,7 @@ class EmailCapture extends PureComponent {
 
     if (this.isDev()) {
       console.log('DEV: Successfully "subscribed"!');
+      this.handleSuccess();
       return;
     }
 
@@ -69,36 +71,60 @@ class EmailCapture extends PureComponent {
 
       this.brontoSuccessNode.innerHTML = brontoImgEl;
     }
+
+    this.handleSuccess();
+  }
+
+  handleSuccess() {
+    this.setState({
+      signupSuccess: true,
+    });
   }
 
   render() {
     const {
       signupError,
+      signupSuccess,
     } = this.state;
 
     return (
-      <div className="EmailCapture grid-center">
-        <div className="col-7_sm-9 padding--none">
-          <div>
-            <Input
-              id="footer-email"
-              placeholder="Email your email address"
-              type="email"
-              error={signupError}
-              inlineMeta={signupError ? 'Please enter a valid email...' : null}
-              onChange={this.handleInputEmailChange}
+      <div className="EmailCapture">
+        <h2
+          className="EmailCapture__success col-12"
+          style={{
+            display: signupSuccess ? 'flex' : 'none',
+          }}
+        >
+          Thanks for signing up!
+        </h2>
+        <div
+          className="grid-center"
+          style={{
+            display: signupSuccess ? 'none' : 'flex',
+          }}
+        >
+          <div className="col-7_sm-9 padding--none">
+            <div>
+              <Input
+                id="footer-email"
+                placeholder="Email your email address"
+                type="email"
+                error={signupError}
+                inlineMeta={signupError ? 'Please enter a valid email...' : null}
+                onChange={this.handleInputEmailChange}
+              />
+            </div>
+          </div>
+          <div className="col-3 padding--none">
+            <Button
+              className="padding--none"
+              handleClick={this.handleSignupClick}
+              text="Sign up"
             />
           </div>
         </div>
-        <div className="col-3 padding--none">
-          <Button
-            className="padding--none"
-            handleClick={this.handleSignupClick}
-            text="Sign up"
-          />
-        </div>
         <div
-          className="hidden"
+          style={{ display: 'none' }}
           ref={x => this.brontoSuccessNode = x}
         />
       </div>

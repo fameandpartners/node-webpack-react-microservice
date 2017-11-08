@@ -1,1 +1,7 @@
-// .EmailCapture {}
+.EmailCapture .EmailCapture__success {
+  background: $c-white;
+  padding: 15px;
+  margin: 0 40px;
+  justify-content: center;
+  border: 1px solid $c-light-gray;
+}
