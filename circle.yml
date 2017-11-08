@@ -4,7 +4,7 @@ machine:
 
 dependencies:
     override:
-      - if [[ $CIRCLE_BRANCH =~ *'release2'* ]]; then echo '23'; else echo '32'; fi
+      - if [[ $CIRCLE_BRANCH =~ 'release2' ]]; then echo '23'; else echo '32'; fi
 
 test:
   override:
