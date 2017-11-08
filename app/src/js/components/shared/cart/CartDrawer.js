@@ -7,13 +7,13 @@ import { bindActionCreators } from 'redux';
 // UI Components
 import CartEmpty from './CartEmpty';
 import Cart from './Cart';
-import CancelOut from '../shared/CancelOut';
+import CancelOut from '../CancelOut';
 
 // Actions
-import * as CartActions from '../../actions/CartActions';
+import * as CartActions from '../../../actions/CartActions';
 
 // CSS
-import '../../../css/components/Cart.scss';
+import '../../../../css/components/Cart.scss';
 
 
 function stateToProps(state) {

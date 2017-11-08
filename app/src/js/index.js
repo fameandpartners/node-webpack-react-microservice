@@ -10,6 +10,7 @@ import App from './App'; // Current Pdp, poor name
 // Standard Components that will be included in old site
 import HeaderWrapper from './components/shared/header/HeaderWrapper';
 import SideMenu from './components/shared/side_menu/SideMenu';
+import CartDrawer from './components/shared/cart/CartDrawer';
 
 // CSS
 import '../css/index.scss';
@@ -46,6 +47,10 @@ renderComponent(HeaderComponent, 'react-header');
 // SIDE MENU
 const SideMenuComponent = <Provider store={store}><SideMenu /></Provider>;
 renderComponent(SideMenuComponent, 'react-menu');
+
+// CART DRAWER
+const CartDrawerComponent = <Provider store={store}><CartDrawer /></Provider>;
+renderComponent(CartDrawerComponent, 'react-cart');
 
 // FOOTER
 

@@ -4,7 +4,9 @@
   position: fixed;
   height: 100%;
   width: 500px;
+  z-index: 1;
   transform: translateX(500px);
+  background: $c-white;
 }
 
 .CartDrawer__header {

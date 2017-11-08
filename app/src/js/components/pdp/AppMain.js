@@ -27,7 +27,7 @@ import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import ProductFabricInfo from './ProductFabricInfo';
-import CartDrawer from './CartDrawer';
+import CartDrawer from '../shared/cart/CartDrawer';
 
 // Generic UI Components
 import HeaderWrapper from '../shared/header/HeaderWrapper';
@@ -116,7 +116,6 @@ class AppMain extends Component {
           >
             <div
               className="AppMain u-height--full"
-              style={{ transform: `translateX(${x}px)` }}
             >
               <div
                 className="App__blanket u-height--full u-width--full"
@@ -179,10 +178,7 @@ class AppMain extends Component {
               <CartDrawer />
             </div>
 
-            <div
-              className="u-position--fixed u-width--full u-bottom u-z-index--mid"
-              style={{ transform: `translateX(${x}px)` }}
-            >
+            <div className="u-position--fixed u-width--full u-bottom u-z-index--mid">
               <AddToCartButtonLedgeMobile />
             </div>
             <CustomizationButtonLedge />
