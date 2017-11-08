@@ -10,7 +10,7 @@ test:
   override:
     - echo 'yacky'
 
-deployment:
+#deployment:
   # qa:
   #   branch: /release1.*/
   #   commands:
