@@ -217,9 +217,6 @@ class ProductOptions extends Component {
     };
   }
 
-  handleStartCliqueToBuy() {
-
-  }
 
   /**
    * Checks for our current color amongst images and returns that image, or default
@@ -237,30 +234,6 @@ class ProductOptions extends Component {
     return expressMakingSelected ? '4-6 business days' : deliveryCopy;
   }
 
-
-  generateCliqueCallout(isCliqueActive) {
-    if (!isCliqueActive) return null;
-    return (
-      <div className="grid-center-spaceAround CliqueCallout__content u-mb-normal">
-        <div className="col-10 u-text-align-left u-paddingBottom--small">
-          <p className="CliqueCallout__content--headline u-mb-small">
-            Want up to 25% off?
-          </p>
-          <p className="CliqueCallout__content--subHeadline">
-            Invite your friends to group shop with you. The more you buy, the more you save.&nbsp;
-            <span
-              role="button"
-              onClick={this.handleStartCliqueToBuy}
-              className="link"
-            >
-              Enter Clique to Buy
-            </span>
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   render() {
     const {
       auSite,
@@ -271,7 +244,6 @@ class ProductOptions extends Component {
       selectedDressSize,
       selectedHeightValue,
     } = this.props;
-    const CLIQUE_ACTIVE = true;
 
     return (
       <div className="ProductOptions grid-12-noGutter">
@@ -320,9 +292,7 @@ class ProductOptions extends Component {
             </div>
 
 
-            {
-              !CLIQUE_ACTIVE ? <ExpressMaking /> : null
-            }
+            <ExpressMaking />
 
             <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />

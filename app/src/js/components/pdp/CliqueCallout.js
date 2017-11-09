@@ -48,8 +48,8 @@ class CliqueCallout extends Component {
     }
   }
 
-  generateCliqueCallout(isCliqueActive) {
-    if (!isCliqueActive || this.state.inShoppingSpree) return null;
+  generateCliqueCallout() {
+    if (this.state.inShoppingSpree) return null;
     return (
       <div className="grid-center-spaceAround CliqueCallout__content">
         <div className="col-10 u-text-align-left u-paddingBottom--small">
@@ -72,11 +72,9 @@ class CliqueCallout extends Component {
   }
 
   render() {
-    const CLIQUE_ACTIVE = true;
-
     return (
-      <div className="CliqueCallout u-mb-small">
-        { this.generateCliqueCallout(CLIQUE_ACTIVE) }
+      <div className="js-clique-callout CliqueCallout u-mb-small">
+        { this.generateCliqueCallout() }
       </div>
     );
   }

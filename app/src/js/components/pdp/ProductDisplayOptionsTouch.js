@@ -129,10 +129,8 @@ class ProductDisplayOptionsTouch extends Component {
           </div>
         </div>
         <div className="layout-container">
-          { true
-            ? <CliqueCallout />
-            : <ExpressMaking mobile />
-          }
+          <CliqueCallout />
+          <ExpressMaking mobile />
         </div>
       </div>
     );
