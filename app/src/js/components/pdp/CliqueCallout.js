@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
 import win from '../../polyfills/windowPolyfill';
 
 
@@ -34,6 +35,11 @@ class CliqueCallout extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+    const cookies = new Cookies();
+
+    this.state = {
+      inShoppingSpree: cookies.get('shopping_spree_id') != null,
+    };
   }
 
   handleStartCliqueToBuy() {
@@ -43,7 +49,7 @@ class CliqueCallout extends Component {
   }
 
   generateCliqueCallout(isCliqueActive) {
-    if (!isCliqueActive) return null;
+    if (!isCliqueActive || this.state.inShoppingSpree) return null;
     return (
       <div className="grid-center-spaceAround CliqueCallout__content">
         <div className="col-10 u-text-align-left u-paddingBottom--small">
@@ -57,7 +63,7 @@ class CliqueCallout extends Component {
               onClick={this.handleStartCliqueToBuy}
               className="link"
             >
-              Enter Clique to Buy
+              Enter Clique to&nbsp;Buy
             </span>
           </p>
         </div>
