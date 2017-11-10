@@ -6,6 +6,7 @@ const express = require('express');
 const logger = require('morgan');
 const React = require('react');
 const Provider = require('react-redux').Provider;
+const clientAssets = require('./build/webpack/asset-manifest.json');
 // const Promise = require('bluebird');
 // const redis = require('redis');
 const cookieParser = require('cookie-parser');
