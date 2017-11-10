@@ -16,6 +16,9 @@ import CancelOut from '../CancelOut';
 // Actions
 import * as CartActions from '../../../actions/CartActions';
 
+// Polyfills
+import win from '../../polyfills/windowPolyfill';
+
 // CSS
 import '../../../../css/components/Cart.scss';
 
@@ -30,8 +33,15 @@ function stateToProps(state) {
 }
 
 function dispatchToProps(dispatch) {
-  const { activateCartDrawer } = bindActionCreators(CartActions, dispatch);
-  return { activateCartDrawer };
+  const {
+    activateCartDrawer,
+    setCartContents,
+  } = bindActionCreators(CartActions, dispatch);
+
+  return {
+    activateCartDrawer,
+    setCartContents,
+  };
 }
 
 
@@ -43,6 +53,14 @@ class CartDrawer extends Component {
 
   handleShoppingBagClose() {
     this.props.activateCartDrawer({ cartDrawerOpen: false });
+  }
+
+  componentDidMount() {
+    const {
+      setCartContents,
+    } = this.props;
+
+    setCartContents({ cart: win.CartData });
   }
 
   render() {
@@ -113,6 +131,7 @@ CartDrawer.propTypes = {
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
   // modelDescription: PropTypes.string.isRequired,
+  setCartContents: PropTypes.func.isRequired,
 };
 
 CartDrawer.defaultProps = {

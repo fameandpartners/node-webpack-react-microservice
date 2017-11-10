@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { redirectSiteVersion } from '../../utilities/helpers';
 
@@ -9,8 +8,7 @@ import { redirectSiteVersion } from '../../utilities/helpers';
 import win from '../../polyfills/windowPolyfill';
 
 // Components
-import Button from '../generic/Button';
-import Input from '../form/Input';
+import EmailCapture from '../generic/EmailCapture';
 
 // CSS
 import '../../../css/components/Footer.scss';
@@ -27,26 +25,13 @@ class Footer extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-    this.state = {
-      signupError: false,
-    };
   }
-  handleSignupClick(e) {
-    e.preventDefault();
-    // Simulate signup error
-    this.setState({
-      signupError: true,
-    });
-  }
+
   changeSiteVersion() {
     redirectSiteVersion(win.location.href);
   }
 
   render() {
-    const {
-      signupError,
-    } = this.state;
-
     const {
       auSite,
     } = this.props;
@@ -161,26 +146,7 @@ class Footer extends PureComponent {
             <p className="Footer__copy u-mb-small">
               Sign up to always enjoy free returns
             </p>
-            <form className={classNames('grid-center', 'Footer__form')}>
-              <div className="col-7_sm-9 padding--none">
-                <div>
-                  <Input
-                    id="footer-email"
-                    placeholder="Email your email address"
-                    type="email"
-                    error={signupError}
-                    inlineMeta={signupError ? 'Error! Something is wrong...' : null}
-                  />
-                </div>
-              </div>
-              <div className="col-3 padding--none">
-                <Button
-                  className="padding--none"
-                  handleClick={this.handleSignupClick}
-                  text="Sign up"
-                />
-              </div>
-            </form>
+            <EmailCapture service="bronto" />
           </div>
         </div>
         <div className="layout-container grid-noGutter">
