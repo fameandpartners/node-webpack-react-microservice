@@ -44,7 +44,7 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class AppMain extends Component {
+class HeaderWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -91,12 +91,12 @@ class AppMain extends Component {
   }
 }
 
-AppMain.propTypes = {
+HeaderWrapper.propTypes = {
   // Redux Props
   activateModal: PropTypes.func.isRequired,
   cartDrawerOpen: PropTypes.bool,
   sideMenuOpen: PropTypes.bool,
-  productTitle: PropTypes.string.isRequired,
+  productTitle: PropTypes.string,
 
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
@@ -106,10 +106,11 @@ AppMain.propTypes = {
   breakpoint: PropTypes.string.isRequired,
 };
 
-AppMain.defaultProps = {
+HeaderWrapper.defaultProps = {
   cartDrawerOpen: false,
+  productTitle: null,
   sideMenuOpen: false,
   sku: null,
 };
 
-export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AppMain));
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(HeaderWrapper));

@@ -27,11 +27,6 @@ import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import ProductFabricInfo from './ProductFabricInfo';
-import CartDrawer from '../shared/cart/CartDrawer';
-
-// Generic UI Components
-import HeaderWrapper from '../shared/header/HeaderWrapper';
-import Footer from '../shared/Footer';
 
 // import FameDifference from './FameDifference';
 
@@ -125,8 +120,6 @@ class AppMain extends Component {
                 }}
               />
 
-              <HeaderWrapper />
-
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? <ProductDisplayOptionsTouch />
                 : (
@@ -166,12 +159,8 @@ class AppMain extends Component {
                     </div>
                   )
                 }
-
-              <Footer />
             </div>
 
-
-            <CartDrawer />
 
             <div className="u-position--fixed u-width--full u-bottom u-z-index--mid">
               <AddToCartButtonLedgeMobile />
