@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-import { formatCents } from '../../utilities/accounting';
-import noop from '../../libs/noop';
+import { formatCents } from '../../../utilities/accounting';
+import noop from '../../../libs/noop';
 
 // UI Components
-import Button from '../generic/Button';
-import ProductCrossSell from './ProductCrossSell';
+import Button from '../../generic/Button';
+import ProductCrossSell from '../../pdp/ProductCrossSell';
 
 // CSS
-import '../../../css/components/Cart.scss';
+import '../../../../css/components/Cart.scss';
 
 class Cart extends Component {
   constructor(props) {

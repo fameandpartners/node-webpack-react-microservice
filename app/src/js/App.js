@@ -9,7 +9,6 @@ import { bindActionCreators } from 'redux';
 import Raven from 'raven-js';
 
 // Components
-import SideMenu from './components/shared/side_menu/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
@@ -127,18 +126,19 @@ class App extends Component {
   render() {
     const { lockBody } = this.props;
     return (
-      <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
-        <SideMenu />
-        <CustomizationDrawer />
-        <AppMain />
-        <OnboardingModal />
-        <ProductFabricModal />
-        <ColorSelectionModal />
-        <ShareModal />
-        <ImageLightboxModal />
-        <StyleSelectionModal />
-        <SizeModals />
-        <AfterpayModal />
+      <div className="__react_root__">
+        <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
+          <CustomizationDrawer />
+          <AppMain />
+          <OnboardingModal />
+          <ProductFabricModal />
+          <ColorSelectionModal />
+          <ShareModal />
+          <ImageLightboxModal />
+          <StyleSelectionModal />
+          <SizeModals />
+          <AfterpayModal />
+        </div>
       </div>
     );
   }

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "PORT=3030 node scripts/start.js",
+    "dev": "concurrently \"webpack --config config/webpack.config.dev.js -w\" \"node server.js\"",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom --notify",
     "test:once": "CI=true node test -- --coverage",
@@ -69,6 +69,7 @@
     "body-parser": "^1.17.2",
     "classnames": "^2.2.5",
     "clipboard": "^1.7.1",
+    "concurrently": "^3.5.0",
     "cookie-parser": "^1.4.3",
     "css-wrap-loader": "^1.0.0",
     "custom-event": "^1.0.1",
@@ -97,7 +98,7 @@
     "sanitize-html": "^1.14.1",
     "sass-loader": "^6.0.3",
     "shallowequal": "^1.0.1",
-    "superagent": "^3.6.3",
+    "superagent": "^3.7.0",
     "webpack-dev-middleware": "^1.12.0"
   },
   "devDependencies": {

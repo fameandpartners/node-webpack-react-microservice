@@ -452,44 +452,50 @@ export function transformProductJSON(productJSON) {
   let productState;
   let customizationState;
   try {
-    productState = {
-      currency: transformProductCurrency(productJSON.product),
-      complementaryProducts: transformProductComplementaryProducts(productJSON.product),
-      deliveryCopy: transformDeliveryCopy(productJSON.product),
-      fabric: transformProductFabric(productJSON.product),
-      fastMaking: transformProductFastMaking(productJSON.product),
-      garmentCareInformation: transformProductGarmentInformation(),
-      preCustomizations: transformProductPreCustomizations(),
-      productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
-      productDescription: transformProductDescription(productJSON.product),
-      productDefaultColors: transformProductColors(productJSON, 'default'),
-      productSecondaryColors: transformProductColors(productJSON, 'extra'),
-      productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
-      productId: transformProductId(productJSON.product),
-      productImages: transformProductImages(productJSON.images),
-      productTitle: transformProductTitle(productJSON.product),
-      isActive: productJSON.product.is_active,
-      makingOptionId: transformProductMakingOptionId(productJSON.product),
-      modelDescription: transformProductModelDescription(productJSON),
-      siteVersion: transformProductSiteVersion(productJSON),
-      sizeChart: transformProductSizeChart(productJSON),
-      sku: transformSKU(productJSON.product),
-    };
+    if (productJSON.product) {
+      productState = {
+        currency: transformProductCurrency(productJSON.product),
+        complementaryProducts: transformProductComplementaryProducts(productJSON.product),
+        deliveryCopy: transformDeliveryCopy(productJSON.product),
+        fabric: transformProductFabric(productJSON.product),
+        fastMaking: transformProductFastMaking(productJSON.product),
+        garmentCareInformation: transformProductGarmentInformation(),
+        preCustomizations: transformProductPreCustomizations(),
+        productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
+        productDescription: transformProductDescription(productJSON.product),
+        productDefaultColors: transformProductColors(productJSON, 'default'),
+        productSecondaryColors: transformProductColors(productJSON, 'extra'),
+        productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
+        productId: transformProductId(productJSON.product),
+        productImages: transformProductImages(productJSON.images),
+        productTitle: transformProductTitle(productJSON.product),
+        isActive: productJSON.product.is_active,
+        makingOptionId: transformProductMakingOptionId(productJSON.product),
+        modelDescription: transformProductModelDescription(productJSON),
+        siteVersion: transformProductSiteVersion(productJSON),
+        sizeChart: transformProductSizeChart(productJSON),
+        sku: transformSKU(productJSON.product),
+      };
+    }
+    productState = {};
   } catch (e) {
     throw ({ e, message: 'Product state has incorrect parameters' });
   }
 
 
   try {
-    const measurementMetric = selectMeasurementMetric(productJSON);
-    const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors);
-    customizationState = {
-      addons: transformAddons(productJSON),
-      selectedColor,
-      temporaryColor: selectedColor,
-      temporaryMeasurementMetric: measurementMetric,
-      selectedMeasurementMetric: measurementMetric,
-    };
+    if (productJSON.product) {
+      const measurementMetric = selectMeasurementMetric(productJSON);
+      const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors);
+      customizationState = {
+        addons: transformAddons(productJSON),
+        selectedColor,
+        temporaryColor: selectedColor,
+        temporaryMeasurementMetric: measurementMetric,
+        selectedMeasurementMetric: measurementMetric,
+      };
+    }
+    customizationState = {};
   } catch (e) {
     throw ({ e, message: 'Customization State has incorrect params' });
   }

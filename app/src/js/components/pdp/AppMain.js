@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Motion, spring } from 'react-motion';
 import classnames from 'classnames';
-import ReactHoverObserver from 'react-hover-observer';
 
 // Decorators
 import Resize from '../../decorators/Resize';
@@ -28,13 +27,6 @@ import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
 import ProductOptions from './ProductOptions';
 import ProductGrid from './ProductGrid';
 import ProductFabricInfo from './ProductFabricInfo';
-import CartDrawer from './CartDrawer';
-
-// Generic UI Components
-import HeaderHider from '../shared/header/HeaderHider';
-import HeaderMobile from '../shared/header/HeaderMobile';
-import Header from '../shared/header/Header';
-import Footer from '../shared/Footer';
 
 // import FameDifference from './FameDifference';
 
@@ -44,9 +36,8 @@ import '../../../css/components/AppMain.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    productTitle: state.$$productState.get('productTitle'),
-    sideMenuOpen: state.$$appState.get('sideMenuOpen'),
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
+    sideMenuOpen: state.$$appState.get('sideMenuOpen'),
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
     sku: state.$$productState.get('sku'),
@@ -81,7 +72,7 @@ class AppMain extends Component {
       cartDrawerOpen,
       sideMenuOpen,
     } = this.props;
-
+    activateCartDrawer({ sideMenuOpen: false });
     if (sideMenuOpen) activateSideMenu({ sideMenuOpen: false });
     else if (cartDrawerOpen) activateCartDrawer({ sideMenuOpen: false });
   }
@@ -97,7 +88,6 @@ class AppMain extends Component {
       sideMenuOpen,
       fabric,
       garmentCareInformation,
-      productTitle,
       sku,
     } = this.props;
 
@@ -107,10 +97,9 @@ class AppMain extends Component {
           opacity: spring(
               sideMenuOpen || cartDrawerOpen ? 25 : 0, AppConstants.ANIMATION_CONFIGURATION,
           ),
-          x: spring(cartDrawerOpen ? -500 : 0, AppConstants.ANIMATION_CONFIGURATION),
         }}
       >
-        {({ opacity, x }) =>
+        {({ opacity }) =>
           <div
             className={
             classnames(
@@ -121,7 +110,6 @@ class AppMain extends Component {
           >
             <div
               className="AppMain u-height--full"
-              style={{ transform: `translateX(${x}px)` }}
             >
               <div
                 className="App__blanket u-height--full u-width--full"
@@ -131,16 +119,6 @@ class AppMain extends Component {
                   visibility: opacity !== 0 ? 'visible' : 'hidden',
                 }}
               />
-
-              { breakpoint === 'mobile' || breakpoint === 'tablet' ?
-                <HeaderHider>
-                  <HeaderMobile headerTitle={productTitle} />
-                </HeaderHider>
-                :
-                <ReactHoverObserver hoverOffDelayInMs={120}>
-                  <Header />
-                </ReactHoverObserver>
-              }
 
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? <ProductDisplayOptionsTouch />
@@ -181,21 +159,10 @@ class AppMain extends Component {
                     </div>
                   )
                 }
-
-              <Footer />
             </div>
 
-            <div
-              className="CartDrawer__wrapper"
-              style={{ transform: `translateX(${500 - (x * -1)}px)` }}
-            >
-              <CartDrawer />
-            </div>
 
-            <div
-              className="u-position--fixed u-width--full u-bottom u-z-index--mid"
-              style={{ transform: `translateX(${x}px)` }}
-            >
+            <div className="u-position--fixed u-width--full u-bottom u-z-index--mid">
               <AddToCartButtonLedgeMobile />
             </div>
             <CustomizationButtonLedge />
@@ -219,7 +186,6 @@ AppMain.propTypes = {
   }).isRequired,
   garmentCareInformation: PropTypes.string.isRequired,
   sku: PropTypes.string,
-  productTitle: PropTypes.string.isRequired,
 
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
@@ -236,7 +202,3 @@ AppMain.defaultProps = {
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AppMain));
-
-// <div className="layout-container">
-//   <FameDifference />
-// </div>
