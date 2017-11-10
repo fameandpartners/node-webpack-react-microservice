@@ -20,7 +20,7 @@ import '../css/index.scss';
 import AppStore from './stores/AppStore';
 
 // Utilities
-// import { transformProductJSON } from './utilities/pdp';
+import { transformProductJSON } from './utilities/pdp';
 
 function renderComponent(Component, idSelectorStr) {
   const el = document.getElementById(idSelectorStr);
@@ -35,7 +35,10 @@ function renderComponent(Component, idSelectorStr) {
 // MAIN PDP
 // const pdpData = win.__data ? transformProductJSON(win.__data) : {};
 // eslint-disable-next-line
-const pdpData = win.__data || {};
+const cleanData = win.__data;
+// eslint-disable-next-line
+const untransformedData = win.__untransformedData || {};
+const pdpData = cleanData || transformProductJSON(untransformedData);
 const store = AppStore(pdpData);
 const AppComponent = <Provider store={store}><App /></Provider>;
 renderComponent(AppComponent, 'root');
