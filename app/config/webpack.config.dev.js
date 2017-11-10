@@ -93,7 +93,7 @@ module.exports = {
     // containing code from all our entry points, and the Webpack runtime.
     filename: 'webpack/static/[name].js',
     // This is the URL that app is served from. We use "/" in development.
-    publicPath,
+    // publicPath
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -231,7 +231,15 @@ module.exports = {
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
-      template: paths.appHtml,
+      chunks: ['hotReloadClient', 'hotReloadServer', 'hotReloadUtils', 'polyfills', 'pdp'],
+      template: paths.appPdpHtml,
+    }),
+    // Generates an `size-profile.html` file with the <script> injected.
+    new HtmlWebpackPlugin({
+      inject: true,
+      filename: 'size-profile.html',
+      chunks: ['hotReloadClient', 'hotReloadServer', 'hotReloadUtils', 'polyfills', 'sizeProfile'],
+      template: paths.appSizeProfileHtml,
     }),
     new webpack.NamedModulesPlugin(),
     // Makes some environment variables available to the JS code, for example:
