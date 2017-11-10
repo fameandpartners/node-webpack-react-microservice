@@ -41,8 +41,8 @@ import '../../../css/components/AppMain.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    sideMenuOpen: state.$$appState.get('sideMenuOpen'),
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
+    sideMenuOpen: state.$$appState.get('sideMenuOpen'),
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
     sku: state.$$productState.get('sku'),
@@ -77,7 +77,7 @@ class AppMain extends Component {
       cartDrawerOpen,
       sideMenuOpen,
     } = this.props;
-
+    activateCartDrawer({ sideMenuOpen: false });
     if (sideMenuOpen) activateSideMenu({ sideMenuOpen: false });
     else if (cartDrawerOpen) activateCartDrawer({ sideMenuOpen: false });
   }
@@ -102,10 +102,9 @@ class AppMain extends Component {
           opacity: spring(
               sideMenuOpen || cartDrawerOpen ? 25 : 0, AppConstants.ANIMATION_CONFIGURATION,
           ),
-          x: spring(cartDrawerOpen ? -500 : 0, AppConstants.ANIMATION_CONFIGURATION),
         }}
       >
-        {({ opacity, x }) =>
+        {({ opacity }) =>
           <div
             className={
             classnames(
@@ -171,12 +170,8 @@ class AppMain extends Component {
               <Footer />
             </div>
 
-            <div
-              className="CartDrawer__wrapper"
-              style={{ transform: `translateX(${500 - (x * -1)}px)` }}
-            >
-              <CartDrawer />
-            </div>
+
+            <CartDrawer />
 
             <div className="u-position--fixed u-width--full u-bottom u-z-index--mid">
               <AddToCartButtonLedgeMobile />

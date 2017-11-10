@@ -11,6 +11,7 @@ import App from './App'; // Current Pdp, poor name
 import HeaderWrapper from './components/shared/header/HeaderWrapper';
 import SideMenu from './components/shared/side_menu/SideMenu';
 import CartDrawer from './components/shared/cart/CartDrawer';
+import Footer from './components/shared/Footer';
 
 // CSS
 import '../css/index.scss';
@@ -23,8 +24,6 @@ import { transformProductJSON } from './utilities/pdp';
 
 function renderComponent(Component, idSelectorStr) {
   const el = document.getElementById(idSelectorStr);
-  console.log('idSelectorStr');
-  console.log('el', el);
   if (el) {
     ReactDOM.render(
       Component,
@@ -53,6 +52,8 @@ const CartDrawerComponent = <Provider store={store}><CartDrawer /></Provider>;
 renderComponent(CartDrawerComponent, 'react-cart');
 
 // FOOTER
+const FooterComponent = <Provider store={store}><Footer /></Provider>;
+renderComponent(FooterComponent, 'react-footer');
 
 // SIDE CART
 
