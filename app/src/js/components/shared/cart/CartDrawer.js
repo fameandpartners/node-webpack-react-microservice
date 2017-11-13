@@ -17,7 +17,7 @@ import CancelOut from '../CancelOut';
 import * as CartActions from '../../../actions/CartActions';
 
 // Polyfills
-import win from '../../polyfills/windowPolyfill';
+import win from '../../../polyfills/windowPolyfill';
 
 // CSS
 import '../../../../css/components/Cart.scss';
