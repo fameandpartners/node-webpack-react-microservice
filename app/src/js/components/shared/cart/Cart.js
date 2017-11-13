@@ -72,7 +72,8 @@ class Cart extends Component {
   }
 
   render() {
-    const { complementaryProducts } = this.props;
+    // const { complementaryProducts } = this.props;
+
     return (
       <div className="Cart u-flex u-flex--1">
         <div className="Cart__contents u-flex--col">

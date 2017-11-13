@@ -28,7 +28,7 @@ function stateToProps(state) {
   return {
     lineItems: state.$$cartState.get('lineItems').toJS(),
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
-    complementaryProducts: state.$$productState.get('complementaryProducts').toJS(),
+    // complementaryProducts: state.$$productState.get('complementaryProducts').toJS(),
   };
 }
 
@@ -62,6 +62,7 @@ class CartDrawer extends Component {
     if (win.CartData) {
       setCartContents({ cart: win.CartData });
     } else {
+      // eslint-disable-next-line
       console.warn('NO CART DATA!');
     }
   }
@@ -69,7 +70,7 @@ class CartDrawer extends Component {
   render() {
     const {
       cartDrawerOpen,
-      complementaryProducts,
+      // complementaryProducts,
       lineItems,
     } = this.props;
 
@@ -96,7 +97,7 @@ class CartDrawer extends Component {
                   <h4>Shopping Bag</h4>
                 </div>
                 { lineItems.length > 0
-                ? <Cart complementaryProducts={complementaryProducts} lineItems={lineItems} />
+                ? <Cart lineItems={lineItems} />
                 : <CartEmpty />
               }
               </div>
@@ -111,13 +112,13 @@ class CartDrawer extends Component {
 CartDrawer.propTypes = {
   // Redux Props
   cartDrawerOpen: PropTypes.bool,
-  complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
-    centsPrice: PropTypes.number,
-    smallImg: PropTypes.string,
-    productId: PropTypes.number,
-    productTitle: PropTypes.string,
-    url: PropTypes.string,
-  })).isRequired,
+  // complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
+  //   centsPrice: PropTypes.number,
+  //   smallImg: PropTypes.string,
+  //   productId: PropTypes.number,
+  //   productTitle: PropTypes.string,
+  //   url: PropTypes.string,
+  // })).isRequired,
   lineItems: PropTypes.arrayOf(PropTypes.shape({
     color: PropTypes.shape({
       id: PropTypes.number,
