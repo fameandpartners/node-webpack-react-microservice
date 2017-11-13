@@ -476,8 +476,9 @@ export function transformProductJSON(productJSON) {
         sizeChart: transformProductSizeChart(productJSON),
         sku: transformSKU(productJSON.product),
       };
+    } else {
+      productState = {};
     }
-    productState = {};
   } catch (e) {
     throw ({ e, message: 'Product state has incorrect parameters' });
   }
@@ -494,8 +495,9 @@ export function transformProductJSON(productJSON) {
         temporaryMeasurementMetric: measurementMetric,
         selectedMeasurementMetric: measurementMetric,
       };
+    } else {
+      customizationState = {};
     }
-    customizationState = {};
   } catch (e) {
     throw ({ e, message: 'Customization State has incorrect params' });
   }
