@@ -6,7 +6,7 @@ import noop from '../../../libs/noop';
 
 // UI Components
 import Button from '../../generic/Button';
-import ProductCrossSell from '../../pdp/ProductCrossSell';
+// import ProductCrossSell from '../../pdp/ProductCrossSell';
 
 // CSS
 import '../../../../css/components/Cart.scss';
@@ -99,7 +99,7 @@ class Cart extends Component {
               <div className="Cart__line-item-wrapper">
                 { this.generateLineItems() }
               </div>
-              <ProductCrossSell complementaryProducts={complementaryProducts} />
+              {/* <ProductCrossSell complementaryProducts={complementaryProducts} /> */}
             </div>
           </div>
 
@@ -110,13 +110,13 @@ class Cart extends Component {
 }
 
 Cart.propTypes = {
-  complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
-    centsPrice: PropTypes.number,
-    smallImg: PropTypes.string,
-    productId: PropTypes.number,
-    productTitle: PropTypes.string,
-    url: PropTypes.string,
-  })).isRequired,
+  // complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
+  //   centsPrice: PropTypes.number,
+  //   smallImg: PropTypes.string,
+  //   productId: PropTypes.number,
+  //   productTitle: PropTypes.string,
+  //   url: PropTypes.string,
+  // })).isRequired,
   lineItems: PropTypes.arrayOf(PropTypes.shape({
     addons: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
