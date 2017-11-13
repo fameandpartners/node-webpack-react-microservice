@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
@@ -49,33 +51,59 @@ class Slider extends Component {
     win.document.removeEventListener('keydown', this.handleKeydowns);
   }
 
-  componentDidMount() {
+  initializeLory() {
     loryInstance = lory(this.slider, {
       infinite: 1,
       classNameFrame: 'Slider__frame',
       classNameSlideContainer: 'Slider__slides',
     });
+  }
 
+  componentDidMount() {
+    this.initializeLory();
     this.setUpEventHandlers();
     if (typeof this.props.activeIndex === 'number') {
-      loryInstance.slideTo(this.props.activeIndex);
+      if (loryInstance) {
+        loryInstance.slideTo(this.props.activeIndex);
+      }
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    // Hack to fix a mobile bug that requires deleting and reinstantiating lory
+    // lory appears to strongly attach to dom elements that get mixed up with react
+    if (loryInstance !== null) {
+      loryInstance.destroy();
+      loryInstance = null;
     }
   }
 
   componentDidUpdate(lastProps) {
+    // If props change then lory is destroyed to remove attachment to previous dom elements
+    // re-initialize it again after render
+    if (loryInstance === null) {
+      this.initializeLory();
+    }
+
     if ((lastProps.winWidth !== this.props.winWidth)
     || (lastProps.winHeight !== this.props.winHeight)) {
-      loryInstance.reset();
+      if (loryInstance) {
+        loryInstance.reset();
+      }
     }
 
     if (lastProps.activeIndex !== this.props.activeIndex) {
-      loryInstance.slideTo(this.props.activeIndex);
+      if (loryInstance) {
+        loryInstance.slideTo(this.props.activeIndex);
+      }
     }
   }
 
   componentWillUnmount() {
     this.removeEventHandler();
-    loryInstance.destroy();
+    if (loryInstance) {
+      loryInstance.destroy();
+    }
   }
 
   render() {
