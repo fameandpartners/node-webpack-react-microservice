@@ -59,8 +59,11 @@ class CartDrawer extends Component {
     const {
       setCartContents,
     } = this.props;
-
-    setCartContents({ cart: win.CartData });
+    if (win.CartData) {
+      setCartContents({ cart: win.CartData });
+    } else {
+      console.warn('NO CART DATA!');
+    }
   }
 
   render() {
