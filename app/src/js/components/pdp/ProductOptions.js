@@ -220,15 +220,26 @@ class ProductOptions extends Component {
     });
   }
 
+  showCreateFitIDModal() {
+    this.props.activateModal({
+      modalId: ModalConstants.FIT_ID_MODAL,
+      shouldAppear: true,
+    });
+  }
+
   /**
    * Activates a drawer to a specific drawer type
    * @param  {String} drawer
    */
   handleProductOptionClick(drawer) {
     return () => {
-      this.props.activateCustomizationDrawer({
-        productCustomizationDrawer: drawer,
-      });
+      if (drawer === CustomizationConstants.SIZE_CUSTOMIZE) {
+        this.showCreateFitIDModal();
+      } else {
+        this.props.activateCustomizationDrawer({
+          productCustomizationDrawer: drawer,
+        });
+      }
     };
   }
 

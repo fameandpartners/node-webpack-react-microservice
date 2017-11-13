@@ -21,6 +21,7 @@ import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
 import AfterpayModal from './components/pdp/AfterpayModal';
 import ShoppingSpree from '../shopping-spree/js/ShoppingSpree';
+import SizeProfileModal from './components/size-profile/SizeProfileModal';
 
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
@@ -161,6 +162,7 @@ class App extends Component {
           <StyleSelectionModal />
           <SizeModals />
           <AfterpayModal />
+          <SizeProfileModal />
         </div>
       </div>
     );

@@ -22,6 +22,8 @@ const modalIds = assign({},
     'SORT_SELECTION_MODAL',
     'STYLE_SELECTION_MODAL',
     'ZOOM_MODAL',
+    'AFTERPAY_MODAL',
+    'FIT_ID_MODAL',
   ]),
 );
 
