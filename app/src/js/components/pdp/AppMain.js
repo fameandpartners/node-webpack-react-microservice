@@ -36,9 +36,8 @@ import '../../../css/components/AppMain.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    productTitle: state.$$productState.get('productTitle'),
-    sideMenuOpen: state.$$appState.get('sideMenuOpen'),
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
+    sideMenuOpen: state.$$appState.get('sideMenuOpen'),
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
     sku: state.$$productState.get('sku'),
@@ -73,7 +72,7 @@ class AppMain extends Component {
       cartDrawerOpen,
       sideMenuOpen,
     } = this.props;
-
+    activateCartDrawer({ sideMenuOpen: false });
     if (sideMenuOpen) activateSideMenu({ sideMenuOpen: false });
     else if (cartDrawerOpen) activateCartDrawer({ sideMenuOpen: false });
   }
@@ -98,20 +97,22 @@ class AppMain extends Component {
           opacity: spring(
               sideMenuOpen || cartDrawerOpen ? 25 : 0, AppConstants.ANIMATION_CONFIGURATION,
           ),
-          x: spring(cartDrawerOpen ? -500 : 0, AppConstants.ANIMATION_CONFIGURATION),
         }}
       >
-        {({ opacity, x }) =>
-          <div className="AppMain__wrapper">
+        {({ opacity }) =>
+          <div
+            className={
+            classnames(
+              'AppMain__wrapper',
+              { 'AppMain__wrapper--cart-drawer-open': cartDrawerOpen },
+            )
+          }
+          >
             <div
               className="AppMain u-height--full"
-              style={{ transform: `translateX(${x}px)` }}
             >
               <div
-                className={classnames(
-                  'App__blanket u-height--full u-width--full',
-                  { 'App__blanket--open': sideMenuOpen },
-                )}
+                className="App__blanket u-height--full u-width--full"
                 onClick={this.handleCloseMenu}
                 style={{
                   opacity: opacity / 100,
@@ -158,13 +159,10 @@ class AppMain extends Component {
                     </div>
                   )
                 }
-
             </div>
 
-            <div
-              className="u-position--fixed u-width--full u-bottom u-z-index--mid"
-              style={{ transform: `translateX(${x}px)` }}
-            >
+
+            <div className="u-position--fixed u-width--full u-bottom u-z-index--mid">
               <AddToCartButtonLedgeMobile />
             </div>
             <CustomizationButtonLedge />
@@ -204,7 +202,3 @@ AppMain.defaultProps = {
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AppMain));
-
-// <div className="layout-container">
-//   <FameDifference />
-// </div>

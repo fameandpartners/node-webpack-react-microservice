@@ -41,7 +41,7 @@ class SearchBarExpander extends Component {
   }
 
   render() {
-    const { isActive, onBlur } = this.props;
+    const { isActive, onBlur, onSubmit } = this.props;
     return (
       <TransitionMotion
         styles={isActive ? [this.defaultStyles()] : []}
@@ -60,7 +60,10 @@ class SearchBarExpander extends Component {
                   opacity: style.opacity,
                 }}
               >
-                <SearchBar onBlur={onBlur} />
+                <SearchBar
+                  onBlur={onBlur}
+                  onSubmit={onSubmit}
+                />
               </div>
             );
           }
@@ -74,6 +77,7 @@ class SearchBarExpander extends Component {
 SearchBarExpander.propTypes = {
   isActive: PropTypes.bool,
   onBlur: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 SearchBarExpander.defaultProps = {

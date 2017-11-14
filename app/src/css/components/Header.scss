@@ -9,7 +9,7 @@
 }
 
 .Header__content-padding {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .Header__link {
@@ -23,6 +23,7 @@
   margin-left: 2rem;
   z-index: 1;
   transition: $fast-transition-time margin;
+  vertical-align: middle;
 }
 
 .Header__action--active-search-left {
@@ -39,7 +40,7 @@
 
 .Header__cart-count {
   font-weight: 500;
-  position: absolute;
-  left: -10px;
-  bottom: 2px;
+  position: relative;
+  left: -1px;
+  bottom: 7px;
 }

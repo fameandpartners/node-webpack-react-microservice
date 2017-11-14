@@ -1,46 +1,41 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { redirectSiteVersion } from '../../utilities/helpers';
+
+// Polyfills
+import win from '../../polyfills/windowPolyfill';
+
 // Components
-import Button from '../generic/Button';
-import Input from '../form/Input';
+import EmailCapture from '../generic/EmailCapture';
 
 // CSS
 import '../../../css/components/Footer.scss';
+
+function stateToProps(state) {
+  return {
+    // APP
+    auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
+  };
+}
 
 /* eslint-disable react/prefer-stateless-function */
 class Footer extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-    this.state = {
-      siteVersion: 'US',
-      signupError: false,
-    };
   }
-  handleSignupClick(e) {
-    e.preventDefault();
-    // Simulate signup error
-    this.setState({
-      signupError: true,
-    });
-  }
+
   changeSiteVersion() {
-    // Presentaional only, will actually change stuff in the future
-    const { siteVersion } = this.state;
-    if (siteVersion === 'AU') {
-      this.setState({
-        siteVersion: 'US',
-      });
-    } else {
-      this.setState({
-        siteVersion: 'AU',
-      });
-    }
+    redirectSiteVersion(win.location.href);
   }
 
   render() {
-    const { siteVersion, signupError } = this.state;
+    const {
+      auSite,
+    } = this.props;
+
     return (
       <footer className="Footer">
         <div className="layout-container grid-noGutter-reverse-spaceAround">
@@ -50,32 +45,34 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a href="/faqs#collapse-delivery-how-long">Shipping Info</a>
+                <a className="link--static" href="/faqs#collapse-delivery-how-long">
+                  Shipping Info
+                </a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/faqs#collapse-returns-policy">Returns Policy</a>
+                <a className="link--static" href="/faqs#collapse-returns-policy">Returns Policy</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/contact">Fame Contact Us</a>
+                <a className="link--static" href="/contact">Fame Contact Us</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/faqs">FAQs</a>
+                <a className="link--static" href="/faqs">FAQs</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/size-guide">Size Guide</a>
+                <a className="link--static" href="/size-guide">Size Guide</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/faqs#collapse-orders-track">Track My Order</a>
+                <a className="link--static" href="/faqs#collapse-orders-track">Track My Order</a>
               </p>
             </li>
           </ul>
@@ -83,32 +80,32 @@ class Footer extends PureComponent {
             <li><p className="Footer__category-title">About</p></li>
             <li>
               <p>
-                <a href="/why-us">Why shop with us</a>
+                <a className="link--static" href="/why-us">Why shop with us</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/about">About us</a>
+                <a className="link--static" href="/about">About us</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/fame-society-application">Fame Society</a>
+                <a className="link--static" href="/fame-society-application">Fame Society</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/from-our-ceo">From our CEO</a>
+                <a className="link--static" href="/from-our-ceo">From our CEO</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/privacy">Privacy Policy</a>
+                <a className="link--static" href="/privacy">Privacy Policy</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/terms">Terms</a>
+                <a className="link--static" href="/terms">Terms</a>
               </p>
             </li>
           </ul>
@@ -116,32 +113,32 @@ class Footer extends PureComponent {
             <li><p className="Footer__category-title">Shop By</p></li>
             <li>
               <p>
-                <a href="/dresses/best-sellers">Best Sellers</a>
+                <a className="link--static" href="/dresses/best-sellers">Best Sellers</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/dresses?order=newest">What's new</a>
+                <a className="link--static" href="/dresses?order=newest">What's new</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/getitquick">Made in 48 Hours</a>
+                <a className="link--static" href="/getitquick">Made in 48 Hours</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/dresses/formal">Formal</a>
+                <a className="link--static" href="/dresses/formal">Formal</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/dresses/prom">Prom</a>
+                <a className="link--static" href="/dresses/prom">Prom</a>
               </p>
             </li>
             <li>
               <p>
-                <a href="/dresses">View All Dresses</a>
+                <a className="link--static" href="/dresses">View All Dresses</a>
               </p>
             </li>
           </ul>
@@ -149,26 +146,7 @@ class Footer extends PureComponent {
             <p className="Footer__copy u-mb-small">
               Sign up to always enjoy free returns
             </p>
-            <form className={classNames('grid-center', 'Footer__form')}>
-              <div className="col-7_sm-9 padding--none">
-                <div>
-                  <Input
-                    id="footer-email"
-                    placeholder="Email your email address"
-                    type="email"
-                    error={signupError}
-                    inlineMeta={signupError ? 'Error! Something is wrong...' : null}
-                  />
-                </div>
-              </div>
-              <div className="col-3 padding--none">
-                <Button
-                  className="padding--none"
-                  handleClick={this.handleSignupClick}
-                  text="Sign up"
-                />
-              </div>
-            </form>
+            <EmailCapture service="bronto" />
           </div>
         </div>
         <div className="layout-container grid-noGutter">
@@ -178,7 +156,10 @@ class Footer extends PureComponent {
                 className="u-text-decoration--underline u-cursor--pointer"
                 onClick={this.changeSiteVersion}
               >
-                {siteVersion}
+                { auSite
+                  ? 'Australia'
+                  : 'U.S.'
+                }
               </span>
             </p>
           </div>
@@ -188,4 +169,9 @@ class Footer extends PureComponent {
   }
 }
 
-export default Footer;
+Footer.propTypes = {
+  // Redux Props
+  auSite: PropTypes.bool.isRequired,
+};
+
+export default connect(stateToProps)(Footer);

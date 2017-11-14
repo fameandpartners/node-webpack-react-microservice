@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import classnames from 'classnames';
 import SearchBarExpander from '../../generic/SearchBarExpander';
+import win from '../../../polyfills/windowPolyfill';
 
 // Assets
 import Carat from '../../../../svg/carat.svg';
@@ -31,6 +33,11 @@ class SideMenuActionButtons extends Component {
     this.setState({ searchBarActive: false });
   }
 
+  handleDressSearch(evt, data) {
+    const location = `${win.location.origin}/search?q=${win.encodeURI(data)}`;
+    win.location = location;
+  }
+
   bindActionClick(subNavigationContainer) {
     const { handleMenuActionClick } = this.props;
     return () => {
@@ -43,7 +50,7 @@ class SideMenuActionButtons extends Component {
 
     return (
       <div>
-        <div className="SideMenuActionButtons__body u-center u-position--relative">
+        <div className="SideMenuActionButtons__body u-position--relative">
           <ul>
             <li
               className="u-cursor--pointer"
@@ -73,13 +80,18 @@ class SideMenuActionButtons extends Component {
                 />
               </span>
             </li>
-            <li><span>Account</span></li>
+            <li>
+              <a className="link link--static link--no-underline" href="/profile">Account</a>
+            </li>
             <li className="u-mb-normal">
-              <span>Orders</span>
+              <a className="link link--static link--no-underline" href="/view-orders">Orders</a>
             </li>
             <li>
               <span
-                className="SideMenuActionButtons__icon-wrapper"
+                className={classnames(
+                  'SideMenuActionButtons__icon-wrapper u-display--inline-block u-vertical-align--middle',
+                  { 'SideMenuActionButtons__icon-wrapper--active': searchBarActive },
+                )}
                 onClick={this.handleSearchIconClick}
               >
                 <SearchIcon
@@ -91,6 +103,7 @@ class SideMenuActionButtons extends Component {
               <SearchBarExpander
                 handleSearchIconClick={this.handleSearchIconClick}
                 onBlur={this.handleSearchIconClickClose}
+                onSubmit={this.handleDressSearch}
                 isActive={searchBarActive}
               />
             </li>

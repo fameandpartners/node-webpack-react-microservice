@@ -206,7 +206,7 @@ export function transformProductCurrency({ prices = {} }) {
   return prices.currency;
 }
 
-export function transformProductComplementaryProducts() {
+export function transformProductComplementaryProducts({ complementary_products: complementaryProducts = [] }) {
   // UNKNOWN
   //   ****** into ******
   // centsPrice: Number,
@@ -215,24 +215,14 @@ export function transformProductComplementaryProducts() {
   // productTitle: String,
   // url: String,
   // })
-  console.warn('NEED BACKEND COMPLEMENTARY PRODUCTS');
-  const complementaryProducts = [
-    {
-      centsPrice: 22900,
-      smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37492/original/fprv1060-white-front.jpg?1499455161',
-      productId: 'fprv1060',
-      productTitle: 'The Laurel Dress',
-      url: 'https://www.fameandpartners.com/dresses/dress-the-laurel-dress-1599?color=white',
-    },
-    {
-      centsPrice: 26900,
-      smallImg: 'https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37428/original/fp2556-white-front.jpg?1499455106',
-      productId: 'fp2556',
-      productTitle: 'The Janette Dress',
-      url: 'https://www.fameandpartners.com/dresses/dress-the-janette-dress-1598?color=white',
-    },
-  ];
-  return complementaryProducts;
+
+  return complementaryProducts.map(item => ({
+    centsPrice: (parseInt(item.price.price.amount, 10) * 100),
+    smallImg: item.product.product.image_link,
+    productId: item.product.product.id,
+    productTitle: item.product.product.name,
+    url: item.product.product.relative_url_path,
+  }));
 }
 
 function removeCommaWhiteSpace(word) {
@@ -462,44 +452,52 @@ export function transformProductJSON(productJSON) {
   let productState;
   let customizationState;
   try {
-    productState = {
-      currency: transformProductCurrency(productJSON.product),
-      complementaryProducts: transformProductComplementaryProducts(),
-      deliveryCopy: transformDeliveryCopy(productJSON.product),
-      fabric: transformProductFabric(productJSON.product),
-      fastMaking: transformProductFastMaking(productJSON.product),
-      garmentCareInformation: transformProductGarmentInformation(),
-      preCustomizations: transformProductPreCustomizations(),
-      productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
-      productDescription: transformProductDescription(productJSON.product),
-      productDefaultColors: transformProductColors(productJSON, 'default'),
-      productSecondaryColors: transformProductColors(productJSON, 'extra'),
-      productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
-      productId: transformProductId(productJSON.product),
-      productImages: transformProductImages(productJSON.images),
-      productTitle: transformProductTitle(productJSON.product),
-      isActive: productJSON.product.is_active,
-      makingOptionId: transformProductMakingOptionId(productJSON.product),
-      modelDescription: transformProductModelDescription(productJSON),
-      siteVersion: transformProductSiteVersion(productJSON),
-      sizeChart: transformProductSizeChart(productJSON),
-      sku: transformSKU(productJSON.product),
-    };
+    if (productJSON.product) {
+      productState = {
+        currency: transformProductCurrency(productJSON.product),
+        complementaryProducts: transformProductComplementaryProducts(productJSON.product),
+        deliveryCopy: transformDeliveryCopy(productJSON.product),
+        fabric: transformProductFabric(productJSON.product),
+        fastMaking: transformProductFastMaking(productJSON.product),
+        garmentCareInformation: transformProductGarmentInformation(),
+        preCustomizations: transformProductPreCustomizations(),
+        productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
+        productDescription: transformProductDescription(productJSON.product),
+        productDefaultColors: transformProductColors(productJSON, 'default'),
+        productSecondaryColors: transformProductColors(productJSON, 'extra'),
+        productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
+        productId: transformProductId(productJSON.product),
+        productImages: transformProductImages(productJSON.images),
+        productTitle: transformProductTitle(productJSON.product),
+        isActive: productJSON.product.is_active,
+        makingOptionId: transformProductMakingOptionId(productJSON.product),
+        modelDescription: transformProductModelDescription(productJSON),
+        siteVersion: transformProductSiteVersion(productJSON),
+        sizeChart: transformProductSizeChart(productJSON),
+        sku: transformSKU(productJSON.product),
+      };
+    } else {
+      productState = {};
+    }
   } catch (e) {
     throw ({ e, message: 'Product state has incorrect parameters' });
   }
 
 
   try {
-    const measurementMetric = selectMeasurementMetric(productJSON);
-    const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors);
-    customizationState = {
-      addons: transformAddons(productJSON),
-      selectedColor,
-      temporaryColor: selectedColor,
-      temporaryMeasurementMetric: measurementMetric,
-      selectedMeasurementMetric: measurementMetric,
-    };
+    if (productJSON.product) {
+      const measurementMetric = selectMeasurementMetric(productJSON);
+      const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors);
+      customizationState = {
+        addons: transformAddons(productJSON),
+        selectedColor,
+        temporaryColor: selectedColor,
+        temporaryMeasurementMetric: measurementMetric,
+        selectedMeasurementMetric: measurementMetric,
+      };
+    } else {
+      customizationState = {};
+    }
   } catch (e) {
     throw ({ e, message: 'Customization State has incorrect params' });
   }

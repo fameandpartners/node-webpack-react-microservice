@@ -1,13 +1,15 @@
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 8001;
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -20,6 +22,11 @@ const publicUrl = '';
 const env = getClientEnvironment(publicUrl);
 
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+
+const extractSass = new ExtractTextPlugin({
+  filename: 'webpack/static/[name].css',
+  disable: false,
+});
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -63,7 +70,7 @@ module.exports = {
     // This does not produce a real file. It's just the virtual path that is
     // served by WebpackDevServer in development. This is the JS bundle
     // containing code from all our entry points, and the Webpack runtime.
-    filename: 'static/js/bundle.js',
+    filename: 'webpack/static/bundle.js',
     // This is the URL that app is served from. We use "/" in development.
     publicPath,
   },
@@ -97,6 +104,7 @@ module.exports = {
         }],
         include: paths.appSrc,
       },
+
       // ** ADDING/UPDATING LOADERS **
       // The "url" loader handles all assets unless explicitly excluded.
       // The `exclude` list *must* be updated with every change to loader extensions.
@@ -116,7 +124,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]',
+          name: 'webpack/static/[name].[hash:8].[ext]',
         },
       },
       // Process JS with Babel.
@@ -139,35 +147,42 @@ module.exports = {
       // in development "style" loader enables hot editing of CSS.
       {
         test: /\.scss$/,
-        use: [{
-          loader: 'style-loader',
-        }, {
-          loader: 'css-loader',
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-            plugins() {
-              return [
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                }),
-              ];
+        use: extractSass.extract({
+          use: [
+                  { loader: 'css-loader' },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                plugins() {
+                  return [
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                    }),
+                  ];
+                },
+              },
             },
-          },
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            data: '@import "variables";',
-            includePaths: [paths.cssSrc],
-          },
-        }],
+            // wrap our CSS to avoid styling conflicts in Rails app
+            {
+              loader: 'css-wrap-loader?selector=.__react_root__',
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                data: '@import "variables";',
+                includePaths: [paths.cssSrc],
+              },
+            },
+          ],
+                      // use style-loader in development
+          fallback: 'style-loader',
+        }),
       },
       // "babel" loader needed to parse Icon.js file
       // "svg-sprite" loader used to generate and swap JSX component for svg
@@ -215,6 +230,11 @@ module.exports = {
     new StyleLintPlugin({
       files: 'src/css/**/*.scss',
       syntax: 'scss',
+    }),
+
+    extractSass,
+    new ManifestPlugin({
+      fileName: 'webpack/asset-manifest.json',
     }),
   ],
   // Some libraries import Node modules but don't use them in the browser.

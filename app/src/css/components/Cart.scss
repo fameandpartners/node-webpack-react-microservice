@@ -4,11 +4,14 @@
   position: fixed;
   height: 100%;
   width: 500px;
+  z-index: 1000;
   transform: translateX(500px);
+  background: $c-white;
 }
 
 .CartDrawer__header {
-  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
   padding-top: 17px;
   padding-bottom: 20px;
   border-bottom: 1px solid $c-light-gray;
@@ -21,10 +24,13 @@
 }
 
 .Cart__layout-container {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
-.Cart__subtotal-price {
-  margin-left: 30px;
+.CartDrawer__hidden-close {
+  position: absolute;
+  left: 0;
+  width: 25px;
+  height: 25px;
 }

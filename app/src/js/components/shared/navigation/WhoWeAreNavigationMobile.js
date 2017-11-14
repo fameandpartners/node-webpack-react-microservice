@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 
+// Components
+import Caret from '../../generic/Caret';
+
 // Constants
 import { NAVIGATION_LINKS } from '../../../constants/AppConstants';
 
@@ -27,7 +30,13 @@ class WhoWeAreNavigationMobile extends PureComponent {
             className="ShopAllNavigationMobile__heading u-cursor--pointer u-width--full typography u-mb-normal"
             onClick={this.props.handleReturnClick}
           >
-            <span className="u-position--relative u-display--inline u-mr-small" />
+            <span className="u-position--relative u-display--inline u-mr-small">
+              <Caret
+                left
+                width="10px"
+                height="10px"
+              />
+            </span>
             <h3 className="h5 u-display--inline u-ml-small">Who We Are</h3>
           </div>
           <NavLinkCol

@@ -17,6 +17,9 @@ import Hamburger from './Hamburger';
 // Assets
 import ShoppingBagIcon from '../../../../svg/i-shopping-bag.svg';
 
+// Assets
+import FameLogo from '../../../../svg/i-fame-logo.svg';
+
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
@@ -55,7 +58,7 @@ class HeaderMobile extends Component {
     const { cartItemCount, headerTitle } = this.props;
     return (
       <header className="Header HeaderMobile u-width--full">
-        <div className="layout-container">
+        <div className="layout-container typography">
           <nav className="grid-noGutter">
             <div className="col-2">
               <Hamburger
@@ -64,7 +67,14 @@ class HeaderMobile extends Component {
               />
             </div>
             <div className="col">
-              {headerTitle}
+              { headerTitle
+                ? <h1 className="h4">{headerTitle}</h1>
+                :
+                <FameLogo
+                  width="200px"
+                  height="26px"
+                />
+              }
             </div>
             <ul className="col-2 u-text-align--right">
               <li onClick={this.handleShoppingBagClick} className="Header__action">
