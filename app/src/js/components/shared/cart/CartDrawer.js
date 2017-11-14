@@ -59,8 +59,9 @@ class CartDrawer extends Component {
     const {
       setCartContents,
     } = this.props;
-    if (win.CartData) {
-      setCartContents({ cart: win.CartData });
+
+    if (win.ApplicationStateData) {
+      setCartContents({ cart: win.ApplicationStateData.CartData });
     } else {
       // eslint-disable-next-line
       console.warn('NO CART DATA!');

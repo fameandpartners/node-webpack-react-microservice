@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-import { connect } from 'react-redux';
 import { redirectSiteVersion } from '../../utilities/helpers';
 
 // Polyfills
@@ -13,18 +12,15 @@ import EmailCapture from '../generic/EmailCapture';
 // CSS
 import '../../../css/components/Footer.scss';
 
-function stateToProps(state) {
-  return {
-    // APP
-    auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
-  };
-}
-
 /* eslint-disable react/prefer-stateless-function */
 class Footer extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+
+    this.state = {
+      auSite: win.ApplicationStateData ? win.ApplicationStateData.auSite : false,
+    };
   }
 
   changeSiteVersion() {
@@ -174,4 +170,4 @@ Footer.propTypes = {
   auSite: PropTypes.bool.isRequired,
 };
 
-export default connect(stateToProps)(Footer);
+export default Footer;
