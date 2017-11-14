@@ -31,7 +31,7 @@
 }
 
 .App__blanket {
-  position: absolute;
+  position: fixed;
   visibility: hidden;
   background: $c-black;
   z-index: 2;
