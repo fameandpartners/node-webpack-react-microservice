@@ -67,7 +67,7 @@ app.get('/webpack/asset-manifest', (req, res) => {
   res.send(asset_paths);
 });
 
-app.get('/webpack/asset_main_test', (req, res) => {
+app.get('/client', (req, res) => {
   var asset_paths = {
     pathA: 'someBS',
     pathB: 'someBS',
