@@ -22,6 +22,10 @@
   box-shadow: 0 3px 2px -2px $c-super-light-gray;
 }
 
+.Cart__single-product-description {
+  position: relative;  
+}
+
 .Cart__line-description {
   display: block;
   line-height: 1.9em;
@@ -32,9 +36,17 @@
   padding-right: 50px;
 }
 
+.Cart__product-remove,
 .CartDrawer__hidden-close {
   position: absolute;
-  left: 0;
   width: 25px;
   height: 25px;
+}
+
+.CartDrawer__hidden-close {
+  left: 0;  
+}
+
+.Cart__product-remove {
+  right: 0;
 }

@@ -89,6 +89,17 @@ export function addToCart(item, auSite) {
     .set('Accept', 'application/json');
 }
 
+export function removeFromCart(itemId) {
+  const csrf = win.document.querySelector('meta[name="csrf-token"]');
+  const token = csrf ? csrf.content : '';
+
+  return request
+    .delete(`/user_cart/products/${itemId}`)
+    .set('X-CSRF-Token', token)
+    .set('Accept', 'application/json');
+}
+
 export default {
   addToCart,
+  removeFromCart,
 };

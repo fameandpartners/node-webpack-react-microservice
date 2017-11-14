@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { formatCents } from '../../../utilities/accounting';
 import noop from '../../../libs/noop';
 
 // UI Components
 import Button from '../../generic/Button';
+import CancelOut from '../CancelOut';
 // import ProductCrossSell from '../../pdp/ProductCrossSell';
+
+// Actions
+import * as CartActions from '../../../actions/CartActions';
+
+// Utilities
+import objnoop from '../../../libs/objnoop';
+
+// temp. helper
+import { removeFromCart } from '../../../utilities/cart-helper';
 
 // CSS
 import '../../../../css/components/Cart.scss';
+
+function dispatchToProps(dispatch) {
+  const {
+    setCartContents,
+  } = bindActionCreators(CartActions, dispatch);
+
+  return {
+    setCartContents,
+  };
+}
 
 class Cart extends Component {
   constructor(props) {
@@ -34,6 +56,26 @@ class Cart extends Component {
     return '';
   }
 
+  handleRemoveFromCartClick(id) {
+    this.handleRemoveFromCartCallback(removeFromCart(id));
+  }
+
+  handleRemoveFromCartCallback(req) {
+    const {
+      setCartContents,
+    } = this.props;
+
+    req.end((err, res) => {
+      if (err) {
+        // eslint-disable-next-line
+        return console.log('Error removing dress from cart.');
+      }
+
+      setCartContents({ cart: res.body });
+      return null;
+    });
+  }
+
   generateLineItems() {
     const { lineItems } = this.props;
 
@@ -52,6 +94,12 @@ class Cart extends Component {
           key={id}
           className="Cart__single-product-description grid-12"
         >
+          <span
+            onClick={() => this.handleRemoveFromCartClick(id)}
+            className="Cart__product-remove u-cursor--pointer"
+          >
+            <CancelOut />
+          </span>
           <div className="col-5">
             <img className="u-width--full" alt="dress1" src={productImage} />
           </div>
@@ -134,6 +182,7 @@ Cart.propTypes = {
     productImage: PropTypes.string,
     productTitle: PropTypes.string,
   })).isRequired,
+  setCartContents: PropTypes.func.isRequired,
 };
 
-export default Cart;
+export default connect(objnoop, dispatchToProps)(Cart);
