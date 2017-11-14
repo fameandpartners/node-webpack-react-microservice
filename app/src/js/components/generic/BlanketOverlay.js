@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import autobind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -33,6 +34,11 @@ function dispatchToProps(dispatch) {
 
 /* eslint-disable react/prefer-stateless-function */
 class BlanketOverlay extends PureComponent {
+  constructor(props) {
+    super(props);
+    autobind(this);
+  }
+
   handleCloseMenu() {
     const {
       activateCartDrawer,
@@ -62,7 +68,7 @@ class BlanketOverlay extends PureComponent {
       >
         {({ opacity }) =>
           <div
-            className="App__blanket u-height--full u-width--full"
+            className="App__blanket u-height--full u-width--full u-cursor--pointer"
             onClick={this.handleCloseMenu}
             style={{
               opacity: opacity / 100,
