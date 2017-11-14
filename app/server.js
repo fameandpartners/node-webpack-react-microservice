@@ -67,6 +67,14 @@ app.get('/webpack/asset-manifest', (req, res) => {
   res.send(asset_paths);
 });
 
+app.get('/webpack/asset_main_test', (req, res) => {
+  var asset_paths = {
+    pathA: 'someBS',
+    pathB: 'someBS',
+  }
+  res.send(asset_paths);
+});
+
 app.get('/pdp', (req, res) => {
   res.header('Content-Type', 'text/html');
   const props = transformProductJSON(mockJSON);
