@@ -68,6 +68,10 @@ app.get('/webpack/asset-manifest', (req, res) => {
 });
 
 app.get('/client', (req, res) => {
+  res.header('Content-Type', 'application/json');
+
+  // eslint-disable-next-line
+  console.log('Sending fake assets');
   var asset_paths = {
     pathA: 'someBS',
     pathB: 'someBS',
