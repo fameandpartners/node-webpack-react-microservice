@@ -3,8 +3,10 @@ import autobind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { Motion, spring } from 'react-motion';
+
+// Utilities
+import win from '../../polyfills/windowPolyfill';
 
 // Constants
 import AppConstants from '../../constants/AppConstants';
@@ -50,6 +52,16 @@ class BlanketOverlay extends PureComponent {
     activateCartDrawer({ sideMenuOpen: false });
     if (sideMenuOpen) activateSideMenu({ sideMenuOpen: false });
     else if (cartDrawerOpen) activateCartDrawer({ sideMenuOpen: false });
+  }
+
+  componentDidUpdate() {
+    const {
+      cartDrawerOpen,
+      sideMenuOpen,
+    } = this.props;
+    if (win.fixBody) {
+      win.fixBody(sideMenuOpen || cartDrawerOpen);
+    }
   }
 
   render() {

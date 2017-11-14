@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import classnames from 'classnames';
 
 // Decorators
 import Resize from '../../decorators/Resize';
@@ -11,7 +10,6 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Actions
 import * as AppActions from '../../actions/AppActions';
-import * as CartActions from '../../actions/CartActions';
 import * as ModalActions from '../../actions/ModalActions';
 
 // Constants
@@ -35,7 +33,6 @@ function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
-    sideMenuOpen: state.$$appState.get('sideMenuOpen'),
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
     sku: state.$$productState.get('sku'),
@@ -45,10 +42,8 @@ function stateToProps(state) {
 function dispatchToProps(dispatch) {
   const actions = bindActionCreators(AppActions, dispatch);
   const modalActions = bindActionCreators(ModalActions, dispatch);
-  const cartActions = bindActionCreators(CartActions, dispatch);
 
   return {
-    activateCartDrawer: cartActions.activateCartDrawer,
     activateSideMenu: actions.activateSideMenu,
     activateModal: modalActions.activateModal,
   };
@@ -70,21 +65,13 @@ class AppMain extends Component {
   render() {
     const {
       breakpoint,
-      cartDrawerOpen,
       fabric,
       garmentCareInformation,
       sku,
     } = this.props;
 
     return (
-      <div
-        className={
-        classnames(
-          'AppMain__wrapper',
-          { 'AppMain__wrapper--cart-drawer-open': cartDrawerOpen },
-        )
-      }
-      >
+      <div className="AppMain__wrapper">
         <div
           className="AppMain u-height--full"
         >
@@ -142,8 +129,6 @@ class AppMain extends Component {
 AppMain.propTypes = {
   // Redux Props
   activateModal: PropTypes.func.isRequired,
-  cartDrawerOpen: PropTypes.bool,
-  sideMenuOpen: PropTypes.bool,
   fabric: PropTypes.shape({
     id: PropTypes.string,
     smallImg: PropTypes.string,
@@ -153,17 +138,12 @@ AppMain.propTypes = {
   garmentCareInformation: PropTypes.string.isRequired,
   sku: PropTypes.string,
 
-  // Redux Actions
-  activateCartDrawer: PropTypes.func.isRequired,
-  activateSideMenu: PropTypes.func.isRequired,
-
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
 };
 
 AppMain.defaultProps = {
   cartDrawerOpen: false,
-  sideMenuOpen: false,
   sku: null,
 };
 
