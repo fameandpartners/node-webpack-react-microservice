@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import win from '../../polyfills/windowPolyfill';
 
 // Utilities
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
@@ -28,7 +29,7 @@ import CustomizationConstants from '../../constants/CustomizationConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
 // temp. helpers (for Rails merge)
-import { addToCart } from '../../utilities/cart-helper';
+import { addToCart, legacyAddToCart } from '../../utilities/cart-helper';
 
 function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
@@ -151,7 +152,15 @@ class AddToCartButton extends Component {
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
       setAppLoadingState({ loadingId: LOADING_IDS.ADD_TO_CART_LOADING });
-      this.handleAddToBagCallback(addToCart(lineItem, auSite));
+
+      if (win.app && win.app.shopping_cart) {
+        // NOTE THIS IS THE LEGACY PATHWAY. IT NEEDS TO BE MAINTAINED UNTIL
+        // THERE IS NO LONGER A LEGACY SHOPPING CART. THIS CODE SHOULD ALLOW
+        // THAT PATHWAY TO EXIST IF STILL PRESENT
+        legacyAddToCart(lineItem, auSite);
+      } else {
+        this.handleAddToBagCallback(addToCart(lineItem, auSite));
+      }
     }
   }
 

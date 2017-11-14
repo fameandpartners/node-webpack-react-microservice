@@ -89,6 +89,14 @@ export function addToCart(item, auSite) {
     .set('Accept', 'application/json');
 }
 
+export function legacyAddToCart(item, auSite) {
+  if (win.app && win.app.shopping_cart) {
+    const transformedLineItem = transformLineItem(item, auSite);
+    console.log('LEGACY PATHWAY', transformedLineItem);
+    win.app.shopping_cart.addProduct(transformedLineItem);
+  }
+}
+
 export default {
   addToCart,
 };
