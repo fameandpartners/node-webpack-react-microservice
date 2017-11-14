@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Motion, spring } from 'react-motion';
 import classnames from 'classnames';
 
 // Decorators
@@ -16,7 +15,6 @@ import * as CartActions from '../../actions/CartActions';
 import * as ModalActions from '../../actions/ModalActions';
 
 // Constants
-import AppConstants from '../../constants/AppConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
@@ -65,18 +63,6 @@ class AppMain extends Component {
     autoBind(this);
   }
 
-  handleCloseMenu() {
-    const {
-      activateCartDrawer,
-      activateSideMenu,
-      cartDrawerOpen,
-      sideMenuOpen,
-    } = this.props;
-    activateCartDrawer({ sideMenuOpen: false });
-    if (sideMenuOpen) activateSideMenu({ sideMenuOpen: false });
-    else if (cartDrawerOpen) activateCartDrawer({ sideMenuOpen: false });
-  }
-
   handleActivateModal() {
     this.props.activateModal({ modalId: ModalConstants.SIGN_UP_MODAL });
   }
@@ -85,90 +71,70 @@ class AppMain extends Component {
     const {
       breakpoint,
       cartDrawerOpen,
-      sideMenuOpen,
       fabric,
       garmentCareInformation,
       sku,
     } = this.props;
 
     return (
-      <Motion
-        style={{
-          opacity: spring(
-              sideMenuOpen || cartDrawerOpen ? 25 : 0, AppConstants.ANIMATION_CONFIGURATION,
-          ),
-        }}
+      <div
+        className={
+        classnames(
+          'AppMain__wrapper',
+          { 'AppMain__wrapper--cart-drawer-open': cartDrawerOpen },
+        )
+      }
       >
-        {({ opacity }) =>
-          <div
-            className={
-            classnames(
-              'AppMain__wrapper',
-              { 'AppMain__wrapper--cart-drawer-open': cartDrawerOpen },
+        <div
+          className="AppMain u-height--full"
+        >
+          { breakpoint === 'mobile' || breakpoint === 'tablet'
+            ? <ProductDisplayOptionsTouch />
+            : (
+              <div>
+                <ProductOptions />
+              </div>
             )
           }
-          >
-            <div
-              className="AppMain u-height--full"
-            >
-              <div
-                className="App__blanket u-height--full u-width--full"
-                onClick={this.handleCloseMenu}
-                style={{
-                  opacity: opacity / 100,
-                  visibility: opacity !== 0 ? 'visible' : 'hidden',
-                }}
-              />
 
-              { breakpoint === 'mobile' || breakpoint === 'tablet'
-                ? <ProductDisplayOptionsTouch />
-                : (
-                  <div>
-                    <ProductOptions />
-                  </div>
-                )
-              }
-
-              <div className="layout-container">
-                <div className="grid-2_sm-1 AppMain__product-info">
-                  <div className="col grid-middle">
-                    <ProductDescription />
-                  </div>
-                  <div className="col grid-middle">
-                    <ProductFabricInfo
-                      className="u-center"
-                      fabric={fabric}
-                      garmentCareInformation={garmentCareInformation}
-                    />
-                  </div>
-                  {
-                    sku
-                      ? <div className="col grid-middle">
-                        <p className="u-center">SKU {sku}</p>
-                      </div>
-                      : null
-                  }
-                </div>
+          <div className="layout-container">
+            <div className="grid-2_sm-1 AppMain__product-info">
+              <div className="col grid-middle">
+                <ProductDescription />
               </div>
-
-              { breakpoint === 'mobile' || breakpoint === 'tablet'
-                  ? null
-                  : (
-                    <div className="u-gray-border--top layout-container u-mb-normal">
-                      <ProductGrid />
-                    </div>
-                  )
-                }
+              <div className="col grid-middle">
+                <ProductFabricInfo
+                  className="u-center"
+                  fabric={fabric}
+                  garmentCareInformation={garmentCareInformation}
+                />
+              </div>
+              {
+                sku
+                  ? <div className="col grid-middle">
+                    <p className="u-center">SKU {sku}</p>
+                  </div>
+                  : null
+              }
             </div>
-
-
-            <div className="u-position--fixed u-width--full u-bottom u-z-index--mid">
-              <AddToCartButtonLedgeMobile />
-            </div>
-            <CustomizationButtonLedge />
           </div>
-      }
-      </Motion>
+
+          { breakpoint === 'mobile' || breakpoint === 'tablet'
+              ? null
+              : (
+                <div className="u-gray-border--top layout-container u-mb-normal">
+                  <ProductGrid />
+                </div>
+              )
+            }
+        </div>
+
+
+        <div className="u-position--fixed u-width--full u-bottom u-z-index--mid">
+          <AddToCartButtonLedgeMobile />
+        </div>
+        <CustomizationButtonLedge />
+      </div>
     );
   }
 }

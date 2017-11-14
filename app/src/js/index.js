@@ -8,6 +8,7 @@ import win from './polyfills/windowPolyfill';
 import App from './App'; // Current Pdp, poor name
 
 // Standard Components that will be included in old site
+import BlanketOverlay from './components/generic/BlanketOverlay';
 import HeaderWrapper from './components/shared/header/HeaderWrapper';
 import SideMenu from './components/shared/side_menu/SideMenu';
 import CartDrawer from './components/shared/cart/CartDrawer';
@@ -42,6 +43,10 @@ const pdpData = cleanData || transformProductJSON(untransformedData);
 const store = AppStore(pdpData);
 const AppComponent = <Provider store={store}><App /></Provider>;
 renderComponent(AppComponent, 'root');
+
+// BLANKET
+const BlanketComponent = <Provider store={store}><BlanketOverlay /></Provider>;
+renderComponent(BlanketComponent, 'react-blanket');
 
 // HEADER
 const HeaderComponent = <Provider store={store}><HeaderWrapper /></Provider>;
