@@ -78,13 +78,13 @@ class CartDrawer extends Component {
     return (
       <Motion
         style={{
-          x: spring(cartDrawerOpen ? -500 : 0, AppConstants.ANIMATION_CONFIGURATION),
+          x: spring(cartDrawerOpen ? -100 : 0, AppConstants.ANIMATION_CONFIGURATION),
         }}
       >
         {({ x }) =>
           <div
             className="CartDrawer__wrapper"
-            style={{ transform: `translateX(${500 - (x * -1)}px)` }}
+            style={{ transform: `translateX(${100 - (x * -1)}%)` }}
           >
             <div className="CartDrawer u-flex--col u-height--full">
               <div className="CartDrawer__header Cart__layout-container header-wrapper">
