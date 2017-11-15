@@ -15,7 +15,7 @@ import '../../../../css/components/HeaderMobile.scss';
 import Hamburger from './Hamburger';
 
 // Assets
-import ShoppingBagIcon from '../../../../svg/i-shopping-bag.svg';
+import ShoppingBagIcon from '../../../../svg/i-shopping-bag-2.svg';
 
 // Assets
 import FameLogo from '../../../../svg/i-fame-logo.svg';

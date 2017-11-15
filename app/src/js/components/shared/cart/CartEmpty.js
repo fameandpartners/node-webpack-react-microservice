@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import ShoppingBagIcon from '../../../../svg/i-shopping-bag.svg';
+import ShoppingBagIcon from '../../../../svg/i-shopping-bag-2.svg';
 
 // CSS
 import '../../../../css/components/CartEmpty.scss';

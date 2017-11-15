@@ -28,9 +28,7 @@ class Footer extends PureComponent {
   }
 
   render() {
-    const {
-      auSite,
-    } = this.props;
+    const { auSite } = this.state;
 
     return (
       <footer className="Footer">
@@ -150,12 +148,13 @@ class Footer extends PureComponent {
             <p className="u-user-select--none">Country: &nbsp;
               <span
                 className="u-text-decoration--underline u-cursor--pointer"
-                onClick={this.changeSiteVersion}
               >
-                { auSite
-                  ? 'Australia'
-                  : 'U.S.'
-                }
+                <form onChange={this.changeSiteVersion}>
+                  <select className="inline-select" value={auSite ? 'au' : 'us'}>
+                    <option value="us">U.S</option>
+                    <option value="au">Australia</option>
+                  </select>
+                </form>
               </span>
             </p>
           </div>

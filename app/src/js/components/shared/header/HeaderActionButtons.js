@@ -17,7 +17,7 @@ import SearchBarExpander from '../../generic/SearchBarExpander';
 import '../../../../css/components/Header.scss';
 
 // Assets
-import ShoppingBagIcon from '../../../../svg/i-shopping-bag.svg';
+import ShoppingBagIcon from '../../../../svg/i-shopping-bag-2.svg';
 import AccountIcon from '../../../../svg/i-account.svg';
 import SearchIcon from '../../../../svg/i-search.svg';
 

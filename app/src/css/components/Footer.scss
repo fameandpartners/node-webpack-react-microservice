@@ -41,3 +41,14 @@
   text-indent: 3px;
   font-size: 12px;
 }
+
+.Footer form {
+  display: inline;
+}
+
+.Footer .inline-select {
+  background: transparent;
+  display: inline;
+  border: none;
+  font-size: 1em;
+}
