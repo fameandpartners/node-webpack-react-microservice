@@ -1,5 +1,15 @@
+.ShopAllNavigationMobile__links {
+  margin-top: 70px;
+}
+
+.ShopAllNavigationMobile__links .NavLinkCol {
+  margin-bottom: 30px;
+}
+
 .ShopAllNavigationMobile__heading {
   height: 40px;
   line-height: 42px;
   background: $c-background-gray;
+  position: fixed;
+  width: 50%;
 }

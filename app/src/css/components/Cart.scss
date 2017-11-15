@@ -7,10 +7,14 @@
   right: 0;
   position: fixed;
   height: 100%;
-  width: 500px;
   z-index: 1000;
-  transform: translateX(500px);
+  transform: translateX(100%);
   background: $c-white;
+  width: 320px;
+
+  @include sm {
+    width: 500px;
+  }
 }
 
 .CartDrawer__header {
@@ -32,8 +36,13 @@
 }
 
 .Cart__layout-container {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include sm {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
 .Cart__product-remove,

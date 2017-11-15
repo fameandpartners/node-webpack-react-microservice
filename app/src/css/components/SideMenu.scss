@@ -32,11 +32,15 @@
 }
 
 .SideMenuActionButtons__body {
-  margin: 30% auto 0 auto;
+  margin: 0 auto 10% auto;
 }
 
 .SideMenuActionButtons__caret--right {
   margin-right: -20px;
+}
+
+.SideMenuActionButtons__icon-wrapper {
+  margin-bottom: 15px;
 }
 
 .SideMenuActionButtons__icon-wrapper--active .SearchBarExpander__icon {

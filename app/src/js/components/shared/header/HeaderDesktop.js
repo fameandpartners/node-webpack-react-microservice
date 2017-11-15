@@ -59,10 +59,6 @@ class Header extends Component {
     activateCartDrawer({ cartDrawerOpen: !cartDrawerOpen });
   }
 
-  handleSearchBarBlur() {
-    this.setState({ searchBarActive: false });
-  }
-
   handleSearchOpenClick() {
     this.setState({ searchBarActive: true });
   }

@@ -7,6 +7,15 @@ export default function (
   const scrollDirection = currentScrollY >= lastKnownScrollY ? 'down' : 'up';
   const distanceScrolled = Math.abs(currentScrollY - lastKnownScrollY);
 
+  // Keep pinned if hovered
+  if (props.isHovering) {
+    return {
+      action: 'pin',
+      scrollDirection,
+      distanceScrolled,
+    };
+  }
+
   // We're disabled
   if (props.disable) {
     return {

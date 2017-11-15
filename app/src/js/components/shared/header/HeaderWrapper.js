@@ -81,9 +81,13 @@ class HeaderWrapper extends Component {
           <HeaderHider>
             <HeaderMobile headerTitle={productTitle} />
           </HeaderHider>
-                :
+          :
           <ReactHoverObserver hoverOffDelayInMs={120}>
-            <HeaderDesktop />
+            <HeaderHider>
+              <ReactHoverObserver hoverOffDelayInMs={120}>
+                <HeaderDesktop />
+              </ReactHoverObserver>
+            </HeaderHider>
           </ReactHoverObserver>
         }
       </div>

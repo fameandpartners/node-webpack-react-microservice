@@ -100,7 +100,7 @@ class Cart extends Component {
           >
             <CancelOut />
           </span>
-          <div className="col-5">
+          <div className="col-5 u-mr--small">
             <img className="u-width--full" alt="dress1" src={productImage} />
           </div>
           <div className="col-7 u-text-align--left">
@@ -126,7 +126,7 @@ class Cart extends Component {
       <div className="Cart u-flex u-flex--1">
         <div className="Cart__contents u-flex--col">
 
-          <div className="Cart__layout-container">
+          <div>
             <div className="Cart__subtotal u-text-align--center grid-12 u-mt-small">
               <span className="col-6 u-text-align--left">Subtotal</span>
               <span className="col-6 Cart__subtotal-price u-text-align--right">
@@ -144,7 +144,7 @@ class Cart extends Component {
 
 
           <div className="u-flex u-flex--1">
-            <div className="Cart__layout-container u-overflow-y--scroll">
+            <div className="u-overflow-y--scroll">
               <div className="Cart__line-item-wrapper">
                 { this.generateLineItems() }
               </div>

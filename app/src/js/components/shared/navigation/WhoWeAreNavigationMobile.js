@@ -24,10 +24,10 @@ class WhoWeAreNavigationMobile extends PureComponent {
   render() {
     return (
       /* eslint-disable max-len */
-      <div className="ShopAllNavigationMobile u-width--full">
+      <div className="ShopAllNavigationMobile u-width--full typography">
         <div className="ShopAllNavigationMobile__link-container u-center grid">
           <div
-            className="ShopAllNavigationMobile__heading u-cursor--pointer u-width--full typography u-mb-normal"
+            className="ShopAllNavigationMobile__heading u-cursor--pointer u-mb-normal"
             onClick={this.props.handleReturnClick}
           >
             <span className="u-position--relative u-display--inline u-mr-small">
@@ -39,14 +39,16 @@ class WhoWeAreNavigationMobile extends PureComponent {
             </span>
             <h3 className="h5 u-display--inline u-ml-small">Who We Are</h3>
           </div>
-          <NavLinkCol
-            colClass="col-4_sm-6_md-3"
-            links={this.splitLinks(1)}
-          />
-          <NavLinkCol
-            colClass="col-4_sm-6_md-3"
-            links={this.splitLinks(0)}
-          />
+          <div className="ShopAllNavigationMobile__links u-flex--1">
+            <NavLinkCol
+              colClass="col-4_sm-6_md-3"
+              links={this.splitLinks(1)}
+            />
+            <NavLinkCol
+              colClass="col-4_sm-6_md-3"
+              links={this.splitLinks(0)}
+            />
+          </div>
         </div>
       </div>
     );

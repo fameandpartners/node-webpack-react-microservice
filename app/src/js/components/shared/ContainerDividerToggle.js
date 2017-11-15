@@ -59,7 +59,7 @@ class ContainerDividerToggle extends Component {
 
     return (
       <div
-        className="ContainerDividerToggle u-flex"
+        className="ContainerDividerToggle u-flex u-height--full"
         key={key}
         style={{
           WebkitTransform: `translate3d(${style.x}%, 0, 0)`,
@@ -68,13 +68,13 @@ class ContainerDividerToggle extends Component {
       >
         <div
           style={{ opacity: (style.opacity) }}
-          className="ContainerDividerToggle__left-node u-width--full u-height--full"
+          className="ContainerDividerToggle__left-node u-width--full"
         >
           {leftContainerNode}
         </div>
         <div
           style={{ opacity: (style.opacity) }}
-          className="ContainerDividerToggle__right-node u-width--full u-height--full"
+          className="ContainerDividerToggle__right-node u-width--full"
         >
           {rightContainerNode}
         </div>
@@ -85,7 +85,7 @@ class ContainerDividerToggle extends Component {
   render() {
     const { activeId, activationIdSet } = this.props;
     return (
-      <div className="u-position--relative u-overflow--hidden">
+      <div className="u-position--relative u-overflow--hidden u-height--full">
         <TransitionMotion
           styles={activationIdSet.indexOf(activeId) > -1 ? [this.transitionedStyles()] : []}
           willEnter={this.willEnter}
