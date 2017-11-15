@@ -67,6 +67,18 @@ app.get('/webpack/asset-manifest', (req, res) => {
   res.send(asset_paths);
 });
 
+app.get('/client', (req, res) => {
+  res.header('Content-Type', 'application/json');
+
+  // eslint-disable-next-line
+  console.log('Sending fake assets');
+  var asset_paths = {
+    pathA: 'someBS',
+    pathB: 'someBS',
+  }
+  res.send(asset_paths);
+});
+
 app.get('/pdp', (req, res) => {
   res.header('Content-Type', 'text/html');
   const props = transformProductJSON(mockJSON);
