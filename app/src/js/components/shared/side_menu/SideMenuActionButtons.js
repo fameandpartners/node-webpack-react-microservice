@@ -49,7 +49,7 @@ class SideMenuActionButtons extends Component {
     const { searchBarActive } = this.state;
 
     return (
-      <div>
+      <div className="u-height--full grid-middle">
         <div className="SideMenuActionButtons__body u-position--relative">
           <ul>
             <li
@@ -89,7 +89,7 @@ class SideMenuActionButtons extends Component {
             <li>
               <span
                 className={classnames(
-                  'SideMenuActionButtons__icon-wrapper u-display--inline-block u-vertical-align--middle',
+                  'SideMenuActionButtons__icon-wrapper u-display--inline-block',
                   { 'SideMenuActionButtons__icon-wrapper--active': searchBarActive },
                 )}
                 onClick={this.handleSearchIconClick}

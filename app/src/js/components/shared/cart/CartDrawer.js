@@ -83,7 +83,7 @@ class CartDrawer extends Component {
       >
         {({ x }) =>
           <div
-            className="CartDrawer__wrapper"
+            className="CartDrawer__wrapper typography"
             style={{ transform: `translateX(${100 - (x * -1)}%)` }}
           >
             <div className="CartDrawer u-flex--col u-height--full">
@@ -95,13 +95,18 @@ class CartDrawer extends Component {
                   >
                     <CancelOut />
                   </span>
-                  <h4>Shopping Bag</h4>
+                  <h5>Shopping Bag</h5>
                 </div>
-                { lineItems.length > 0
-                ? <Cart lineItems={lineItems} />
-                : <CartEmpty />
-              }
               </div>
+              { lineItems.length > 0
+                ? <Cart lineItems={lineItems} />
+                :
+                <CartEmpty
+                  closeCartDrawer={() => {
+                    this.props.activateCartDrawer({ cartDrawerOpen: false });
+                  }}
+                />
+              }
             </div>
           </div>
       }

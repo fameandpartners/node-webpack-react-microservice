@@ -14,13 +14,13 @@
 
 .Header__link {
   cursor: pointer;
-  margin-right: 1rem;
+  margin-right: 1.5em;
 }
 
 .Header__action {
   position: relative;
   cursor: pointer;
-  margin-left: 2rem;
+  margin-left: 2em;
   z-index: 1;
   transition: $fast-transition-time margin;
   vertical-align: middle;
