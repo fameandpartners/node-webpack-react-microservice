@@ -7,9 +7,16 @@ import { bindActionCreators } from 'redux';
 // Actions
 import ModalActions from '../../actions/ModalActions';
 
+// Constants
+import ModalConstants from '../../constants/ModalConstants';
+
 // Components
 import Button from '../generic/Button';
 import Modal from '../modal/Modal';
+
+function stateToProps() {
+  return {};
+}
 
 function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
@@ -22,12 +29,13 @@ class CreateFitID extends Component {
     autoBind(this);
   }
 
-  handleClick() {
-    return null;
+  handleCloseModal() {
+    console.log(this.props.activateModal);
+    this.props.activateModal({ shouldAppear: false });
   }
 
-  handleCloseModal() {
-    this.props.activateModal({ shouldAppear: false });
+  handleSizeClick() {
+    this.props.activateModal({ modalId: ModalConstants.SIZE_SELECTION_MODAL });
   }
 
   render() {
@@ -43,12 +51,14 @@ class CreateFitID extends Component {
             <Button
               className="CreateFitIDButton"
               text="Use a fit I.D."
+              handleClick={this.handleSizeClick}
             />
           </div>
           <div>
             <Button
               className="SelectSizeButton"
               text="Use standard sizing"
+              handleClick={this.handleSizeClick}
             />
           </div>
 
@@ -62,8 +72,7 @@ CreateFitID.propTypes = {
   activateModal: PropTypes.func.isRequired,
 };
 
-// CreateFitID.defaultProps = {
+CreateFitID.defaultProps = {
+};
 
-// }
-
-export default connect(dispatchToProps)(CreateFitID);
+export default connect(stateToProps, dispatchToProps)(CreateFitID);
