@@ -38,6 +38,10 @@ class CreateFitID extends Component {
     this.props.activateModal({ modalId: ModalConstants.SIZE_SELECTION_MODAL });
   }
 
+  handleFitIDClick() {
+    this.props.activateModal({ modalId: ModalConstants.FIT_ID_MODAL });
+  }
+
   render() {
     return (
       <Modal
@@ -51,7 +55,7 @@ class CreateFitID extends Component {
             <Button
               className="CreateFitIDButton"
               text="Use a fit I.D."
-              handleClick={this.handleSizeClick}
+              handleClick={this.handleFitIDClick  }
             />
           </div>
           <div>
