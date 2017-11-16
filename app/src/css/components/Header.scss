@@ -14,7 +14,7 @@
 
 .Header__link {
   cursor: pointer;
-  margin-right: 1.5em;
+  margin-right: 20px;
 }
 
 .Header__action {
@@ -60,6 +60,12 @@
   width: 100%;
   z-index: -1;
 }
+
+.Header__icon-click-wrapper:hover {
+  border-bottom: 1px solid;
+  padding-bottom: 9px;
+}
+
 
 .Header li {
   display: inline-block;

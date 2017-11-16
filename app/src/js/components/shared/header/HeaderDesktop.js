@@ -76,7 +76,7 @@ class Header extends Component {
                 <span className="Header__link" role="link">Shop all</span>
               </li>
               <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.WHO_WE_ARE)}>
-                <span className="Header__link" href="#about">Who we are</span>
+                <span className="Header__link" href="#about">Inside Fame</span>
               </li>
             </ul>
             <div className="col-4 u-text-align--center">

@@ -29,6 +29,7 @@ class SearchBar extends Component {
           focusOnMount
           lineInput
           indent
+          placeholder="Search"
           onBlur={onBlur}
           onKeyPress={this.handleKeyPress}
         />
