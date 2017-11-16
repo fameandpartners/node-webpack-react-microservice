@@ -222,7 +222,7 @@ class ProductOptions extends Component {
 
   showCreateFitIDModal() {
     this.props.activateModal({
-      modalId: ModalConstants.FIT_ID_MODAL,
+      modalId: ModalConstants.SIZE_PROFILE_MODAL,
       shouldAppear: true,
     });
   }

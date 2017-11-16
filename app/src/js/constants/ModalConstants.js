@@ -24,6 +24,7 @@ const modalIds = assign({},
     'ZOOM_MODAL',
     'AFTERPAY_MODAL',
     'FIT_ID_MODAL',
+    'SIZE_PROFILE_MODAL',
   ]),
 );
 

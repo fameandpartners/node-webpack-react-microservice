@@ -6,9 +6,13 @@ import { string } from 'prop-types';
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import CreateFitID from '../size-profile/CreateFitID';
+import Wizard from '../shared/wizard/Wizard';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
+
+// CSS
+import '../../../css/components/SizeProfile.scss';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -21,7 +25,6 @@ function dispatchToProps() {
   return {};
 }
 
-
 class SizeProfileModal extends Component {
   constructor(props) {
     super(props);
@@ -30,8 +33,10 @@ class SizeProfileModal extends Component {
 
   injectModalStep() {
     const { activeModalId } = this.props;
-    if (activeModalId === ModalConstants.FIT_ID_MODAL) {
+    if (activeModalId === ModalConstants.SIZE_PROFILE_MODAL) {
       return <CreateFitID />;
+    } else if (activeModalId === ModalConstants.FIT_ID_MODAL) {
+      return <Wizard />;
     }
     return null;
   }
@@ -42,9 +47,14 @@ class SizeProfileModal extends Component {
         modalContainerClass="grid-middle"
         modalIds={[
           ModalConstants.FIT_ID_MODAL,
+          ModalConstants.SIZE_PROFILE_MODAL,
         ]}
       >
-        { this.injectModalStep() }
+        <div
+          className="SizeProfileModal u-width--full u-height--full"
+        >
+          { this.injectModalStep() }
+        </div>
       </ModalContainer>
     );
   }
