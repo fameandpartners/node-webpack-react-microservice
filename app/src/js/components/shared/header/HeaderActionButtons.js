@@ -21,7 +21,6 @@ import '../../../../css/components/Header.scss';
 
 // Assets
 import ShoppingBagIcon from '../../../../svg/i-shopping-bag-2.svg';
-import AccountIcon from '../../../../svg/i-account.svg';
 import SearchIcon from '../../../../svg/i-search.svg';
 
 function stateToProps(state) {
@@ -72,31 +71,19 @@ class Header extends Component {
   }
 
   render() {
-    const { cartItemCount, user } = this.props;
+    const { cartItemCount } = this.props;
     const { searchBarActive, revealProfileActions } = this.state;
 
     return (
-      <ul className="col-4 u-text-align--right">
-        { searchBarActive ? null : (
-          <li className="Header__action">
-            { user.first_name ?
-              (
-                <ReactHoverObserver hoverOffDelayInMs={120}>
-                  <HeaderProfileActionRevealer
-                    isActive={revealProfileActions}
-                  />
-                </ReactHoverObserver>
-              )
-              :
-                <a href="/profile">
-                  <AccountIcon
-                    width="18px"
-                    height="26px"
-                  />
-                </a>
-            }
-          </li>
-        )}
+      <ul className="col-5 u-text-align--right">
+        <li className="Header__action">
+          <ReactHoverObserver hoverOffDelayInMs={100}>
+            <HeaderProfileActionRevealer
+              searchBarActive={searchBarActive}
+              isActive={revealProfileActions}
+            />
+          </ReactHoverObserver>
+        </li>
 
         <li
           className={classnames(

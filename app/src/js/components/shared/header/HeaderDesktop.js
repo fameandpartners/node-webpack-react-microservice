@@ -71,7 +71,7 @@ class Header extends Component {
       <header className="Header u-position--relative u-width--full">
         <div className="layout-container Header__content-padding">
           <nav className="grid-12-noGutter">
-            <ul className="col-4 u-text-align--left">
+            <ul className="col-5 u-text-align--left">
               <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.SHOP_ALL)}>
                 <span className="Header__link" role="link">Shop all</span>
               </li>
@@ -79,7 +79,7 @@ class Header extends Component {
                 <span className="Header__link" href="#about">Inside Fame</span>
               </li>
             </ul>
-            <div className="col-4 u-text-align--center">
+            <div className="col-2 u-text-align--center">
               <FameLogo
                 width="200px"
                 height="26px"

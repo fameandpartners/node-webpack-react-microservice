@@ -34,10 +34,19 @@
   margin-left: -1.2em;
 }
 
+.Header__action-name {
+  opacity: 1;
+  transition: 180ms all;
+}
+
 .Header__action-name::after {
   content: '';
   border-right: 1px solid $c-neutral-8;
   padding-left: 25px;
+}
+
+.Header__action-name--hide {
+  opacity: 0;
 }
 
 .Header__action-account-revealer {
@@ -63,7 +72,7 @@
 
 .Header__icon-click-wrapper:hover {
   border-bottom: 1px solid;
-  padding-bottom: 9px;
+  padding-bottom: 10px;
 }
 
 

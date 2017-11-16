@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { spring, TransitionMotion } from 'react-motion';
+import classnames from 'classnames';
 import noop from '../../libs/noop';
 
 // Components

@@ -61,6 +61,7 @@ class Input extends Component {
           'Input__wrapper',
           wrapperClassName,
           {
+            'Input__wrapper--line-input': lineInput,
             Input__wrapper__error: error,
           },
         )}
