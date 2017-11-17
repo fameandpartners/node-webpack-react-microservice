@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
-// CSS
+import Resize from '../../../decorators/Resize';
+import PDPBreakpoints from '../../../libs/PDPBreakpoints';
+
+// Assets
+import fallWeddings from '../../../../img/fall-weddings.jpg';
 import '../../../../css/components/ShopAllNavigationDesktop.scss';
 
 // Constants
@@ -17,34 +21,52 @@ class ShopAllNavigationDesktop extends PureComponent {
   }
 
   render() {
-    const { childRef } = this.props;
+    const { breakpoint, childRef } = this.props;
     return (
       <div
         ref={childRef}
         className="ShopAllNavigationDesktop u-width--full layout-container"
       >
-        <div className="ShopAllNavigationDesktop__link-container u-center grid">
-          <NavLinkCol
-            colTitle="Weddings"
-            links={NAVIGATION_LINKS.WEDDINGS}
-          />
-          <NavLinkCol
-            colTitle="Dresses"
-            headerLink={NAVIGATION_LINKS.DRESSES_PATH}
-            links={NAVIGATION_LINKS.DRESSES}
-          />
-          <NavLinkCol
-            colTitle="Separates"
-            links={NAVIGATION_LINKS.SEPARATES}
-          />
-          <NavLinkCol
-            colTitle="Featured"
-            links={NAVIGATION_LINKS.FEATURED}
-          />
-          <NavLinkCol
-            colTitle="Collections"
-            links={NAVIGATION_LINKS.COLLECTIONS}
-          />
+        <div className="grid-center">
+          <div
+            className="ShopAllNavigationDesktop__link-container u-center grid"
+          >
+            <NavLinkCol
+              colTitle="Weddings"
+              links={NAVIGATION_LINKS.WEDDINGS}
+            />
+            <NavLinkCol
+              colTitle="Dresses"
+              headerLink={NAVIGATION_LINKS.DRESSES_PATH}
+              links={NAVIGATION_LINKS.DRESSES}
+            />
+            <NavLinkCol
+              colTitle="Separates"
+              links={NAVIGATION_LINKS.SEPARATES}
+            />
+            <NavLinkCol
+              colTitle="Featured"
+              links={NAVIGATION_LINKS.FEATURED}
+            />
+            <NavLinkCol
+              colTitle="Collections"
+              links={NAVIGATION_LINKS.COLLECTIONS}
+            />
+            { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
+            <div className="ShopAllNavigationDesktop__ad">
+              <a href="/dresses/fall-weddings">
+                <img
+                  alt="Fall Weddings Ad"
+                  className="ShopAllNavigationDesktop__image u-width--full"
+                  src={fallWeddings}
+                />
+              </a>
+              <a href="/dresses/fall-weddings" className="link">
+                <span>Shop Fall Weddings</span>
+              </a>
+            </div>
+            }
+          </div>
         </div>
       </div>
     );
@@ -52,7 +74,8 @@ class ShopAllNavigationDesktop extends PureComponent {
 }
 
 ShopAllNavigationDesktop.propTypes = {
+  breakpoint: PropTypes.string,
   childRef: PropTypes.func.isRequired,
 };
 
-export default ShopAllNavigationDesktop;
+export default Resize(PDPBreakpoints)(ShopAllNavigationDesktop);

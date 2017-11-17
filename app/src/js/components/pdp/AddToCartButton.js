@@ -105,11 +105,12 @@ class AddToCartButton extends Component {
       setCartContents,
     } = this.props;
     req.end((err, res) => {
+      setAppLoadingState({ loadingId: null });
       if (err) {
-        return console.log('error adding something to the cart');
+        // eslint-disable-next-line
+        return console.warn('error adding something to the cart', err);
       }
 
-      setAppLoadingState({ loadingId: null });
       setCartContents({ cart: res.body });
       activateCartDrawer({ cartDrawerOpen: true });
       return null;
