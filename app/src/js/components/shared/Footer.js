@@ -117,12 +117,22 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a className="link--static" href="/dresses?order=newest">What's new</a>
+                <a className="link--static" href="/dresses?order=newest">New Arrivals</a>
               </p>
             </li>
             <li>
               <p>
                 <a className="link--static" href="/getitquick">Made in 48 Hours</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a className="link--static" href="/modern-bridesmaid-collection">Bridesmaid</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a className="link--static" href="/bespoke-bridal-collection">Bridal</a>
               </p>
             </li>
             <li>
@@ -142,13 +152,12 @@ class Footer extends PureComponent {
             </li>
           </ul>
           <div className="col-6_md-12_sm-12_sm-first u-mb-big">
-            <p className="Footer__copy u-mb-small">
-              Stay Updated
+            <p className="Footer__copy u-mb-small u-text-align--left">
+              Are you on the list?
             </p>
             <p className="u-text-align--left u-mb-small">
-              Sign up for an insider round of the latest fashion news, collection
-              drops and underground style options,
-              plus an instant $25 off your first order.
+              Join for an instant $25 off your first order, exclusive access to
+              new arrivals, and more.
             </p>
             <EmailCapture
               className="u-text-align--left"

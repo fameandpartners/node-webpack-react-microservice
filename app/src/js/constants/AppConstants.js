@@ -149,16 +149,12 @@ const navigationLinks = {
         url: '/high-contrast',
       },
       {
-        text: 'Modern Evening',
-        url: '/the-modern-evening-collection',
+        text: 'Evening Shop',
+        url: '/the-evening-shop',
       },
       {
-        text: 'Inside/Out',
-        url: '/inside-out-collection',
-      },
-      {
-        text: 'Bespoke Bridal',
-        url: '/bespoke-bridal-collection',
+        text: 'Anti-Fast Fashion Shop',
+        url: '/the-anti-fast-fashion-shop',
       },
     ],
     WHO_WE_ARE: [
