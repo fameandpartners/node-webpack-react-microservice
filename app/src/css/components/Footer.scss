@@ -56,3 +56,11 @@
   border: 0;
   font-size: 1em;
 }
+
+.Footer__sign-up {
+  order: -1;
+
+  @include sm {
+    order: 1;
+  }
+}

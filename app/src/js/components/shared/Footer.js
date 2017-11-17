@@ -32,7 +32,7 @@ class Footer extends PureComponent {
 
     return (
       <footer className="Footer">
-        <div className="layout-container grid-noGutter-reverse-spaceAround">
+        <div className="layout-container grid-12-noGutter-spaceAround">
           <ul className="col-2_sm-4 Footer__category-list">
             <li>
               <p className="Footer__category-title">Help</p>
@@ -74,12 +74,12 @@ class Footer extends PureComponent {
             <li><p className="Footer__category-title">About</p></li>
             <li>
               <p>
-                <a className="link--static" href="/why-us">Why shop with us</a>
+                <a className="link--static" href="/why-us">Why Shop With Us</a>
               </p>
             </li>
             <li>
               <p>
-                <a className="link--static" href="/about">About us</a>
+                <a className="link--static" href="/about">About Us</a>
               </p>
             </li>
             <li>
@@ -89,7 +89,7 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a className="link--static" href="/from-our-ceo">From our CEO</a>
+                <a className="link--static" href="/from-our-ceo">From Our CEO</a>
               </p>
             </li>
             <li>
@@ -135,23 +135,25 @@ class Footer extends PureComponent {
                 <a className="link--static" href="/bespoke-bridal-collection">Bridal</a>
               </p>
             </li>
-            <li>
-              <p>
-                <a className="link--static" href="/dresses/formal">Formal</a>
-              </p>
-            </li>
-            <li>
-              <p>
-                <a className="link--static" href="/dresses/prom">Prom</a>
-              </p>
-            </li>
+            { auSite ?
+              <li>
+                <p>
+                  <a className="link--static" href="/dresses/formal">Formal</a>
+                </p>
+              </li> :
+              <li>
+                <p>
+                  <a className="link--static" href="/dresses/prom">Prom</a>
+                </p>
+              </li>
+            }
             <li>
               <p>
                 <a className="link--static" href="/dresses">View All Dresses</a>
               </p>
             </li>
           </ul>
-          <div className="col-6_md-12_sm-12_sm-first u-mb-big">
+          <div className="col-6_sm-12 Footer__sign-up u-mb-big">
             <p className="Footer__copy u-mb-small u-text-align--left">
               Are you on the list?
             </p>
@@ -182,7 +184,7 @@ class Footer extends PureComponent {
           </div>
         </div>
 
-        <p className="u-mt-normal u-mb-huge">
+        <p className="u-mt-normal u-mb-big">
           © 2017 Fame and Partners. All rights reserved.
         </p>
       </footer>

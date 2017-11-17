@@ -85,7 +85,7 @@ class HeaderActionRevealer extends Component {
                             <a className="h5 link link--no-underline" href="/profile">Account</a>
                           </span>
                           <span className="col-12 u-textAlign--center">
-                            <a className="h5 link link--no-underline" href="/profile">Orders</a>
+                            <a className="h5 link link--no-underline" href="/view-orders">Orders</a>
                           </span>
                           <span className="col-12 u-textAlign--center">
                             <a
