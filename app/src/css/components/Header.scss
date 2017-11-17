@@ -8,6 +8,10 @@
   box-shadow: 0 3px 2px -2px $c-super-light-gray;
 }
 
+.Header__main-contents {
+  z-index: 1;
+}
+
 .Header__content-padding {
   margin-bottom: 5px;
 }

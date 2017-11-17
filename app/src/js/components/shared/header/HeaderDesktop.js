@@ -69,7 +69,7 @@ class Header extends Component {
 
     return (
       <header className="Header u-position--relative u-width--full">
-        <div className="layout-container Header__content-padding">
+        <div className="Header__main-contents layout-container Header__content-padding">
           <nav className="grid-12-noGutter">
             <ul className="col-5 u-text-align--left">
               <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.SHOP_ALL)}>
