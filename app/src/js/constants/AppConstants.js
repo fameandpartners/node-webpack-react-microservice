@@ -149,7 +149,7 @@ const navigationLinks = {
         url: '/high-contrast',
       },
       {
-        text: 'Moder Evening',
+        text: 'Modern Evening',
         url: '/the-modern-evening-collection',
       },
       {

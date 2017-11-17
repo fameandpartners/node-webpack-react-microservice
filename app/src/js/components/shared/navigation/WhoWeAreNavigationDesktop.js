@@ -1,7 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-// CSS
+// Breakpoint stuff
+import Resize from '../../../decorators/Resize';
+import PDPBreakpoints from '../../../libs/PDPBreakpoints';
+
+// Assets
+import internshipImg from '../../../../img/internship.jpg';
 import '../../../../css/components/WhoWeAreNavigation.scss';
 
 // Constants
@@ -16,6 +21,7 @@ class WhoWeAreNavigation extends PureComponent {
   }
 
   render() {
+    const { breakpoint } = this.props;
     return (
       <div
         ref={this.props.childRef}
@@ -28,6 +34,20 @@ class WhoWeAreNavigation extends PureComponent {
           <NavLinkCol
             links={this.splitLinks(0)}
           />
+          { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
+          <div className="WhoWeAreNavigation__ad">
+            <a href="/dresses/fall-weddings">
+              <img
+                alt="Internship Ad"
+                className="WhoWeAreNavigation__image u-width--full"
+                src={internshipImg}
+              />
+            </a>
+            <a href="/it-girl" className="link">
+              <span>Win an Internship</span>
+            </a>
+          </div>
+        }
         </div>
       </div>
     );
@@ -35,7 +55,8 @@ class WhoWeAreNavigation extends PureComponent {
 }
 
 WhoWeAreNavigation.propTypes = {
+  breakpoint: PropTypes.string,
   childRef: PropTypes.func.isRequired,
 };
 
-export default WhoWeAreNavigation;
+export default Resize(PDPBreakpoints)(WhoWeAreNavigation);
