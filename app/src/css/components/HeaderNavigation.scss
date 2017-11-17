@@ -3,5 +3,6 @@
   position: relative;
   background: $c-white;
   transition: $fast-transition-time height ease-in-out;
-  top: 6px;
+  top: 7px;
+  box-shadow: 0 3px 2px -2px $c-super-light-gray;
 }

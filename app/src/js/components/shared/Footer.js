@@ -69,6 +69,11 @@ class Footer extends PureComponent {
                 <a className="link--static" href="/faqs#collapse-orders-track">Track My Order</a>
               </p>
             </li>
+            <li>
+              <p>
+                <a className="link--static" href="/guest-returns">Return My Order</a>
+              </p>
+            </li>
           </ul>
           <ul className="col-2_sm-4 Footer__category-list">
             <li><p className="Footer__category-title">About</p></li>

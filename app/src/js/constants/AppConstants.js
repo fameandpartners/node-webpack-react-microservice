@@ -98,6 +98,9 @@ const navigationLinks = {
         url: '/dresses/prom',
       },
       {
+        type: 'divider',
+      },
+      {
         text: 'View All',
         url: '/dresses',
       },
