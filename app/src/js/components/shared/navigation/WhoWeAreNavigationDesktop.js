@@ -55,7 +55,7 @@ class WhoWeAreNavigation extends PureComponent {
 }
 
 WhoWeAreNavigation.propTypes = {
-  breakpoint: PropTypes.string,
+  breakpoint: PropTypes.string.isRequired,
   childRef: PropTypes.func.isRequired,
 };
 

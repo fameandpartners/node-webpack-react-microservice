@@ -74,7 +74,7 @@ class ShopAllNavigationDesktop extends PureComponent {
 }
 
 ShopAllNavigationDesktop.propTypes = {
-  breakpoint: PropTypes.string,
+  breakpoint: PropTypes.string.isRequired,
   childRef: PropTypes.func.isRequired,
 };
 
