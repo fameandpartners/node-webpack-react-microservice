@@ -94,6 +94,11 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
+                <a className="link--static" href="/wholesale">Wholesale Inquiries</a>
+              </p>
+            </li>
+            <li>
+              <p>
                 <a className="link--static" href="/privacy">Privacy Policy</a>
               </p>
             </li>
@@ -138,9 +143,17 @@ class Footer extends PureComponent {
           </ul>
           <div className="col-6_md-12_sm-12_sm-first u-mb-big">
             <p className="Footer__copy u-mb-small">
-              Sign up to always enjoy free returns
+              Stay Updated
             </p>
-            <EmailCapture service="bronto" />
+            <p className="u-text-align--left u-mb-small">
+              Sign up for an insider round of the latest fashion news, collection
+              drops and underground style options,
+              plus an instant $25 off your first order.
+            </p>
+            <EmailCapture
+              className="u-text-align--left"
+              service="bronto"
+            />
           </div>
         </div>
         <div className="layout-container grid-noGutter">
@@ -159,6 +172,10 @@ class Footer extends PureComponent {
             </form>
           </div>
         </div>
+
+        <p className="u-mt-normal u-mb-huge">
+          © 2017 Fame and Partners. All rights reserved.
+        </p>
       </footer>
     );
   }

@@ -109,7 +109,7 @@ class AddToCartButton extends Component {
         return console.log('error adding something to the cart');
       }
 
-      setAppLoadingState({ loadingId: LOADING_IDS.ADD_TO_CART_LOADING });
+      setAppLoadingState({ loadingId: null });
       setCartContents({ cart: res.body });
       activateCartDrawer({ cartDrawerOpen: true });
       return null;
