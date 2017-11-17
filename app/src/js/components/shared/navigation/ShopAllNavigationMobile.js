@@ -50,6 +50,7 @@ class ShopAllNavigationMobile extends PureComponent {
                   colClass="col_sm-6_md-2"
                   colTitle="Dresses"
                   links={NAVIGATION_LINKS.DRESSES}
+                  headerLink={NAVIGATION_LINKS.DRESSES_PATH}
                 />
                 <NavLinkCol
                   colClass="col_sm-6_md-2"
@@ -58,8 +59,8 @@ class ShopAllNavigationMobile extends PureComponent {
                 />
                 <NavLinkCol
                   colClass="col_sm-6_md-2"
-                  colTitle="New Arrivals"
-                  links={NAVIGATION_LINKS.NEW_ARRIVALS}
+                  colTitle="Featured"
+                  links={NAVIGATION_LINKS.FEATURED}
                 />
                 <NavLinkCol
                   colClass="col_sm-6_md-2"

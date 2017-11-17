@@ -43,6 +43,7 @@ class Header extends Component {
     super(props);
     autoBind(this);
     this.state = {
+      revealProfileActions: false,
       searchBarActive: false,
       openNavItem: null,
     };
@@ -98,7 +99,7 @@ class Header extends Component {
           >
             <SearchIcon
               width="18px"
-              height="26px"
+              height="22px"
             />
           </span>
         </li>
@@ -131,7 +132,7 @@ class Header extends Component {
               >
                 <ShoppingBagIcon
                   width="18px"
-                  height="26px"
+                  height="22px"
                 />
               </span>
             )

@@ -51,7 +51,7 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a className="link--static" href="/contact">Fame Contact Us</a>
+                <a className="link--static" href="/contact">Contact Us</a>
               </p>
             </li>
             <li>
@@ -144,14 +144,14 @@ class Footer extends PureComponent {
           </div>
         </div>
         <div className="layout-container grid-noGutter">
-          <div className="col-12 Footer__site-version-container">
+          <div className="col-12 Footer__site-version-container u-mt-normal">
             <form onChange={this.changeSiteVersion}>
               <p className="u-user-select--none">Country: &nbsp;
               <span
                 className="u-text-decoration--underline u-cursor--pointer"
               >
                 <select className="inline-select" value={auSite ? 'au' : 'us'}>
-                  <option value="us">U.S</option>
+                  <option value="us">US</option>
                   <option value="au">Australia</option>
                 </select>
               </span>

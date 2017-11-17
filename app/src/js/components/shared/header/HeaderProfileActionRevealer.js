@@ -127,7 +127,11 @@ HeaderActionRevealer.propTypes = {
   isHovering: PropTypes.bool.isRequired,
   searchBarActive: PropTypes.bool.isRequired,
   isActive: PropTypes.bool.isRequired,
-  firstName: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
+};
+
+HeaderActionRevealer.defaultProps = {
+  firstName: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(HeaderActionRevealer);

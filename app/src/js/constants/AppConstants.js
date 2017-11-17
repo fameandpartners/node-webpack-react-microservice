@@ -49,16 +49,11 @@ const navigationLinks = {
         url: '/dresses/wedding-guests',
       },
       {
-        text: 'Bespoke Bridal',
-        url: '/this-has-no-link',
+        text: 'Fall Weddings',
+        url: '/dresses/fall-weddings',
       },
       {
-        text: 'Bridal Style Guides',
-        url: '/this-has-no-link',
-      },
-      {
-        text: 'Summer Weddings',
-        url: '/dresses/summer-weddings',
+        type: 'divider',
       },
       {
         text: 'Wedding Styling',
@@ -67,6 +62,10 @@ const navigationLinks = {
       {
         text: 'The Wedding App',
         url: '/wedding-atelier',
+      },
+      {
+        text: 'Bridal Style Guides',
+        url: '/get-the-look',
       },
     ],
     DRESSES: [
@@ -98,7 +97,12 @@ const navigationLinks = {
         text: 'Prom',
         url: '/dresses/prom',
       },
+      {
+        text: 'View All',
+        url: '/dresses',
+      },
     ],
+    DRESSES_PATH: '',
     SEPARATES: [
       {
         text: 'Tops',
@@ -121,36 +125,40 @@ const navigationLinks = {
         url: '/outerwear',
       },
     ],
-    NEW_ARRIVALS: [
+    FEATURED: [
       {
         text: 'Best Sellers',
-        url: '/bespoke-bridal-collection',
+        url: '/dresses/best-sellers',
       },
       {
-        text: 'Trending Looks',
-        url: '/modern-bridesmaid-dresses',
+        text: 'New Arrivals',
+        url: '/dresses/new-this-week',
+      },
+      {
+        text: 'Florals',
+        url: '/dresses/floral',
       },
     ],
     COLLECTIONS: [
+      {
+        text: 'Holiday Party Collection',
+        url: '/holiday-party-survival-kit',
+      },
       {
         text: 'High Contrast',
         url: '/high-contrast',
       },
       {
-        text: 'Modern Evening',
+        text: 'Moder Evening',
         url: '/the-modern-evening-collection',
-      },
-      {
-        text: 'Pre-Season Evening',
-        url: '/pre-season-evening-collection',
       },
       {
         text: 'Inside/Out',
         url: '/inside-out-collection',
       },
       {
-        text: 'Anti Fast Fashion Shop',
-        url: '/the-anti-fast-fashion-shop',
+        text: 'Bespoke Bridal',
+        url: '/bespoke-bridal-collection',
       },
     ],
     WHO_WE_ARE: [

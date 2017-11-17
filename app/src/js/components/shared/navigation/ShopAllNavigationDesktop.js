@@ -30,6 +30,7 @@ class ShopAllNavigationDesktop extends PureComponent {
           />
           <NavLinkCol
             colTitle="Dresses"
+            headerLink={NAVIGATION_LINKS.DRESSES_PATH}
             links={NAVIGATION_LINKS.DRESSES}
           />
           <NavLinkCol
@@ -37,8 +38,8 @@ class ShopAllNavigationDesktop extends PureComponent {
             links={NAVIGATION_LINKS.SEPARATES}
           />
           <NavLinkCol
-            colTitle="New Arrivals"
-            links={NAVIGATION_LINKS.NEW_ARRIVALS}
+            colTitle="Featured"
+            links={NAVIGATION_LINKS.FEATURED}
           />
           <NavLinkCol
             colTitle="Collections"
