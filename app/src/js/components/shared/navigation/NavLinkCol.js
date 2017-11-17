@@ -16,17 +16,17 @@ class NavLinkCol extends Component {
     return (
       <div
         className={classnames(
-          colClass, // NOTE: This is dumb, but gridlex requires this class first
+          colClass, // NOTE: This is dumb, but gridlex requires this class to be first
           'NavLinkCol',
         )}
       >
         { colTitle
-          ? <h2 className="h6 u-uppercase u-mb-small">{colTitle}</h2>
+          ? <h2 className="NavLinkCol__heading h6 u-uppercase">{colTitle}</h2>
           : null
         }
         <ul>
           { links.map(l => (
-            <li key={l.text} className="NavLinkCol__li u-width--full u-mb-small">
+            <li key={l.text} className="NavLinkCol__li u-width--full">
               <a className="link link--static link--no-underline" href={l.url}>{l.text}</a>
             </li>
           ))}

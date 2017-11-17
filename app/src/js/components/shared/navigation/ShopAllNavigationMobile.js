@@ -40,7 +40,7 @@ class ShopAllNavigationMobile extends PureComponent {
           </div>
           <div className="ShopAllNavigationMobile__links u-flex--1">
             <div className="u-overflow-y--scroll">
-              <div className="grid-center">
+              <div className="grid-center-noGutter">
                 <NavLinkCol
                   colClass="col_sm-6_md-2"
                   colTitle="Weddings"

@@ -146,8 +146,6 @@ Header.propTypes = {
   // Redux Props
   cartItemCount: PropTypes.number,
   cartDrawerOpen: PropTypes.bool,
-  /* eslint-disable react/forbid-prop-types */
-  user: PropTypes.object.isRequired,
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
 };

@@ -25,7 +25,7 @@ class WhoWeAreNavigationMobile extends PureComponent {
     return (
       /* eslint-disable max-len */
       <div className="ShopAllNavigationMobile u-width--full typography">
-        <div className="ShopAllNavigationMobile__link-container u-center grid">
+        <div className="ShopAllNavigationMobile__link-container u-center grid-noGutter">
           <div
             className="ShopAllNavigationMobile__heading u-cursor--pointer u-mb-normal"
             onClick={this.props.handleReturnClick}
