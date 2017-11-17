@@ -144,7 +144,7 @@ const navigationLinks = {
     ],
     COLLECTIONS: [
       {
-        text: 'Holiday Party Collection',
+        text: 'Holiday Party',
         url: '/holiday-party-survival-kit',
       },
       {
