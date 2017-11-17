@@ -4,6 +4,7 @@ import AppConstants, { QUERY_PARAMS } from '../constants/AppConstants';
 import win from '../polyfills/windowPolyfill';
 
 export const $$initialState = Immutable.fromJS({
+  user: {},
   defaultValue: [],
   loadingId: null,
   gallerySlideActiveIndex: 0,
@@ -52,6 +53,11 @@ export default function AppReducer($$state = $$initialState, action = null) {
     case AppConstants.SET_APP_LOADING_STATE: {
       return $$state.merge({
         loadingId: action.loadingId,
+      });
+    }
+    case AppConstants.SET_APP_USER: {
+      return $$state.merge({
+        user: action.user,
       });
     }
     case AppConstants.SET_GALLERY_SLIDE_ACTIVE_INDEX: {

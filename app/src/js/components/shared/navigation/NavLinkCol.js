@@ -11,25 +11,52 @@ class NavLinkCol extends Component {
     super(props);
     autoBind(this);
   }
+
+  renderTitle() {
+    const { colTitle, headerLink } = this.props;
+    if (headerLink) {
+      return (
+        <a href={headerLink}>
+          <h2 className="NavLinkCol__heading h6 u-uppercase">{colTitle}</h2>
+        </a>
+      );
+    }
+
+    return <h2 className="NavLinkCol__heading h6 u-uppercase">{colTitle}</h2>;
+  }
+
   render() {
-    const { colClass, colTitle, links } = this.props;
+    const {
+      colClass,
+      colTitle,
+      links,
+    } = this.props;
+
     return (
       <div
         className={classnames(
-          colClass, // NOTE: This is dumb, but gridlex requires this class first
+          colClass, // NOTE: This is dumb, but gridlex requires this class to be first
           'NavLinkCol',
         )}
       >
         { colTitle
-          ? <h2 className="h6 u-uppercase u-mb-small">{colTitle}</h2>
+          ? this.renderTitle()
           : null
         }
         <ul>
-          { links.map(l => (
-            <li key={l.text} className="NavLinkCol__li u-width--full u-mb-small">
-              <a className="link link--static link--no-underline" href={l.url}>{l.text}</a>
-            </li>
-          ))}
+          { links.map((l, i) => {
+            if (l.type === 'divider') {
+              return (
+                <li key={`divider-${i}`}>-</li>
+              );
+            }
+
+            return (
+              <li key={l.text} className="NavLinkCol__li u-width--full">
+                <a className="link link--static link--no-underline" href={l.url}>{l.text}</a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
@@ -39,6 +66,7 @@ class NavLinkCol extends Component {
 NavLinkCol.propTypes = {
   colClass: PropTypes.string,
   colTitle: PropTypes.string,
+  headerLink: PropTypes.string,
   links: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string,
     url: PropTypes.string,
@@ -48,6 +76,7 @@ NavLinkCol.propTypes = {
 NavLinkCol.defaultProps = {
   colClass: 'col',
   colTitle: null,
+  headerLink: null,
 };
 
 export default NavLinkCol;

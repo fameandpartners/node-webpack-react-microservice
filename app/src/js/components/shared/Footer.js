@@ -28,9 +28,7 @@ class Footer extends PureComponent {
   }
 
   render() {
-    const {
-      auSite,
-    } = this.props;
+    const { auSite } = this.state;
 
     return (
       <footer className="Footer">
@@ -53,7 +51,7 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a className="link--static" href="/contact">Fame Contact Us</a>
+                <a className="link--static" href="/contact">Contact Us</a>
               </p>
             </li>
             <li>
@@ -92,6 +90,11 @@ class Footer extends PureComponent {
             <li>
               <p>
                 <a className="link--static" href="/from-our-ceo">From our CEO</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a className="link--static" href="/wholesale">Wholesale Inquiries</a>
               </p>
             </li>
             <li>
@@ -140,26 +143,39 @@ class Footer extends PureComponent {
           </ul>
           <div className="col-6_md-12_sm-12_sm-first u-mb-big">
             <p className="Footer__copy u-mb-small">
-              Sign up to always enjoy free returns
+              Stay Updated
             </p>
-            <EmailCapture service="bronto" />
+            <p className="u-text-align--left u-mb-small">
+              Sign up for an insider round of the latest fashion news, collection
+              drops and underground style options,
+              plus an instant $25 off your first order.
+            </p>
+            <EmailCapture
+              className="u-text-align--left"
+              service="bronto"
+            />
           </div>
         </div>
         <div className="layout-container grid-noGutter">
-          <div className="col-12 Footer__site-version-container">
-            <p className="u-user-select--none">Country: &nbsp;
+          <div className="col-12 Footer__site-version-container u-mt-normal">
+            <form onChange={this.changeSiteVersion}>
+              <p className="u-user-select--none">Country: &nbsp;
               <span
                 className="u-text-decoration--underline u-cursor--pointer"
-                onClick={this.changeSiteVersion}
               >
-                { auSite
-                  ? 'Australia'
-                  : 'U.S.'
-                }
+                <select className="inline-select" value={auSite ? 'au' : 'us'}>
+                  <option value="us">US</option>
+                  <option value="au">Australia</option>
+                </select>
               </span>
-            </p>
+              </p>
+            </form>
           </div>
         </div>
+
+        <p className="u-mt-normal u-mb-huge">
+          © 2017 Fame and Partners. All rights reserved.
+        </p>
       </footer>
     );
   }

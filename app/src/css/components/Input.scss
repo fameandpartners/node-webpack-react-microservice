@@ -60,6 +60,15 @@
   border-radius: 0;
   border-bottom: 1px solid $c-black;
   background: transparent;
+
+  &:hover {
+    border-color: inherit;
+  }
+
+  // Specific
+  position: absolute;
+  bottom: -28px;
+  padding-bottom: 10px;
 }
 
 .Input__label {

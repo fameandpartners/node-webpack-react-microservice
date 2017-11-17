@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 
+// CSS
+import '../../../css/components/SearchBar.scss';
+
 // Components
 import Input from '../form/Input';
 
@@ -29,6 +32,7 @@ class SearchBar extends Component {
           focusOnMount
           lineInput
           indent
+          placeholder="Search"
           onBlur={onBlur}
           onKeyPress={this.handleKeyPress}
         />

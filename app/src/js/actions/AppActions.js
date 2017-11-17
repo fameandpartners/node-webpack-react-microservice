@@ -14,6 +14,13 @@ export function setAppLoadingState({ loadingId }) {
   };
 }
 
+export function setAppUser({ user }) {
+  return {
+    type: AppConstants.SET_APP_USER,
+    user,
+  };
+}
+
 export function setShareableQueryParams({ color, customizations }) {
   return {
     type: AppConstants.SET_SHAREABLE_QUERY_PARAMS,

@@ -124,7 +124,7 @@ class Cart extends Component {
 
     return (
       <div className="Cart u-flex u-flex--1">
-        <div className="Cart__contents u-flex--col">
+        <div className="Cart__contents Cart__layout-container u-flex--col">
 
           <div>
             <div className="Cart__subtotal u-text-align--center grid-12 u-mt-small">

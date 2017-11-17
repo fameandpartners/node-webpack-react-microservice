@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import classnames from 'classnames';
 
 // Polyfills
 import win from '../../polyfills/windowPolyfill';
@@ -83,12 +84,18 @@ class EmailCapture extends PureComponent {
 
   render() {
     const {
+      className,
       signupError,
       signupSuccess,
     } = this.state;
 
     return (
-      <div className="EmailCapture">
+      <div
+        className={classnames(
+        'EmailCapture',
+        className,
+      )}
+      >
         <h2
           className="EmailCapture__success col-12"
           style={{
@@ -119,7 +126,7 @@ class EmailCapture extends PureComponent {
             <Button
               className="padding--none"
               handleClick={this.handleSignupClick}
-              text="Sign up"
+              text="Submit"
             />
           </div>
         </div>
@@ -137,6 +144,10 @@ EmailCapture.propTypes = {
   service: PropTypes.oneOf([
     'bronto',
   ]).isRequired,
+};
+
+EmailCapture.defaultProps = {
+  className: '',
 };
 
 export default EmailCapture;

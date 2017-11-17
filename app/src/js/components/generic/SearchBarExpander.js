@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { spring, TransitionMotion } from 'react-motion';
+import classnames from 'classnames';
 import noop from '../../libs/noop';
 
 // Components
@@ -53,7 +54,10 @@ class SearchBarExpander extends Component {
             const style = items[0].style;
             return (
               <div
-                className="SearchBarExpander u-center u-display--inline-block"
+                className={classnames(
+                  'SearchBarExpander u-center u-display--inline-block',
+                  { 'SearchBarExpander--active': isActive },
+                )}
                 key={items[0].key}
                 style={{
                   width: `${style.width}px`,

@@ -48,8 +48,12 @@ body {
   }
 }
 
-.link--no-underline {
+.link.link--no-underline {
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .link--static {
