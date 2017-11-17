@@ -50,11 +50,12 @@
 }
 
 .Header__action-account-revealer {
-  padding: 30px 60px;
+  padding: 20px 40px;
   position: absolute;
   right: 0;
   background: $c-white;
   z-index: 2;
+  top: 40px;
 }
 
 .Header__action-account-revealer::before {
