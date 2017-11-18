@@ -220,7 +220,7 @@ class ProductOptions extends Component {
     });
   }
 
-  showCreateFitIDModal() {
+  showSelectSizeProfileModal() {
     this.props.activateModal({
       modalId: ModalConstants.SIZE_PROFILE_MODAL,
       shouldAppear: true,
@@ -234,7 +234,7 @@ class ProductOptions extends Component {
   handleProductOptionClick(drawer) {
     return () => {
       if (drawer === CustomizationConstants.SIZE_CUSTOMIZE) {
-        this.showCreateFitIDModal();
+        this.showSelectSizeProfileModal();
       } else {
         this.props.activateCustomizationDrawer({
           productCustomizationDrawer: drawer,

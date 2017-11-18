@@ -5,7 +5,7 @@ import { string } from 'prop-types';
 
 // Components
 import ModalContainer from '../modal/ModalContainer';
-import CreateFitID from '../size-profile/CreateFitID';
+import SelectSizeProfile from '../size-profile/SelectSizeProfile';
 import Wizard from '../shared/wizard/Wizard';
 
 // Constants
@@ -34,7 +34,7 @@ class SizeProfileModal extends Component {
   injectModalStep() {
     const { activeModalId } = this.props;
     if (activeModalId === ModalConstants.SIZE_PROFILE_MODAL) {
-      return <CreateFitID />;
+      return <SelectSizeProfile />;
     } else if (activeModalId === ModalConstants.FIT_ID_MODAL) {
       return <Wizard />;
     }

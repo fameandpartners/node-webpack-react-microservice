@@ -23,14 +23,13 @@ function dispatchToProps(dispatch) {
   return { activateModal };
 }
 
-class CreateFitID extends Component {
+class SelectSizeProfile extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
   }
 
   handleCloseModal() {
-    console.log(this.props.activateModal);
     this.props.activateModal({ shouldAppear: false });
   }
 
@@ -50,12 +49,12 @@ class CreateFitID extends Component {
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="CreateFitID u-height--full">
+        <div className="SelectSizeProfile u-height--full">
           <div className="">
             <Button
-              className="CreateFitIDButton"
+              className="SelectSizeProfileButton"
               text="Use a fit I.D."
-              handleClick={this.handleFitIDClick  }
+              handleClick={this.handleFitIDClick}
             />
           </div>
           <div>
@@ -72,11 +71,11 @@ class CreateFitID extends Component {
   }
 }
 
-CreateFitID.propTypes = {
+SelectSizeProfile.propTypes = {
   activateModal: PropTypes.func.isRequired,
 };
 
-CreateFitID.defaultProps = {
+SelectSizeProfile.defaultProps = {
 };
 
-export default connect(stateToProps, dispatchToProps)(CreateFitID);
+export default connect(stateToProps, dispatchToProps)(SelectSizeProfile);
