@@ -162,11 +162,11 @@ const navigationLinks = {
     ],
     ABOUT: [
       {
-        text: 'About Us',
+        text: 'Who We Are',
         url: '/about',
       },
       {
-        text: 'Why Made to Order',
+        text: 'Why Made-to-Order',
         url: '/why-us',
       },
       {
