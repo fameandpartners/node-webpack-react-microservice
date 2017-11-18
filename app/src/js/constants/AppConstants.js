@@ -160,7 +160,7 @@ const navigationLinks = {
         url: '/the-anti-fast-fashion-shop',
       },
     ],
-    WHO_WE_ARE: [
+    ABOUT: [
       {
         text: 'About Us',
         url: '/about',
@@ -173,6 +173,12 @@ const navigationLinks = {
         text: 'Empowerment Initiatives',
         url: '/iequalchange',
       },
+    ],
+    COMMUNITY: [
+      {
+        text: 'Win an Internship',
+        url: '/it-girl',
+      },
       {
         text: 'Read the Fame Files',
         url: 'http://blog.fameandpartners.com/',
@@ -184,6 +190,10 @@ const navigationLinks = {
       {
         text: 'Meet the CEO',
         url: '/from-our-ceo',
+      },
+      {
+        text: 'Get $25 Off',
+        url: '/invite?nav',
       },
     ],
   },
