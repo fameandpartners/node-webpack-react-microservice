@@ -6,6 +6,7 @@ import { string } from 'prop-types';
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import SelectSizeProfile from '../size-profile/SelectSizeProfile';
+import StandardSizing from '../size-profile/StandardSizing';
 import Wizard from '../shared/wizard/Wizard';
 
 // Constants
@@ -35,7 +36,10 @@ class SizeProfileModal extends Component {
     const { activeModalId } = this.props;
     if (activeModalId === ModalConstants.SIZE_PROFILE_MODAL) {
       return <SelectSizeProfile />;
-    } else if (activeModalId === ModalConstants.FIT_ID_MODAL) {
+    } else if (activeModalId === ModalConstants.STANDARD_SIZING_MODAL) {
+      console.log('STANDARD SIZING');
+      return <StandardSizing />;
+    } else if (activeModalId === ModalConstants.START_FIT_ID_WIZARD) {
       return <Wizard />;
     }
     return null;
@@ -46,8 +50,9 @@ class SizeProfileModal extends Component {
       <ModalContainer
         modalContainerClass="grid-middle"
         modalIds={[
-          ModalConstants.FIT_ID_MODAL,
           ModalConstants.SIZE_PROFILE_MODAL,
+          ModalConstants.STANDARD_SIZING_MODAL,
+          ModalConstants.START_FIT_ID_WIZARD,
         ]}
       >
         <div

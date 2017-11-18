@@ -8,10 +8,10 @@ import { bindActionCreators } from 'redux';
 import ModalActions from '../../actions/ModalActions';
 
 // Constants
-import ModalConstants from '../../constants/ModalConstants';
+// import ModalConstants from '../../constants/ModalConstants';
 
 // Components
-import Button from '../generic/Button';
+// import Button from '../generic/Button';
 import Modal from '../modal/Modal';
 
 function stateToProps() {
@@ -23,7 +23,7 @@ function dispatchToProps(dispatch) {
   return { activateModal };
 }
 
-class SelectSizeProfile extends Component {
+class StandardSizing extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -31,14 +31,6 @@ class SelectSizeProfile extends Component {
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
-  }
-
-  handleSizeClick() {
-    this.props.activateModal({ modalId: ModalConstants.STANDARD_SIZING_MODAL });
-  }
-
-  handleFitIDClick() {
-    this.props.activateModal({ modalId: ModalConstants.START_FIT_ID_WIZARD });
   }
 
   render() {
@@ -49,33 +41,17 @@ class SelectSizeProfile extends Component {
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="SelectSizeProfile u-height--full">
-          <div className="">
-            <Button
-              className="SelectSizeProfileButton"
-              text="Use a fit I.D."
-              handleClick={this.handleFitIDClick}
-            />
-          </div>
-          <div>
-            <Button
-              className="SelectSizeButton"
-              text="Use standard sizing"
-              handleClick={this.handleSizeClick}
-            />
-          </div>
-
-        </div>
+        <h1>Select Sizing</h1>
       </Modal>
     );
   }
 }
 
-SelectSizeProfile.propTypes = {
+StandardSizing.propTypes = {
   activateModal: PropTypes.func.isRequired,
 };
 
-SelectSizeProfile.defaultProps = {
+StandardSizing.defaultProps = {
 };
 
-export default connect(stateToProps, dispatchToProps)(SelectSizeProfile);
+export default connect(stateToProps, dispatchToProps)(StandardSizing);
