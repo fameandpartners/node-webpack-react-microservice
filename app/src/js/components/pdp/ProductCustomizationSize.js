@@ -238,6 +238,8 @@ class ProductCustomizationStyle extends PureComponent {
       temporaryHeightValue,
       heightError,
       sizeError,
+      displaySaveButton,
+      containerClassNames,
     } = this.props;
     const SIZES = isUSSiteVersion ? US_SIZES : AU_SIZES;
 
@@ -248,9 +250,14 @@ class ProductCustomizationStyle extends PureComponent {
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        <div className="ProductCustomizationSize__layout-container u-center u-mt--normal u-mb--huge">
-          <div className="u-mb--big">
-            <h3 className="h4 u-mb--small">
+        <div
+          className={classnames(
+            'ProductCustomizationSize__layout-container',
+            containerClassNames,
+          )}
+        >
+          <div className="u-mb-big">
+            <h3 className="h4 u-mb-small">
               Let’s make it fit.
             </h3>
             <p className="h6 ProductCustomizationSize__sub-heading">
@@ -339,6 +346,16 @@ class ProductCustomizationStyle extends PureComponent {
                   View Size Guide
                 </p>
               </div>
+              { displaySaveButton ?
+                <div className="ButtonBox--medium-width ButtonBox--center">
+                  <Button
+                    className="SelectSizeProfile__button"
+                    text="Save"
+                    handleClick={this.handleSaveSelection}
+                  />
+                </div>
+                : null
+              }
             </div>
           </div>
         </div>
@@ -350,6 +367,7 @@ class ProductCustomizationStyle extends PureComponent {
 ProductCustomizationStyle.propTypes = {
   // Passed Props
   hasNavItems: PropTypes.bool.isRequired,
+  containerClassNames: PropTypes.string,
   // Redux Props
   activateModal: PropTypes.func.isRequired,
   hasFabrics: PropTypes.bool.isRequired,
@@ -360,6 +378,7 @@ ProductCustomizationStyle.propTypes = {
   temporaryHeightValue: PropTypes.number,
   heightError: PropTypes.bool,
   sizeError: PropTypes.bool,
+  displaySaveButton: PropTypes.bool,
   // Redux Actions
   changeCustomizationDrawer: PropTypes.func.isRequired,
   setSizeProfileError: PropTypes.func.isRequired,
@@ -370,12 +389,14 @@ ProductCustomizationStyle.propTypes = {
 
 ProductCustomizationStyle.defaultProps = {
   hasNavItems: true,
+  containerClassNames: 'u-mt-normal u-mb-huge',
   selectedColorId: '',
   temporaryDressSize: null,
   temporaryMeasurementMetric: null,
   temporaryHeightValue: null,
   heightError: false,
   sizeError: false,
+  displaySaveButton: false,
 };
 
 

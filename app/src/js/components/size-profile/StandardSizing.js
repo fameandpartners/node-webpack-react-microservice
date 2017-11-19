@@ -48,7 +48,11 @@ class StandardSizing extends Component {
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <ProductCustomizationSize hasNavItems={false} />
+        <ProductCustomizationSize
+          hasNavItems={false}
+          displaySaveButton
+          containerClassNames="u-mt-normal u-mb-big"
+        />
       </Modal>
     );
   }
