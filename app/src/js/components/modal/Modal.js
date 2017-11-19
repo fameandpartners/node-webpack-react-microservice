@@ -8,6 +8,7 @@ import noop from '../../libs/noop';
 
 // Components
 import CancelOut from '../shared/CancelOut';
+import BackArrow from '../shared/BackArrow';
 import Container from '../generic/Container';
 
 class Modal extends PureComponent {
@@ -40,11 +41,20 @@ class Modal extends PureComponent {
         >
           <div
             className={classnames(
+              'BackArrow__wrapper',
+            )}
+          >
+            <BackArrow onClick={handleCloseModal} />
+          </div>
+
+          <div
+            className={classnames(
              'CancelOut__wrapper',
-           )}
+            )}
           >
             <CancelOut onClick={handleCloseModal} />
           </div>
+
           <h3 className="h6">{headline}</h3>
         </div>
 

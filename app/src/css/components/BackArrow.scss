@@ -1,0 +1,18 @@
+.BackArrow__wrapper {
+  position: absolute;
+  top: 22px;
+  left: 20px;
+  z-index: $z-max;
+}
+
+.BackArrow {
+  cursor: pointer;
+  border: solid 000;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+  width: 11px;
+  height: 11px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}

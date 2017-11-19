@@ -7,7 +7,7 @@ import { string } from 'prop-types';
 import ModalContainer from '../modal/ModalContainer';
 import SelectSizeProfile from '../size-profile/SelectSizeProfile';
 import StandardSizing from '../size-profile/StandardSizing';
-import Wizard from '../shared/wizard/Wizard';
+import Wizard from '../wizard/Wizard';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
