@@ -37,7 +37,6 @@ class SizeProfileModal extends Component {
     if (activeModalId === ModalConstants.SIZE_PROFILE_MODAL) {
       return <SelectSizeProfile />;
     } else if (activeModalId === ModalConstants.STANDARD_SIZING_MODAL) {
-      console.log('STANDARD SIZING');
       return <StandardSizing />;
     } else if (activeModalId === ModalConstants.START_FIT_ID_WIZARD) {
       return <Wizard />;

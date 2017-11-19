@@ -8,6 +8,8 @@ import { bindActionCreators } from 'redux';
 import ModalActions from '../../actions/ModalActions';
 
 // Constants
+import ProductCustomizationSize from '../pdp/ProductCustomizationSize';
+import * as CustomizationActions from '../../actions/CustomizationActions';
 // import ModalConstants from '../../constants/ModalConstants';
 
 // Components
@@ -20,7 +22,12 @@ function stateToProps() {
 
 function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  return { activateModal };
+  const { productCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+
+  return {
+    activateModal,
+    productCustomizationDrawer,
+  };
 }
 
 class StandardSizing extends Component {
@@ -41,7 +48,7 @@ class StandardSizing extends Component {
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <h1>Select Sizing</h1>
+        <ProductCustomizationSize hasNavItems={false} />
       </Modal>
     );
   }
