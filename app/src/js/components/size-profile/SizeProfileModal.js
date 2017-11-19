@@ -47,15 +47,16 @@ class SizeProfileModal extends Component {
   render() {
     return (
       <ModalContainer
-        modalContainerClass="grid-middle"
+        modalContainerClass="SizeProfileModalContainer grid-middle"
         modalIds={[
           ModalConstants.SIZE_PROFILE_MODAL,
           ModalConstants.STANDARD_SIZING_MODAL,
           ModalConstants.START_FIT_ID_WIZARD,
         ]}
+        flexWidth
       >
         <div
-          className="SizeProfileModal u-width--full u-height--full"
+          className="SizeProfileModal u-width-big"
         >
           { this.injectModalStep() }
         </div>

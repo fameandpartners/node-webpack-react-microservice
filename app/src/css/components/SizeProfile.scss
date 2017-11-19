@@ -1,13 +1,24 @@
+// .SizeProfileModalContainer {
+
+// }
+
+.u-width-big {
+  width: 700px;
+}
+
 .full-padding-big {
   padding: 50px;
 }
 
-.SelectSizeButton {
+.SelectSize__button {
   background-color: '#E8E8E8';
   color: '#000';
-  margin: 20px;
 }
 
-.SelectSizeProfileButton {
-  margin: 20px;
+.ButtonBox--medium-width {
+  width: 300px;
+}
+
+.ButtonBox--center {
+  margin: 20px auto;
 }

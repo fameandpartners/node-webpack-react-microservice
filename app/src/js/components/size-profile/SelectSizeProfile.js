@@ -49,17 +49,17 @@ class SelectSizeProfile extends Component {
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="SelectSizeProfile u-height--full">
-          <div className="">
+        <div className="SelectSizeProfile">
+          <div className="ButtonBox--medium-width ButtonBox--center">
             <Button
-              className="SelectSizeProfileButton"
+              className="SelectSizeProfile__button"
               text="Use a fit I.D."
               handleClick={this.handleFitIDClick}
             />
           </div>
-          <div>
+          <div className="ButtonBox--medium-width ButtonBox--center">
             <Button
-              className="SelectSizeButton"
+              className="SelectSize__button"
               text="Use standard sizing"
               handleClick={this.handleSizeClick}
             />
