@@ -68,12 +68,14 @@ class HeaderMobile extends Component {
             </div>
             <div className="col">
               { headerTitle
-                ? <h1 className="h4">{headerTitle}</h1>
+                ? <h1 className="h4 u-text-align--center">{headerTitle}</h1>
                 :
-                <FameLogo
-                  width="200px"
-                  height="26px"
-                />
+                <a href="/">
+                  <FameLogo
+                    width="200px"
+                    height="26px"
+                  />
+                </a>
               }
             </div>
             <ul className="col-2 u-text-align--right">

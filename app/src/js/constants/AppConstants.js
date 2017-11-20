@@ -98,6 +98,9 @@ const navigationLinks = {
         url: '/dresses/prom',
       },
       {
+        type: 'divider',
+      },
+      {
         text: 'View All',
         url: '/dresses',
       },
@@ -141,7 +144,7 @@ const navigationLinks = {
     ],
     COLLECTIONS: [
       {
-        text: 'Holiday Party Collection',
+        text: 'Holiday Party',
         url: '/holiday-party-survival-kit',
       },
       {
@@ -149,30 +152,32 @@ const navigationLinks = {
         url: '/high-contrast',
       },
       {
-        text: 'Modern Evening',
-        url: '/the-modern-evening-collection',
+        text: 'Evening Shop',
+        url: '/the-evening-shop',
       },
       {
-        text: 'Inside/Out',
-        url: '/inside-out-collection',
-      },
-      {
-        text: 'Bespoke Bridal',
-        url: '/bespoke-bridal-collection',
+        text: 'Anti-Fast Fashion Shop',
+        url: '/the-anti-fast-fashion-shop',
       },
     ],
-    WHO_WE_ARE: [
+    ABOUT: [
       {
-        text: 'About Us',
+        text: 'Who We Are',
         url: '/about',
       },
       {
-        text: 'Why Made to Order',
+        text: 'Why Made-to-Order',
         url: '/why-us',
       },
       {
         text: 'Empowerment Initiatives',
         url: '/iequalchange',
+      },
+    ],
+    COMMUNITY: [
+      {
+        text: 'Win an Internship',
+        url: '/it-girl',
       },
       {
         text: 'Read the Fame Files',
@@ -185,6 +190,10 @@ const navigationLinks = {
       {
         text: 'Meet the CEO',
         url: '/from-our-ceo',
+      },
+      {
+        text: 'Get $25 Off',
+        url: '/invite?nav',
       },
     ],
   },

@@ -16,10 +16,6 @@ import { NAVIGATION_LINKS } from '../../../constants/AppConstants';
 import NavLinkCol from './NavLinkCol';
 
 class WhoWeAreNavigation extends PureComponent {
-  splitLinks(remainder) {
-    return NAVIGATION_LINKS.WHO_WE_ARE.filter((l, i) => i % 2 === remainder);
-  }
-
   render() {
     const { breakpoint } = this.props;
     return (
@@ -29,10 +25,12 @@ class WhoWeAreNavigation extends PureComponent {
       >
         <div className="WhoWeAreNavigation__link-container u-center grid">
           <NavLinkCol
-            links={this.splitLinks(1)}
+            colTitle="About"
+            links={NAVIGATION_LINKS.ABOUT}
           />
           <NavLinkCol
-            links={this.splitLinks(0)}
+            colTitle="Community"
+            links={NAVIGATION_LINKS.COMMUNITY}
           />
           { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
           <div className="WhoWeAreNavigation__ad">

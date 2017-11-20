@@ -80,10 +80,12 @@ class Header extends Component {
               </li>
             </ul>
             <div className="col-2 u-text-align--center">
-              <FameLogo
-                width="200px"
-                height="26px"
-              />
+              <a href="/">
+                <FameLogo
+                  width="200px"
+                  height="26px"
+                />
+              </a>
             </div>
 
             <HeaderActionButtons />

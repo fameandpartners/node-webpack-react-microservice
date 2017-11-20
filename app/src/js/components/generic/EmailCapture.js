@@ -110,7 +110,7 @@ class EmailCapture extends PureComponent {
             display: signupSuccess ? 'none' : 'flex',
           }}
         >
-          <div className="col-7_sm-9 padding--none">
+          <div className="col-9 padding--none">
             <div>
               <Input
                 id="footer-email"
@@ -126,7 +126,7 @@ class EmailCapture extends PureComponent {
             <Button
               className="padding--none"
               handleClick={this.handleSignupClick}
-              text="Submit"
+              text="Join Now"
             />
           </div>
         </div>

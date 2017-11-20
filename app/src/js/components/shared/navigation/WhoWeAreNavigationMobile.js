@@ -42,11 +42,13 @@ class WhoWeAreNavigationMobile extends PureComponent {
           <div className="ShopAllNavigationMobile__links u-flex--1">
             <NavLinkCol
               colClass="col-4_sm-6_md-3"
-              links={this.splitLinks(1)}
+              colTitle="About"
+              links={NAVIGATION_LINKS.ABOUT}
             />
             <NavLinkCol
               colClass="col-4_sm-6_md-3"
-              links={this.splitLinks(0)}
+              colTitle="Community"
+              links={NAVIGATION_LINKS.COMMUNITY}
             />
           </div>
         </div>
