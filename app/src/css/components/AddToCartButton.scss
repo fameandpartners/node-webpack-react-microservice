@@ -1,0 +1,7 @@
+.AddToCartButton--clique {
+  background: $c-clique-blue;
+
+  &:hover {
+    background: darken($c-clique-blue, 10%);
+  }
+}

@@ -4,6 +4,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
+import classnames from 'classnames';
 
 // Utilities
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
@@ -31,6 +32,9 @@ import ModalConstants from '../../constants/ModalConstants';
 // temp. helpers (for Rails merge)
 import { addToCart } from '../../utilities/cart-helper';
 import win from '../../polyfills/windowPolyfill';
+
+// CSS
+import '../../../css/components/AddToCartButton.scss';
 
 function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
@@ -168,7 +172,7 @@ class AddToCartButton extends Component {
   generateText() {
     const { isActive, showTotal } = this.props;
     if (this.state.inShoppingSpree) {
-      return 'Add to Clique';
+      return 'Add to the Social Experience';
     }
 
     if (!isActive) {
@@ -183,15 +187,22 @@ class AddToCartButton extends Component {
 
   render() {
     const { addToCartLoading, isActive } = this.props;
+    const {
+      inShoppingSpree,
+    } = this.state;
+
     return (
       <Button
         tall
         isLoading={addToCartLoading}
         disabled={!isActive}
         uppercase={isActive}
-        className="AddToCartButton"
         text={this.generateText()}
         handleClick={this.handleAddButtonClick}
+        className={classnames(
+          'AddToCartButton',
+          { 'AddToCartButton--clique': inShoppingSpree },
+        )}
       />
     );
   }
