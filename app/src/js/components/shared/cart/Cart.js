@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classnames from 'classnames';
+
 import { formatCents } from '../../../utilities/accounting';
 import noop from '../../../libs/noop';
 
@@ -11,17 +13,28 @@ import Button from '../../generic/Button';
 import CancelOut from '../CancelOut';
 // import ProductCrossSell from '../../pdp/ProductCrossSell';
 
+// Constants
+import { UNITS } from '../../../constants/ProductConstants';
+
 // Actions
 import * as CartActions from '../../../actions/CartActions';
 
-// Utilities
-import objnoop from '../../../libs/objnoop';
+import {
+  isExtremeLightLuminance,
+  generateBackgroundValueFromColor,
+} from '../../../utilities/color';
 
 // temp. helper
 import { removeFromCart } from '../../../utilities/cart-helper';
 
 // CSS
 import '../../../../css/components/Cart.scss';
+
+function stateToProps({ $$appState }) {
+  return {
+    siteVersion: $$appState.get('siteVersion'),
+  };
+}
 
 function dispatchToProps(dispatch) {
   const {
@@ -48,7 +61,9 @@ class Cart extends Component {
           const lineItemTotal
             = currLineItem.color.centsTotal
             + currLineItem.productCentsBasePrice
-            + currLineItem.addons.reduce((subTotal, c) => subTotal + c.centsTotal, 0);
+            + currLineItem.addons.reduce(
+              (subTotal, c) => subTotal + parseInt(c.display_price.money.fractional, 10), 0,
+            );
           return prevTotal + lineItemTotal;
         }, 0,
       );
@@ -76,17 +91,89 @@ class Cart extends Component {
     });
   }
 
+  addonNamePresenter(nameStr) {
+    const strParts = nameStr.split('-');
+    if (strParts.length > 1) {
+      return strParts.map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(' ');
+    }
+    return nameStr;
+  }
+
+  generateAddonSummary(addons) {
+    return (
+      <ul>
+        { addons.map(a => (
+          <li key={a.name}>{this.addonNamePresenter(a.name)}</li>
+        ))}
+      </ul>
+    );
+  }
+
+  generateColorSelectionNode(color) {
+    const {
+      centsTotal,
+      presentation,
+      hexValue,
+      patternUrl,
+    } = color;
+    const background = generateBackgroundValueFromColor({
+      hexValue,
+      patternUrl,
+    });
+
+    return (
+      <span>
+        <span>{presentation}</span>&nbsp;
+        { centsTotal
+          ? <span>+{formatCents(centsTotal, 0)}</span>
+          : null
+        }
+        <span
+          style={{ background }}
+          className={classnames(
+            'ProductOptions__color-swatch u-display--inline-block',
+            { 'ProductOptions__color-swatch--extreme-light': isExtremeLightLuminance({ hexValue }) },
+          )}
+        />
+      </span>
+    );
+  }
+
+  generateSizeSummary(lineItem) {
+    const { siteVersion } = this.props;
+    const {
+      heightUnit,
+      heightValue,
+      sizePresentationAU,
+      sizePresentationUS,
+    } = lineItem;
+    const sizePresentation = siteVersion.toLowerCase() === 'usa'
+      ? sizePresentationUS
+      : sizePresentationAU;
+    let sizingInformation = '';
+
+    if (heightUnit === UNITS.INCH) {
+      // INCH
+      const ft = Math.floor(heightValue / 12);
+      const inch = heightValue % 12;
+      sizingInformation = `${ft}ft ${inch}in / ${sizePresentation}`;
+    } else {
+      // CM
+      sizingInformation = `${heightValue} ${heightUnit.toLowerCase()} / ${sizePresentation}`;
+    }
+
+    return sizingInformation;
+  }
+
+
   generateLineItems() {
     const { lineItems } = this.props;
 
     return lineItems.map((lineItem) => {
       const {
         id,
-        color,
         productCentsBasePrice,
         productImage,
-        // productId, // TODO: @elgrecode, we'll need to compute something more that incorporates
-        // color and addons selections, BELOW Math.random() will be replaced with a UID
         productTitle,
       } = lineItem;
       return (
@@ -104,14 +191,17 @@ class Cart extends Component {
             <img className="u-width--full" alt="dress1" src={productImage} />
           </div>
           <div className="col-7 u-text-align--left">
-            <span className="Cart__line-description">
-              <span>{productTitle}</span> - <span>{formatCents(productCentsBasePrice, 2)}</span>
+            <span className="Cart__line-description u-bold">
+              <span>{productTitle}</span>&nbsp;<span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>
             <span className="Cart__line-description">
-              {color.presentation}
+              {this.generateColorSelectionNode(lineItem.color)}
             </span>
             <span className="Cart__line-description">
-              {lineItem.addons.length}&nbsp;Addon{lineItem.addons.length === 1 ? '' : 's'}
+              {this.generateAddonSummary(lineItem.addons)}
+            </span>
+            <span className="Cart__line-description">
+              Size: {this.generateSizeSummary(lineItem)}
             </span>
           </div>
         </div>
@@ -145,7 +235,7 @@ class Cart extends Component {
 
           <div className="u-flex u-flex--1">
             <div className="u-overflow-y--scroll">
-              <div className="Cart__line-item-wrapper">
+              <div className="Cart__line-item-wrapper u-overflow-x--hidden">
                 { this.generateLineItems() }
               </div>
               {/* <ProductCrossSell complementaryProducts={complementaryProducts} /> */}
@@ -159,6 +249,8 @@ class Cart extends Component {
 }
 
 Cart.propTypes = {
+  // Redux Props
+  siteVersion: PropTypes.string.isRequired,
   // complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
   //   centsPrice: PropTypes.number,
   //   smallImg: PropTypes.string,
@@ -185,4 +277,4 @@ Cart.propTypes = {
   setCartContents: PropTypes.func.isRequired,
 };
 
-export default connect(objnoop, dispatchToProps)(Cart);
+export default connect(stateToProps, dispatchToProps)(Cart);

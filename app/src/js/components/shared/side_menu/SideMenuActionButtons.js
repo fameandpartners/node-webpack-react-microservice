@@ -153,4 +153,8 @@ SideMenuActionButtons.propTypes = {
   handleMenuActionClick: PropTypes.func.isRequired,
 };
 
+SideMenuActionButtons.defaultProps = {
+  firstName: null,
+};
+
 export default connect(stateToProps)(SideMenuActionButtons);

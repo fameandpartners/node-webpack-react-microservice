@@ -30,6 +30,11 @@ function transformCartDataLineItems(lineItems) {
     productCentsBasePrice: (parseInt(li.price.amount, 10) * 100),
     productImage: li.image.original,
     productTitle: li.name,
+    heightUnit: li.height_unit,
+    heightValue: li.height_value,
+    sizePresentationAU: li.size.presentation_au,
+    sizePresentationUS: li.size.presentation_us,
+    sizeNumber: li.size.sort_key,
     color: {
       id: li.color.id,
       centsTotal: li.color.custom_color ? 1600 : 0,
