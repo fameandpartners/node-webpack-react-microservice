@@ -56,10 +56,10 @@ class Cart extends Component {
     const { lineItems } = this.props;
     if (lineItems.length > 0) {
       // Reduces subTotal based on base price, colors, and addons chosen
-      return lineItems.reduce((prevTotal, currLineItem) => {
-        console.log('currLineItem', currLineItem.productCentsBasePrice);
-        return prevTotal + currLineItem.productCentsBasePrice;
-      }, 0);
+      return lineItems.reduce(
+        (prevTotal, currLineItem) => prevTotal + currLineItem.productCentsBasePrice,
+        0,
+      );
     }
     return '';
   }
