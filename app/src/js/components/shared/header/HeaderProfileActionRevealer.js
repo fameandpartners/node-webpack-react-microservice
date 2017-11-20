@@ -92,7 +92,7 @@ class HeaderActionRevealer extends Component {
                               className="h5 link link--no-underline"
                               href="/logout"
                             >
-                                Log&nbsp;out
+                                Log&nbsp;Out
                             </a>
                           </span>
                         </div>
@@ -113,7 +113,7 @@ class HeaderActionRevealer extends Component {
                 )}
                 onClick={this.handleRevealProfileActions}
               >
-                Log in / Sign up
+                Log In / Sign Up
               </span>
             </a>
 

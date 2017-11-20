@@ -66,7 +66,7 @@ class HeaderMobile extends Component {
                 handleClick={this.handleMenuClick}
               />
             </div>
-            <div className="col">
+            <div className="col u-text-align--center">
               { headerTitle
                 ? <h1 className="h4 u-text-align--center">{headerTitle}</h1>
                 :
