@@ -8,6 +8,7 @@ import win from '../../polyfills/windowPolyfill';
 
 // Components
 import EmailCapture from '../generic/EmailCapture';
+import SocialLinks from '../generic/SocialLinks';
 
 // CSS
 import '../../../css/components/Footer.scss';
@@ -170,6 +171,10 @@ class Footer extends PureComponent {
               className="u-text-align--left"
               service="bronto"
             />
+
+            <div className="Footer__social-icon-row u-mt-normal">
+              <SocialLinks />
+            </div>
           </div>
         </div>
         <div className="layout-container grid-noGutter">
