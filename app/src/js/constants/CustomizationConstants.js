@@ -28,9 +28,9 @@ const productCustomizationDrawers = assign({},
 );
 
 const productCustomizationHeadlines = {
-  COLOR_HEADLINE: 'Color',
-  STYLE_HEADLINE: 'Customizations',
-  SIZE_HEADLINE: 'Size',
+  COLOR_HEADLINE: 'Choose your Color',
+  STYLE_HEADLINE: 'Customize the Design',
+  SIZE_HEADLINE: 'Select your Size',
 };
 
 export default assign({},

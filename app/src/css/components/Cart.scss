@@ -1,18 +1,33 @@
+.Cart {
+  margin-top: 30px;
+}
+
 .CartDrawer__wrapper {
   top: 0;
   right: 0;
   position: fixed;
   height: 100%;
-  width: 500px;
-  transform: translateX(500px);
+  z-index: 1000;
+  transform: translateX(100%);
+  background: $c-white;
+  width: 320px;
+
+  @include sm {
+    width: 500px;
+  }
 }
 
 .CartDrawer__header {
-  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
   padding-top: 17px;
   padding-bottom: 20px;
   border-bottom: 1px solid $c-light-gray;
   box-shadow: 0 3px 2px -2px $c-super-light-gray;
+}
+
+.Cart__single-product-description {
+  position: relative;
 }
 
 .Cart__line-description {
@@ -21,10 +36,27 @@
 }
 
 .Cart__layout-container {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include sm {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
-.Cart__subtotal-price {
-  margin-left: 30px;
+.Cart__product-remove,
+.CartDrawer__hidden-close {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.CartDrawer__hidden-close {
+  left: 0;
+}
+
+.Cart__product-remove {
+  right: 0;
 }

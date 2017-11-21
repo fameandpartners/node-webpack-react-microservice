@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 
+// CSS
+import '../../../css/components/SearchBar.scss';
+
 // Components
 import Input from '../form/Input';
 
@@ -9,6 +12,13 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+  }
+
+  handleKeyPress(evt, val) {
+    if (evt.which === 13 || evt.keyCode === 13) {
+      evt.preventDefault();
+      this.props.onSubmit(evt, val);
+    }
   }
 
   render() {
@@ -22,7 +32,9 @@ class SearchBar extends Component {
           focusOnMount
           lineInput
           indent
+          placeholder="Search"
           onBlur={onBlur}
+          onKeyPress={this.handleKeyPress}
         />
       </div>
     );
@@ -31,6 +43,7 @@ class SearchBar extends Component {
 
 SearchBar.propTypes = {
   onBlur: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

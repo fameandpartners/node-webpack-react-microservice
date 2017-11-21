@@ -1,8 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable array-callback-return */
-/* eslint-disable radix */
+import request from 'superagent';
 
 // polyfills
 import win from '../polyfills/windowPolyfill';
@@ -14,9 +11,9 @@ import win from '../polyfills/windowPolyfill';
 function getDressVariantId(variants, color, size) {
   let id;
 
-  variants.map((val) => {
-    if (parseInt(val.table.color_id) === parseInt(color)
-      && parseInt(val.table.size_id) === parseInt(size)) {
+  variants.forEach((val) => {
+    if (parseInt(val.table.color_id, 10) === parseInt(color, 10)
+      && parseInt(val.table.size_id, 10) === parseInt(size, 10)) {
       id = val.table.id;
     }
   });
@@ -80,14 +77,29 @@ function transformLineItem(lineItem, auSite) {
 }
 
 export function addToCart(item, auSite) {
-  if (win.app && win.app.shopping_cart) {
-    const transformedLineItem = transformLineItem(item, auSite);
-    console.log(transformedLineItem);
+  // TODO: Initalize superagent with default REST API Json values
+  const transformedLineItem = transformLineItem(item, auSite);
+  const csrf = win.document.querySelector('meta[name="csrf-token"]');
+  const token = csrf ? csrf.content : '';
 
-    win.app.shopping_cart.addProduct(transformedLineItem);
-  }
+  return request
+    .post('/user_cart/products')
+    .send(transformedLineItem)
+    .set('X-CSRF-Token', token)
+    .set('Accept', 'application/json');
+}
+
+export function removeFromCart(itemId) {
+  const csrf = win.document.querySelector('meta[name="csrf-token"]');
+  const token = csrf ? csrf.content : '';
+
+  return request
+    .delete(`/user_cart/products/${itemId}`)
+    .set('X-CSRF-Token', token)
+    .set('Accept', 'application/json');
 }
 
 export default {
   addToCart,
+  removeFromCart,
 };

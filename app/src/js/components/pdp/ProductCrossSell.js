@@ -12,13 +12,18 @@ class ProductCrossSell extends PureComponent {
         <div className="ProductCrossSell__wrapper grid-12">
           { complementaryProducts.map(p => (
             <div key={p.productId} className="col-6">
-              <img className="u-width--full" alt="dress1" src={p.smallImg} />
+              <a href={p.url}>
+                <img className="u-width--full" alt="dress1" src={p.smallImg} />
+              </a>
               <span className="ProductCrossSell__title">{p.productTitle}</span>
               <span className="ProductCrossSell__price display--block">
                 {formatCents(p.centsPrice, 0)}
               </span>
-              <span className="ProductCrossSell__cta link display--block">
-                Add to Cart
+              <span
+                className="ProductCrossSell__cta link display--block"
+                onClick={() => console.log(`Add Complementary w/ID: ${p.productId} to cart...`)}
+              >
+                  Add to Cart
               </span>
             </div>
             ))}
@@ -32,7 +37,7 @@ ProductCrossSell.propTypes = {
   complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
     centsPrice: PropTypes.number,
     smallImg: PropTypes.string,
-    productId: PropTypes.string,
+    productId: PropTypes.number,
     productTitle: PropTypes.string,
     url: PropTypes.string,
   })).isRequired,

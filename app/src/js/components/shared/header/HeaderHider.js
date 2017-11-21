@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import raf from 'raf';
 import autoBind from 'react-autobind';
 import shouldUpdate from '../../../libs/HeaderHiderShouldUpdate';
-import window from '../../../polyfills/windowPolyfill';
+import win from '../../../polyfills/windowPolyfill';
 import noop from '../../../libs/noop';
 
 // CSS
@@ -37,23 +37,23 @@ class HeaderHider extends Component {
       return this.props.parent().scrollTop;
     }
     return (
-      window.document.documentElement
-      || window.document.body.parentNode
-      || window.document.body
+      win.document.documentElement
+      || win.document.body.parentNode
+      || win.document.body
     ).scrollTop;
   }
 
   getViewportHeight() {
     return (
-      window.innerHeight
-      || window.document.documentElement.clientHeight
-      || window.document.body.clientHeight
+      win.innerHeight
+      || win.document.documentElement.clientHeight
+      || win.document.body.clientHeight
     );
   }
 
   getDocumentHeight() {
-    const body = window.document.body;
-    const documentElement = window.document.documentElement;
+    const body = win.document.body;
+    const documentElement = win.document.documentElement;
 
     return Math.max(
       body.scrollHeight, documentElement.scrollHeight,
@@ -80,7 +80,7 @@ class HeaderHider extends Component {
   getScrollerPhysicalHeight() {
     const parent = this.props.parent();
 
-    return (parent === window || parent === window.document.body)
+    return (parent === win || parent === win.document.body)
     ? this.getViewportHeight()
     : this.getElementPhysicalHeight(parent);
   }
@@ -88,7 +88,7 @@ class HeaderHider extends Component {
   getScrollerHeight() {
     const parent = this.props.parent();
 
-    return (parent === window || parent === window.document.body)
+    return (parent === win || parent === win.document.body)
     ? this.getDocumentHeight()
     : this.getElementHeight(parent);
   }
@@ -193,7 +193,7 @@ class HeaderHider extends Component {
 
   componentWillUnmount() {
     this.props.parent().removeEventListener('scroll', this.handleScroll);
-    window.removeEventListener('scroll', this.handleScroll);
+    win.removeEventListener('scroll', this.handleScroll);
   }
 
 
@@ -206,7 +206,7 @@ class HeaderHider extends Component {
       top: 0,
       left: 0,
       right: 0,
-      zIndex: 1,
+      zIndex: 2,
       WebkitTransform: `translateY(${this.state.translateY})`,
       MsTransform: `translateY(${this.state.translateY})`,
       transform: `translateY(${this.state.translateY})`,
@@ -276,7 +276,7 @@ HeaderHider.propTypes = {
 };
 
 HeaderHider.defaultProps = {
-  parent: () => window,
+  parent: () => win,
   disableInlineStyles: false,
   disable: false,
   upTolerance: 5,

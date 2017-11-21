@@ -1,4 +1,16 @@
 .WhoWeAreNavigation__link-container {
   padding-top: 15px;
   max-width: 450px;
+
+  @include md {
+    max-width: 750px;
+  }
+}
+
+.WhoWeAreNavigation__ad {
+  width: 280px;
+  height: 256px;
+  margin-bottom: 20px;
+  margin-left: 60px;
+  right: 0;
 }

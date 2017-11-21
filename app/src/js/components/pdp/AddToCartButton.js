@@ -58,10 +58,14 @@ function stateToProps(state) {
 }
 
 function dispatchToProps(dispatch) {
-  const { activateCartDrawer, addItemToCart } = bindActionCreators(CartActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const { setAppLoadingState } = bindActionCreators(AppActions, dispatch);
 
+  const {
+    activateCartDrawer,
+    addItemToCart,
+    setCartContents,
+  } = bindActionCreators(CartActions, dispatch);
   const {
     setSizeProfileError,
     activateCustomizationDrawer,
@@ -71,6 +75,7 @@ function dispatchToProps(dispatch) {
     activateCartDrawer,
     activateModal,
     addItemToCart,
+    setCartContents,
     setAppLoadingState,
     setSizeProfileError,
     activateCustomizationDrawer,
@@ -102,6 +107,25 @@ class AddToCartButton extends Component {
       colorCentsTotal,
       selectedAddonOptions,
       expressMakingSelected,
+    });
+  }
+
+  handleAddToBagCallback(req) {
+    const {
+      activateCartDrawer,
+      setAppLoadingState,
+      setCartContents,
+    } = this.props;
+    req.end((err, res) => {
+      setAppLoadingState({ loadingId: null });
+      if (err) {
+        // eslint-disable-next-line
+        return console.warn('error adding something to the cart', err);
+      }
+
+      setCartContents({ cart: res.body });
+      activateCartDrawer({ cartDrawerOpen: true });
+      return null;
     });
   }
 
@@ -140,7 +164,7 @@ class AddToCartButton extends Component {
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
       setAppLoadingState({ loadingId: LOADING_IDS.ADD_TO_CART_LOADING });
-      addToCart(lineItem, auSite);
+      this.handleAddToBagCallback(addToCart(lineItem, auSite));
     }
   }
 
@@ -224,11 +248,13 @@ AddToCartButton.propTypes = {
   selectedAddonOptions: PropTypes.array,
   // Redux Actions
   // addItemToCart: PropTypes.func.isRequired,
+  activateCartDrawer: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func,
   activateModal: PropTypes.func,
   setAppLoadingState: PropTypes.func.isRequired,
   heightValue: PropTypes.number,
   setSizeProfileError: PropTypes.func.isRequired,
+  setCartContents: PropTypes.func.isRequired,
   sizeValue: PropTypes.number,
   breakpoint: PropTypes.string,
 };

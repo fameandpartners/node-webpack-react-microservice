@@ -15,7 +15,10 @@ import '../../../../css/components/HeaderMobile.scss';
 import Hamburger from './Hamburger';
 
 // Assets
-import ShoppingBagIcon from '../../../../svg/i-shopping-bag.svg';
+import ShoppingBagIcon from '../../../../svg/i-shopping-bag-2.svg';
+
+// Assets
+import FameLogo from '../../../../svg/i-fame-logo.svg';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -55,7 +58,7 @@ class HeaderMobile extends Component {
     const { cartItemCount, headerTitle } = this.props;
     return (
       <header className="Header HeaderMobile u-width--full">
-        <div className="layout-container">
+        <div className="layout-container typography">
           <nav className="grid-noGutter">
             <div className="col-2">
               <Hamburger
@@ -63,8 +66,17 @@ class HeaderMobile extends Component {
                 handleClick={this.handleMenuClick}
               />
             </div>
-            <div className="col">
-              {headerTitle}
+            <div className="col u-text-align--center">
+              { headerTitle
+                ? <h1 className="h4 u-text-align--center">{headerTitle}</h1>
+                :
+                <a href="/">
+                  <FameLogo
+                    width="200px"
+                    height="26px"
+                  />
+                </a>
+              }
             </div>
             <ul className="col-2 u-text-align--right">
               <li onClick={this.handleShoppingBagClick} className="Header__action">

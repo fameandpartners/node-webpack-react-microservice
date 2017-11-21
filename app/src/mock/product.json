@@ -1,254 +1,150 @@
 {
   "paths": {
-    "79": "/dresses/dress-tilbury-dress-1109?color=pale-blue",
-    "82": "/dresses/dress-tilbury-dress-1109?color=champagne",
-    "default": "/dresses/dress-tilbury-dress-1109"
+    "26": "/dresses/dress-the-tiegs-dress-1512?color=red",
+    "default": "/dresses/dress-the-tiegs-dress-1512"
   },
   "product": {
-    "id": 1109,
-    "sku": "fp2006",
-    "name": "Tilbury Dress",
+    "price": {
+      "price": {
+        "amount": "249.0",
+        "currency": "USD",
+        "id": 81415,
+        "variant_id": 50219
+      }
+    },
     "images": [
       {
         "table": {
-          "id": 37551,
+          "id": 36109,
+          "position": 0,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/original/fp2318-red-front.jpg?1494624920",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/product/fp2318-red-front.jpg?1494624920",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/large/fp2318-red-front.jpg?1494624920",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/xlarge/fp2318-red-front.jpg?1494624920",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/small/fp2318-red-front.jpg?1494624920",
+          "color": "red",
+          "color_id": 26,
+          "size": null,
+          "size_id": null
+        }
+      },
+      {
+        "table": {
+          "id": 36107,
           "position": 1,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/original/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/product/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/large/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/xlarge/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/small/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "color": "champagne",
-          "color_id": 82,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36107/original/fp2318-red-1.jpg?1494624918",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36107/product/fp2318-red-1.jpg?1494624918",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36107/large/fp2318-red-1.jpg?1494624918",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36107/xlarge/fp2318-red-1.jpg?1494624918",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36107/small/fp2318-red-1.jpg?1494624918",
+          "color": "red",
+          "color_id": 26,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37552,
+          "id": 36110,
           "position": 2,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/original/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/product/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/large/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/xlarge/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/small/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "color": "champagne",
-          "color_id": 82,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36110/original/fp2318-red-2.jpg?1494624921",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36110/product/fp2318-red-2.jpg?1494624921",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36110/large/fp2318-red-2.jpg?1494624921",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36110/xlarge/fp2318-red-2.jpg?1494624921",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36110/small/fp2318-red-2.jpg?1494624921",
+          "color": "red",
+          "color_id": 26,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37553,
+          "id": 36108,
           "position": 3,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/original/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/product/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/large/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/xlarge/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/small/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "color": "champagne",
-          "color_id": 82,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36108/original/fp2318-red-3.jpg?1494624919",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36108/product/fp2318-red-3.jpg?1494624919",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36108/large/fp2318-red-3.jpg?1494624919",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36108/xlarge/fp2318-red-3.jpg?1494624919",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36108/small/fp2318-red-3.jpg?1494624919",
+          "color": "red",
+          "color_id": 26,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37550,
+          "id": 36103,
           "position": 4,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/original/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/product/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/large/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/xlarge/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/small/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "color": "champagne",
-          "color_id": 82,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36103/original/fp2318-red-4.jpg?1494624916",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36103/product/fp2318-red-4.jpg?1494624916",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36103/large/fp2318-red-4.jpg?1494624916",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36103/xlarge/fp2318-red-4.jpg?1494624916",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36103/small/fp2318-red-4.jpg?1494624916",
+          "color": "red",
+          "color_id": 26,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37548,
+          "id": 36105,
           "position": 5,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37548/original/FP2006-CHAMPAGNE-CROP.jpg?1499967226",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37548/product/FP2006-CHAMPAGNE-CROP.jpg?1499967226",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37548/large/FP2006-CHAMPAGNE-CROP.jpg?1499967226",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37548/xlarge/FP2006-CHAMPAGNE-CROP.jpg?1499967226",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37548/small/FP2006-CHAMPAGNE-CROP.jpg?1499967226",
-          "color": "champagne",
-          "color_id": 82,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36105/original/fp2318-red-front-crop.jpg?1494624917",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36105/product/fp2318-red-front-crop.jpg?1494624917",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36105/large/fp2318-red-front-crop.jpg?1494624917",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36105/xlarge/fp2318-red-front-crop.jpg?1494624917",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36105/small/fp2318-red-front-crop.jpg?1494624917",
+          "color": "red",
+          "color_id": 26,
           "size": null,
           "size_id": null
         }
       },
       {
         "table": {
-          "id": 37549,
+          "id": 36104,
+          "position": 5,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36104/original/fp2318-red-5.jpg?1494624917",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36104/product/fp2318-red-5.jpg?1494624917",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36104/large/fp2318-red-5.jpg?1494624917",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36104/xlarge/fp2318-red-5.jpg?1494624917",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36104/small/fp2318-red-5.jpg?1494624917",
+          "color": "red",
+          "color_id": 26,
+          "size": null,
+          "size_id": null
+        }
+      },
+      {
+        "table": {
+          "id": 36106,
           "position": 6,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37549/original/FP2006-CHAMPAGNE-FRONT-CROP.jpg?1499967226",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37549/product/FP2006-CHAMPAGNE-FRONT-CROP.jpg?1499967226",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37549/large/FP2006-CHAMPAGNE-FRONT-CROP.jpg?1499967226",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37549/xlarge/FP2006-CHAMPAGNE-FRONT-CROP.jpg?1499967226",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37549/small/FP2006-CHAMPAGNE-FRONT-CROP.jpg?1499967226",
-          "color": "champagne",
-          "color_id": 82,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 37554,
-          "position": 7,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/original/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/product/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/large/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/xlarge/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/small/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "color": "champagne",
-          "color_id": 82,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31545,
-          "position": 8,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/original/fp2006-pale_blue-1.jpg?1471292831",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/product/fp2006-pale_blue-1.jpg?1471292831",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/large/fp2006-pale_blue-1.jpg?1471292831",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/xlarge/fp2006-pale_blue-1.jpg?1471292831",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/small/fp2006-pale_blue-1.jpg?1471292831",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31225,
-          "position": 9,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/original/fp2006-pale_blue-2.jpg?1471291862",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/product/fp2006-pale_blue-2.jpg?1471291862",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/large/fp2006-pale_blue-2.jpg?1471291862",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/xlarge/fp2006-pale_blue-2.jpg?1471291862",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/small/fp2006-pale_blue-2.jpg?1471291862",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31220,
-          "position": 10,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/original/fp2006-pale_blue-3.jpg?1471291857",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/product/fp2006-pale_blue-3.jpg?1471291857",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/large/fp2006-pale_blue-3.jpg?1471291857",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/xlarge/fp2006-pale_blue-3.jpg?1471291857",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/small/fp2006-pale_blue-3.jpg?1471291857",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31550,
-          "position": 11,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/original/fp2006-pale_blue-4.jpg?1471292835",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/product/fp2006-pale_blue-4.jpg?1471292835",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/large/fp2006-pale_blue-4.jpg?1471292835",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/xlarge/fp2006-pale_blue-4.jpg?1471292835",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/small/fp2006-pale_blue-4.jpg?1471292835",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31551,
-          "position": 12,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31551/original/fp2006-pale_blue-crop.jpg?1471292836",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31551/product/fp2006-pale_blue-crop.jpg?1471292836",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31551/large/fp2006-pale_blue-crop.jpg?1471292836",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31551/xlarge/fp2006-pale_blue-crop.jpg?1471292836",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31551/small/fp2006-pale_blue-crop.jpg?1471292836",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31219,
-          "position": 13,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31219/original/fp2006-pale_blue-front-crop.jpg?1471291857",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31219/product/fp2006-pale_blue-front-crop.jpg?1471291857",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31219/large/fp2006-pale_blue-front-crop.jpg?1471291857",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31219/xlarge/fp2006-pale_blue-front-crop.jpg?1471291857",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31219/small/fp2006-pale_blue-front-crop.jpg?1471291857",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31218,
-          "position": 14,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/original/fp2006-pale_blue-front.jpg?1471291856",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/product/fp2006-pale_blue-front.jpg?1471291856",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/large/fp2006-pale_blue-front.jpg?1471291856",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/xlarge/fp2006-pale_blue-front.jpg?1471291856",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/small/fp2006-pale_blue-front.jpg?1471291856",
-          "color": "pale-blue",
-          "color_id": 79,
+          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36106/original/fp2318-red-crop.jpg?1494624918",
+          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36106/product/fp2318-red-crop.jpg?1494624918",
+          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36106/large/fp2318-red-crop.jpg?1494624918",
+          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36106/xlarge/fp2318-red-crop.jpg?1494624918",
+          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36106/small/fp2318-red-crop.jpg?1494624918",
+          "color": "red",
+          "color_id": 26,
           "size": null,
           "size_id": null
         }
       }
     ],
-    "price": {
-      "price": {
-        "amount": "249.0",
-        "currency": "USD",
-        "id": 69050,
-        "variant_id": 43984
-      }
-    },
-    "fast_making": true,
-    "prices": {
-      "currency": "USD",
-      "original_amount": "249.0",
-      "sale_amount": null,
-      "discount_amount": null,
-      "original_string": "$249.00",
-      "sale_string": null,
-      "discount_string": null
-    },
     "default_image": {
       "table": {
-        "id": 37551,
-        "position": 1,
-        "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/original/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/product/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/large/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/xlarge/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/small/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "color": "champagne",
-        "color_id": 82,
+        "id": 36109,
+        "position": 0,
+        "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/original/fp2318-red-front.jpg?1494624920",
+        "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/product/fp2318-red-front.jpg?1494624920",
+        "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/large/fp2318-red-front.jpg?1494624920",
+        "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/xlarge/fp2318-red-front.jpg?1494624920",
+        "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/small/fp2318-red-front.jpg?1494624920",
+        "color": "red",
+        "color_id": 26,
         "size": null,
         "size_id": null
       }
@@ -257,432 +153,189 @@
       {
         "taxon": {
           "taxon": {
-            "created_at": "2015-11-03T17:16:55.293-08:00",
+            "created_at": "2014-02-17T04:32:27.145-08:00",
             "delivery_period": "7 - 10 business days",
             "description": "",
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 268,
-            "lft": 422,
+            "id": 104,
+            "lft": 48,
             "meta_description": "",
             "meta_keywords": null,
             "meta_title": "",
-            "name": "Wedding Guests",
-            "parent_id": 184,
-            "permalink": "event/wedding-guests",
-            "position": 19,
-            "published_at": "2015-11-30T16:00:00.000-08:00",
-            "rgt": 423,
-            "taxonomy_id": 10,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.684-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2017-08-22T16:32:20.942-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 391,
-            "lft": 374,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "",
-            "name": "AU PRICE",
-            "parent_id": 32,
-            "permalink": "edits/au-price",
-            "position": 60,
-            "published_at": "2017-08-22T00:00:00.000-07:00",
-            "rgt": 375,
-            "taxonomy_id": 8,
-            "title": null,
-            "updated_at": "2017-08-22T16:35:00.814-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2017-03-24T09:57:29.601-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 383,
-            "lft": 248,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "",
-            "name": "Dress",
+            "name": "Cocktail",
             "parent_id": 23,
-            "permalink": "style/dress",
-            "position": 103,
-            "published_at": "2017-03-19T00:00:00.000-07:00",
-            "rgt": 249,
+            "permalink": "style/cocktail",
+            "position": 0,
+            "published_at": "2015-06-27T17:00:00.000-07:00",
+            "rgt": 49,
             "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.386-07:00"
+            "updated_at": "2017-08-23T10:38:05.283-07:00"
           }
         }
       },
       {
         "taxon": {
           "taxon": {
-            "created_at": "2015-09-19T04:04:58.904-07:00",
+            "created_at": "2014-08-06T05:35:59.547-07:00",
+            "delivery_period": "7 - 10 business days",
+            "description": "",
+            "icon_content_type": null,
+            "icon_file_name": null,
+            "icon_file_size": null,
+            "icon_updated_at": null,
+            "id": 160,
+            "lft": 72,
+            "meta_description": "",
+            "meta_keywords": null,
+            "meta_title": "",
+            "name": "Mini",
+            "parent_id": 23,
+            "permalink": "style/mini",
+            "position": 0,
+            "published_at": "2015-11-22T16:00:00.000-08:00",
+            "rgt": 73,
+            "taxonomy_id": 7,
+            "title": null,
+            "updated_at": "2017-08-23T10:38:05.155-07:00"
+          }
+        }
+      },
+      {
+        "taxon": {
+          "taxon": {
+            "created_at": "2016-09-16T11:18:53.512-07:00",
             "delivery_period": "7 - 10 business days",
             "description": null,
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 249,
-            "lft": 32,
+            "id": 345,
+            "lft": 182,
             "meta_description": null,
             "meta_keywords": null,
             "meta_title": null,
-            "name": "Long ",
-            "parent_id": 17,
-            "permalink": "collection/long",
-            "position": 0,
+            "name": "satin",
+            "parent_id": 23,
+            "permalink": "style/satin",
+            "position": 75,
             "published_at": null,
-            "rgt": 33,
-            "taxonomy_id": 6,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.844-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2014-08-06T05:35:57.271-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 155,
-            "lft": 56,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "Long Dresses, long formal dresses, high quality formal dresses.",
-            "name": "Long",
-            "parent_id": 23,
-            "permalink": "style/long",
-            "position": 0,
-            "published_at": "2015-09-28T17:00:00.000-07:00",
-            "rgt": 57,
+            "rgt": 183,
             "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.751-07:00"
+            "updated_at": "2017-08-23T10:38:05.307-07:00"
           }
         }
       },
       {
         "taxon": {
           "taxon": {
-            "created_at": "2015-03-25T02:53:43.956-07:00",
+            "created_at": "2014-03-13T20:18:40.494-07:00",
             "delivery_period": "7 - 10 business days",
             "description": "",
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 215,
-            "lft": 18,
+            "id": 132,
+            "lft": 62,
             "meta_description": "",
             "meta_keywords": null,
             "meta_title": "",
-            "name": "Evening",
-            "parent_id": 17,
-            "permalink": "collection/evening",
-            "position": 0,
-            "published_at": "2017-02-23T00:00:00.000-08:00",
-            "rgt": 19,
-            "taxonomy_id": 6,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.603-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2017-02-15T15:23:19.537-08:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 376,
-            "lft": 240,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "",
-            "name": "Evening-Shop-Plunging",
+            "name": "Metallic",
             "parent_id": 23,
-            "permalink": "style/evening-shop-plunging",
-            "position": 99,
-            "published_at": "2017-02-15T00:00:00.000-08:00",
-            "rgt": 241,
-            "taxonomy_id": 7,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.393-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2017-02-15T15:22:51.700-08:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 374,
-            "lft": 236,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "",
-            "name": "Evening-Shop-Wraps",
-            "parent_id": 23,
-            "permalink": "style/evening-shop-wraps",
-            "position": 97,
-            "published_at": "2017-02-15T00:00:00.000-08:00",
-            "rgt": 237,
-            "taxonomy_id": 7,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.391-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2016-09-16T11:19:57.180-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": null,
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 347,
-            "lft": 186,
-            "meta_description": null,
-            "meta_keywords": null,
-            "meta_title": null,
-            "name": "georgette",
-            "parent_id": 23,
-            "permalink": "style/georgette",
-            "position": 77,
-            "published_at": null,
-            "rgt": 187,
-            "taxonomy_id": 7,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.850-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2016-09-16T10:59:43.257-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": null,
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 311,
-            "lft": 128,
-            "meta_description": null,
-            "meta_keywords": null,
-            "meta_title": null,
-            "name": "full skirt",
-            "parent_id": 23,
-            "permalink": "style/full-skirt",
-            "position": 44,
-            "published_at": null,
-            "rgt": 129,
-            "taxonomy_id": 7,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.662-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2016-08-25T12:12:09.784-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 303,
-            "lft": 436,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "",
-            "name": "Day Night",
-            "parent_id": 184,
-            "permalink": "event/day-night",
+            "permalink": "style/metallic",
             "position": 26,
-            "published_at": "2016-08-28T00:00:00.000-07:00",
-            "rgt": 437,
-            "taxonomy_id": 10,
+            "published_at": "2015-09-28T17:00:00.000-07:00",
+            "rgt": 63,
+            "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.626-07:00"
+            "updated_at": "2017-08-23T10:38:05.224-07:00"
           }
         }
       },
       {
         "taxon": {
           "taxon": {
-            "created_at": "2016-08-16T16:24:53.200-07:00",
+            "created_at": "2014-02-19T05:12:59.736-08:00",
+            "delivery_period": "12 - 15 business days",
+            "description": "",
+            "icon_content_type": null,
+            "icon_file_name": null,
+            "icon_file_size": null,
+            "icon_updated_at": null,
+            "id": 121,
+            "lft": 68,
+            "meta_description": "",
+            "meta_keywords": null,
+            "meta_title": "",
+            "name": "Pleated",
+            "parent_id": 23,
+            "permalink": "style/pleated",
+            "position": 0,
+            "published_at": "2015-09-28T00:00:00.000-07:00",
+            "rgt": 69,
+            "taxonomy_id": 7,
+            "title": null,
+            "updated_at": "2017-03-15T14:39:00.678-07:00"
+          }
+        }
+      },
+      {
+        "taxon": {
+          "taxon": {
+            "created_at": "2016-07-22T08:54:47.126-07:00",
             "delivery_period": "7 - 10 business days",
             "description": "",
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 301,
-            "lft": 358,
+            "id": 298,
+            "lft": 120,
             "meta_description": "",
             "meta_keywords": null,
             "meta_title": "",
-            "name": "IT GIRL",
-            "parent_id": 32,
-            "permalink": "edits/it-girl",
-            "position": 52,
-            "published_at": "2016-08-15T00:00:00.000-07:00",
-            "rgt": 359,
-            "taxonomy_id": 8,
+            "name": "Fit and Flare",
+            "parent_id": 23,
+            "permalink": "style/fit-and-flare",
+            "position": 42,
+            "published_at": "2016-07-21T00:00:00.000-07:00",
+            "rgt": 121,
+            "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.691-07:00"
+            "updated_at": "2017-08-23T10:38:05.191-07:00"
           }
         }
       },
       {
         "taxon": {
           "taxon": {
-            "created_at": "2016-07-20T11:02:30.444-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 291,
-            "lft": 428,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "",
-            "name": "Daytime",
-            "parent_id": 184,
-            "permalink": "event/daytime",
-            "position": 22,
-            "published_at": "2016-07-20T00:00:00.000-07:00",
-            "rgt": 429,
-            "taxonomy_id": 10,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.778-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2014-11-10T12:17:53.795-08:00",
+            "created_at": "2016-09-16T11:08:22.718-07:00",
             "delivery_period": "7 - 10 business days",
             "description": null,
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 186,
-            "lft": 90,
+            "id": 324,
+            "lft": 150,
             "meta_description": null,
             "meta_keywords": null,
             "meta_title": null,
-            "name": "Split",
+            "name": "sleeveless",
             "parent_id": 23,
-            "permalink": "style/split",
-            "position": 0,
-            "published_at": "2015-06-23T21:04:42.654-07:00",
-            "rgt": 91,
-            "taxonomy_id": 7,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.799-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2015-03-31T16:47:20.991-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 228,
-            "lft": 102,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "",
-            "name": "Maxi",
-            "parent_id": 23,
-            "permalink": "style/maxi",
-            "position": 32,
-            "published_at": "2015-09-30T17:00:00.000-07:00",
-            "rgt": 103,
-            "taxonomy_id": 7,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.762-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2015-03-25T02:53:41.853-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 214,
-            "lft": 16,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "",
-            "name": "Wrap",
-            "parent_id": 17,
-            "permalink": "collection/wrap",
-            "position": 0,
+            "permalink": "style/sleeveless",
+            "position": 57,
             "published_at": null,
-            "rgt": 17,
-            "taxonomy_id": 6,
+            "rgt": 151,
+            "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.833-07:00"
+            "updated_at": "2017-08-23T10:38:05.213-07:00"
           }
         }
       },
@@ -709,115 +362,61 @@
             "rgt": 213,
             "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.894-07:00"
+            "updated_at": "2017-08-23T10:38:05.286-07:00"
           }
         }
       },
       {
         "taxon": {
           "taxon": {
-            "created_at": "2016-07-20T11:03:07.380-07:00",
+            "created_at": "2017-03-24T09:57:29.601-07:00",
             "delivery_period": "7 - 10 business days",
             "description": "",
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 294,
-            "lft": 432,
+            "id": 383,
+            "lft": 248,
             "meta_description": "",
             "meta_keywords": null,
             "meta_title": "",
-            "name": "Vacation",
-            "parent_id": 184,
-            "permalink": "event/vacation",
-            "position": 24,
-            "published_at": "2016-07-20T00:00:00.000-07:00",
-            "rgt": 433,
-            "taxonomy_id": 10,
+            "name": "Dress",
+            "parent_id": 23,
+            "permalink": "style/dress",
+            "position": 103,
+            "published_at": "2017-03-19T00:00:00.000-07:00",
+            "rgt": 249,
+            "taxonomy_id": 7,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.598-07:00"
+            "updated_at": "2017-08-23T10:38:05.083-07:00"
           }
         }
       },
       {
         "taxon": {
           "taxon": {
-            "created_at": "2014-08-06T05:35:57.830-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "Find your perfect formal dress.",
-            "icon_content_type": null,
-            "icon_file_name": null,
-            "icon_file_size": null,
-            "icon_updated_at": null,
-            "id": 158,
-            "lft": 388,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "Bespoke formal dresses",
-            "name": "formal",
-            "parent_id": 184,
-            "permalink": "event/formal",
-            "position": 0,
-            "published_at": "2015-06-23T17:00:00.000-07:00",
-            "rgt": 389,
-            "taxonomy_id": 10,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.600-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2015-03-31T16:31:35.313-07:00",
-            "delivery_period": "7 - 10 business days",
-            "description": "",
-            "icon_content_type": "image/jpeg",
-            "icon_file_name": "bridesmaids-dark-bg.jpg",
-            "icon_file_size": 752975,
-            "icon_updated_at": "2015-05-18T05:42:54.432-07:00",
-            "id": 221,
-            "lft": 404,
-            "meta_description": "",
-            "meta_keywords": null,
-            "meta_title": "Bridesmaid dresses",
-            "name": "Bridesmaid",
-            "parent_id": 184,
-            "permalink": "event/bridesmaid",
-            "position": 10,
-            "published_at": "2016-02-23T06:36:39.414-08:00",
-            "rgt": 405,
-            "taxonomy_id": 10,
-            "title": null,
-            "updated_at": "2017-08-21T15:59:42.759-07:00"
-          }
-        }
-      },
-      {
-        "taxon": {
-          "taxon": {
-            "created_at": "2014-08-06T05:35:56.388-07:00",
+            "created_at": "2015-10-13T16:07:29.716-07:00",
             "delivery_period": "7 - 10 business days",
             "description": "",
             "icon_content_type": null,
             "icon_file_name": null,
             "icon_file_size": null,
             "icon_updated_at": null,
-            "id": 148,
-            "lft": 384,
+            "id": 258,
+            "lft": 330,
             "meta_description": "",
             "meta_keywords": null,
-            "meta_title": "Long & Short Prom Dresses",
-            "name": "Prom",
-            "parent_id": 184,
-            "permalink": "event/prom",
-            "position": 0,
-            "published_at": "2015-06-23T17:00:00.000-07:00",
-            "rgt": 385,
-            "taxonomy_id": 10,
+            "meta_title": "",
+            "name": "New This Week",
+            "parent_id": 32,
+            "permalink": "edits/new-this-week",
+            "position": 39,
+            "published_at": "2015-10-12T17:00:00.000-07:00",
+            "rgt": 331,
+            "taxonomy_id": 8,
             "title": null,
-            "updated_at": "2017-08-21T15:59:42.695-07:00"
+            "updated_at": "2017-08-23T10:38:05.158-07:00"
           }
         }
       }
@@ -826,330 +425,69 @@
       {
         "product": {
           "product": {
-            "available_on": "2016-08-14T00:00:00.000-07:00",
-            "category_id": 3,
+            "available_on": "2017-05-11T14:32:31.145-07:00",
+            "category_id": 33,
             "count_on_hand": 120,
-            "created_at": "2016-08-15T13:07:07.652-07:00",
+            "created_at": "2017-05-12T14:32:44.994-07:00",
             "deleted_at": null,
-            "description": "<p>A rose for a rose. The Portrait is a heavy georgette wrap gown in an exclusive digital print.</p>",
+            "description": "<p>Command attention. The Gaby is a heavy matte stretch woven mini dress in our exclusive faded floral print featuring a panelled bodice and a flared skirt. It has an invisible zipper and hook and eye closure.</p>",
             "fabric_card_id": null,
             "factory_id": 3,
             "featured": false,
             "hidden": false,
-            "id": 1110,
-            "meta_description": "",
+            "id": 1505,
+            "meta_description": null,
             "meta_keywords": null,
-            "name": "Portrait Dress",
+            "name": "The Gaby Dress",
             "on_demand": true,
-            "permalink": "portrait_dress",
+            "permalink": "the_gaby_dress",
             "position": 0,
             "shipping_category_id": null,
             "size_chart": "2016_v2",
             "tax_category_id": null,
-            "updated_at": "2017-10-14T03:09:42.521-07:00"
-          }
-        },
-        "price": {
-          "price": {
-            "amount": "299.0",
-            "currency": "USD",
-            "id": 69100,
-            "variant_id": 44009
-          }
-        },
-        "presenter": {
-          "price": {
-            "price": {
-              "amount": "299.0",
-              "currency": "USD",
-              "id": 69100,
-              "variant_id": 44009
-            }
-          },
-          "product": {
-            "product": {
-              "available_on": "2016-08-14T00:00:00.000-07:00",
-              "category_id": 3,
-              "count_on_hand": 120,
-              "created_at": "2016-08-15T13:07:07.652-07:00",
-              "deleted_at": null,
-              "description": "<p>A rose for a rose. The Portrait is a heavy georgette wrap gown in an exclusive digital print.</p>",
-              "fabric_card_id": null,
-              "factory_id": 3,
-              "featured": false,
-              "hidden": false,
-              "id": 1110,
-              "meta_description": "",
-              "meta_keywords": null,
-              "name": "Portrait Dress",
-              "on_demand": true,
-              "permalink": "portrait_dress",
-              "position": 0,
-              "shipping_category_id": null,
-              "size_chart": "2016_v2",
-              "tax_category_id": null,
-              "updated_at": "2017-10-14T03:09:42.521-07:00"
-            }
-          }
-        },
-        "site_version": {
-          "site_version": {
-            "active": false,
-            "created_at": "2013-11-21T12:31:12.191-08:00",
-            "currency": "USD",
-            "default": true,
-            "domain": "www.fameandpartners.com",
-            "exchange_rate": "1.0",
-            "exchange_rate_timestamp": "2012-11-21",
-            "id": 2,
-            "locale": "en-US",
-            "name": "USA",
-            "permalink": "us",
-            "updated_at": "2015-08-02T16:13:32.508-07:00",
-            "zone_id": 4
-          }
-        }
-      },
-      {
-        "product": {
-          "product": {
-            "available_on": "2016-06-02T00:00:00.000-07:00",
-            "category_id": 3,
-            "count_on_hand": 480,
-            "created_at": "2016-06-03T15:26:36.234-07:00",
-            "deleted_at": null,
-            "description": "<p>Callais is a heavy georgette maxi dress featuring an asymmetrical frill detailing across the bodice. V neckline, criss-cross strap detailing at back, and ruffled thigh-high front side split. Ready to dance the night.</p>",
-            "fabric_card_id": null,
-            "factory_id": 3,
-            "featured": false,
-            "hidden": false,
-            "id": 1064,
-            "meta_description": "",
-            "meta_keywords": null,
-            "name": "Callais",
-            "on_demand": true,
-            "permalink": "callais",
-            "position": 0,
-            "shipping_category_id": null,
-            "size_chart": "2016_v2",
-            "tax_category_id": null,
-            "updated_at": "2017-10-16T05:48:39.178-07:00"
-          }
-        },
-        "price": {
-          "price": {
-            "amount": "299.0",
-            "currency": "USD",
-            "id": 67064,
-            "variant_id": 42991
-          }
-        },
-        "presenter": {
-          "price": {
-            "price": {
-              "amount": "299.0",
-              "currency": "USD",
-              "id": 67064,
-              "variant_id": 42991
-            }
-          },
-          "product": {
-            "product": {
-              "available_on": "2016-06-02T00:00:00.000-07:00",
-              "category_id": 3,
-              "count_on_hand": 480,
-              "created_at": "2016-06-03T15:26:36.234-07:00",
-              "deleted_at": null,
-              "description": "<p>Callais is a heavy georgette maxi dress featuring an asymmetrical frill detailing across the bodice. V neckline, criss-cross strap detailing at back, and ruffled thigh-high front side split. Ready to dance the night.</p>",
-              "fabric_card_id": null,
-              "factory_id": 3,
-              "featured": false,
-              "hidden": false,
-              "id": 1064,
-              "meta_description": "",
-              "meta_keywords": null,
-              "name": "Callais",
-              "on_demand": true,
-              "permalink": "callais",
-              "position": 0,
-              "shipping_category_id": null,
-              "size_chart": "2016_v2",
-              "tax_category_id": null,
-              "updated_at": "2017-10-16T05:48:39.178-07:00"
-            }
-          }
-        },
-        "site_version": {
-          "site_version": {
-            "active": false,
-            "created_at": "2013-11-21T12:31:12.191-08:00",
-            "currency": "USD",
-            "default": true,
-            "domain": "www.fameandpartners.com",
-            "exchange_rate": "1.0",
-            "exchange_rate_timestamp": "2012-11-21",
-            "id": 2,
-            "locale": "en-US",
-            "name": "USA",
-            "permalink": "us",
-            "updated_at": "2015-08-02T16:13:32.508-07:00",
-            "zone_id": 4
-          }
-        }
-      },
-      {
-        "product": {
-          "product": {
-            "available_on": "2016-07-21T00:00:00.000-07:00",
-            "category_id": 3,
-            "count_on_hand": 240,
-            "created_at": "2016-07-22T08:55:36.618-07:00",
-            "deleted_at": null,
-            "description": "<p>Ada girl! This is a matte satin gown featuring a halter neckline, side cut outs and and a side split. It has an invisible zipper and hook and eye closure.</p>",
-            "fabric_card_id": null,
-            "factory_id": 3,
-            "featured": false,
-            "hidden": false,
-            "id": 1096,
-            "meta_description": "",
-            "meta_keywords": null,
-            "name": "Ada Dress",
-            "on_demand": true,
-            "permalink": "ada-dress",
-            "position": 0,
-            "shipping_category_id": null,
-            "size_chart": "2016_v2",
-            "tax_category_id": null,
-            "updated_at": "2017-10-17T03:14:15.658-07:00"
-          }
-        },
-        "price": {
-          "price": {
-            "amount": "229.0",
-            "currency": "USD",
-            "id": 68424,
-            "variant_id": 43671
-          }
-        },
-        "presenter": {
-          "price": {
-            "price": {
-              "amount": "229.0",
-              "currency": "USD",
-              "id": 68424,
-              "variant_id": 43671
-            }
-          },
-          "product": {
-            "product": {
-              "available_on": "2016-07-21T00:00:00.000-07:00",
-              "category_id": 3,
-              "count_on_hand": 240,
-              "created_at": "2016-07-22T08:55:36.618-07:00",
-              "deleted_at": null,
-              "description": "<p>Ada girl! This is a matte satin gown featuring a halter neckline, side cut outs and and a side split. It has an invisible zipper and hook and eye closure.</p>",
-              "fabric_card_id": null,
-              "factory_id": 3,
-              "featured": false,
-              "hidden": false,
-              "id": 1096,
-              "meta_description": "",
-              "meta_keywords": null,
-              "name": "Ada Dress",
-              "on_demand": true,
-              "permalink": "ada-dress",
-              "position": 0,
-              "shipping_category_id": null,
-              "size_chart": "2016_v2",
-              "tax_category_id": null,
-              "updated_at": "2017-10-17T03:14:15.658-07:00"
-            }
-          }
-        },
-        "site_version": {
-          "site_version": {
-            "active": false,
-            "created_at": "2013-11-21T12:31:12.191-08:00",
-            "currency": "USD",
-            "default": true,
-            "domain": "www.fameandpartners.com",
-            "exchange_rate": "1.0",
-            "exchange_rate_timestamp": "2012-11-21",
-            "id": 2,
-            "locale": "en-US",
-            "name": "USA",
-            "permalink": "us",
-            "updated_at": "2015-08-02T16:13:32.508-07:00",
-            "zone_id": 4
-          }
-        }
-      },
-      {
-        "product": {
-          "product": {
-            "available_on": "2016-08-14T00:00:00.000-07:00",
-            "category_id": 3,
-            "count_on_hand": 240,
-            "created_at": "2016-08-15T13:07:24.094-07:00",
-            "deleted_at": null,
-            "description": "<p>Off-balance and on-trend. The Yoko is a fully-lined, woven crepe wrap dress with sheer draped overlay. It has an invisible zipper and hook and eye closure.</p>",
-            "fabric_card_id": null,
-            "factory_id": 6,
-            "featured": false,
-            "hidden": false,
-            "id": 1116,
-            "meta_description": "",
-            "meta_keywords": null,
-            "name": "Yoko Dress",
-            "on_demand": true,
-            "permalink": "yoko_dress",
-            "position": 0,
-            "shipping_category_id": null,
-            "size_chart": "2016_v2",
-            "tax_category_id": null,
-            "updated_at": "2017-10-18T11:49:57.184-07:00"
+            "updated_at": "2017-10-30T15:23:29.358-07:00"
           }
         },
         "price": {
           "price": {
             "amount": "269.0",
             "currency": "USD",
-            "id": 69280,
-            "variant_id": 44099
+            "id": 81209,
+            "variant_id": 50116
           }
         },
         "presenter": {
-          "price": {
-            "price": {
-              "amount": "269.0",
-              "currency": "USD",
-              "id": 69280,
-              "variant_id": 44099
-            }
-          },
           "product": {
             "product": {
-              "available_on": "2016-08-14T00:00:00.000-07:00",
-              "category_id": 3,
-              "count_on_hand": 240,
-              "created_at": "2016-08-15T13:07:24.094-07:00",
+              "available_on": "2017-05-11T14:32:31.145-07:00",
+              "category_id": 33,
+              "count_on_hand": 120,
+              "created_at": "2017-05-12T14:32:44.994-07:00",
               "deleted_at": null,
-              "description": "<p>Off-balance and on-trend. The Yoko is a fully-lined, woven crepe wrap dress with sheer draped overlay. It has an invisible zipper and hook and eye closure.</p>",
+              "description": "<p>Command attention. The Gaby is a heavy matte stretch woven mini dress in our exclusive faded floral print featuring a panelled bodice and a flared skirt. It has an invisible zipper and hook and eye closure.</p>",
               "fabric_card_id": null,
-              "factory_id": 6,
+              "factory_id": 3,
               "featured": false,
               "hidden": false,
-              "id": 1116,
-              "meta_description": "",
+              "id": 1505,
+              "meta_description": null,
               "meta_keywords": null,
-              "name": "Yoko Dress",
+              "name": "The Gaby Dress",
               "on_demand": true,
-              "permalink": "yoko_dress",
+              "permalink": "the_gaby_dress",
               "position": 0,
               "shipping_category_id": null,
               "size_chart": "2016_v2",
               "tax_category_id": null,
-              "updated_at": "2017-10-18T11:49:57.184-07:00"
+              "updated_at": "2017-10-30T15:23:29.358-07:00"
+            }
+          },
+          "price": {
+            "price": {
+              "amount": "269.0",
+              "currency": "USD",
+              "id": 81209,
+              "variant_id": 50116
             }
           }
         },
@@ -1168,6 +506,169 @@
             "permalink": "us",
             "updated_at": "2015-08-02T16:13:32.508-07:00",
             "zone_id": 4
+          }
+        }
+      },
+      {
+        "product": {
+          "product": {
+            "available_on": "2017-05-11T14:32:31.145-07:00",
+            "category_id": 5,
+            "count_on_hand": 120,
+            "created_at": "2017-05-12T14:33:06.297-07:00",
+            "deleted_at": null,
+            "description": "<p>Chicer than your average. The Christensen is a matte satin mini dress featuring a draped v-neck top, a defined waist, and a fitted skirt. It has an invisible zipper and hook and eye closure.</p>",
+            "fabric_card_id": null,
+            "factory_id": 3,
+            "featured": false,
+            "hidden": false,
+            "id": 1513,
+            "meta_description": null,
+            "meta_keywords": null,
+            "name": "The Christensen Dress",
+            "on_demand": true,
+            "permalink": "the_christensen_dress",
+            "position": 0,
+            "shipping_category_id": null,
+            "size_chart": "2016_v2",
+            "tax_category_id": null,
+            "updated_at": "2017-10-30T15:24:02.596-07:00"
+          }
+        },
+        "price": {
+          "price": {
+            "amount": "249.0",
+            "currency": "USD",
+            "id": 81441,
+            "variant_id": 50232
+          }
+        },
+        "presenter": {
+          "product": {
+            "product": {
+              "available_on": "2017-05-11T14:32:31.145-07:00",
+              "category_id": 5,
+              "count_on_hand": 120,
+              "created_at": "2017-05-12T14:33:06.297-07:00",
+              "deleted_at": null,
+              "description": "<p>Chicer than your average. The Christensen is a matte satin mini dress featuring a draped v-neck top, a defined waist, and a fitted skirt. It has an invisible zipper and hook and eye closure.</p>",
+              "fabric_card_id": null,
+              "factory_id": 3,
+              "featured": false,
+              "hidden": false,
+              "id": 1513,
+              "meta_description": null,
+              "meta_keywords": null,
+              "name": "The Christensen Dress",
+              "on_demand": true,
+              "permalink": "the_christensen_dress",
+              "position": 0,
+              "shipping_category_id": null,
+              "size_chart": "2016_v2",
+              "tax_category_id": null,
+              "updated_at": "2017-10-30T15:24:02.596-07:00"
+            }
+          },
+          "price": {
+            "price": {
+              "amount": "249.0",
+              "currency": "USD",
+              "id": 81441,
+              "variant_id": 50232
+            }
+          }
+        },
+        "site_version": {
+          "site_version": {
+            "active": false,
+            "created_at": "2013-11-21T12:31:12.191-08:00",
+            "currency": "USD",
+            "default": true,
+            "domain": "www.fameandpartners.com",
+            "exchange_rate": "1.0",
+            "exchange_rate_timestamp": "2012-11-21",
+            "id": 2,
+            "locale": "en-US",
+            "name": "USA",
+            "permalink": "us",
+            "updated_at": "2015-08-02T16:13:32.508-07:00",
+            "zone_id": 4
+          }
+        }
+      }
+    ],
+    "complementary_products": [
+      {
+        "product": {
+          "product": {
+            "available_on": "2017-05-11T14:32:31.145-07:00",
+            "category_id": 33,
+            "count_on_hand": 120,
+            "created_at": "2017-05-12T14:32:44.994-07:00",
+            "deleted_at": null,
+            "description": "<p>Command attention. The Gaby is a heavy matte stretch woven mini dress in our exclusive faded floral print featuring a panelled bodice and a flared skirt. It has an invisible zipper and hook and eye closure.</p>",
+            "fabric_card_id": null,
+            "factory_id": 3,
+            "featured": false,
+            "hidden": false,
+            "id": 1505,
+            "image_link": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36124/product/fp2400-faded_floral-front.jpg?1494624932",
+            "meta_description": null,
+            "meta_keywords": null,
+            "name": "The Gaby Dress",
+            "on_demand": true,
+            "permalink": "the_gaby_dress",
+            "position": 0,
+            "relative_url_path": "/dresses/dress-the-gaby-dress-1505",
+            "shipping_category_id": null,
+            "size_chart": "2016_v2",
+            "tax_category_id": null,
+            "updated_at": "2017-10-30T15:23:29.358-07:00"
+          }
+        },
+        "price": {
+          "price": {
+            "amount": "269.0",
+            "currency": "USD",
+            "id": 81209,
+            "variant_id": 50116
+          }
+        }
+      },
+      {
+        "product": {
+          "product": {
+            "available_on": "2017-05-11T14:32:31.145-07:00",
+            "category_id": 5,
+            "count_on_hand": 120,
+            "created_at": "2017-05-12T14:33:06.297-07:00",
+            "deleted_at": null,
+            "description": "<p>Chicer than your average. The Christensen is a matte satin mini dress featuring a draped v-neck top, a defined waist, and a fitted skirt. It has an invisible zipper and hook and eye closure.</p>",
+            "fabric_card_id": null,
+            "factory_id": 3,
+            "featured": false,
+            "hidden": false,
+            "id": 1513,
+            "image_link": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36112/product/fp2348-black-front.jpg?1494624923",
+            "meta_description": null,
+            "meta_keywords": null,
+            "name": "The Christensen Dress",
+            "on_demand": true,
+            "permalink": "the_christensen_dress",
+            "position": 0,
+            "relative_url_path": "/dresses/dress-the-christensen-dress-1513",
+            "shipping_category_id": null,
+            "size_chart": "2016_v2",
+            "tax_category_id": null,
+            "updated_at": "2017-10-30T15:24:02.596-07:00"
+          }
+        },
+        "price": {
+          "price": {
+            "amount": "249.0",
+            "currency": "USD",
+            "id": 81441,
+            "variant_id": 50232
           }
         }
       }
@@ -1181,13 +682,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43985,
+          "id": 50220,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 1,
-          "product_id": 1109,
-          "sku": "FP2006US0AU4C82",
+          "product_id": 1512,
+          "sku": "FP2318US0AU4C26",
           "weight": null,
           "width": null
         }
@@ -1200,13 +701,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43986,
+          "id": 50221,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 2,
-          "product_id": 1109,
-          "sku": "FP2006US0AU4C79",
+          "product_id": 1512,
+          "sku": "FP2318US2AU6C26",
           "weight": null,
           "width": null
         }
@@ -1219,13 +720,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43987,
+          "id": 50222,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 3,
-          "product_id": 1109,
-          "sku": "FP2006US2AU6C82",
+          "product_id": 1512,
+          "sku": "FP2318US4AU8C26",
           "weight": null,
           "width": null
         }
@@ -1238,13 +739,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43988,
+          "id": 50223,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 4,
-          "product_id": 1109,
-          "sku": "FP2006US2AU6C79",
+          "product_id": 1512,
+          "sku": "FP2318US6AU10C26",
           "weight": null,
           "width": null
         }
@@ -1257,13 +758,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43989,
+          "id": 50224,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 5,
-          "product_id": 1109,
-          "sku": "FP2006US4AU8C82",
+          "product_id": 1512,
+          "sku": "FP2318US8AU12C26",
           "weight": null,
           "width": null
         }
@@ -1276,13 +777,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43990,
+          "id": 50225,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 6,
-          "product_id": 1109,
-          "sku": "FP2006US4AU8C79",
+          "product_id": 1512,
+          "sku": "FP2318US10AU14C26",
           "weight": null,
           "width": null
         }
@@ -1295,13 +796,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43991,
+          "id": 50226,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 7,
-          "product_id": 1109,
-          "sku": "FP2006US6AU10C82",
+          "product_id": 1512,
+          "sku": "FP2318US12AU16C26",
           "weight": null,
           "width": null
         }
@@ -1314,13 +815,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43992,
+          "id": 50227,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 8,
-          "product_id": 1109,
-          "sku": "FP2006US6AU10C79",
+          "product_id": 1512,
+          "sku": "FP2318US14AU18C26",
           "weight": null,
           "width": null
         }
@@ -1333,13 +834,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43993,
+          "id": 50228,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 9,
-          "product_id": 1109,
-          "sku": "FP2006US8AU12C82",
+          "product_id": 1512,
+          "sku": "FP2318US16AU20C26",
           "weight": null,
           "width": null
         }
@@ -1352,13 +853,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43994,
+          "id": 50229,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 10,
-          "product_id": 1109,
-          "sku": "FP2006US8AU12C79",
+          "product_id": 1512,
+          "sku": "FP2318US18AU22C26",
           "weight": null,
           "width": null
         }
@@ -1371,13 +872,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43995,
+          "id": 50230,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 11,
-          "product_id": 1109,
-          "sku": "FP2006US10AU14C82",
+          "product_id": 1512,
+          "sku": "FP2318US20AU24C26",
           "weight": null,
           "width": null
         }
@@ -1390,241 +891,13 @@
           "deleted_at": null,
           "depth": null,
           "height": null,
-          "id": 43996,
+          "id": 50231,
           "is_master": false,
           "lock_version": 0,
           "on_demand": true,
           "position": 12,
-          "product_id": 1109,
-          "sku": "FP2006US10AU14C79",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 43997,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 13,
-          "product_id": 1109,
-          "sku": "FP2006US12AU16C82",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 43998,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 14,
-          "product_id": 1109,
-          "sku": "FP2006US12AU16C79",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 43999,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 15,
-          "product_id": 1109,
-          "sku": "FP2006US14AU18C82",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 44000,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 16,
-          "product_id": 1109,
-          "sku": "FP2006US14AU18C79",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 44001,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 17,
-          "product_id": 1109,
-          "sku": "FP2006US16AU20C82",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 44002,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 18,
-          "product_id": 1109,
-          "sku": "FP2006US16AU20C79",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 44003,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 19,
-          "product_id": 1109,
-          "sku": "FP2006US18AU22C82",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 44004,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 20,
-          "product_id": 1109,
-          "sku": "FP2006US18AU22C79",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 44005,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 21,
-          "product_id": 1109,
-          "sku": "FP2006US20AU24C82",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 44006,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 22,
-          "product_id": 1109,
-          "sku": "FP2006US20AU24C79",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 44007,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 23,
-          "product_id": 1109,
-          "sku": "FP2006US22AU26C82",
-          "weight": null,
-          "width": null
-        }
-      },
-      {
-        "variant": {
-          "cost_currency": "AUD",
-          "cost_price": null,
-          "count_on_hand": 10,
-          "deleted_at": null,
-          "depth": null,
-          "height": null,
-          "id": 44008,
-          "is_master": false,
-          "lock_version": 0,
-          "on_demand": true,
-          "position": 24,
-          "product_id": 1109,
-          "sku": "FP2006US22AU26C79",
+          "product_id": 1512,
+          "sku": "FP2318US22AU26C26",
           "weight": null,
           "width": null
         }
@@ -1636,129 +909,9 @@
         "variants": [
           {
             "table": {
-              "id": 44008,
-              "size_id": 145,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 44007,
-              "size_id": 145,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 44006,
-              "size_id": 146,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 44005,
-              "size_id": 146,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 44004,
-              "size_id": 147,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 44003,
-              "size_id": 147,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 44002,
-              "size_id": 148,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 44001,
-              "size_id": 148,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 44000,
-              "size_id": 149,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43999,
-              "size_id": 149,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43998,
-              "size_id": 24,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43997,
-              "size_id": 24,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43996,
+              "id": 50225,
               "size_id": 23,
-              "color_id": 79,
+              "color_id": 26,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1766,99 +919,9 @@
           },
           {
             "table": {
-              "id": 43995,
-              "size_id": 23,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43994,
-              "size_id": 22,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43993,
-              "size_id": 22,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43992,
-              "size_id": 21,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43991,
-              "size_id": 21,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43990,
-              "size_id": 20,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43989,
-              "size_id": 20,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43988,
-              "size_id": 34,
-              "color_id": 79,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43987,
-              "size_id": 34,
-              "color_id": 82,
-              "count_on_hand": 10,
-              "fast_delivery": false,
-              "available": true
-            }
-          },
-          {
-            "table": {
-              "id": 43986,
+              "id": 50220,
               "size_id": 86,
-              "color_id": 79,
+              "color_id": 26,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -1866,9 +929,99 @@
           },
           {
             "table": {
-              "id": 43985,
-              "size_id": 86,
-              "color_id": 82,
+              "id": 50221,
+              "size_id": 34,
+              "color_id": 26,
+              "count_on_hand": 10,
+              "fast_delivery": false,
+              "available": true
+            }
+          },
+          {
+            "table": {
+              "id": 50222,
+              "size_id": 20,
+              "color_id": 26,
+              "count_on_hand": 10,
+              "fast_delivery": false,
+              "available": true
+            }
+          },
+          {
+            "table": {
+              "id": 50223,
+              "size_id": 21,
+              "color_id": 26,
+              "count_on_hand": 10,
+              "fast_delivery": false,
+              "available": true
+            }
+          },
+          {
+            "table": {
+              "id": 50224,
+              "size_id": 22,
+              "color_id": 26,
+              "count_on_hand": 10,
+              "fast_delivery": false,
+              "available": true
+            }
+          },
+          {
+            "table": {
+              "id": 50226,
+              "size_id": 24,
+              "color_id": 26,
+              "count_on_hand": 10,
+              "fast_delivery": false,
+              "available": true
+            }
+          },
+          {
+            "table": {
+              "id": 50227,
+              "size_id": 149,
+              "color_id": 26,
+              "count_on_hand": 10,
+              "fast_delivery": false,
+              "available": true
+            }
+          },
+          {
+            "table": {
+              "id": 50228,
+              "size_id": 148,
+              "color_id": 26,
+              "count_on_hand": 10,
+              "fast_delivery": false,
+              "available": true
+            }
+          },
+          {
+            "table": {
+              "id": 50229,
+              "size_id": 147,
+              "color_id": 26,
+              "count_on_hand": 10,
+              "fast_delivery": false,
+              "available": true
+            }
+          },
+          {
+            "table": {
+              "id": 50230,
+              "size_id": 146,
+              "color_id": 26,
+              "count_on_hand": 10,
+              "fast_delivery": false,
+              "available": true
+            }
+          },
+          {
+            "table": {
+              "id": 50231,
+              "size_id": 145,
+              "color_id": 26,
               "count_on_hand": 10,
               "fast_delivery": false,
               "available": true
@@ -2051,54 +1204,22 @@
             "default": [
               {
                 "option_value": {
-                  "created_at": "2013-08-09T03:04:09.649-07:00",
-                  "id": 82,
+                  "created_at": "2013-08-06T19:15:45.526-07:00",
+                  "id": 26,
                   "image_content_type": null,
                   "image_file_name": null,
                   "image_file_size": null,
-                  "name": "champagne",
+                  "name": "red",
                   "option_type_id": 8,
-                  "position": 37,
-                  "presentation": "Champagne",
-                  "updated_at": "2017-01-30T00:55:43.601-08:00",
+                  "position": 1,
+                  "presentation": "Red",
+                  "updated_at": "2017-01-30T00:55:44.007-08:00",
                   "use_in_customisation": true,
-                  "value": "#EFE4DC"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T23:58:38.640-07:00",
-                  "id": 79,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "pale-blue",
-                  "option_type_id": 8,
-                  "position": 36,
-                  "presentation": "Pale Blue",
-                  "updated_at": "2017-01-30T00:55:44.066-08:00",
-                  "use_in_customisation": true,
-                  "value": "#BBD0ED"
+                  "value": "#E01B1B"
                 }
               }
             ],
             "extra": [
-              {
-                "option_value": {
-                  "created_at": "2015-06-04T22:37:57.906-07:00",
-                  "id": 244,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "aqua",
-                  "option_type_id": 8,
-                  "position": 116,
-                  "presentation": "Aqua",
-                  "updated_at": "2017-09-25T16:32:47.536-07:00",
-                  "use_in_customisation": false,
-                  "value": "#4aa5d8"
-                }
-              },
               {
                 "option_value": {
                   "created_at": "2013-08-06T19:15:45.519-07:00",
@@ -2117,374 +1238,6 @@
               },
               {
                 "option_value": {
-                  "created_at": "2014-02-17T04:32:27.600-08:00",
-                  "id": 90,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "blush",
-                  "option_type_id": 8,
-                  "position": 43,
-                  "presentation": "Blush",
-                  "updated_at": "2015-03-25T18:57:08.124-07:00",
-                  "use_in_customisation": true,
-                  "value": "#F9DAD8"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2016-01-28T22:14:22.624-08:00",
-                  "id": 293,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "bright-yellow",
-                  "option_type_id": 8,
-                  "position": 157,
-                  "presentation": "Bright Yellow",
-                  "updated_at": "2017-09-25T16:32:46.783-07:00",
-                  "use_in_customisation": false,
-                  "value": "#fcf751"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2014-02-17T03:58:14.777-08:00",
-                  "id": 89,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "burgundy",
-                  "option_type_id": 8,
-                  "position": 43,
-                  "presentation": "Burgundy",
-                  "updated_at": "2017-01-30T00:55:43.769-08:00",
-                  "use_in_customisation": true,
-                  "value": "#77202F"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2015-03-25T02:51:30.862-07:00",
-                  "id": 212,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "candy-pink",
-                  "option_type_id": 8,
-                  "position": 89,
-                  "presentation": "Candy Pink",
-                  "updated_at": "2015-03-25T19:18:37.696-07:00",
-                  "use_in_customisation": false,
-                  "value": "#ff99ff"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:02:47.931-07:00",
-                  "id": 42,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "cherry-red",
-                  "option_type_id": 8,
-                  "position": 10,
-                  "presentation": "Cherry Red",
-                  "updated_at": "2014-03-04T12:40:15.481-08:00",
-                  "use_in_customisation": true,
-                  "value": "#B91B29"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:50:04.396-07:00",
-                  "id": 73,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "cobalt-blue",
-                  "option_type_id": 8,
-                  "position": 32,
-                  "presentation": "Cobalt Blue",
-                  "updated_at": "2014-03-04T12:40:15.506-08:00",
-                  "use_in_customisation": true,
-                  "value": "#012D60"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:02:47.946-07:00",
-                  "id": 49,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "coral",
-                  "option_type_id": 8,
-                  "position": 14,
-                  "presentation": "Coral",
-                  "updated_at": "2017-05-16T14:30:23.384-07:00",
-                  "use_in_customisation": true,
-                  "value": "#FD9A92"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2016-01-28T22:14:22.706-08:00",
-                  "id": 296,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "cornflower-blue",
-                  "option_type_id": 8,
-                  "position": 160,
-                  "presentation": "Cornflower Blue",
-                  "updated_at": "2017-09-25T16:32:47.542-07:00",
-                  "use_in_customisation": false,
-                  "value": "#4865c1"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-10T05:43:19.814-07:00",
-                  "id": 85,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "cream",
-                  "option_type_id": 8,
-                  "position": 40,
-                  "presentation": "Cream",
-                  "updated_at": "2014-03-04T12:40:15.514-08:00",
-                  "use_in_customisation": true,
-                  "value": "#EBE5CD"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2016-01-28T22:14:22.713-08:00",
-                  "id": 297,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "dark-chocolate",
-                  "option_type_id": 8,
-                  "position": 161,
-                  "presentation": "Dark Chocolate",
-                  "updated_at": "2017-09-25T16:32:47.529-07:00",
-                  "use_in_customisation": false,
-                  "value": "#4c1f0b"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2015-10-22T21:59:02.208-07:00",
-                  "id": 281,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "dark-nude",
-                  "option_type_id": 8,
-                  "position": 145,
-                  "presentation": "Dark Nude",
-                  "updated_at": "2015-10-22T22:10:18.559-07:00",
-                  "use_in_customisation": false,
-                  "value": "#d2af99"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:54:03.616-07:00",
-                  "id": 77,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "emerald-green",
-                  "option_type_id": 8,
-                  "position": 35,
-                  "presentation": "Emerald Green",
-                  "updated_at": "2014-03-04T12:40:15.510-08:00",
-                  "use_in_customisation": true,
-                  "value": "#009875"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:18:51.344-07:00",
-                  "id": 58,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "hot-pink",
-                  "option_type_id": 8,
-                  "position": 20,
-                  "presentation": "Hot Pink",
-                  "updated_at": "2014-03-04T12:40:15.496-08:00",
-                  "use_in_customisation": true,
-                  "value": "#F14873"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:02:47.939-07:00",
-                  "id": 46,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "ice-blue",
-                  "option_type_id": 8,
-                  "position": 11,
-                  "presentation": "Ice Blue",
-                  "updated_at": "2015-03-25T19:10:02.038-07:00",
-                  "use_in_customisation": true,
-                  "value": "#abfdff"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2015-03-25T02:46:22.386-07:00",
-                  "id": 203,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "indigo",
-                  "option_type_id": 8,
-                  "position": 85,
-                  "presentation": "Indigo",
-                  "updated_at": "2015-03-25T19:18:37.683-07:00",
-                  "use_in_customisation": false,
-                  "value": "#3366cc"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:25:45.588-07:00",
-                  "id": 65,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "ivory",
-                  "option_type_id": 8,
-                  "position": 26,
-                  "presentation": "Ivory",
-                  "updated_at": "2015-03-25T19:03:30.046-07:00",
-                  "use_in_customisation": true,
-                  "value": "#FFFFF0"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2014-02-16T13:21:01.832-08:00",
-                  "id": 87,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "lavender",
-                  "option_type_id": 8,
-                  "position": 41,
-                  "presentation": "Lavender",
-                  "updated_at": "2015-03-25T19:10:02.052-07:00",
-                  "use_in_customisation": true,
-                  "value": "#d9c0e7"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:02:47.937-07:00",
-                  "id": 45,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "lemon",
-                  "option_type_id": 8,
-                  "position": 10,
-                  "presentation": "Lemon",
-                  "updated_at": "2014-03-04T12:40:15.482-08:00",
-                  "use_in_customisation": true,
-                  "value": "#F3D623"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2016-01-28T22:14:22.809-08:00",
-                  "id": 300,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "light-nude",
-                  "option_type_id": 8,
-                  "position": 163,
-                  "presentation": "Light Nude",
-                  "updated_at": "2017-09-25T16:32:46.936-07:00",
-                  "use_in_customisation": false,
-                  "value": "#e2c7bc"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2015-03-25T02:46:21.268-07:00",
-                  "id": 196,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "light-pink",
-                  "option_type_id": 8,
-                  "position": 78,
-                  "presentation": "Light Pink",
-                  "updated_at": "2015-03-25T18:28:32.776-07:00",
-                  "use_in_customisation": true,
-                  "value": "#ffecef"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:22:41.139-07:00",
-                  "id": 61,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "lilac",
-                  "option_type_id": 8,
-                  "position": 23,
-                  "presentation": "Lilac",
-                  "updated_at": "2015-03-25T19:10:02.046-07:00",
-                  "use_in_customisation": true,
-                  "value": "#ecddf4"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:04:53.841-07:00",
-                  "id": 55,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "mint",
-                  "option_type_id": 8,
-                  "position": 18,
-                  "presentation": "Mint",
-                  "updated_at": "2017-01-30T00:55:44.089-08:00",
-                  "use_in_customisation": true,
-                  "value": "#BBECEB"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2014-08-26T05:09:34.923-07:00",
-                  "id": 183,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "mushroom",
-                  "option_type_id": 8,
-                  "position": 70,
-                  "presentation": "Mushroom",
-                  "updated_at": "2014-09-15T18:38:17.359-07:00",
-                  "use_in_customisation": false,
-                  "value": "#837478"
-                }
-              },
-              {
-                "option_value": {
                   "created_at": "2013-08-08T04:26:58.201-07:00",
                   "id": 70,
                   "image_content_type": null,
@@ -2492,235 +1245,11 @@
                   "image_file_size": null,
                   "name": "navy",
                   "option_type_id": 8,
-                  "position": 29,
+                  "position": 34,
                   "presentation": "Navy",
                   "updated_at": "2017-01-30T00:55:43.623-08:00",
                   "use_in_customisation": true,
                   "value": "#0E0E47"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2015-06-04T22:37:57.980-07:00",
-                  "id": 245,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "olive",
-                  "option_type_id": 8,
-                  "position": 117,
-                  "presentation": "Olive",
-                  "updated_at": "2017-09-25T16:32:47.570-07:00",
-                  "use_in_customisation": false,
-                  "value": "#34351f"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-07T23:47:57.223-07:00",
-                  "id": 35,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "orange",
-                  "option_type_id": 8,
-                  "position": 5,
-                  "presentation": "Orange",
-                  "updated_at": "2014-03-04T12:40:15.473-08:00",
-                  "use_in_customisation": true,
-                  "value": "#FF8434"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2014-08-21T01:23:47.589-07:00",
-                  "id": 179,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "pale-grey",
-                  "option_type_id": 8,
-                  "position": 68,
-                  "presentation": "Pale Grey",
-                  "updated_at": "2017-01-30T00:55:44.102-08:00",
-                  "use_in_customisation": true,
-                  "value": "#D8D6DD"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:18:51.342-07:00",
-                  "id": 57,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "pale-pink",
-                  "option_type_id": 8,
-                  "position": 19,
-                  "presentation": "Pale Pink",
-                  "updated_at": "2017-01-30T00:55:44.046-08:00",
-                  "use_in_customisation": true,
-                  "value": "#F5E5EC"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:02:47.925-07:00",
-                  "id": 39,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "peach",
-                  "option_type_id": 8,
-                  "position": 7,
-                  "presentation": "Peach",
-                  "updated_at": "2017-05-16T14:30:23.387-07:00",
-                  "use_in_customisation": true,
-                  "value": "#F7C6B0"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-06T19:15:45.546-07:00",
-                  "id": 29,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "pink",
-                  "option_type_id": 8,
-                  "position": 3,
-                  "presentation": "Pink",
-                  "updated_at": "2014-03-24T07:16:07.417-07:00",
-                  "use_in_customisation": false,
-                  "value": "#FF95CB"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2014-08-06T05:35:56.149-07:00",
-                  "id": 158,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "plum",
-                  "option_type_id": 8,
-                  "position": 56,
-                  "presentation": "Plum",
-                  "updated_at": "2017-01-30T00:55:44.053-08:00",
-                  "use_in_customisation": true,
-                  "value": "#37105B"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-06T19:15:45.526-07:00",
-                  "id": 26,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "red",
-                  "option_type_id": 8,
-                  "position": 1,
-                  "presentation": "Red",
-                  "updated_at": "2017-01-30T00:55:44.007-08:00",
-                  "use_in_customisation": true,
-                  "value": "#E01B1B"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2015-05-09T19:26:06.081-07:00",
-                  "id": 228,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "sage-green",
-                  "option_type_id": 8,
-                  "position": 102,
-                  "presentation": "Sage Green",
-                  "updated_at": "2015-05-15T00:55:08.454-07:00",
-                  "use_in_customisation": false,
-                  "value": "#95c7bc"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2015-03-25T02:53:40.802-07:00",
-                  "id": 214,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "sand",
-                  "option_type_id": 8,
-                  "position": 90,
-                  "presentation": "Sand",
-                  "updated_at": "2015-03-25T19:18:37.698-07:00",
-                  "use_in_customisation": false,
-                  "value": "#efeadd"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2016-01-28T22:14:22.697-08:00",
-                  "id": 295,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "sunset-orange",
-                  "option_type_id": 8,
-                  "position": 159,
-                  "presentation": "Sunset Orange",
-                  "updated_at": "2017-09-25T16:32:46.909-07:00",
-                  "use_in_customisation": false,
-                  "value": "#e83c25"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:04:53.839-07:00",
-                  "id": 54,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "turquoise",
-                  "option_type_id": 8,
-                  "position": 17,
-                  "presentation": "Turquoise",
-                  "updated_at": "2014-03-04T12:40:15.489-08:00",
-                  "use_in_customisation": true,
-                  "value": "#41B5A8"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:52:00.970-07:00",
-                  "id": 76,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "watermelon",
-                  "option_type_id": 8,
-                  "position": 34,
-                  "presentation": "Watermelon",
-                  "updated_at": "2014-03-04T12:40:15.509-08:00",
-                  "use_in_customisation": true,
-                  "value": "#E9658A"
-                }
-              },
-              {
-                "option_value": {
-                  "created_at": "2013-08-08T04:02:47.921-07:00",
-                  "id": 38,
-                  "image_content_type": null,
-                  "image_file_name": null,
-                  "image_file_size": null,
-                  "name": "white",
-                  "option_type_id": 8,
-                  "position": 6,
-                  "presentation": "White",
-                  "updated_at": "2014-03-04T12:40:15.476-08:00",
-                  "use_in_customisation": true,
-                  "value": "#FFFFFF"
                 }
               }
             ],
@@ -2739,12 +1268,12 @@
             "all": [
               {
                 "table": {
-                  "id": 2806,
-                  "name": "Remove Side Split",
-                  "image": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/2806/original/1.png",
+                  "id": 4217,
+                  "name": "Add Draped Panels To Straps",
+                  "image": "logo_empty.png",
                   "display_price": {
                     "money": {
-                      "fractional": "999.0",
+                      "fractional": "900.0",
                       "currency": {
                         "id": "aud",
                         "priority": 4,
@@ -2781,12 +1310,12 @@
               },
               {
                 "table": {
-                  "id": 2807,
-                  "name": "Wider Straps And Waist Tie",
-                  "image": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/2807/original/2.png",
+                  "id": 4218,
+                  "name": "Add Covered Buttons Down Front Bodice",
+                  "image": "logo_empty.png",
                   "display_price": {
                     "money": {
-                      "fractional": "999.0",
+                      "fractional": "400.0",
                       "currency": {
                         "id": "aud",
                         "priority": 4,
@@ -2823,12 +1352,12 @@
               },
               {
                 "table": {
-                  "id": 2808,
+                  "id": 4219,
                   "name": "Make Petti Length",
-                  "image": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/2808/original/3.png",
+                  "image": "logo_empty.png",
                   "display_price": {
                     "money": {
-                      "fractional": "0.0",
+                      "fractional": "900.0",
                       "currency": {
                         "id": "aud",
                         "priority": 4,
@@ -2862,41 +1391,123 @@
                   },
                   "position": 3
                 }
+              },
+              {
+                "table": {
+                  "id": 4220,
+                  "name": "Add Buttons Down Center Front",
+                  "image": "logo_empty.png",
+                  "display_price": {
+                    "money": {
+                      "fractional": "900.0",
+                      "currency": {
+                        "id": "aud",
+                        "priority": 4,
+                        "iso_code": "AUD",
+                        "name": "Australian Dollar",
+                        "symbol": "$",
+                        "alternate_symbols": [
+                          "A$"
+                        ],
+                        "subunit": "Cent",
+                        "subunit_to_unit": 100,
+                        "symbol_first": true,
+                        "html_entity": "$",
+                        "decimal_mark": ".",
+                        "thousands_separator": ",",
+                        "iso_numeric": "036"
+                      },
+                      "bank": {
+                        "rounding_method": null,
+                        "rates": {},
+                        "mutex": {}
+                      }
+                    },
+                    "options": {
+                      "with_currency": false,
+                      "symbol_position": "before",
+                      "no_cents": false,
+                      "decimal_mark": ".",
+                      "thousands_separator": ","
+                    }
+                  },
+                  "position": 4
+                }
               }
             ],
             "incompatibilities": {
-              "2806": [],
-              "2807": [],
-              "2808": []
+              "4217": [],
+              "4218": [],
+              "4219": [],
+              "4220": []
             },
             "is_free": false
           }
         },
-        "making_options": [
-          {
-            "product_making_option": {
-              "active": true,
-              "currency": "USD",
-              "id": 210,
-              "option_type": "fast_making",
-              "price": "30.0",
-              "product_id": 1109,
-              "variant_id": null
+        "making_options": [],
+        "addons": {
+          "base_images": [
+            {
+              "name": "FP2318_base-2.png",
+              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1512/cads/869/web/base-2.png?1494624829",
+              "position": 4,
+              "bit_array": [
+                false,
+                false,
+                true,
+                false
+              ]
+            },
+            {
+              "name": "FP2318_base.png",
+              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1512/cads/870/web/base-.png?1494624830",
+              "position": 5,
+              "bit_array": [
+                false,
+                false,
+                false,
+                false
+              ]
             }
-          },
-          {
-            "product_making_option": {
-              "active": true,
-              "currency": "USD",
-              "id": 1296,
-              "option_type": "slow_making",
-              "price": "-0.1",
-              "product_id": 1109,
-              "variant_id": null
+          ],
+          "layer_images": [
+            {
+              "name": "FP2318_layer-3.png",
+              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1512/cads/866/web/layer-3.png?1494624826",
+              "position": 1,
+              "bit_array": [
+                false,
+                false,
+                false,
+                true
+              ]
+            },
+            {
+              "name": "FP2318_layer-1.png",
+              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1512/cads/867/web/layer-1.png?1494624828",
+              "position": 2,
+              "bit_array": [
+                false,
+                true,
+                false,
+                false
+              ]
+            },
+            {
+              "name": "FP2318_layer-0.png",
+              "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/1512/cads/868/web/layer-0.png?1494624828",
+              "position": 3,
+              "bit_array": [
+                true,
+                false,
+                false,
+                false
+              ]
             }
-          }
-        ]
-      }
+          ]
+        }
+      },
+      "modifiable": true
     },
     "moodboard": {
       "table": {
@@ -2908,114 +1519,68 @@
         },
         "celebrity_item": {
           "table": {
-            "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12918/product/celeb.png?1471293152",
-            "source": ""
+            "image_url": null,
+            "source": null
           }
         },
-        "items": [
-          {
-            "table": {
-              "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12921/product/tumblr_n6shz2eonu1rl727go1_500.jpg?1471293153",
-              "source": ""
-            }
-          },
-          {
-            "table": {
-              "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12920/product/164f3de94f56e184bba93b201dad9167.jpg?1471293153",
-              "source": ""
-            }
-          },
-          {
-            "table": {
-              "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12919/product/78e8fde2049d345651e1cd51f128627a.jpg?1471293153",
-              "source": ""
-            }
-          },
-          {
-            "table": {
-              "image_url": "https://d1msb7dh8kb0o9.cloudfront.net/system/images/12917/product/681260f1cb315f77684c8dbd7a104ee0.jpg?1471293152",
-              "source": ""
-            }
-          }
-        ]
+        "items": []
       }
     },
     "render3d_images": [],
-    "master_id": 43984,
-    "description": "<p>Let's wrap it up. The Tilbury is a heavy georgette wrap gown featuring a full skirt and a thigh high split.</p>",
-    "meta_description": "",
-    "permalink": "tilbury_dress",
+    "id": 1512,
+    "master_id": 50219,
+    "sku": "fp2318",
+    "name": "The Tiegs Dress",
+    "description": "<p>Time to shine. The Tiegs is a metallic woven satin mini dress featuring structured pleating across the hips and a flared skirt. It has an invisible zipper and hook and eye closure.</p>",
+    "permalink": "the_tiegs_dress",
     "is_active": true,
     "is_deleted": false,
     "height_customisable": true,
-    "fabric": "Main: 100% polyester heavy georgetteLining: 100% polyester heavy georgette",
-    "fit": "Bianca wears a size AU8/US4 and skirt tall length, her measurements are:Bust: 86cm, Waist: 61cm, Hips: 86cm, Height: 180cm",
-    "size": "Skirt length: 110cm",
-    "style_notes": "",
+    "fabric": "Main: 96% polyester, 4% spandex metallic woven \nLining: 97% polyester, 3% spandex matte stretch satin \nTrim: Nylon invisible zip with hook & eye closure\n\n",
+    "fit": "Emma's measurements are:\nBust: 32\"\n, Waist: 24\"\n, Hips: 35\"\n, Height: 5\"11\n\nShe wears a size 0 (AU 4)",
+    "size": "Dress length: 47cm",
     "size_chart": "2016_v2",
+    "fast_making": false,
     "standard_days_for_making": "5",
     "customised_days_for_making": "10",
     "default_standard_days_for_making": 5,
     "default_customised_days_for_making": 10,
-    "delivery_period": "7 - 10 business days",
+    "delivery_period": "12 - 15 business days",
     "fast_making_delivery_period": "4 - 6 business days",
     "cny_delivery_delays": false,
-    "color_id": 82,
-    "color_name": "champagne",
-    "making_option_id": 210,
+    "color_id": 26,
+    "color_name": "red",
+    "making_option_id": null,
+    "prices": {
+      "currency": "USD",
+      "original_amount": "249.0",
+      "sale_amount": null,
+      "discount_amount": null,
+      "original_string": "$249.00",
+      "sale_string": null,
+      "discount_string": null
+    },
     "colors": {
       "table": {
         "default": [
           {
             "option_value": {
-              "created_at": "2013-08-09T03:04:09.649-07:00",
-              "id": 82,
+              "created_at": "2013-08-06T19:15:45.526-07:00",
+              "id": 26,
               "image_content_type": null,
               "image_file_name": null,
               "image_file_size": null,
-              "name": "champagne",
+              "name": "red",
               "option_type_id": 8,
-              "position": 37,
-              "presentation": "Champagne",
-              "updated_at": "2017-01-30T00:55:43.601-08:00",
+              "position": 1,
+              "presentation": "Red",
+              "updated_at": "2017-01-30T00:55:44.007-08:00",
               "use_in_customisation": true,
-              "value": "#EFE4DC"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T23:58:38.640-07:00",
-              "id": 79,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "pale-blue",
-              "option_type_id": 8,
-              "position": 36,
-              "presentation": "Pale Blue",
-              "updated_at": "2017-01-30T00:55:44.066-08:00",
-              "use_in_customisation": true,
-              "value": "#BBD0ED"
+              "value": "#E01B1B"
             }
           }
         ],
         "extra": [
-          {
-            "option_value": {
-              "created_at": "2015-06-04T22:37:57.906-07:00",
-              "id": 244,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "aqua",
-              "option_type_id": 8,
-              "position": 116,
-              "presentation": "Aqua",
-              "updated_at": "2017-09-25T16:32:47.536-07:00",
-              "use_in_customisation": false,
-              "value": "#4aa5d8"
-            }
-          },
           {
             "option_value": {
               "created_at": "2013-08-06T19:15:45.519-07:00",
@@ -3034,374 +1599,6 @@
           },
           {
             "option_value": {
-              "created_at": "2014-02-17T04:32:27.600-08:00",
-              "id": 90,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "blush",
-              "option_type_id": 8,
-              "position": 43,
-              "presentation": "Blush",
-              "updated_at": "2015-03-25T18:57:08.124-07:00",
-              "use_in_customisation": true,
-              "value": "#F9DAD8"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2016-01-28T22:14:22.624-08:00",
-              "id": 293,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "bright-yellow",
-              "option_type_id": 8,
-              "position": 157,
-              "presentation": "Bright Yellow",
-              "updated_at": "2017-09-25T16:32:46.783-07:00",
-              "use_in_customisation": false,
-              "value": "#fcf751"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2014-02-17T03:58:14.777-08:00",
-              "id": 89,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "burgundy",
-              "option_type_id": 8,
-              "position": 43,
-              "presentation": "Burgundy",
-              "updated_at": "2017-01-30T00:55:43.769-08:00",
-              "use_in_customisation": true,
-              "value": "#77202F"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2015-03-25T02:51:30.862-07:00",
-              "id": 212,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "candy-pink",
-              "option_type_id": 8,
-              "position": 89,
-              "presentation": "Candy Pink",
-              "updated_at": "2015-03-25T19:18:37.696-07:00",
-              "use_in_customisation": false,
-              "value": "#ff99ff"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:02:47.931-07:00",
-              "id": 42,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "cherry-red",
-              "option_type_id": 8,
-              "position": 10,
-              "presentation": "Cherry Red",
-              "updated_at": "2014-03-04T12:40:15.481-08:00",
-              "use_in_customisation": true,
-              "value": "#B91B29"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:50:04.396-07:00",
-              "id": 73,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "cobalt-blue",
-              "option_type_id": 8,
-              "position": 32,
-              "presentation": "Cobalt Blue",
-              "updated_at": "2014-03-04T12:40:15.506-08:00",
-              "use_in_customisation": true,
-              "value": "#012D60"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:02:47.946-07:00",
-              "id": 49,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "coral",
-              "option_type_id": 8,
-              "position": 14,
-              "presentation": "Coral",
-              "updated_at": "2017-05-16T14:30:23.384-07:00",
-              "use_in_customisation": true,
-              "value": "#FD9A92"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2016-01-28T22:14:22.706-08:00",
-              "id": 296,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "cornflower-blue",
-              "option_type_id": 8,
-              "position": 160,
-              "presentation": "Cornflower Blue",
-              "updated_at": "2017-09-25T16:32:47.542-07:00",
-              "use_in_customisation": false,
-              "value": "#4865c1"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-10T05:43:19.814-07:00",
-              "id": 85,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "cream",
-              "option_type_id": 8,
-              "position": 40,
-              "presentation": "Cream",
-              "updated_at": "2014-03-04T12:40:15.514-08:00",
-              "use_in_customisation": true,
-              "value": "#EBE5CD"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2016-01-28T22:14:22.713-08:00",
-              "id": 297,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "dark-chocolate",
-              "option_type_id": 8,
-              "position": 161,
-              "presentation": "Dark Chocolate",
-              "updated_at": "2017-09-25T16:32:47.529-07:00",
-              "use_in_customisation": false,
-              "value": "#4c1f0b"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2015-10-22T21:59:02.208-07:00",
-              "id": 281,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "dark-nude",
-              "option_type_id": 8,
-              "position": 145,
-              "presentation": "Dark Nude",
-              "updated_at": "2015-10-22T22:10:18.559-07:00",
-              "use_in_customisation": false,
-              "value": "#d2af99"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:54:03.616-07:00",
-              "id": 77,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "emerald-green",
-              "option_type_id": 8,
-              "position": 35,
-              "presentation": "Emerald Green",
-              "updated_at": "2014-03-04T12:40:15.510-08:00",
-              "use_in_customisation": true,
-              "value": "#009875"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:18:51.344-07:00",
-              "id": 58,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "hot-pink",
-              "option_type_id": 8,
-              "position": 20,
-              "presentation": "Hot Pink",
-              "updated_at": "2014-03-04T12:40:15.496-08:00",
-              "use_in_customisation": true,
-              "value": "#F14873"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:02:47.939-07:00",
-              "id": 46,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "ice-blue",
-              "option_type_id": 8,
-              "position": 11,
-              "presentation": "Ice Blue",
-              "updated_at": "2015-03-25T19:10:02.038-07:00",
-              "use_in_customisation": true,
-              "value": "#abfdff"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2015-03-25T02:46:22.386-07:00",
-              "id": 203,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "indigo",
-              "option_type_id": 8,
-              "position": 85,
-              "presentation": "Indigo",
-              "updated_at": "2015-03-25T19:18:37.683-07:00",
-              "use_in_customisation": false,
-              "value": "#3366cc"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:25:45.588-07:00",
-              "id": 65,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "ivory",
-              "option_type_id": 8,
-              "position": 26,
-              "presentation": "Ivory",
-              "updated_at": "2015-03-25T19:03:30.046-07:00",
-              "use_in_customisation": true,
-              "value": "#FFFFF0"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2014-02-16T13:21:01.832-08:00",
-              "id": 87,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "lavender",
-              "option_type_id": 8,
-              "position": 41,
-              "presentation": "Lavender",
-              "updated_at": "2015-03-25T19:10:02.052-07:00",
-              "use_in_customisation": true,
-              "value": "#d9c0e7"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:02:47.937-07:00",
-              "id": 45,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "lemon",
-              "option_type_id": 8,
-              "position": 10,
-              "presentation": "Lemon",
-              "updated_at": "2014-03-04T12:40:15.482-08:00",
-              "use_in_customisation": true,
-              "value": "#F3D623"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2016-01-28T22:14:22.809-08:00",
-              "id": 300,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "light-nude",
-              "option_type_id": 8,
-              "position": 163,
-              "presentation": "Light Nude",
-              "updated_at": "2017-09-25T16:32:46.936-07:00",
-              "use_in_customisation": false,
-              "value": "#e2c7bc"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2015-03-25T02:46:21.268-07:00",
-              "id": 196,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "light-pink",
-              "option_type_id": 8,
-              "position": 78,
-              "presentation": "Light Pink",
-              "updated_at": "2015-03-25T18:28:32.776-07:00",
-              "use_in_customisation": true,
-              "value": "#ffecef"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:22:41.139-07:00",
-              "id": 61,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "lilac",
-              "option_type_id": 8,
-              "position": 23,
-              "presentation": "Lilac",
-              "updated_at": "2015-03-25T19:10:02.046-07:00",
-              "use_in_customisation": true,
-              "value": "#ecddf4"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:04:53.841-07:00",
-              "id": 55,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "mint",
-              "option_type_id": 8,
-              "position": 18,
-              "presentation": "Mint",
-              "updated_at": "2017-01-30T00:55:44.089-08:00",
-              "use_in_customisation": true,
-              "value": "#BBECEB"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2014-08-26T05:09:34.923-07:00",
-              "id": 183,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "mushroom",
-              "option_type_id": 8,
-              "position": 70,
-              "presentation": "Mushroom",
-              "updated_at": "2014-09-15T18:38:17.359-07:00",
-              "use_in_customisation": false,
-              "value": "#837478"
-            }
-          },
-          {
-            "option_value": {
               "created_at": "2013-08-08T04:26:58.201-07:00",
               "id": 70,
               "image_content_type": null,
@@ -3409,235 +1606,11 @@
               "image_file_size": null,
               "name": "navy",
               "option_type_id": 8,
-              "position": 29,
+              "position": 34,
               "presentation": "Navy",
               "updated_at": "2017-01-30T00:55:43.623-08:00",
               "use_in_customisation": true,
               "value": "#0E0E47"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2015-06-04T22:37:57.980-07:00",
-              "id": 245,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "olive",
-              "option_type_id": 8,
-              "position": 117,
-              "presentation": "Olive",
-              "updated_at": "2017-09-25T16:32:47.570-07:00",
-              "use_in_customisation": false,
-              "value": "#34351f"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-07T23:47:57.223-07:00",
-              "id": 35,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "orange",
-              "option_type_id": 8,
-              "position": 5,
-              "presentation": "Orange",
-              "updated_at": "2014-03-04T12:40:15.473-08:00",
-              "use_in_customisation": true,
-              "value": "#FF8434"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2014-08-21T01:23:47.589-07:00",
-              "id": 179,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "pale-grey",
-              "option_type_id": 8,
-              "position": 68,
-              "presentation": "Pale Grey",
-              "updated_at": "2017-01-30T00:55:44.102-08:00",
-              "use_in_customisation": true,
-              "value": "#D8D6DD"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:18:51.342-07:00",
-              "id": 57,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "pale-pink",
-              "option_type_id": 8,
-              "position": 19,
-              "presentation": "Pale Pink",
-              "updated_at": "2017-01-30T00:55:44.046-08:00",
-              "use_in_customisation": true,
-              "value": "#F5E5EC"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:02:47.925-07:00",
-              "id": 39,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "peach",
-              "option_type_id": 8,
-              "position": 7,
-              "presentation": "Peach",
-              "updated_at": "2017-05-16T14:30:23.387-07:00",
-              "use_in_customisation": true,
-              "value": "#F7C6B0"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-06T19:15:45.546-07:00",
-              "id": 29,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "pink",
-              "option_type_id": 8,
-              "position": 3,
-              "presentation": "Pink",
-              "updated_at": "2014-03-24T07:16:07.417-07:00",
-              "use_in_customisation": false,
-              "value": "#FF95CB"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2014-08-06T05:35:56.149-07:00",
-              "id": 158,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "plum",
-              "option_type_id": 8,
-              "position": 56,
-              "presentation": "Plum",
-              "updated_at": "2017-01-30T00:55:44.053-08:00",
-              "use_in_customisation": true,
-              "value": "#37105B"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-06T19:15:45.526-07:00",
-              "id": 26,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "red",
-              "option_type_id": 8,
-              "position": 1,
-              "presentation": "Red",
-              "updated_at": "2017-01-30T00:55:44.007-08:00",
-              "use_in_customisation": true,
-              "value": "#E01B1B"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2015-05-09T19:26:06.081-07:00",
-              "id": 228,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "sage-green",
-              "option_type_id": 8,
-              "position": 102,
-              "presentation": "Sage Green",
-              "updated_at": "2015-05-15T00:55:08.454-07:00",
-              "use_in_customisation": false,
-              "value": "#95c7bc"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2015-03-25T02:53:40.802-07:00",
-              "id": 214,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "sand",
-              "option_type_id": 8,
-              "position": 90,
-              "presentation": "Sand",
-              "updated_at": "2015-03-25T19:18:37.698-07:00",
-              "use_in_customisation": false,
-              "value": "#efeadd"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2016-01-28T22:14:22.697-08:00",
-              "id": 295,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "sunset-orange",
-              "option_type_id": 8,
-              "position": 159,
-              "presentation": "Sunset Orange",
-              "updated_at": "2017-09-25T16:32:46.909-07:00",
-              "use_in_customisation": false,
-              "value": "#e83c25"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:04:53.839-07:00",
-              "id": 54,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "turquoise",
-              "option_type_id": 8,
-              "position": 17,
-              "presentation": "Turquoise",
-              "updated_at": "2014-03-04T12:40:15.489-08:00",
-              "use_in_customisation": true,
-              "value": "#41B5A8"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:52:00.970-07:00",
-              "id": 76,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "watermelon",
-              "option_type_id": 8,
-              "position": 34,
-              "presentation": "Watermelon",
-              "updated_at": "2014-03-04T12:40:15.509-08:00",
-              "use_in_customisation": true,
-              "value": "#E9658A"
-            }
-          },
-          {
-            "option_value": {
-              "created_at": "2013-08-08T04:02:47.921-07:00",
-              "id": 38,
-              "image_content_type": null,
-              "image_file_name": null,
-              "image_file_size": null,
-              "name": "white",
-              "option_type_id": 8,
-              "position": 6,
-              "presentation": "White",
-              "updated_at": "2014-03-04T12:40:15.476-08:00",
-              "use_in_customisation": true,
-              "value": "#FFFFFF"
             }
           }
         ],
@@ -3653,15 +1626,15 @@
     },
     "featured_image": {
       "table": {
-        "id": 37551,
-        "position": 1,
-        "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/original/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/product/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/large/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/xlarge/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/small/FP2006-CHAMPAGNE-1.jpg?1499967225",
-        "color": "champagne",
-        "color_id": 82,
+        "id": 36109,
+        "position": 0,
+        "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/original/fp2318-red-front.jpg?1494624920",
+        "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/product/fp2318-red-front.jpg?1494624920",
+        "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/large/fp2318-red-front.jpg?1494624920",
+        "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/xlarge/fp2318-red-front.jpg?1494624920",
+        "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/small/fp2318-red-front.jpg?1494624920",
+        "color": "red",
+        "color_id": 26,
         "size": null,
         "size_id": null
       }
@@ -3836,159 +1809,7 @@
           }
         }
       }
-    },
-    "featured_images": [
-      {
-        "table": {
-          "id": 37551,
-          "position": 1,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/original/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/product/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/large/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/xlarge/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/small/FP2006-CHAMPAGNE-1.jpg?1499967225",
-          "color": "champagne",
-          "color_id": 82,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 37552,
-          "position": 2,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/original/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/product/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/large/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/xlarge/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/small/FP2006-CHAMPAGNE-2.jpg?1499967226",
-          "color": "champagne",
-          "color_id": 82,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 37553,
-          "position": 3,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/original/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/product/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/large/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/xlarge/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/small/FP2006-CHAMPAGNE-3.jpg?1499967226",
-          "color": "champagne",
-          "color_id": 82,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 37550,
-          "position": 4,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/original/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/product/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/large/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/xlarge/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/small/FP2006-CHAMPAGNE-4.jpg?1499967226",
-          "color": "champagne",
-          "color_id": 82,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 37554,
-          "position": 7,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/original/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/product/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/large/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/xlarge/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/small/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-          "color": "champagne",
-          "color_id": 82,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31545,
-          "position": 8,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/original/fp2006-pale_blue-1.jpg?1471292831",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/product/fp2006-pale_blue-1.jpg?1471292831",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/large/fp2006-pale_blue-1.jpg?1471292831",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/xlarge/fp2006-pale_blue-1.jpg?1471292831",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/small/fp2006-pale_blue-1.jpg?1471292831",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31225,
-          "position": 9,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/original/fp2006-pale_blue-2.jpg?1471291862",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/product/fp2006-pale_blue-2.jpg?1471291862",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/large/fp2006-pale_blue-2.jpg?1471291862",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/xlarge/fp2006-pale_blue-2.jpg?1471291862",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/small/fp2006-pale_blue-2.jpg?1471291862",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31220,
-          "position": 10,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/original/fp2006-pale_blue-3.jpg?1471291857",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/product/fp2006-pale_blue-3.jpg?1471291857",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/large/fp2006-pale_blue-3.jpg?1471291857",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/xlarge/fp2006-pale_blue-3.jpg?1471291857",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/small/fp2006-pale_blue-3.jpg?1471291857",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31550,
-          "position": 11,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/original/fp2006-pale_blue-4.jpg?1471292835",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/product/fp2006-pale_blue-4.jpg?1471292835",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/large/fp2006-pale_blue-4.jpg?1471292835",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/xlarge/fp2006-pale_blue-4.jpg?1471292835",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/small/fp2006-pale_blue-4.jpg?1471292835",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      },
-      {
-        "table": {
-          "id": 31218,
-          "position": 14,
-          "original": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/original/fp2006-pale_blue-front.jpg?1471291856",
-          "product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/product/fp2006-pale_blue-front.jpg?1471291856",
-          "large": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/large/fp2006-pale_blue-front.jpg?1471291856",
-          "xlarge": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/xlarge/fp2006-pale_blue-front.jpg?1471291856",
-          "small": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/small/fp2006-pale_blue-front.jpg?1471291856",
-          "color": "pale-blue",
-          "color_id": 79,
-          "size": null,
-          "size_id": null
-        }
-      }
-    ]
+    }
   },
   "discount": {
     "table": {
@@ -3997,74 +1818,46 @@
   },
   "images": [
     {
-      "id": 37551,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/original/FP2006-CHAMPAGNE-1.jpg?1499967225",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37551/product/FP2006-CHAMPAGNE-1.jpg?1499967225",
-      "color_id": 82,
-      "alt": "Tilbury Dress"
+      "id": 36109,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/original/fp2318-red-front.jpg?1494624920",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36109/product/fp2318-red-front.jpg?1494624920",
+      "color_id": 26,
+      "alt": "The Tiegs Dress"
     },
     {
-      "id": 37552,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/original/FP2006-CHAMPAGNE-2.jpg?1499967226",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37552/product/FP2006-CHAMPAGNE-2.jpg?1499967226",
-      "color_id": 82,
-      "alt": "Tilbury Dress"
+      "id": 36107,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36107/original/fp2318-red-1.jpg?1494624918",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36107/product/fp2318-red-1.jpg?1494624918",
+      "color_id": 26,
+      "alt": "The Tiegs Dress"
     },
     {
-      "id": 37553,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/original/FP2006-CHAMPAGNE-3.jpg?1499967226",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37553/product/FP2006-CHAMPAGNE-3.jpg?1499967226",
-      "color_id": 82,
-      "alt": "Tilbury Dress"
+      "id": 36110,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36110/original/fp2318-red-2.jpg?1494624921",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36110/product/fp2318-red-2.jpg?1494624921",
+      "color_id": 26,
+      "alt": "The Tiegs Dress"
     },
     {
-      "id": 37550,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/original/FP2006-CHAMPAGNE-4.jpg?1499967226",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37550/product/FP2006-CHAMPAGNE-4.jpg?1499967226",
-      "color_id": 82,
-      "alt": "Tilbury Dress"
+      "id": 36108,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36108/original/fp2318-red-3.jpg?1494624919",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36108/product/fp2318-red-3.jpg?1494624919",
+      "color_id": 26,
+      "alt": "The Tiegs Dress"
     },
     {
-      "id": 37554,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/original/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/37554/product/FP2006-CHAMPAGNE-FRONT.jpg?1499967228",
-      "color_id": 82,
-      "alt": "Tilbury Dress"
+      "id": 36103,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36103/original/fp2318-red-4.jpg?1494624916",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36103/product/fp2318-red-4.jpg?1494624916",
+      "color_id": 26,
+      "alt": "The Tiegs Dress"
     },
     {
-      "id": 31545,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/original/fp2006-pale_blue-1.jpg?1471292831",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/product/fp2006-pale_blue-1.jpg?1471292831",
-      "color_id": 79,
-      "alt": "Tilbury Dress"
-    },
-    {
-      "id": 31225,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/original/fp2006-pale_blue-2.jpg?1471291862",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31225/product/fp2006-pale_blue-2.jpg?1471291862",
-      "color_id": 79,
-      "alt": "Tilbury Dress"
-    },
-    {
-      "id": 31220,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/original/fp2006-pale_blue-3.jpg?1471291857",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31220/product/fp2006-pale_blue-3.jpg?1471291857",
-      "color_id": 79,
-      "alt": "Tilbury Dress"
-    },
-    {
-      "id": 31550,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/original/fp2006-pale_blue-4.jpg?1471292835",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31550/product/fp2006-pale_blue-4.jpg?1471292835",
-      "color_id": 79,
-      "alt": "Tilbury Dress"
-    },
-    {
-      "id": 31218,
-      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/original/fp2006-pale_blue-front.jpg?1471291856",
-      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31218/product/fp2006-pale_blue-front.jpg?1471291856",
-      "color_id": 79,
-      "alt": "Tilbury Dress"
+      "id": 36104,
+      "url": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36104/original/fp2318-red-5.jpg?1494624917",
+      "url_product": "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36104/product/fp2318-red-5.jpg?1494624917",
+      "color_id": 26,
+      "alt": "The Tiegs Dress"
     }
   ],
   "sizeChart": [

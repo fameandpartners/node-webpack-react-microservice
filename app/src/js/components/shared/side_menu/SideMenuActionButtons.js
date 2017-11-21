@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import classnames from 'classnames';
+import { connect } from 'react-redux';
 import SearchBarExpander from '../../generic/SearchBarExpander';
+import win from '../../../polyfills/windowPolyfill';
 
 // Assets
 import Carat from '../../../../svg/carat.svg';
@@ -13,6 +16,14 @@ import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
 // CSS
 import '../../../../css/components/SideMenuActionButtons.scss';
 
+
+function stateToProps(state) {
+  // Which part of the Redux global state does our component want to receive as props?
+  const user = state.$$appState.get('user');
+  return {
+    firstName: user ? user.get('first_name') : null,
+  };
+}
 
 class SideMenuActionButtons extends Component {
   constructor(props) {
@@ -31,6 +42,11 @@ class SideMenuActionButtons extends Component {
     this.setState({ searchBarActive: false });
   }
 
+  handleDressSearch(evt, data) {
+    const location = `${win.location.origin}/search?q=${win.encodeURI(data)}`;
+    win.location = location;
+  }
+
   bindActionClick(subNavigationContainer) {
     const { handleMenuActionClick } = this.props;
     return () => {
@@ -40,11 +56,32 @@ class SideMenuActionButtons extends Component {
 
   render() {
     const { searchBarActive } = this.state;
+    const { firstName } = this.props;
 
     return (
-      <div>
-        <div className="SideMenuActionButtons__body u-center u-position--relative">
+      <div className="u-height--full grid-middle">
+        <div className="SideMenuActionButtons__body u-position--relative">
           <ul>
+            { firstName ?
+              <li className="u-mb-big u-ml-xs">
+                <a
+                  className="link link--static link--no-underline"
+                  href="/profile"
+                >
+                    Hello, {firstName}
+                </a>
+              </li>
+              :
+              <li className="u-ml-xs">
+                <a
+                  className="link link--static link--no-underline"
+                  href="/profile"
+                >
+                  Log In / Sign Up
+                </a>
+              </li>
+            }
+            <li>-</li>
             <li
               className="u-cursor--pointer"
               onClick={this.bindActionClick(NAVIGATION_CONTAINERS.SHOP_ALL)}
@@ -73,13 +110,22 @@ class SideMenuActionButtons extends Component {
                 />
               </span>
             </li>
-            <li><span>Account</span></li>
-            <li className="u-mb-normal">
-              <span>Orders</span>
-            </li>
+            { firstName ?
+              <li>
+                <a className="link link--static link--no-underline" href="/profile">Account</a>
+              </li> : null
+            }
+            { firstName ?
+              <li className="u-mb-normal">
+                <a className="link link--static link--no-underline" href="/view-orders">Orders</a>
+              </li> : null
+            }
             <li>
               <span
-                className="SideMenuActionButtons__icon-wrapper"
+                className={classnames(
+                  'SideMenuActionButtons__icon-wrapper u-display--inline-block',
+                  { 'SideMenuActionButtons__icon-wrapper--active': searchBarActive },
+                )}
                 onClick={this.handleSearchIconClick}
               >
                 <SearchIcon
@@ -91,6 +137,7 @@ class SideMenuActionButtons extends Component {
               <SearchBarExpander
                 handleSearchIconClick={this.handleSearchIconClick}
                 onBlur={this.handleSearchIconClickClose}
+                onSubmit={this.handleDressSearch}
                 isActive={searchBarActive}
               />
             </li>
@@ -102,7 +149,12 @@ class SideMenuActionButtons extends Component {
 }
 
 SideMenuActionButtons.propTypes = {
+  firstName: PropTypes.string.isRequired,
   handleMenuActionClick: PropTypes.func.isRequired,
 };
 
-export default SideMenuActionButtons;
+SideMenuActionButtons.defaultProps = {
+  firstName: null,
+};
+
+export default connect(stateToProps)(SideMenuActionButtons);

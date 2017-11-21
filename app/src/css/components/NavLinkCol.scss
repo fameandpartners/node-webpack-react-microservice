@@ -1,3 +1,11 @@
-.NavLinkCol {
-  // background: $c-neutral-4;
+.NavLinkCol__heading {
+  margin-bottom: 10px;
+}
+
+.SideMenu .NavLinkCol__heading {
+  margin-bottom: 20px;
+}
+
+.NavLinkCol__li {
+  line-height: 35px;
 }

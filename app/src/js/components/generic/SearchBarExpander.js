@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { spring, TransitionMotion } from 'react-motion';
+import classnames from 'classnames';
 import noop from '../../libs/noop';
 
 // Components
@@ -41,7 +42,7 @@ class SearchBarExpander extends Component {
   }
 
   render() {
-    const { isActive, onBlur } = this.props;
+    const { isActive, onBlur, onSubmit } = this.props;
     return (
       <TransitionMotion
         styles={isActive ? [this.defaultStyles()] : []}
@@ -53,14 +54,20 @@ class SearchBarExpander extends Component {
             const style = items[0].style;
             return (
               <div
-                className="SearchBarExpander u-center u-display--inline-block"
+                className={classnames(
+                  'SearchBarExpander u-center u-display--inline-block',
+                  { 'SearchBarExpander--active': isActive },
+                )}
                 key={items[0].key}
                 style={{
                   width: `${style.width}px`,
                   opacity: style.opacity,
                 }}
               >
-                <SearchBar onBlur={onBlur} />
+                <SearchBar
+                  onBlur={onBlur}
+                  onSubmit={onSubmit}
+                />
               </div>
             );
           }
@@ -74,6 +81,7 @@ class SearchBarExpander extends Component {
 SearchBarExpander.propTypes = {
   isActive: PropTypes.bool,
   onBlur: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 SearchBarExpander.defaultProps = {
