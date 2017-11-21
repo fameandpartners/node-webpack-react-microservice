@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
 import { sizeProfilePresence } from '../../utilities/pdpValidations';
 import noop from '../../libs/noop';
+import win from '../../polyfills/windowPolyfill';
 
 // Breakpoint Decoration
 import Resize from '../../decorators/Resize';
@@ -109,6 +110,11 @@ class AddToCartButton extends Component {
       if (err) {
         // eslint-disable-next-line
         return console.warn('error adding something to the cart', err);
+      }
+
+      // eslint-disable-next-line
+      if (win && win.__data) { // we are in old PDP, this needs to be removed ASAP
+        win.location = '/checkout';
       }
 
       setCartContents({ cart: res.body });
