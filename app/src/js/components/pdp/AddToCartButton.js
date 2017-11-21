@@ -208,6 +208,7 @@ AddToCartButton.propTypes = {
   setSizeProfileError: PropTypes.func.isRequired,
   setCartContents: PropTypes.func.isRequired,
   sizeValue: PropTypes.number,
+  // Decorator Props
   breakpoint: PropTypes.string,
 };
 
