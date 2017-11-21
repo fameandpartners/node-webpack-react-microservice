@@ -117,7 +117,7 @@ class AppMain extends Component {
         </div>
 
 
-        <div className="u-position--fixed u-width--full u-bottom u-z-index--mid">
+        <div className="u-position--fixed u-width--full u-bottom">
           <AddToCartButtonLedgeMobile />
         </div>
         <CustomizationButtonLedge />

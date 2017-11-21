@@ -149,7 +149,7 @@ class SideMenuActionButtons extends Component {
 }
 
 SideMenuActionButtons.propTypes = {
-  firstName: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
   handleMenuActionClick: PropTypes.func.isRequired,
 };
 

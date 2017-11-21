@@ -57,15 +57,8 @@ class Cart extends Component {
     if (lineItems.length > 0) {
       // Reduces subTotal based on base price, colors, and addons chosen
       return lineItems.reduce(
-        (prevTotal, currLineItem) => {
-          const lineItemTotal
-            = currLineItem.color.centsTotal
-            + currLineItem.productCentsBasePrice
-            + currLineItem.addons.reduce(
-              (subTotal, c) => subTotal + parseInt(c.display_price.money.fractional, 10), 0,
-            );
-          return prevTotal + lineItemTotal;
-        }, 0,
+        (prevTotal, currLineItem) => prevTotal + currLineItem.productCentsBasePrice,
+        0,
       );
     }
     return '';
