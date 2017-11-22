@@ -73,7 +73,7 @@ class Header extends Component {
           <nav className="grid-12-noGutter">
             <ul className="col-5 u-text-align--left">
               <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.SHOP_ALL)}>
-                <span className="Header__link" role="link">Shop all</span>
+                <span className="Header__link" role="link">Shop All</span>
               </li>
               <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.WHO_WE_ARE)}>
                 <span className="Header__link" href="#about">Inside Fame</span>
