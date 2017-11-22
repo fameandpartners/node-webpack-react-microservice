@@ -101,7 +101,7 @@ const navigationLinks = {
         type: 'divider',
       },
       {
-        text: 'View All',
+        text: 'Shop All',
         url: '/dresses',
       },
     ],
