@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import ModalActions from '../../actions/ModalActions';
 
 // Constants
-import ProductCustomizationSize from '../pdp/ProductCustomizationSize';
+import StandardSizeForm from './StandardSizeForm';
 import * as CustomizationActions from '../../actions/CustomizationActions';
 // import ModalConstants from '../../constants/ModalConstants';
 
@@ -48,8 +48,7 @@ class StandardSizing extends Component {
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <ProductCustomizationSize
-          hasNavItems={false}
+        <StandardSizeForm
           displaySaveButton
           containerClassNames="u-mt-normal u-mb-big"
         />

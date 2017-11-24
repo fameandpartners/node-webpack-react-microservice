@@ -5,8 +5,8 @@ import { string } from 'prop-types';
 
 // Components
 import WizardContainer from '../wizard/WizardContainer';
-import SelectSizeProfile from '../size-profile/SelectSizeProfile';
-import StandardSizing from '../size-profile/StandardSizing';
+import SelectSizeProfile from './SelectSizeProfile';
+import StandardSizing from './StandardSizing';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
