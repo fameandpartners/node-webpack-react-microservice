@@ -9,7 +9,6 @@ import ModalActions from '../../actions/ModalActions';
 
 // Constants
 import StandardSizeForm from './StandardSizeForm';
-import * as CustomizationActions from '../../actions/CustomizationActions';
 // import ModalConstants from '../../constants/ModalConstants';
 
 // Components
@@ -22,11 +21,8 @@ function stateToProps() {
 
 function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  const { productCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
-
   return {
     activateModal,
-    productCustomizationDrawer,
   };
 }
 
@@ -36,14 +32,14 @@ class StandardSizing extends Component {
     autoBind(this);
   }
 
-  handleCloseModal() {
+  handleCloseWizard() {
     this.props.activateModal({ shouldAppear: false });
   }
 
   render() {
     return (
       <WizardStep
-        handleCloseModal={this.handleCloseModal}
+        handleCloseWizard={this.handleCloseWizard}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"

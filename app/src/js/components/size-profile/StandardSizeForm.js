@@ -217,6 +217,10 @@ class StandardSizeForm extends PureComponent {
     }));
   }
 
+  handleSaveSelection() {
+    console.log('Save selection');
+  }
+
   render() {
     const {
       isUSSiteVersion,
