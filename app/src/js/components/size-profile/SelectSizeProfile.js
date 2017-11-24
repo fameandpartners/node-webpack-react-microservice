@@ -12,7 +12,7 @@ import ModalConstants from '../../constants/ModalConstants';
 
 // Components
 import Button from '../generic/Button';
-import Modal from '../modal/Modal';
+import WizardStep from '../wizard/WizardStep';
 
 function stateToProps() {
   return {};
@@ -43,7 +43,7 @@ class SelectSizeProfile extends Component {
 
   render() {
     return (
-      <Modal
+      <WizardStep
         handleCloseModal={this.handleCloseModal}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
@@ -66,7 +66,7 @@ class SelectSizeProfile extends Component {
           </div>
 
         </div>
-      </Modal>
+      </WizardStep>
     );
   }
 }

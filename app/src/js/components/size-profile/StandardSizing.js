@@ -14,7 +14,7 @@ import * as CustomizationActions from '../../actions/CustomizationActions';
 
 // Components
 // import Button from '../generic/Button';
-import Modal from '../modal/Modal';
+import WizardStep from '../wizard/WizardStep';
 
 function stateToProps() {
   return {};
@@ -42,7 +42,7 @@ class StandardSizing extends Component {
 
   render() {
     return (
-      <Modal
+      <WizardStep
         handleCloseModal={this.handleCloseModal}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
@@ -53,7 +53,7 @@ class StandardSizing extends Component {
           displaySaveButton
           containerClassNames="u-mt-normal u-mb-big"
         />
-      </Modal>
+      </WizardStep>
     );
   }
 }

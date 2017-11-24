@@ -8,13 +8,14 @@ import noop from '../../libs/noop';
 
 // Components
 import CancelOut from '../shared/CancelOut';
+import BackArrow from '../shared/BackArrow';
 import Container from '../generic/Container';
 
-class Modal extends PureComponent {
+class WizardStep extends PureComponent {
   render() {
     const {
       children,
-      handleCloseModal,
+      handleCloseWizard,
       headline,
       modalClassName,
       modalContentClassName,
@@ -25,25 +26,33 @@ class Modal extends PureComponent {
     return (
       <div
         className={classnames([
-          'Modal__wrapper u-height--full',
+          'WizardStep__wrapper u-height--full',
           modalWrapperClassName,
         ])}
         onMouseMove={onMouseMove}
       >
         <div
           className={classnames(
-            'Modal__header h4 Modal__layout-container',
+            'WizardStep__header h4 WizardStep__layout-container',
             {
-              'Modal__header--headline': !!headline,
+              'WizardStep__header--headline': !!headline,
             },
           )}
         >
           <div
             className={classnames(
+              'BackArrow__wrapper',
+            )}
+          >
+            <BackArrow onClick={handleCloseWizard} />
+          </div>
+
+          <div
+            className={classnames(
              'CancelOut__wrapper',
             )}
           >
-            <CancelOut onClick={handleCloseModal} />
+            <CancelOut onClick={handleCloseWizard} />
           </div>
 
           <h3 className="h6">{headline}</h3>
@@ -51,13 +60,13 @@ class Modal extends PureComponent {
 
         <div
           className={classnames([
-            'Modal',
+            'WizardStep',
             modalClassName,
           ])}
         >
           <Container
             className={classnames([
-              'Modal__content',
+              'WizardStep__content',
               modalContentClassName,
             ])}
           >
@@ -69,9 +78,9 @@ class Modal extends PureComponent {
   }
 }
 
-Modal.propTypes = {
+WizardStep.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
-  handleCloseModal: PropTypes.func,
+  handleCloseWizard: PropTypes.func,
   headline: PropTypes.string,
   modalClassName: PropTypes.string,
   modalContentClassName: PropTypes.string,
@@ -79,13 +88,13 @@ Modal.propTypes = {
   onMouseMove: PropTypes.func,
 };
 
-Modal.defaultProps = {
+WizardStep.defaultProps = {
   headline: null,
-  handleCloseModal: noop,
+  handleCloseWizard: noop,
   modalClassName: '',
   modalContentClassName: '',
   modalWrapperClassName: '',
   onMouseMove: noop,
 };
 
-export default Modal;
+export default WizardStep;

@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { string } from 'prop-types';
 
 // Components
-import ModalContainer from '../modal/ModalContainer';
+import WizardContainer from '../wizard/WizardContainer';
 import SelectSizeProfile from '../size-profile/SelectSizeProfile';
 import StandardSizing from '../size-profile/StandardSizing';
-import Wizard from '../wizard/Wizard';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -39,15 +38,15 @@ class SizeProfileModal extends Component {
     } else if (activeModalId === ModalConstants.STANDARD_SIZING_MODAL) {
       return <StandardSizing />;
     } else if (activeModalId === ModalConstants.START_FIT_ID_WIZARD) {
-      return <Wizard />;
+      return <SelectSizeProfile />;
     }
     return null;
   }
 
   render() {
     return (
-      <ModalContainer
-        modalContainerClass="SizeProfileModalContainer grid-middle"
+      <WizardContainer
+        modalContainerClass="SizeProfileWizardContainer grid-middle"
         modalIds={[
           ModalConstants.SIZE_PROFILE_MODAL,
           ModalConstants.STANDARD_SIZING_MODAL,
@@ -60,7 +59,7 @@ class SizeProfileModal extends Component {
         >
           { this.injectModalStep() }
         </div>
-      </ModalContainer>
+      </WizardContainer>
     );
   }
 }
