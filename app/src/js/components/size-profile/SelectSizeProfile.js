@@ -29,7 +29,7 @@ class SelectSizeProfile extends Component {
     autoBind(this);
   }
 
-  handleCloseModal() {
+  handleCloseWizard() {
     this.props.activateModal({ shouldAppear: false });
   }
 
@@ -44,7 +44,7 @@ class SelectSizeProfile extends Component {
   render() {
     return (
       <WizardStep
-        handleCloseModal={this.handleCloseModal}
+        handleCloseWizard={this.handleCloseWizard}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
