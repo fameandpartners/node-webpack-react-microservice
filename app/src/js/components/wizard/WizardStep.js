@@ -17,11 +17,12 @@ class WizardStep extends PureComponent {
       children,
       handleCloseWizard,
       handlePreviousStep,
-      headline,
       modalClassName,
       modalContentClassName,
       modalWrapperClassName,
       onMouseMove,
+      currentStep,
+      totalSteps,
     } = this.props;
 
     return (
@@ -35,9 +36,6 @@ class WizardStep extends PureComponent {
         <div
           className={classnames(
             'WizardStep__header h4 WizardStep__layout-container',
-            {
-              'WizardStep__header--headline': !!headline,
-            },
           )}
         >
           { handlePreviousStep &&
@@ -56,8 +54,9 @@ class WizardStep extends PureComponent {
           >
             <CancelOut onClick={handleCloseWizard} />
           </div>
-
-          <h3 className="h6">{headline}</h3>
+          { currentStep && totalSteps &&
+            <h3 className="h6">{`${currentStep} of ${totalSteps}`}</h3>
+          }
         </div>
 
         <div
@@ -84,21 +83,23 @@ WizardStep.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
   handleCloseWizard: PropTypes.func,
   handlePreviousStep: PropTypes.func,
-  headline: PropTypes.string,
   modalClassName: PropTypes.string,
   modalContentClassName: PropTypes.string,
   modalWrapperClassName: PropTypes.string,
   onMouseMove: PropTypes.func,
+  currentStep: PropTypes.number,
+  totalSteps: PropTypes.number,
 };
 
 WizardStep.defaultProps = {
-  headline: null,
   handleCloseWizard: noop,
   handlePreviousStep: null,
   modalClassName: '',
   modalContentClassName: '',
   modalWrapperClassName: '',
   onMouseMove: noop,
+  currentStep: null,
+  totalSteps: null,
 };
 
 export default WizardStep;

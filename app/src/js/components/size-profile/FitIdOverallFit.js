@@ -42,6 +42,8 @@ class FitIdOverallFit extends Component {
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
+        currentStep="1"
+        totalSteps="5"
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
