@@ -11,7 +11,7 @@ import WizardActions from '../../actions/WizardActions';
 import WizardConstants from '../../constants/WizardConstants';
 
 // Components
-import Button from '../generic/Button';
+// import Button from '../generic/Button';
 import WizardStep from '../wizard/WizardStep';
 
 function stateToProps() {
@@ -23,7 +23,7 @@ function dispatchToProps(dispatch) {
   return { jumpToStep };
 }
 
-class SelectSizeProfile extends Component {
+class FitIdOverallFit extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -33,49 +33,32 @@ class SelectSizeProfile extends Component {
     this.props.jumpToStep({ shouldAppear: false });
   }
 
-  handleSizeClick() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.STANDARD_SIZING_STEP });
-  }
-
-  handleFitIDClick() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERALL_FIT_STEP });
+  handlePreviousStep() {
+    this.props.jumpToStep({ activeStepId: WizardConstants.SELECT_SIZE_PROFILE_STEP });
   }
 
   render() {
     return (
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
+        handlePreviousStep={this.handlePreviousStep}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="SelectSizeProfile">
-          <div className="ButtonBox--medium-width ButtonBox--center">
-            <Button
-              className="SelectSizeProfile__button"
-              text="Use a fit I.D."
-              handleClick={this.handleFitIDClick}
-            />
-          </div>
-          <div className="ButtonBox--medium-width ButtonBox--center">
-            <Button
-              className="SelectSize__button"
-              text="Use standard sizing"
-              handleClick={this.handleSizeClick}
-            />
-          </div>
-
+        <div className="FitIdOverallFit">
+          <h1>OVerall Fit</h1>
         </div>
       </WizardStep>
     );
   }
 }
 
-SelectSizeProfile.propTypes = {
+FitIdOverallFit.propTypes = {
   jumpToStep: PropTypes.func.isRequired,
 };
 
-SelectSizeProfile.defaultProps = {
+FitIdOverallFit.defaultProps = {
 };
 
-export default connect(stateToProps, dispatchToProps)(SelectSizeProfile);
+export default connect(stateToProps, dispatchToProps)(FitIdOverallFit);
