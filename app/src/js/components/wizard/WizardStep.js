@@ -23,6 +23,7 @@ class WizardStep extends PureComponent {
       onMouseMove,
       currentStep,
       totalSteps,
+      headline,
     } = this.props;
 
     return (
@@ -54,10 +55,24 @@ class WizardStep extends PureComponent {
           >
             <CancelOut onClick={handleCloseWizard} />
           </div>
+
           { currentStep && totalSteps &&
-            <h3 className="h6">{`${currentStep} of ${totalSteps}`}</h3>
+            <h3 className="h7">{`${currentStep} of ${totalSteps}`}</h3>
+          }
+          { headline &&
+            <h3 className="h6">{headline}</h3>
           }
         </div>
+
+        { currentStep && totalSteps &&
+          <progress
+            className={classnames(
+              'WizardStep__step-progress',
+            )}
+            max="100"
+            value={`${(currentStep / totalSteps) * 100}`}
+          />
+        }
 
         <div
           className={classnames([
@@ -89,6 +104,7 @@ WizardStep.propTypes = {
   onMouseMove: PropTypes.func,
   currentStep: PropTypes.number,
   totalSteps: PropTypes.number,
+  headline: PropTypes.string,
 };
 
 WizardStep.defaultProps = {
@@ -100,6 +116,7 @@ WizardStep.defaultProps = {
   onMouseMove: noop,
   currentStep: null,
   totalSteps: null,
+  headline: null,
 };
 
 export default WizardStep;

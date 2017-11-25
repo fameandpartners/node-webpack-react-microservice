@@ -141,6 +141,11 @@ input {
   font-weight: 400;
 }
 
+.h7 {
+  font-size: 90%;
+  font-weight: 400;
+}
+
 .typography {
   a {
 
@@ -194,5 +199,11 @@ input {
 
     @extend .h6;
   }
+
+  .h7 {
+
+    @extend .h7;
+  }
+
 
 }
