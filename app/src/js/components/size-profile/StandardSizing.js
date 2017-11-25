@@ -8,11 +8,11 @@ import { bindActionCreators } from 'redux';
 import WizardActions from '../../actions/WizardActions';
 
 // Constants
-import StandardSizeForm from './StandardSizeForm';
-// import ModalConstants from '../../constants/ModalConstants';
+import WizardConstants from '../../constants/WizardConstants';
 
 // Components
 import WizardStep from '../wizard/WizardStep';
+import StandardSizeForm from './StandardSizeForm';
 
 function stateToProps() {
   return {};
@@ -35,10 +35,15 @@ class StandardSizing extends Component {
     this.props.jumpToStep({ shouldAppear: false });
   }
 
+  handlePreviousStep() {
+    this.props.jumpToStep({ activeStepId: WizardConstants.SELECT_SIZE_PROFILE_STEP });
+  }
+
   render() {
     return (
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
+        handlePreviousStep={this.handlePreviousStep}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
