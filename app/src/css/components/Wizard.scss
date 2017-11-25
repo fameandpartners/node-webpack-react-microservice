@@ -28,9 +28,37 @@
   visibility: visible;
 }
 
+// WizardStep styles
+
 .WizardStep__header {
   padding-top: 22px;
 }
+
+// Progress styles
+
+progress {
+  margin-top: 15px;
+  width: 100%;
+  height: 10px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: rgb(246, 245, 243);
+}
+
+progress::-webkit-progress-bar {
+  background: rgb(246, 245, 243);
+}
+
+progress::-webkit-progress-value {
+  background: rgb(0, 0, 0);
+}
+
+progress::-moz-progress-bar {
+  background: rgb(246, 245, 243);
+}
+
+// default Modal styles
 
 .Modal__content--sm-margin-top {
   margin-top: 15px;
