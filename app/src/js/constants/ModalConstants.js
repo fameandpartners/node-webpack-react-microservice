@@ -23,10 +23,6 @@ const modalIds = assign({},
     'STYLE_SELECTION_MODAL',
     'ZOOM_MODAL',
     'AFTERPAY_MODAL',
-    // SIZE PROFILE
-    'SIZE_PROFILE_MODAL',
-    'STANDARD_SIZING_MODAL',
-    'START_FIT_ID_WIZARD',
   ]),
 );
 

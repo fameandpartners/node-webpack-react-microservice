@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import ModalActions from '../../actions/ModalActions';
+import WizardActions from '../../actions/WizardActions';
 
 // Constants
-import ModalConstants from '../../constants/ModalConstants';
+import WizardConstants from '../../constants/WizardConstants';
 
 // Components
 import Button from '../generic/Button';
@@ -19,8 +19,8 @@ function stateToProps() {
 }
 
 function dispatchToProps(dispatch) {
-  const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  return { activateModal };
+  const { jumpToStep } = bindActionCreators(WizardActions, dispatch);
+  return { jumpToStep };
 }
 
 class SelectSizeProfile extends Component {
@@ -30,15 +30,15 @@ class SelectSizeProfile extends Component {
   }
 
   handleCloseWizard() {
-    this.props.activateModal({ shouldAppear: false });
+    this.props.jumpToStep({ shouldAppear: false });
   }
 
   handleSizeClick() {
-    this.props.activateModal({ modalId: ModalConstants.STANDARD_SIZING_MODAL });
+    this.props.jumpToStep({ activeStepId: WizardConstants.STANDARD_SIZING_STEP });
   }
 
   handleFitIDClick() {
-    this.props.activateModal({ modalId: ModalConstants.START_FIT_ID_WIZARD });
+    console.log('FIT ID');
   }
 
   render() {
@@ -72,7 +72,7 @@ class SelectSizeProfile extends Component {
 }
 
 SelectSizeProfile.propTypes = {
-  activateModal: PropTypes.func.isRequired,
+  jumpToStep: PropTypes.func.isRequired,
 };
 
 SelectSizeProfile.defaultProps = {

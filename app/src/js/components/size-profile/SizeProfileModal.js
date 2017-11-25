@@ -9,7 +9,7 @@ import SelectSizeProfile from './SelectSizeProfile';
 import StandardSizing from './StandardSizing';
 
 // Constants
-import ModalConstants from '../../constants/ModalConstants';
+import WizardConstants from '../../constants/WizardConstants';
 
 // CSS
 import '../../../css/components/SizeProfile.scss';
@@ -17,7 +17,7 @@ import '../../../css/components/SizeProfile.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    activeModalId: state.$$modalState.get('modalId'),
+    activeStepId: state.$$wizardState.get('activeStepId'),
   };
 }
 
@@ -31,33 +31,32 @@ class SizeProfileModal extends Component {
     autoBind(this);
   }
 
-  injectModalStep() {
-    const { activeModalId } = this.props;
-    if (activeModalId === ModalConstants.SIZE_PROFILE_MODAL) {
-      return <SelectSizeProfile />;
-    } else if (activeModalId === ModalConstants.STANDARD_SIZING_MODAL) {
-      return <StandardSizing />;
-    } else if (activeModalId === ModalConstants.START_FIT_ID_WIZARD) {
-      return <SelectSizeProfile />;
+  injectWizardStep() {
+    const { activeStepId } = this.props;
+    switch (activeStepId) {
+      case WizardConstants.SELECT_SIZE_PROFILE_STEP:
+        return <SelectSizeProfile />;
+      case WizardConstants.STANDARD_SIZING_STEP:
+        return <StandardSizing />;
+      default:
+        return null;
     }
-    return null;
   }
 
   render() {
     return (
       <WizardContainer
-        modalContainerClass="SizeProfileWizardContainer grid-middle"
-        modalIds={[
-          ModalConstants.SIZE_PROFILE_MODAL,
-          ModalConstants.STANDARD_SIZING_MODAL,
-          ModalConstants.START_FIT_ID_WIZARD,
+        wizardContainerClass="SizeProfileWizardContainer grid-middle"
+        stepIds={[
+          WizardConstants.SELECT_SIZE_PROFILE_STEP,
+          WizardConstants.STANDARD_SIZING_STEP,
         ]}
         flexWidth
       >
         <div
           className="SizeProfileModal u-width-big"
         >
-          { this.injectModalStep() }
+          { this.injectWizardStep() }
         </div>
       </WizardContainer>
     );
@@ -65,12 +64,12 @@ class SizeProfileModal extends Component {
 }
 
 SizeProfileModal.propTypes = {
-  activeModalId: string,
+  activeStepId: string,
 };
 
 SizeProfileModal.defaultProps = {
   // Redux
-  activeModalId: null,
+  activeStepId: null,
 };
 
 

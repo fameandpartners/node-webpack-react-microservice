@@ -1,6 +1,7 @@
 import AppReducer, { $$initialState as $$appState } from './AppReducer';
 import BDCustomizationReducer, { $$initialState as $$bdCustomizationState } from './BDCustomizationReducer';
 import ModalReducer, { $$initialState as $$modalState } from './ModalReducer';
+import WizardReducer, { $$initialState as $$wizardState } from './WizardReducer';
 import ProductReducer, { $$initialState as $$productState } from './ProductReducer';
 import CartReducer, { $$initialState as $$cartState } from './CartReducer';
 import CustomizationReducer, { $$initialState as $$customizationState } from './CustomizationReducer';
@@ -13,6 +14,7 @@ export default {
   $$appState: AppReducer,
   $$bdCustomizationState: BDCustomizationReducer,
   $$modalState: ModalReducer,
+  $$wizardState: WizardReducer,
   $$productState: ProductReducer,
   $$cartState: CartReducer,
   $$collectionFilterSortState: CollectionFilterSortReducer,
@@ -26,6 +28,7 @@ export const initialStates = {
   $$appState,
   $$bdCustomizationState,
   $$modalState,
+  $$wizardState,
   $$productState,
   $$cartState,
   $$collectionFilterSortState,

@@ -5,14 +5,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import ModalActions from '../../actions/ModalActions';
+import WizardActions from '../../actions/WizardActions';
 
 // Constants
 import StandardSizeForm from './StandardSizeForm';
 // import ModalConstants from '../../constants/ModalConstants';
 
 // Components
-// import Button from '../generic/Button';
 import WizardStep from '../wizard/WizardStep';
 
 function stateToProps() {
@@ -20,9 +19,9 @@ function stateToProps() {
 }
 
 function dispatchToProps(dispatch) {
-  const { activateModal } = bindActionCreators(ModalActions, dispatch);
+  const { jumpToStep } = bindActionCreators(WizardActions, dispatch);
   return {
-    activateModal,
+    jumpToStep,
   };
 }
 
@@ -33,7 +32,7 @@ class StandardSizing extends Component {
   }
 
   handleCloseWizard() {
-    this.props.activateModal({ shouldAppear: false });
+    this.props.jumpToStep({ shouldAppear: false });
   }
 
   render() {
@@ -54,7 +53,7 @@ class StandardSizing extends Component {
 }
 
 StandardSizing.propTypes = {
-  activateModal: PropTypes.func.isRequired,
+  jumpToStep: PropTypes.func.isRequired,
 };
 
 StandardSizing.defaultProps = {

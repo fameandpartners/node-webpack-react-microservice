@@ -25,6 +25,7 @@ import {
 // Constants
 import CustomizationConstants from '../../constants/CustomizationConstants';
 import ModalConstants from '../../constants/ModalConstants';
+import WizardConstants from '../../constants/WizardConstants';
 
 // UI components
 import ProductOptionsRow from './ProductOptionsRow';
@@ -37,6 +38,7 @@ import CliqueCallout from './CliqueCallout';
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
 import ModalActions from '../../actions/ModalActions';
+import WizardActions from '../../actions/WizardActions';
 
 // CSS
 import '../../../css/components/ProductOptions.scss';
@@ -94,9 +96,11 @@ function stateToProps(state) {
 function dispatchToProps(dispatch) {
   const { activateCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
   const actions = bindActionCreators(ModalActions, dispatch);
+  const { jumpToStep } = bindActionCreators(WizardActions, dispatch);
 
   return {
     activateCustomizationDrawer,
+    jumpToStep,
     activateModal: actions.activateModal,
   };
 }
@@ -221,8 +225,8 @@ class ProductOptions extends Component {
   }
 
   showSelectSizeProfileModal() {
-    this.props.activateModal({
-      modalId: ModalConstants.SIZE_PROFILE_MODAL,
+    this.props.jumpToStep({
+      activeStepId: WizardConstants.SELECT_SIZE_PROFILE_STEP,
       shouldAppear: true,
     });
   }
@@ -432,6 +436,7 @@ ProductOptions.propTypes = {
   //* Redux Actions
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
+  jumpToStep: PropTypes.func,
   deliveryCopy: PropTypes.string,
   expressMakingSelected: PropTypes.bool,
   superExpressMakingSelected: PropTypes.bool,
@@ -445,6 +450,7 @@ ProductOptions.defaultProps = {
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
+  jumpToStep: noop,
   deliveryCopy: '',
   expressMakingSelected: false,
   superExpressMakingSelected: false,

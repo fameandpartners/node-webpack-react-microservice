@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import win from '../../polyfills/windowPolyfill';
 
 // Actions
-import * as ModalActions from '../../actions/ModalActions';
+import * as WizardActions from '../../actions/WizardActions';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
@@ -22,15 +22,15 @@ import '../../../css/components/Wizard.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    shouldAppear: state.$$modalState.get('shouldAppear'),
-    activeModalId: state.$$modalState.get('modalId'),
+    shouldAppear: state.$$wizardState.get('shouldAppear'),
+    activeStepId: state.$$wizardState.get('activeStepId'),
   };
 }
 
 function dispatchToProps(dispatch) {
-  const actions = bindActionCreators(ModalActions, dispatch);
+  const actions = bindActionCreators(WizardActions, dispatch);
   return {
-    activateModal: actions.activateModal,
+    jumpToStep: actions.jumpToStep,
   };
 }
 
@@ -54,9 +54,9 @@ class WizardContainer extends Component {
   }
 
   handleBackgroundClick() {
-    const { activateModal, closeOnBackgroundClick } = this.props;
+    const { jumpToStep, closeOnBackgroundClick } = this.props;
     if (closeOnBackgroundClick) {
-      activateModal({ shouldAppear: false });
+      jumpToStep({ shouldAppear: false });
     }
   }
 
@@ -64,20 +64,20 @@ class WizardContainer extends Component {
     e.stopPropagation();
   }
 
-  modalIsActive() {
-    const { activeModalId, modalIds } = this.props;
-    return modalIds.indexOf(activeModalId) > -1;
+  wizardIsActive() {
+    const { activeStepId, stepIds } = this.props;
+    return stepIds.indexOf(activeStepId) > -1;
   }
 
-  hasActivatedModal() {
+  hasActivatedStep() {
     const { shouldAppear } = this.props;
-    return shouldAppear && this.modalIsActive();
+    return shouldAppear && this.wizardIsActive();
   }
 
   handleEscapeKeydown(evt) {
-    const { activateModal } = this.props;
-    if (evt.keyCode === KEYS.ESC && this.modalIsActive()) {
-      activateModal({ shouldAppear: false });
+    const { jumpToStep } = this.props;
+    if (evt.keyCode === KEYS.ESC && this.wizardIsActive()) {
+      jumpToStep({ shouldAppear: false });
     }
   }
 
@@ -85,7 +85,7 @@ class WizardContainer extends Component {
     const {
       dimBackground,
       height,
-      modalContainerClass,
+      wizardContainerClass,
       zIndex,
       children,
       fullScreen,
@@ -97,10 +97,10 @@ class WizardContainer extends Component {
       <div
         className={classnames([
           'WizardContainer u-center typography',
-          modalContainerClass,
+          wizardContainerClass,
           {
             'WizardContainer--dim-background': dimBackground,
-            'u-pointerEvents--none': !this.hasActivatedModal(),
+            'u-pointerEvents--none': !this.hasActivatedStep(),
           },
         ])}
         style={{ zIndex, opacity: style.opacity }}
@@ -142,7 +142,7 @@ class WizardContainer extends Component {
   render() {
     return (
       <TransitionMotion
-        styles={this.hasActivatedModal() ? [this.defaultStyles()] : []}
+        styles={this.hasActivatedStep() ? [this.defaultStyles()] : []}
         willEnter={this.willEnter}
         willLeave={this.willLeave}
       >
@@ -165,17 +165,17 @@ WizardContainer.propTypes = {
   closeOnEscapeKey: PropTypes.bool,
   dimBackground: PropTypes.bool,
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  modalContainerClass: PropTypes.string,
+  wizardContainerClass: PropTypes.string,
   fullScreen: PropTypes.bool,
   flexWidth: PropTypes.bool,
+  fullWidth: PropTypes.bool,
   zIndex: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   // Redux
-  activateModal: PropTypes.func.isRequired,
-  activeModalId: PropTypes.string,
-  modalIds: PropTypes.arrayOf(PropTypes.string),
+  jumpToStep: PropTypes.func.isRequired,
+  activeStepId: PropTypes.string,
+  stepIds: PropTypes.arrayOf(PropTypes.string),
   shouldAppear: PropTypes.bool,
-  fullWidth: PropTypes.bool,
 };
 
 WizardContainer.defaultProps = {
@@ -185,14 +185,14 @@ WizardContainer.defaultProps = {
   children: null,
   fullScreen: false,
   flexWidth: false,
-  height: null,
-  modalContainerClass: '',
-  zIndex: 999,
-  modalIds: [],
-  // Redux
-  activeModalId: null,
-  shouldAppear: false,
   fullWidth: false,
+  height: null,
+  wizardContainerClass: '',
+  zIndex: 999,
+  stepIds: [],
+  // Redux
+  activeStepId: null,
+  shouldAppear: false,
 };
 
 
