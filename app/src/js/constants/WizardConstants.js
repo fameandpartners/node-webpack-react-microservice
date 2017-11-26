@@ -12,7 +12,8 @@ const availableStepIds = assign({},
     // SIZE PROFILE
     'SELECT_SIZE_PROFILE_STEP',
     'STANDARD_SIZING_STEP',
-    'FIT_ID_OVERALL_FIT_STEP',
+    'OVERALL_FIT_STEP',
+    'PETITE_PLUS_SURVEY_STEP',
   ]),
 );
 

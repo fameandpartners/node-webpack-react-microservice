@@ -9,36 +9,28 @@ import classnames from 'classnames';
 // Constants
 import {
   CM_TO_INCHES,
-  US_SIZES,
-  AU_SIZES,
   INCH_SIZES,
   MIN_CM,
   MAX_CM,
   UNITS,
 } from '../../constants/ProductConstants';
-import ModalConstants from '../../constants/ModalConstants';
 
 // Actions
 import CustomizationActions from '../../actions/CustomizationActions';
-import ModalActions from '../../actions/ModalActions';
 
 // UI Components
 import Select from '../form/Select';
 import Input from '../form/Input';
 import RadioToggle from '../form/RadioToggle';
-import Button from '../generic/Button';
 
 // CSS
 import '../../../css/components/StandardSizeForm.scss';
 
 function stateToProps(state) {
   return {
-    isUSSiteVersion: state.$$appState.get('siteVersion').toLowerCase() === 'usa',
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
-    temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
     heightError: state.$$customizationState.get('heightError'),
-    sizeError: state.$$customizationState.get('sizeError'),
   };
 }
 
@@ -47,22 +39,16 @@ function dispatchToProps(dispatch) {
     setSizeProfileError,
     updateMeasurementMetric,
     updateHeightSelection,
-    updateDressSizeSelection,
   } = bindActionCreators(CustomizationActions, dispatch);
-
-  const modalActions = bindActionCreators(ModalActions, dispatch);
 
   return {
     setSizeProfileError,
     updateMeasurementMetric,
     updateHeightSelection,
-    updateDressSizeSelection,
-    activateModal: modalActions.activateModal,
   };
 }
 
-
-class StandardSizeForm extends PureComponent {
+class BodySizeForm extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -77,23 +63,15 @@ class StandardSizeForm extends PureComponent {
   }
 
   validateSizeSelection({ temporaryHeightValue, temporaryMeasurementMetric }) {
-    const { setSizeProfileError, temporaryDressSize } = this.props;
+    const { setSizeProfileError } = this.props;
     const errors = { heightError: false, sizeError: false };
 
-    if (this.hasHeightError({
-      temporaryHeightValue, temporaryMeasurementMetric },
-    ) || !temporaryDressSize) {
-      if (this.hasHeightError(
-        { temporaryHeightValue, temporaryMeasurementMetric },
-      )) {
-        errors.heightError = true;
-      }
-
-      if (!temporaryDressSize) { errors.sizeError = true; }
-      setSizeProfileError(errors);
+    if (this.hasHeightError(
+      { temporaryHeightValue, temporaryMeasurementMetric },
+    )) {
+      errors.heightError = true;
       return false;
     }
-
     setSizeProfileError(errors);
     return true;
   }
@@ -175,16 +153,6 @@ class StandardSizeForm extends PureComponent {
     }
   }
 
-  handleDressSizeSelection(s) {
-    return () => {
-      this.props.updateDressSizeSelection({ temporaryDressSize: s });
-    };
-  }
-
-  handleViewSizeGuideClick() {
-    this.props.activateModal({ modalId: ModalConstants.SIZE_GUIDE_MODAL });
-  }
-
   /**
    * Helper method to generate normal option for Select
    * @param  {Number} i
@@ -216,52 +184,47 @@ class StandardSizeForm extends PureComponent {
     }));
   }
 
-  handleSaveSelection() {
-    console.log('Save selection');
-  }
-
   render() {
     const {
-      isUSSiteVersion,
-      temporaryDressSize,
       temporaryMeasurementMetric,
       temporaryHeightValue,
       heightError,
-      sizeError,
-      displaySaveButton,
       containerClassNames,
     } = this.props;
-    const SIZES = isUSSiteVersion ? US_SIZES : AU_SIZES;
 
     return (
       <div
         className={classnames(
-          'StandardSizeForm__layout-container',
+          'BodySizeForm__layout-container',
           containerClassNames,
         )}
       >
-        <div className="u-mb-big">
-          <h3 className="h4 u-mb-small">
-            Let’s make it fit.
-          </h3>
-          <p className="h6 StandardSizeForm__sub-heading">
-            Just tell us your height and size, and we&apos;ll take care of the tailoring.
-          </p>
-        </div>
-
-        <div className="StandardSizeForm__height u-mb-normal">
-          <p
-            className={classnames(
-              'h6 u-mb-xs u-text-align--left',
-              {
-                'u-color-red': heightError,
-              },
-            )}
-          >
-            What's your height?
-          </p>
+        <div className="BodySizeForm__height u-mb-normal">
+          <div className="grid-noGutter align-items--flex-end">
+            <p
+              className={classnames(
+                'h6 u-mb-xs u-text-align--left col-8',
+                {
+                  'u-color-red': heightError,
+                },
+              )}
+            >
+              What's your height?
+            </p>
+            <div className="">
+              <RadioToggle
+                id="metric"
+                value={temporaryMeasurementMetric}
+                options={[
+                  { value: UNITS.INCH },
+                  { label: 'cm', value: UNITS.CM },
+                ]}
+                onChange={this.handleMetricSwitch}
+              />
+            </div>
+          </div>
           <div className="grid-noGutter">
-            <div className="col-8">
+            <div className="col-10">
               { temporaryMeasurementMetric === UNITS.INCH ?
                 <Select
                   id="height-option-in"
@@ -282,99 +245,84 @@ class StandardSizeForm extends PureComponent {
                 />
               }
             </div>
+          </div>
+        </div>
 
-            <div className="col">
-              <RadioToggle
-                id="metric"
-                value={temporaryMeasurementMetric}
-                options={[
-                  { value: UNITS.INCH },
-                  { label: 'cm', value: UNITS.CM },
-                ]}
-                onChange={this.handleMetricSwitch}
+        <div className="BodySizeForm__height u-mb-normal">
+          <p
+            className={classnames(
+              'h6 u-mb-xs u-text-align--left',
+              {
+                'u-color-red': heightError,
+              },
+            )}
+          >
+            What's your weight?
+          </p>
+          <div className="grid-noGutter">
+            <div className="col-10">
+              <Input
+                id="height-option-cm"
+                type="number"
+                error={heightError}
+                inlineMeta={heightError ? 'Please enter a valid height' : null}
+                onChange={this.handleCMChange}
+                defaultValue={temporaryHeightValue}
               />
             </div>
           </div>
-
         </div>
 
-        <div>
-          <p className="h6 u-text-align-left u-mb-xs">What&apos;s your size?</p>
-          <div className="StandardSizeForm__size grid-12-spaceBetween">
-            { SIZES.map(s => (
-              <div key={s} className="col-3">
-                <Button
-                  tertiary
-                  tall
-                  selected={s === temporaryDressSize}
-                  text={isUSSiteVersion ? `US ${s}` : `AU ${s}`}
-                  handleClick={this.handleDressSizeSelection(s)}
-                />
-              </div>
-            ))}
-          </div>
-          { sizeError ?
-            <div className="StandardSizeForm__size-error-text">
-              <p className="p u-color-red u-text-align-left u-mb-small u-mt-small">
-                Please select a size
-              </p>
-            </div>
-            : null
-          }
+        <div className="BodySizeForm__height u-mb-normal">
+          <p
+            className={classnames(
+              'h6 u-mb-xs u-text-align--left',
+              {
+                'u-color-red': heightError,
+              },
+            )}
+          >
+            How old are you?
+          </p>
           <div className="grid-noGutter">
-            <div className="col-12">
-              <p
-                className="link link--static u-text-align-left"
-                onClick={this.handleViewSizeGuideClick}
-              >
-                View Size Guide
-              </p>
+            <div className="col-10">
+              <Input
+                id="height-option-cm"
+                type="number"
+                error={heightError}
+                inlineMeta={heightError ? 'Please enter a valid height' : null}
+                onChange={this.handleCMChange}
+                defaultValue={temporaryHeightValue}
+              />
             </div>
-            { displaySaveButton &&
-              <div className="ButtonBox--medium-width ButtonBox--center">
-                <Button
-                  className="SelectSizeProfile__button"
-                  text="Save"
-                  handleClick={this.handleSaveSelection}
-                />
-              </div>
-            }
           </div>
         </div>
+
       </div>
     );
   }
 }
 
-StandardSizeForm.propTypes = {
+BodySizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
   // Redux Props
-  activateModal: PropTypes.func.isRequired,
-  isUSSiteVersion: PropTypes.bool.isRequired,
-  temporaryDressSize: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string,
   temporaryHeightValue: PropTypes.number,
   heightError: PropTypes.bool,
-  sizeError: PropTypes.bool,
-  displaySaveButton: PropTypes.bool,
   // Redux Actions
   setSizeProfileError: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
-  updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
 };
 
-StandardSizeForm.defaultProps = {
+BodySizeForm.defaultProps = {
   containerClassNames: 'u-mt-normal u-mb-huge',
   selectedColorId: '',
-  temporaryDressSize: null,
   temporaryMeasurementMetric: null,
   temporaryHeightValue: null,
   heightError: false,
-  sizeError: false,
-  displaySaveButton: false,
 };
 
 
-export default connect(stateToProps, dispatchToProps)(StandardSizeForm);
+export default connect(stateToProps, dispatchToProps)(BodySizeForm);

@@ -8,6 +8,7 @@ import WizardContainer from '../wizard/WizardContainer';
 import SelectSizeProfile from './SelectSizeProfile';
 import StandardSizing from './StandardSizing';
 import FitIdOverallFit from './FitIdOverallFit';
+import PetiteOrPlusSurvey from './PetiteOrPlusSurvey';
 
 // Constants
 import WizardConstants from '../../constants/WizardConstants';
@@ -39,8 +40,10 @@ class SizeProfileModal extends Component {
         return <SelectSizeProfile />;
       case WizardConstants.STANDARD_SIZING_STEP:
         return <StandardSizing />;
-      case WizardConstants.FIT_ID_OVERALL_FIT_STEP:
+      case WizardConstants.OVERALL_FIT_STEP:
         return <FitIdOverallFit />;
+      case WizardConstants.PETITE_PLUS_SURVEY_STEP:
+        return <PetiteOrPlusSurvey />;
       default:
         return null;
     }
@@ -53,7 +56,8 @@ class SizeProfileModal extends Component {
         stepIds={[
           WizardConstants.SELECT_SIZE_PROFILE_STEP,
           WizardConstants.STANDARD_SIZING_STEP,
-          WizardConstants.FIT_ID_OVERALL_FIT_STEP,
+          WizardConstants.OVERALL_FIT_STEP,
+          WizardConstants.PETITE_PLUS_SURVEY_STEP,
         ]}
         flexWidth
       >

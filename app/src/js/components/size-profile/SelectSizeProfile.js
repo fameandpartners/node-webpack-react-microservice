@@ -38,7 +38,7 @@ class SelectSizeProfile extends Component {
   }
 
   handleFitIDClick() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERALL_FIT_STEP });
+    this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
   }
 
   render() {
