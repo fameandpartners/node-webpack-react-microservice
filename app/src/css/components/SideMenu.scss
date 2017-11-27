@@ -1,5 +1,5 @@
 .SideMenu {
-  z-index: 100;
+  z-index: 1000;
   position: fixed;
   height: 100%;
   width: 100%;
@@ -31,6 +31,19 @@
   margin-left: -22px;
 }
 
+.SideMenuActionButtons__body {
+  margin: 0 auto 10% auto;
+}
+
 .SideMenuActionButtons__caret--right {
   margin-right: -20px;
+}
+
+.SideMenuActionButtons__icon-wrapper {
+  margin-bottom: 15px;
+}
+
+.SideMenuActionButtons__icon-wrapper--active .SearchBarExpander__icon {
+  margin-right: -1.9em;
+  z-index: 1;
 }

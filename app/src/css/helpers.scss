@@ -6,6 +6,10 @@
   margin: 0 auto;
 }
 
+.u-bold {
+  font-weight: 500;
+}
+
 .display--block {
   display: block;
 }
@@ -72,6 +76,10 @@
   margin-bottom: 6px;
 }
 
+.u-ml-xs {
+  margin-left: 6px;
+}
+
 .u-gray-border--top {
   border-top: 1px solid $c-light-gray;
 }
@@ -94,6 +102,10 @@
 
 .u-mr-small {
   margin-right: 15px;
+}
+
+.u-mr--normal {
+  margin-right: 30px;
 }
 
 .u-mt-small {
@@ -136,8 +148,12 @@
   text-align: right;
 }
 
-.u-vertical-align-middle {
+.u-vertical-align--middle {
   vertical-align: middle;
+}
+
+.u-overflow-x--hidden {
+  overflow-x: hidden;
 }
 
 .u-overflow-y--scroll {

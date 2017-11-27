@@ -5,6 +5,10 @@
 }
 
 .Footer p {
+  line-height: 30px;
+}
+
+.Footer__copy {
   font-weight: 500;
   line-height: 30px;
 }
@@ -42,11 +46,21 @@
   font-size: 12px;
 }
 
-.Footer .Footer__form {
-  max-width: 350px;
+.Footer form {
+  display: inline;
+}
 
-  @include md {
-    max-width: 480px;
+.Footer .inline-select {
+  background: transparent;
+  display: inline;
+  border: 0;
+  font-size: 1em;
+}
+
+.Footer__sign-up {
+  order: -1;
+
+  @include sm {
+    order: 1;
   }
-  margin: 0 auto;
 }

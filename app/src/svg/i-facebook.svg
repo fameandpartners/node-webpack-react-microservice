@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="10px" height="18px" viewBox="0 0 10 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
-    <title>facebook-app-symbol</title>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>facebook</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Log-In" transform="translate(-99.000000, -132.000000)" fill="#FFFFFF">
-            <g id="Facebook-Button-Copy-2" transform="translate(45.000000, 123.000000)">
-                <g id="Group-27">
-                    <g id="facebook-app-symbol" transform="translate(54.000000, 9.000000)">
-                        <g id="Capa_1">
-                            <path d="M6.09672168,18 L6.09672168,9.7899561 L8.86469441,9.7899561 L9.27997193,6.58940692 L6.09672168,6.58940692 L6.09672168,4.54632297 C6.09672168,3.6199795 6.35414244,2.98868756 7.69044534,2.98868756 L9.39201059,2.98799141 L9.39201059,0.125306983 C9.09774881,0.087250788 8.08765211,0 6.91200402,0 C4.45706333,0 2.77636689,1.49126912 2.77636689,4.22934272 L2.77636689,6.58940692 L8.8817842e-16,6.58940692 L8.8817842e-16,9.7899561 L2.77636689,9.7899561 L2.77636689,18 L6.09672168,18 L6.09672168,18 Z" id="f_1_"></path>
-                        </g>
-                    </g>
-                </g>
-            </g>
+        <g id="facebook" fill-rule="nonzero" fill="#000000">
+            <path d="M16.4381864,28 L16.4381864,15.2278434 L20.7251765,15.2278434 L21.3670925,10.2503074 L16.4381864,10.2503074 L16.4381864,7.07246509 C16.4381864,5.63135355 16.8383601,4.64928358 18.904879,4.64928358 L21.5406248,4.64813181 L21.5406248,0.196183642 C21.0847826,0.135524121 19.5201764,0 17.6998789,0 C13.8997006,0 11.2979958,2.31965081 11.2979958,6.5795105 L11.2979958,10.2503074 L7,10.2503074 L7,15.2278434 L11.2979958,15.2278434 L11.2979958,28 L16.4381864,28 Z" id="f"></path>
         </g>
     </g>
 </svg>

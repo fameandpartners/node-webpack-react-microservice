@@ -11,8 +11,6 @@ import { render } from 'react-dom';
 import Raven from 'raven-js';
 
 // Components
-import ShoppingSpree from '../shopping-spree/js/ShoppingSpree';
-import SideMenu from './components/shared/side_menu/SideMenu';
 import AppMain from './components/pdp/AppMain';
 import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
@@ -27,6 +25,9 @@ import AfterpayModal from './components/pdp/AfterpayModal';
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
 
+// Services
+import { getUserCart } from './services/UserService';
+
 // Actions
 import * as AppActions from './actions/AppActions';
 import * as CustomizationActions from './actions/CustomizationActions';
@@ -39,8 +40,8 @@ import '../css/global/variables.scss';
 import '../css/reset.scss';
 import '../css/gridlex.scss';
 import '../css/helpers.scss';
-import '../css/layout.scss';
 import '../css/typography.scss';
+import '../css/layout.scss';
 import '../css/animations.scss';
 import '../css/components/App.scss';
 
@@ -117,12 +118,11 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.lockBody) {
-      win.document.body.style.overflow = 'hidden';
-    } else {
-      win.document.body.style.overflow = 'visible';
-    }
+  componentDidMount() {
+    getUserCart().end((err, res) => {
+      console.log('res', res);
+      // Do something
+    });
   }
 
   componentDidMount(){
@@ -140,18 +140,19 @@ class App extends Component {
   render() {
     const { lockBody } = this.props;
     return (
+      <div className="__react_root__">
         <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
-        <SideMenu />
-        <CustomizationDrawer />
-        <AppMain />
-        <OnboardingModal />
-        <ProductFabricModal />
-        <ColorSelectionModal />
-        <ShareModal />
-        <ImageLightboxModal />
-        <StyleSelectionModal />
-        <SizeModals />
-        <AfterpayModal />
+          <CustomizationDrawer />
+          <AppMain />
+          <OnboardingModal />
+          <ProductFabricModal />
+          <ColorSelectionModal />
+          <ShareModal />
+          <ImageLightboxModal />
+          <StyleSelectionModal />
+          <SizeModals />
+          <AfterpayModal />
+        </div>
       </div>
     );
   }

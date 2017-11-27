@@ -59,10 +59,6 @@ class Header extends Component {
     activateCartDrawer({ cartDrawerOpen: !cartDrawerOpen });
   }
 
-  handleSearchBarBlur() {
-    this.setState({ searchBarActive: false });
-  }
-
   handleSearchOpenClick() {
     this.setState({ searchBarActive: true });
   }
@@ -73,21 +69,23 @@ class Header extends Component {
 
     return (
       <header className="Header u-position--relative u-width--full">
-        <div className="layout-container Header__content-padding">
+        <div className="Header__main-contents layout-container Header__content-padding">
           <nav className="grid-12-noGutter">
-            <ul className="col-4 u-text-align--left">
+            <ul className="col-5 u-text-align--left">
               <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.SHOP_ALL)}>
                 <span className="Header__link" role="link">Shop all</span>
               </li>
               <li onMouseOver={this.handleLinkMouseOver(NAVIGATION_CONTAINERS.WHO_WE_ARE)}>
-                <span className="Header__link" href="#about">Who we are</span>
+                <span className="Header__link" href="#about">Inside Fame</span>
               </li>
             </ul>
-            <div className="col-4 u-text-align--center">
-              <FameLogo
-                width="200px"
-                height="26px"
-              />
+            <div className="col-2 u-text-align--center">
+              <a href="/">
+                <FameLogo
+                  width="200px"
+                  height="26px"
+                />
+              </a>
             </div>
 
             <HeaderActionButtons />

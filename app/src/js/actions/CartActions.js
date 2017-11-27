@@ -7,6 +7,13 @@ export function addItemToCart({ lineItem }) {
   };
 }
 
+export function setCartContents({ cart }) {
+  return {
+    type: CartConstants.SET_CART_CONTENTS,
+    cart,
+  };
+}
+
 export function activateCartDrawer({ cartDrawerOpen }) {
   return {
     type: CartConstants.ACTIVATE_CART_DRAWER,
