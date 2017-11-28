@@ -21,6 +21,7 @@ import ImageLightboxModal from './components/pdp/ImageLightboxModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
 import AfterpayModal from './components/pdp/AfterpayModal';
+import ShoppingSpree from '../shopping-spree/js/ShoppingSpree';
 
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
