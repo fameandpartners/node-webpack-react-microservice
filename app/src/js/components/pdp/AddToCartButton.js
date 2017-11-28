@@ -32,7 +32,6 @@ import ModalConstants from '../../constants/ModalConstants';
 
 // temp. helpers (for Rails merge)
 import { addToCart } from '../../utilities/cart-helper';
-import win from '../../polyfills/windowPolyfill';
 
 // CSS
 import '../../../css/components/AddToCartButton.scss';
