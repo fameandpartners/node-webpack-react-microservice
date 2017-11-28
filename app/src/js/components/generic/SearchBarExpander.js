@@ -5,6 +5,10 @@ import { spring, TransitionMotion } from 'react-motion';
 import classnames from 'classnames';
 import noop from '../../libs/noop';
 
+// Breakpoint Decoration
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
+
 // Components
 import SearchBar from './SearchBar';
 
@@ -18,11 +22,12 @@ class SearchBarExpander extends Component {
   }
 
   defaultStyles() {
+    const { winWidth } = this.props;
     return {
       key: 'search',
       style: {
         opacity: spring(1),
-        width: spring(240),
+        width: spring(winWidth > 1400 ? 240 : 200),
       },
     };
   }
@@ -82,12 +87,14 @@ SearchBarExpander.propTypes = {
   isActive: PropTypes.bool,
   onBlur: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  winWidth: PropTypes.number,
 };
 
 SearchBarExpander.defaultProps = {
   hasIcon: true,
   handleSearchIconClick: noop,
   isActive: false,
+  winWidth: 800,
 };
 
-export default SearchBarExpander;
+export default Resize(PDPBreakpoints)(SearchBarExpander);

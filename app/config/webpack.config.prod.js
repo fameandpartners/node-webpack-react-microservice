@@ -74,6 +74,7 @@ module.exports = {
   },
   module: {
     rules: [
+      { parser: { amd: false } },
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {

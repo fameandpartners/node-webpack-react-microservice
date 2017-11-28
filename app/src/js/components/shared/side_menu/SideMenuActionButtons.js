@@ -87,7 +87,7 @@ class SideMenuActionButtons extends Component {
               onClick={this.bindActionClick(NAVIGATION_CONTAINERS.SHOP_ALL)}
               role="button"
             >
-              <span className="SideMenuActionButtons--mr-caret-bump">Shop all</span>
+              <span className="SideMenuActionButtons--mr-caret-bump">Shop All</span>
               <span className="u-position--relative u-u-display--inline">
                 <Carat
                   className="SideMenuActionButtons__caret--right"
@@ -149,7 +149,7 @@ class SideMenuActionButtons extends Component {
 }
 
 SideMenuActionButtons.propTypes = {
-  firstName: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
   handleMenuActionClick: PropTypes.func.isRequired,
 };
 

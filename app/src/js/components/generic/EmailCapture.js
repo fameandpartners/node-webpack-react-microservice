@@ -126,7 +126,7 @@ class EmailCapture extends PureComponent {
             <Button
               className="padding--none"
               handleClick={this.handleSignupClick}
-              text="Join Now"
+              text="Join&nbsp;Now"
             />
           </div>
         </div>

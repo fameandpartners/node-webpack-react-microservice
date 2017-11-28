@@ -119,6 +119,12 @@ class App extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (win && win.fixBody) {
+      win.fixBody(this.props.lockBody);
+    }
+  }
+
   componentDidMount() {
     getUserCart().end((err, res) => {
       console.log('res', res);

@@ -22,8 +22,9 @@ export function isExtremeLightLuminance({ hexValue }) {
 }
 
 export function separateHexColorsInString(hexStr = '') {
+  const hexStringClean = (hexStr === null) ? '' : hexStr;
   const rexi = /#(\w+)(?!\w)/g;
-  return hexStr.match(rexi);
+  return hexStringClean.match(rexi);
 }
 
 function generateDuoToneSwatchBackground(start, end) {

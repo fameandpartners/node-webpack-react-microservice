@@ -138,6 +138,10 @@ const navigationLinks = {
         url: '/dresses/new-this-week',
       },
       {
+        text: 'Made in 48 Hours',
+        url: '/getitquick',
+      },
+      {
         text: 'Florals',
         url: '/dresses/floral',
       },

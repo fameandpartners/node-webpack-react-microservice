@@ -34,7 +34,7 @@ class WhoWeAreNavigation extends PureComponent {
           />
           { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
           <div className="WhoWeAreNavigation__ad">
-            <a href="/dresses/fall-weddings">
+            <a href="/it-girl">
               <img
                 alt="Internship Ad"
                 className="WhoWeAreNavigation__image u-width--full"

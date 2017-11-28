@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { redirectSiteVersion } from '../../utilities/helpers';
 
@@ -184,7 +183,7 @@ class Footer extends PureComponent {
               <span
                 className="u-text-decoration--underline u-cursor--pointer"
               >
-                <select className="inline-select" value={auSite ? 'au' : 'us'}>
+                <select className="inline-select" defaultValue={auSite ? 'au' : 'us'}>
                   <option value="us">US</option>
                   <option value="au">Australia</option>
                 </select>
@@ -201,10 +200,5 @@ class Footer extends PureComponent {
     );
   }
 }
-
-Footer.propTypes = {
-  // Redux Props
-  auSite: PropTypes.bool.isRequired,
-};
 
 export default Footer;

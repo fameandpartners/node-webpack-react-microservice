@@ -4,6 +4,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+import win from '../../../polyfills/windowPolyfill';
 
 import { formatCents } from '../../../utilities/accounting';
 import noop from '../../../libs/noop';
@@ -31,8 +32,9 @@ import { removeFromCart } from '../../../utilities/cart-helper';
 import '../../../../css/components/Cart.scss';
 
 function stateToProps({ $$appState }) {
+  const siteVersion = win.ApplicationStateData ? win.ApplicationStateData.currentSiteVersion : null;
   return {
-    siteVersion: $$appState.get('siteVersion'),
+    siteVersion: siteVersion || $$appState.get('siteVersion'),
   };
 }
 
@@ -57,15 +59,8 @@ class Cart extends Component {
     if (lineItems.length > 0) {
       // Reduces subTotal based on base price, colors, and addons chosen
       return lineItems.reduce(
-        (prevTotal, currLineItem) => {
-          const lineItemTotal
-            = currLineItem.color.centsTotal
-            + currLineItem.productCentsBasePrice
-            + currLineItem.addons.reduce(
-              (subTotal, c) => subTotal + parseInt(c.display_price.money.fractional, 10), 0,
-            );
-          return prevTotal + lineItemTotal;
-        }, 0,
+        (prevTotal, currLineItem) => prevTotal + currLineItem.productCentsBasePrice,
+        0,
       );
     }
     return '';
@@ -147,7 +142,7 @@ class Cart extends Component {
       sizePresentationAU,
       sizePresentationUS,
     } = lineItem;
-    const sizePresentation = siteVersion.toLowerCase() === 'usa'
+    const sizePresentation = (siteVersion && siteVersion.toLowerCase() === 'usa')
       ? sizePresentationUS
       : sizePresentationAU;
     let sizingInformation = '';
