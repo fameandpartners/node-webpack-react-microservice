@@ -42,7 +42,6 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   startListeningForToast() {
-
     super.connectToFirebase();
     const { firebaseNodeId } = this.state;
     const spreeFirebase = firebase.apps[0].database();
@@ -157,8 +156,7 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   startOnboarding() {
-    let bodyEl = document.getElementsByTagName("body")[0];
-    bodyEl.style.overflow = 'hidden';
+    console.log("TRIGGER: Hide Cart / Header Icons");
 
     this.setState({
       display: "onboarding",
@@ -224,7 +222,6 @@ export default class ShoppingSpree extends FirebaseComponent {
       display: "none",
       showExitModal: false,
     });
-    this.hideBanner();
   }
 
   doneShoppingSpree() {
@@ -239,9 +236,6 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   closeOnboarding() {
-    let bodyEl = document.getElementsByTagName("body")[0];
-    bodyEl.style.overflow = 'auto';
-
     this.setState({
       display: "none",
     });
@@ -261,8 +255,6 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   doneOnboarding(email, name, icon, shoppingSpreeId) {
-    console.log("TRIGGER: Hide Cart / Header Icons");
-
     this.cookies.set("shopping_spree_name", name, { path: "/", secure: false });
     this.cookies.set("shopping_spree_icon", icon, { path: "/", secure: false });
     this.cookies.set("shopping_spree_email", email, {

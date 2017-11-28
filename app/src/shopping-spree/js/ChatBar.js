@@ -100,17 +100,6 @@ export default class ChatBar extends FirebaseComponent {
   //   });
   // }
 
-  // addMember(data) {
-  //   const member = data.val();
-  //   console.log(`${member.from.name} joined Shopping Spree...`);
-
-  //   this.setState(prevState => ({
-  //     members: [...prevState.members, member.from],
-  //   }));
-
-  //   this.setMasterUserEmail();
-  // }
-
   updateLocalStateStep(data) {
     let step = data.val();
     console.log(`updateLocalStateStep(${step})...`);

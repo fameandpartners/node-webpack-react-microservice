@@ -37,7 +37,7 @@ export default class ShareModal extends React.Component {
         <div className="shopping-spree shopping-spree-share-modal container">
           <div className="row">
             <div className="modal-headline text-center col-xs-10 col-xs-push-1 col-md-10 col-md-push-1 no-gutter-mobile">
-              Let’s get social. Copy this link to invite your friends!
+              Let’s Clique to Buy. Copy and share this link with your friends.
             </div>
           </div>
           <div className="row equal">
@@ -54,7 +54,7 @@ export default class ShareModal extends React.Component {
                   data-event="click"
                   data-tip="copied!"
                   ref={i => (this.copyTrigger = i)}
-                  className="btn btn-shopping-spree-blue btn-block col-xs-3"
+                  className="btn btn-black btn-block col-xs-3"
                 >
                   Copy Link
                 </a>
@@ -74,18 +74,18 @@ export default class ShareModal extends React.Component {
                   (
                     <a
                       onClick={this.props.nextStep}
-                      className="center-button-text btn btn-md btn-shopping-spree-blue btn-block"
+                      className="center-button-text btn btn-md btn-black btn-block"
                     >
-                      Share With Friends
+                      Continue Clique
                     </a>
                   )
                   :
                   (
                     <a
                       onClick={this.props.nextStep}
-                      className="center-button-text btn btn-md btn-shopping-spree-blue btn-block"
+                      className="center-button-text btn btn-md btn-black btn-block"
                     >
-                      Get up to 25% off now
+                      Start Clique to buy
                     </a>
                   )
                 }

@@ -38,10 +38,10 @@
 
 .shopping-spree-onboarding {
   display: block;
-  // .btn {
-  //   padding-left: 0;
-  //   padding-right: 0;
-  // }
+  .btn {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
   .equal {
     display: flex;
@@ -71,9 +71,6 @@
       .btn-close {
         top: 22px;
         right: 22px;
-        cursor: pointer;
-        position: absolute;
-        z-index: 10;
       }
 
       .welcome-headline {
@@ -88,8 +85,8 @@
         }
       }
       .base-text {
-        line-height: 24px;
-        font-size: 18px;
+        line-height: 31px;
+        font-size: 26px;
       }
 
       .body-text {
@@ -98,7 +95,7 @@
       }
 
       #enter-email-text {
-        padding-top: 48px;
+        padding-top: 92px;
       }
 
       .dress-image-left {
