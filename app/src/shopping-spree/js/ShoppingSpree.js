@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Cookies from "universal-cookie";
 import Modal from "react-modal";
-// import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import * as firebase from "firebase";
 import _ from "lodash";
 
@@ -109,11 +109,10 @@ export default class ShoppingSpree extends FirebaseComponent {
   addChatMessage(data, prevChildKey) {
     const dataVal = data.val();
     if (data.val()["created_at"] > this.state.lastChatTime) {
-      console.log('Toast!');
-      // toast(this.renderToast(dataVal), {
-      //   closeButton: <span className="ToastAlert__closeButton">&times;</span>,
-      //   className: `ToastAlert__${dataVal.type}`,
-      // });
+      toast(this.renderToast(dataVal), {
+        closeButton: <span className="ToastAlert__closeButton">&times;</span>,
+        className: `ToastAlert__${dataVal.type}`,
+      });
     }
   }
 
@@ -290,7 +289,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     return (
       <div>
         <div>
-          {/* <div className="ToastAlert__container">
+          <div className="ToastAlert__container">
             <ToastContainer
               position="bottom-right"
               type="default"
@@ -300,7 +299,7 @@ export default class ShoppingSpree extends FirebaseComponent {
               closeOnClick
               pauseOnHover
             />
-          </div> */}
+          </div>
         </div>
         {this.state.showAddingToCartModal && (
           <AddToCartModal
