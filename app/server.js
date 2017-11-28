@@ -61,8 +61,10 @@ app.use(cookieParser());
 app.get('/webpack/asset-manifest', (req, res) => {
   const clientAssets = require('./build/webpack/asset-manifest.json');
   var asset_paths = {
-    jsBundle: clientAssets['main.js'],
-    cssBundle: clientAssets['main.css'],
+    jsBundle: clientAssets['pdp.js'],
+    cssBundle: clientAssets['pdp.css'],
+    flashJsBundle: clientAssets['flash.js'],
+    flashCssBundle: clientAssets['flash.css'],
   }
   res.send(asset_paths);
 });
