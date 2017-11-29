@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 import win from './polyfills/windowPolyfill';
 
 // Components
-import FlashSaleApp from './FlashSaleApp'; // Current Pdp, poor name
+import FlashSaleApp from './FlashSaleApp'; // Current FLASH Product App,
+import FlashSaleListApp from './FlashSaleListApp'; // FLASH List App
 
 // Standard Components that will be included in old site
 import BlanketOverlay from './components/generic/BlanketOverlay';
@@ -36,7 +37,10 @@ function renderComponent(Component, idSelectorStr) {
 const cleanData = win.__data;
 const store = AppStore(cleanData);
 const FlashSaleAppComponent = <Provider store={store}><FlashSaleApp /></Provider>;
-renderComponent(FlashSaleAppComponent, 'flash-list-root');
+renderComponent(FlashSaleAppComponent, 'flash-product-root');
+
+const FlashSaleListAppComponent = <Provider store={store}><FlashSaleListApp /></Provider>;
+renderComponent(FlashSaleListAppComponent, 'flash-list-root');
 
 // BLANKET
 const BlanketComponent = <Provider store={store}><BlanketOverlay /></Provider>;

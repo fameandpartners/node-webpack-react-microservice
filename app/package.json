@@ -81,6 +81,7 @@
     "mirror-creator": "^1.1.0",
     "morgan": "^1.8.1",
     "node-sass": "^4.5.3",
+    "pluralize": "^7.0.0",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",
     "raf": "^3.3.2",
