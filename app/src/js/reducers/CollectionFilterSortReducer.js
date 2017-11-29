@@ -2,8 +2,52 @@ import Immutable from 'immutable';
 import FilterSortConstants from '../constants/CollectionFilterSortConstants';
 import { updateExternalLegacyFilters } from '../utilities/CollectionFilterSortUtilities';
 
+function generateSizes() {
+  let sizes = [];
+  for (let i = 0; i <= 22; i += 2) {
+    sizes = sizes.concat({
+      id: `size-${i}`,
+      value: i,
+    });
+  }
+  return sizes;
+}
+
+function generateDressLengths() {
+  const lengths = [
+    {
+      id: 'mini',
+      name: 'Mini',
+      value: 'mini',
+    },
+    {
+      id: 'midi',
+      name: 'Midi',
+      value: 'midi',
+    },
+    {
+      id: 'knee',
+      name: 'Knee',
+      value: 'knee',
+    },
+    {
+      id: 'ankle',
+      name: 'Ankle',
+      value: 'ankle',
+    },
+    {
+      id: 'maxi',
+      name: 'Maxi',
+      value: 'maxi',
+    },
+  ];
+  return lengths;
+}
+
 export const $$initialState = Immutable.fromJS({
   $$colors: [],
+  $$dressLengths: generateDressLengths(),
+  $$sizes: generateSizes(),
   $$bodyShapes: [],
   $$bodyStyles: [],
   fastMaking: false,

@@ -14,11 +14,11 @@ import * as CollectionFilterSortActions from '../../actions/CollectionFilterSort
 // Libraries
 import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
-import { cleanCapitalizeWord } from '../../utilities/TextFormatting';
 import { hasLegacyInstance } from '../../utilities/CollectionFilterSortUtilities';
 
 // Components
 import ExpandablePanelItem from './ExpandablePanelItem';
+import Button from '../generic/Button';
 
 // Constants
 import CollectionFilterSortConstants from '../../constants/CollectionFilterSortConstants';
@@ -29,14 +29,15 @@ import '../../../css/components/CollectionFilter.scss';
 const { PRICES, FILTER_DEFAULTS } = CollectionFilterSortConstants;
 
 function stateToProps({ $$collectionFilterSortState }, props) {
+  console.log('$$collectionFilterSortState', $$collectionFilterSortState.toJS());
     // Which part of the Redux global state does our component want to receive as props?
   if ($$collectionFilterSortState) {
     const collectionFilterSortState = $$collectionFilterSortState.toJS();
     return {
           // Immutable Defaults
       $$colors: $$collectionFilterSortState.get('$$colors'),
-      $$bodyShapes: $$collectionFilterSortState.get('$$bodyShapes'),
-      $$bodyStyles: $$collectionFilterSortState.get('$$bodyStyles'),
+      $$dressLengths: $$collectionFilterSortState.get('$$dressLengths'),
+      $$sizes: $$collectionFilterSortState.get('$$sizes'),
           // Mutable props
       isDrawerLayout: props.isDrawerLayout,
       filters: assign({},
@@ -153,8 +154,6 @@ class CollectionFilterSort extends React.Component {
       setSelectedColors(newColors);
       updateExternalLegacyFilters({ selectedColors: newColors });
     }
-
-    this.trackSelection('COLLECTION_COLOR_FILTER_SELECTION', name);
   }
 
   updatePrice(newPrices) {
@@ -180,7 +179,6 @@ class CollectionFilterSort extends React.Component {
     const { filters } = this.props;
     return () => {
       const newPrices = this.addOrRemoveFrom(filters.selectedPrices, id).sort();
-      this.trackSelection('COLLECTION_PRICE_FILTER_SELECTION', id);
       this.updatePrice(newPrices);
     };
   }
@@ -205,42 +203,21 @@ class CollectionFilterSort extends React.Component {
     }
   }
 
+  handleDressSizeSelection({ value }) {
+    console.log('handling dress size selection', value);
+  }
+
   handleStyleSelection(style) {
     return () => {
       const styleId = style.permalink;
       const newStyles = this.addOrRemoveFrom(this.props.filters.selectedStyles, styleId).sort();
-      this.trackSelection('COLLECTION_STYLE_FILTER_SELECTION', styleId);
       this.updateStyles(newStyles);
     };
-  }
-
-  updateShapes(newShapes) {
-    const {
-        $$bodyShapes,
-        isDrawerLayout,
-        setSelectedShapes,
-        setTemporaryFilters,
-        temporaryFilters,
-        updateExternalLegacyFilters,
-      } = this.props;
-    if (isDrawerLayout) { // mobile, temporary setting
-      setTemporaryFilters(assign({}, temporaryFilters, {
-        selectedShapes: newShapes,
-      }));
-    } else {
-      setSelectedShapes(newShapes);
-      updateExternalLegacyFilters({
-        selectedShapes: newShapes.length === $$bodyShapes.toJS().length
-            ? []
-            : newShapes,
-      });
-    }
   }
 
   handleShapeSelection(shapeId) {
     return () => {
       const newShapes = this.addOrRemoveFrom(this.props.filters.selectedShapes, shapeId).sort();
-      this.trackSelection('COLLECTION_BODYSHAPE_FILTER_SELECTION', shapeId);
       this.updateShapes(newShapes);
     };
   }
@@ -264,16 +241,28 @@ class CollectionFilterSort extends React.Component {
         setFastMaking(!fastMaking);
         this.props.updateExternalLegacyFilters(newFastMaking);
       }
-
-        // this.trackSelection('COLLECTION_FASTMAKING_FILTER_SELECTION', !fastMaking);
     };
   }
 
 
-    /**
-     * RENDERERS
-     * ***************************************************
-     */
+  /**
+   * RENDERERS
+   * ***************************************************
+   */
+  buildSizeOption(size) {
+    // selected = s === temporaryDressSize
+    return (
+      <div key={size.id} className="col-3">
+        <Button
+          tertiary
+          tall
+          text={`US ${size.value}`}
+          handleClick={this.handleDressSizeSelection(size)}
+        />
+      </div>
+    );
+  }
+
   buildColorOption(color) {
     const { selectedColors } = this.props.filters;
     const { name, id } = color;
@@ -294,41 +283,24 @@ class CollectionFilterSort extends React.Component {
     );
   }
 
-  buildShapeOptions(shape) {
-    const { selectedShapes } = this.props.filters;
+  buildDressLengths(dressLength) {
+    // checked={selectedShapes.indexOf(shape) > -1}
     return (
-      <label htmlFor={`shape-${shape}`} key={`shape-${shape}`} className="ExpandablePanel__option ExpandablePanel__listColumn" name="shape">
+      <label
+        key={`length-${dressLength.id}`}
+        className="col-6 ExpandablePanel__option ExpandablePanel__listColumn" name="dress-length"
+        htmlFor={`dress-length-${dressLength.id}`}
+      >
         <input
-          id={`shape-${shape}`}
-          onChange={this.handleShapeSelection(shape)}
-          checked={selectedShapes.indexOf(shape) > -1}
+          onChange={this.handleShapeSelection(dressLength)}
           data-all="false"
-          name={`shape-${shape}`}
+          id={`dress-length-${dressLength.id}`}
+          name={`dress-length-${dressLength.id}`}
           type="checkbox"
-          value={shape}
+          value={dressLength.value}
         />
         <span className="checkboxBlackBg__check">
-          <span className="ExpandablePanel__optionName">{cleanCapitalizeWord(shape, ['_'])}</span>
-        </span>
-      </label>
-    );
-  }
-
-  buildStyleOptions(style) {
-    const { selectedStyles } = this.props.filters;
-    return (
-      <label htmlFor={`style-${style.permalink}`} key={`style-${style.permalink}`} className="ExpandablePanel__option ExpandablePanel__listColumn" name="style">
-        <input
-          onChange={this.handleStyleSelection(style)}
-          checked={selectedStyles.indexOf(style.permalink) > -1}
-          data-all="false"
-          id={`style-${style.permalink}`}
-          name={`style-${style.permalink}`}
-          type="checkbox"
-          value={style.name}
-        />
-        <span className="checkboxBlackBg__check">
-          <span className="ExpandablePanel__optionName">{style.name}</span>
+          <span className="ExpandablePanel__optionName">{dressLength.name}</span>
         </span>
       </label>
     );
@@ -372,33 +344,11 @@ class CollectionFilterSort extends React.Component {
       );
   }
 
-  generateShapeSummary() {
-    const { $$bodyShapes, filters } = this.props;
-    const selectedCount = filters.selectedShapes.length;
-
-    if (selectedCount === $$bodyShapes.toJS().length || selectedCount === 0) { // All
-      return (this.generateSelectedItemSpan('all', 'All Shapes', 'shape'));
-    }
-
-    return (this.generateSelectedItemSpan('shapes-selected', pluralize('Shape', selectedCount, true), 'bodyshapes'));
-  }
-
-  generateStyleSummary() {
-    const { $$bodyStyles, filters } = this.props;
-    const selectedCount = filters.selectedStyles.length;
-    if (selectedCount === $$bodyStyles.toJS().length || selectedCount === 0) { // All
-      return (this.generateSelectedItemSpan('all', 'All Styles', 'style'));
-    }
-
-    return (this.generateSelectedItemSpan('styles-selected', pluralize('Style', selectedCount, true), 'styles'));
-  }
-
-
   render() {
     const {
-      $$bodyShapes,
-      $$bodyStyles,
       $$colors,
+      $$dressLengths,
+      $$sizes,
       isDrawerLayout,
       filters,
     } = this.props;
@@ -409,17 +359,35 @@ class CollectionFilterSort extends React.Component {
           <div className="ExpandablePanel--wrapper">
             <div className="ExpandablePanel__heading">
               <span className="ExpandablePanel__mainTitle">{isDrawerLayout ? 'Filter' : 'Filter by'}</span>
-              <div className="ExpandablePanel__clearAllWrapper">
-                <a
-                  onClick={this.handleClearAll}
-                  className="ExpandablePanel__clearAll js-trigger-clear-all-filters"
-                >
-                  Clear All
-                </a>
-              </div>
             </div>
 
             <ExpandablePanelItem
+              isActive
+              openedByDefault
+              itemGroup={(
+                <div>
+                  <div className="ExpandablePanel__name">
+                    Size
+                  </div>
+                </div>
+              )}
+              revealedContent={(
+                <div
+                  className="ExpandablePanel__listOptions ExpandablePanel__listOptions--panelColors clearfix"
+                >
+                  <div className="ExpandablePanel__listTwoColumns">
+                    <div className="ProductCustomizationSize__size grid-12-spaceBetween">
+                      {
+                        $$sizes.toJS().map(size => this.buildSizeOption(size))
+                      }
+                    </div>
+                  </div>
+                </div>
+              )}
+            />
+
+            <ExpandablePanelItem
+              isActive
               openedByDefault
               itemGroup={(
                 <div>
@@ -430,7 +398,7 @@ class CollectionFilterSort extends React.Component {
                     {this.generateColorSummary(filters.selectedColors)}
                   </div>
                 </div>
-                          )}
+              )}
               revealedContent={(
                 <div
                   className="ExpandablePanel__listOptions ExpandablePanel__listOptions--panelColors clearfix"
@@ -443,91 +411,32 @@ class CollectionFilterSort extends React.Component {
                 </div>
               )}
             />
-
-            <ExpandablePanelItem
-              openedByDefault={!!filters.selectedStyles.length}
-              itemGroup={(
-                <div>
-                  <div className="ExpandablePanel__name">
-                                  Style
-                              </div>
-                  <div className="ExpandablePanel__selectedOptions">
-                    {this.generateStyleSummary()}
-                  </div>
-                </div>
-                          )}
-              revealedContent={(
-                <div className="ExpandablePanel__listOptions checkboxBlackBg clearfix">
-                  <div className="ExpandablePanel__listTwoColumns">
-                    {$$bodyStyles.toJS().map(this.buildStyleOptions)}
-                  </div>
-                </div>
-                          )}
-            />
-
-            <ExpandablePanelItem
-              openedByDefault={!!filters.selectedShapes.length}
-              itemGroup={(
-                <div>
-                  <div className="ExpandablePanel__name">
-                                  Bodyshape
-                              </div>
-                  <div className="ExpandablePanel__selectedOptions">
-                    {this.generateShapeSummary()}
-                  </div>
-                </div>
-                          )}
-              revealedContent={(
-                <div className="ExpandablePanel__listOptions checkboxBlackBg clearfix">
-                  <div className="ExpandablePanel__listTwoColumns">
-                    {$$bodyShapes.toJS().map(this.buildShapeOptions)}
-                  </div>
-                </div>
-                          )}
-            />
-
-            <ExpandablePanelItem
-              openedByDefault={!!filters.selectedPrices.length}
-              itemGroup={(
-                <div>
-                  <div className="ExpandablePanel__name">
-                                  Price
-                              </div>
-                  <div className="ExpandablePanel__selectedOptions">
-                    {this.generatePriceSummary(filters.selectedPrices)}
-                  </div>
-                </div>
-                          )}
-              revealedContent={(
-                <div className="ExpandablePanel__listOptions checkboxBlackBg clearfix">
-                  <div>
-                    {PRICES.map((p, i) => (
-                      <label
-                        htmlFor={`price-${p.id}}`}
-                        key={`price-${p.id}`}
-                        className="ExpandablePanel__option"
-                        name="price"
-                      >
-                        <input
-                          id={`price-${p.id}}`}
-                          checked={filters.selectedPrices.indexOf(PRICES[i].id) > -1}
-                          data-pricemin={p.range[0]}
-                          data-pricemax={p.range[1]}
-                          onChange={this.handlePriceSelection(p.id)}
-                          name="price"
-                          type="checkbox"
-                          value={p.range[0]}
-                        />
-                        <span className="checkboxBlackBg__check">
-                          <span className="ExpandablePanel__optionName">{p.presentation}</span>
-                        </span>
-                      </label>
-                      ))}
-                  </div>
-                </div>
-              )}
-            />
           </div>
+
+          <ExpandablePanelItem
+            isActive
+            openedByDefault
+            itemGroup={(
+              <div>
+                <div className="ExpandablePanel__name">
+                  Length
+                </div>
+              </div>
+            )}
+            revealedContent={(
+              <div
+                className="ExpandablePanel__listOptions ExpandablePanel__listOptions--panelColors clearfix"
+              >
+                <div>
+                  <div className="ProductCustomizationSize__size grid-12-spaceBetween">
+                    {
+                      $$dressLengths.toJS().map(size => this.buildDressLengths(size))
+                    }
+                  </div>
+                </div>
+              </div>
+            )}
+          />
 
           {isDrawerLayout ?
             <div className="ExpandablePanel__action">
@@ -553,8 +462,8 @@ CollectionFilterSort.propTypes = {
   // breakpoint: PropTypes.string,
   isDrawerLayout: PropTypes.bool.isRequired,
   $$colors: PropTypes.object.isRequired,
-  $$bodyShapes: PropTypes.object.isRequired,
-  $$bodyStyles: PropTypes.object.isRequired,
+  $$dressLengths: PropTypes.object.isRequired,
+  $$sizes: PropTypes.object.isRequired,
   filters: PropTypes.object.isRequired,
   temporaryFilters: PropTypes.object.isRequired,
 

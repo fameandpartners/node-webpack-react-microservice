@@ -11,6 +11,13 @@
   }
 }
 
+.CollectionFilterSort .FilterSort .Button--tall {
+  padding: 3px;
+  height: 44px;
+  width: 44px;
+  font-size: 12px;
+}
+
 .ExpandablePanel--mobile .FilterSort {
   height: 1000px;
 }
@@ -316,17 +323,8 @@
   input[type="checkbox"]:checked {
 
     ~ .ExpandablePanel__optionCheck--tick {
-
-      &::after {
-        color: $c-white;
-        font-family: 'icomoon_fame_2015';
-        font-size: 0.6em;
-        content: "\e90f";
-        display: inline-block;
-        position: relative;
-        left: 3px;
-        top: -5px;
-      }
+      outline: 2px solid $c-black;
+      outline-offset: 1px;
 
       &.inverse::after {
         color: $c-neutral-12;
@@ -345,6 +343,7 @@
 
 // Option label
 .ExpandablePanel__option {
+  text-align: left;
   padding: 1px 0;
   font-weight: 400;
   font-size: 0.95em;
@@ -361,9 +360,8 @@
 
   // Rounded checkbox / radio
   &--rounded {
-    border-radius: 100%;
-    height: 17px;
-    width: 17px;
+    height: 14px;
+    width: 14px;
     margin-right: 10px;
     display: inline-block;
     position: relative;
@@ -374,12 +372,11 @@
 
 // Fallback for colors with no background defined
 .ExpandablePanel__optionColorFallback {
-  border-radius: 100%;
   background: $c-neutral-4;
   display: inline-block;
   position: absolute;
-  height: 17px;
-  width: 17px;
+  height: 14px;
+  width: 14px;
   top: 3px;
 }
 
@@ -458,4 +455,51 @@
 
 .CollectionSortMobile .ExpandablePanel__action {
   position: fixed;
+}
+
+.checkboxBlackBg {
+
+  label {
+    display: block;
+  }
+
+  .checkboxBlackBg__check {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-left: 20px;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      padding: 4px;
+      left: 0;
+      top: 6px;
+      border: 1px solid $c-black;
+      background-color: $c-white;
+    }
+
+  }
+
+  input[type="checkbox"] {
+    opacity: 0;
+
+    &:disabled ~ .checkboxBlackBg__check {
+      opacity: 0.65;
+
+      &::before {
+        background-color: $c-neutral-8;
+        cursor: not-allowed;
+      }
+
+    }
+
+    &:checked ~ .checkboxBlackBg__check::before {
+      background-color: $c-black;
+    }
+
+  }
+
 }
