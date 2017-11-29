@@ -18,6 +18,7 @@ import '../css/components/FlashSale.scss';
 
 // Components
 import CollectionFilter from './components/flash_sale/CollectionFilter';
+import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 
 
 // Configure Error Tracking
@@ -52,7 +53,9 @@ class FlashSaleApp extends Component {
             <div className="col-3">
               <CollectionFilter />
             </div>
-            <div className="col-9" />
+            <div className="col-9">
+              <FlashSaleProductGrid />
+            </div>
           </div>
         </div>
       </div>
