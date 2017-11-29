@@ -52,7 +52,9 @@ class FlashSaleApp extends Component {
             <div className="col-3">
               <CollectionFilter />
             </div>
-            <div className="col-9" />
+            <div className="col-9">
+              Results Go Here
+            </div>
           </div>
         </div>
       </div>

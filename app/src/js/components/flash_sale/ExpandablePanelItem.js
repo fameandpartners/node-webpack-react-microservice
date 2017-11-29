@@ -21,13 +21,13 @@ class ExpandablePanel extends React.Component {
     }
 
     render() {
-      const { itemGroup, revealedContent, } = this.props;
-      const { isActive, } = this.state;
+      const { itemGroup, revealedContent } = this.props;
+      const { isActive } = this.state;
       return (
           <div className={`ExpandablePanelItem
             ${isActive ? 'ExpandablePanelItem--is-active' : ''}
           `}>
-              <div className="ExpandablePanelItem__item-bar" onClick={this.openPanel}>
+              <div className="u-text-align--left ExpandablePanelItem__item-bar" onClick={this.openPanel}>
                   {itemGroup}
               </div>
               <div className="ExpandablePanelItem__revealed-content">
