@@ -48,7 +48,7 @@ class FlashSaleApp extends Component {
     return (
       <div className="__react_root__">
         <div className={`FlashSaleListApp Root__wrapper ${lockBody ? 'FlashSaleApp--scroll-lock' : ''}`}>
-          <div className="grid-12">
+          <div className="grid-12 layout-container">
             <div className="col-3">
               <CollectionFilter />
             </div>

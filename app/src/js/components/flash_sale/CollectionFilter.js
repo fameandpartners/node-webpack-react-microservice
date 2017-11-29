@@ -29,7 +29,6 @@ import '../../../css/components/CollectionFilter.scss';
 const { PRICES, FILTER_DEFAULTS } = CollectionFilterSortConstants;
 
 function stateToProps({ $$collectionFilterSortState }, props) {
-  console.log('state', $$collectionFilterSortState.toJS());
     // Which part of the Redux global state does our component want to receive as props?
   if ($$collectionFilterSortState) {
     const collectionFilterSortState = $$collectionFilterSortState.toJS();
@@ -277,7 +276,6 @@ class CollectionFilterSort extends React.Component {
      */
   buildColorOption(color) {
     const { selectedColors } = this.props.filters;
-    console.log('selectedColors', selectedColors);
     const { name, id } = color;
     const inverse = name.toLowerCase().indexOf('white') > -1 ? 'inverse' : '';
     return (
@@ -404,8 +402,6 @@ class CollectionFilterSort extends React.Component {
       isDrawerLayout,
       filters,
     } = this.props;
-
-    console.log('$$colors', $$colors);
 
     return (
       <div className="CollectionFilterSort">
