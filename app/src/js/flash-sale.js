@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { assign } from 'lodash';
 import win from './polyfills/windowPolyfill';
 
 // Components
@@ -34,7 +35,16 @@ function renderComponent(Component, idSelectorStr) {
 // MAIN PDP
 // const pdpData = win.__data ? transformProductJSON(win.__data) : {};
 // eslint-disable-next-line
-const cleanData = win.__data;
+let cleanData = win.__data || {};
+const $$collectionFilterSortState = {
+  $$colors: win.CollectionFilterData.colors,
+  $$bodyShapes: win.CollectionFilterData.bodyShapes,
+  $$bodyStyles: win.CollectionFilterData.bodyStyles,
+};
+cleanData = assign({}, cleanData, {
+  $$collectionFilterSortState,
+});
+
 const store = AppStore(cleanData);
 const FlashSaleAppComponent = <Provider store={store}><FlashSaleApp /></Provider>;
 renderComponent(FlashSaleAppComponent, 'flash-product-root');
