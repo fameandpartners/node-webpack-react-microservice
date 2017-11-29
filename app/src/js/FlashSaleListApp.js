@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import autoBind from 'react-autobind';
+import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 
 // Sentry Error Tracking
@@ -48,7 +48,7 @@ class FlashSaleApp extends Component {
       transformedData: flashSaleDresses.dresses,
     };
 
-    autoBind(this);
+    autobind(this);
   }
 
   render() {
