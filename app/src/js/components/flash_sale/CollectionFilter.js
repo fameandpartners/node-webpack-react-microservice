@@ -1,20 +1,21 @@
 /* eslint-disable react/jsx-no-bind */
+/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import autobind from 'react-autobind';
-import { assign, find } from 'lodash';
-import pluralize from 'pluralize';
-import win from '../../polyfills/windowPolyfill';
+import { assign } from 'lodash';
 
 // Actions
 import * as CollectionFilterSortActions from '../../actions/CollectionFilterSortActions';
 
 // Libraries
+import win from '../../polyfills/windowPolyfill';
 import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
 import { hasLegacyInstance } from '../../utilities/CollectionFilterSortUtilities';
+import { serializeObjectIntoQueryParams } from '../../utilities/BOM';
 
 // Components
 import ExpandablePanelItem from './ExpandablePanelItem';
@@ -26,7 +27,7 @@ import CollectionFilterSortConstants from '../../constants/CollectionFilterSortC
 // CSS
 import '../../../css/components/CollectionFilter.scss';
 
-const { PRICES, FILTER_DEFAULTS } = CollectionFilterSortConstants;
+const { FILTER_DEFAULTS } = CollectionFilterSortConstants;
 
 function stateToProps({ $$collectionFilterSortState }, props) {
   console.log('$$collectionFilterSortState', $$collectionFilterSortState.toJS());
@@ -45,9 +46,8 @@ function stateToProps({ $$collectionFilterSortState }, props) {
           order: collectionFilterSortState.order,
           fastMaking: collectionFilterSortState.fastMaking,
           selectedColors: collectionFilterSortState.selectedColors,
-          selectedPrices: collectionFilterSortState.selectedPrices,
-          selectedShapes: collectionFilterSortState.selectedShapes,
-          selectedStyles: collectionFilterSortState.selectedStyles,
+          selectedDressSize: collectionFilterSortState.selectedDressSize,
+          selectedDressLengths: collectionFilterSortState.selectedDressLengths,
         },
             // Include temporary filters if we are in a drawer
             (props.isDrawerLayout) ? collectionFilterSortState.temporaryFilters : {},
@@ -102,16 +102,17 @@ class CollectionFilterSort extends React.Component {
   }
 
   handleFilterApply() {
-    const {
-        applyTemporaryFilters,
-        setTemporaryFilters,
-        temporaryFilters,
-      } = this.props;
+    const { temporaryFilters } = this.props;
     return () => {
-      applyTemporaryFilters(temporaryFilters);
-      setTemporaryFilters({});
-      this.props.updateExternalLegacyFilters(temporaryFilters);
-      if (hasLegacyInstance()) { win.ProductCollectionFilter__Instance.toggleFilters(false); }
+      const queryObj = {
+        page: 1,
+        sort: null,
+        color: temporaryFilters.selectedColors,
+        length: temporaryFilters.selectedDressLengths,
+        size: temporaryFilters.selectedDressSize,
+      };
+      const serializedParams = serializeObjectIntoQueryParams(queryObj);
+      win.location = `${win.location.href}?${serializedParams}`;
     };
   }
 
@@ -137,110 +138,36 @@ class CollectionFilterSort extends React.Component {
 
   handleColorSelection({ name }) {
     const {
-        isDrawerLayout,
-        filters,
-        setSelectedColors,
-        setTemporaryFilters,
-        temporaryFilters,
-        updateExternalLegacyFilters,
-      } = this.props;
-    const newColors = this.addOrRemoveFrom(filters.selectedColors, name);
-
-    if (isDrawerLayout) { // mobile, temporary setting
-      setTemporaryFilters(assign({}, temporaryFilters, {
-        selectedColors: newColors,
-      }));
-    } else {
-      setSelectedColors(newColors);
-      updateExternalLegacyFilters({ selectedColors: newColors });
-    }
-  }
-
-  updatePrice(newPrices) {
-    const {
-        isDrawerLayout,
-        setSelectedPrices,
-        setTemporaryFilters,
-        temporaryFilters,
-        updateExternalLegacyFilters,
-      } = this.props;
-
-    if (isDrawerLayout) { // mobile, temporary setting
-      setTemporaryFilters(assign({}, temporaryFilters, {
-        selectedPrices: newPrices,
-      }));
-    } else {
-      setSelectedPrices(newPrices);
-      updateExternalLegacyFilters({ selectedPrices: newPrices });
-    }
-  }
-
-  handlePriceSelection(id) {
-    const { filters } = this.props;
-    return () => {
-      const newPrices = this.addOrRemoveFrom(filters.selectedPrices, id).sort();
-      this.updatePrice(newPrices);
-    };
-  }
-
-  updateStyles(newStyles) {
-    const {
-        isDrawerLayout,
-        setSelectedStyles,
         setTemporaryFilters,
         temporaryFilters,
       } = this.props;
+    const newColors = this.addOrRemoveFrom(temporaryFilters.selectedColors, name);
 
-    if (isDrawerLayout) { // mobile version
-      setTemporaryFilters(assign({}, temporaryFilters, {
-        selectedStyles: newStyles,
-      }));
-    } else {
-      setSelectedStyles(newStyles);
-      this.props.updateExternalLegacyFilters({
-        selectedStyles: newStyles,
-      });
-    }
+    setTemporaryFilters(assign({}, temporaryFilters, {
+      selectedColors: newColors,
+    }));
   }
 
   handleDressSizeSelection({ value }) {
-    console.log('handling dress size selection', value);
-  }
-
-  handleStyleSelection(style) {
     return () => {
-      const styleId = style.permalink;
-      const newStyles = this.addOrRemoveFrom(this.props.filters.selectedStyles, styleId).sort();
-      this.updateStyles(newStyles);
-    };
-  }
-
-  handleShapeSelection(shapeId) {
-    return () => {
-      const newShapes = this.addOrRemoveFrom(this.props.filters.selectedShapes, shapeId).sort();
-      this.updateShapes(newShapes);
-    };
-  }
-
-
-  handleFastMaking() {
-    const {
-        filters,
-        isDrawerLayout,
-        setFastMaking,
+      const {
         setTemporaryFilters,
         temporaryFilters,
       } = this.props;
-    const { fastMaking } = filters;
-    const newFastMaking = { fastMaking: !fastMaking };
 
+      setTemporaryFilters(assign({}, temporaryFilters, {
+        selectedDressSize: value,
+      }));
+    };
+  }
+
+  handleDressLengthSelection(dressLength) {
     return () => {
-      if (isDrawerLayout) {
-        setTemporaryFilters(assign({}, temporaryFilters, newFastMaking));
-      } else {
-        setFastMaking(!fastMaking);
-        this.props.updateExternalLegacyFilters(newFastMaking);
-      }
+      const { setTemporaryFilters, temporaryFilters } = this.props;
+      const newDressLengths = this.addOrRemoveFrom(temporaryFilters.selectedDressLengths, dressLength.id).sort();
+      setTemporaryFilters(assign({}, temporaryFilters, {
+        selectedDressLengths: newDressLengths,
+      }));
     };
   }
 
@@ -250,12 +177,13 @@ class CollectionFilterSort extends React.Component {
    * ***************************************************
    */
   buildSizeOption(size) {
-    // selected = s === temporaryDressSize
+    const { temporaryFilters } = this.props;
     return (
       <div key={size.id} className="col-3">
         <Button
           tertiary
           tall
+          selected={size.value === temporaryFilters.selectedDressSize}
           text={`US ${size.value}`}
           handleClick={this.handleDressSizeSelection(size)}
         />
@@ -264,7 +192,7 @@ class CollectionFilterSort extends React.Component {
   }
 
   buildColorOption(color) {
-    const { selectedColors } = this.props.filters;
+    const { selectedColors } = this.props.temporaryFilters;
     const { name, id } = color;
     const inverse = name.toLowerCase().indexOf('white') > -1 ? 'inverse' : '';
     return (
@@ -292,7 +220,7 @@ class CollectionFilterSort extends React.Component {
         htmlFor={`dress-length-${dressLength.id}`}
       >
         <input
-          onChange={this.handleShapeSelection(dressLength)}
+          onChange={this.handleDressLengthSelection(dressLength)}
           data-all="false"
           id={`dress-length-${dressLength.id}`}
           name={`dress-length-${dressLength.id}`}
@@ -306,43 +234,25 @@ class CollectionFilterSort extends React.Component {
     );
   }
 
-  generateSelectedItemSpan(id, presentation, category = 'elem') {
-    return (
-      <span key={`${category}-${id}`} className="ExpandablePanel__selectedItem">{presentation}</span>
-    );
-  }
-
-  generateColorSummary(selectedColorNames) {
-    const selectedColors = selectedColorNames.map(name =>
-        find(this.props.$$colors.toJS(), { name }),
-      );
-    const selectedCount = selectedColors.length;
-
-    if (selectedCount === 0) {
-      return (this.generateSelectedItemSpan('all', 'All Colors', 'color'));
-    }
-
-    return (this.generateSelectedItemSpan('colors-selected', pluralize('Color', selectedCount, true), 'color'));
-  }
-
-  generatePriceSummary(selectedPriceIds) {
-    const selectedPrices = selectedPriceIds.map(id => find(PRICES, { id }));
-    if (PRICES.length === selectedPriceIds.length || selectedPriceIds.length === 0) { // All
-      return (this.generateSelectedItemSpan('all', 'All Prices', 'price'));
-    }
-
-    if (selectedPrices.length === 1 ||
-      (selectedPrices.length === 2 && selectedPrices.indexOf(PRICES[1]) < 0)) { // Individual Elems
-      return selectedPrices.map(p => this.generateSelectedItemSpan(p.id, p.presentation));
-    }
-
-      // Combined pricing
-    const combinedSelectedPrices = selectedPrices.reduce((acc, c) => acc.concat(c.range), []);
-    return this.generateSelectedItemSpan(
-        'combined',
-        `$${Math.min(...combinedSelectedPrices)} - $${Math.max(...combinedSelectedPrices)}`,
-      );
-  }
+  //
+  // generatePriceSummary(selectedPriceIds) {
+  //   const selectedPrices = selectedPriceIds.map(id => find(PRICES, { id }));
+  //   if (PRICES.length === selectedPriceIds.length || selectedPriceIds.length === 0) { // All
+  //     return (this.generateSelectedItemSpan('all', 'All Prices', 'price'));
+  //   }
+  //
+  //   if (selectedPrices.length === 1 ||
+  //     (selectedPrices.length === 2 && selectedPrices.indexOf(PRICES[1]) < 0)) { // Individual Elems
+  //     return selectedPrices.map(p => this.generateSelectedItemSpan(p.id, p.presentation));
+  //   }
+  //
+  //     // Combined pricing
+  //   const combinedSelectedPrices = selectedPrices.reduce((acc, c) => acc.concat(c.range), []);
+  //   return this.generateSelectedItemSpan(
+  //       'combined',
+  //       `$${Math.min(...combinedSelectedPrices)} - $${Math.max(...combinedSelectedPrices)}`,
+  //     );
+  // }
 
   render() {
     const {
@@ -350,7 +260,6 @@ class CollectionFilterSort extends React.Component {
       $$dressLengths,
       $$sizes,
       isDrawerLayout,
-      filters,
     } = this.props;
 
     return (
@@ -362,6 +271,7 @@ class CollectionFilterSort extends React.Component {
             </div>
 
             <ExpandablePanelItem
+              forceOpen
               isActive
               openedByDefault
               itemGroup={(
@@ -387,6 +297,7 @@ class CollectionFilterSort extends React.Component {
             />
 
             <ExpandablePanelItem
+              forceOpen
               isActive
               openedByDefault
               itemGroup={(
@@ -395,7 +306,7 @@ class CollectionFilterSort extends React.Component {
                     Color
                   </div>
                   <div className="ExpandablePanel__selectedOptions">
-                    {this.generateColorSummary(filters.selectedColors)}
+                    clear all
                   </div>
                 </div>
               )}
@@ -414,6 +325,7 @@ class CollectionFilterSort extends React.Component {
           </div>
 
           <ExpandablePanelItem
+            forceOpen
             isActive
             openedByDefault
             itemGroup={(
@@ -430,7 +342,7 @@ class CollectionFilterSort extends React.Component {
                 <div>
                   <div className="ProductCustomizationSize__size grid-12-spaceBetween">
                     {
-                      $$dressLengths.toJS().map(size => this.buildDressLengths(size))
+                      $$dressLengths.toJS().map(dressLength => this.buildDressLengths(dressLength))
                     }
                   </div>
                 </div>
@@ -438,16 +350,21 @@ class CollectionFilterSort extends React.Component {
             )}
           />
 
-          {isDrawerLayout ?
+          {!isDrawerLayout ?
             <div className="ExpandablePanel__action">
               <div className="ExpandablePanel__filterTriggers--cancel-apply">
                 <a
                   onClick={this.handleFilterCancel()}
-                  className="ExpandablePanel__btn ExpandablePanel__btn--secondary"
+                  className="link link--static u-mr--small"
                 >
                     Cancel
                 </a>
-                <a onClick={this.handleFilterApply()} className="ExpandablePanel__btn">Apply</a>
+                <a
+                  onClick={this.handleFilterApply()}
+                  className="link link--static"
+                >
+                  Apply
+                </a>
               </div>
             </div> : null
             }
@@ -468,13 +385,7 @@ CollectionFilterSort.propTypes = {
   temporaryFilters: PropTypes.object.isRequired,
 
     // Redux Actions
-  applyTemporaryFilters: PropTypes.func.isRequired,
   clearAllCollectionFilters: PropTypes.func.isRequired,
-  setFastMaking: PropTypes.func.isRequired,
-  setSelectedColors: PropTypes.func.isRequired,
-  setSelectedPrices: PropTypes.func.isRequired,
-  setSelectedShapes: PropTypes.func.isRequired,
-  setSelectedStyles: PropTypes.func.isRequired,
   setTemporaryFilters: PropTypes.func.isRequired,
   updateExternalLegacyFilters: PropTypes.func.isRequired,
 };

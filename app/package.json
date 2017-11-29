@@ -83,6 +83,7 @@
     "node-sass": "^4.5.3",
     "pluralize": "^7.0.0",
     "prop-types": "^15.5.10",
+    "qs": "^6.5.1",
     "query-string": "^5.0.0",
     "raf": "^3.3.2",
     "raven-js": "^3.17.0",

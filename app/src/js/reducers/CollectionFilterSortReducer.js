@@ -53,13 +53,23 @@ export const $$initialState = Immutable.fromJS({
   fastMaking: false,
   order: 'newest',
   selectedColors: [],
+  selectedDressSize: null,
+  selectedDressLengths: [],
   selectedPrices: [],
   selectedShapes: [],
   selectedStyles: [],
   temporaryFilters: {
+    selectedColors: [],
+    selectedDressSize: null,
+    selectedDressLengths: [],
     // temporaryFilters is populating the object with the same keys as normal filters,
     // it is a simple way to temporaily save filters without applying them via ajax call
-    // fastMaking, order, selectedColors, selectedPrices, selectedShapes, etc..
+    // fastMaking, order,
+    // selectedColors,
+    // selectedDressSize,
+    // selectedDressLengths,
+    // selectedPrices,
+    // selectedShapes, etc..
   },
 });
 

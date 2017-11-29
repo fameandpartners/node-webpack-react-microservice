@@ -173,7 +173,6 @@
 
 // Container of each item / filter
 .ExpandablePanelItem {
-  border-top: 1px solid $c-neutral-4;
   max-height: 60px;
   background: $c-white;
   padding: 10px 30px;
@@ -235,7 +234,8 @@
 }
 
 .ExpandablePanelItem__item-bar {
-  padding: 6px 15px 8px 0;
+  border-bottom: 1px solid $c-neutral-4;
+  padding: 20px 15px 8px 0;
 }
 
 // Hide top border from first filter

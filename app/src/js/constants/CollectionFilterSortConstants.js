@@ -1,4 +1,4 @@
-import {assign,} from 'lodash';
+import { assign } from 'lodash';
 import mirrorCreator from 'mirror-creator';
 
 const actionTypes = assign({},
@@ -15,7 +15,7 @@ const actionTypes = assign({},
     'UPDATE_EXTERNAL_LEGACY_FILTERS',
   ]),
   {
-    FILTER_DEFAULTS : {
+    FILTER_DEFAULTS: {
       fastMaking: false,
       selectedColors: [],
       selectedPrices: [],
@@ -31,24 +31,24 @@ const actionTypes = assign({},
     },
   },
   { PRICES:
-    [
-      {
-        id: '0-199',
-        range: [0, 199,],
-        presentation: '$0 - $199',
-      },
-      {
-        id: '200-299',
-        range: [200, 299,],
-        presentation: '$200 - $299',
-      },
-      {
-        id: '300-399',
-        range: [300, 399,],
-        presentation: '$300 - $399',
-      },
+  [
+    {
+      id: '0-199',
+      range: [0, 199],
+      presentation: '$0 - $199',
+    },
+    {
+      id: '200-299',
+      range: [200, 299],
+      presentation: '$200 - $299',
+    },
+    {
+      id: '300-399',
+      range: [300, 399],
+      presentation: '$300 - $399',
+    },
   ],
-  }
+  },
 );
 
 export default actionTypes;

@@ -1,6 +1,7 @@
 import queryString from 'query-string';
 import { find } from 'lodash';
 import { QUERY_PARAMS } from '../constants/AppConstants';
+import qs from 'qs';
 
 // polyfills
 import win from '../polyfills/windowPolyfill';
@@ -79,6 +80,10 @@ export function decodeQueryParams() {
   });
 
   return queryObj;
+}
+
+export function serializeObjectIntoQueryParams(obj) {
+  return qs.stringify(obj);
 }
 
 

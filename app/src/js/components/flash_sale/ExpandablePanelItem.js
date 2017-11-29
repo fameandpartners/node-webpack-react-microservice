@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 class ExpandablePanel extends React.Component {
     constructor(props) {
@@ -21,11 +21,11 @@ class ExpandablePanel extends React.Component {
     }
 
     render() {
-      const { itemGroup, revealedContent } = this.props;
+      const { itemGroup, revealedContent, forceOpen } = this.props;
       const { isActive } = this.state;
       return (
           <div className={`ExpandablePanelItem
-            ${isActive ? 'ExpandablePanelItem--is-active' : ''}
+            ${isActive || forceOpen ? 'ExpandablePanelItem--is-active' : ''}
           `}>
               <div className="u-text-align--left ExpandablePanelItem__item-bar" onClick={this.openPanel}>
                   {itemGroup}
@@ -38,8 +38,13 @@ class ExpandablePanel extends React.Component {
     }
 }
 
+ExpandablePanel.propTypes = {
+  forceOpen: PropTypes.bool,
+}
+
 ExpandablePanel.defaultProps = {
     openedByDefault: false,
+    forceOpen: false,
 };
 
 export default ExpandablePanel;
