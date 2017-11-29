@@ -20,6 +20,8 @@ import '../css/components/FlashSale.scss';
 import CollectionFilter from './components/flash_sale/CollectionFilter';
 import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 
+// TEMP. mock data
+import flashSaleDresses from '../mock/flash-sale-dresses.json';
 
 // Configure Error Tracking
 Raven
@@ -40,12 +42,21 @@ function dispatchToProps() {
 class FlashSaleApp extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false };
+
+    this.state = {
+      isOpen: false,
+      transformedData: flashSaleDresses.dresses,
+    };
+
     autoBind(this);
   }
 
   render() {
     const { lockBody } = this.props;
+    const {
+      transformedData,
+    } = this.state;
+
     return (
       <div className="__react_root__">
         <div className={`FlashSaleListApp Root__wrapper ${lockBody ? 'FlashSaleApp--scroll-lock' : ''}`}>
@@ -54,7 +65,7 @@ class FlashSaleApp extends Component {
               <CollectionFilter />
             </div>
             <div className="col-9">
-              <FlashSaleProductGrid />
+              <FlashSaleProductGrid products={transformedData} />
             </div>
           </div>
         </div>

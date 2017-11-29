@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 
 // CSS
@@ -9,81 +10,16 @@ class FlashSaleProductGrid extends Component {
   constructor(props) {
     super(props);
     autobind(this);
-
-    this.state = {
-      dresses: [
-        {
-          id: 1,
-          name: 'Dress 1',
-          images: [{ url: 'http://via.placeholder.com/250x400' }],
-          originalPrice: '$299',
-          currentPrice: '$179',
-          size: '8 US',
-          color: 'Black',
-          permalink: '/dresses/flash',
-        },
-        {
-          id: 2,
-          name: 'Dress 2',
-          images: [{ url: 'http://via.placeholder.com/250x400' }],
-          originalPrice: '$299',
-          currentPrice: '$179',
-          size: '8 US',
-          color: 'Black',
-          permalink: '/dresses/flash',
-        },
-        {
-          id: 3,
-          name: 'Dress 3',
-          images: [{ url: 'http://via.placeholder.com/250x400' }],
-          originalPrice: '$299',
-          currentPrice: '$179',
-          size: '8 US',
-          color: 'Black',
-          permalink: '/dresses/flash',
-        },
-        {
-          id: 4,
-          name: 'Dress 4',
-          images: [{ url: 'http://via.placeholder.com/250x400' }],
-          originalPrice: '$299',
-          currentPrice: '$179',
-          size: '8 US',
-          color: 'Black',
-          permalink: '/dresses/flash',
-        },
-        {
-          id: 5,
-          name: 'Dress 5',
-          images: [{ url: 'http://via.placeholder.com/250x400' }],
-          originalPrice: '$299',
-          currentPrice: '$179',
-          size: '8 US',
-          color: 'Black',
-          permalink: '/dresses/flash',
-        },
-        {
-          id: 6,
-          name: 'Dress 6',
-          images: [{ url: 'http://via.placeholder.com/250x400' }],
-          originalPrice: '$299',
-          currentPrice: '$179',
-          size: '8 US',
-          color: 'Black',
-          permalink: '/dresses/flash',
-        },
-      ],
-    };
   }
 
   render() {
     const {
-      dresses,
-    } = this.state;
+      products,
+    } = this.props;
 
     return (
       <div className="FlashSaleProductGrid__wrapper grid-12">
-        { dresses.map(dress => (
+        { products.map(dress => (
           <div
             key={dress.id}
             className="FlashSaleProduct__container col-4"
@@ -115,5 +51,18 @@ class FlashSaleProductGrid extends Component {
     );
   }
 }
+
+FlashSaleProductGrid.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    images: PropTypes.array,
+    originalPrice: PropTypes.string,
+    currentPrice: PropTypes.string,
+    size: PropTypes.string,
+    color: PropTypes.string,
+    permalink: PropTypes.string,
+  })).isRequired,
+};
 
 export default FlashSaleProductGrid;
