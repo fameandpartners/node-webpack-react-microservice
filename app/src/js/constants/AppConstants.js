@@ -121,7 +121,7 @@ const navigationLinks = {
       },
       {
         text: 'Jumpsuits',
-        url: '/dresses/jumpsuits',
+        url: '/dresses/jumpsuit',
       },
       {
         text: 'Outerwear',
