@@ -75,6 +75,7 @@
     "custom-event": "^1.0.1",
     "express": "^4.15.2",
     "firebase": "^4.5.2",
+    "glamor": "^2.20.40",
     "helmet": "^3.6.1",
     "ignore-styles": "^5.0.1",
     "immutable": "^3.8.1",
