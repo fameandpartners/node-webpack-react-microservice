@@ -14,13 +14,23 @@
   width: 100%;
 }
 
+// bruh...
+.FlashSaleProduct__info [class^="col"] {
+  padding-bottom: 0.5em;
+}
+
 .FlashSaleProduct__info a {
   font-size: 1.2em;
   color: #222222;
 
   &:hover {
-    color: #dddddd;
+    color: #777777;
   }
+}
+
+.FlashSaleProduct__original-price,
+.FlashSaleProduct__current-price {
+  text-align: right;
 }
 
 .FlashSaleProduct__original-price {
@@ -28,5 +38,5 @@
 }
 
 .FlashSaleProduct__current-price {
-  font-weight: 400;
+  font-weight: bold;
 }
