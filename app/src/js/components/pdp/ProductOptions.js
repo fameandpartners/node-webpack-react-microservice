@@ -31,12 +31,17 @@ import ProductOptionsRow from './ProductOptionsRow';
 import ProductSecondaryActions from './ProductSecondaryActions';
 import ExpressMaking from './ExpressMaking';
 
+// REMOVE Component
+import CliqueCallout from './CliqueCallout';
+
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
 import ModalActions from '../../actions/ModalActions';
 
 // CSS
 import '../../../css/components/ProductOptions.scss';
+// CSS REMOVE
+import '../../../css/components/ShoppingSpree.scss';
 
 // Assets
 import afterpayImage from '../../../img/test/afterpay.png';
@@ -212,6 +217,7 @@ class ProductOptions extends Component {
     };
   }
 
+
   /**
    * Checks for our current color amongst images and returns that image, or default
    * @return {String} imageUrl
@@ -284,13 +290,19 @@ class ProductOptions extends Component {
                 handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
               />
             </div>
+
+
             <ExpressMaking />
+
             <div className="ProductOptions__ctas grid-1 u-mb-small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
 
             {isActive ?
               <div className="ProductOptions__additional-info u-mt-small u-mb-normal">
+
+                <CliqueCallout />
+
                 { auSite ?
                   (
                     <p className="AfterPay__message">

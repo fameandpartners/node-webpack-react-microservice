@@ -76,7 +76,7 @@ class ExpressMaking extends Component {
     } = this.props;
     if (expressMakingAvailable && isActive) {
       return (
-        <div className="grid-center-spaceAround ExpressMaking__content u-mb-small">
+        <div className="grid-center-spaceAround ExpressMaking__content u-mb-small js-express-make">
           <div className="col-1">
             <Checkbox
               id="express_making"

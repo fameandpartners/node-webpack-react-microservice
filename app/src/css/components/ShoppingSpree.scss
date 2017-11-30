@@ -1,0 +1,20 @@
+// TODO: REMOVE
+// REMOVE: SHOPPING_SPREE
+.CliqueCallout__content {
+  background: $c-background-gray;
+  border: 1px solid $c-border-gray;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.CliqueCallout__content--headline {
+  text-align: center;
+  font-size: 2rem;
+  font-style: italic;
+  font-family: "freight-display-pro",Helvetica,Arial,sans-serif;
+  font-weight: 300;
+}
+
+.CliqueCallout__content--error {
+  color: $c-red;
+}

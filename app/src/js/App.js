@@ -1,9 +1,11 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { render } from 'react-dom';
 
 // Sentry Error Tracking
 import Raven from 'raven-js';
@@ -19,6 +21,7 @@ import ImageLightboxModal from './components/pdp/ImageLightboxModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
 import AfterpayModal from './components/pdp/AfterpayModal';
+import ShoppingSpree from '../shopping-spree/js/ShoppingSpree';
 
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
@@ -127,6 +130,18 @@ class App extends Component {
       console.log('res', res);
       // Do something
     });
+  }
+
+  componentDidMount(){
+    // IF SHOPPING SPREE IS AVAILBLE, BUILD IT
+    if( win.ShoppingSpreeData ) {
+      render(
+          <ShoppingSpree firebaseAPI={window.ShoppingSpreeData.firebaseAPI}
+                         firebaseDatabase={window.ShoppingSpreeData.firebaseDatabase}/>,
+
+          document.getElementById( 'shopping-spree' )
+      );
+    }
   }
 
   render() {

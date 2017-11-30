@@ -18,6 +18,8 @@ import { formatCents } from '../../utilities/accounting';
 
 // UI Components
 import ProductImageSlider from './ProductImageSlider';
+// REMOVE COMPONENTS
+import CliqueCallout from './CliqueCallout';
 
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
@@ -132,6 +134,7 @@ class ProductDisplayOptionsTouch extends Component {
           </div>
         </div>
         <div className="layout-container">
+          <CliqueCallout />
           <ExpressMaking mobile />
         </div>
       </div>

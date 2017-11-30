@@ -199,6 +199,11 @@ const navigationLinks = {
         text: 'Get $25 Off',
         url: '/invite?nav',
       },
+      {
+        text: 'Shop With Friends',
+        url: '#',
+        customClass: 'js-shop-with-friends',
+      },
     ],
   },
 };
