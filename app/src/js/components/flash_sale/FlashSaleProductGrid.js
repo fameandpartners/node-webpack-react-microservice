@@ -22,7 +22,7 @@ class FlashSaleProductGrid extends Component {
         { products.map(dress => (
           <div
             key={dress.id}
-            className="FlashSaleProduct__container col-4"
+            className="FlashSaleProduct__container col-4_sm-6"
           >
             <div className="FlashSaleProduct__image">
               <a href={dress.permalink}>
@@ -30,18 +30,18 @@ class FlashSaleProductGrid extends Component {
               </a>
             </div>
             <div className="FlashSaleProduct__info grid-12">
-              <div className="col-9">
+              <div className="col-8">
                 <a href={dress.permalink}>
                   {dress.name}
                 </a>
               </div>
-              <div className="col-3 FlashSaleProduct__original-price">
+              <div className="col-4 FlashSaleProduct__original-price">
                 {dress.originalPrice}
               </div>
-              <div className="col-9">
+              <div className="col-8">
                 {dress.color}, {dress.size}
               </div>
-              <div className="col-3 FlashSaleProduct__current-price">
+              <div className="col-4 FlashSaleProduct__current-price">
                 {dress.currentPrice}
               </div>
             </div>
