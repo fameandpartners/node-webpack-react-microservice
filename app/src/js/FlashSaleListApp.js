@@ -37,6 +37,7 @@ import CollectionFilter from './components/flash_sale/CollectionFilter';
 import CollectionSort from './components/flash_sale/CollectionSort';
 import FilterSelectionModal from './components/flash_sale/FilterSelectionModal';
 import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
+import FlashSalePagination from './components/flash_sale/FlashSalePagination';
 
 // TEMP. mock data
 import flashSaleDresses from '../mock/flash-sale-dresses.json';
@@ -69,9 +70,19 @@ class FlashSaleApp extends Component {
     this.state = {
       isOpen: false,
       transformedData: flashSaleDresses.dresses,
+      productsCurrentPage: null,
     };
 
     autobind(this);
+  }
+
+  componentWillMount() {
+    const queryParams = win.location.search;
+    const parsedQueryObj = qs.parse(queryParams.slice(1));
+
+    this.setState({
+      productsCurrentPage: parsedQueryObj.page,
+    });
   }
 
   componentDidMount() {
@@ -104,6 +115,7 @@ class FlashSaleApp extends Component {
 
     const {
       transformedData,
+      productsCurrentPage,
     } = this.state;
 
     return (
@@ -140,7 +152,13 @@ class FlashSaleApp extends Component {
                 </div>
               </div>
             </div>
-
+            { productsCurrentPage ?
+              (
+                <div className="col-3" data-push-left="off-9">
+                  <FlashSalePagination page={productsCurrentPage} />
+                </div>
+              ) : null
+            }
           </div>
         </div>
 
