@@ -72,9 +72,9 @@ class FlashSaleApp extends Component {
       this.props.hydrateFiltersFromURL({
         page: parsedQueryObj.page,
         sort: parsedQueryObj.sort,
-        selectedColors: parsedQueryObj.color,
+        selectedColors: parsedQueryObj.color || [],
         selectedDressSize: parsedQueryObj.size,
-        selectedDressLengths: parsedQueryObj.length,
+        selectedDressLengths: parsedQueryObj.length || [],
       });
     }
   }
