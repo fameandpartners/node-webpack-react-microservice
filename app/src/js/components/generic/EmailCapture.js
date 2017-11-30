@@ -114,7 +114,7 @@ class EmailCapture extends PureComponent {
             <div>
               <Input
                 id="footer-email"
-                placeholder="Email your email address"
+                placeholder="Enter your email address"
                 type="email"
                 error={signupError}
                 inlineMeta={signupError ? 'Please enter a valid email...' : null}
