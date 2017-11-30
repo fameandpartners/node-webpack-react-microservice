@@ -12,8 +12,6 @@ import * as CollectionFilterSortActions from '../../actions/CollectionFilterSort
 
 // Libraries
 import win from '../../polyfills/windowPolyfill';
-import Resize from '../../decorators/Resize';
-import PDPBreakpoints from '../../libs/PDPBreakpoints';
 import { hasLegacyInstance } from '../../utilities/CollectionFilterSortUtilities';
 import { serializeObjectIntoQueryParams } from '../../utilities/BOM';
 
@@ -212,7 +210,8 @@ class CollectionFilterSort extends React.Component {
   }
 
   buildDressLengths(dressLength) {
-    // checked={selectedShapes.indexOf(shape) > -1}
+    const { temporaryFilters } = this.props;
+    const { selectedDressLengths = [] } = temporaryFilters;
     return (
       <label
         key={`length-${dressLength.id}`}
@@ -220,6 +219,7 @@ class CollectionFilterSort extends React.Component {
         htmlFor={`dress-length-${dressLength.id}`}
       >
         <input
+          checked={selectedDressLengths.indexOf(dressLength.value) > -1}
           onChange={this.handleDressLengthSelection(dressLength)}
           data-all="false"
           id={`dress-length-${dressLength.id}`}
@@ -390,4 +390,4 @@ CollectionFilterSort.propTypes = {
   updateExternalLegacyFilters: PropTypes.func.isRequired,
 };
 
-export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));
+export default connect(stateToProps, dispatchToProps)(CollectionFilterSort);
