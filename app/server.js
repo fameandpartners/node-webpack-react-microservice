@@ -1,5 +1,4 @@
 /* eslint-disable */
-require('dotenv').config();
 require('ignore-styles');
 require('babel-register');
 
