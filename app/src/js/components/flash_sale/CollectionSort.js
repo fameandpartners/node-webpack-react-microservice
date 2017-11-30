@@ -82,7 +82,44 @@ class CollectionFilterSort extends React.Component {
     this.applyFilters(newTemporaryFilters);
   }
 
+  handleMobileSortSelection(option) {
+    return () => {
+      this.handleSortSelection({ option });
+    };
+  }
+
+
+  buildMobileCollectionSort(options) {
+    return (
+      <div className="grid-middle">
+        <ul className="u-center">
+          {options.map(opt => (
+            <li
+              onClick={this.handleMobileSortSelection(opt)}
+            >
+              {opt.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  buildDestkopCollectionSort(options) {
+    return (
+      <div className="CollectionSort">
+        <Select
+          id="sort-option"
+          className="sort-options"
+          options={options}
+          onChange={this.handleSortSelection}
+        />
+      </div>
+    );
+  }
+
   buildCollectionSort() {
+    const { breakpoint } = this.props;
     const SORT_OPTIONS = [
       {
         id: 0,
@@ -97,21 +134,17 @@ class CollectionFilterSort extends React.Component {
       },
     ];
 
+    if (breakpoint === 'mobile' || breakpoint === 'tablet') {
+      return this.buildMobileCollectionSort(SORT_OPTIONS);
+    }
 
-    return (
-      <Select
-        id="sort-option"
-        className="sort-options"
-        options={SORT_OPTIONS}
-        onChange={this.handleSortSelection}
-      />
-    );
+    return this.buildDestkopCollectionSort(SORT_OPTIONS);
   }
 
 
   render() {
     return (
-      <div className="CollectionSort">
+      <div>
         { this.buildCollectionSort() }
       </div>
     );
@@ -120,6 +153,7 @@ class CollectionFilterSort extends React.Component {
 
 /* eslint-disable react/forbid-prop-types */
 CollectionFilterSort.propTypes = {
+  breakpoint: PropTypes.string.isRequired,
   filters: PropTypes.object.isRequired,
   temporaryFilters: PropTypes.object.isRequired,
 };
