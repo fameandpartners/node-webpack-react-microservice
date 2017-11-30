@@ -47,9 +47,7 @@ class FlashSaleApp extends Component {
     return (
       <div className="__react_root__">
         <div className={`FlashSaleApp Root__wrapper ${lockBody ? 'FlashSaleApp--scroll-lock' : ''}`}>
-          <div className="layout-container">
-            <FlashAppMain />
-          </div>
+          <FlashAppMain />
         </div>
       </div>
     );

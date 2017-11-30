@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
 import CollectionFilter from './CollectionFilter';
+import CollectionSort from './CollectionSort';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
@@ -15,8 +16,10 @@ import ModalActions from '../../actions/ModalActions';
 // Constants
 import ModalConstants from '../../constants/ModalConstants';
 
-function stateToProps() {
-  return {};
+function stateToProps(state) {
+  return {
+    activeModalId: state.$$modalState.get('modalId'),
+  };
 }
 
 
@@ -37,22 +40,35 @@ class FilterSelectionModal extends PureComponent {
     this.props.activateModal({ shouldAppear: false });
   }
 
+  injectModalStep() {
+    const { activeModalId } = this.props;
+    if (activeModalId === ModalConstants.FILTER_SELECTION_MODAL) {
+      return <CollectionFilter />;
+    } else if (activeModalId === ModalConstants.SORT_SELECTION_MODAL) {
+      return <CollectionSort />;
+    }
+    return null;
+  }
+
   render() {
+    const isFilters = (this.props.activeModalId === ModalConstants.FILTER_SELECTION_MODAL);
     return (
       <ModalContainer
         slideUp
         dimBackground={false}
-        modalIds={[ModalConstants.FILTER_SELECTION_MODAL]}
+        modalIds={[
+          ModalConstants.FILTER_SELECTION_MODAL,
+          ModalConstants.SORT_SELECTION_MODAL,
+        ]}
       >
         <Modal
-          headline="Filters"
+          headline={isFilters ? 'Filters' : 'Sort'}
           handleCloseModal={this.handleCloseModal}
           modalClassName="u-flex u-flex--1"
           modalContentClassName="u-width--full u-overflow-y--scroll"
           modalWrapperClassName="u-flex--col"
         >
-
-          <CollectionFilter />
+          { this.injectModalStep() }
         </Modal>
       </ModalContainer>
     );
@@ -61,12 +77,14 @@ class FilterSelectionModal extends PureComponent {
 
 FilterSelectionModal.propTypes = {
   // Redux Props
+  activeModalId: PropTypes.string,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
 };
 
 FilterSelectionModal.defaultProps = {
   activeModalId: null,
+  activateModal: null,
 };
 
 

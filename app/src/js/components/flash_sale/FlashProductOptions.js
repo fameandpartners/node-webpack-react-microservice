@@ -67,11 +67,20 @@ class FlashProductOptions extends Component {
             style={{ backgroundImage: 'url(http://via.placeholder.com/350x150)' }}
           />
         </div>
-        <div className="ProductOptions__col grid-middle col-6 u-center">
-          options and add to cart
+        <div className="FlashProductOptions__col grid-middle col-6 u-center">
           <div className="FlashProductOptions__ctas grid-1 u-mb-small">
-            <FlashProductDescription />
-            <FlashAddToCartButton showTotal={false} shouldActivateCartDrawer />
+            <div className="col-12">
+              <FlashProductDescription />
+            </div>
+            <div className="col-12 u-mt-huge">
+              <FlashAddToCartButton
+                showTotal={false}
+                shouldActivateCartDrawer
+              />
+              <div className="u-mt-normal">
+                All sale items are final sale. Offer only available in US only
+              </div>
+            </div>
           </div>
         </div>
       </div>

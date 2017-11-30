@@ -35,7 +35,7 @@ import ModalConstants from './constants/ModalConstants';
 // Components
 import CollectionFilter from './components/flash_sale/CollectionFilter';
 import CollectionSort from './components/flash_sale/CollectionSort';
-import FilterSelectionModal from './components/flash_sale/FilterSelectionModal';
+import FilterSortSelectionModal from './components/flash_sale/FilterSortSelectionModal';
 import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 import FlashSalePagination from './components/flash_sale/FlashSalePagination';
 
@@ -108,6 +108,12 @@ class FlashSaleApp extends Component {
     });
   }
 
+  handleOpenSortClick() {
+    this.props.activateModal({
+      modalId: ModalConstants.SORT_SELECTION_MODAL,
+    });
+  }
+
   render() {
     const {
       breakpoint,
@@ -145,7 +151,16 @@ class FlashSaleApp extends Component {
               <div className="grid-12">
                 <div className="col-12">
                   { breakpoint === 'mobile' || breakpoint === 'tablet'
-                    ? <div>Open Sort</div>
+                    ? (
+                      <div>
+                        <a
+                          className="link link--static"
+                          onClick={this.handleOpenSortClick}
+                        >
+                          Open Sort
+                        </a>
+                      </div>
+                    )
                     : <CollectionSort />
                   }
                 </div>
@@ -167,7 +182,7 @@ class FlashSaleApp extends Component {
           </div>
         </div>
 
-        <FilterSelectionModal />
+        <FilterSortSelectionModal />
       </div>
     );
   }
