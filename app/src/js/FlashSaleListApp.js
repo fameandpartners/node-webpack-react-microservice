@@ -71,6 +71,7 @@ class FlashSaleApp extends Component {
       isOpen: false,
       transformedData: flashSaleDresses.dresses,
       productsCurrentPage: null,
+      dressCount: flashSaleDresses.dresses.length,
     };
 
     autobind(this);
@@ -116,6 +117,7 @@ class FlashSaleApp extends Component {
     const {
       transformedData,
       productsCurrentPage,
+      dressCount,
     } = this.state;
 
     return (
@@ -155,7 +157,10 @@ class FlashSaleApp extends Component {
             { productsCurrentPage ?
               (
                 <div className="col-3" data-push-left="off-9">
-                  <FlashSalePagination page={productsCurrentPage} />
+                  <FlashSalePagination
+                    page={productsCurrentPage}
+                    totalItems={dressCount}
+                  />
                 </div>
               ) : null
             }

@@ -33,6 +33,7 @@ class FlashSalePagination extends Component {
   render() {
     const {
       page,
+      totalItems,
     } = this.props;
 
     return (
@@ -56,16 +57,20 @@ class FlashSalePagination extends Component {
           </li>
           <li className="col-4">{page}</li>
           <li className="col-4">
-            <span
-              className="FlashSalePagination__navigation-button u-cursor--pointer"
-              onClick={() => this.handlePaginationClick(Number(page) + 1)}
-            >
-              <Caret
-                right
-                width="10px"
-                height="10px"
-              />
-            </span>
+            { totalItems > 100 ?
+              (
+                <span
+                  className="FlashSalePagination__navigation-button u-cursor--pointer"
+                  onClick={() => this.handlePaginationClick(Number(page) + 1)}
+                >
+                  <Caret
+                    right
+                    width="10px"
+                    height="10px"
+                  />
+                </span>
+              ) : null
+            }
           </li>
         </ul>
       </div>
@@ -75,6 +80,7 @@ class FlashSalePagination extends Component {
 
 FlashSalePagination.propTypes = {
   page: PropTypes.number.isRequired,
+  totalItems: PropTypes.number.isRequired,
 };
 
 export default FlashSalePagination;
