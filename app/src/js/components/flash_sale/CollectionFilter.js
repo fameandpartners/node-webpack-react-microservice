@@ -49,9 +49,9 @@ function stateToProps({ $$collectionFilterSortState }, props) {
           selectedDressSize: collectionFilterSortState.selectedDressSize,
           selectedDressLengths: collectionFilterSortState.selectedDressLengths,
         },
-            // Include temporary filters if we are in a drawer
-            (props.isDrawerLayout) ? collectionFilterSortState.temporaryFilters : {},
-          ),
+        //   // Include temporary filters if we are in a drawer
+        //   (props.isDrawerLayout) ? collectionFilterSortState.temporaryFilters : {},
+      ),
       temporaryFilters: collectionFilterSortState.temporaryFilters,
     };
   }
@@ -183,7 +183,7 @@ class CollectionFilterSort extends React.Component {
         <Button
           tertiary
           tall
-          selected={size.value === temporaryFilters.selectedDressSize}
+          selected={size.id === temporaryFilters.selectedDressSize}
           text={`US ${size.value}`}
           handleClick={this.handleDressSizeSelection(size)}
         />

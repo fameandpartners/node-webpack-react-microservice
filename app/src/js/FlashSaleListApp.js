@@ -18,6 +18,7 @@ import '../css/components/FlashSale.scss';
 
 // Components
 import CollectionFilter from './components/flash_sale/CollectionFilter';
+import CollectionSort from './components/flash_sale/CollectionSort';
 import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 
 // TEMP. mock data
@@ -65,7 +66,14 @@ class FlashSaleApp extends Component {
               <CollectionFilter />
             </div>
             <div className="col-9">
-              <FlashSaleProductGrid products={transformedData} />
+              <div className="grid-12">
+                <div className="col-12">
+                  <CollectionSort />
+                </div>
+                <div className="col-12">
+                  <FlashSaleProductGrid products={transformedData} />
+                </div>
+              </div>
             </div>
           </div>
         </div>

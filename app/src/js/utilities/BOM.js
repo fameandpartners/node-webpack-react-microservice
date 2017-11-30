@@ -1,7 +1,9 @@
 import queryString from 'query-string';
 import { find } from 'lodash';
-import { QUERY_PARAMS } from '../constants/AppConstants';
 import qs from 'qs';
+
+// Constants
+import { QUERY_PARAMS } from '../constants/AppConstants';
 
 // polyfills
 import win from '../polyfills/windowPolyfill';
