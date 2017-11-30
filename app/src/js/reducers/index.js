@@ -4,6 +4,7 @@ import ProductReducer, { $$initialState as $$productState } from './ProductReduc
 import CartReducer, { $$initialState as $$cartState } from './CartReducer';
 import CustomizationReducer, { $$initialState as $$customizationState } from './CustomizationReducer';
 import CollectionFilterSortReducer, { $$initialState as $$collectionFilterSortState } from './CollectionFilterSortReducer';
+import FlashSaleReducer, { $$initialState as $$flashSaleState } from './FlashSaleReducer';
 
 export default {
   $$appState: AppReducer,
@@ -12,6 +13,7 @@ export default {
   $$cartState: CartReducer,
   $$collectionFilterSortState: CollectionFilterSortReducer,
   $$customizationState: CustomizationReducer,
+  $$flashSaleState: FlashSaleReducer,
 };
 
 export const initialStates = {
@@ -21,4 +23,5 @@ export const initialStates = {
   $$cartState,
   $$collectionFilterSortState,
   $$customizationState,
+  $$flashSaleState,
 };

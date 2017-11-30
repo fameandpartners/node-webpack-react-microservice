@@ -4,6 +4,9 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+// Services
+import FlashSaleService from '../../services/FlashSaleService';
+
 // Utilities
 // import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
 // import { sizeProfilePresence } from '../../utilities/pdpValidations';
@@ -31,8 +34,11 @@ import Button from '../generic/Button';
 // // temp. helpers (for Rails merge)
 // import { addToCart } from '../../utilities/cart-helper';
 
-function stateToProps() {
-  return {};
+function stateToProps({ $$flashSaleState }) {
+  const lineItem = $$flashSaleState.get('$$lineItem').toJS();
+  return {
+    lineItemId: lineItem ? lineItem.id : null,
+  };
 }
 
 function dispatchToProps(dispatch) {
@@ -71,36 +77,23 @@ class AddToCartButton extends Component {
     return '$226';
   }
 
-  handleAddToBagCallback() {
-
+  handleAddToBagCallback(req) {
     // TODO: Do something like this
     // const {
     //   activateCartDrawer,
     //   setAppLoadingState,
     //   setCartContents,
     // } = this.props;
-    // req.end((err, res) => {
-    //   setAppLoadingState({ loadingId: null });
-    //   if (err) {
-    //     // eslint-disable-next-line
-    //     return console.warn('error adding something to the cart', err);
-    //   }
-    //
-    //   // eslint-disable-next-line
-    //   if (win && win.__data) { // we are in old PDP, this needs to be removed ASAP
-    //     win.location = '/checkout';
-    //   }
-    //
-    //   setCartContents({ cart: res.body });
-    //   activateCartDrawer({ cartDrawerOpen: true });
-    //   return null;
-    // });
+    req.end((err, res) => {
+      console.log('res', res);
+    });
   }
 
   /**
    * Handles adding item to cart
    */
   handleAddToBag() {
+    const { lineItemId } = this.props;
     console.log('clicking add to bag!!!');
 
     // TODO: SOMETHING LIKE THIS
@@ -136,8 +129,10 @@ class AddToCartButton extends Component {
     //   const lineItem = accumulateCustomizationSelections({ $$customizationState,
     //   $$productState });
     //   setAppLoadingState({ loadingId: LOADING_IDS.ADD_TO_CART_LOADING });
-    //   this.handleAddToBagCallback(addToCart(lineItem, auSite));
     // }
+    this.handleAddToBagCallback(
+      FlashSaleService.postFlashSaleItem(lineItemId),
+    );
   }
 
   generateText() {
@@ -167,12 +162,14 @@ AddToCartButton.propTypes = {
   // Passed Props
   showTotal: PropTypes.bool,
   // Redux Props
+  lineItemId: PropTypes.number,
   addToCartLoading: PropTypes.bool,
 };
 
 AddToCartButton.defaultProps = {
   showTotal: true,
   addToCartLoading: false,
+  lineItemId: null,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));

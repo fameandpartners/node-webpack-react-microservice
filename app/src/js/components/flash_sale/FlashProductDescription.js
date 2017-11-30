@@ -34,13 +34,13 @@ class FlashProductDescription extends Component {
           </div>
         </div>
 
-        <div className="FlashProductDescription__description u-mt-normal">
+        <p className="FlashProductDescription__description u-mt-normal">
           [[
             Welcome to the future. The Collins is a metallic lurex woven, strapless mini
             dress feature a sweetheart neckline, a weap-style fit, and an exaggerated bow
             at the wast. It has an invisible zip closure
           ]]
-        </div>
+        </p>
 
         <div className="FlashProductDescription__customization-details u-mt-normal">
           <p>[[Customizations: Remove Train (Note  featured)]]</p>

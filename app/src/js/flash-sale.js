@@ -38,17 +38,27 @@ function renderComponent(Component, idSelectorStr) {
 // eslint-disable-next-line
 let cleanData = win.__data || {};
 let $$collectionFilterSortState = {};
+let $$flashSaleState = {};
 
-if (win.CollectionFilterSortData) {
+if (win.CollectionFilterData) {
   $$collectionFilterSortState = {
     $$colors: win.CollectionFilterData.colors,
     $$bodyShapes: win.CollectionFilterData.bodyShapes,
     $$bodyStyles: win.CollectionFilterData.bodyStyles,
   };
 }
+
+if (win.FlashSaleData) {
+  $$flashSaleState = {
+    $$lineItem: win.FlashSaleData.lineItem,
+  };
+}
+
 cleanData = assign({}, cleanData, {
   $$collectionFilterSortState,
+  $$flashSaleState,
 });
+
 
 const store = AppStore(cleanData);
 const FlashSaleAppComponent = <Provider store={store}><FlashSaleApp /></Provider>;
