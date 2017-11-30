@@ -59,14 +59,14 @@ class CollectionFilterSort extends React.Component {
   applyFilters(newTemporaryFilters) {
     const { filters } = this.props;
     const queryObj = {
-      page: 1,
+      page: filters.page,
       sort: newTemporaryFilters.sort,
       color: filters.selectedColors,
       length: filters.selectedDressLengths,
       size: filters.selectedDressSize,
     };
     const serializedParams = serializeObjectIntoQueryParams(queryObj);
-    win.location = `${win.location.href}?${serializedParams}`;
+    win.location = `${win.location.origin}${win.location.pathname}?${serializedParams}`;
   }
 
   /**

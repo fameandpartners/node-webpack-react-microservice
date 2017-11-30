@@ -85,7 +85,11 @@ export function decodeQueryParams() {
 }
 
 export function serializeObjectIntoQueryParams(obj) {
-  return qs.stringify(obj);
+  return qs.stringify(
+    obj,
+    { arrayFormat: 'brackets' },
+    { encodeValuesOnly: true },
+  );
 }
 
 

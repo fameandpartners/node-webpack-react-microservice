@@ -59,3 +59,10 @@ export function updateExternalLegacyFilters(update) {
     update,
   };
 }
+
+export function hydrateFiltersFromURL(queryObj) {
+  return {
+    type: CollectionFilterSortConstants.HYDRATE_FILTERS_FROM_URL,
+    queryObj,
+  };
+}
