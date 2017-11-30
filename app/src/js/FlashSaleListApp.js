@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
+import qs from 'qs';
+import { bindActionCreators } from 'redux';
 
 // Sentry Error Tracking
 import Raven from 'raven-js';
+
+// Actions
+import * as CollectionFilterSortActions from './actions/CollectionFilterSortActions';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -16,8 +21,12 @@ import '../css/layout.scss';
 import '../css/animations.scss';
 import '../css/components/FlashSale.scss';
 
+// Utilities
+import win from './polyfills/windowPolyfill';
+
 // Components
 import CollectionFilter from './components/flash_sale/CollectionFilter';
+import CollectionSort from './components/flash_sale/CollectionSort';
 import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 
 // TEMP. mock data
@@ -35,8 +44,11 @@ function stateToProps() {
   };
 }
 
-function dispatchToProps() {
-  return {};
+function dispatchToProps(dispatch) {
+  const actions = bindActionCreators(CollectionFilterSortActions, dispatch);
+  return {
+    hydrateFiltersFromURL: actions.hydrateFiltersFromURL,
+  };
 }
 
 class FlashSaleApp extends Component {
@@ -49,6 +61,22 @@ class FlashSaleApp extends Component {
     };
 
     autobind(this);
+  }
+
+  componentDidMount() {
+    const queryParams = win.location.search;
+    const hasSearchQueryParams = !!queryParams;
+
+    if (hasSearchQueryParams) {
+      const parsedQueryObj = qs.parse(queryParams.slice(1));
+      this.props.hydrateFiltersFromURL({
+        page: parsedQueryObj.page,
+        sort: parsedQueryObj.sort,
+        selectedColors: parsedQueryObj.color || [],
+        selectedDressSize: parsedQueryObj.size,
+        selectedDressLengths: parsedQueryObj.length || [],
+      });
+    }
   }
 
   render() {
@@ -65,7 +93,14 @@ class FlashSaleApp extends Component {
               <CollectionFilter />
             </div>
             <div className="col-9">
-              <FlashSaleProductGrid products={transformedData} />
+              <div className="grid-12">
+                <div className="col-12">
+                  <CollectionSort />
+                </div>
+                <div className="col-12">
+                  <FlashSaleProductGrid products={transformedData} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -76,6 +111,7 @@ class FlashSaleApp extends Component {
 
 FlashSaleApp.propTypes = {
   lockBody: PropTypes.bool.isRequired,
+  hydrateFiltersFromURL: PropTypes.func.isRequired,
 };
 
 export default connect(stateToProps, dispatchToProps)(FlashSaleApp);

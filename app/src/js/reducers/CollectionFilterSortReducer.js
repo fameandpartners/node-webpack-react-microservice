@@ -1,4 +1,6 @@
 import Immutable from 'immutable';
+import { assign } from 'lodash';
+
 import FilterSortConstants from '../constants/CollectionFilterSortConstants';
 import { updateExternalLegacyFilters } from '../utilities/CollectionFilterSortUtilities';
 
@@ -51,6 +53,7 @@ export const $$initialState = Immutable.fromJS({
   $$bodyShapes: [],
   $$bodyStyles: [],
   fastMaking: false,
+  page: 1,
   order: 'newest',
   selectedColors: [],
   selectedDressSize: null,
@@ -115,6 +118,12 @@ export default function CollectionFilterSortReducer($$state = $$initialState, ac
       return $$state.merge({
         temporaryFilters: action.temporaryFilters,
       });
+    }
+    case FilterSortConstants.HYDRATE_FILTERS_FROM_URL: {
+      return $$state.merge(assign({},
+        action.queryObj,
+        { temporaryFilters: action.queryObj },
+      ));
     }
     // NO MANIPULATION
     case FilterSortConstants.UPDATE_EXTERNAL_LEGACY_FILTERS: {

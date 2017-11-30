@@ -49,9 +49,9 @@ function stateToProps({ $$collectionFilterSortState }, props) {
           selectedDressSize: collectionFilterSortState.selectedDressSize,
           selectedDressLengths: collectionFilterSortState.selectedDressLengths,
         },
-            // Include temporary filters if we are in a drawer
-            (props.isDrawerLayout) ? collectionFilterSortState.temporaryFilters : {},
-          ),
+        //   // Include temporary filters if we are in a drawer
+        //   (props.isDrawerLayout) ? collectionFilterSortState.temporaryFilters : {},
+      ),
       temporaryFilters: collectionFilterSortState.temporaryFilters,
     };
   }
@@ -102,17 +102,17 @@ class CollectionFilterSort extends React.Component {
   }
 
   handleFilterApply() {
-    const { temporaryFilters } = this.props;
+    const { filters, temporaryFilters } = this.props;
     return () => {
       const queryObj = {
-        page: 1,
-        sort: null,
+        page: filters.page,
+        sort: filters.sort,
         color: temporaryFilters.selectedColors,
         length: temporaryFilters.selectedDressLengths,
         size: temporaryFilters.selectedDressSize,
       };
       const serializedParams = serializeObjectIntoQueryParams(queryObj);
-      win.location = `${win.location.href}?${serializedParams}`;
+      win.location = `${win.location.origin}${win.location.pathname}?${serializedParams}`;
     };
   }
 
@@ -183,7 +183,7 @@ class CollectionFilterSort extends React.Component {
         <Button
           tertiary
           tall
-          selected={size.value === temporaryFilters.selectedDressSize}
+          selected={size.id === temporaryFilters.selectedDressSize}
           text={`US ${size.value}`}
           handleClick={this.handleDressSizeSelection(size)}
         />

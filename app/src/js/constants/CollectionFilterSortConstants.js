@@ -5,6 +5,7 @@ const actionTypes = assign({},
   mirrorCreator([
     'APPLY_TEMPORARY_FILTERS',
     'CLEAR_ALL_COLLECTION_FILTERS',
+    'HYDRATE_FILTERS_FROM_URL',
     'SET_FAST_MAKING',
     'SET_SELECTED_COLORS',
     'SET_SELECTED_PRICES',
