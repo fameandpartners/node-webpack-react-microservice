@@ -8,8 +8,13 @@ import { bindActionCreators } from 'redux';
 // Sentry Error Tracking
 import Raven from 'raven-js';
 
+// Libraries
+import Resize from './decorators/Resize';
+import PDPBreakpoints from './libs/PDPBreakpoints';
+
 // Actions
 import * as CollectionFilterSortActions from './actions/CollectionFilterSortActions';
+import * as ModalActions from './actions/ModalActions';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -24,9 +29,13 @@ import '../css/components/FlashSale.scss';
 // Utilities
 import win from './polyfills/windowPolyfill';
 
+// Constants
+import ModalConstants from './constants/ModalConstants';
+
 // Components
 import CollectionFilter from './components/flash_sale/CollectionFilter';
 import CollectionSort from './components/flash_sale/CollectionSort';
+import FilterSelectionModal from './components/flash_sale/FilterSelectionModal';
 import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 
 // TEMP. mock data
@@ -45,8 +54,10 @@ function stateToProps() {
 }
 
 function dispatchToProps(dispatch) {
+  const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const actions = bindActionCreators(CollectionFilterSortActions, dispatch);
   return {
+    activateModal,
     hydrateFiltersFromURL: actions.hydrateFiltersFromURL,
   };
 }
@@ -79,8 +90,18 @@ class FlashSaleApp extends Component {
     }
   }
 
+  handleOpenFiltersClick() {
+    this.props.activateModal({
+      modalId: ModalConstants.FILTER_SELECTION_MODAL,
+    });
+  }
+
   render() {
-    const { lockBody } = this.props;
+    const {
+      breakpoint,
+      lockBody,
+    } = this.props;
+
     const {
       transformedData,
     } = this.state;
@@ -89,29 +110,54 @@ class FlashSaleApp extends Component {
       <div className="__react_root__">
         <div className={`FlashSaleListApp Root__wrapper ${lockBody ? 'FlashSaleApp--scroll-lock' : ''}`}>
           <div className="grid-12 layout-container">
-            <div className="col-3">
-              <CollectionFilter />
+
+            <div className="col-3_sm-12_lg-3">
+              { breakpoint === 'mobile' || breakpoint === 'tablet'
+                ? (
+                  <div>
+                    <a
+                      className="link link--static"
+                      onClick={this.handleOpenFiltersClick}
+                    >
+                      Open Filters
+                    </a>
+                  </div>
+                )
+                : <CollectionFilter />
+              }
             </div>
-            <div className="col-9">
+
+            <div className="col-9_sm-12_lg-9">
               <div className="grid-12">
                 <div className="col-12">
-                  <CollectionSort />
+                  { breakpoint === 'mobile' || breakpoint === 'tablet'
+                    ? <div>Open Sort</div>
+                    : <CollectionSort />
+                  }
                 </div>
                 <div className="col-12">
                   <FlashSaleProductGrid products={transformedData} />
                 </div>
               </div>
             </div>
+
           </div>
         </div>
+
+        <FilterSelectionModal />
       </div>
     );
   }
 }
 
 FlashSaleApp.propTypes = {
+  // Decorator
+  breakpoint: PropTypes.bool.isRequired,
+  // Redux
   lockBody: PropTypes.bool.isRequired,
+  // Redux Functions
   hydrateFiltersFromURL: PropTypes.func.isRequired,
+  activateModal: PropTypes.func.isRequired,
 };
 
-export default connect(stateToProps, dispatchToProps)(FlashSaleApp);
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(FlashSaleApp));
