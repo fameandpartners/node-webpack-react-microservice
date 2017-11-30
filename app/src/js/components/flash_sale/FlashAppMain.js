@@ -70,11 +70,9 @@ class FlashAppMain extends Component {
             )
           }
 
-          <div className="layout-container">
-            <div className="grid-2_sm-1 FlashAppMain__product-info">
-              <div className="col grid-middle">
-                More Images Here
-              </div>
+          <div className="grid-2_sm-1 FlashAppMain__product-info">
+            <div className="col grid-middle">
+              More Images Here
             </div>
           </div>
 

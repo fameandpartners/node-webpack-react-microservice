@@ -32,15 +32,20 @@ function renderComponent(Component, idSelectorStr) {
   }
 }
 
-// MAIN PDP
+// FAKE PDP
+// INITIALIZATIONS
 // const pdpData = win.__data ? transformProductJSON(win.__data) : {};
 // eslint-disable-next-line
 let cleanData = win.__data || {};
-const $$collectionFilterSortState = {
-  $$colors: win.CollectionFilterData.colors,
-  $$bodyShapes: win.CollectionFilterData.bodyShapes,
-  $$bodyStyles: win.CollectionFilterData.bodyStyles,
-};
+let $$collectionFilterSortState = {};
+
+if (win.CollectionFilterSortData) {
+  $$collectionFilterSortState = {
+    $$colors: win.CollectionFilterData.colors,
+    $$bodyShapes: win.CollectionFilterData.bodyShapes,
+    $$bodyStyles: win.CollectionFilterData.bodyStyles,
+  };
+}
 cleanData = assign({}, cleanData, {
   $$collectionFilterSortState,
 });
