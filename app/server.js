@@ -127,7 +127,7 @@ app.post('/pdp', (req, res) => {
 app.listen(process.env.PORT || 8001);
 
 // reset the rails cache, have to do it here cause ebs environment variables are lies
-// require('./scripts/clear_cache');
+require('./scripts/clear_cache');
 /* eslint-disable no-console */
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');

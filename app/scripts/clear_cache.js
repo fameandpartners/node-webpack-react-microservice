@@ -1,4 +1,6 @@
-clearRailsCache();
+if (process.env.RAIL_SERVERS) {
+  clearRailsCache();
+}
 
 
 function clearRailsCache() {
