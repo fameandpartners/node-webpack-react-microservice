@@ -18,7 +18,9 @@ import ModalConstants from '../../constants/ModalConstants';
 // PDP specific UI Components
 // import AddToCartButtonLedgeMobile from '../pdp/AddToCartButtonLedgeMobile';
 import FlashProductOptions from './FlashProductOptions';
+import FlashProductDisplayOptionsTouch from './FlashProductDisplayOptionsTouch';
 import FlashProductGrid from './FlashProductGrid';
+import FlashAddToCartButtonLedgeMobile from './FlashAddToCartButtonLedgeMobile';
 // import ProductFabricInfo from './ProductFabricInfo';
 
 // import FameDifference from './FameDifference';
@@ -62,12 +64,8 @@ class FlashAppMain extends Component {
         <div className="FlashAppMain u-height--full">
 
           { breakpoint === 'mobile' || breakpoint === 'tablet'
-            ? <div>FlashPRoductDisplayOptionsTouch</div>
-            : (
-              <div>
-                <FlashProductOptions />
-              </div>
-            )
+            ? <FlashProductDisplayOptionsTouch />
+            : <FlashProductOptions />
           }
 
           {
@@ -83,9 +81,7 @@ class FlashAppMain extends Component {
 
 
         <div className="u-position--fixed u-width--full u-bottom">
-          {
-            // <AddToCartButtonLedgeMobile />
-          }
+          <FlashAddToCartButtonLedgeMobile />
         </div>
       </div>
     );

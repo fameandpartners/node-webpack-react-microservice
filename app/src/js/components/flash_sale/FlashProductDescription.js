@@ -29,7 +29,6 @@ class FlashProductDescription extends Component {
 
   generateFlashColorSwatch() {
     const { lineItem } = this.props;
-    console.log('lineItem', lineItem);
     const value = lineItem.color_value;
     const hasPatternImage = value ? value.indexOf('.') > -1 : false;
 
