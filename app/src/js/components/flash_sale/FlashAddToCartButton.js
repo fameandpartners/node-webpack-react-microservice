@@ -80,14 +80,22 @@ class AddToCartButton extends Component {
   }
 
   handleAddToBagCallback(req) {
-    // TODO: Do something like this
-    // const {
-    //   activateCartDrawer,
-    //   setAppLoadingState,
-    //   setCartContents,
-    // } = this.props;
+    const {
+      activateCartDrawer,
+      setAppLoadingState,
+      setCartContents,
+    } = this.props;
+
     req.end((err, res) => {
-      console.log('res', res);
+      setAppLoadingState({ loadingId: null });
+      if (err) {
+        // eslint-disable-next-line
+        return console.warn('error adding something to the cart', err);
+      }
+
+      setCartContents({ cart: res.body });
+      activateCartDrawer({ cartDrawerOpen: true });
+      return null;
     });
   }
 
@@ -167,6 +175,10 @@ AddToCartButton.propTypes = {
   lineItem: PropTypes.number,
   lineItemId: PropTypes.number,
   addToCartLoading: PropTypes.bool,
+  // Redux Funcs
+  activateCartDrawer: PropTypes.func.isRequired,
+  setAppLoadingState: PropTypes.func.isRequired,
+  setCartContents: PropTypes.func.isRequired,
 };
 
 AddToCartButton.defaultProps = {

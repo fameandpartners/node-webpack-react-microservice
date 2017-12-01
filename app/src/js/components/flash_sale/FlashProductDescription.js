@@ -29,7 +29,8 @@ class FlashProductDescription extends Component {
 
   generateFlashColorSwatch() {
     const { lineItem } = this.props;
-    const { value } = lineItem.color.option_value;
+    console.log('lineItem', lineItem);
+    const value = lineItem.color_value;
     const hasPatternImage = value ? value.indexOf('.') > -1 : false;
 
     if (hasPatternImage) {
@@ -45,7 +46,7 @@ class FlashProductDescription extends Component {
 
   render() {
     const { lineItem } = this.props;
-    const { presentation } = lineItem.color.option_value;
+    const presentation = lineItem.color_presentation;
 
     return (
       <div className="FlashProductDescription typography u-center">
