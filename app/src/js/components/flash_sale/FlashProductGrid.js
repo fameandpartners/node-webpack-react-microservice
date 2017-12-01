@@ -27,7 +27,7 @@ class ProductGrid extends Component {
       .map((img, idx) => (
         <div className="col-6" key={img}>
           <div className="brick u-cursor--pointer">
-            <img className="u-width--full" alt={`Dress photo ${idx+1}`} src={img.bigImg} />
+            <img className="u-width--full" alt={`Dress photo ${idx+1}`} src={img} />
           </div>
         </div>
       ));
