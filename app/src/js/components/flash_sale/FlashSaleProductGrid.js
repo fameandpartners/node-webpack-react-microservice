@@ -30,9 +30,18 @@ class FlashSaleProductGrid extends Component {
             key={dress.id}
             className="FlashSaleProduct__container col-4_sm-6"
           >
-            <div className="FlashSaleProduct__image">
+            <div className="FlashSaleProduct__image-wrapper">
               <a href={`/sample-sale/${dress.id}`}>
-                <img src={dress.images[dress.images.length - 1]} alt={dress.name} />
+                <img
+                  className="FlashSaleProduct__image--original"
+                  alt={dress.name}
+                  src={dress.images[dress.images.length - 1]}
+                />
+                <img
+                  className="FlashSaleProduct__image--hover"
+                  alt={dress.name}
+                  src={dress.images[dress.images.length - 2]}
+                />
               </a>
             </div>
             <div className="FlashSaleProduct__info grid-12">

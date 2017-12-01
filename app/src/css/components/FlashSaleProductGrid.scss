@@ -10,8 +10,21 @@
   padding: 16px;
 }
 
-.FlashSaleProduct__image img {
+.FlashSaleProduct__image-wrapper img {
   width: 100%;
+}
+
+.FlashSaleProduct__image--hover {
+  display: none;
+}
+
+.FlashSaleProduct__image-wrapper:hover {
+  .FlashSaleProduct__image--original {
+    display: none;
+  }
+  .FlashSaleProduct__image--hover {
+    display: block;
+  }
 }
 
 // bruh...
