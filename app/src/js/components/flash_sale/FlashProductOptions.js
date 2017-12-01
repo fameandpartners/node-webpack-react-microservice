@@ -21,8 +21,10 @@ import ModalActions from '../../actions/ModalActions';
 // CSS
 import '../../../css/components/FlashProductOptions.scss';
 
-function stateToProps() {
-  return {};
+function stateToProps({ $$flashSaleState }) {
+  return {
+    lineItem: $$flashSaleState.get('$$lineItem').toJS(),
+  };
 }
 
 
@@ -59,27 +61,30 @@ class FlashProductOptions extends Component {
   }
 
   render() {
+    const { lineItem } = this.props;
     return (
       <div className="FlashProductOptions grid-12-noGutter">
         <div className="FlashProductOptions__primary-image-container brick col-6">
           <div
             className="FlashProductOptions__primary-image-wrapper u-cursor--pointer"
-            style={{ backgroundImage: 'url(http://via.placeholder.com/350x150)' }}
+            style={{ backgroundImage: `url(${lineItem.images[0]})` }}
           />
         </div>
         <div className="FlashProductOptions__col grid-middle col-6 u-center">
           <div className="FlashProductOptions__ctas grid-1 u-mb-small">
             <div className="col-12">
-              <FlashProductDescription />
+              <FlashProductDescription
+                lineItem={lineItem}
+              />
             </div>
             <div className="col-12 u-mt-huge">
               <FlashAddToCartButton
                 showTotal={false}
                 shouldActivateCartDrawer
               />
-              <div className="u-mt-normal">
+              <p className="u-mt-normal">
                 All sale items are final sale. Offer only available in US only
-              </div>
+              </p>
             </div>
           </div>
         </div>
@@ -103,6 +108,8 @@ FlashProductOptions.propTypes = {
   // COLOR
   colorId: PropTypes.number.isRequired,
   deliveryCopy: PropTypes.string,
+  // eslint-disable-next-line
+  lineItem: PropTypes.object.isRequired,
   expressMakingSelected: PropTypes.bool,
 
 };
@@ -114,6 +121,7 @@ FlashProductOptions.defaultProps = {
   selectedHeightValue: null,
   activateModal: noop,
   deliveryCopy: '',
+  lineItem: null,
   expressMakingSelected: false,
 
 };

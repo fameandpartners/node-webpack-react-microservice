@@ -18,7 +18,7 @@ import ModalConstants from '../../constants/ModalConstants';
 // PDP specific UI Components
 // import AddToCartButtonLedgeMobile from '../pdp/AddToCartButtonLedgeMobile';
 import FlashProductOptions from './FlashProductOptions';
-// import ProductGrid from './ProductGrid';
+import FlashProductGrid from './FlashProductGrid';
 // import ProductFabricInfo from './ProductFabricInfo';
 
 // import FameDifference from './FameDifference';
@@ -70,20 +70,14 @@ class FlashAppMain extends Component {
             )
           }
 
-          <div className="grid-2_sm-1 FlashAppMain__product-info">
-            <div className="col grid-middle">
-              More Images Here
-            </div>
-          </div>
-
           {
-           // breakpoint === 'mobile' || breakpoint === 'tablet'
-           //  ? null
-           //  : (
-           //    <div className="u-gray-border--top layout-container u-mb-normal">
-           //      <ProductGrid />
-           //    </div>
-           //  )
+           breakpoint === 'mobile' || breakpoint === 'tablet'
+            ? null
+            : (
+              <div className="u-gray-border--top u-mb-normal">
+                <FlashProductGrid />
+              </div>
+            )
           }
         </div>
 

@@ -37,6 +37,7 @@ import Button from '../generic/Button';
 function stateToProps({ $$flashSaleState }) {
   const lineItem = $$flashSaleState.get('$$lineItem').toJS();
   return {
+    lineItem,
     lineItemId: lineItem ? lineItem.id : null,
   };
 }
@@ -74,7 +75,8 @@ class AddToCartButton extends Component {
   }
 
   subTotal() {
-    return '$226';
+    const { lineItem } = this.props;
+    return lineItem.current_price;
   }
 
   handleAddToBagCallback(req) {
@@ -162,6 +164,7 @@ AddToCartButton.propTypes = {
   // Passed Props
   showTotal: PropTypes.bool,
   // Redux Props
+  lineItem: PropTypes.number,
   lineItemId: PropTypes.number,
   addToCartLoading: PropTypes.bool,
 };
@@ -169,6 +172,7 @@ AddToCartButton.propTypes = {
 AddToCartButton.defaultProps = {
   showTotal: true,
   addToCartLoading: false,
+  lineItem: null,
   lineItemId: null,
 };
 
