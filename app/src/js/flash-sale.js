@@ -48,9 +48,10 @@ if (win.CollectionFilterData) {
   };
 }
 
-if (win.FlashSaleData) {
+if (win.FlashSaleData || win.FlashSaleListData) {
   $$flashSaleState = {
-    $$lineItem: win.FlashSaleData.lineItem,
+    $$lineItem: win.FlashSaleData ? win.FlashSaleData.lineItem : null,
+    $$pageDresses: win.FlashSaleListData ? win.FlashSaleListData.pageDresses : null,
   };
 }
 

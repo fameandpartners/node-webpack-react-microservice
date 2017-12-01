@@ -12,6 +12,12 @@ class FlashSaleProductGrid extends Component {
     autobind(this);
   }
 
+  formatPrice(str) {
+    const newPrice = str.substring(0, str.length - 2);
+
+    return `$${newPrice}`;
+  }
+
   render() {
     const {
       products,
@@ -24,25 +30,34 @@ class FlashSaleProductGrid extends Component {
             key={dress.id}
             className="FlashSaleProduct__container col-4_sm-6"
           >
-            <div className="FlashSaleProduct__image">
-              <a href={dress.permalink}>
-                <img src={dress.images[0].url} alt={dress.name} />
+            <div className="FlashSaleProduct__image-wrapper">
+              <a href={`/sample-sale/${dress.id}`}>
+                <img
+                  className="FlashSaleProduct__image--original"
+                  alt={dress.name}
+                  src={dress.images[dress.images.length - 1]}
+                />
+                <img
+                  className="FlashSaleProduct__image--hover"
+                  alt={dress.name}
+                  src={dress.images[dress.images.length - 2]}
+                />
               </a>
             </div>
             <div className="FlashSaleProduct__info grid-12">
               <div className="col-8">
-                <a href={dress.permalink}>
+                <a href={`/sample-sale/${dress.id}`}>
                   {dress.name}
                 </a>
               </div>
               <div className="col-4 FlashSaleProduct__original-price">
-                {dress.originalPrice}
+                {this.formatPrice(dress.original_price)}
               </div>
               <div className="col-8">
                 {dress.color}, {dress.size}
               </div>
               <div className="col-4 FlashSaleProduct__current-price">
-                {dress.currentPrice}
+                {this.formatPrice(dress.current_price)}
               </div>
             </div>
           </div>
@@ -57,8 +72,8 @@ FlashSaleProductGrid.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     images: PropTypes.array,
-    originalPrice: PropTypes.string,
-    currentPrice: PropTypes.string,
+    original_price: PropTypes.number,
+    current_price: PropTypes.number,
     size: PropTypes.string,
     color: PropTypes.string,
     permalink: PropTypes.string,
