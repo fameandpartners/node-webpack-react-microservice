@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Utilities
 import { formatCents } from '../../utilities/accounting';
+// import { addonSelectionDisplayText } from '../../utilities/pdp';
 
 // CSS
 import '../../../css/components/FlashProductDescription.scss';
@@ -19,8 +20,33 @@ class FlashProductDescription extends Component {
     return currencySymbol + (Number(this.calculateSubTotal('')) / divisor).toFixed(2);
   }
 
+  generateCustomizationText() {
+    return '[Customization info goes here Nav, I think you can just throw in the customizations into the function below]';
+    // const { lineItem } = this.props;
+    // console.log('lineItem', lineItem);
+    // return addonSelectionDisplayText({ selectedAddonOptions: lineItem.customizations });
+  }
+
+  generateFlashColorSwatch() {
+    const { lineItem } = this.props;
+    const { value } = lineItem.color.option_value;
+    const hasPatternImage = value ? value.indexOf('.') > -1 : false;
+
+    if (hasPatternImage) {
+      return {
+        backgroundImage: `url(${value})`,
+      };
+    }
+
+    return {
+      background: value,
+    };
+  }
+
   render() {
     const { lineItem } = this.props;
+    const { presentation } = lineItem.color.option_value;
+
     return (
       <div className="FlashProductDescription typography u-center">
         <div className="FlashProductDescription__title-section u-text-align--left">
@@ -43,9 +69,12 @@ class FlashProductDescription extends Component {
         </p>
 
         <div className="FlashProductDescription__customization-details u-mt-normal">
-          <p>[[Customizations: Remove Train (Note  featured)]]</p>
-          <p>[[Color: Navy]]</p>
-          <div>[COLOR]</div>
+          <p>{this.generateCustomizationText()}</p>
+          <p>Color: {presentation}</p>
+          <div
+            style={this.generateFlashColorSwatch()}
+            className="FlashProductDescription__color-swatch"
+          />
         </div>
       </div>
     );
