@@ -9,7 +9,7 @@ function postFlashSaleItem(lineItemId) {
   const token = csrf ? csrf.content : '';
 
   return request
-    .post(`/line_items/${lineItemId}`)
+    .post(`user_cart/line_items/${lineItemId}`)
     .set('X-CSRF-Token', token)
     .set('Accept', 'application/json');
 }
