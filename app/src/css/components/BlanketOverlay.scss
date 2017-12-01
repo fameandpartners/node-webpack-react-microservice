@@ -1,0 +1,12 @@
+.App__main--open .BlanketOverlay {
+  z-index: 1;
+  visibility: visible;
+  opacity: 0.3;
+}
+
+.BlanketOverlay {
+  position: fixed;
+  visibility: hidden;
+  background: $c-black;
+  z-index: 3;
+}

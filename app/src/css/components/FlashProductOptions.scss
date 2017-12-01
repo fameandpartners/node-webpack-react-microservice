@@ -1,0 +1,82 @@
+.FlashProductOptions {
+  border-bottom: 1px solid $c-light-gray;
+}
+
+.FlashProductOptions__container {
+  width: 70%;
+  max-width: 450px;
+}
+
+.FlashProductOptions__primary-image-wrapper {
+  height: 600px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @include md {
+    height: 650px;
+  }
+
+  @include lg {
+    height: 730px;
+  }
+}
+
+.FlashProductOptions .FlashProductOptions__primary-image-container {
+  padding-bottom: 0;
+}
+
+.FlashProductOptionsRow {
+  padding: 1em 0;
+  border-bottom: 1px solid $c-light-gray;
+  transition: 500ms all ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: $c-black;
+    border-color: $c-black;
+  }
+}
+
+// TODO: @Elgrecode, this is a little overwritey, consider revising
+.FlashProductOptionsRow--heading {
+  cursor: default;
+
+  &:hover {
+    border-bottom: 1px solid $c-light-gray;
+    color: inherit;
+  }
+}
+
+.FlashProductOptionsRow__right {
+  opacity: 0;
+  transition: 300ms opacity ease-in-out;
+  width: 65%;
+}
+
+.FlashProductOptionsRow:hover .FlashProductOptionsRow__right,
+.FlashProductOptionsRow__right--fade-in {
+  opacity: 1;
+}
+
+.FlashProductOptionsRow__right--selected {
+  font-weight: 500;
+  color: $c-black;
+}
+
+.FlashProductOptions__additional-info {
+  color: $c-text-gray;
+}
+
+.FlashProductOptions__color-swatch {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-top: -4px;
+}
+
+.FlashProductOptions__color-swatch--extreme-light {
+  border: 1px solid $c-neutral-4;
+}

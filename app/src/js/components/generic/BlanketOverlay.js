@@ -15,6 +15,8 @@ import AppConstants from '../../constants/AppConstants';
 import * as AppActions from '../../actions/AppActions';
 import * as CartActions from '../../actions/CartActions';
 
+// CSS
+import '../../../css/components/BlanketOverlay.scss';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?

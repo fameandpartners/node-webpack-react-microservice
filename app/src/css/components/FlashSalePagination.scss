@@ -1,0 +1,9 @@
+// .FlashSalePagination__wrapper {
+// }
+
+// this is lazy, update the Caret component to accept color/fill props
+.FlashSalePagination__navigation-button:hover {
+  svg path {
+    fill: #777777;
+  }
+}

@@ -1,0 +1,55 @@
+/* stylelint-disable */
+.FlashSaleProductGrid__wrapper {
+  margin: 32px;
+  text-align: left;
+  // REMOVE: shouldn't have to do this (but not cascading correctly)
+  font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
+}
+
+.FlashSaleProduct__container {
+  padding: 16px;
+}
+
+.FlashSaleProduct__image-wrapper img {
+  width: 100%;
+}
+
+.FlashSaleProduct__image--hover {
+  display: none;
+}
+
+.FlashSaleProduct__image-wrapper:hover {
+  .FlashSaleProduct__image--original {
+    display: none;
+  }
+  .FlashSaleProduct__image--hover {
+    display: block;
+  }
+}
+
+// bruh...
+.FlashSaleProduct__info [class^="col"] {
+  padding-bottom: 0.5em;
+}
+
+.FlashSaleProduct__info a {
+  font-size: 1.2em;
+  color: #222222;
+
+  &:hover {
+    color: #777777;
+  }
+}
+
+.FlashSaleProduct__original-price,
+.FlashSaleProduct__current-price {
+  text-align: right;
+}
+
+.FlashSaleProduct__original-price {
+  text-decoration: line-through;
+}
+
+.FlashSaleProduct__current-price {
+  font-weight: bold;
+}

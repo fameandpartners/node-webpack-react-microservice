@@ -195,9 +195,13 @@ class Cart extends Component {
             <span className="Cart__line-description">
               {this.generateAddonSummary(lineItem.addons)}
             </span>
-            <span className="Cart__line-description">
-              Size: {this.generateSizeSummary(lineItem)}
-            </span>
+            { lineItem.heightValue && lineItem.heightUnit
+              ? (
+                <span className="Cart__line-description">
+                  Size: {this.generateSizeSummary(lineItem)}
+                </span>
+              ) : null
+            }
           </div>
         </div>
       );

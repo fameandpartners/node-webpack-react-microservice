@@ -1,0 +1,27 @@
+.FlashProductDisplayOptionsTouch__option {
+  color: $c-black;
+  width: 142px;
+  height: 122px;
+  margin: 0 6px;
+  vertical-align: top;
+
+  @include xs {
+    width: 180px;
+    height: 125px;
+  }
+}
+
+.FlashProductDisplayOptionsTouch__option--extreme-light {
+  box-shadow: inset 0 0 0 2px $c-hover-gray;
+  border: 0;
+}
+
+.FlashProductDisplayOptionsTouch__option--dark {
+  color: $c-white;
+}
+
+.FlashProductDisplayOptionsTouch__background-text {
+  color: $c-white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}

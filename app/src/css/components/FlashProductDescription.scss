@@ -1,0 +1,40 @@
+.FlashProductDescription__copy {
+  color: $c-neutral-8;
+}
+
+.FlashProductDescription {
+  padding-top: 20px;
+  text-align: left;
+}
+
+.FlashProductDescription__current-price {
+  font-size: 28px;
+}
+
+.FlashProductDescription__title-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid $c-border-gray;
+}
+
+.FlashProductDescription__customization-details {
+  padding-top: 20px;
+  border-top: 1px solid $c-border-gray;
+}
+
+.FlashProductDescription__addons-details {
+  margin-bottom: 6px;
+}
+
+.FlashProductDescription__addons-list {
+  padding: 6px;
+}
+
+.FlashProductOptions__ctas {
+  max-width: 530px;
+  margin: 0 30px;
+}
+
+.FlashProductDescription__color-swatch {
+  height: 40px;
+  width: 40px;
+}
