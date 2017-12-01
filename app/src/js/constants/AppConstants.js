@@ -142,8 +142,8 @@ const navigationLinks = {
         url: '/getitquick',
       },
       {
-        text: 'Florals',
-        url: '/dresses/floral',
+        text: 'Sample Sale',
+        url: '/sample-sale',
       },
     ],
     COLLECTIONS: [
