@@ -39,8 +39,6 @@ import FilterSortSelectionModal from './components/flash_sale/FilterSortSelectio
 import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 import FlashSalePagination from './components/flash_sale/FlashSalePagination';
 
-// TEMP. mock data
-import flashSaleDresses from '../mock/flash-sale-dresses.json';
 
 // Configure Error Tracking
 Raven
@@ -48,9 +46,12 @@ Raven
   .install();
 
 
-function stateToProps() {
+function stateToProps({ $$flashSaleState }) {
+  const pageDresses = $$flashSaleState.get('$$pageDresses').toJS();
+
   return {
     lockBody: false,
+    pageDresses,
   };
 }
 
@@ -63,15 +64,13 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class FlashSaleApp extends Component {
+class FlashSaleListApp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isOpen: false,
-      transformedData: flashSaleDresses.dresses,
       productsCurrentPage: null,
-      dressCount: flashSaleDresses.dresses.length,
     };
 
     autobind(this);
@@ -82,7 +81,7 @@ class FlashSaleApp extends Component {
     const parsedQueryObj = qs.parse(queryParams.slice(1));
 
     this.setState({
-      productsCurrentPage: parsedQueryObj.page,
+      productsCurrentPage: Number(parsedQueryObj.page),
     });
   }
 
@@ -118,12 +117,11 @@ class FlashSaleApp extends Component {
     const {
       breakpoint,
       lockBody,
+      pageDresses,
     } = this.props;
 
     const {
-      transformedData,
       productsCurrentPage,
-      dressCount,
     } = this.state;
 
     return (
@@ -165,7 +163,7 @@ class FlashSaleApp extends Component {
                   }
                 </div>
                 <div className="col-12">
-                  <FlashSaleProductGrid products={transformedData} />
+                  <FlashSaleProductGrid products={pageDresses} />
                 </div>
               </div>
             </div>
@@ -174,7 +172,7 @@ class FlashSaleApp extends Component {
                 <div className="col-3" data-push-left="off-9">
                   <FlashSalePagination
                     page={productsCurrentPage}
-                    totalItems={dressCount}
+                    totalItems={pageDresses.length}
                   />
                 </div>
               ) : null
@@ -188,7 +186,7 @@ class FlashSaleApp extends Component {
   }
 }
 
-FlashSaleApp.propTypes = {
+FlashSaleListApp.propTypes = {
   // Decorator
   breakpoint: PropTypes.bool.isRequired,
   // Redux
@@ -196,6 +194,16 @@ FlashSaleApp.propTypes = {
   // Redux Functions
   hydrateFiltersFromURL: PropTypes.func.isRequired,
   activateModal: PropTypes.func.isRequired,
+  pageDresses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    images: PropTypes.array,
+    original_price: PropTypes.number,
+    current_price: PropTypes.number,
+    size: PropTypes.string,
+    color: PropTypes.string,
+    permalink: PropTypes.string,
+  })).isRequired,
 };
 
-export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(FlashSaleApp));
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(FlashSaleListApp));

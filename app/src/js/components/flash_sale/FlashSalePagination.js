@@ -27,7 +27,7 @@ class FlashSalePagination extends Component {
     console.log(`Navigating to Page: ${pageNum}`);
 
     const updatedPath = `${win.location.origin}${win.location.pathname}?${qs.stringify(parsedQueryObj)}`;
-    console.log(`New URL: ${updatedPath}`);
+    win.location.href = updatedPath;
   }
 
   render() {
@@ -57,7 +57,7 @@ class FlashSalePagination extends Component {
           </li>
           <li className="col-4">{page}</li>
           <li className="col-4">
-            { totalItems > 100 ?
+            { totalItems >= 100 ?
               (
                 <span
                   className="FlashSalePagination__navigation-button u-cursor--pointer"
