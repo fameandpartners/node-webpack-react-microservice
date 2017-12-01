@@ -12,6 +12,12 @@ class FlashSaleProductGrid extends Component {
     autobind(this);
   }
 
+  formatPrice(str) {
+    const newPrice = str.substring(0, str.length - 2);
+
+    return `$${newPrice}`;
+  }
+
   render() {
     const {
       products,
@@ -36,13 +42,13 @@ class FlashSaleProductGrid extends Component {
                 </a>
               </div>
               <div className="col-4 FlashSaleProduct__original-price">
-                {dress.original_price}
+                {this.formatPrice(dress.original_price)}
               </div>
               <div className="col-8">
                 {dress.color}, {dress.size}
               </div>
               <div className="col-4 FlashSaleProduct__current-price">
-                {dress.current_price}
+                {this.formatPrice(dress.current_price)}
               </div>
             </div>
           </div>
