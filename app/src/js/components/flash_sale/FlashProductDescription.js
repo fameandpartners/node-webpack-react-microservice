@@ -63,6 +63,8 @@ class FlashProductDescription extends Component {
         <div className="FlashProductDescription__title-section u-text-align--left">
           <h2 className="FlashProductDescription__title u-display--inline-block">
             {lineItem.name}
+            <br />
+            {presentation}, Size {lineItem.size}
           </h2>
 
           <div className="FlashProductDescription__price u-display--inline-block float--right">
@@ -93,6 +95,8 @@ class FlashProductDescription extends Component {
               </div>
             ) : null
           }
+          <p>Size: {lineItem.size}</p>
+          <p>Height: {lineItem.height}</p>
           <p>Color: {presentation}</p>
           <div
             style={this.generateFlashColorSwatch()}

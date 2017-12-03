@@ -22,6 +22,7 @@ const actionTypes = assign({},
       selectedPrices: [],
       selectedShapes: [],
       selectedStyles: [],
+      // selectedSizes: [],
     },
   },
   {

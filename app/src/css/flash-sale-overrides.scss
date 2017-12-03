@@ -1,0 +1,28 @@
+//  NOTE:
+//    Don't want to cause styling conflicts w/ main site
+//    CollectionFilter so making Flash Sale changes here
+
+.CollectionFilterSort .FilterSort .Button--tall {
+  padding: 6px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.ExpandablePanel__name {
+  // poor form
+  font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;  
+}
+
+.ExpandablePanelItem--is-active .ExpandablePanel__name:before {
+  top: 3px;
+  font-size: 0.7rem;
+  color: #777777;
+}
+
+.ExpandablePanel__optionName {
+  font-size: 1.05em;
+}
+
+.CollectionSort {
+  padding-right: 48px;
+}

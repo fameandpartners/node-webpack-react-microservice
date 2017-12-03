@@ -18,10 +18,12 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Components
 import Select from '../form/Select';
+import Button from '../generic/Button';
 // Constants
 
 // CSS
 import '../../../css/components/CollectionFilter.scss';
+import '../../../css/flash-sale-overrides.scss';
 
 
 function stateToProps({ $$collectionFilterSortState }) {
@@ -35,8 +37,9 @@ function stateToProps({ $$collectionFilterSortState }) {
           order: collectionFilterSortState.order,
           fastMaking: collectionFilterSortState.fastMaking,
           selectedColors: collectionFilterSortState.selectedColors,
-          selectedDressSize: collectionFilterSortState.selectedDressSize,
+          selectedSizes: collectionFilterSortState.selectedSizes,
           selectedDressLengths: collectionFilterSortState.selectedDressLengths,
+          page: collectionFilterSortState.page,
         },
         //   // Include temporary filters if we are in a drawer
         //   (props.isDrawerLayout) ? collectionFilterSortState.temporaryFilters : {},
@@ -63,7 +66,7 @@ class CollectionFilterSort extends React.Component {
       sort: newTemporaryFilters.sort,
       color: filters.selectedColors,
       length: filters.selectedDressLengths,
-      size: filters.selectedDressSize,
+      size: filters.selectedSizes,
     };
     const serializedParams = serializeObjectIntoQueryParams(queryObj);
     win.location = `${win.location.origin}${win.location.pathname}?${serializedParams}`;
@@ -92,13 +95,14 @@ class CollectionFilterSort extends React.Component {
   buildMobileCollectionSort(options) {
     return (
       <div className="grid-middle">
-        <ul className="u-center">
+        <ul className="u-center u-mt-normal">
           {options.map(opt => (
-            <li
-              onClick={this.handleMobileSortSelection(opt)}
-            >
-              {opt.name}
-            </li>
+            <Button
+              className="u-mt-small"
+              secondary
+              text={opt.name}
+              handleClick={this.handleMobileSortSelection(opt)}
+            />
           ))}
         </ul>
       </div>

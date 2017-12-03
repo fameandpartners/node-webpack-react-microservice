@@ -24,6 +24,7 @@ import CollectionFilterSortConstants from '../../constants/CollectionFilterSortC
 
 // CSS
 import '../../../css/components/CollectionFilter.scss';
+import '../../../css/flash-sale-overrides.scss';
 
 const { FILTER_DEFAULTS } = CollectionFilterSortConstants;
 
@@ -44,8 +45,9 @@ function stateToProps({ $$collectionFilterSortState }, props) {
           order: collectionFilterSortState.order,
           fastMaking: collectionFilterSortState.fastMaking,
           selectedColors: collectionFilterSortState.selectedColors,
-          selectedDressSize: collectionFilterSortState.selectedDressSize,
+          selectedSizes: collectionFilterSortState.selectedSizes,
           selectedDressLengths: collectionFilterSortState.selectedDressLengths,
+          page: collectionFilterSortState.page,
         },
         //   // Include temporary filters if we are in a drawer
         //   (props.isDrawerLayout) ? collectionFilterSortState.temporaryFilters : {},
@@ -73,6 +75,15 @@ class CollectionFilterSort extends React.Component {
      * @return {Array} new array of values
      */
   addOrRemoveFrom(selectedOptions, changeOption) {
+    // REMOVE
+    console.group('selectedOptions');
+    console.log(selectedOptions);
+    console.groupEnd();
+
+    console.group('changeOption');
+    console.log(changeOption);
+    console.groupEnd();
+
     let newSelections = [];
     const selectedOptionIndex = selectedOptions.indexOf(changeOption);
     if (selectedOptionIndex > -1) {
@@ -107,7 +118,7 @@ class CollectionFilterSort extends React.Component {
         sort: filters.sort,
         color: temporaryFilters.selectedColors,
         length: temporaryFilters.selectedDressLengths,
-        size: temporaryFilters.selectedDressSize,
+        size: temporaryFilters.selectedSizes,
       };
       const serializedParams = serializeObjectIntoQueryParams(queryObj);
       win.location = `${win.location.origin}${win.location.pathname}?${serializedParams}`;
@@ -153,8 +164,30 @@ class CollectionFilterSort extends React.Component {
         temporaryFilters,
       } = this.props;
 
+      // REMOVE
+      console.group('temporaryFilters');
+      console.log(temporaryFilters);
+      console.groupEnd();
+
+      /**
+       *
+       *  attn: @elgrecode
+       *
+       *    have I missed initializing this selectedSizes temporaryFilter somewhere? I'm finding
+       *    myself needing to pass in the `|| []`, because if sizes are not already present in the
+       *    query params, size selection does not work (temporaryFilters.selectedSizes is undefined),
+       *    but when sizes ARE present in the query params btw, it works fine...
+       *
+       *    spent hours on this, v. frustrating because a log of the $$collectionFilterSortState DOES
+       *    show an empty array present for temporaryFilters.selectedSizes, but I'm obviously not
+       *    seeing the need for this aforementioned conditional for selectedDressLengths (or colors)
+       *
+       *
+       */
+      const newSizes = this.addOrRemoveFrom((temporaryFilters.selectedSizes || []), `US${value}`);
+
       setTemporaryFilters(assign({}, temporaryFilters, {
-        selectedDressSize: value,
+        selectedSizes: newSizes,
       }));
     };
   }
@@ -176,12 +209,14 @@ class CollectionFilterSort extends React.Component {
    */
   buildSizeOption(size) {
     const { temporaryFilters } = this.props;
+    const { selectedSizes = [] } = temporaryFilters;
+
     return (
       <div key={size.id} className="col-3">
         <Button
           tertiary
           tall
-          selected={size.id === temporaryFilters.selectedDressSize}
+          selected={selectedSizes.indexOf(`US${size.value}`) > -1}
           text={`US ${size.value}`}
           handleClick={this.handleDressSizeSelection(size)}
         />
@@ -263,7 +298,7 @@ class CollectionFilterSort extends React.Component {
     } = this.props;
 
     return (
-      <div className="CollectionFilterSort">
+      <div className="CollectionFilterSort u-mt-big">
         <div className="FilterSort">
           <div className="ExpandablePanel--wrapper">
             <div className="ExpandablePanel__heading">
@@ -352,19 +387,20 @@ class CollectionFilterSort extends React.Component {
 
           {!isDrawerLayout ?
             <div className="ExpandablePanel__action">
-              <div className="ExpandablePanel__filterTriggers--cancel-apply">
-                <a
-                  onClick={this.handleFilterCancel()}
-                  className="link link--static u-mr--small"
-                >
-                    Cancel
-                </a>
-                <a
-                  onClick={this.handleFilterApply()}
-                  className="link link--static"
-                >
-                  Apply
-                </a>
+              <div className="ExpandablePanel__filterTriggers--cancel-apply grid-12-spaceBetween u-center">
+                <div className="col-6_sm-12">
+                  <Button
+                    secondary
+                    text="Cancel"
+                    handleClick={this.handleFilterCancel()}
+                  />
+                </div>
+                <div className="col-6_sm-12">
+                  <Button
+                    text="Apply"
+                    handleClick={this.handleFilterApply()}
+                  />
+                </div>
               </div>
             </div> : null
             }
@@ -382,7 +418,13 @@ CollectionFilterSort.propTypes = {
   $$dressLengths: PropTypes.object.isRequired,
   $$sizes: PropTypes.object.isRequired,
   filters: PropTypes.object.isRequired,
-  temporaryFilters: PropTypes.object.isRequired,
+  temporaryFilters: PropTypes.shape({
+    page: PropTypes.string.isRequired,
+    selectedColors: PropTypes.array.isRequired,
+    selectedDressLengths: PropTypes.array.isRequired,
+    selectedSizes: PropTypes.array.isRequired,
+    sort: PropTypes.string.isRequired,
+  }).isRequired,
 
     // Redux Actions
   clearAllCollectionFilters: PropTypes.func.isRequired,
