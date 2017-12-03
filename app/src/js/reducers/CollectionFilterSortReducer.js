@@ -20,27 +20,27 @@ function generateDressLengths() {
     {
       id: 'mini',
       name: 'Mini',
-      value: 'Mini',
+      value: 'mini',
     },
     {
       id: 'midi',
       name: 'Midi',
-      value: 'Midi',
+      value: 'midi',
     },
     {
       id: 'knee',
       name: 'Knee',
-      value: 'Knee',
+      value: 'knee',
     },
     {
       id: 'ankle',
       name: 'Ankle',
-      value: 'Ankle',
+      value: 'ankle',
     },
     {
       id: 'maxi',
       name: 'Maxi',
-      value: 'Maxi',
+      value: 'maxi',
     },
   ];
   return lengths;
