@@ -10,17 +10,25 @@
   padding: 16px;
 }
 
+.FlashSaleProduct__image-wrapper {
+  position: relative;
+  display: block;
+}
+
 .FlashSaleProduct__image-wrapper img {
   width: 100%;
 }
 
 .FlashSaleProduct__image--hover {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: none;
 }
 
 .FlashSaleProduct__image-wrapper:hover {
   .FlashSaleProduct__image--original {
-    display: none;
+    z-index: 0;
   }
   .FlashSaleProduct__image--hover {
     display: block;
