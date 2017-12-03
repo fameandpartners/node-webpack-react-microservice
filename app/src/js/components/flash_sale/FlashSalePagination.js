@@ -5,6 +5,7 @@ import qs from 'qs';
 
 // Utilities
 import win from '../../polyfills/windowPolyfill';
+import { serializeObjectIntoQueryParams } from '../../utilities/BOM';
 
 // Components
 import Caret from '../../components/generic/Caret';
@@ -24,9 +25,9 @@ class FlashSalePagination extends Component {
     const parsedQueryObj = qs.parse(queryParams.slice(1));
 
     parsedQueryObj.page = pageNum;
-    console.log(`Navigating to Page: ${pageNum}`);
+    const serializedParams = serializeObjectIntoQueryParams(parsedQueryObj);
 
-    const updatedPath = `${win.location.origin}${win.location.pathname}?${qs.stringify(parsedQueryObj)}`;
+    const updatedPath = `${win.location.origin}${win.location.pathname}?${serializedParams}`;
     win.location.href = updatedPath;
   }
 

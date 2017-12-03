@@ -35,8 +35,9 @@ function stateToProps({ $$collectionFilterSortState }) {
           order: collectionFilterSortState.order,
           fastMaking: collectionFilterSortState.fastMaking,
           selectedColors: collectionFilterSortState.selectedColors,
-          selectedDressSize: collectionFilterSortState.selectedDressSize,
+          selectedSizes: collectionFilterSortState.selectedSizes,
           selectedDressLengths: collectionFilterSortState.selectedDressLengths,
+          page: collectionFilterSortState.page,
         },
         //   // Include temporary filters if we are in a drawer
         //   (props.isDrawerLayout) ? collectionFilterSortState.temporaryFilters : {},
@@ -63,7 +64,7 @@ class CollectionFilterSort extends React.Component {
       sort: newTemporaryFilters.sort,
       color: filters.selectedColors,
       length: filters.selectedDressLengths,
-      size: filters.selectedDressSize,
+      size: filters.selectedSizes,
     };
     const serializedParams = serializeObjectIntoQueryParams(queryObj);
     win.location = `${win.location.origin}${win.location.pathname}?${serializedParams}`;
