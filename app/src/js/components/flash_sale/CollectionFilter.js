@@ -75,7 +75,6 @@ class CollectionFilterSort extends React.Component {
      * @return {Array} new array of values
      */
   addOrRemoveFrom(selectedOptions, changeOption) {
-
     // REMOVE
     console.group('selectedOptions');
     console.log(selectedOptions);
