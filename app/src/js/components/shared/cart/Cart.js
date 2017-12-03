@@ -162,7 +162,12 @@ class Cart extends Component {
 
 
   generateLineItems() {
-    const { lineItems } = this.props;
+    const {
+      lineItems,
+      siteVersion,
+    } = this.props;
+
+    const auSite = siteVersion && siteVersion.toLowerCase() !== 'usa';
 
     return lineItems.map((lineItem) => {
       const {
@@ -190,7 +195,7 @@ class Cart extends Component {
               <span>{productTitle}</span>&nbsp;<span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>
             <span className="Cart__line-description">
-              {this.generateColorSelectionNode(lineItem.color)}
+              Color: {this.generateColorSelectionNode(lineItem.color)}
             </span>
             <span className="Cart__line-description">
               {this.generateAddonSummary(lineItem.addons)}
@@ -199,6 +204,20 @@ class Cart extends Component {
               ? (
                 <span className="Cart__line-description">
                   Size: {this.generateSizeSummary(lineItem)}
+                </span>
+              ) : null
+            }
+            { lineItem.sizePresentationUS && lineItem.sizePresentationAU
+              ? (
+                <span className="Cart__line-description">
+                  Size: { auSite ? lineItem.sizePresentationAU : lineItem.sizePresentationUS }
+                </span>
+              ) : null
+            }
+            { lineItem.height
+              ? (
+                <span className="Cart__line-description">
+                  Height: {lineItem.height}
                 </span>
               ) : null
             }

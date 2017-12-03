@@ -32,6 +32,7 @@ function transformCartDataLineItems(lineItems) {
     productTitle: li.name,
     heightUnit: li.height_unit,
     heightValue: li.height_value,
+    height: li.height ? li.height : null,
     sizePresentationAU: li.size.presentation_au,
     sizePresentationUS: li.size.presentation_us,
     sizeNumber: li.size.sort_key,
