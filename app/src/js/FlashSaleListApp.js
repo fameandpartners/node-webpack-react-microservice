@@ -38,6 +38,7 @@ import CollectionSort from './components/flash_sale/CollectionSort';
 import FilterSortSelectionModal from './components/flash_sale/FilterSortSelectionModal';
 import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 import FlashSalePagination from './components/flash_sale/FlashSalePagination';
+import Button from './components/generic/Button';
 
 
 // Configure Error Tracking
@@ -133,30 +134,29 @@ class FlashSaleListApp extends Component {
               { breakpoint === 'mobile' || breakpoint === 'tablet'
                 ? (
                   <div>
-                    <a
-                      className="link link--static"
-                      onClick={this.handleOpenFiltersClick}
-                    >
-                      Open Filters
-                    </a>
+                    <Button
+                      className="u-mt-small"
+                      secondary
+                      text="Open Filters"
+                      handleClick={this.handleOpenFiltersClick}
+                    />
                   </div>
                 )
                 : <CollectionFilter />
               }
             </div>
 
-            <div className="col-9_sm-12_lg-9">
+            <div className="col-9_sm-12_lg-9 u-mt-normal">
               <div className="grid-12">
                 <div className="col-12">
                   { breakpoint === 'mobile' || breakpoint === 'tablet'
                     ? (
                       <div>
-                        <a
-                          className="link link--static"
-                          onClick={this.handleOpenSortClick}
-                        >
-                          Open Sort
-                        </a>
+                        <Button
+                          secondary
+                          text="Open Sort"
+                          handleClick={this.handleOpenSortClick}
+                        />
                       </div>
                     )
                     : <CollectionSort />
@@ -167,6 +167,7 @@ class FlashSaleListApp extends Component {
                 </div>
               </div>
             </div>
+
             { productsCurrentPage ?
               (
                 <div className="col-3" data-push-left="off-9">

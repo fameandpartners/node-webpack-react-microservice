@@ -30,7 +30,7 @@ class ExpandablePanel extends React.Component {
               <div className="u-text-align--left ExpandablePanelItem__item-bar" onClick={this.openPanel}>
                   {itemGroup}
               </div>
-              <div className="ExpandablePanelItem__revealed-content">
+              <div className="ExpandablePanelItem__revealed-content u-mt-small">
                   {revealedContent}
               </div>
           </div>

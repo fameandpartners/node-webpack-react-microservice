@@ -18,10 +18,12 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Components
 import Select from '../form/Select';
+import Button from '../generic/Button';
 // Constants
 
 // CSS
 import '../../../css/components/CollectionFilter.scss';
+import '../../../css/flash-sale-overrides.scss';
 
 
 function stateToProps({ $$collectionFilterSortState }) {
@@ -93,13 +95,14 @@ class CollectionFilterSort extends React.Component {
   buildMobileCollectionSort(options) {
     return (
       <div className="grid-middle">
-        <ul className="u-center">
+        <ul className="u-center u-mt-normal">
           {options.map(opt => (
-            <li
-              onClick={this.handleMobileSortSelection(opt)}
-            >
-              {opt.name}
-            </li>
+            <Button
+              className="u-mt-small"
+              secondary
+              text={opt.name}
+              handleClick={this.handleMobileSortSelection(opt)}
+            />
           ))}
         </ul>
       </div>
