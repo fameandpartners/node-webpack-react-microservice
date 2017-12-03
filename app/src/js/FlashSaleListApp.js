@@ -95,7 +95,7 @@ class FlashSaleListApp extends Component {
         page: parsedQueryObj.page,
         sort: parsedQueryObj.sort,
         selectedColors: parsedQueryObj.color || [],
-        selectedDressSize: parsedQueryObj.size,
+        selectedSizes: parsedQueryObj.size,
         selectedDressLengths: parsedQueryObj.length || [],
       });
     }

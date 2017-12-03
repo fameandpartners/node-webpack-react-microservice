@@ -44,8 +44,9 @@ function stateToProps({ $$collectionFilterSortState }, props) {
           order: collectionFilterSortState.order,
           fastMaking: collectionFilterSortState.fastMaking,
           selectedColors: collectionFilterSortState.selectedColors,
-          selectedDressSize: collectionFilterSortState.selectedDressSize,
+          selectedSizes: collectionFilterSortState.selectedSizes,
           selectedDressLengths: collectionFilterSortState.selectedDressLengths,
+          page: collectionFilterSortState.page,
         },
         //   // Include temporary filters if we are in a drawer
         //   (props.isDrawerLayout) ? collectionFilterSortState.temporaryFilters : {},
@@ -107,7 +108,7 @@ class CollectionFilterSort extends React.Component {
         sort: filters.sort,
         color: temporaryFilters.selectedColors,
         length: temporaryFilters.selectedDressLengths,
-        size: temporaryFilters.selectedDressSize,
+        size: temporaryFilters.selectedSizes,
       };
       const serializedParams = serializeObjectIntoQueryParams(queryObj);
       win.location = `${win.location.origin}${win.location.pathname}?${serializedParams}`;
@@ -152,9 +153,10 @@ class CollectionFilterSort extends React.Component {
         setTemporaryFilters,
         temporaryFilters,
       } = this.props;
+      const newSizes = this.addOrRemoveFrom(temporaryFilters.selectedSizes, `US${value}`);
 
       setTemporaryFilters(assign({}, temporaryFilters, {
-        selectedDressSize: value,
+        selectedSizes: newSizes,
       }));
     };
   }
@@ -176,12 +178,14 @@ class CollectionFilterSort extends React.Component {
    */
   buildSizeOption(size) {
     const { temporaryFilters } = this.props;
+    const { selectedSizes = [] } = temporaryFilters;
+
     return (
       <div key={size.id} className="col-3">
         <Button
           tertiary
           tall
-          selected={size.id === temporaryFilters.selectedDressSize}
+          selected={selectedSizes.indexOf(`US${size.value}`) > -1}
           text={`US ${size.value}`}
           handleClick={this.handleDressSizeSelection(size)}
         />
