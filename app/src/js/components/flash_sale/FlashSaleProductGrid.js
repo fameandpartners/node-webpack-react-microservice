@@ -54,7 +54,7 @@ class FlashSaleProductGrid extends Component {
                 {this.formatPrice(dress.original_price)}
               </div>
               <div className="col-8">
-                {dress.color}, {dress.size}
+                {dress.color}, {dress.size}, {dress.height}
               </div>
               <div className="col-4 FlashSaleProduct__current-price">
                 {this.formatPrice(dress.current_price)}

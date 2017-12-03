@@ -93,6 +93,7 @@ class FlashProductDescription extends Component {
               </div>
             ) : null
           }
+          <p>Height: {lineItem.height}</p>
           <p>Color: {presentation}</p>
           <div
             style={this.generateFlashColorSwatch()}
