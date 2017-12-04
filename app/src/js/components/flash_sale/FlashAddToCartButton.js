@@ -50,7 +50,10 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  const { setAppLoadingState } = bindActionCreators(AppActions, dispatch);
+  const {
+    setAppLoadingState,
+    setErrorCode,
+  } = bindActionCreators(AppActions, dispatch);
 
   const {
     activateCartDrawer,
@@ -66,6 +69,7 @@ function dispatchToProps(dispatch) {
     activateCartDrawer,
     activateModal,
     addItemToCart,
+    setErrorCode,
     setCartContents,
     setAppLoadingState,
     setSizeProfileError,
@@ -90,11 +94,13 @@ class FlashSaleAddToCartButton extends Component {
       activateCartDrawer,
       setAppLoadingState,
       setCartContents,
+      setErrorCode,
     } = this.props;
 
     req.end((err, res) => {
       setAppLoadingState({ loadingId: null });
       if (err) {
+        setErrorCode({ errorCode: res.statusCode });
         // eslint-disable-next-line
         return console.warn('error adding something to the cart', err);
       }
@@ -208,6 +214,7 @@ FlashSaleAddToCartButton.propTypes = {
   activateCartDrawer: PropTypes.func.isRequired,
   setAppLoadingState: PropTypes.func.isRequired,
   setCartContents: PropTypes.func.isRequired,
+  setErrorCode: PropTypes.func.isRequired,
 };
 
 FlashSaleAddToCartButton.defaultProps = {

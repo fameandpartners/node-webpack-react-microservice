@@ -22,9 +22,10 @@ import ModalActions from '../../actions/ModalActions';
 import '../../../css/components/FlashProductOptions.scss';
 import '../../../css/flash-sale-overrides.scss';
 
-function stateToProps({ $$flashSaleState }) {
+function stateToProps({ $$flashSaleState, $$appState }) {
   return {
     lineItem: $$flashSaleState.get('$$lineItem').toJS(),
+    errorCode: $$appState.get('errorCode'),
   };
 }
 
@@ -62,7 +63,11 @@ class FlashProductOptions extends Component {
   }
 
   render() {
-    const { lineItem } = this.props;
+    const {
+      lineItem,
+      errorCode,
+    } = this.props;
+
     return (
       <div className="FlashProductOptions grid-12-noGutter">
         <div className="FlashProductOptions__primary-image-container brick col-6">
@@ -78,11 +83,18 @@ class FlashProductOptions extends Component {
                 lineItem={lineItem}
               />
             </div>
-            <div className="col-12 u-mt-huge">
+            <div className="FlashProductOptions__actionsWrapper col-12 u-mt-huge">
               <FlashAddToCartButton
                 showTotal={false}
                 shouldActivateCartDrawer
               />
+              { errorCode === 422
+                  ? (
+                    <p className="FlashProductOptions__message--error u-mt-normal">
+                      This item is out of stock.
+                    </p>
+                  ) : null
+              }
               <p className="u-mt-normal">
                 All sample sale items are final sale. Offer valid for shipments to US only.
               </p>
@@ -106,6 +118,7 @@ FlashProductOptions.propTypes = {
     width: PropTypes.number,
     position: PropTypes.number,
   })).isRequired,
+  errorCode: PropTypes.number,
   // COLOR
   colorId: PropTypes.number.isRequired,
   deliveryCopy: PropTypes.string,
@@ -124,7 +137,7 @@ FlashProductOptions.defaultProps = {
   deliveryCopy: '',
   lineItem: null,
   expressMakingSelected: false,
-
+  errorCode: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(FlashProductOptions);

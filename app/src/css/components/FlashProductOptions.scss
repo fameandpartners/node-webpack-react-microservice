@@ -80,3 +80,15 @@
 .FlashProductOptions__color-swatch--extreme-light {
   border: 1px solid $c-neutral-4;
 }
+
+.FlashProductOptions__actionsWrapper {
+  position: relative;
+}
+
+.FlashProductOptions__message--error {
+  color: darken(#f00, 25%);
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 32px;
+}
