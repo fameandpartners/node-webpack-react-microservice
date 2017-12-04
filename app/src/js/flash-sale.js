@@ -13,7 +13,7 @@ import FlashSaleListApp from './FlashSaleListApp'; // FLASH List App
 import BlanketOverlay from './components/generic/BlanketOverlay';
 import HeaderWrapper from './components/shared/header/HeaderWrapper';
 import SideMenu from './components/shared/side_menu/SideMenu';
-import CartDrawer from './components/shared/cart/CartDrawer';
+import FlashCartDrawer from './components/flash_sale/FlashCartDrawer';
 import Footer from './components/shared/Footer';
 
 // CSS
@@ -81,7 +81,7 @@ const SideMenuComponent = <Provider store={store}><SideMenu /></Provider>;
 renderComponent(SideMenuComponent, 'react-menu');
 
 // CART DRAWER
-const CartDrawerComponent = <Provider store={store}><CartDrawer /></Provider>;
+const CartDrawerComponent = <Provider store={store}><FlashCartDrawer /></Provider>;
 renderComponent(CartDrawerComponent, 'react-cart');
 
 // FOOTER
