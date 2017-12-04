@@ -23,7 +23,6 @@ import Button from '../generic/Button';
 
 // CSS
 import '../../../css/components/CollectionFilter.scss';
-import '../../../css/flash-sale-overrides.scss';
 
 
 function stateToProps({ $$collectionFilterSortState }) {

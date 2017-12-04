@@ -24,7 +24,6 @@ import CollectionFilterSortConstants from '../../constants/CollectionFilterSortC
 
 // CSS
 import '../../../css/components/CollectionFilter.scss';
-import '../../../css/flash-sale-overrides.scss';
 
 const { FILTER_DEFAULTS } = CollectionFilterSortConstants;
 
