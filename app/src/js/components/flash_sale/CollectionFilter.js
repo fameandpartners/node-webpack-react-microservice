@@ -106,6 +106,8 @@ class CollectionFilterSort extends React.Component {
       if (hasLegacyInstance()) {
         this.props.setTemporaryFilters({});
         win.ProductCollectionFilter__Instance.toggleFilters();
+      } else {
+        this.props.setTemporaryFilters(FILTER_DEFAULTS);
       }
     };
   }
