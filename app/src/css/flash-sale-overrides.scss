@@ -10,13 +10,13 @@
 
 .ExpandablePanel__name {
   // poor form
-  font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;  
+  font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
 }
 
 .ExpandablePanelItem--is-active .ExpandablePanel__name:before {
   top: 3px;
   font-size: 0.7rem;
-  color: #777777;
+  color: rgb(119, 119, 119);
 }
 
 .ExpandablePanel__optionName {

@@ -122,18 +122,19 @@ class CollectionFilterSort extends React.Component {
   }
 
   buildCollectionSort() {
-    const { breakpoint } = this.props;
+    const { breakpoint, temporaryFilters } = this.props;
     const SORT_OPTIONS = [
       {
         id: 0,
         name: 'Price: Low to High',
         value: 'asc',
-        active: true,
+        active: temporaryFilters.sort !== 'desc',
       },
       {
         id: 1,
         name: 'Price: High to Low',
         value: 'desc',
+        active: temporaryFilters.sort === 'desc',
       },
     ];
 
