@@ -184,7 +184,7 @@ class FlashSaleAddToCartButton extends Component {
     if (this.itemInCart()) {
       return (
         <h2 className="ItemInCart__message">
-          This dress is already in your cart.
+          This item is already in your cart.
         </h2>
       );
     }

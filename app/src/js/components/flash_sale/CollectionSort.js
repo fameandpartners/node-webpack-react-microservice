@@ -126,13 +126,13 @@ class CollectionFilterSort extends React.Component {
     const SORT_OPTIONS = [
       {
         id: 0,
-        name: 'Prices Low to High',
+        name: 'Price: Low to High',
         value: 'asc',
         active: true,
       },
       {
         id: 1,
-        name: 'Prices High to Low',
+        name: 'Price: High to Low',
         value: 'desc',
       },
     ];
