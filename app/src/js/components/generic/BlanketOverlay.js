@@ -82,7 +82,7 @@ class BlanketOverlay extends PureComponent {
       >
         {({ opacity }) =>
           <div
-            className="App__blanket u-height--full u-width--full u-cursor--pointer"
+            className="BlanketOverlay u-height--full u-width--full u-cursor--pointer"
             onClick={this.handleCloseMenu}
             style={{
               opacity: opacity / 100,
