@@ -54,7 +54,7 @@ export const $$initialState = Immutable.fromJS({
   $$bodyStyles: [],
   fastMaking: false,
   page: 1,
-  order: 'newest',
+  sort: 'newest',
   selectedColors: [],
   selectedDressSize: null,
   selectedDressLengths: [],
@@ -63,6 +63,7 @@ export const $$initialState = Immutable.fromJS({
   selectedShapes: [],
   selectedStyles: [],
   temporaryFilters: {
+    sort: 'newest',
     selectedColors: [],
     selectedDressSize: null,
     selectedDressLengths: [],
