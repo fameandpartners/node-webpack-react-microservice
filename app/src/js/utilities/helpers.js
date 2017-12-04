@@ -28,3 +28,7 @@ export function redirectSiteVersion(path) {
 
   win.location.href = redirectUrl;
 }
+
+export function formatSizePresentationUS(size) {
+  return `${size.split(' ')[1]} ${size.split(' ')[0]}`;
+}

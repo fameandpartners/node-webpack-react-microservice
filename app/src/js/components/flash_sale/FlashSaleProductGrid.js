@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 
+// Utilities
+import { formatSizePresentationUS } from '../../utilities/helpers';
+
 // CSS
 import '../../../css/components/FlashSaleProductGrid.scss';
 
@@ -52,7 +55,7 @@ class FlashSaleProductGrid extends Component {
                 {this.formatPrice(dress.original_price)}
               </div>
               <div className="col-8">
-                {dress.color}, {dress.size}, {dress.height}
+                {dress.color}, {formatSizePresentationUS(dress.size)}, {dress.height}
               </div>
               <div className="col-4 FlashSaleProduct__current-price">
                 {this.formatPrice(dress.current_price)}
