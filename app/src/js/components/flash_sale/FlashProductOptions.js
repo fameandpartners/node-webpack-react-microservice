@@ -64,7 +64,6 @@ class FlashProductOptions extends Component {
   render() {
     const {
       lineItem,
-      errorCode,
     } = this.props;
 
     return (
@@ -73,7 +72,11 @@ class FlashProductOptions extends Component {
           <div
             className="FlashProductOptions__primary-image-wrapper u-cursor--pointer"
             style={{ backgroundImage: `url(${lineItem.images[0]})` }}
-          />
+          >
+            <span className="FlashProductOptions__primaryImageOverlayText">
+              Delivered in 5 - 7 Business Days.
+            </span>
+          </div>
         </div>
         <div className="FlashProductOptions__col grid-middle col-6 u-center">
           <div className="FlashProductOptions__ctas grid-1 u-mb-small">

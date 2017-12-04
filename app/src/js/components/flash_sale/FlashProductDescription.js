@@ -87,7 +87,7 @@ class FlashProductDescription extends Component {
             (
               <div className="FlashProductDescription__addons-details">
                 <h5 className="FlashProductDescription__addons-header">
-                  Customizations
+                  Customizations (Not featured):
                 </h5>
                 <ul className="FlashProductDescription__addons-list">
                   {/* eslint-disable react/no-array-index-key */}
