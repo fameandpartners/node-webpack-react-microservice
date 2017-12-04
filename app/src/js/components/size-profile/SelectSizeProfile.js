@@ -50,8 +50,10 @@ class SelectSizeProfile extends Component {
         modalWrapperClassName="u-flex--col"
       >
         <div className="SelectSizeProfile">
-          <h3 className="WizardStep__title">Create a Fit I.D. to unlock your awesomeness!</h3>
-          <h5 className="WizardStep__description">Avoid sizing confusions.
+          <h3 className="WizardStep__title u-mb-normal u-mt-big">
+            Create a Fit I.D. to unlock your awesomeness!
+          </h3>
+          <h5 className="WizardStep__description u-mb-big">Avoid sizing confusions.
           Answer 8 simple questions and we'll create your perfect fit.
           If not we'll re-make it for you free of charge.</h5>
           <div className="ButtonBox--medium-width ButtonBox--center">

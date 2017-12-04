@@ -62,7 +62,7 @@ class SizeProfileModal extends Component {
         flexWidth
       >
         <div
-          className="SizeProfileModal u-width-big"
+          className="SizeProfileModal__fixed-width"
         >
           { this.injectWizardStep() }
         </div>

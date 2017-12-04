@@ -54,13 +54,16 @@ class FitIdOverallFit extends Component {
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="u-mb-big">
-          <h3 className="h4 u-mb-small">
+        <div>
+          <h3 className="WizardStep__title u-mb-small">
             Let’s get started
           </h3>
-          <p className="h6 BodySizeForm__sub-heading">
+          <h5 className="WizardStep__description u-mb-normal">
             These first set of questions will contribute to refining your overall fit.
-          </p>
+          </h5>
+          <h5 className="WizardStep__description u-mb-normal">
+            Already have a Fit I.D.? <a href="">Log in</a>
+          </h5>
         </div>
 
         <div className="grid-12-noGutter">
@@ -77,7 +80,7 @@ class FitIdOverallFit extends Component {
           </div>
         </div>
 
-        <div className="ButtonBox--medium-width ButtonBox--center">
+        <div className="ButtonBox--center">
           <Button
             className="SelectSizeProfile__button"
             text="Next"

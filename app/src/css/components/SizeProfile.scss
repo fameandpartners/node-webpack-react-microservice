@@ -5,14 +5,11 @@
 .WizardStep__title {
   max-width: 340px;
   margin: 0 auto;
-  margin-top: 40px;
-  margin-bottom: 30px;
 }
 
 .WizardStep__description {
   max-width: 300px;
   margin: 0 auto;
-  margin-bottom: 40px;
 }
 
 .WizardStep__info {
@@ -20,8 +17,21 @@
   margin: 0 auto;
 }
 
-.u-width-big {
-  width: 700px;
+.SizeProfileModal__fixed-width {
+  width: 800px;
+}
+
+.Survey__button {
+  background: $c-white;
+  color: $c-black;
+  border: 2px solid $c-light-gray;
+  width: 150px;
+  height: 60px;
+
+  &:hover {
+    background-color: $c-white;
+    border: 2px solid $c-black;
+  }
 }
 
 .u-height-big {
@@ -39,6 +49,10 @@
 .SelectSize__button {
   background: $c-background-gray;
   color: $c-black;
+
+  &:hover {
+    background-color: $c-border-gray;
+  }
 }
 
 .ButtonBox--medium-width {

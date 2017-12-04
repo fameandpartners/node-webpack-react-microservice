@@ -52,10 +52,10 @@ class PetiteOrPlusSurvey extends Component {
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="u-mb-big">
-          <h3 className="h4 u-mb-small">
+        <div className="u-mb-big u-mt-big">
+          <h4 className="WizardStep__title">
             Do you ever buy clothing in petite sizes? (This can be on rare occasions)
-          </h3>
+          </h4>
         </div>
 
         <div className="grid-noGutter">
@@ -63,12 +63,12 @@ class PetiteOrPlusSurvey extends Component {
             <Button
               text="Yes"
               handleClick={this.handleNextSelection}
+              className="Survey__button u-mr-small"
             />
-          </div>
-          <div className="col">
             <Button
               text="No"
               handleClick={this.handleNextSelection}
+              className="Survey__button"
             />
           </div>
         </div>
