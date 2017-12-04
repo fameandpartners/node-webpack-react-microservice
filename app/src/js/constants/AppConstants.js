@@ -9,6 +9,7 @@ const actionTypes = assign({},
     'SET_APP_USER',
     'SET_SHAREABLE_QUERY_PARAMS',
     'SET_GALLERY_SLIDE_ACTIVE_INDEX',
+    'SET_ERROR_CODE',
   ]),
 );
 

@@ -65,6 +65,11 @@ export default function AppReducer($$state = $$initialState, action = null) {
         gallerySlideActiveIndex: action.index,
       });
     }
+    case AppConstants.SET_ERROR_CODE: {
+      return $$state.merge({
+        errorCode: action.errorCode,
+      });
+    }
     default: {
       return $$state;
     }
