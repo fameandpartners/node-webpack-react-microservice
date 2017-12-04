@@ -4,32 +4,31 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
-import win from '../../../polyfills/windowPolyfill';
+import win from '../../../js/polyfills/windowPolyfill';
 
-import { formatCents } from '../../../utilities/accounting';
-import noop from '../../../libs/noop';
+import { formatCents } from '../../../js/utilities/accounting';
+import noop from '../../../js/libs/noop';
 
 // UI Components
-import Button from '../../generic/Button';
-import CancelOut from '../CancelOut';
-// import ProductCrossSell from '../../pdp/ProductCrossSell';
+import Button from '../../../js/components/generic/Button';
+import CancelOut from '../../../js/components/shared/CancelOut';
 
 // Constants
-import { UNITS } from '../../../constants/ProductConstants';
+import { UNITS } from '../../../js/constants/ProductConstants';
 
 // Actions
-import * as CartActions from '../../../actions/CartActions';
+import * as CartActions from '../../../js/actions/CartActions';
 
 import {
   isExtremeLightLuminance,
   generateBackgroundValueFromColor,
-} from '../../../utilities/color';
+} from '../../../js/utilities/color';
 
 // temp. helper
-import { removeFromCart } from '../../../utilities/cart-helper';
+import { removeFromCart } from '../../../js/utilities/cart-helper';
 
 // CSS
-import '../../../../css/components/Cart.scss';
+import '../../../css/components/Cart.scss';
 
 function stateToProps({ $$appState }) {
   const siteVersion = win.ApplicationStateData ? win.ApplicationStateData.currentSiteVersion : null;
@@ -48,7 +47,7 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class Cart extends Component {
+class FlashCart extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -162,7 +161,12 @@ class Cart extends Component {
 
 
   generateLineItems() {
-    const { lineItems } = this.props;
+    const {
+      lineItems,
+      siteVersion,
+    } = this.props;
+
+    const auSite = siteVersion && siteVersion.toLowerCase() !== 'usa';
 
     return lineItems.map((lineItem) => {
       const {
@@ -190,14 +194,25 @@ class Cart extends Component {
               <span>{productTitle}</span>&nbsp;<span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>
             <span className="Cart__line-description">
-              {this.generateColorSelectionNode(lineItem.color)}
+              Color: {this.generateColorSelectionNode(lineItem.color)}
             </span>
             <span className="Cart__line-description">
               {this.generateAddonSummary(lineItem.addons)}
             </span>
-            <span className="Cart__line-description">
-              Size: {this.generateSizeSummary(lineItem)}
-            </span>
+            { lineItem.sizePresentationUS && lineItem.sizePresentationAU
+              ? (
+                <span className="Cart__line-description">
+                  Size: { auSite ? lineItem.sizePresentationAU : lineItem.sizePresentationUS }
+                </span>
+              ) : null
+            }
+            { lineItem.height
+              ? (
+                <span className="Cart__line-description">
+                  Height: {lineItem.height}
+                </span>
+              ) : null
+            }
           </div>
         </div>
       );
@@ -243,7 +258,7 @@ class Cart extends Component {
   }
 }
 
-Cart.propTypes = {
+FlashCart.propTypes = {
   // Redux Props
   siteVersion: PropTypes.string.isRequired,
   // complementaryProducts: PropTypes.arrayOf(PropTypes.shape({
@@ -272,4 +287,4 @@ Cart.propTypes = {
   setCartContents: PropTypes.func.isRequired,
 };
 
-export default connect(stateToProps, dispatchToProps)(Cart);
+export default connect(stateToProps, dispatchToProps)(FlashCart);

@@ -26,6 +26,9 @@ import * as ModalActions from '../../actions/ModalActions';
 // UI
 import Button from '../generic/Button';
 
+// CSS
+import '../../../css/components/FlashSaleAddToCartButton.scss';
+
 // Constants
 // import { LOADING_IDS } from '../../constants/AppConstants';
 // import CustomizationConstants from '../../constants/CustomizationConstants';
@@ -34,11 +37,14 @@ import Button from '../generic/Button';
 // // temp. helpers (for Rails merge)
 // import { addToCart } from '../../utilities/cart-helper';
 
-function stateToProps({ $$flashSaleState }) {
-  const lineItem = $$flashSaleState.get('$$lineItem').toJS();
+function stateToProps(state) {
+  const lineItem = state.$$flashSaleState.get('$$lineItem').toJS();
+  const cartItems = state.$$cartState.toJS().lineItems;
+
   return {
     lineItem,
     lineItemId: lineItem ? lineItem.id : null,
+    cartItems,
   };
 }
 
@@ -68,7 +74,7 @@ function dispatchToProps(dispatch) {
 }
 
 
-class AddToCartButton extends Component {
+class FlashSaleAddToCartButton extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -153,8 +159,30 @@ class AddToCartButton extends Component {
     return 'Add to Bag';
   }
 
+  itemInCart() {
+    const {
+      lineItemId,
+      cartItems,
+    } = this.props;
+
+    if (cartItems.filter(i => i.id === lineItemId).length > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
   render() {
     const { addToCartLoading } = this.props;
+
+    if (this.itemInCart()) {
+      return (
+        <h2 className="ItemInCart__message">
+          This dress is already in your cart.
+        </h2>
+      );
+    }
+
     return (
       <Button
         tall
@@ -168,12 +196,13 @@ class AddToCartButton extends Component {
 }
 
 /*  eslint-disable react/forbid-prop-types */
-AddToCartButton.propTypes = {
+FlashSaleAddToCartButton.propTypes = {
   // Passed Props
   showTotal: PropTypes.bool,
   // Redux Props
   lineItem: PropTypes.number,
   lineItemId: PropTypes.number,
+  cartItems: PropTypes.array,
   addToCartLoading: PropTypes.bool,
   // Redux Funcs
   activateCartDrawer: PropTypes.func.isRequired,
@@ -181,11 +210,13 @@ AddToCartButton.propTypes = {
   setCartContents: PropTypes.func.isRequired,
 };
 
-AddToCartButton.defaultProps = {
+FlashSaleAddToCartButton.defaultProps = {
   showTotal: true,
   addToCartLoading: false,
   lineItem: null,
   lineItemId: null,
+  cartItems: [],
 };
 
-export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AddToCartButton));
+// eslint-disable-next-line
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(FlashSaleAddToCartButton));
