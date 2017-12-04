@@ -40,11 +40,13 @@ import '../../../css/components/FlashSaleAddToCartButton.scss';
 function stateToProps(state) {
   const lineItem = state.$$flashSaleState.get('$$lineItem').toJS();
   const cartItems = state.$$cartState.toJS().lineItems;
+  const errorCode = state.$$appState.get('errorCode');
 
   return {
     lineItem,
     lineItemId: lineItem ? lineItem.id : null,
     cartItems,
+    errorCode,
   };
 }
 
@@ -158,6 +160,10 @@ class FlashSaleAddToCartButton extends Component {
   }
 
   generateText() {
+    if (this.props.errorCode === 422) {
+      return 'Sorry, this product is currently unavailable';
+    }
+
     if (this.props.showTotal) {
       return `${this.subTotal()} - Add to Bag`;
     }
@@ -179,7 +185,10 @@ class FlashSaleAddToCartButton extends Component {
   }
 
   render() {
-    const { addToCartLoading } = this.props;
+    const {
+      addToCartLoading,
+      errorCode,
+    } = this.props;
 
     if (this.itemInCart()) {
       return (
@@ -196,6 +205,7 @@ class FlashSaleAddToCartButton extends Component {
         className="AddToCartButton"
         text={this.generateText()}
         handleClick={this.handleAddToBag}
+        disabled={errorCode}
       />
     );
   }
@@ -210,6 +220,7 @@ FlashSaleAddToCartButton.propTypes = {
   lineItemId: PropTypes.number,
   cartItems: PropTypes.array,
   addToCartLoading: PropTypes.bool,
+  errorCode: PropTypes.number,
   // Redux Funcs
   activateCartDrawer: PropTypes.func.isRequired,
   setAppLoadingState: PropTypes.func.isRequired,
@@ -223,6 +234,7 @@ FlashSaleAddToCartButton.defaultProps = {
   lineItem: null,
   lineItemId: null,
   cartItems: [],
+  errorCode: null,
 };
 
 // eslint-disable-next-line
