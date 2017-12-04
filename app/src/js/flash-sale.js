@@ -18,6 +18,7 @@ import Footer from './components/shared/Footer';
 
 // CSS
 import '../css/index.scss';
+import '../css/flash-sale-overrides.scss';
 
 // Store
 import AppStore from './stores/AppStore';

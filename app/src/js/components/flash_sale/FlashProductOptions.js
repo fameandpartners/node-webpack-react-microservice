@@ -83,7 +83,7 @@ class FlashProductOptions extends Component {
                 shouldActivateCartDrawer
               />
               <p className="u-mt-normal">
-                All sale items are final sale. Offer only available in US only
+                All sample sale items are final sale. Offer valid for shipments to US only.
               </p>
             </div>
           </div>

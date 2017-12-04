@@ -26,3 +26,16 @@
 .CollectionSort {
   padding-right: 48px;
 }
+
+.App__main--open .App__blanket {
+  z-index: 1;
+  visibility: visible;
+  opacity: 0.3;
+}
+
+.App__blanket {
+  position: fixed;
+  visibility: hidden;
+  background: $c-black;
+  z-index: 3;
+}

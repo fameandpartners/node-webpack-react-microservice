@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Utilities
 import { formatCents } from '../../utilities/accounting';
+import { formatSizePresentationUS } from '../../utilities/helpers';
 
 // CSS
 import '../../../css/components/FlashProductDescription.scss';
@@ -64,7 +65,7 @@ class FlashProductDescription extends Component {
           <h2 className="FlashProductDescription__title u-display--inline-block">
             {lineItem.name}
             <br />
-            {presentation}, Size {lineItem.size}
+            {presentation}, Size {formatSizePresentationUS(lineItem.size)}
           </h2>
 
           <div className="FlashProductDescription__price u-display--inline-block float--right">
@@ -95,7 +96,7 @@ class FlashProductDescription extends Component {
               </div>
             ) : null
           }
-          <p>Size: {lineItem.size}</p>
+          <p>Size: {formatSizePresentationUS(lineItem.size)}</p>
           <p>Height: {lineItem.height}</p>
           <p>Color: {presentation}</p>
           <div

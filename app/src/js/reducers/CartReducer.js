@@ -1,6 +1,9 @@
 import Immutable from 'immutable';
 import CartConstants from '../constants/CartConstants';
 
+// Utilities
+import { formatSizePresentationUS } from '../utilities/helpers';
+
 export const $$initialState = Immutable.fromJS({
   cartDrawerOpen: false,
   // ArrayOf({
@@ -34,7 +37,7 @@ function transformCartDataLineItems(lineItems) {
     heightValue: li.height_value,
     height: li.height ? li.height : null,
     sizePresentationAU: li.size.presentation_au,
-    sizePresentationUS: li.size.presentation_us,
+    sizePresentationUS: formatSizePresentationUS(li.size.presentation_us),
     sizeNumber: li.size.sort_key,
     color: {
       id: li.color.id,
