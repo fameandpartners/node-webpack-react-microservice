@@ -1,4 +1,12 @@
 .ItemInCart__message {
   font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
   font-size: 1.2em;
+  background: #fff;
+  padding: 16px;
+  border-top: 1px solid #ccc;
+
+  @include sm {
+    padding: 0;
+    border: 0;
+  }
 }
