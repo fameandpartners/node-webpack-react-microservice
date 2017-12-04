@@ -20,6 +20,7 @@ import ModalActions from '../../actions/ModalActions';
 
 // CSS
 import '../../../css/components/FlashProductOptions.scss';
+import '../../../css/flash-sale-overrides.scss';
 
 function stateToProps({ $$flashSaleState }) {
   return {
