@@ -50,6 +50,10 @@ class SelectSizeProfile extends Component {
         modalWrapperClassName="u-flex--col"
       >
         <div className="SelectSizeProfile">
+          <h3 className="WizardStep__title">Create a Fit I.D. to unlock your awesomeness!</h3>
+          <h5 className="WizardStep__description">Avoid sizing confusions.
+          Answer 8 simple questions and we'll create your perfect fit.
+          If not we'll re-make it for you free of charge.</h5>
           <div className="ButtonBox--medium-width ButtonBox--center">
             <Button
               className="SelectSizeProfile__button"
@@ -57,6 +61,7 @@ class SelectSizeProfile extends Component {
               handleClick={this.handleFitIDClick}
             />
           </div>
+          <h5>Or</h5>
           <div className="ButtonBox--medium-width ButtonBox--center">
             <Button
               className="SelectSize__button"
@@ -64,7 +69,9 @@ class SelectSizeProfile extends Component {
               handleClick={this.handleSizeClick}
             />
           </div>
-
+          <p className="WizardStep__info">
+            *Free returns and re-makes for <strong>Fit I.D.</strong> customers only.
+          </p>
         </div>
       </WizardStep>
     );

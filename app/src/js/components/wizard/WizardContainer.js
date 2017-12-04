@@ -109,7 +109,7 @@ class WizardContainer extends Component {
       >
         <div
           className={classnames([
-            'WizardContainer__content-wrapper u-center col',
+            'WizardContainer__content-wrapper u-center col u-height-big',
             {
               WizardContainer__fullScreen: fullScreen,
               'u-width--full': fullWidth,

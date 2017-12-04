@@ -1,9 +1,31 @@
-// .SizeProfileModalContainer {
+.WizardStep h3 {
+  line-height: 1.0; // How do I override settings in typography
+}
 
-// }
+.WizardStep__title {
+  max-width: 340px;
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.WizardStep__description {
+  max-width: 300px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.WizardStep__info {
+  max-width: 270px;
+  margin: 0 auto;
+}
 
 .u-width-big {
   width: 700px;
+}
+
+.u-height-big {
+  min-height: 80%;
 }
 
 .full-padding-big {
@@ -15,8 +37,8 @@
 }
 
 .SelectSize__button {
-  background-color: '#E8E8E8';
-  color: '#000';
+  background: $c-background-gray;
+  color: $c-black;
 }
 
 .ButtonBox--medium-width {
