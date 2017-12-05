@@ -161,16 +161,16 @@ class Cart extends Component {
       // INCH
       const ft = Math.floor(heightValue / 12);
       const inch = heightValue % 12;
-      sizingInformation = `Height: ${ft}ft ${inch}in / ${sizePresentation}`;
+      sizingInformation = `Size: ${ft}ft ${inch}in / ${sizePresentation}`;
     } else if (heightUnit === UNITS.CM) {
       // CM
-      sizingInformation = `Height: ${heightValue} ${heightUnit.toLowerCase()} / ${sizePresentation}`;
+      sizingInformation = `Size: ${heightValue} ${heightUnit.toLowerCase()} / ${sizePresentation}`;
     } else if (height) {
       const lowerHeight = height.toLowerCase();
       if (HEIGHT_VALS[lowerHeight]) {
-        sizingInformation = `Height: ${HEIGHT_VALS[lowerHeight]} / ${sizePresentation}`;
+        sizingInformation = `Size: ${HEIGHT_VALS[lowerHeight]} / ${sizePresentation}`;
       } else {
-        sizingInformation = `Height: ${height} / ${sizePresentation}`;
+        sizingInformation = `Size: ${height} / ${sizePresentation}`;
       }
     }
 
