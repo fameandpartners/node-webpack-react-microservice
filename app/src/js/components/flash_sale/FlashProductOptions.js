@@ -87,10 +87,10 @@ class FlashProductOptions extends Component {
             </div>
             <div className="FlashProductOptions__actionsWrapper col-12 u-mt-huge">
               <FlashAddToCartButton
-                showTotal={false}
+                showTotal
                 shouldActivateCartDrawer
               />
-              <p className="u-mt-normal">
+              <p className="u-mt-small">
                 All sample sale items are final sale. Offer valid for shipments to US only.
               </p>
             </div>

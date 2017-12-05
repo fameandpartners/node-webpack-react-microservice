@@ -82,38 +82,12 @@ class FlashProductDisplayOptionsTouch extends Component {
 
   render() {
     const { lineItem } = this.props;
-    const {
-      color_presentation: colorPresentation,
-      color_value: colorValue,
-    } = lineItem;
     return (
       <div className="FlashProductDisplayOptionsTouch layout-container">
 
         <FlashProductImageSlider />
 
-        <div className="FlashProductDisplayOptionsTouch__options u-mb-normal u-mt-normal">
-          <div
-            className={classnames(
-              'FlashProductDisplayOptionsTouch__option u-display--inline-block',
-              { 'FlashProductDisplayOptionsTouch__option--dark': this.determineDarkLuminance() },
-              { 'FlashProductDisplayOptionsTouch__option--extreme-light': this.determineLightLuminance() },
-            )}
-            style={this.generateFlashColorSwatch()}
-          >
-            <div className="grid-middle-noGutter u-height--full">
-              <div className="col">
-                <div
-                  className={classnames(
-                  { 'FlashProductDisplayOptionsTouch__background-text': this.hasPatternImage(colorValue) },
-                )}
-                >
-                  <span>Color</span><br />
-                  <span>{colorPresentation}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div className="FlashProductDisplayOptionsTouch__options u-mb-normal u-mt-normal" />
 
         <div className="u-mb-huge">
           <FlashProductDescription lineItem={lineItem} />

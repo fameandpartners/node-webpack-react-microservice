@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 // Services
 import FlashSaleService from '../../services/FlashSaleService';
+import { formatCents } from '../../utilities/accounting';
 
 // Utilities
 // import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
@@ -88,7 +89,7 @@ class FlashSaleAddToCartButton extends Component {
 
   subTotal() {
     const { lineItem } = this.props;
-    return lineItem.current_price;
+    return formatCents(parseFloat(lineItem.current_price * 100), 0);
   }
 
   handleAddToBagCallback(req) {

@@ -40,6 +40,11 @@ import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 import FlashSalePagination from './components/flash_sale/FlashSalePagination';
 import Button from './components/generic/Button';
 
+const FILTER_OPTIONS = {
+  asc: 'Lowest to Highest',
+  desc: 'Highest to Lowest',
+  newest: 'Lowest To Highest',
+};
 
 // Configure Error Tracking
 Raven
@@ -47,12 +52,13 @@ Raven
   .install();
 
 
-function stateToProps({ $$flashSaleState }) {
+function stateToProps({ $$collectionFilterSortState, $$flashSaleState }) {
   const pageDresses = $$flashSaleState.get('$$pageDresses').toJS();
 
   return {
     lockBody: false,
     pageDresses,
+    sort: $$collectionFilterSortState.get('temporaryFilters').get('sort'),
   };
 }
 
@@ -77,6 +83,18 @@ class FlashSaleListApp extends Component {
     autobind(this);
   }
 
+  handleOpenFiltersClick() {
+    this.props.activateModal({
+      modalId: ModalConstants.FILTER_SELECTION_MODAL,
+    });
+  }
+
+  handleOpenSortClick() {
+    this.props.activateModal({
+      modalId: ModalConstants.SORT_SELECTION_MODAL,
+    });
+  }
+
   componentWillMount() {
     const queryParams = win.location.search;
     const parsedQueryObj = qs.parse(queryParams.slice(1));
@@ -94,7 +112,7 @@ class FlashSaleListApp extends Component {
       const parsedQueryObj = qs.parse(queryParams.slice(1));
       this.props.hydrateFiltersFromURL({
         page: parsedQueryObj.page,
-        sort: parsedQueryObj.sort,
+        sort: parsedQueryObj.sort || 'asc',
         selectedColors: parsedQueryObj.color || [],
         selectedSizes: parsedQueryObj.size,
         selectedDressLengths: parsedQueryObj.length || [],
@@ -102,23 +120,13 @@ class FlashSaleListApp extends Component {
     }
   }
 
-  handleOpenFiltersClick() {
-    this.props.activateModal({
-      modalId: ModalConstants.FILTER_SELECTION_MODAL,
-    });
-  }
-
-  handleOpenSortClick() {
-    this.props.activateModal({
-      modalId: ModalConstants.SORT_SELECTION_MODAL,
-    });
-  }
 
   render() {
     const {
       breakpoint,
       lockBody,
       pageDresses,
+      sort,
     } = this.props;
 
     const {
@@ -146,17 +154,18 @@ class FlashSaleListApp extends Component {
               }
             </div>
 
-            <div className="col-9_sm-12_lg-9 u-mt-normal">
+            <div className="col-9_sm-12_lg-9">
               <div className="grid-12">
                 <div className="col-12">
                   { breakpoint === 'mobile' || breakpoint === 'tablet'
                     ? (
                       <div>
-                        <Button
-                          secondary
-                          text="Open Sort"
-                          handleClick={this.handleOpenSortClick}
-                        />
+                        <span
+                          className="link"
+                          onClick={this.handleOpenSortClick}
+                        >
+                          <span>Sort By: <span className="u-capitalize">{FILTER_OPTIONS[sort]}</span></span>
+                        </span>
                       </div>
                     )
                     : <CollectionSort />
@@ -205,6 +214,11 @@ FlashSaleListApp.propTypes = {
     color: PropTypes.string,
     permalink: PropTypes.string,
   })).isRequired,
+  sort: PropTypes.string,
+};
+
+FlashSaleListApp.defaultProps = {
+  sort: 'Newest',
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(FlashSaleListApp));

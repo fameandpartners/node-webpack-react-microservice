@@ -8,6 +8,7 @@ import Raven from 'raven-js';
 
 // Components
 import FlashAppMain from './components/flash_sale/FlashAppMain';
+import SizeModals from './components/pdp/SizeModals';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -48,6 +49,7 @@ class FlashSaleApp extends Component {
       <div className="__react_root__">
         <div className={`FlashSaleApp Root__wrapper ${lockBody ? 'FlashSaleApp--scroll-lock' : ''}`}>
           <FlashAppMain />
+          <SizeModals />
         </div>
       </div>
     );
