@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import classnames from 'classnames';
 // Utilities
 import {
   isDarkLuminance,
