@@ -5,7 +5,7 @@ import Resize from '../../../decorators/Resize';
 import PDPBreakpoints from '../../../libs/PDPBreakpoints';
 
 // Assets
-import fallWeddings from '../../../../img/fall-weddings.jpg';
+import sampleSale from '../../../../img/SampleSale-ShopAllTile.jpg';
 import '../../../../css/components/ShopAllNavigationDesktop.scss';
 
 // Constants
@@ -54,15 +54,15 @@ class ShopAllNavigationDesktop extends PureComponent {
             />
             { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
             <div className="ShopAllNavigationDesktop__ad">
-              <a href="/dresses/fall-weddings">
+              <a href="/sample-sale">
                 <img
                   alt="Fall Weddings Ad"
                   className="ShopAllNavigationDesktop__image u-width--full"
-                  src={fallWeddings}
+                  src={sampleSale}
                 />
               </a>
               <a href="/dresses/fall-weddings" className="link">
-                <span>Shop Fall Weddings</span>
+                <span>Shop up to 40% OFF SAMPLE SALE</span>
               </a>
             </div>
             }
