@@ -125,7 +125,7 @@ class FlashProductDescription extends Component {
                   Customizations (Not featured):
                 </h5>
                 <ul className="FlashProductDescription__addons-list">
-                  {customizations.map((c, i) => <li key={`cust-${i}`}>{c}</li>)}
+                  {customizations.map((c, i) => <li key={`cust-${i + 1}`}>{c}</li>)}
                 </ul>
               </div>
             ) : null
@@ -158,4 +158,6 @@ FlashProductDescription.propTypes = {
   activateModal: PropTypes.func.isRequired,
 };
 
+/* eslint-disable max-len */
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(FlashProductDescription));
+/* eslint-enable max-len */
