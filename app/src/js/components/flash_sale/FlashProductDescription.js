@@ -22,8 +22,14 @@ import { formatSizePresentationUS } from '../../utilities/helpers';
 // CSS
 import '../../../css/components/FlashProductDescription.scss';
 
-function stateToProps() {
+const HEIGHT_VALS = {
+  petite: '4ft 10in - 5ft 4in',
+  standard: '5ft 5in - 5ft 7in',
+  tall: '5ft 8in - 6ft 4in',
+};
 
+function stateToProps() {
+  return {};
 }
 
 function dispatchToProps(dispatch) {
@@ -77,6 +83,14 @@ class FlashProductDescription extends Component {
     }
   }
 
+  transformHeight(height = '') {
+    const lowerHeight = height.toLowerCase();
+    if (HEIGHT_VALS[lowerHeight]) {
+      return `Height: ${HEIGHT_VALS[lowerHeight]}`;
+    }
+    return `Height: ${height}`;
+  }
+
   componentWillMount() {
     this.setCustomizations();
   }
@@ -117,7 +131,12 @@ class FlashProductDescription extends Component {
           {lineItem.description}
         </p>
 
-        <div className="FlashProductDescription__customization-details u-mt-normal">
+        <div className="FlashProductDescription__callout font-family-primary">
+          Please note the customizations and color on this item are not reflected
+          in the product image
+        </div>
+        <div className="FlashProductDescription__customization-details">
+          <br />
           { customizations.length ?
             (
               <div className="FlashProductDescription__addons-details">
@@ -138,7 +157,7 @@ class FlashProductDescription extends Component {
               Size Guide
             </span>
           </p>
-          <p>Height: {lineItem.height}</p>
+          <p>{this.transformHeight(lineItem.height)}</p>
           <p>Color: {presentation}</p>
           <div
             style={this.generateFlashColorSwatch()}
