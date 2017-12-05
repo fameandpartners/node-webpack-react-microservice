@@ -184,7 +184,9 @@ class FlashSaleListApp extends Component {
                           className="link"
                           onClick={this.handleOpenSortClick}
                         >
+                        {/* eslint-disable max-len */}
                           <span>Sort By: <span className="u-capitalize">{FILTER_OPTIONS[sort]}</span></span>
+                        {/* eslint-enable max-len */}
                         </span>
                       </div>
                     )
