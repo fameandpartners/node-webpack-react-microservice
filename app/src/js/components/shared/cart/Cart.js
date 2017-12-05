@@ -168,9 +168,9 @@ class Cart extends Component {
     } else if (height) {
       const lowerHeight = height.toLowerCase();
       if (HEIGHT_VALS[lowerHeight]) {
-        sizingInformation = `Height: ${HEIGHT_VALS[lowerHeight]}`;
+        sizingInformation = `Height: ${HEIGHT_VALS[lowerHeight]} / ${sizePresentation}`;
       } else {
-        sizingInformation = `Height: ${height}`;
+        sizingInformation = `Height: ${height} / ${sizePresentation}`;
       }
     }
 
