@@ -39,8 +39,8 @@ class FlashSalePagination extends Component {
 
     return (
       <div className="FlashSalePagination__wrapper">
-        <ul className="grid-12">
-          <li className="col-4">
+        <ul className="grid-12 float--right">
+          <li className="col-1">
             { page > 1 ?
               (
                 <span
@@ -56,8 +56,8 @@ class FlashSalePagination extends Component {
               ) : null
             }
           </li>
-          <li className="col-4">{page}</li>
-          <li className="col-4">
+          <li className="col-1">{page}</li>
+          <li className="col-1">
             { totalItems >= 100 ?
               (
                 <span
