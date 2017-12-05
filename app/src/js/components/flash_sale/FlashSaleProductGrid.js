@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 
 // Utilities
+import win from '../../polyfills/windowPolyfill';
 import { formatSizePresentationUS } from '../../utilities/helpers';
 
 // CSS
@@ -21,6 +22,12 @@ class FlashSaleProductGrid extends Component {
     return `$${newPrice}`;
   }
 
+  goToImageHref(href) {
+    return () => {
+      win.location = href;
+    };
+  }
+
   render() {
     const {
       products,
@@ -33,20 +40,18 @@ class FlashSaleProductGrid extends Component {
             key={dress.id}
             className="FlashSaleProduct__container col-4_sm-6"
           >
-            <div className="FlashSaleProduct__image-wrapper">
-              <a className="u-display--inline-block" href={`/sample-sale/${dress.id}`}>
-                <img
-                  className="FlashSaleProduct__image FlashSaleProduct__image--original"
-                  alt={dress.name}
-                  src={dress.images[dress.images.length - 1]}
-                />
-                <img
-                  className="FlashSaleProduct__image FlashSaleProduct__image--hover"
-                  alt={dress.name}
-                  src={dress.images[dress.images.length - 2]}
-                />
-              </a>
-            </div>
+            <a onClick={this.goToImageHref(`/sample-sale/${dress.id}`)} className="FlashSaleProduct__image-wrapper">
+              <img
+                className="FlashSaleProduct__image--original"
+                alt={dress.name}
+                src={dress.images[dress.images.length - 1]}
+              />
+              <img
+                className="FlashSaleProduct__image--hover"
+                alt={dress.name}
+                src={dress.images[dress.images.length - 2]}
+              />
+            </a>
             <div className="FlashSaleProduct__info grid-12">
               <div className="col-8">
                 <a href={`/sample-sale/${dress.id}`}>
