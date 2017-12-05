@@ -9,6 +9,11 @@ import { formatSizePresentationUS } from '../../utilities/helpers';
 // CSS
 import '../../../css/components/FlashSaleProductGrid.scss';
 
+const HEIGHT_VALS = {
+  petite: '4\'10"-5\'4"',
+  standard: '5\'5"-5\'7"',
+  tall: '5\'8"-6\'4"',
+};
 
 class FlashSaleProductGrid extends Component {
   constructor(props) {
@@ -62,8 +67,9 @@ class FlashSaleProductGrid extends Component {
               <div className="col-4 FlashSaleProduct__original-price">
                 {this.formatPrice(dress.original_price)}
               </div>
-              <div className="col-8">
-                {dress.color}, {formatSizePresentationUS(dress.size)}, {dress.height}
+              <div className="col-8 FlashSaleProductLine">
+                {dress.color}, {formatSizePresentationUS(dress.size)}, {dress.height}&nbsp;
+                {HEIGHT_VALS[dress.height.toLowerCase()]}
               </div>
               <div className="col-4 FlashSaleProduct__current-price">
                 {this.formatPrice(dress.current_price)}
