@@ -16,6 +16,10 @@ import PDPBreakpoints from './libs/PDPBreakpoints';
 import * as CollectionFilterSortActions from './actions/CollectionFilterSortActions';
 import * as ModalActions from './actions/ModalActions';
 
+// Assets
+import FlashSaleBannerImageDesktop from '../img/flash_sale/SampleSale-Banner-Desktop.jpg';
+import FlashSaleBannerImageMobile from '../img/flash_sale/SampleSale-Banner-Mobile.jpg';
+
 // Global Styles
 import '../css/global/variables.scss';
 import '../css/reset.scss';
@@ -40,11 +44,15 @@ import FlashSaleProductGrid from './components/flash_sale/FlashSaleProductGrid';
 import FlashSalePagination from './components/flash_sale/FlashSalePagination';
 import Button from './components/generic/Button';
 
+// CSS
+import '../css/components/FlashSaleListApp.scss';
+
 const FILTER_OPTIONS = {
   asc: 'Lowest to Highest',
   desc: 'Highest to Lowest',
   newest: 'Lowest To Highest',
 };
+
 
 // Configure Error Tracking
 Raven
@@ -136,6 +144,18 @@ class FlashSaleListApp extends Component {
     return (
       <div className="__react_root__">
         <div className={`FlashSaleListApp Root__wrapper ${lockBody ? 'FlashSaleApp--scroll-lock' : ''}`}>
+
+          <div className="FlashSaleBanner__wrapper">
+            <img
+              className="FlashSaleBanner__image FlashSaleBanner__image--desktop"
+              src={FlashSaleBannerImageDesktop} alt="40% off Sample Sale"
+            />
+            <img
+              className="FlashSaleBanner__image FlashSaleBanner__image--mobile"
+              src={FlashSaleBannerImageMobile} alt="40% off Sample Sale"
+            />
+          </div>
+
           <div className="grid-12 layout-container">
 
             <div className="col-3_sm-12_lg-3">

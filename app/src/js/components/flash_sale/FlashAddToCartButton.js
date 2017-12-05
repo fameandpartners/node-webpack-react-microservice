@@ -217,7 +217,7 @@ FlashSaleAddToCartButton.propTypes = {
   // Passed Props
   showTotal: PropTypes.bool,
   // Redux Props
-  lineItem: PropTypes.number,
+  lineItem: PropTypes.object,
   lineItemId: PropTypes.number,
   cartItems: PropTypes.array,
   addToCartLoading: PropTypes.bool,

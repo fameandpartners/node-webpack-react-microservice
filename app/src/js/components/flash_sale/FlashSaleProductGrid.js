@@ -63,6 +63,15 @@ class FlashSaleProductGrid extends Component {
             </div>
           </div>
         ))}
+        <div className="FlashSaleProduct__footerMessageWrapper col-12 u-mt-normal">
+          <span className="FlashSaleProduct__footerMessage">
+            Didn't find what you are looking for?
+            <br />
+            <a href="/dresses/best-sellers">
+              Shop Best Sellers
+            </a>
+          </span>
+        </div>
       </div>
     );
   }
