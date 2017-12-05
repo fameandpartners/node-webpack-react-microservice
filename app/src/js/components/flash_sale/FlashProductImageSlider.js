@@ -96,11 +96,12 @@ class FlashProductImageSlider extends Component {
           winWidth={winWidth}
           winHeight={winHeight}
         >
-          { sliderImages.map(img => (
-            <Slide key={img.id}>
+          { sliderImages.map((img, i) => (
+            /* eslint-disable react/no-array-index-key */
+            <Slide key={i}>
               <img
                 alt="Something"
-                src={img.bigImg}
+                src={img}
                 className="u-height--full"
               />
             </Slide>

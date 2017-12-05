@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import autobind from 'react-autobind';
 import { assign } from 'lodash';
+import classnames from 'classnames';
 
 // Actions
 import * as CollectionFilterSortActions from '../../actions/CollectionFilterSortActions';
+import * as ModalActions from '../../actions/ModalActions';
 
 // Libraries
 import win from '../../polyfills/windowPolyfill';
@@ -57,7 +59,14 @@ function stateToProps({ $$collectionFilterSortState }, props) {
   return {};
 }
 function dispatchToProps(dispatch) {
-  return bindActionCreators(CollectionFilterSortActions, dispatch);
+  const { clearAllCollectionFilters, setTemporaryFilters, updateExternalLegacyFilters } = bindActionCreators(CollectionFilterSortActions, dispatch);
+  const { activateModal } = bindActionCreators(ModalActions, dispatch);
+  return {
+    activateModal,
+    clearAllCollectionFilters,
+    setTemporaryFilters,
+    updateExternalLegacyFilters,
+  };
 }
 
 
@@ -74,15 +83,6 @@ class CollectionFilterSort extends React.Component {
      * @return {Array} new array of values
      */
   addOrRemoveFrom(selectedOptions, changeOption) {
-    // REMOVE
-    console.group('selectedOptions');
-    console.log(selectedOptions);
-    console.groupEnd();
-
-    console.group('changeOption');
-    console.log(changeOption);
-    console.groupEnd();
-
     let newSelections = [];
     const selectedOptionIndex = selectedOptions.indexOf(changeOption);
     if (selectedOptionIndex > -1) {
@@ -101,12 +101,14 @@ class CollectionFilterSort extends React.Component {
      * Ugly. I know. But this is how we sprinkle in react components with prexisting framework
      */
   handleFilterCancel() {
+    const { activateModal, setTemporaryFilters } = this.props;
     return () => {
       if (hasLegacyInstance()) {
-        this.props.setTemporaryFilters({});
+        setTemporaryFilters({});
         win.ProductCollectionFilter__Instance.toggleFilters();
       } else {
-        this.props.setTemporaryFilters(FILTER_DEFAULTS);
+        activateModal({ shouldAppear: false });
+        setTemporaryFilters(FILTER_DEFAULTS);
       }
     };
   }
@@ -165,11 +167,6 @@ class CollectionFilterSort extends React.Component {
         temporaryFilters,
       } = this.props;
 
-      // REMOVE
-      console.group('temporaryFilters');
-      console.log(temporaryFilters);
-      console.groupEnd();
-
       /**
        *
        *  attn: @elgrecode
@@ -226,6 +223,7 @@ class CollectionFilterSort extends React.Component {
   }
 
   buildColorOption(color) {
+    const isWhite = color.name === 'white-ivory';
     const { selectedColors } = this.props.temporaryFilters;
     const { name, id } = color;
     const inverse = name.toLowerCase().indexOf('white') > -1 ? 'inverse' : '';
@@ -239,7 +237,12 @@ class CollectionFilterSort extends React.Component {
           onChange={this.handleColorSelection.bind(this, color)}
         />
         <span className="ExpandablePanel__optionColorFallback" />
-        <span className={`ExpandablePanel__optionCheck--rounded ExpandablePanel__optionCheck--tick ${inverse} color-${name}`} />
+        <span
+          className={classnames(
+            `ExpandablePanel__optionCheck--rounded ExpandablePanel__optionCheck--tick ${inverse} color-${name}`,
+            { 'ExpandablePanel__optionCheck--light': isWhite },
+          )}
+        />
         <span className="ExpandablePanel__optionName">{name}</span>
       </label>
     );
@@ -303,7 +306,7 @@ class CollectionFilterSort extends React.Component {
         <div className="FilterSort">
           <div className="ExpandablePanel--wrapper">
             <div className="ExpandablePanel__heading">
-              <span className="ExpandablePanel__mainTitle">{isDrawerLayout ? 'Filter' : 'Filter by'}</span>
+              <span className="ExpandablePanel__mainTitle font-family-secondary">{isDrawerLayout ? 'Filter' : 'Filter by'}</span>
             </div>
 
             <ExpandablePanelItem
@@ -388,15 +391,15 @@ class CollectionFilterSort extends React.Component {
 
           {!isDrawerLayout ?
             <div className="ExpandablePanel__action">
-              <div className="ExpandablePanel__filterTriggers--cancel-apply grid-12-spaceBetween u-center">
-                <div className="col-6_sm-12">
+              <div className="ExpandablePanel__filterTriggers--cancel-apply grid-12-noGutter u-center">
+                <div className="col-6">
                   <Button
                     secondary
                     text="Cancel"
                     handleClick={this.handleFilterCancel()}
                   />
                 </div>
-                <div className="col-6_sm-12">
+                <div className="col-6">
                   <Button
                     text="Apply"
                     handleClick={this.handleFilterApply()}
@@ -428,6 +431,7 @@ CollectionFilterSort.propTypes = {
   }).isRequired,
 
     // Redux Actions
+  activateModal: PropTypes.func.isRequired,
   clearAllCollectionFilters: PropTypes.func.isRequired,
   setTemporaryFilters: PropTypes.func.isRequired,
   updateExternalLegacyFilters: PropTypes.func.isRequired,

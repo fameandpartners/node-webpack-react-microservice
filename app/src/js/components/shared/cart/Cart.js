@@ -151,10 +151,12 @@ class Cart extends Component {
       // INCH
       const ft = Math.floor(heightValue / 12);
       const inch = heightValue % 12;
-      sizingInformation = `${ft}ft ${inch}in / ${sizePresentation}`;
-    } else {
+      sizingInformation = `Size: ${ft}ft ${inch}in / ${sizePresentation}`;
+    } else if (heightUnit === UNITS.CM) {
       // CM
-      sizingInformation = `${heightValue} ${heightUnit.toLowerCase()} / ${sizePresentation}`;
+      sizingInformation = `Size: ${heightValue} ${heightUnit.toLowerCase()} / ${sizePresentation}`;
+    } else {
+      return null;
     }
 
     return sizingInformation;
@@ -196,7 +198,7 @@ class Cart extends Component {
               {this.generateAddonSummary(lineItem.addons)}
             </span>
             <span className="Cart__line-description">
-              Size: {this.generateSizeSummary(lineItem)}
+              {this.generateSizeSummary(lineItem)}
             </span>
           </div>
         </div>

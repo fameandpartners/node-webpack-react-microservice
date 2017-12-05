@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 // Services
 import FlashSaleService from '../../services/FlashSaleService';
+import { formatCents } from '../../utilities/accounting';
 
 // Utilities
 // import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
@@ -40,17 +41,22 @@ import '../../../css/components/FlashSaleAddToCartButton.scss';
 function stateToProps(state) {
   const lineItem = state.$$flashSaleState.get('$$lineItem').toJS();
   const cartItems = state.$$cartState.toJS().lineItems;
+  const errorCode = state.$$appState.get('errorCode');
 
   return {
     lineItem,
     lineItemId: lineItem ? lineItem.id : null,
     cartItems,
+    errorCode,
   };
 }
 
 function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  const { setAppLoadingState } = bindActionCreators(AppActions, dispatch);
+  const {
+    setAppLoadingState,
+    setErrorCode,
+  } = bindActionCreators(AppActions, dispatch);
 
   const {
     activateCartDrawer,
@@ -66,6 +72,7 @@ function dispatchToProps(dispatch) {
     activateCartDrawer,
     activateModal,
     addItemToCart,
+    setErrorCode,
     setCartContents,
     setAppLoadingState,
     setSizeProfileError,
@@ -82,7 +89,7 @@ class FlashSaleAddToCartButton extends Component {
 
   subTotal() {
     const { lineItem } = this.props;
-    return lineItem.current_price;
+    return formatCents(parseFloat(lineItem.current_price * 100), 0);
   }
 
   handleAddToBagCallback(req) {
@@ -90,11 +97,13 @@ class FlashSaleAddToCartButton extends Component {
       activateCartDrawer,
       setAppLoadingState,
       setCartContents,
+      setErrorCode,
     } = this.props;
 
     req.end((err, res) => {
       setAppLoadingState({ loadingId: null });
       if (err) {
+        setErrorCode({ errorCode: res.statusCode });
         // eslint-disable-next-line
         return console.warn('error adding something to the cart', err);
       }
@@ -152,6 +161,10 @@ class FlashSaleAddToCartButton extends Component {
   }
 
   generateText() {
+    if (this.props.errorCode === 422) {
+      return 'Sorry, this product is currently unavailable';
+    }
+
     if (this.props.showTotal) {
       return `${this.subTotal()} - Add to Bag`;
     }
@@ -173,12 +186,15 @@ class FlashSaleAddToCartButton extends Component {
   }
 
   render() {
-    const { addToCartLoading } = this.props;
+    const {
+      addToCartLoading,
+      errorCode,
+    } = this.props;
 
     if (this.itemInCart()) {
       return (
         <h2 className="ItemInCart__message">
-          This dress is already in your cart.
+          This item is already in your cart.
         </h2>
       );
     }
@@ -190,6 +206,7 @@ class FlashSaleAddToCartButton extends Component {
         className="AddToCartButton"
         text={this.generateText()}
         handleClick={this.handleAddToBag}
+        disabled={errorCode}
       />
     );
   }
@@ -200,14 +217,16 @@ FlashSaleAddToCartButton.propTypes = {
   // Passed Props
   showTotal: PropTypes.bool,
   // Redux Props
-  lineItem: PropTypes.number,
+  lineItem: PropTypes.object,
   lineItemId: PropTypes.number,
   cartItems: PropTypes.array,
   addToCartLoading: PropTypes.bool,
+  errorCode: PropTypes.number,
   // Redux Funcs
   activateCartDrawer: PropTypes.func.isRequired,
   setAppLoadingState: PropTypes.func.isRequired,
   setCartContents: PropTypes.func.isRequired,
+  setErrorCode: PropTypes.func.isRequired,
 };
 
 FlashSaleAddToCartButton.defaultProps = {
@@ -216,6 +235,7 @@ FlashSaleAddToCartButton.defaultProps = {
   lineItem: null,
   lineItemId: null,
   cartItems: [],
+  errorCode: null,
 };
 
 // eslint-disable-next-line

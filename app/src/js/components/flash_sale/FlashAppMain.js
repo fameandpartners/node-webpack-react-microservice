@@ -79,8 +79,8 @@ class FlashAppMain extends Component {
           }
         </div>
 
-
-        <div className="u-position--fixed u-width--full u-bottom">
+        { /* eslint-disable max-len */ }
+        <div className="FlashAddToCartButtonLedgeMobile__wrapper u-position--fixed u-width--full u-bottom">
           <FlashAddToCartButtonLedgeMobile />
         </div>
       </div>

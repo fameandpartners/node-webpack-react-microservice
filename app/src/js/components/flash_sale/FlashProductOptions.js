@@ -62,14 +62,21 @@ class FlashProductOptions extends Component {
   }
 
   render() {
-    const { lineItem } = this.props;
+    const {
+      lineItem,
+    } = this.props;
+
     return (
       <div className="FlashProductOptions grid-12-noGutter">
         <div className="FlashProductOptions__primary-image-container brick col-6">
           <div
             className="FlashProductOptions__primary-image-wrapper u-cursor--pointer"
             style={{ backgroundImage: `url(${lineItem.images[0]})` }}
-          />
+          >
+            <span className="FlashProductOptions__primaryImageOverlayText">
+              Delivered in 5 - 7 Business Days.
+            </span>
+          </div>
         </div>
         <div className="FlashProductOptions__col grid-middle col-6 u-center">
           <div className="FlashProductOptions__ctas grid-1 u-mb-small">
@@ -78,12 +85,12 @@ class FlashProductOptions extends Component {
                 lineItem={lineItem}
               />
             </div>
-            <div className="col-12 u-mt-huge">
+            <div className="FlashProductOptions__actionsWrapper col-12 u-mt-huge">
               <FlashAddToCartButton
-                showTotal={false}
+                showTotal
                 shouldActivateCartDrawer
               />
-              <p className="u-mt-normal">
+              <p className="u-mt-small">
                 All sample sale items are final sale. Offer valid for shipments to US only.
               </p>
             </div>
@@ -124,7 +131,6 @@ FlashProductOptions.defaultProps = {
   deliveryCopy: '',
   lineItem: null,
   expressMakingSelected: false,
-
 };
 
 export default connect(stateToProps, dispatchToProps)(FlashProductOptions);

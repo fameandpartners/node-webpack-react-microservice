@@ -8,6 +8,7 @@
 }
 
 .FlashProductOptions__primary-image-wrapper {
+  position: relative;
   height: 600px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -79,4 +80,10 @@
 
 .FlashProductOptions__color-swatch--extreme-light {
   border: 1px solid $c-neutral-4;
+}
+
+.FlashProductOptions__primaryImageOverlayText {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }

@@ -17,7 +17,7 @@ $fixed-line-height: 1.2;
 
 $heading-font-family: sans-serif;
 $heading-font-weight: 500;
-// $secondary-font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
+$secondary-font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
 
 
 /*
@@ -29,6 +29,10 @@ body {
   font-size: $base-font-size;
   font-family: $base-font-family;
   font-weight: $base-font-weight;
+}
+
+.font-family-secondary {
+  font-family: $secondary-font-family;
 }
 
 

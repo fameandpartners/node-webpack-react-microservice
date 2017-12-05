@@ -1,7 +1,31 @@
-.FlashSaleListApp {
-  margin: 0;
+// .FlashSaleListApp {
+//   margin: 0;
+// }
+
+// .layout-container {
+//   padding: 0 4%;
+// }
+
+.FlashSaleBanner__wrapper {
+  width: 100%;
 }
 
-.layout-container {
-  padding: 0 4%;
+.FlashSaleBanner__image {
+  width: inherit;
+}
+
+.FlashSaleBanner__image--mobile {
+  display: block;
+
+  @include sm {
+    display: none;
+  }
+}
+
+.FlashSaleBanner__image--desktop {
+  display: none;
+
+  @include sm {
+    display: block;
+  }
 }

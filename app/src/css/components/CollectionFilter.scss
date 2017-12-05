@@ -139,13 +139,23 @@
 //Heading
 .ExpandablePanel__heading {
   margin-bottom: 5px;
+  text-align: left;
 }
 
 // Panel title
 .ExpandablePanel__mainTitle {
-  font-size: 1.9em;
-  font-weight: 300;
+  font-size: 1.45em;
   display: inline-block;
+  font-weight: 300;
+  padding: 0 30px;
+
+  @include xs {
+    padding: 0 30px;
+  }
+
+  @include sm {
+    padding: 0;
+  }
 }
 
 // Trigger to reset all filters
@@ -269,18 +279,6 @@
   text-transform: uppercase;
   display: inline-block;
   padding-left: 10px;
-  cursor: pointer;
-
-  // Display the arrow icon
-  &:before {
-    font-family: 'icomoon_fame_2015';
-    font-size: 1rem;
-    content: "\e624";
-    padding-right: 8px;
-    display: inline-block;
-    position: relative;
-  }
-
 }
 
 // List of selected options
@@ -349,6 +347,7 @@
   font-size: 0.95em;
   text-transform: capitalize;
   cursor: pointer;
+  line-height: 1.7;
   // &.two-col {
   //   width: 50%;
   //   float: left;
@@ -366,6 +365,10 @@
     display: inline-block;
     position: relative;
     top: 2px;
+  }
+
+  &--light {
+    border: 1px solid rgb(119, 119, 119);
   }
 
 }

@@ -15,6 +15,8 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 import ButtonLedge from '../generic/ButtonLedge';
 import FlashAddToCartButton from './FlashAddToCartButton';
 
+// CSS
+import '../../../css/components/FlashAddToCartButtonLedgeMobile.scss';
 
 function stateToProps(state) {
   return {
