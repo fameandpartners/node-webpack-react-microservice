@@ -1,5 +1,6 @@
 .FlashProductOptions {
   border-bottom: 1px solid $c-light-gray;
+  padding-bottom: 16px;
 }
 
 .FlashProductOptions__container {
@@ -9,18 +10,18 @@
 
 .FlashProductOptions__primary-image-wrapper {
   position: relative;
-  height: 600px;
+  height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 
-  @include md {
-    height: 650px;
-  }
+  // @include md {
+  //   height: 690px;
+  // }
 
-  @include lg {
-    height: 730px;
-  }
+  // @include lg {
+  //   height: 730px;
+  // }
 }
 
 .FlashProductOptions .FlashProductOptions__primary-image-container {
