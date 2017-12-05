@@ -67,6 +67,7 @@ function stateToProps({ $$collectionFilterSortState, $$flashSaleState }) {
     lockBody: false,
     pageDresses,
     sort: $$collectionFilterSortState.get('temporaryFilters').get('sort'),
+    page: $$collectionFilterSortState.get('temporaryFilters').get('page'),
   };
 }
 
@@ -108,7 +109,7 @@ class FlashSaleListApp extends Component {
     const parsedQueryObj = qs.parse(queryParams.slice(1));
 
     this.setState({
-      productsCurrentPage: Number(parsedQueryObj.page),
+      productsCurrentPage: Number(parsedQueryObj.page) || this.props.page,
     });
   }
 
@@ -239,11 +240,13 @@ FlashSaleListApp.propTypes = {
     color: PropTypes.string,
     permalink: PropTypes.string,
   })).isRequired,
+  page: PropTypes.number,
   sort: PropTypes.string,
 };
 
 FlashSaleListApp.defaultProps = {
   sort: 'Newest',
+  page: 1,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(FlashSaleListApp));
