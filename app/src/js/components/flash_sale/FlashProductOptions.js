@@ -67,7 +67,7 @@ class FlashProductOptions extends Component {
     } = this.props;
 
     return (
-      <div className="FlashProductOptions grid-12-noGutter">
+      <div className="FlashProductOptions grid-12">
         <div className="FlashProductOptions__primary-image-container brick col-6">
           <div
             className="FlashProductOptions__primary-image-wrapper u-cursor--pointer"
@@ -85,7 +85,7 @@ class FlashProductOptions extends Component {
                 lineItem={lineItem}
               />
             </div>
-            <div className="FlashProductOptions__actionsWrapper col-12 u-mt-huge">
+            <div className="FlashProductOptions__actionsWrapper col-12">
               <FlashAddToCartButton
                 showTotal
                 shouldActivateCartDrawer
