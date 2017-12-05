@@ -35,8 +35,16 @@
 }
 
 .FlashProductOptions__ctas {
-  max-width: 530px;
+  position: relative;
   margin: 0 30px;
+  max-width: 575px;
+  height: 690px;
+}
+
+.FlashProductOptions__actionsWrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .FlashProductDescription__color-swatch {
