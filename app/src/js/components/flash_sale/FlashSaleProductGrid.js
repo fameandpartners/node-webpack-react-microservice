@@ -33,18 +33,20 @@ class FlashSaleProductGrid extends Component {
             key={dress.id}
             className="FlashSaleProduct__container col-4_sm-6"
           >
-            <a href={`/sample-sale/${dress.id}`} className="FlashSaleProduct__image-wrapper">
-              <img
-                className="FlashSaleProduct__image--original"
-                alt={dress.name}
-                src={dress.images[dress.images.length - 1]}
-              />
-              <img
-                className="FlashSaleProduct__image--hover"
-                alt={dress.name}
-                src={dress.images[dress.images.length - 2]}
-              />
-            </a>
+            <div className="FlashSaleProduct__image-wrapper">
+              <a className="u-display--inline-block" href={`/sample-sale/${dress.id}`}>
+                <img
+                  className="FlashSaleProduct__image FlashSaleProduct__image--original"
+                  alt={dress.name}
+                  src={dress.images[dress.images.length - 1]}
+                />
+                <img
+                  className="FlashSaleProduct__image FlashSaleProduct__image--hover"
+                  alt={dress.name}
+                  src={dress.images[dress.images.length - 2]}
+                />
+              </a>
+            </div>
             <div className="FlashSaleProduct__info grid-12">
               <div className="col-8">
                 <a href={`/sample-sale/${dress.id}`}>
@@ -63,14 +65,16 @@ class FlashSaleProductGrid extends Component {
             </div>
           </div>
         ))}
-        <div className="FlashSaleProduct__footerMessageWrapper col-12 u-mt-normal">
-          <span className="FlashSaleProduct__footerMessage">
-            Didn't find what you are looking for?
-            <br />
-            <a href="/dresses/best-sellers">
-              Shop Best Sellers
-            </a>
-          </span>
+        <div className="col-12">
+          <div className="FlashSaleProduct__footerMessageWrapper u-mt-normal">
+            <span className="FlashSaleProduct__footerMessage">
+              Didn't find what you are looking for?
+              <br />
+              <a href="/dresses/best-sellers">
+                Shop Best Sellers
+              </a>
+            </span>
+          </div>
         </div>
       </div>
     );

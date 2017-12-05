@@ -157,7 +157,7 @@ class FlashSaleListApp extends Component {
             />
           </div>
 
-          <div className="grid-12 layout-container">
+          <div className="grid-12-noGutter layout-container">
 
             <div className="col-3_sm-12_lg-3">
               { breakpoint === 'mobile' || breakpoint === 'tablet'
@@ -175,7 +175,7 @@ class FlashSaleListApp extends Component {
               }
             </div>
 
-            <div className="col-9_sm-12_lg-9">
+            <div className="col-9_sm-12_lg-9 u-mt-normal layout-container">
               <div className="grid-12">
                 <div className="col-12">
                   { breakpoint === 'mobile' || breakpoint === 'tablet'
