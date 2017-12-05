@@ -15,23 +15,23 @@
   display: block;
 }
 
+.FlashSaleProduct__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .FlashSaleProduct__image-wrapper img {
   width: 100%;
 }
 
 .FlashSaleProduct__image--hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: none;
+  z-index: -1;
 }
 
 .FlashSaleProduct__image-wrapper:hover {
   .FlashSaleProduct__image--original {
-    z-index: 0;
-  }
-  .FlashSaleProduct__image--hover {
-    display: block;
+    z-index: -2;
   }
 }
 
