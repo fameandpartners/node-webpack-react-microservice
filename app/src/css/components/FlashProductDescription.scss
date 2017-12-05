@@ -12,13 +12,18 @@
   font-size: 28px;
 }
 
-.FlashProductDescription__title-section {
+.FlashProductDescription__callout {
+  border-top: 1px solid $c-border-gray;
+  padding-top: 20px;
+  margin-top: 20px;
   padding-bottom: 20px;
+}
+
+.FlashProductDescription__title-section {
   border-bottom: 1px solid $c-border-gray;
 }
 
 .FlashProductDescription__customization-details {
-  padding-top: 20px;
   border-top: 1px solid $c-border-gray;
 }
 

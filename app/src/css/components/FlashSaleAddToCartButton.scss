@@ -1,9 +1,9 @@
 .ItemInCart__message {
   font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
   font-size: 1.2em;
-  background: #fff;
+  background: rgb(255, 255, 255);
   padding: 16px;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid rgb(204, 204, 204);
 
   @include sm {
     padding: 0;

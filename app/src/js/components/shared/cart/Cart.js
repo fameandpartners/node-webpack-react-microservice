@@ -31,6 +31,12 @@ import { removeFromCart } from '../../../utilities/cart-helper';
 // CSS
 import '../../../../css/components/Cart.scss';
 
+const HEIGHT_VALS = {
+  petite: '4ft 10in - 5ft 4in',
+  standard: '5ft 5in - 5ft 7in',
+  tall: '5ft 8in - 6ft 4in',
+};
+
 function stateToProps({ $$appState }) {
   const siteVersion = win.ApplicationStateData ? win.ApplicationStateData.currentSiteVersion : null;
   return {
@@ -104,7 +110,9 @@ class Cart extends Component {
     );
   }
 
-  generateColorSelectionNode(color) {
+  generateColorSelectionNode(lineItem) {
+    const { color, isFlashSaleItem } = lineItem;
+
     const {
       centsTotal,
       presentation,
@@ -119,7 +127,7 @@ class Cart extends Component {
     return (
       <span>
         <span>{presentation}</span>&nbsp;
-        { centsTotal
+        { (centsTotal && !isFlashSaleItem)
           ? <span>+{formatCents(centsTotal, 0)}</span>
           : null
         }
@@ -137,6 +145,7 @@ class Cart extends Component {
   generateSizeSummary(lineItem) {
     const { siteVersion } = this.props;
     const {
+      height,
       heightUnit,
       heightValue,
       sizePresentationAU,
@@ -147,16 +156,22 @@ class Cart extends Component {
       : sizePresentationAU;
     let sizingInformation = '';
 
+
     if (heightUnit === UNITS.INCH) {
       // INCH
       const ft = Math.floor(heightValue / 12);
       const inch = heightValue % 12;
-      sizingInformation = `Size: ${ft}ft ${inch}in / ${sizePresentation}`;
+      sizingInformation = `Height: ${ft}ft ${inch}in / ${sizePresentation}`;
     } else if (heightUnit === UNITS.CM) {
       // CM
-      sizingInformation = `Size: ${heightValue} ${heightUnit.toLowerCase()} / ${sizePresentation}`;
-    } else {
-      return null;
+      sizingInformation = `Height: ${heightValue} ${heightUnit.toLowerCase()} / ${sizePresentation}`;
+    } else if (height) {
+      const lowerHeight = height.toLowerCase();
+      if (HEIGHT_VALS[lowerHeight]) {
+        sizingInformation = `Height: ${HEIGHT_VALS[lowerHeight]}`;
+      } else {
+        sizingInformation = `Height: ${height}`;
+      }
     }
 
     return sizingInformation;
@@ -192,7 +207,7 @@ class Cart extends Component {
               <span>{productTitle}</span>&nbsp;<span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>
             <span className="Cart__line-description">
-              {this.generateColorSelectionNode(lineItem.color)}
+              {this.generateColorSelectionNode(lineItem)}
             </span>
             <span className="Cart__line-description">
               {this.generateAddonSummary(lineItem.addons)}
