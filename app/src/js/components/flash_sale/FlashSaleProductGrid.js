@@ -42,11 +42,13 @@ class FlashSaleProductGrid extends Component {
           >
             <a onClick={this.goToImageHref(`/sample-sale/${dress.id}`)} className="FlashSaleProduct__image-wrapper">
               <img
+                onClick={this.goToImageHref(`/sample-sale/${dress.id}`)}
                 className="FlashSaleProduct__image--original"
                 alt={dress.name}
                 src={dress.images[dress.images.length - 1]}
               />
               <img
+                onClick={this.goToImageHref(`/sample-sale/${dress.id}`)}
                 className="FlashSaleProduct__image--hover"
                 alt={dress.name}
                 src={dress.images[dress.images.length - 2]}
