@@ -213,22 +213,22 @@ class FlashSaleListApp extends Component {
                   />
                 ) : null
               }
-              { pageDresses.length < 96 ?
-                <div className="col-12">
-                  <div className="FlashSaleProduct__footerMessageWrapper u-mt-normal">
-                    <span className="FlashSaleProduct__footerMessage">
-                      Didn't find what you are looking for?
-                      <br />
-                      <a href="/dresses/best-sellers">
-                        Shop Best Sellers
-                      </a>
-                    </span>
-                  </div>
-                </div>
-                :
-                null
-              }
             </div>
+            { pageDresses.length < 96 ?
+              <div className="col-12">
+                <div className="FlashSaleProduct__footerMessageWrapper u-mt-normal">
+                  <span className="FlashSaleProduct__footerMessage">
+                    Didn't find what you are looking for?
+                    <br />
+                    <a href="/dresses/best-sellers">
+                      Shop Best Sellers
+                    </a>
+                  </span>
+                </div>
+              </div>
+              :
+              null
+            }
           </div>
         </div>
         <FilterSortSelectionModal />
