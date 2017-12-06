@@ -201,21 +201,33 @@ class FlashSaleListApp extends Component {
                   <FlashSaleProductGrid products={pageDresses} />
                 </div>
               </div>
-            </div>
-
-            { productsCurrentPage ?
-              (
-                <div className="col-3" data-push-left="off-9">
-                  <FlashSalePagination
-                    page={productsCurrentPage}
-                    totalItems={pageDresses.length}
-                  />
+              { productsCurrentPage ?
+                (
+                    <FlashSalePagination
+                      page={productsCurrentPage}
+                      totalItems={pageDresses.length}
+                    />
+                ) : null
+              }
+              { pageDresses.length < 96 ?
+                <div className="col-12">
+                  <div className="FlashSaleProduct__footerMessageWrapper u-mt-normal">
+                    <span className="FlashSaleProduct__footerMessage">
+                      Didn't find what you are looking for?
+                      <br />
+                      <a href="/dresses/best-sellers">
+                        Shop Best Sellers
+                      </a>
+                    </span>
+                  </div>
                 </div>
-              ) : null
-            }
+                :
+                null
+              }
+            </div>
+         
           </div>
         </div>
-
         <FilterSortSelectionModal />
       </div>
     );
