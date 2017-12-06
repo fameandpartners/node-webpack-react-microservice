@@ -87,6 +87,7 @@ class FlashSaleListApp extends Component {
     this.state = {
       isOpen: false,
       productsCurrentPage: null,
+      totalPages: null,
     };
 
     autobind(this);
@@ -110,6 +111,8 @@ class FlashSaleListApp extends Component {
 
     this.setState({
       productsCurrentPage: Number(parsedQueryObj.page) || this.props.page,
+      // eslint-disable-next-line
+      totalPages: Number(this.props.pageDresses[0].total_pages),
     });
   }
 
@@ -140,6 +143,7 @@ class FlashSaleListApp extends Component {
 
     const {
       productsCurrentPage,
+      totalPages,
     } = this.state;
 
     return (
@@ -205,26 +209,26 @@ class FlashSaleListApp extends Component {
                 (
                   <FlashSalePagination
                     page={productsCurrentPage}
-                    totalItems={pageDresses.length}
+                    totalPages={totalPages}
                   />
                 ) : null
               }
-              { pageDresses.length < 96 ?
-                <div className="col-12">
-                  <div className="FlashSaleProduct__footerMessageWrapper u-mt-normal">
-                    <span className="FlashSaleProduct__footerMessage">
-                      Didn't find what you are looking for?
-                      <br />
-                      <a href="/dresses/best-sellers">
-                        Shop Best Sellers
-                      </a>
-                    </span>
-                  </div>
-                </div>
-                :
-                null
-              }
             </div>
+            { pageDresses.length < 96 ?
+              <div className="col-12">
+                <div className="FlashSaleProduct__footerMessageWrapper u-mt-normal">
+                  <span className="FlashSaleProduct__footerMessage">
+                    Didn't find what you are looking for?
+                    <br />
+                    <a href="/dresses/best-sellers">
+                      Shop Best Sellers
+                    </a>
+                  </span>
+                </div>
+              </div>
+              :
+              null
+            }
           </div>
         </div>
         <FilterSortSelectionModal />

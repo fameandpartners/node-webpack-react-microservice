@@ -34,7 +34,7 @@ class FlashSalePagination extends Component {
   render() {
     const {
       page,
-      totalItems,
+      totalPages,
     } = this.props;
 
     return (
@@ -58,7 +58,7 @@ class FlashSalePagination extends Component {
           </li>
           <li className="col-1">{page}</li>
           <li className="col-1">
-            { totalItems >= 96 ?
+            { page < totalPages ?
               (
                 <span
                   className="FlashSalePagination__navigation-button u-cursor--pointer"

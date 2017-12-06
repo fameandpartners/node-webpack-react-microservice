@@ -1,9 +1,29 @@
-// .FlashSalePagination__wrapper {
-// }
+.FlashSalePagination__wrapper {
+  font-size: large;
+}
 
 // this is lazy, update the Caret component to accept color/fill props
 .FlashSalePagination__navigation-button:hover {
   svg path {
     fill: rgb(119, 119, 119);
   }
+}
+
+.FlashSalePagination__wrapper .Button {
+  background: #ffffff;
+  color: #222222;
+  border: 1px solid #222222;
+  width: 50px;
+  padding: 0;
+}
+
+.FlashSalePagination__wrapper .Button--selected {
+  background: #222222;
+  color: #ffffff;
+  // border: 1px solid #222222;
+  cursor: none;
+}
+
+.FlashSalePagination__ellipsis {
+  padding-top: 8px;
 }
