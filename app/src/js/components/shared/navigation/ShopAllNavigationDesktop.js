@@ -61,7 +61,7 @@ class ShopAllNavigationDesktop extends PureComponent {
                   src={sampleSale}
                 />
               </a>
-              <a href="/dresses/fall-weddings" className="link">
+              <a href="/sample-sale" className="link">
                 <span>Shop up to 40% OFF SAMPLE SALE</span>
               </a>
             </div>
