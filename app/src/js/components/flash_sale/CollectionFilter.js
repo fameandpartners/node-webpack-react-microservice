@@ -117,7 +117,6 @@ class CollectionFilterSort extends React.Component {
     const { filters, temporaryFilters } = this.props;
     return () => {
       const queryObj = {
-        page: filters.page,
         sort: filters.sort,
         color: temporaryFilters.selectedColors,
         length: temporaryFilters.selectedDressLengths,

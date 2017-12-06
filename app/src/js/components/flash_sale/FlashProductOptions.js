@@ -74,7 +74,7 @@ class FlashProductOptions extends Component {
             style={{ backgroundImage: `url(${lineItem.images[0]})` }}
           >
             <span className="FlashProductOptions__primaryImageOverlayText">
-              Delivered in 5 - 7 Business Days.
+              Estimated Delivery 5 - 7 Business Days.
             </span>
           </div>
         </div>
