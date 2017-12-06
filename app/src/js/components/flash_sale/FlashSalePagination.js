@@ -81,7 +81,7 @@ class FlashSalePagination extends Component {
 
 FlashSalePagination.propTypes = {
   page: PropTypes.number.isRequired,
-  totalItems: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
 };
 
 export default FlashSalePagination;
