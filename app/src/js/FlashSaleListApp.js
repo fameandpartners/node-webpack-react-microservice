@@ -87,6 +87,7 @@ class FlashSaleListApp extends Component {
     this.state = {
       isOpen: false,
       productsCurrentPage: null,
+      totalPages: null,
     };
 
     autobind(this);
@@ -110,6 +111,8 @@ class FlashSaleListApp extends Component {
 
     this.setState({
       productsCurrentPage: Number(parsedQueryObj.page) || this.props.page,
+      // eslint-disable-next-line
+      totalPages: Number(this.props.pageDresses[0].total_pages),
     });
   }
 
@@ -140,6 +143,7 @@ class FlashSaleListApp extends Component {
 
     const {
       productsCurrentPage,
+      totalPages,
     } = this.state;
 
     return (
@@ -205,7 +209,7 @@ class FlashSaleListApp extends Component {
                 (
                   <FlashSalePagination
                     page={productsCurrentPage}
-                    totalItems={pageDresses.length}
+                    totalPages={totalPages}
                   />
                 ) : null
               }
