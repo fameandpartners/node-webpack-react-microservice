@@ -203,10 +203,10 @@ class FlashSaleListApp extends Component {
               </div>
               { productsCurrentPage ?
                 (
-                    <FlashSalePagination
-                      page={productsCurrentPage}
-                      totalItems={pageDresses.length}
-                    />
+                  <FlashSalePagination
+                    page={productsCurrentPage}
+                    totalItems={pageDresses.length}
+                  />
                 ) : null
               }
               { pageDresses.length < 96 ?
@@ -225,7 +225,6 @@ class FlashSaleListApp extends Component {
                 null
               }
             </div>
-         
           </div>
         </div>
         <FilterSortSelectionModal />
