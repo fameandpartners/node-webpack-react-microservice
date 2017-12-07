@@ -205,7 +205,7 @@ class FlashSaleListApp extends Component {
                   <FlashSaleProductGrid products={pageDresses} />
                 </div>
               </div>
-              { productsCurrentPage ?
+              { pageDresses.length ?
                 (
                   <FlashSalePagination
                     page={productsCurrentPage}
@@ -216,14 +216,16 @@ class FlashSaleListApp extends Component {
               }
               { pageDresses.length < 96 ?
                 <div className="grid-12">
-                  <div className="FlashSaleProduct__footerMessageWrapper col-12 u-mt-normal">
-                    <span className="FlashSaleProduct__footerMessage">
-                      Didn't find what you are looking for?
-                      <br />
-                      <a href="/dresses/best-sellers">
-                        Shop Best Sellers
-                      </a>
-                    </span>
+                  <div className="col-12">
+                    <div className="FlashSaleProduct__footerMessageWrapper u-mt-normal">
+                      <span className="FlashSaleProduct__footerMessage">
+                        Didn't find what you are looking for?
+                        <br />
+                        <a href="/dresses/best-sellers">
+                          Shop Best Sellers
+                        </a>
+                      </span>
+                    </div>
                   </div>
                 </div>
                 :
