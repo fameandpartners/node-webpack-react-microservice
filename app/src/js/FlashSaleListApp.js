@@ -210,6 +210,7 @@ class FlashSaleListApp extends Component {
                   <FlashSalePagination
                     page={productsCurrentPage}
                     totalPages={totalPages}
+                    totalItems={pageDresses.length}
                   />
                 ) : null
               }
