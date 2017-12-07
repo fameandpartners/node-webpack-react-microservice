@@ -30,9 +30,9 @@
 }
 
 .FlashSalePagination__wrapper .Button {
-  background: #ffffff;
-  color: #222222;
-  border: 1px solid #cccccc;
+  background: rgb(255, 255, 255);
+  color: rgb(34,34,34);
+  border: 1px solid rgb(204,204,204);
   width: 40px;
   padding: 0;
 
@@ -42,8 +42,8 @@
 }
 
 .FlashSalePagination__wrapper .Button--selected {
-  background: #222222;
-  color: #ffffff;
+  background: rgb(34,34,34);
+  color: rgb(255, 255, 255);
 }
 
 .FlashSalePagination__wrapper .Button--selected,
@@ -68,12 +68,12 @@
 
 .FlashSalePagination__action-text {
   text-decoration: underline;
-  color: #222222;
+  color: rgb(34,34,34);
   cursor: pointer;
   padding: 0 18px;
 
   &:hover {
-    color: #777777;
+    color: rgb(119,119,119);
   }
 
   @include sm {
@@ -87,7 +87,7 @@
   cursor: default;
 
   &:hover {
-    color: #222222;
+    color: rgb(34,34,34);
   }
 }
 
