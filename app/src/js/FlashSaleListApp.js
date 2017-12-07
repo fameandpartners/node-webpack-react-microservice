@@ -112,7 +112,7 @@ class FlashSaleListApp extends Component {
     this.setState({
       productsCurrentPage: Number(parsedQueryObj.page) || this.props.page,
       // eslint-disable-next-line
-      totalPages: Number(this.props.pageDresses[0].total_pages),
+      totalPages: this.props.pageDresses.length ? Number(this.props.pageDresses[0].total_pages) : this.props.page,
     });
   }
 
@@ -210,25 +210,26 @@ class FlashSaleListApp extends Component {
                   <FlashSalePagination
                     page={productsCurrentPage}
                     totalPages={totalPages}
+                    totalItems={pageDresses.length}
                   />
                 ) : null
               }
-            </div>
-            { pageDresses.length < 96 ?
-              <div className="col-12">
-                <div className="FlashSaleProduct__footerMessageWrapper u-mt-normal">
-                  <span className="FlashSaleProduct__footerMessage">
-                    Didn't find what you are looking for?
-                    <br />
-                    <a href="/dresses/best-sellers">
-                      Shop Best Sellers
-                    </a>
-                  </span>
+              { pageDresses.length < 96 ?
+                <div className="grid-12">
+                  <div className="FlashSaleProduct__footerMessageWrapper col-12 u-mt-normal">
+                    <span className="FlashSaleProduct__footerMessage">
+                      Didn't find what you are looking for?
+                      <br />
+                      <a href="/dresses/best-sellers">
+                        Shop Best Sellers
+                      </a>
+                    </span>
+                  </div>
                 </div>
-              </div>
-              :
-              null
-            }
+                :
+                null
+              }
+            </div>
           </div>
         </div>
         <FilterSortSelectionModal />

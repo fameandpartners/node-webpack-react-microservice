@@ -1,29 +1,107 @@
-.FlashSalePagination__wrapper {
-  font-size: large;
+.FlashSalePagination__listRow {
+  margin: 16px 0;
+
+  @include sm {
+    margin: 32px 0;
+  }
 }
 
-// this is lazy, update the Caret component to accept color/fill props
-.FlashSalePagination__navigation-button:hover {
-  svg path {
-    fill: rgb(119, 119, 119);
+.FlashSalePagination__buttonWrapper {
+  display: inline-block;
+  width: 32px;
+  margin: 0 8px;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 6px;
+  }
+
+  @include sm {
+    width: 42px;
+    margin: 0 12px;
   }
 }
 
 .FlashSalePagination__wrapper .Button {
-  background: #ffffff;
-  color: #222222;
-  border: 1px solid #222222;
-  width: 50px;
+  background: rgb(255, 255, 255);
+  color: rgb(34,34,34);
+  border: 1px solid rgb(204,204,204);
+  width: 40px;
   padding: 0;
+
+  @include sm {
+    width: 50px;
+  }
 }
 
 .FlashSalePagination__wrapper .Button--selected {
-  background: #222222;
-  color: #ffffff;
-  // border: 1px solid #222222;
-  cursor: none;
+  background: rgb(34,34,34);
+  color: rgb(255, 255, 255);
+}
+
+.FlashSalePagination__wrapper .Button--selected,
+.FlashSalePagination__ellipsis {
+  cursor: default;
 }
 
 .FlashSalePagination__ellipsis {
-  padding-top: 8px;
+  @include sm {
+    margin: 0 6px;
+  }
+}
+
+.FlashSalePagination__ellipsis .Button {
+  border: 0;
+  cursor: default;
+
+  @include sm {
+    padding-top: 8px;
+  }
+}
+
+.FlashSalePagination__action-text {
+  text-decoration: underline;
+  color: rgb(34,34,34);
+  cursor: pointer;
+  padding: 0 18px;
+
+  &:hover {
+    color: rgb(119,119,119);
+  }
+
+  @include sm {
+    margin: 48px 0;
+    padding: 0;
+  }
+}
+
+.FlashSalePagination__action-text--disabled {
+  text-decoration: none;
+  cursor: default;
+
+  &:hover {
+    color: rgb(34,34,34);
+  }
+}
+
+.FlashSalePagination__action-text--prev {
+  order: 0;
+  text-align: left;
+
+  @include sm {
+    text-align: right;
+  }
+}
+
+.FlashSalePagination__action-text--next {
+  order: 0;
+  text-align: right;
+
+  @include sm {
+    order: 3;
+    text-align: left;
+  }
 }
