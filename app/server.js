@@ -1,7 +1,7 @@
 /* eslint-disable */
 require('ignore-styles');
 require('babel-register');
-
+// require('dotenv').config();
 
 const express = require('express');
 const logger = require('morgan');
