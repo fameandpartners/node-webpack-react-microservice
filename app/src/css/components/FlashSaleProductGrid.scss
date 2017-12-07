@@ -71,6 +71,10 @@
   text-align: center;
   padding: 32px;
   margin-bottom: 15px;
+
+  @include sm {
+    margin: 48px;
+  }
 }
 
 .FlashSaleProduct__footerMessage a {
