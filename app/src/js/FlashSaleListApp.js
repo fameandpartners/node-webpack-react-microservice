@@ -112,7 +112,7 @@ class FlashSaleListApp extends Component {
     this.setState({
       productsCurrentPage: Number(parsedQueryObj.page) || this.props.page,
       // eslint-disable-next-line
-      totalPages: Number(this.props.pageDresses[0].total_pages),
+      totalPages: this.props.pageDresses.length ? Number(this.props.pageDresses[0].total_pages) : this.props.page,
     });
   }
 
