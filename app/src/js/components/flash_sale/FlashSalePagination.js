@@ -64,7 +64,7 @@ class FlashSalePagination extends Component {
 
     let paginationContainer;
 
-    if (totalItems >= 96) {
+    if (totalItems >= 96 || page > 1) {
       paginationContainer = (
         <div className="FlashSalePagination__wrapper grid-12 float--center font-family-primary">
 
