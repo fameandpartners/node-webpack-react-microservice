@@ -185,7 +185,9 @@ class FlashSalePagination extends Component {
               selected={page === totalPages}
               disabled={page === totalPages}
               text={totalPages}
-              handleClick={page !== totalPages ? () => this.handlePaginationClick(totalPages) : null}
+              handleClick={
+                page !== totalPages ? () => this.handlePaginationClick(totalPages) : null
+              }
             />
           </li>
 
