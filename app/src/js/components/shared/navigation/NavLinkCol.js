@@ -51,10 +51,8 @@ class NavLinkCol extends Component {
               );
             }
 
-            const shouldHide = l.shouldHide ? l.shouldHide : false;
-
             return (
-              shouldHide ?
+              l.shouldHide ?
                 null
                 :
                 (
