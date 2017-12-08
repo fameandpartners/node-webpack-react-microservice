@@ -76,8 +76,8 @@ class FlashSalePagination extends Component {
                   'FlashSalePagination__action-text--prev',
                   {
                     'FlashSalePagination__action-text--disabled': page === 1,
-                    'col-3_sm-6': page !== totalPages,
-                    'col-3_sm-12': page === totalPages,
+                    'col-3_md-2_sm-6': page !== totalPages,
+                    'col-3_md-2_sm-12': page === totalPages,
                   },
                 )}
                 onClick={() => this.handlePaginationClick(page - 1)}
@@ -95,8 +95,8 @@ class FlashSalePagination extends Component {
                   'FlashSalePagination__action-text--next',
                   {
                     'FlashSalePagination__action-text--disabled': page === totalPages,
-                    'col-3_sm-6': page !== 1,
-                    'col-3_sm-12': page === 1,
+                    'col-3_md-2_sm-6': page !== 1,
+                    'col-3_md-2_sm-12': page === 1,
                   },
                 )}
                 onClick={() => this.handlePaginationClick(page + 1)}
@@ -107,7 +107,7 @@ class FlashSalePagination extends Component {
           }
 
           <ul
-            className="FlashSalePagination__listRow col-6_sm-12"
+            className="FlashSalePagination__listRow col-6_md-8_sm-12"
             data-push-left={page === 1 ? 'off-2' : ''}
             data-push-right={page === totalPages ? 'off-2' : ''}
           >
