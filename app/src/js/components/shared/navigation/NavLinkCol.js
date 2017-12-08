@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import autoBind from 'react-autobind';
+import autobind from 'react-autobind';
 import classnames from 'classnames';
 
 // CSS
@@ -9,7 +9,7 @@ import '../../../../css/components/NavLinkCol.scss';
 class NavLinkCol extends Component {
   constructor(props) {
     super(props);
-    autoBind(this);
+    autobind(this);
   }
 
   renderTitle() {
@@ -51,10 +51,17 @@ class NavLinkCol extends Component {
               );
             }
 
+            const shouldHide = l.shouldHide ? l.shouldHide : false;
+
             return (
-              <li key={l.text} className="NavLinkCol__li u-width--full">
-                <a className="link link--static link--no-underline" href={l.url}>{l.text}</a>
-              </li>
+              shouldHide ?
+                null
+                :
+                (
+                  <li key={l.text} className="NavLinkCol__li u-width--full">
+                    <a className="link link--static link--no-underline" href={l.url}>{l.text}</a>
+                  </li>
+                )
             );
           })}
         </ul>
