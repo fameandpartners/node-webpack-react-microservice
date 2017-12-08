@@ -177,7 +177,7 @@ class Footer extends PureComponent {
               <span
                 className="u-text-decoration--underline u-cursor--pointer"
               >
-                <select className="inline-select" defaultValue={auSite ? 'au' : 'us'}>
+                <select className="inline-select" defaultValue={siteVersionAU ? 'au' : 'us'}>
                   <option value="us">US</option>
                   <option value="au">Australia</option>
                 </select>
