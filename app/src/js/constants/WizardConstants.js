@@ -15,6 +15,8 @@ const availableStepIds = assign({},
     'OVERALL_FIT_STEP',
     'PETITE_PLUS_SURVEY_STEP',
     'CURRENT_DRESS_FIT_COMBINED_STEP',
+    'FIT_ID_OVERVIEW_STEP',
+    'COMPLETED_FIT_ID_STEP',
   ]),
 );
 

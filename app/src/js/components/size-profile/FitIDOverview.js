@@ -13,8 +13,6 @@ import WizardConstants from '../../constants/WizardConstants';
 // Components
 import Button from '../generic/Button';
 import WizardStep from '../wizard/WizardStep';
-import CurrentDressSizeForm from './CurrentDressSizeForm';
-import CurrentDressFitForm from './CurrentDressFitForm';
 
 function stateToProps() {
   return {};
@@ -25,7 +23,7 @@ function dispatchToProps(dispatch) {
   return { jumpToStep };
 }
 
-class CurrentDressFitCombined extends Component {
+class FitIDOverview extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -36,56 +34,44 @@ class CurrentDressFitCombined extends Component {
   }
 
   handlePreviousStep() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.PETITE_PLUS_SURVEY_STEP });
+    this.props.jumpToStep({ activeStepId: WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP });
   }
 
-  handleNextSelection() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERVIEW_STEP });
+  saveFitID() {
+    this.props.jumpToStep({ activeStepId: WizardConstants.COMPLETED_FIT_ID_STEP });
   }
 
   render() {
     return (
       <WizardStep
-        handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
-        currentStep={3}
-        totalSteps={3}
+        handleCloseWizard={this.handleCloseWizard}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="grid-12-noGutter">
-          <div className="col-6">
-            <CurrentDressSizeForm
-              containerClassNames="u-mt-normal u-mb-big"
-            />
-          </div>
-
-          <div className="col-6">
-            <CurrentDressFitForm
-              containerClassNames="u-mt-normal u-mb-big"
+        <div className="FitIDOverview">
+          <h3 className="WizardStep__title u-mb-normal u-mt-big">
+            Let&rsquo;s make sure we got this correct.
+          </h3>
+          <div className="ButtonBox--medium-width ButtonBox--center">
+            <Button
+              className="FitIDOverview__button"
+              text="Save your Fit I.D. to your profile"
+              handleClick={this.saveFitID}
             />
           </div>
         </div>
-
-        <div className="ButtonBox--center">
-          <Button
-            className="SelectSizeProfile__button"
-            text="Next"
-            handleClick={this.handleNextSelection}
-          />
-        </div>
-
       </WizardStep>
     );
   }
 }
 
-CurrentDressFitCombined.propTypes = {
+FitIDOverview.propTypes = {
   jumpToStep: PropTypes.func.isRequired,
 };
 
-CurrentDressFitCombined.defaultProps = {
+FitIDOverview.defaultProps = {
 };
 
-export default connect(stateToProps, dispatchToProps)(CurrentDressFitCombined);
+export default connect(stateToProps, dispatchToProps)(FitIDOverview);
