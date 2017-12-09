@@ -13,7 +13,7 @@ import WizardConstants from '../../constants/WizardConstants';
 // Components
 import Button from '../generic/Button';
 import WizardStep from '../wizard/WizardStep';
-import BodySizeForm from './BodySizeForm';
+import CurrentDressSizeForm from './CurrentDressSizeForm';
 import ClothingSizeForm from './ClothingSizeForm';
 
 function stateToProps() {
@@ -25,7 +25,7 @@ function dispatchToProps(dispatch) {
   return { jumpToStep };
 }
 
-class OverallFitCombined extends Component {
+class CurrentDressFitCombined extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -48,27 +48,15 @@ class OverallFitCombined extends Component {
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
-        currentStep={1}
+        currentStep={3}
         totalSteps={3}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div>
-          <h3 className="WizardStep__title u-mb-small">
-            Let’s get started
-          </h3>
-          <h5 className="WizardStep__description u-mb-normal">
-            These first set of questions will contribute to refining your overall fit.
-          </h5>
-          <h5 className="WizardStep__description u-mb-normal">
-            Already have a Fit I.D.? <a href="">Log in</a>
-          </h5>
-        </div>
-
         <div className="grid-12-noGutter">
           <div className="col-6">
-            <BodySizeForm
+            <CurrentDressSizeForm
               containerClassNames="u-mt-normal u-mb-big"
             />
           </div>
@@ -93,11 +81,11 @@ class OverallFitCombined extends Component {
   }
 }
 
-OverallFitCombined.propTypes = {
+CurrentDressFitCombined.propTypes = {
   jumpToStep: PropTypes.func.isRequired,
 };
 
-OverallFitCombined.defaultProps = {
+CurrentDressFitCombined.defaultProps = {
 };
 
-export default connect(stateToProps, dispatchToProps)(OverallFitCombined);
+export default connect(stateToProps, dispatchToProps)(CurrentDressFitCombined);

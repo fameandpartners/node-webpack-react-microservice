@@ -9,6 +9,7 @@ import SelectSizeProfile from './SelectSizeProfile';
 import StandardSizing from './StandardSizing';
 import OverallFitCombined from './OverallFitCombined';
 import PetiteOrPlusSurvey from './PetiteOrPlusSurvey';
+import CurrentDressFitCombined from './CurrentDressFitCombined';
 
 // Constants
 import WizardConstants from '../../constants/WizardConstants';
@@ -44,6 +45,8 @@ class SizeProfileModal extends Component {
         return <OverallFitCombined />;
       case WizardConstants.PETITE_PLUS_SURVEY_STEP:
         return <PetiteOrPlusSurvey />;
+      case WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP:
+        return <CurrentDressFitCombined />;
       default:
         return null;
     }
@@ -58,6 +61,7 @@ class SizeProfileModal extends Component {
           WizardConstants.STANDARD_SIZING_STEP,
           WizardConstants.OVERALL_FIT_STEP,
           WizardConstants.PETITE_PLUS_SURVEY_STEP,
+          WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP,
         ]}
         flexWidth
       >

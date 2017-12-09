@@ -14,6 +14,7 @@ const availableStepIds = assign({},
     'STANDARD_SIZING_STEP',
     'OVERALL_FIT_STEP',
     'PETITE_PLUS_SURVEY_STEP',
+    'CURRENT_DRESS_FIT_COMBINED_STEP',
   ]),
 );
 

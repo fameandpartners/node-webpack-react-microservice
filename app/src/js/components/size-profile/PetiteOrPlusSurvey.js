@@ -38,7 +38,7 @@ class PetiteOrPlusSurvey extends Component {
   }
 
   handleNextSelection() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.SELECT_SIZE_PROFILE_STEP });
+    this.props.jumpToStep({ activeStepId: WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP });
   }
 
   render() {
@@ -47,7 +47,7 @@ class PetiteOrPlusSurvey extends Component {
         handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
         currentStep={2}
-        totalSteps={5}
+        totalSteps={3}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
