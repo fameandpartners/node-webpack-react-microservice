@@ -14,7 +14,7 @@ import WizardConstants from '../../constants/WizardConstants';
 import Button from '../generic/Button';
 import WizardStep from '../wizard/WizardStep';
 import CurrentDressSizeForm from './CurrentDressSizeForm';
-import ClothingSizeForm from './ClothingSizeForm';
+import CurrentDressFitForm from './CurrentDressFitForm';
 
 function stateToProps() {
   return {};
@@ -36,7 +36,7 @@ class CurrentDressFitCombined extends Component {
   }
 
   handlePreviousStep() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.SELECT_SIZE_PROFILE_STEP });
+    this.props.jumpToStep({ activeStepId: WizardConstants.PETITE_PLUS_SURVEY_STEP });
   }
 
   handleNextSelection() {
@@ -62,7 +62,7 @@ class CurrentDressFitCombined extends Component {
           </div>
 
           <div className="col-6">
-            <ClothingSizeForm
+            <CurrentDressFitForm
               containerClassNames="u-mt-normal u-mb-big"
             />
           </div>

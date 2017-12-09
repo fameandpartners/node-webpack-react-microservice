@@ -17,7 +17,7 @@ import CustomizationActions from '../../actions/CustomizationActions';
 import Button from '../generic/Button';
 
 // CSS
-// import '../../../css/components/SelectFittedDressSizeForm.scss';
+import '../../../css/components/CurrentDressSizeForm.scss';
 
 function stateToProps(state) {
   return {
@@ -60,12 +60,14 @@ class CurrentDressSizeForm extends PureComponent {
     return (
       <div
         className={classnames(
-          'SelectFittedDressSizeForm__layout-container',
+          'CurrentDressSizeForm__layout-container',
           containerClassNames,
         )}
       >
         <div>
-          <p className="h6 u-text-align-left u-mb-xs">What&apos;s your size?</p>
+          <p className="h6 u-text-align-left u-mb-xs">
+            In <strong>US sizes</strong>, what fitted dress size do you typically wear?
+          </p>
           <div className="CurrentDressSizeForm__size grid-12-spaceBetween">
             { US_SIZES.map(s => (
               <div key={s} className="col-3">
