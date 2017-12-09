@@ -7,7 +7,7 @@ import { string } from 'prop-types';
 import WizardContainer from '../wizard/WizardContainer';
 import SelectSizeProfile from './SelectSizeProfile';
 import StandardSizing from './StandardSizing';
-import FitIdOverallFit from './FitIdOverallFit';
+import OverallFitCombined from './OverallFitCombined';
 import PetiteOrPlusSurvey from './PetiteOrPlusSurvey';
 
 // Constants
@@ -41,7 +41,7 @@ class SizeProfileModal extends Component {
       case WizardConstants.STANDARD_SIZING_STEP:
         return <StandardSizing />;
       case WizardConstants.OVERALL_FIT_STEP:
-        return <FitIdOverallFit />;
+        return <OverallFitCombined />;
       case WizardConstants.PETITE_PLUS_SURVEY_STEP:
         return <PetiteOrPlusSurvey />;
       default:

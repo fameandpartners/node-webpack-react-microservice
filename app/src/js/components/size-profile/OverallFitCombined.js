@@ -25,7 +25,7 @@ function dispatchToProps(dispatch) {
   return { jumpToStep };
 }
 
-class FitIdOverallFit extends Component {
+class OverallFitCombined extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -93,11 +93,11 @@ class FitIdOverallFit extends Component {
   }
 }
 
-FitIdOverallFit.propTypes = {
+OverallFitCombined.propTypes = {
   jumpToStep: PropTypes.func.isRequired,
 };
 
-FitIdOverallFit.defaultProps = {
+OverallFitCombined.defaultProps = {
 };
 
-export default connect(stateToProps, dispatchToProps)(FitIdOverallFit);
+export default connect(stateToProps, dispatchToProps)(OverallFitCombined);
