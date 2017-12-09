@@ -6,11 +6,16 @@ import { connect } from 'react-redux';
 // import { find } from 'lodash';
 import classnames from 'classnames';
 
+// Constants
+import {
+  FIT_ISSUES,
+} from '../../constants/ProductConstants';
+
 // Actions
 // import CustomizationActions from '../../actions/CustomizationActions';
 
 // UI Components
-import Input from '../form/Input';
+import Select from '../form/Select';
 
 // CSS
 import '../../../css/components/StandardSizeForm.scss';
@@ -29,6 +34,17 @@ class CurrentDressFitForm extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+  }
+
+  /**
+   * Generates the fit issue options for the Select dropdown
+   * @return {Object} options
+   */
+  generateFitIssueOptions() {
+    return FIT_ISSUES.map(i => ({
+      id: i,
+      name: i,
+    }));
   }
 
   render() {
@@ -59,11 +75,11 @@ class CurrentDressFitForm extends PureComponent {
           </p>
           <div className="grid-noGutter">
             <div className="col-10">
-              <Input
-                id="height-option-cm"
-                type="number"
-                inlineMeta=""
-                onChange={this.handleCMChange}
+              <Select
+                id="bust-fit-issue"
+                className="sort-options"
+                label="Select"
+                options={this.generateFitIssueOptions()}
               />
             </div>
           </div>
@@ -82,11 +98,11 @@ class CurrentDressFitForm extends PureComponent {
           </p>
           <div className="grid-noGutter">
             <div className="col-10">
-              <Input
-                id="height-option-cm"
-                type="number"
-                inlineMeta=""
-                onChange={this.handleCMChange}
+              <Select
+                id="bust-fit-issue"
+                className="sort-options"
+                label="Select"
+                options={this.generateFitIssueOptions()}
               />
             </div>
           </div>
@@ -105,11 +121,11 @@ class CurrentDressFitForm extends PureComponent {
           </p>
           <div className="grid-noGutter">
             <div className="col-10">
-              <Input
-                id="height-option-cm"
-                type="number"
-                inlineMeta=""
-                onChange={this.handleCMChange}
+              <Select
+                id="bust-fit-issue"
+                className="sort-options"
+                label="Select"
+                options={this.generateFitIssueOptions()}
               />
             </div>
           </div>

@@ -36,6 +36,11 @@ const constants = assign({},
     },
     EXPRESS_MAKING_PRICE_CENTS: 1800,
     SUPER_EXPRESS_MAKING_PRICE_CENTS: 2800,
+    FIT_ISSUES: [
+      'Very Loose',
+      'A Little Loose',
+      'No Fit Issues',
+    ],
   },
 
   mirrorCreator([
