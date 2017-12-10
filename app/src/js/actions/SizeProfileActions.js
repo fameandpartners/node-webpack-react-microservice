@@ -63,6 +63,17 @@ export function updateBustSelection({
   };
 }
 
+export function updateWaistSelection({
+  temporaryWaistValue,
+  selectedWaistValue,
+}) {
+  return {
+    type: SizeProfileConstants.UPDATE_WAIST_SELECTION,
+    selectedWaistValue,
+    temporaryWaistValue,
+  };
+}
+
 export function updateDressSizeSelection({ temporaryDressSize, selectedDressSize }) {
   return {
     type: SizeProfileConstants.UPDATE_DRESS_SIZE_SELECTION,
@@ -91,4 +102,5 @@ export default {
   updateDressSizeSelection,
   updateFittedDressSizeSelection,
   updateBustSelection,
+  updateWaistSelection,
 };

@@ -22,16 +22,19 @@ import '../../../css/components/StandardSizeForm.scss';
 function stateToProps(state) {
   return {
     temporaryBustValue: state.$$sizeProfileState.get('temporaryBustValue'),
+    temporaryWaistValue: state.$$sizeProfileState.get('temporaryWaistValue'),
   };
 }
 
 function dispatchToProps(dispatch) {
   const {
     updateBustSelection,
+    updateWaistSelection,
   } = bindActionCreators(SizeProfileActions, dispatch);
 
   return {
     updateBustSelection,
+    updateWaistSelection,
   };
 }
 
@@ -58,10 +61,16 @@ class CurrentDressFitForm extends PureComponent {
     this.props.updateBustSelection({ temporaryBustValue: value.option.id });
   }
 
+  handleWaistChange(value) {
+    console.log(value);
+    this.props.updateWaistSelection({ temporaryWaistValue: value.option.id });
+  }
+
   render() {
     const {
       containerClassNames,
       temporaryBustValue,
+      temporaryWaistValue,
     } = this.props;
 
     return (
@@ -115,7 +124,8 @@ class CurrentDressFitForm extends PureComponent {
                 id="bust-fit-issue"
                 className="sort-options"
                 label="Select"
-                options={this.generateFitIssueOptions()}
+                options={this.generateFitIssueOptions(temporaryWaistValue)}
+                onChange={this.handleWaistChange}
               />
             </div>
           </div>
@@ -154,13 +164,16 @@ CurrentDressFitForm.propTypes = {
   containerClassNames: PropTypes.string,
   // Redux Props
   temporaryBustValue: PropTypes.string,
+  temporaryWaistValue: PropTypes.string,
   // Redux Actions
   updateBustSelection: PropTypes.func.isRequired,
+  updateWaistSelection: PropTypes.func.isRequired,
 };
 
 CurrentDressFitForm.defaultProps = {
   containerClassNames: 'u-mt-normal u-mb-huge',
   temporaryBustValue: null,
+  temporaryWaistValue: null,
 };
 
 

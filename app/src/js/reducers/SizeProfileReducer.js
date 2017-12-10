@@ -19,9 +19,13 @@ export const $$initialState = Immutable.fromJS({
   temporaryAgeValue: null,
   selectedAgeValue: null,
 
-  // Number
+  // String
   temporaryBustValue: null,
   selectedBustValue: null,
+
+  // String
+  temporaryWaistValue: null,
+  selectedWaistValue: null,
 
   // Number
   temporaryDressSize: null,
@@ -88,7 +92,7 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
         temporaryAgeValue: action.temporaryAgeValue,
       });
     }
-    // BUST
+    // FITTED DRESS SIZING
     case SizeProfileConstants.UPDATE_BUST_SELECTION: {
       if (action.selectedBustValue) {
         return $$state.merge({
@@ -98,6 +102,17 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
       }
       return $$state.merge({
         temporaryBustValue: action.temporaryBustValue,
+      });
+    }
+    case SizeProfileConstants.UPDATE_WAIST_SELECTION: {
+      if (action.selectedWaistValue) {
+        return $$state.merge({
+          selectedWaistValue: action.selectedWaistValue,
+          temporaryWaistValue: action.selectedWaistValue,
+        });
+      }
+      return $$state.merge({
+        temporaryWaistValue: action.temporaryWaistValue,
       });
     }
     // DRESS SIZE
