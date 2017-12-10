@@ -52,6 +52,17 @@ export function updateAgeSelection({
   };
 }
 
+export function updateBustSelection({
+  temporaryBustValue,
+  selectedBustValue,
+}) {
+  return {
+    type: SizeProfileConstants.UPDATE_BUST_SELECTION,
+    selectedBustValue,
+    temporaryBustValue,
+  };
+}
+
 export function updateDressSizeSelection({ temporaryDressSize, selectedDressSize }) {
   return {
     type: SizeProfileConstants.UPDATE_DRESS_SIZE_SELECTION,
@@ -79,4 +90,5 @@ export default {
   updateAgeSelection,
   updateDressSizeSelection,
   updateFittedDressSizeSelection,
+  updateBustSelection,
 };

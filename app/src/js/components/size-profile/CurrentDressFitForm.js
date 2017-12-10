@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import { find } from 'lodash';
+import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
 // Constants
@@ -12,7 +11,7 @@ import {
 } from '../../constants/ProductConstants';
 
 // Actions
-// import CustomizationActions from '../../actions/CustomizationActions';
+import SizeProfileActions from '../../actions/SizeProfileActions';
 
 // UI Components
 import Select from '../form/Select';
@@ -20,13 +19,19 @@ import Select from '../form/Select';
 // CSS
 import '../../../css/components/StandardSizeForm.scss';
 
-function stateToProps() {
+function stateToProps(state) {
   return {
+    temporaryBustValue: state.$$sizeProfileState.get('temporaryBustValue'),
   };
 }
 
-function dispatchToProps() {
+function dispatchToProps(dispatch) {
+  const {
+    updateBustSelection,
+  } = bindActionCreators(SizeProfileActions, dispatch);
+
   return {
+    updateBustSelection,
   };
 }
 
@@ -40,16 +45,23 @@ class CurrentDressFitForm extends PureComponent {
    * Generates the fit issue options for the Select dropdown
    * @return {Object} options
    */
-  generateFitIssueOptions() {
+  generateFitIssueOptions(selected) {
     return FIT_ISSUES.map(i => ({
       id: i,
       name: i,
+      meta: i,
+      active: i === selected,
     }));
+  }
+
+  handleBustChange(value) {
+    this.props.updateBustSelection({ temporaryBustValue: value.option.id });
   }
 
   render() {
     const {
       containerClassNames,
+      temporaryBustValue,
     } = this.props;
 
     return (
@@ -79,7 +91,8 @@ class CurrentDressFitForm extends PureComponent {
                 id="bust-fit-issue"
                 className="sort-options"
                 label="Select"
-                options={this.generateFitIssueOptions()}
+                options={this.generateFitIssueOptions(temporaryBustValue)}
+                onChange={this.handleBustChange}
               />
             </div>
           </div>
@@ -139,10 +152,15 @@ class CurrentDressFitForm extends PureComponent {
 CurrentDressFitForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
+  // Redux Props
+  temporaryBustValue: PropTypes.string,
+  // Redux Actions
+  updateBustSelection: PropTypes.func.isRequired,
 };
 
 CurrentDressFitForm.defaultProps = {
   containerClassNames: 'u-mt-normal u-mb-huge',
+  temporaryBustValue: null,
 };
 
 
