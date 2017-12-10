@@ -62,3 +62,36 @@
 .ButtonBox--center {
   margin: 20px auto;
 }
+
+// OVERVIEW
+
+.FitIDOverview__body-fit-wrapper {
+  height: 130px;
+  background-color: $c-background-gray;
+}
+
+.FitIDOverview {
+  .WizardStep__title {
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+
+  .ButtonBox {
+    padding: 50px 120px;
+  }
+}
+
+.FitIDOverview__body-fit-list {
+  li {
+    float: left;
+    margin-right: 35px;
+    margin-left: 35px;
+    margin-top: 45px;
+  }
+
+  .body-fit-title {
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
