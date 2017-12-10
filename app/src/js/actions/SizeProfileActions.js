@@ -60,6 +60,17 @@ export function updateDressSizeSelection({ temporaryDressSize, selectedDressSize
   };
 }
 
+export function updateFittedDressSizeSelection({
+  temporaryFittedDressSize,
+  selectedFittedDressSize,
+}) {
+  return {
+    type: SizeProfileConstants.UPDATE_FITTED_DRESS_SIZE_SELECTION,
+    selectedFittedDressSize,
+    temporaryFittedDressSize,
+  };
+}
+
 export default {
   setSizeProfileError,
   updateMeasurementMetric,
@@ -67,4 +78,5 @@ export default {
   updateWeightSelection,
   updateAgeSelection,
   updateDressSizeSelection,
+  updateFittedDressSizeSelection,
 };

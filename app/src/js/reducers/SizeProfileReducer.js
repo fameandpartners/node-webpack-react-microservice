@@ -22,6 +22,10 @@ export const $$initialState = Immutable.fromJS({
   // Number
   temporaryDressSize: null,
   selectedDressSize: null,
+
+  // Number
+  temporaryFittedDressSize: null,
+  selectedFittedDressSize: null,
 });
 
 export default function SizeProfileReducer($$state = $$initialState, action = null) {
@@ -56,6 +60,7 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
         temporaryHeightValue: action.temporaryHeightValue,
       });
     }
+    // WEIGHT
     case SizeProfileConstants.UPDATE_WEIGHT_SELECTION: {
       if (action.selectedWeightValue) {
         return $$state.merge({
@@ -67,6 +72,7 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
         temporaryWeightValue: action.temporaryWeightValue,
       });
     }
+    // AGE
     case SizeProfileConstants.UPDATE_AGE_SELECTION: {
       if (action.selectedAgeValue) {
         return $$state.merge({
@@ -78,6 +84,7 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
         temporaryAgeValue: action.temporaryAgeValue,
       });
     }
+    // DRESS SIZE
     case SizeProfileConstants.UPDATE_DRESS_SIZE_SELECTION: {
       if (typeof action.selectedDressSize === 'number') {
         return $$state.merge({
@@ -90,6 +97,19 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
         temporaryDressSize: action.temporaryDressSize,
       });
     }
+    case SizeProfileConstants.UPDATE_FITTED_DRESS_SIZE_SELECTION: {
+      if (typeof action.selectedDressSize === 'number') {
+        return $$state.merge({
+          selectedFittedDressSize: action.selectedFittedDressSize,
+          temporaryFittedDressSize: action.selectedFittedDressSize,
+        });
+      }
+
+      return $$state.merge({
+        temporaryFittedDressSize: action.temporaryFittedDressSize,
+      });
+    }
+
     default: {
       return $$state;
     }

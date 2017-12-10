@@ -11,7 +11,7 @@ import {
 } from '../../constants/ProductConstants';
 
 // Actions
-import CustomizationActions from '../../actions/CustomizationActions';
+import SizeProfileActions from '../../actions/SizeProfileActions';
 
 // UI Components
 import Button from '../generic/Button';
@@ -21,20 +21,20 @@ import '../../../css/components/CurrentDressSizeForm.scss';
 
 function stateToProps(state) {
   return {
-    temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
-    sizeError: state.$$customizationState.get('sizeError'),
+    temporaryFittedDressSize: state.$$sizeProfileState.get('temporaryFittedDressSize'),
+    sizeError: state.$$sizeProfileState.get('sizeError'),
   };
 }
 
 function dispatchToProps(dispatch) {
   const {
     setSizeProfileError,
-    updateDressSizeSelection,
-  } = bindActionCreators(CustomizationActions, dispatch);
+    updateFittedDressSizeSelection,
+  } = bindActionCreators(SizeProfileActions, dispatch);
 
   return {
     setSizeProfileError,
-    updateDressSizeSelection,
+    updateFittedDressSizeSelection,
   };
 }
 
@@ -46,13 +46,13 @@ class CurrentDressSizeForm extends PureComponent {
 
   handleDressSizeSelection(s) {
     return () => {
-      this.props.updateDressSizeSelection({ temporaryDressSize: s });
+      this.props.updateFittedDressSizeSelection({ temporaryFittedDressSize: s });
     };
   }
 
   render() {
     const {
-      temporaryDressSize,
+      temporaryFittedDressSize,
       sizeError,
       containerClassNames,
     } = this.props;
@@ -74,7 +74,7 @@ class CurrentDressSizeForm extends PureComponent {
                 <Button
                   tertiary
                   tall
-                  selected={s === temporaryDressSize}
+                  selected={s === temporaryFittedDressSize}
                   text={s}
                   handleClick={this.handleDressSizeSelection(s)}
                 />
@@ -99,15 +99,15 @@ CurrentDressSizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
   // Redux Props
-  temporaryDressSize: PropTypes.number,
+  temporaryFittedDressSize: PropTypes.number,
   sizeError: PropTypes.bool,
   // Redux Actions
-  updateDressSizeSelection: PropTypes.func.isRequired,
+  updateFittedDressSizeSelection: PropTypes.func.isRequired,
 };
 
 CurrentDressSizeForm.defaultProps = {
   containerClassNames: 'u-mt-normal u-mb-huge',
-  temporaryDressSize: null,
+  temporaryFittedDressSize: null,
   sizeError: false,
 };
 
