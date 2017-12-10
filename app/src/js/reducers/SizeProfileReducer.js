@@ -115,6 +115,17 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
         temporaryWaistValue: action.temporaryWaistValue,
       });
     }
+    case SizeProfileConstants.UPDATE_HIP_SELECTION: {
+      if (action.selectedHipValue) {
+        return $$state.merge({
+          selectedHipValue: action.selectedHipValue,
+          temporaryHipValue: action.selectedHipValue,
+        });
+      }
+      return $$state.merge({
+        temporaryHipValue: action.temporaryHipValue,
+      });
+    }
     // DRESS SIZE
     case SizeProfileConstants.UPDATE_DRESS_SIZE_SELECTION: {
       if (typeof action.selectedDressSize === 'number') {

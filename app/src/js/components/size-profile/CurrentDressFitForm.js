@@ -23,6 +23,7 @@ function stateToProps(state) {
   return {
     temporaryBustValue: state.$$sizeProfileState.get('temporaryBustValue'),
     temporaryWaistValue: state.$$sizeProfileState.get('temporaryWaistValue'),
+    temporaryHipValue: state.$$sizeProfileState.get('temporaryHipValue'),
   };
 }
 
@@ -30,11 +31,13 @@ function dispatchToProps(dispatch) {
   const {
     updateBustSelection,
     updateWaistSelection,
+    updateHipSelection,
   } = bindActionCreators(SizeProfileActions, dispatch);
 
   return {
     updateBustSelection,
     updateWaistSelection,
+    updateHipSelection,
   };
 }
 
@@ -62,8 +65,11 @@ class CurrentDressFitForm extends PureComponent {
   }
 
   handleWaistChange(value) {
-    console.log(value);
     this.props.updateWaistSelection({ temporaryWaistValue: value.option.id });
+  }
+
+  handleHipChange(value) {
+    this.props.updateHipSelection({ temporaryHipValue: value.option.id });
   }
 
   render() {
@@ -71,6 +77,7 @@ class CurrentDressFitForm extends PureComponent {
       containerClassNames,
       temporaryBustValue,
       temporaryWaistValue,
+      temporaryHipValue,
     } = this.props;
 
     return (
@@ -148,7 +155,8 @@ class CurrentDressFitForm extends PureComponent {
                 id="bust-fit-issue"
                 className="sort-options"
                 label="Select"
-                options={this.generateFitIssueOptions()}
+                options={this.generateFitIssueOptions(temporaryHipValue)}
+                onChange={this.handleHipChange}
               />
             </div>
           </div>
@@ -165,15 +173,18 @@ CurrentDressFitForm.propTypes = {
   // Redux Props
   temporaryBustValue: PropTypes.string,
   temporaryWaistValue: PropTypes.string,
+  temporaryHipValue: PropTypes.string,
   // Redux Actions
   updateBustSelection: PropTypes.func.isRequired,
   updateWaistSelection: PropTypes.func.isRequired,
+  updateHipSelection: PropTypes.func.isRequired,
 };
 
 CurrentDressFitForm.defaultProps = {
   containerClassNames: 'u-mt-normal u-mb-huge',
   temporaryBustValue: null,
   temporaryWaistValue: null,
+  temporaryHipValue: null,
 };
 
 
