@@ -19,7 +19,7 @@ import {
 import ModalConstants from '../../constants/ModalConstants';
 
 // Actions
-import CustomizationActions from '../../actions/CustomizationActions';
+import SizeProfileActions from '../../actions/SizeProfileActions';
 import ModalActions from '../../actions/ModalActions';
 
 // UI Components
@@ -34,11 +34,11 @@ import '../../../css/components/StandardSizeForm.scss';
 function stateToProps(state) {
   return {
     isUSSiteVersion: state.$$appState.get('siteVersion').toLowerCase() === 'usa',
-    temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
-    temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
-    temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
-    heightError: state.$$customizationState.get('heightError'),
-    sizeError: state.$$customizationState.get('sizeError'),
+    temporaryMeasurementMetric: state.$$sizeProfileState.get('temporaryMeasurementMetric'),
+    temporaryHeightValue: state.$$sizeProfileState.get('temporaryHeightValue'),
+    temporaryDressSize: state.$$sizeProfileState.get('temporaryDressSize'),
+    heightError: state.$$sizeProfileState.get('heightError'),
+    sizeError: state.$$sizeProfileState.get('sizeError'),
   };
 }
 
@@ -48,7 +48,7 @@ function dispatchToProps(dispatch) {
     updateMeasurementMetric,
     updateHeightSelection,
     updateDressSizeSelection,
-  } = bindActionCreators(CustomizationActions, dispatch);
+  } = bindActionCreators(SizeProfileActions, dispatch);
 
   const modalActions = bindActionCreators(ModalActions, dispatch);
 

@@ -16,7 +16,7 @@ import {
 } from '../../constants/ProductConstants';
 
 // Actions
-import CustomizationActions from '../../actions/CustomizationActions';
+import SizeProfileActions from '../../actions/SizeProfileActions';
 
 // UI Components
 import Select from '../form/Select';
@@ -28,9 +28,13 @@ import '../../../css/components/StandardSizeForm.scss';
 
 function stateToProps(state) {
   return {
-    temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
-    temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
-    heightError: state.$$customizationState.get('heightError'),
+    temporaryMeasurementMetric: state.$$sizeProfileState.get('temporaryMeasurementMetric'),
+    temporaryHeightValue: state.$$sizeProfileState.get('temporaryHeightValue'),
+    heightError: state.$$sizeProfileState.get('heightError'),
+    temporaryWeightValue: state.$$sizeProfileState.get('temporaryWeightValue'),
+    // weightError: state.$$sizeProfileState.get('weightError'),
+    temporaryAgeValue: state.$$sizeProfileState.get('temporaryAgeValue'),
+    // ageError: state.$$sizeProfileState.get('ageError'),
   };
 }
 
@@ -39,12 +43,16 @@ function dispatchToProps(dispatch) {
     setSizeProfileError,
     updateMeasurementMetric,
     updateHeightSelection,
-  } = bindActionCreators(CustomizationActions, dispatch);
+    updateWeightSelection,
+    updateAgeSelection,
+  } = bindActionCreators(SizeProfileActions, dispatch);
 
   return {
     setSizeProfileError,
     updateMeasurementMetric,
     updateHeightSelection,
+    updateWeightSelection,
+    updateAgeSelection,
   };
 }
 
@@ -153,6 +161,40 @@ class BodySizeForm extends PureComponent {
     }
   }
 
+  handleWeightChange({ value }) {
+    const { updateWeightSelection } = this.props;
+    const numVal = parseInt(value, 10);
+
+    if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
+      // if (heightError) { // Only validate if there is an error
+      //   this.validateSizeSelection({
+      //     temporaryHeightValue: numVal,
+      //     temporaryMeasurementMetric: UNITS.CM,
+      //   });
+      // }
+      updateWeightSelection({
+        temporaryWeightValue: numVal,
+      });
+    }
+  }
+
+  handleAgeChange({ value }) {
+    const { updateAgeSelection } = this.props;
+    const numVal = parseInt(value, 10);
+
+    if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
+      // if (heightError) { // Only validate if there is an error
+      //   this.validateSizeSelection({
+      //     temporaryHeightValue: numVal,
+      //     temporaryMeasurementMetric: UNITS.CM,
+      //   });
+      // }
+      updateAgeSelection({
+        temporaryAgeValue: numVal,
+      });
+    }
+  }
+
   /**
    * Helper method to generate normal option for Select
    * @param  {Number} i
@@ -190,6 +232,8 @@ class BodySizeForm extends PureComponent {
       temporaryHeightValue,
       heightError,
       containerClassNames,
+      temporaryWeightValue,
+      temporaryAgeValue,
     } = this.props;
 
     return (
@@ -266,8 +310,8 @@ class BodySizeForm extends PureComponent {
                 type="number"
                 error={heightError}
                 inlineMeta={heightError ? 'Please enter a valid height' : null}
-                onChange={this.handleCMChange}
-                defaultValue={temporaryHeightValue}
+                onChange={this.handleWeightChange}
+                defaultValue={temporaryWeightValue}
               />
             </div>
           </div>
@@ -291,8 +335,8 @@ class BodySizeForm extends PureComponent {
                 type="number"
                 error={heightError}
                 inlineMeta={heightError ? 'Please enter a valid height' : null}
-                onChange={this.handleCMChange}
-                defaultValue={temporaryHeightValue}
+                onChange={this.handleAgeChange}
+                defaultValue={temporaryAgeValue}
               />
             </div>
           </div>
@@ -310,10 +354,14 @@ BodySizeForm.propTypes = {
   temporaryMeasurementMetric: PropTypes.string,
   temporaryHeightValue: PropTypes.number,
   heightError: PropTypes.bool,
+  temporaryWeightValue: PropTypes.number,
+  temporaryAgeValue: PropTypes.number,
   // Redux Actions
   setSizeProfileError: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
+  updateWeightSelection: PropTypes.func.isRequired,
+  updateAgeSelection: PropTypes.func.isRequired,
 };
 
 BodySizeForm.defaultProps = {
@@ -322,6 +370,8 @@ BodySizeForm.defaultProps = {
   temporaryMeasurementMetric: null,
   temporaryHeightValue: null,
   heightError: false,
+  temporaryWeightValue: null,
+  temporaryAgeValue: null,
 };
 
 

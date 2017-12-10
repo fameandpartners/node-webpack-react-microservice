@@ -9,6 +9,7 @@ import CollectionFilterSortReducer, { $$initialState as $$collectionFilterSortSt
 import FlashSaleReducer, { $$initialState as $$flashSaleState } from './FlashSaleReducer';
 import BridesmaidsFilterReducer, { $$initialState as $$bridesmaidsFilterState } from './BridesmaidsFilterReducer';
 import FabricSwatchReducer, { $$initialState as $$fabricSwatchState } from './FabricSwatchReducer';
+import SizeProfileReducer, { $$initialState as $$sizeProfileState } from './SizeProfileReducer';
 
 export default {
   $$appState: AppReducer,
@@ -22,6 +23,7 @@ export default {
   $$flashSaleState: FlashSaleReducer,
   $$bridesmaidsFilterState: BridesmaidsFilterReducer,
   $$fabricSwatchState: FabricSwatchReducer,
+  $$sizeProfileState: SizeProfileReducer,
 };
 
 export const initialStates = {
@@ -36,4 +38,5 @@ export const initialStates = {
   $$flashSaleState,
   $$bridesmaidsFilterState,
   $$fabricSwatchState,
+  $$sizeProfileState,
 };
