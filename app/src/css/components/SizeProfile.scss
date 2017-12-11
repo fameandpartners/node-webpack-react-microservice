@@ -68,6 +68,15 @@
 .FitIDOverview__body-fit-wrapper {
   height: 130px;
   background-color: $c-background-gray;
+  position: relative;
+
+  .link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 30px;
+    margin-top: 30px;
+  }
 }
 
 .FitIDOverview {

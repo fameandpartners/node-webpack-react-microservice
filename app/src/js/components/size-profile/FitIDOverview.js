@@ -55,6 +55,10 @@ class FitIDOverview extends Component {
     this.props.jumpToStep({ activeStepId: WizardConstants.COMPLETED_FIT_ID_STEP });
   }
 
+  handleOpenEditBodyFit() {
+    this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
+  }
+
   heightText() {
     const { temporaryHeightValue, temporaryMeasurementMetric } = this.props;
 
@@ -90,10 +94,13 @@ class FitIDOverview extends Component {
         modalWrapperClassName="u-flex--col"
       >
         <div className="FitIDOverview">
+
           <h3 className="WizardStep__title u-mb-normal u-mt-big">
             Let&rsquo;s make sure we <br /> got this correct.
           </h3>
+
           <div className="FitIDOverview__body-fit-wrapper">
+
             <div className="grid-center-noGutter">
               <ul className="FitIDOverview__body-fit-list">
                 <li>
@@ -118,14 +125,26 @@ class FitIDOverview extends Component {
                 </li>
               </ul>
             </div>
+
+            <a
+              className="link link--static"
+              onClick={this.handleOpenEditBodyFit}
+            >
+              Edit
+            </a>
+
           </div>
+
           <div className="ButtonBox ButtonBox--center">
+
             <Button
               className="FitIDOverview__button"
               text="Save your Fit I.D. to your profile"
               handleClick={this.saveFitID}
             />
+
           </div>
+
         </div>
       </WizardStep>
     );
