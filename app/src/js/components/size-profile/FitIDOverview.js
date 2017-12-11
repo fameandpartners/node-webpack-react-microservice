@@ -3,6 +3,7 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { find } from 'lodash';
 
 // Actions
 // import SizeProfileActions from '../../actions/SizeProfileActions';
@@ -10,6 +11,10 @@ import WizardActions from '../../actions/WizardActions';
 
 // Constants
 import WizardConstants from '../../constants/WizardConstants';
+import {
+  INCH_SIZES,
+  UNITS,
+} from '../../constants/ProductConstants';
 
 // Components
 import Button from '../generic/Button';
@@ -17,6 +22,7 @@ import WizardStep from '../wizard/WizardStep';
 
 function stateToProps(state) {
   return {
+    temporaryMeasurementMetric: state.$$sizeProfileState.get('temporaryMeasurementMetric'),
     temporaryHeightValue: state.$$sizeProfileState.get('temporaryHeightValue'),
     temporaryWeightValue: state.$$sizeProfileState.get('temporaryWeightValue'),
     temporaryAgeValue: state.$$sizeProfileState.get('temporaryAgeValue'),
@@ -49,9 +55,28 @@ class FitIDOverview extends Component {
     this.props.jumpToStep({ activeStepId: WizardConstants.COMPLETED_FIT_ID_STEP });
   }
 
+  heightText() {
+    const { temporaryHeightValue, temporaryMeasurementMetric } = this.props;
+
+    if (temporaryHeightValue === null) {
+      return 'N/A';
+    }
+
+    if (temporaryMeasurementMetric === UNITS.CM && temporaryHeightValue) { // CM selected
+      return `${temporaryHeightValue}cm`;
+    } else if (temporaryMeasurementMetric === UNITS.INCH && temporaryHeightValue) { // INCH selected
+      const totalInches = temporaryHeightValue;
+      const option = find(INCH_SIZES, { totalInches });
+      console.log(INCH_SIZES);
+      console.log(option);
+      return option ? `${option.ft}ft ${option.inch}in` : 'N/A';
+    }
+
+    return 'N/A';
+  }
+
   render() {
     const {
-      temporaryHeightValue,
       temporaryWeightValue,
       temporaryAgeValue,
     } = this.props;
@@ -73,7 +98,7 @@ class FitIDOverview extends Component {
               <ul className="FitIDOverview__body-fit-list">
                 <li>
                   <span className="body-fit-title">Height</span>
-                  <span className="body-fit-value">{temporaryHeightValue}</span>
+                  <span className="body-fit-value">{this.heightText()}</span>
                 </li>
                 <li>
                   <span className="body-fit-title">Weight</span>
@@ -111,12 +136,14 @@ FitIDOverview.propTypes = {
   // Redux Actions
   jumpToStep: PropTypes.func.isRequired,
   // Redux Props
+  temporaryMeasurementMetric: PropTypes.string,
   temporaryHeightValue: PropTypes.number,
   temporaryWeightValue: PropTypes.string,
-  temporaryAgeValue: PropTypes.string,
+  temporaryAgeValue: PropTypes.number,
 };
 
 FitIDOverview.defaultProps = {
+  temporaryMeasurementMetric: null,
   temporaryHeightValue: null,
   temporaryWeightValue: null,
   temporaryAgeValue: null,

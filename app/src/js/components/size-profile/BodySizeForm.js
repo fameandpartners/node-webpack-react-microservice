@@ -162,20 +162,7 @@ class BodySizeForm extends PureComponent {
   }
 
   handleWeightChange({ value }) {
-    const { updateWeightSelection } = this.props;
-    const numVal = parseInt(value, 10);
-
-    if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
-      // if (heightError) { // Only validate if there is an error
-      //   this.validateSizeSelection({
-      //     temporaryHeightValue: numVal,
-      //     temporaryMeasurementMetric: UNITS.CM,
-      //   });
-      // }
-      updateWeightSelection({
-        temporaryWeightValue: numVal,
-      });
-    }
+    this.props.updateWeightSelection({ temporaryWeightValue: value });
   }
 
   handleAgeChange({ value }) {
@@ -183,12 +170,6 @@ class BodySizeForm extends PureComponent {
     const numVal = parseInt(value, 10);
 
     if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
-      // if (heightError) { // Only validate if there is an error
-      //   this.validateSizeSelection({
-      //     temporaryHeightValue: numVal,
-      //     temporaryMeasurementMetric: UNITS.CM,
-      //   });
-      // }
       updateAgeSelection({
         temporaryAgeValue: numVal,
       });
@@ -307,9 +288,9 @@ class BodySizeForm extends PureComponent {
             <div className="col-10">
               <Input
                 id="height-option-cm"
-                type="number"
+                type="text"
                 error={heightError}
-                inlineMeta={heightError ? 'Please enter a valid height' : null}
+                inlineMeta={heightError ? 'Please enter a valid weight' : null}
                 onChange={this.handleWeightChange}
                 defaultValue={temporaryWeightValue}
               />
@@ -334,7 +315,7 @@ class BodySizeForm extends PureComponent {
                 id="height-option-cm"
                 type="number"
                 error={heightError}
-                inlineMeta={heightError ? 'Please enter a valid height' : null}
+                inlineMeta={heightError ? 'Please enter a valid age' : null}
                 onChange={this.handleAgeChange}
                 defaultValue={temporaryAgeValue}
               />
@@ -354,7 +335,7 @@ BodySizeForm.propTypes = {
   temporaryMeasurementMetric: PropTypes.string,
   temporaryHeightValue: PropTypes.number,
   heightError: PropTypes.bool,
-  temporaryWeightValue: PropTypes.number,
+  temporaryWeightValue: PropTypes.string,
   temporaryAgeValue: PropTypes.number,
   // Redux Actions
   setSizeProfileError: PropTypes.func.isRequired,

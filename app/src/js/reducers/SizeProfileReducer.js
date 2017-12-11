@@ -11,7 +11,7 @@ export const $$initialState = Immutable.fromJS({
   temporaryHeightValue: null,
   selectedHeightValue: null,
 
-  // Number
+  // String
   temporaryWeightValue: null,
   selectedWeightValue: null,
 
