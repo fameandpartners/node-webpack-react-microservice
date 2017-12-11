@@ -22,6 +22,10 @@
   display: inline-block;
 }
 
+.u-display--inline-flex {
+  display: inline-flex;
+}
+
 .float--left {
   float: left;
 }
@@ -124,6 +128,10 @@
   margin-top: 50px;
 }
 
+.u-mt-huge {
+  margin-top: 150px;
+}
+
 .u-paddingLeft--small {
   padding-left: 10px;
 }
@@ -165,8 +173,16 @@
   text-transform: uppercase;
 }
 
+.u-capitalize {
+  text-transform: capitalize;
+}
+
 .u-text-decoration--underline {
   text-decoration: underline;
+}
+
+.u-text-decoration--line-through {
+  text-decoration: line-through;
 }
 
 .u-pointerEvents--none {

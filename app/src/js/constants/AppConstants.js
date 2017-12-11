@@ -9,6 +9,7 @@ const actionTypes = assign({},
     'SET_APP_USER',
     'SET_SHAREABLE_QUERY_PARAMS',
     'SET_GALLERY_SLIDE_ACTIVE_INDEX',
+    'SET_ERROR_CODE',
   ]),
 );
 
@@ -121,7 +122,7 @@ const navigationLinks = {
       },
       {
         text: 'Jumpsuits',
-        url: '/dresses/jumpsuits',
+        url: '/dresses/jumpsuit',
       },
       {
         text: 'Outerwear',
@@ -142,8 +143,8 @@ const navigationLinks = {
         url: '/getitquick',
       },
       {
-        text: 'Florals',
-        url: '/dresses/floral',
+        text: 'Sample Sale',
+        url: '/sample-sale',
       },
     ],
     COLLECTIONS: [

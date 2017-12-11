@@ -1,6 +1,7 @@
 /* eslint-disable */
 require('ignore-styles');
 require('babel-register');
+// require('dotenv').config();
 
 const express = require('express');
 const logger = require('morgan');
@@ -61,8 +62,10 @@ app.use(cookieParser());
 app.get('/webpack/asset-manifest', (req, res) => {
   const clientAssets = require('./build/webpack/asset-manifest.json');
   var asset_paths = {
-    jsBundle: clientAssets['main.js'],
-    cssBundle: clientAssets['main.css'],
+    jsBundle: clientAssets['pdp.js'],
+    cssBundle: clientAssets['pdp.css'],
+    flashJsBundle: clientAssets['flash.js'],
+    flashCssBundle: clientAssets['flash.css'],
   }
   res.send(asset_paths);
 });
@@ -127,7 +130,8 @@ app.post('/pdp', (req, res) => {
 app.listen(process.env.PORT || 8001);
 
 // reset the rails cache, have to do it here cause ebs environment variables are lies
-// require('./scripts/clear_cache');
+require('./scripts/clear_cache');
+/* eslint-disable no-console */
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
 module.exports = app;

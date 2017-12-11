@@ -106,7 +106,7 @@ class ExpressMaking extends Component {
             mobile ?
               <p>
                 <a
-                  href="/terms#collapse-shipping"
+                  href="/faqs#collapse-what-express-making"
                   className="u-text-decoration--underline link link--static"
                   target="noopener noreferrer"
                 >
@@ -122,7 +122,7 @@ class ExpressMaking extends Component {
             !mobile ?
               <div>
                 <a
-                  href="/terms#collapse-shipping"
+                  href="/faqs#collapse-what-express-making"
                   className="link link--static u-text-decoration--underline"
                 >
                   Learn More

@@ -1,0 +1,22 @@
+//  NOTE:
+//    Don't want to cause styling conflicts w/ main site
+//    CollectionFilter so making Flash Sale changes here
+
+.ExpandablePanel__name {
+  // poor form
+  font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
+}
+
+.ExpandablePanelItem--is-active .ExpandablePanel__name:before {
+  top: 3px;
+  font-size: 0.7rem;
+  color: rgb(119, 119, 119);
+}
+
+.ExpandablePanel__optionName {
+  font-size: 1.05em;
+}
+
+.CollectionSort {
+  padding-right: 48px;
+}

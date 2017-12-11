@@ -1,11 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import autoBind from 'react-autobind';
+import autobind from 'react-autobind';
 import Resize from '../../../decorators/Resize';
 import PDPBreakpoints from '../../../libs/PDPBreakpoints';
 
+// Polyfills
+import win from '../../../polyfills/windowPolyfill';
+
 // Assets
 import fallWeddings from '../../../../img/fall-weddings.jpg';
+import sampleSale from '../../../../img/SampleSale-ShopAllTile.jpg';
 import '../../../../css/components/ShopAllNavigationDesktop.scss';
 
 // Constants
@@ -14,14 +18,61 @@ import { NAVIGATION_LINKS } from '../../../constants/AppConstants';
 // Components
 import NavLinkCol from './NavLinkCol';
 
+
 class ShopAllNavigationDesktop extends PureComponent {
   constructor(props) {
     super(props);
-    autoBind(this);
+    autobind(this);
+
+    this.state = {
+      auSite: win.ApplicationStateData ? win.ApplicationStateData.auSite : false,
+    };
   }
 
   render() {
-    const { breakpoint, childRef } = this.props;
+    const {
+      breakpoint,
+      childRef,
+    } = this.props;
+
+    const {
+      auSite,
+    } = this.state;
+
+    let headerAd;
+
+    if (auSite) {
+      headerAd = (
+        <div className="HeaderNavigationDesktop__ad">
+          <a href="/dresses/fall-weddings">
+            <img
+              alt="Fall Weddings Ad"
+              className="u-width--full"
+              src={fallWeddings}
+            />
+          </a>
+          <a href="/dresses/fall-weddings" className="link">
+            <span>Shop Fall Weddings</span>
+          </a>
+        </div>
+      );
+    } else {
+      headerAd = (
+        <div className="HeaderNavigationDesktop__ad">
+          <a href="/sample-sale">
+            <img
+              alt="Sample Sale Ad"
+              className="u-width--full"
+              src={sampleSale}
+            />
+          </a>
+          <a href="/sample-sale" className="link">
+            <span>Shop up to 40% OFF SAMPLE SALE</span>
+          </a>
+        </div>
+      );
+    }
+
     return (
       <div
         ref={childRef}
@@ -53,18 +104,7 @@ class ShopAllNavigationDesktop extends PureComponent {
               links={NAVIGATION_LINKS.COLLECTIONS}
             />
             { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
-            <div className="ShopAllNavigationDesktop__ad">
-              <a href="/dresses/fall-weddings">
-                <img
-                  alt="Fall Weddings Ad"
-                  className="ShopAllNavigationDesktop__image u-width--full"
-                  src={fallWeddings}
-                />
-              </a>
-              <a href="/dresses/fall-weddings" className="link">
-                <span>Shop Fall Weddings</span>
-              </a>
-            </div>
+              headerAd
             }
           </div>
         </div>

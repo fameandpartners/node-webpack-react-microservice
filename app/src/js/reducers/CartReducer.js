@@ -1,6 +1,9 @@
 import Immutable from 'immutable';
 import CartConstants from '../constants/CartConstants';
 
+// Utilities
+import { formatSizePresentationUS } from '../utilities/helpers';
+
 export const $$initialState = Immutable.fromJS({
   cartDrawerOpen: false,
   // ArrayOf({
@@ -27,13 +30,15 @@ export const $$initialState = Immutable.fromJS({
 function transformCartDataLineItems(lineItems) {
   return lineItems.map(li => ({
     id: li.line_item_id,
+    isFlashSaleItem: !!li.old_price,
     productCentsBasePrice: parseInt(li.price.money.money.fractional, 10),
     productImage: li.image.original,
     productTitle: li.name,
     heightUnit: li.height_unit,
     heightValue: li.height_value,
+    height: li.height ? li.height : null,
     sizePresentationAU: li.size.presentation_au,
-    sizePresentationUS: li.size.presentation_us,
+    sizePresentationUS: formatSizePresentationUS(li.size.presentation_us),
     sizeNumber: li.size.sort_key,
     color: {
       id: li.color.id,

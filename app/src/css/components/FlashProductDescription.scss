@@ -1,0 +1,58 @@
+.FlashProductDescription__copy {
+  color: $c-neutral-8;
+}
+
+.FlashProductDescription {
+  padding-top: 20px;
+  text-align: left;
+}
+
+.FlashProductDescription__current-price {
+  padding-left: 4px;
+  font-size: 28px;
+}
+
+.FlashProductDescription__callout {
+  border-top: 1px solid $c-border-gray;
+  padding-top: 20px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.FlashProductDescription__title-section {
+  border-bottom: 1px solid $c-border-gray;
+}
+
+.FlashProductDescription__customization-details {
+  border-top: 1px solid $c-border-gray;
+}
+
+.FlashProductDescription__customization-details p {
+  line-height: 2;
+}
+
+.FlashProductDescription__addons-details {
+  margin-bottom: 6px;
+}
+
+.FlashProductDescription__addons-list {
+  padding: 6px;
+}
+
+.FlashProductOptions__ctas {
+  position: relative;
+  margin: 0 30px;
+  max-width: 575px;
+  height: 690px;
+}
+
+.FlashProductOptions__actionsWrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.FlashProductDescription__color-swatch {
+  height: 40px;
+  width: 40px;
+}

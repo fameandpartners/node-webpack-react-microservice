@@ -36,6 +36,13 @@ export function setGallerySlideActiveIndex({ index = 0 }) {
   };
 }
 
+export function setErrorCode({ errorCode }) {
+  return {
+    type: AppConstants.SET_ERROR_CODE,
+    errorCode,
+  };
+}
+
 export default {
   activateSideMenu,
   setShareableQueryParams,
