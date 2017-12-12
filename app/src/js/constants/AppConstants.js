@@ -1,6 +1,9 @@
 import { assign } from 'lodash';
 import mirrorCreator from 'mirror-creator';
 
+// Utilities
+import { siteVersionAU } from '../utilities/helpers';
+
 const actionTypes = assign({},
   mirrorCreator([
     'ACTIVATE_SIDE_MENU',
@@ -145,6 +148,7 @@ const navigationLinks = {
       {
         text: 'Sample Sale',
         url: '/sample-sale',
+        shouldHide: siteVersionAU(),
       },
     ],
     COLLECTIONS: [

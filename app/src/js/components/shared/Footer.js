@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
-import { redirectSiteVersion } from '../../utilities/helpers';
+import { redirectSiteVersion, siteVersionAU } from '../../utilities/helpers';
 
 // Polyfills
 import win from '../../polyfills/windowPolyfill';
@@ -17,10 +17,6 @@ class Footer extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-
-    this.state = {
-      auSite: win.ApplicationStateData ? win.ApplicationStateData.auSite : false,
-    };
   }
 
   changeSiteVersion() {
@@ -28,8 +24,6 @@ class Footer extends PureComponent {
   }
 
   render() {
-    const { auSite } = this.state;
-
     return (
       <footer className="Footer">
         <div className="layout-container grid-12-noGutter-spaceAround">
@@ -140,7 +134,7 @@ class Footer extends PureComponent {
                 <a className="link--static" href="/bespoke-bridal-collection">Bridal</a>
               </p>
             </li>
-            { auSite ?
+            { siteVersionAU() ?
               <li>
                 <p>
                   <a className="link--static" href="/dresses/formal">Formal</a>
@@ -183,7 +177,7 @@ class Footer extends PureComponent {
               <span
                 className="u-text-decoration--underline u-cursor--pointer"
               >
-                <select className="inline-select" defaultValue={auSite ? 'au' : 'us'}>
+                <select className="inline-select" defaultValue={siteVersionAU() ? 'au' : 'us'}>
                   <option value="us">US</option>
                   <option value="au">Australia</option>
                 </select>

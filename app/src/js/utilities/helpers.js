@@ -32,3 +32,7 @@ export function redirectSiteVersion(path) {
 export function formatSizePresentationUS(size) {
   return `${size.split(' ')[1]} ${size.split(' ')[0]}`;
 }
+
+export function siteVersionAU() {
+  return (win.ApplicationStateData ? win.ApplicationStateData.auSite : false);
+}
