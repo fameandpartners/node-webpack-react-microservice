@@ -53,10 +53,6 @@ const navigationLinks = {
         url: '/dresses/wedding-guests',
       },
       {
-        text: 'Fall Weddings',
-        url: '/dresses/fall-weddings',
-      },
-      {
         type: 'divider',
       },
       {
