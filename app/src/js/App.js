@@ -136,8 +136,11 @@ class App extends Component {
     // IF SHOPPING SPREE IS AVAILBLE, BUILD IT
     if( win.ShoppingSpreeData ) {
       render(
-          <ShoppingSpree firebaseAPI={window.ShoppingSpreeData.firebaseAPI}
-                         firebaseDatabase={window.ShoppingSpreeData.firebaseDatabase}/>,
+          <ShoppingSpree
+            firebaseAPI={window.ShoppingSpreeData.firebaseAPI}
+            firebaseDatabase={window.ShoppingSpreeData.firebaseDatabase}
+            isPDP
+          />,
 
           document.getElementById( 'shopping-spree' )
       );
