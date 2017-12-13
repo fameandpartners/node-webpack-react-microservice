@@ -4,7 +4,7 @@ machine:
 
 dependencies:
     override:
-      - if [ $CIRCLE_BRANCH = 'master' ]; then sh ./build-prod.sh; elif [[ $CIRCLE_BRANCH =~ 'release2' ]]; then sh ./build-dev2.sh; else sh ./build-dev.sh; fi; 
+      - if [ $CIRCLE_BRANCH = 'master' ]; then sh ./build-prod.sh; elif [[ $CIRCLE_BRANCH =~ 'release2' ]]; then sh ./build-dev2.sh; elif [[ $CIRCLE_BRANCH =~ 'release3' ]]; then sh ./build-dev3.sh; else sh ./build-dev.sh; fi; 
 
 test:
   override:
@@ -33,6 +33,17 @@ deployment:
             app
       - aws elasticbeanstalk create-application-version --application-name pdpode --version-label $CIRCLE_BUILD_NUM --source-bundle S3Bucket=dev-fameandpartners-website,S3Key=deploy/pdpode/node_deployebs.$CIRCLE_BUILD_NUM.zip --region us-east-1
       - aws elasticbeanstalk update-environment --environment-name nodey-qa2 --version-label $CIRCLE_BUILD_NUM --region us-east-1
+  qa3:
+    branch: /release3.*/
+    commands:
+      - zip -r node_deploy.zip . -x \*node_modules\*:
+          pwd: 
+            app
+      - aws s3 cp node_deploy.zip s3://dev-fameandpartners-website/deploy/pdpode/node_deployebs.$CIRCLE_BUILD_NUM.zip:
+          pwd: 
+            app
+      - aws elasticbeanstalk create-application-version --application-name pdpode --version-label $CIRCLE_BUILD_NUM --source-bundle S3Bucket=dev-fameandpartners-website,S3Key=deploy/pdpode/node_deployebs.$CIRCLE_BUILD_NUM.zip --region us-east-1
+      - aws elasticbeanstalk update-environment --environment-name nodey-qa3 --version-label $CIRCLE_BUILD_NUM --region us-east-1      
   production:
     branch: master
     commands:
