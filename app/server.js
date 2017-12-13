@@ -1,13 +1,12 @@
 /* eslint-disable */
 require('ignore-styles');
 require('babel-register');
-// require('dotenv').config();
+require('dotenv').config();
 
 const express = require('express');
 const logger = require('morgan');
 const React = require('react');
 const Provider = require('react-redux').Provider;
-const clientAssets = require('./build/webpack/asset-manifest.json');
 // const Promise = require('bluebird');
 // const redis = require('redis');
 const cookieParser = require('cookie-parser');
@@ -20,6 +19,7 @@ const ReactDOMServer = require('react-dom/server');
 const chalk = require('chalk');
 
 // Assets
+const clientAssets = require('./build/asset-manifest.json');
 const template = require('./template');
 
 
@@ -29,7 +29,6 @@ const { transformProductJSON } = require('./src/js/utilities/pdp');
 // Components
 const App = require('./src/js/App');
 const mockJSON = require('./src/mock/product.json');
-const request = require('superagent');
 
 // Store
 const AppStore = require('./src/js/stores/AppStore');
@@ -58,30 +57,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 
-
-app.get('/webpack/asset-manifest', (req, res) => {
-  const clientAssets = require('./build/webpack/asset-manifest.json');
-  var asset_paths = {
-    jsBundle: clientAssets['pdp.js'],
-    cssBundle: clientAssets['pdp.css'],
-    flashJsBundle: clientAssets['flash.js'],
-    flashCssBundle: clientAssets['flash.css'],
-  }
-  res.send(asset_paths);
-});
-
-app.get('/client', (req, res) => {
-  res.header('Content-Type', 'application/json');
-
-  // eslint-disable-next-line
-  console.log('Sending fake assets');
-  var asset_paths = {
-    pathA: 'someBS',
-    pathB: 'someBS',
-  }
-  res.send(asset_paths);
-});
-
+// Rendering
+// *****************************************************************************
 app.get('/pdp', (req, res) => {
   res.header('Content-Type', 'text/html');
   const props = transformProductJSON(mockJSON);
@@ -131,7 +108,6 @@ app.listen(process.env.PORT || 8001);
 
 // reset the rails cache, have to do it here cause ebs environment variables are lies
 require('./scripts/clear_cache');
-/* eslint-disable no-console */
 console.log('Launched Successfully');
 console.log('Go to http://localhost:8001');
 module.exports = app;
