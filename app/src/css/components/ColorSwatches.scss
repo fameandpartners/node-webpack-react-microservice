@@ -26,10 +26,6 @@
   opacity: 1;
 }
 
-.ColorSwatches__swatch--pattern::after {
-  padding-top: 20%;
-}
-
 .ColorSwatches__swatch--dark {
   color: $c-white;
 }

@@ -44,15 +44,15 @@ class ShopAllNavigationDesktop extends PureComponent {
     if (auSite) {
       headerAd = (
         <div className="HeaderNavigationDesktop__ad">
-          <a href="/dresses/fall-weddings">
+          <a href="/dresses/wedding-guests">
             <img
               alt="Fall Weddings Ad"
               className="u-width--full"
               src={fallWeddings}
             />
           </a>
-          <a href="/dresses/fall-weddings" className="link">
-            <span>Shop Fall Weddings</span>
+          <a href="/dresses/wedding-guests" className="link">
+            <span>Shop Wedding Guests</span>
           </a>
         </div>
       );
