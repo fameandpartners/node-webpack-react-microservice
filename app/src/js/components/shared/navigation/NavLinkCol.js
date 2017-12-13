@@ -56,8 +56,25 @@ class NavLinkCol extends Component {
                 null
                 :
                 (
-                  <li key={l.text} className="NavLinkCol__li u-width--full">
-                    <a className="link link--static link--no-underline" href={l.url}>{l.text}</a>
+                  <li
+                    key={l.text}
+                    className={classnames(
+                      l.customClass,
+                      'NavLinkCol__li',
+                      'u-width--full',
+                    )}
+                  >
+                    <a
+                      className={classnames(
+                        l.customClass,
+                        'link',
+                        'link--static',
+                        'link--no-underline',
+                      )}
+                      href={l.url}
+                    >
+                      {l.text}
+                    </a>
                   </li>
                 )
             );
