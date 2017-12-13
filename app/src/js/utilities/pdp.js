@@ -281,14 +281,15 @@ export function transformProductColors(data, key) {
     const optionValue = c.option_value;
     const optionValueVal = optionValue.value || '';
     const hasPatternImage = optionValueVal ? optionValueVal.indexOf('.') > -1 : false;
-    const ASSET_BASE_PATH = process.env.CLOUDFRONT_BASE_PATH + '/assets/product-color-images';
+    const cfPath = process.env.CLOUDFRONT_BASE_PATH;
+    const ASSET_BASE_PATH = '/assets/product-color-images';
 
     return {
       id: optionValue.id,
       name: optionValue.name,
       presentation: optionValue.presentation,
       hexValue: hasPatternImage ? '' : optionValueVal,
-      patternUrl: hasPatternImage ? `${ASSET_BASE_PATH}/${optionValueVal}` : '',
+      patternUrl: hasPatternImage ? `${cfPath}${ASSET_BASE_PATH}/${optionValueVal}` : '',
       centsTotal: price,
     };
   });
