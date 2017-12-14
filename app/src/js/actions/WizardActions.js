@@ -9,6 +9,14 @@ export function jumpToStep({ activeStepId, previousStepId, shouldAppear = true }
   };
 }
 
+export function updateEditingStep({ isEditingStep }) {
+  return {
+    type: WizardConstants.EDIT_STEP,
+    isEditingStep,
+  };
+}
+
 export default {
   jumpToStep,
+  updateEditingStep,
 };

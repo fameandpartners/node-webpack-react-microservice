@@ -4,15 +4,21 @@ import WizardConstants from '../constants/WizardConstants';
 export const $$initialState = Immutable.fromJS({
   activeStepId: null,
   shouldAppear: false,
+  isEditingStep: false,
 });
 
 export default function WizardReducer($$state = $$initialState, action = null) {
   switch (action.type) {
     case WizardConstants.ACTIVATE_STEP: {
       return $$state.merge({
-        // Do not wipe activeStepId or previousStepId, if one is not provided
+        // Do not wipe activeStepId, if one is not provided
         activeStepId: action.activeStepId ? action.activeStepId : $$state.get('activeStepId'),
         shouldAppear: action.shouldAppear,
+      });
+    }
+    case WizardConstants.EDIT_STEP: {
+      return $$state.merge({
+        isEditingStep: action.isEditingStep,
       });
     }
     default: {

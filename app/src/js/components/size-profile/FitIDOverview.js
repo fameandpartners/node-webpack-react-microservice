@@ -33,8 +33,15 @@ function stateToProps(state) {
 }
 
 function dispatchToProps(dispatch) {
-  const { jumpToStep } = bindActionCreators(WizardActions, dispatch);
-  return { jumpToStep };
+  const {
+    jumpToStep,
+    updateEditingStep,
+  } = bindActionCreators(WizardActions, dispatch);
+
+  return {
+    jumpToStep,
+    updateEditingStep,
+  };
 }
 
 class FitIDOverview extends Component {
@@ -56,6 +63,7 @@ class FitIDOverview extends Component {
   }
 
   handleOpenEditBodyFit() {
+    this.props.updateEditingStep({ isEditingStep: true });
     this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
   }
 
@@ -154,6 +162,7 @@ class FitIDOverview extends Component {
 FitIDOverview.propTypes = {
   // Redux Actions
   jumpToStep: PropTypes.func.isRequired,
+  updateEditingStep: PropTypes.func.isRequired,
   // Redux Props
   temporaryMeasurementMetric: PropTypes.string,
   temporaryHeightValue: PropTypes.number,

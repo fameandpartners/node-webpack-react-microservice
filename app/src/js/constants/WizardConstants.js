@@ -4,6 +4,7 @@ import mirrorCreator from 'mirror-creator';
 const actionTypes = assign({},
   mirrorCreator([
     'ACTIVATE_STEP',
+    'EDIT_STEP',
   ]),
 );
 

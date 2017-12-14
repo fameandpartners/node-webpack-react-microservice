@@ -16,16 +16,25 @@ import WizardStep from '../wizard/WizardStep';
 import BodySizeForm from './BodySizeForm';
 import ClothingSizeForm from './ClothingSizeForm';
 
-function stateToProps() {
-  return {};
+function stateToProps(state) {
+  return {
+    isEditingStep: state.$$wizardState.get('isEditingStep'),
+  };
 }
 
 function dispatchToProps(dispatch) {
-  const { jumpToStep } = bindActionCreators(WizardActions, dispatch);
-  return { jumpToStep };
+  const {
+    jumpToStep,
+    updateEditingStep,
+  } = bindActionCreators(WizardActions, dispatch);
+
+  return {
+    jumpToStep,
+    updateEditingStep,
+  };
 }
 
-class OverallFitCombined extends Component {
+class AboutYouCombined extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -40,30 +49,65 @@ class OverallFitCombined extends Component {
   }
 
   handleNextSelection() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.PETITE_PLUS_SURVEY_STEP });
+    const {
+      jumpToStep,
+      isEditingStep,
+      updateEditingStep,
+    } = this.props;
+
+    if (isEditingStep) {
+      updateEditingStep({ isEditingStep: false });
+      jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERVIEW_STEP });
+    } else {
+      jumpToStep({ activeStepId: WizardConstants.PETITE_PLUS_SURVEY_STEP });
+    }
+  }
+
+  wizardDescription() {
+    if (this.props.isEditingStep) {
+      return (
+        <div>
+          <h5 className="WizardStep__description u-mb-normal">
+            These questions will contribute to refining your overall fit.
+          </h5>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <h5 className="WizardStep__description u-mb-normal">
+          These first set of questions will contribute to refining your overall fit.
+        </h5>
+        <h5 className="WizardStep__description u-mb-normal">
+          Already have a Fit I.D.?
+          <a href="">Log in</a>
+        </h5>
+      </div>
+    );
   }
 
   render() {
+    const { isEditingStep } = this.props;
+
     return (
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
-        currentStep={1}
-        totalSteps={3}
+        currentStep={isEditingStep ? null : 1}
+        totalSteps={isEditingStep ? null : 3}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
         <div>
           <h3 className="WizardStep__title u-mb-small">
-            Let’s get started
+            { isEditingStep
+              ? 'Edit About You'
+              : 'Let’s get started'
+            }
           </h3>
-          <h5 className="WizardStep__description u-mb-normal">
-            These first set of questions will contribute to refining your overall fit.
-          </h5>
-          <h5 className="WizardStep__description u-mb-normal">
-            Already have a Fit I.D.? <a href="">Log in</a>
-          </h5>
+          { this.wizardDescription() }
         </div>
 
         <div className="grid-12-noGutter">
@@ -83,7 +127,7 @@ class OverallFitCombined extends Component {
         <div className="ButtonBox--center">
           <Button
             className="SelectSizeProfile__button button-height-big"
-            text="Next"
+            text={isEditingStep ? 'Save' : 'Next'}
             handleClick={this.handleNextSelection}
           />
         </div>
@@ -93,11 +137,15 @@ class OverallFitCombined extends Component {
   }
 }
 
-OverallFitCombined.propTypes = {
+AboutYouCombined.propTypes = {
   jumpToStep: PropTypes.func.isRequired,
+  updateEditingStep: PropTypes.func.isRequired,
+  // Redux Props
+  isEditingStep: PropTypes.bool,
 };
 
-OverallFitCombined.defaultProps = {
+AboutYouCombined.defaultProps = {
+  isEditingStep: false,
 };
 
-export default connect(stateToProps, dispatchToProps)(OverallFitCombined);
+export default connect(stateToProps, dispatchToProps)(AboutYouCombined);
