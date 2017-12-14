@@ -82,7 +82,7 @@ class OverallFitCombined extends Component {
 
         <div className="ButtonBox--center">
           <Button
-            className="SelectSizeProfile__button"
+            className="SelectSizeProfile__button button-height-big"
             text="Next"
             handleClick={this.handleNextSelection}
           />

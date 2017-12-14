@@ -66,7 +66,7 @@ class SelectSizeProfile extends Component {
           <h5>Or</h5>
           <div className="ButtonBox--medium-width ButtonBox--center">
             <Button
-              className="SelectSize__button"
+              className="SelectSize__button button-height-big"
               text="Use standard sizing"
               handleClick={this.handleSizeClick}
             />

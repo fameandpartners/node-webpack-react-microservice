@@ -138,7 +138,7 @@ class FitIDOverview extends Component {
           <div className="ButtonBox ButtonBox--center">
 
             <Button
-              className="FitIDOverview__button"
+              className="FitIDOverview__button button-height-big"
               text="Save your Fit I.D. to your profile"
               handleClick={this.saveFitID}
             />
