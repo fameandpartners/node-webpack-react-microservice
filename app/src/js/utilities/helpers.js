@@ -36,3 +36,7 @@ export function formatSizePresentationUS(size) {
 export function siteVersionAU() {
   return (win.ApplicationStateData ? win.ApplicationStateData.auSite : false);
 }
+
+export function cnyDeliveryDelays() {
+  return (win.ApplicationStateData ? win.ApplicationStateData.CnyDeliveryDelays : false);
+}

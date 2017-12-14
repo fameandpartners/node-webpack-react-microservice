@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
+// Utilities
 import noop from '../../libs/noop';
+import { cnyDeliveryDelays } from '../../utilities/helpers';
 
 // UI components
 import Checkbox from '../form/Checkbox';
@@ -74,7 +76,7 @@ class ExpressMaking extends Component {
       isActive,
       mobile,
     } = this.props;
-    if (expressMakingAvailable && isActive) {
+    if (expressMakingAvailable && isActive && !cnyDeliveryDelays()) {
       return (
         <div className="grid-center-spaceAround ExpressMaking__content u-mb-small">
           <div className="col-1">
