@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
 import win from '../../polyfills/windowPolyfill';
 
+// Utilities
+import { siteVersionAU } from '../../utilities/helpers';
 
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
@@ -49,7 +51,7 @@ class CliqueCallout extends Component {
   }
 
   generateCliqueCallout() {
-    if (this.state.inShoppingSpree) return null;
+    if (this.state.inShoppingSpree || siteVersionAU()) return null;
     return (
       <div className="grid-center-spaceAround CliqueCallout__content">
         <div className="col-10 u-text-align-left u-paddingBottom--small">
