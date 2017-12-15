@@ -126,7 +126,7 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a className="link--static" href="/modern-bridesmaid-collection">Bridesmaid</a>
+                <a className="link--static" href="/modern-bridesmaid-dresses">Bridesmaid</a>
               </p>
             </li>
             <li>
