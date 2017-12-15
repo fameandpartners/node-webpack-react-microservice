@@ -204,6 +204,7 @@ const navigationLinks = {
         text: 'Shop With Friends',
         url: '#',
         customClass: 'js-shop-with-friends',
+        shouldHide: siteVersionAU(),
       },
     ],
   },
