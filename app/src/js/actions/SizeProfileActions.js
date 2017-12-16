@@ -85,6 +85,28 @@ export function updateHipSelection({
   };
 }
 
+export function updateJeanSelection({
+  temporaryJeanSize,
+  selectedJeanSize,
+}) {
+  return {
+    type: SizeProfileConstants.UPDATE_JEAN_SELECTION,
+    selectedJeanSize,
+    temporaryJeanSize,
+  };
+}
+
+export function updateBraSelection({
+  temporaryBraSize,
+  selectedBraSize,
+}) {
+  return {
+    type: SizeProfileConstants.UPDATE_BRA_SELECTION,
+    selectedBraSize,
+    temporaryBraSize,
+  };
+}
+
 export function updateDressSizeSelection({ temporaryDressSize, selectedDressSize }) {
   return {
     type: SizeProfileConstants.UPDATE_DRESS_SIZE_SELECTION,
@@ -115,4 +137,6 @@ export default {
   updateBustSelection,
   updateWaistSelection,
   updateHipSelection,
+  updateBraSelection,
+  updateJeanSelection,
 };

@@ -2,26 +2,40 @@ import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import { find } from 'lodash';
+import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
+// Constants
+import {
+  JEAN_SIZES,
+} from '../../constants/ProductConstants';
+
 // Actions
-// import CustomizationActions from '../../actions/CustomizationActions';
+import SizeProfileActions from '../../actions/SizeProfileActions';
 
 // UI Components
 import Input from '../form/Input';
+import Select from '../form/Select';
 
 // CSS
 import '../../../css/components/StandardSizeForm.scss';
 
-function stateToProps() {
+function stateToProps(state) {
   return {
+    temporaryJeanSize: state.$$sizeProfileState.get('temporaryJeanSize'),
+    temporaryBraSize: state.$$sizeProfileState.get('temporaryBraSize'),
   };
 }
 
-function dispatchToProps() {
+function dispatchToProps(dispatch) {
+  const {
+    updateJeanSelection,
+    updateBraSelection,
+  } = bindActionCreators(SizeProfileActions, dispatch);
+
   return {
+    updateJeanSelection,
+    updateBraSelection,
   };
 }
 
@@ -31,9 +45,28 @@ class ClothingSizeForm extends PureComponent {
     autoBind(this);
   }
 
+  generateJeanOptions(selected) {
+    return JEAN_SIZES.map(i => ({
+      id: i,
+      name: i,
+      meta: i,
+      active: i === selected,
+    }));
+  }
+
+  handleJeanChange(value) {
+    this.props.updateJeanSelection({ temporaryJeanSize: value.option.id });
+  }
+
+  handleBraChange({ value }) {
+    this.props.updateBraSelection({ temporaryBraSize: String(value) });
+  }
+
   render() {
     const {
       containerClassNames,
+      temporaryJeanSize,
+      temporaryBraSize,
     } = this.props;
 
     return (
@@ -58,9 +91,10 @@ class ClothingSizeForm extends PureComponent {
             <div className="col-10">
               <Input
                 id="height-option-cm"
-                type="number"
+                type="text"
+                defaultValue={temporaryBraSize}
                 inlineMeta=""
-                onChange={this.handleCMChange}
+                onChange={this.handleBraChange}
               />
             </div>
           </div>
@@ -75,15 +109,15 @@ class ClothingSizeForm extends PureComponent {
               },
             )}
           >
-            What's your jeans waist size (inches)
+            What&rsquo;s your jeans waist size (inches)
           </p>
           <div className="grid-noGutter">
             <div className="col-10">
-              <Input
-                id="height-option-cm"
-                type="number"
-                inlineMeta=""
-                onChange={this.handleCMChange}
+              <Select
+                id="jean-option-in"
+                className="sort-options"
+                options={this.generateJeanOptions(temporaryJeanSize)}
+                onChange={this.handleJeanChange}
               />
             </div>
           </div>
@@ -97,10 +131,18 @@ class ClothingSizeForm extends PureComponent {
 ClothingSizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
+  // Redux Props
+  temporaryJeanSize: PropTypes.number,
+  temporaryBraSize: PropTypes.string,
+  // Redux Actions
+  updateJeanSelection: PropTypes.func.isRequired,
+  updateBraSelection: PropTypes.func.isRequired,
 };
 
 ClothingSizeForm.defaultProps = {
   containerClassNames: 'u-mt-normal u-mb-huge',
+  temporaryJeanSize: null,
+  temporaryBraSize: null,
 };
 
 

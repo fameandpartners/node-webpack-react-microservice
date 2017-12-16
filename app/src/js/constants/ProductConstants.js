@@ -22,6 +22,7 @@ const constants = assign({},
   {
     AU_SIZES: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26],
     US_SIZES: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
+    JEAN_SIZES: [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43],
     INCH_SIZES: generateInchesSizing(),
     MIN_CM: 147,
     MAX_CM: 193,

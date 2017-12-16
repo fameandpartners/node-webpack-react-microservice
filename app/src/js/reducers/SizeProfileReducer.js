@@ -34,6 +34,14 @@ export const $$initialState = Immutable.fromJS({
   // Number
   temporaryFittedDressSize: null,
   selectedFittedDressSize: null,
+
+  // Number
+  temporaryJeanSize: null,
+  selectedJeanSize: null,
+
+  // String
+  temporaryBraSize: null,
+  selectedBraSize: null,
 });
 
 export default function SizeProfileReducer($$state = $$initialState, action = null) {
@@ -149,6 +157,29 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
 
       return $$state.merge({
         temporaryFittedDressSize: action.temporaryFittedDressSize,
+      });
+    }
+    // DRESS FIT
+    case SizeProfileConstants.UPDATE_JEAN_SELECTION: {
+      if (action.selectedJeanSize) {
+        return $$state.merge({
+          selectedJeanSize: action.selectedJeanSize,
+          temporaryJeanSize: action.selectedJeanSize,
+        });
+      }
+      return $$state.merge({
+        temporaryJeanSize: action.temporaryJeanSize,
+      });
+    }
+    case SizeProfileConstants.UPDATE_BRA_SELECTION: {
+      if (action.selectedBraSize) {
+        return $$state.merge({
+          selectedBraSize: action.selectedBraSize,
+          temporaryBraSize: action.selectedBraSize,
+        });
+      }
+      return $$state.merge({
+        temporaryBraSize: action.temporaryBraSize,
       });
     }
 
