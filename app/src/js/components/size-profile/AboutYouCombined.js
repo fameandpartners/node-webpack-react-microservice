@@ -42,6 +42,7 @@ class AboutYouCombined extends Component {
 
   handleCloseWizard() {
     this.props.jumpToStep({ shouldAppear: false });
+    this.props.updateEditingStep({ isEditingStep: false });
   }
 
   handlePreviousStep() {

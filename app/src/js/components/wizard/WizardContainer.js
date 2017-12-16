@@ -31,6 +31,7 @@ function dispatchToProps(dispatch) {
   const actions = bindActionCreators(WizardActions, dispatch);
   return {
     jumpToStep: actions.jumpToStep,
+    updateEditingStep: actions.updateEditingStep,
   };
 }
 
@@ -54,8 +55,9 @@ class WizardContainer extends Component {
   }
 
   handleBackgroundClick() {
-    const { jumpToStep, closeOnBackgroundClick } = this.props;
+    const { jumpToStep, closeOnBackgroundClick, updateEditingStep } = this.props;
     if (closeOnBackgroundClick) {
+      updateEditingStep({ isEditingStep: false });
       jumpToStep({ shouldAppear: false });
     }
   }
@@ -75,8 +77,9 @@ class WizardContainer extends Component {
   }
 
   handleEscapeKeydown(evt) {
-    const { jumpToStep } = this.props;
+    const { jumpToStep, updateEditingStep } = this.props;
     if (evt.keyCode === KEYS.ESC && this.wizardIsActive()) {
+      updateEditingStep({ isEditingStep: false });
       jumpToStep({ shouldAppear: false });
     }
   }
@@ -173,6 +176,7 @@ WizardContainer.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   // Redux
   jumpToStep: PropTypes.func.isRequired,
+  updateEditingStep: PropTypes.func.isRequired,
   activeStepId: PropTypes.string,
   stepIds: PropTypes.arrayOf(PropTypes.string),
   shouldAppear: PropTypes.bool,
