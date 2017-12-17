@@ -1,11 +1,11 @@
 import SizeProfileConstants from '../constants/SizeProfileConstants';
 
-export function setSizeProfileError({
+export function setStandardSizeError({
   heightError = false,
   sizeError = false,
 }) {
   return {
-    type: SizeProfileConstants.SET_SIZE_PROFILE_ERROR,
+    type: SizeProfileConstants.SET_STANDARD_SIZE_ERROR,
     heightError,
     sizeError,
   };
@@ -127,7 +127,7 @@ export function updateFittedDressSizeSelection({
 }
 
 export default {
-  setSizeProfileError,
+  setStandardSizeError,
   updateMeasurementMetric,
   updateHeightSelection,
   updateWeightSelection,

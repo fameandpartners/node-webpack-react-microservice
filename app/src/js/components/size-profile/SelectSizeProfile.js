@@ -58,7 +58,7 @@ class SelectSizeProfile extends Component {
           If not we'll re-make it for you free of charge.</h5>
           <div className="ButtonBox--medium-width ButtonBox--center">
             <Button
-              className="SelectSizeProfile__button"
+              className="SelectSizeProfile__button button-height-big"
               text="Use a fit I.D."
               handleClick={this.handleFitIDClick}
             />

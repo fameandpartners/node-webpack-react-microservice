@@ -58,6 +58,16 @@ class SizeProfileModal extends Component {
     }
   }
 
+  containerClassName() {
+    const { activeStepId } = this.props;
+    switch (activeStepId) {
+      case WizardConstants.STANDARD_SIZING_STEP:
+        return 'SizeProfileModal__fixed-width-small';
+      default:
+        return 'SizeProfileModal__fixed-width-big';
+    }
+  }
+
   render() {
     return (
       <WizardContainer
@@ -73,10 +83,8 @@ class SizeProfileModal extends Component {
         ]}
         flexWidth
       >
-        <div
-          className="SizeProfileModal__fixed-width"
-        >
-          { this.injectWizardStep() }
+        <div className={this.containerClassName()} >
+          {this.injectWizardStep()}
         </div>
       </WizardContainer>
     );

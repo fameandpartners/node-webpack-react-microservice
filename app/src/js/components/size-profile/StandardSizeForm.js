@@ -44,7 +44,7 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const {
-    setSizeProfileError,
+    setStandardSizeError,
     updateMeasurementMetric,
     updateHeightSelection,
     updateDressSizeSelection,
@@ -53,7 +53,7 @@ function dispatchToProps(dispatch) {
   const modalActions = bindActionCreators(ModalActions, dispatch);
 
   return {
-    setSizeProfileError,
+    setStandardSizeError,
     updateMeasurementMetric,
     updateHeightSelection,
     updateDressSizeSelection,
@@ -77,8 +77,10 @@ class StandardSizeForm extends PureComponent {
   }
 
   validateSizeSelection({ temporaryHeightValue, temporaryMeasurementMetric }) {
-    const { setSizeProfileError, temporaryDressSize } = this.props;
+    const { setStandardSizeError, temporaryDressSize } = this.props;
     const errors = { heightError: false, sizeError: false };
+
+    console.log('VALIDATION YES ******');
 
     if (this.hasHeightError({
       temporaryHeightValue, temporaryMeasurementMetric },
@@ -90,11 +92,15 @@ class StandardSizeForm extends PureComponent {
       }
 
       if (!temporaryDressSize) { errors.sizeError = true; }
-      setSizeProfileError(errors);
+      console.log('HAS ERRORS ******');
+      console.log(errors);
+      setStandardSizeError(errors);
       return false;
     }
 
-    setSizeProfileError(errors);
+    console.log('NO ERRORS ******');
+    console.log(errors);
+    setStandardSizeError(errors);
     return true;
   }
 
@@ -177,6 +183,8 @@ class StandardSizeForm extends PureComponent {
 
   handleDressSizeSelection(s) {
     return () => {
+      console.log(s);
+      this.props.setStandardSizeError({ sizeError: false });
       this.props.updateDressSizeSelection({ temporaryDressSize: s });
     };
   }
@@ -217,6 +225,15 @@ class StandardSizeForm extends PureComponent {
   }
 
   handleSaveSelection() {
+    this.validateSizeSelection({
+      temporaryHeightValue: this.props.temporaryHeightValue,
+      temporaryMeasurementMetric: this.props.temporaryMeasurementMetric,
+    });
+
+    if (this.props.heightError || this.props.sizeError) {
+      console.log('ERRORS ARE IN DA HOUSE');
+    }
+
     console.log('Save selection');
   }
 
@@ -228,7 +245,6 @@ class StandardSizeForm extends PureComponent {
       temporaryHeightValue,
       heightError,
       sizeError,
-      displaySaveButton,
       containerClassNames,
     } = this.props;
     const SIZES = isUSSiteVersion ? US_SIZES : AU_SIZES;
@@ -330,16 +346,14 @@ class StandardSizeForm extends PureComponent {
                 View Size Guide
               </p>
             </div>
-            { displaySaveButton &&
-              <div className="ButtonBox--medium-width ButtonBox--center">
-                <Button
-                  className="SelectSizeProfile__button"
-                  text="Save"
-                  handleClick={this.handleSaveSelection}
-                />
-              </div>
-            }
           </div>
+        </div>
+        <div className="ButtonBox--center">
+          <Button
+            className="SelectSizeProfile__button button-height-big"
+            text="Save"
+            handleClick={this.handleSaveSelection}
+          />
         </div>
       </div>
     );
@@ -357,9 +371,8 @@ StandardSizeForm.propTypes = {
   temporaryHeightValue: PropTypes.number,
   heightError: PropTypes.bool,
   sizeError: PropTypes.bool,
-  displaySaveButton: PropTypes.bool,
   // Redux Actions
-  setSizeProfileError: PropTypes.func.isRequired,
+  setStandardSizeError: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
@@ -373,7 +386,6 @@ StandardSizeForm.defaultProps = {
   temporaryHeightValue: null,
   heightError: false,
   sizeError: false,
-  displaySaveButton: false,
 };
 
 

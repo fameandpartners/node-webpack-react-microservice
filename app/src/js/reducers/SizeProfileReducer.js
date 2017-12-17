@@ -47,7 +47,7 @@ export const $$initialState = Immutable.fromJS({
 export default function SizeProfileReducer($$state = $$initialState, action = null) {
   switch (action.type) {
     // GENERAL
-    case SizeProfileConstants.SET_SIZE_PROFILE_ERROR: {
+    case SizeProfileConstants.SET_STANDARD_SIZE_ERROR: {
       return $$state.merge({
         heightError: action.heightError,
         sizeError: action.sizeError,

@@ -14,7 +14,7 @@ const actionTypes = assign({},
     'UPDATE_JEAN_SELECTION',
     'UPDATE_BRA_SELECTION',
     'UPDATE_MEASUREMENT_METRIC',
-    'SET_SIZE_PROFILE_ERROR',
+    'SET_STANDARD_SIZE_ERROR',
   ]),
 );
 
