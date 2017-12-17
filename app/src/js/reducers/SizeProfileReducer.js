@@ -49,8 +49,8 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
     // GENERAL
     case SizeProfileConstants.SET_STANDARD_SIZE_ERROR: {
       return $$state.merge({
-        heightError: action.heightError,
-        sizeError: action.sizeError,
+        standardHeightError: action.standardHeightError,
+        standardSizeError: action.standardSizeError,
       });
     }
     // HEIGHT

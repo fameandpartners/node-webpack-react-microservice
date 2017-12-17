@@ -13,6 +13,7 @@ import WizardConstants from '../../constants/WizardConstants';
 // Components
 import WizardStep from '../wizard/WizardStep';
 import StandardSizeForm from './StandardSizeForm';
+import Button from '../generic/Button';
 
 function stateToProps() {
   return {};
@@ -39,6 +40,12 @@ class StandardSizing extends Component {
     this.props.jumpToStep({ activeStepId: WizardConstants.SELECT_SIZE_PROFILE_STEP });
   }
 
+  handleSaveSelection() {
+    if (this.sizeForm.isValid()) {
+      this.props.jumpToStep({ shouldAppear: false });
+    }
+  }
+
   render() {
     return (
       <WizardStep
@@ -51,7 +58,16 @@ class StandardSizing extends Component {
         <StandardSizeForm
           displaySaveButton
           containerClassNames="u-mt-normal u-mb-big"
+          validationHandler={ref => (this.sizeForm = ref)}
         />
+
+        <div className="ButtonBox--center">
+          <Button
+            className="SelectSizeProfile__button button-height-big"
+            text="Save"
+            handleClick={this.handleSaveSelection}
+          />
+        </div>
       </WizardStep>
     );
   }

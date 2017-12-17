@@ -37,8 +37,8 @@ function stateToProps(state) {
     temporaryMeasurementMetric: state.$$sizeProfileState.get('temporaryMeasurementMetric'),
     temporaryHeightValue: state.$$sizeProfileState.get('temporaryHeightValue'),
     temporaryDressSize: state.$$sizeProfileState.get('temporaryDressSize'),
-    heightError: state.$$sizeProfileState.get('heightError'),
-    sizeError: state.$$sizeProfileState.get('sizeError'),
+    standardHeightError: state.$$sizeProfileState.get('standardHeightError'),
+    standardSizeError: state.$$sizeProfileState.get('standardSizeError'),
   };
 }
 
@@ -68,6 +68,21 @@ class StandardSizeForm extends PureComponent {
     autoBind(this);
   }
 
+  componentDidMount() {
+    this.props.validationHandler(this);
+  }
+
+  componentWillUnmount() {
+    this.props.validationHandler(undefined);
+  }
+
+  isValid() {
+    return this.validateSizeSelection({
+      temporaryHeightValue: this.props.temporaryHeightValue,
+      temporaryMeasurementMetric: this.props.temporaryMeasurementMetric,
+    });
+  }
+
   hasHeightError({ temporaryHeightValue, temporaryMeasurementMetric }) {
     return (
      !(temporaryHeightValue && temporaryMeasurementMetric) || // Not Present
@@ -78,9 +93,7 @@ class StandardSizeForm extends PureComponent {
 
   validateSizeSelection({ temporaryHeightValue, temporaryMeasurementMetric }) {
     const { setStandardSizeError, temporaryDressSize } = this.props;
-    const errors = { heightError: false, sizeError: false };
-
-    console.log('VALIDATION YES ******');
+    const errors = { standardHeightError: false, standardSizeError: false };
 
     if (this.hasHeightError({
       temporaryHeightValue, temporaryMeasurementMetric },
@@ -88,18 +101,14 @@ class StandardSizeForm extends PureComponent {
       if (this.hasHeightError(
         { temporaryHeightValue, temporaryMeasurementMetric },
       )) {
-        errors.heightError = true;
+        errors.standardHeightError = true;
       }
 
-      if (!temporaryDressSize) { errors.sizeError = true; }
-      console.log('HAS ERRORS ******');
-      console.log(errors);
+      if (!temporaryDressSize) { errors.standardSizeError = true; }
       setStandardSizeError(errors);
       return false;
     }
 
-    console.log('NO ERRORS ******');
-    console.log(errors);
     setStandardSizeError(errors);
     return true;
   }
@@ -109,11 +118,11 @@ class StandardSizeForm extends PureComponent {
    * @param  {Number|String} value
    */
   handleCMChange({ value }) {
-    const { heightError, updateHeightSelection } = this.props;
+    const { standardHeightError, updateHeightSelection } = this.props;
     const numVal = parseInt(value, 10);
 
     if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
-      if (heightError) { // Only validate if there is an error
+      if (standardHeightError) { // Only validate if there is an error
         this.validateSizeSelection({
           temporaryHeightValue: numVal,
           temporaryMeasurementMetric: UNITS.CM,
@@ -131,12 +140,12 @@ class StandardSizeForm extends PureComponent {
    * @param  {Object} {option} - Select dropdown's option chosen
    */
   handleInchChange({ option }) {
-    const { updateHeightSelection, heightError } = this.props;
+    const { updateHeightSelection, standardHeightError } = this.props;
     const selection = INCH_SIZES[option.id];
 
     if (selection) {
       const inches = (selection.ft * 12) + selection.inch;
-      if (heightError) {
+      if (standardHeightError) {
         this.validateSizeSelection({
           temporaryHeightValue: inches,
           temporaryMeasurementMetric: UNITS.INCH,
@@ -183,8 +192,7 @@ class StandardSizeForm extends PureComponent {
 
   handleDressSizeSelection(s) {
     return () => {
-      console.log(s);
-      this.props.setStandardSizeError({ sizeError: false });
+      this.props.setStandardSizeError({ standardSizeError: false });
       this.props.updateDressSizeSelection({ temporaryDressSize: s });
     };
   }
@@ -224,27 +232,14 @@ class StandardSizeForm extends PureComponent {
     }));
   }
 
-  handleSaveSelection() {
-    this.validateSizeSelection({
-      temporaryHeightValue: this.props.temporaryHeightValue,
-      temporaryMeasurementMetric: this.props.temporaryMeasurementMetric,
-    });
-
-    if (this.props.heightError || this.props.sizeError) {
-      console.log('ERRORS ARE IN DA HOUSE');
-    }
-
-    console.log('Save selection');
-  }
-
   render() {
     const {
       isUSSiteVersion,
       temporaryDressSize,
       temporaryMeasurementMetric,
       temporaryHeightValue,
-      heightError,
-      sizeError,
+      standardHeightError,
+      standardSizeError,
       containerClassNames,
     } = this.props;
     const SIZES = isUSSiteVersion ? US_SIZES : AU_SIZES;
@@ -270,7 +265,7 @@ class StandardSizeForm extends PureComponent {
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
-                'u-color-red': heightError,
+                'u-color-red': standardHeightError,
               },
             )}
           >
@@ -282,16 +277,16 @@ class StandardSizeForm extends PureComponent {
                 <Select
                   id="height-option-in"
                   className="sort-options"
-                  error={heightError}
-                  inlineMeta={heightError ? 'Please select your height' : null}
+                  error={standardHeightError}
+                  inlineMeta={standardHeightError ? 'Please select your height' : null}
                   options={this.generateInchesOptions()}
                   onChange={this.handleInchChange}
                 /> :
                 <Input
                   id="height-option-cm"
                   type="number"
-                  error={heightError}
-                  inlineMeta={heightError ? 'Please enter a valid height' : null}
+                  error={standardHeightError}
+                  inlineMeta={standardHeightError ? 'Please enter a valid height' : null}
                   focusOnMount
                   onChange={this.handleCMChange}
                   defaultValue={temporaryHeightValue}
@@ -329,14 +324,14 @@ class StandardSizeForm extends PureComponent {
               </div>
             ))}
           </div>
-          { sizeError ?
+          { standardSizeError &&
             <div className="StandardSizeForm__size-error-text">
               <p className="p u-color-red u-text-align-left u-mb-small u-mt-small">
                 Please select a size
               </p>
             </div>
-            : null
           }
+
           <div className="grid-noGutter">
             <div className="col-12">
               <p
@@ -348,13 +343,6 @@ class StandardSizeForm extends PureComponent {
             </div>
           </div>
         </div>
-        <div className="ButtonBox--center">
-          <Button
-            className="SelectSizeProfile__button button-height-big"
-            text="Save"
-            handleClick={this.handleSaveSelection}
-          />
-        </div>
       </div>
     );
   }
@@ -363,14 +351,15 @@ class StandardSizeForm extends PureComponent {
 StandardSizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
+  validationHandler: PropTypes.func.isRequired,
   // Redux Props
   activateModal: PropTypes.func.isRequired,
   isUSSiteVersion: PropTypes.bool.isRequired,
   temporaryDressSize: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string,
   temporaryHeightValue: PropTypes.number,
-  heightError: PropTypes.bool,
-  sizeError: PropTypes.bool,
+  standardHeightError: PropTypes.bool,
+  standardSizeError: PropTypes.bool,
   // Redux Actions
   setStandardSizeError: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
@@ -384,9 +373,8 @@ StandardSizeForm.defaultProps = {
   temporaryDressSize: null,
   temporaryMeasurementMetric: null,
   temporaryHeightValue: null,
-  heightError: false,
-  sizeError: false,
+  standardHeightError: false,
+  standardSizeError: false,
 };
-
 
 export default connect(stateToProps, dispatchToProps)(StandardSizeForm);

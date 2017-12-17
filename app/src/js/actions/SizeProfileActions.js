@@ -1,13 +1,13 @@
 import SizeProfileConstants from '../constants/SizeProfileConstants';
 
 export function setStandardSizeError({
-  heightError = false,
-  sizeError = false,
+  standardHeightError = false,
+  standardSizeError = false,
 }) {
   return {
     type: SizeProfileConstants.SET_STANDARD_SIZE_ERROR,
-    heightError,
-    sizeError,
+    standardHeightError,
+    standardSizeError,
   };
 }
 
