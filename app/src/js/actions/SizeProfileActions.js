@@ -11,6 +11,30 @@ export function setStandardSizeError({
   };
 }
 
+export function setClothingSizeError({
+  braSizeError = false,
+  jeanSizeError = false,
+}) {
+  return {
+    type: SizeProfileConstants.SET_CLOTHING_SIZE_ERROR,
+    braSizeError,
+    jeanSizeError,
+  };
+}
+
+export function setBodySizeError({
+  heightError = false,
+  weightError = false,
+  ageError = false,
+}) {
+  return {
+    type: SizeProfileConstants.SET_BODY_SIZE_ERROR,
+    heightError,
+    weightError,
+    ageError,
+  };
+}
+
 export function updateMeasurementMetric({ selectedMeasurementMetric, temporaryMeasurementMetric }) {
   return {
     type: SizeProfileConstants.UPDATE_MEASUREMENT_METRIC,
@@ -128,6 +152,8 @@ export function updateFittedDressSizeSelection({
 
 export default {
   setStandardSizeError,
+  setClothingSizeError,
+  setBodySizeError,
   updateMeasurementMetric,
   updateHeightSelection,
   updateWeightSelection,

@@ -32,15 +32,15 @@ function stateToProps(state) {
     temporaryHeightValue: state.$$sizeProfileState.get('temporaryHeightValue'),
     heightError: state.$$sizeProfileState.get('heightError'),
     temporaryWeightValue: state.$$sizeProfileState.get('temporaryWeightValue'),
-    // weightError: state.$$sizeProfileState.get('weightError'),
+    weightError: state.$$sizeProfileState.get('weightError'),
     temporaryAgeValue: state.$$sizeProfileState.get('temporaryAgeValue'),
-    // ageError: state.$$sizeProfileState.get('ageError'),
+    ageError: state.$$sizeProfileState.get('ageError'),
   };
 }
 
 function dispatchToProps(dispatch) {
   const {
-    setSizeProfileError,
+    setBodySizeError,
     updateMeasurementMetric,
     updateHeightSelection,
     updateWeightSelection,
@@ -48,7 +48,7 @@ function dispatchToProps(dispatch) {
   } = bindActionCreators(SizeProfileActions, dispatch);
 
   return {
-    setSizeProfileError,
+    setBodySizeError,
     updateMeasurementMetric,
     updateHeightSelection,
     updateWeightSelection,
@@ -62,6 +62,14 @@ class BodySizeForm extends PureComponent {
     autoBind(this);
   }
 
+  componentDidMount() {
+    this.props.validationHandler(this);
+  }
+
+  componentWillUnmount() {
+    this.props.validationHandler(undefined);
+  }
+
   hasHeightError({ temporaryHeightValue, temporaryMeasurementMetric }) {
     return (
      !(temporaryHeightValue && temporaryMeasurementMetric) || // Not Present
@@ -71,7 +79,7 @@ class BodySizeForm extends PureComponent {
   }
 
   validateSizeSelection({ temporaryHeightValue, temporaryMeasurementMetric }) {
-    const { setSizeProfileError } = this.props;
+    const { setBodySizeError } = this.props;
     const errors = { heightError: false, sizeError: false };
 
     if (this.hasHeightError(
@@ -80,7 +88,7 @@ class BodySizeForm extends PureComponent {
       errors.heightError = true;
       return false;
     }
-    setSizeProfileError(errors);
+    setBodySizeError(errors);
     return true;
   }
 
@@ -176,6 +184,13 @@ class BodySizeForm extends PureComponent {
     }
   }
 
+  // isValid() {
+  //   return this.validateSizeSelection({
+  //     temporaryHeightValue: this.props.temporaryHeightValue,
+  //     temporaryMeasurementMetric: this.props.temporaryMeasurementMetric,
+  //   });
+  // }
+
   /**
    * Helper method to generate normal option for Select
    * @param  {Number} i
@@ -212,6 +227,8 @@ class BodySizeForm extends PureComponent {
       temporaryMeasurementMetric,
       temporaryHeightValue,
       heightError,
+      weightError,
+      ageError,
       containerClassNames,
       temporaryWeightValue,
       temporaryAgeValue,
@@ -278,7 +295,7 @@ class BodySizeForm extends PureComponent {
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
-                'u-color-red': heightError,
+                'u-color-red': weightError,
               },
             )}
           >
@@ -289,8 +306,8 @@ class BodySizeForm extends PureComponent {
               <Input
                 id="height-option-cm"
                 type="text"
-                error={heightError}
-                inlineMeta={heightError ? 'Please enter a valid weight' : null}
+                error={weightError}
+                inlineMeta={weightError ? 'Please enter a valid weight' : null}
                 onChange={this.handleWeightChange}
                 defaultValue={temporaryWeightValue}
               />
@@ -303,7 +320,7 @@ class BodySizeForm extends PureComponent {
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
-                'u-color-red': heightError,
+                'u-color-red': ageError,
               },
             )}
           >
@@ -314,8 +331,8 @@ class BodySizeForm extends PureComponent {
               <Input
                 id="height-option-cm"
                 type="number"
-                error={heightError}
-                inlineMeta={heightError ? 'Please enter a valid age' : null}
+                error={ageError}
+                inlineMeta={ageError ? 'Please enter a valid age' : null}
                 onChange={this.handleAgeChange}
                 defaultValue={temporaryAgeValue}
               />
@@ -331,14 +348,17 @@ class BodySizeForm extends PureComponent {
 BodySizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
+  validationHandler: PropTypes.func.isRequired,
   // Redux Props
   temporaryMeasurementMetric: PropTypes.string,
   temporaryHeightValue: PropTypes.number,
   heightError: PropTypes.bool,
+  weightError: PropTypes.bool,
+  ageError: PropTypes.bool,
   temporaryWeightValue: PropTypes.string,
   temporaryAgeValue: PropTypes.number,
   // Redux Actions
-  setSizeProfileError: PropTypes.func.isRequired,
+  setBodySizeError: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
   updateWeightSelection: PropTypes.func.isRequired,
@@ -351,6 +371,8 @@ BodySizeForm.defaultProps = {
   temporaryMeasurementMetric: null,
   temporaryHeightValue: null,
   heightError: false,
+  weightError: false,
+  ageError: false,
   temporaryWeightValue: null,
   temporaryAgeValue: null,
 };

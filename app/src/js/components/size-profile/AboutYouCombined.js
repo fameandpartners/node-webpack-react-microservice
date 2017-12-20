@@ -56,6 +56,15 @@ class AboutYouCombined extends Component {
       updateEditingStep,
     } = this.props;
 
+    // ensure forms are valid
+    // if (!this.clothingForm.isValid() || !this.bodyForm.isValid()) {
+    //   return;
+    // }
+    console.log(this.clothingForm.isValid());
+    if (!this.clothingForm.isValid()) {
+      return;
+    }
+
     if (isEditingStep) {
       updateEditingStep({ isEditingStep: false });
       jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERVIEW_STEP });
@@ -115,12 +124,14 @@ class AboutYouCombined extends Component {
           <div className="col-6">
             <BodySizeForm
               containerClassNames="u-mt-normal u-mb-big"
+              validationHandler={ref => (this.bodyForm = ref)}
             />
           </div>
 
           <div className="col-6">
             <ClothingSizeForm
               containerClassNames="u-mt-normal u-mb-big"
+              validationHandler={ref => (this.clothingForm = ref)}
             />
           </div>
         </div>

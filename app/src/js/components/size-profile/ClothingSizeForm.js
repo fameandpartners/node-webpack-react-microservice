@@ -24,16 +24,20 @@ function stateToProps(state) {
   return {
     temporaryJeanSize: state.$$sizeProfileState.get('temporaryJeanSize'),
     temporaryBraSize: state.$$sizeProfileState.get('temporaryBraSize'),
+    jeanSizeError: state.$$sizeProfileState.get('jeanSizeError'),
+    braSizeError: state.$$sizeProfileState.get('braSizeError'),
   };
 }
 
 function dispatchToProps(dispatch) {
   const {
+    setClothingSizeError,
     updateJeanSelection,
     updateBraSelection,
   } = bindActionCreators(SizeProfileActions, dispatch);
 
   return {
+    setClothingSizeError,
     updateJeanSelection,
     updateBraSelection,
   };
@@ -43,6 +47,14 @@ class ClothingSizeForm extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+  }
+
+  componentDidMount() {
+    this.props.validationHandler(this);
+  }
+
+  componentWillUnmount() {
+    this.props.validationHandler(undefined);
   }
 
   generateJeanOptions(selected) {
@@ -56,10 +68,34 @@ class ClothingSizeForm extends PureComponent {
 
   handleJeanChange(value) {
     this.props.updateJeanSelection({ temporaryJeanSize: value.option.id });
+    this.props.setClothingSizeError({
+      jeanSizeError: false,
+      braSizeError: this.props.braSizeError,
+    });
   }
 
   handleBraChange({ value }) {
     this.props.updateBraSelection({ temporaryBraSize: String(value) });
+    this.props.setClothingSizeError({
+      braSizeError: false,
+      jeanSizeError: this.props.jeanSizeError,
+    });
+  }
+
+  isValid() {
+    const { setClothingSizeError, temporaryBraSize, temporaryJeanSize } = this.props;
+    const errors = { braSizeError: false, jeanSizeError: false };
+    let isValid = true;
+    if (!temporaryBraSize) {
+      isValid = false;
+      errors.braSizeError = true;
+    }
+    if (!temporaryJeanSize) {
+      isValid = false;
+      errors.jeanSizeError = true;
+    }
+    setClothingSizeError(errors);
+    return isValid;
   }
 
   render() {
@@ -67,6 +103,8 @@ class ClothingSizeForm extends PureComponent {
       containerClassNames,
       temporaryJeanSize,
       temporaryBraSize,
+      braSizeError,
+      jeanSizeError,
     } = this.props;
 
     return (
@@ -81,7 +119,7 @@ class ClothingSizeForm extends PureComponent {
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
-                'u-color-red': null,
+                'u-color-red': braSizeError,
               },
             )}
           >
@@ -93,7 +131,8 @@ class ClothingSizeForm extends PureComponent {
                 id="height-option-cm"
                 type="text"
                 defaultValue={temporaryBraSize}
-                inlineMeta=""
+                error={braSizeError}
+                inlineMeta={braSizeError ? 'Please enter a valid bra size' : null}
                 onChange={this.handleBraChange}
               />
             </div>
@@ -105,7 +144,7 @@ class ClothingSizeForm extends PureComponent {
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
-                'u-color-red': null,
+                'u-color-red': jeanSizeError,
               },
             )}
           >
@@ -116,6 +155,8 @@ class ClothingSizeForm extends PureComponent {
               <Select
                 id="jean-option-in"
                 className="sort-options"
+                error={jeanSizeError}
+                inlineMeta={jeanSizeError ? 'Please select your jean size' : null}
                 options={this.generateJeanOptions(temporaryJeanSize)}
                 onChange={this.handleJeanChange}
               />
@@ -131,10 +172,14 @@ class ClothingSizeForm extends PureComponent {
 ClothingSizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
+  validationHandler: PropTypes.func.isRequired,
   // Redux Props
   temporaryJeanSize: PropTypes.number,
   temporaryBraSize: PropTypes.string,
+  braSizeError: PropTypes.bool,
+  jeanSizeError: PropTypes.bool,
   // Redux Actions
+  setClothingSizeError: PropTypes.func.isRequired,
   updateJeanSelection: PropTypes.func.isRequired,
   updateBraSelection: PropTypes.func.isRequired,
 };
@@ -143,6 +188,8 @@ ClothingSizeForm.defaultProps = {
   containerClassNames: 'u-mt-normal u-mb-huge',
   temporaryJeanSize: null,
   temporaryBraSize: null,
+  braSizeError: false,
+  jeanSizeError: false,
 };
 
 

@@ -53,6 +53,19 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
         standardSizeError: action.standardSizeError,
       });
     }
+    case SizeProfileConstants.SET_CLOTHING_SIZE_ERROR: {
+      return $$state.merge({
+        braSizeError: action.braSizeError,
+        jeanSizeError: action.jeanSizeError,
+      });
+    }
+    case SizeProfileConstants.SET_BODY_SIZE_ERROR: {
+      return $$state.merge({
+        heightError: action.heightError,
+        weightError: action.weightError,
+        ageError: action.ageError,
+      });
+    }
     // HEIGHT
     case SizeProfileConstants.UPDATE_MEASUREMENT_METRIC: {
       if (action.selectedMeasurementMetric) {
