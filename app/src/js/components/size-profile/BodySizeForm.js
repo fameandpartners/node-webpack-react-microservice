@@ -78,9 +78,13 @@ class BodySizeForm extends PureComponent {
     );
   }
 
-  validateSizeSelection({ temporaryHeightValue, temporaryMeasurementMetric }) {
+  validateHeightSelection({ temporaryHeightValue, temporaryMeasurementMetric }) {
     const { setBodySizeError } = this.props;
-    const errors = { heightError: false, sizeError: false };
+    const errors = {
+      heightError: false,
+      weightError: this.props.weightError,
+      ageError: this.props.ageError,
+    };
 
     if (this.hasHeightError(
       { temporaryHeightValue, temporaryMeasurementMetric },
@@ -102,7 +106,7 @@ class BodySizeForm extends PureComponent {
 
     if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
       if (heightError) { // Only validate if there is an error
-        this.validateSizeSelection({
+        this.validateHeightSelection({
           temporaryHeightValue: numVal,
           temporaryMeasurementMetric: UNITS.CM,
         });
@@ -125,7 +129,7 @@ class BodySizeForm extends PureComponent {
     if (selection) {
       const inches = (selection.ft * 12) + selection.inch;
       if (heightError) {
-        this.validateSizeSelection({
+        this.validateHeightSelection({
           temporaryHeightValue: inches,
           temporaryMeasurementMetric: UNITS.INCH,
         });
@@ -171,6 +175,11 @@ class BodySizeForm extends PureComponent {
 
   handleWeightChange({ value }) {
     this.props.updateWeightSelection({ temporaryWeightValue: value });
+    this.props.setBodySizeError({
+      weightError: false,
+      heightError: this.props.heightError,
+      ageError: this.props.ageError,
+    });
   }
 
   handleAgeChange({ value }) {
@@ -181,15 +190,39 @@ class BodySizeForm extends PureComponent {
       updateAgeSelection({
         temporaryAgeValue: numVal,
       });
+      this.props.setBodySizeError({
+        ageError: false,
+        heightError: this.props.heightError,
+        weightError: this.props.ageError,
+      });
     }
   }
 
-  // isValid() {
-  //   return this.validateSizeSelection({
-  //     temporaryHeightValue: this.props.temporaryHeightValue,
-  //     temporaryMeasurementMetric: this.props.temporaryMeasurementMetric,
-  //   });
-  // }
+  isValid() {
+    const {
+      setBodySizeError,
+      temporaryHeightValue,
+      temporaryWeightValue,
+      temporaryAgeValue,
+    } = this.props;
+    const errors = { weightError: false, heightError: false, ageError: false };
+    let isValid = true;
+
+    if (!temporaryHeightValue) {
+      isValid = false;
+      errors.heightError = true;
+    }
+    if (!temporaryWeightValue) {
+      isValid = false;
+      errors.weightError = true;
+    }
+    if (!temporaryAgeValue) {
+      isValid = false;
+      errors.ageError = true;
+    }
+    setBodySizeError(errors);
+    return isValid;
+  }
 
   /**
    * Helper method to generate normal option for Select

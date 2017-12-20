@@ -56,12 +56,14 @@ class AboutYouCombined extends Component {
       updateEditingStep,
     } = this.props;
 
-    // ensure forms are valid
-    // if (!this.clothingForm.isValid() || !this.bodyForm.isValid()) {
-    //   return;
-    // }
-    console.log(this.clothingForm.isValid());
+    let isValid = true;
     if (!this.clothingForm.isValid()) {
+      isValid = false;
+    }
+    if (!this.bodyForm.isValid()) {
+      isValid = false;
+    }
+    if (!isValid) {
       return;
     }
 
