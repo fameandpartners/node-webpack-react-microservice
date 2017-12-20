@@ -8,6 +8,8 @@ import classnames from 'classnames';
 // Constants
 import {
   JEAN_SIZES,
+  BRA_CUP_SIZES,
+  BRA_BUST_SIZES,
 } from '../../constants/ProductConstants';
 
 // Actions
@@ -89,6 +91,15 @@ class ClothingSizeForm extends PureComponent {
     if (!temporaryBraSize) {
       isValid = false;
       errors.braSizeError = true;
+    } else {
+      const regex = /^(\d+)(\w+)$/gi;
+      const match = regex.exec(temporaryBraSize.replace(/ /g, ''));
+      const bust = parseInt(match[1], 10);
+      const cup = String((match[2] || '').toUpperCase());
+      if (!BRA_BUST_SIZES.includes(bust) || !BRA_CUP_SIZES.includes(cup)) {
+        isValid = false;
+        errors.braSizeError = true;
+      }
     }
     if (!temporaryJeanSize) {
       isValid = false;
