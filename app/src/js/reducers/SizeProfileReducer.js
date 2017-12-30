@@ -66,6 +66,13 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
         ageError: action.ageError,
       });
     }
+    case SizeProfileConstants.SET_DRESS_FIT_ERROR: {
+      return $$state.merge({
+        bustFitError: action.bustFitError,
+        waistFitError: action.waistFitError,
+        hipsFitError: action.hipsFitError,
+      });
+    }
     // HEIGHT
     case SizeProfileConstants.UPDATE_MEASUREMENT_METRIC: {
       if (action.selectedMeasurementMetric) {

@@ -24,6 +24,9 @@ function stateToProps(state) {
     temporaryBustValue: state.$$sizeProfileState.get('temporaryBustValue'),
     temporaryWaistValue: state.$$sizeProfileState.get('temporaryWaistValue'),
     temporaryHipValue: state.$$sizeProfileState.get('temporaryHipValue'),
+    bustFitError: state.$$sizeProfileState.get('bustFitError'),
+    waistFitError: state.$$sizeProfileState.get('waistFitError'),
+    hipsFitError: state.$$sizeProfileState.get('hipsFitError'),
   };
 }
 
@@ -32,12 +35,14 @@ function dispatchToProps(dispatch) {
     updateBustSelection,
     updateWaistSelection,
     updateHipSelection,
+    setDressFitError,
   } = bindActionCreators(SizeProfileActions, dispatch);
 
   return {
     updateBustSelection,
     updateWaistSelection,
     updateHipSelection,
+    setDressFitError,
   };
 }
 
@@ -45,6 +50,14 @@ class CurrentDressFitForm extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+  }
+
+  componentDidMount() {
+    this.props.validationHandler(this);
+  }
+
+  componentWillUnmount() {
+    this.props.validationHandler(undefined);
   }
 
   /**
@@ -62,14 +75,57 @@ class CurrentDressFitForm extends PureComponent {
 
   handleBustChange(value) {
     this.props.updateBustSelection({ temporaryBustValue: value.option.id });
+    this.props.setDressFitError({
+      bustFitError: false,
+      waistFitError: this.props.waistFitError,
+      hipsFitError: this.props.hipsFitError,
+    });
   }
 
   handleWaistChange(value) {
     this.props.updateWaistSelection({ temporaryWaistValue: value.option.id });
+    this.props.setDressFitError({
+      bustFitError: this.props.bustFitError,
+      waistFitError: false,
+      hipsFitError: this.props.hipsFitError,
+    });
   }
 
   handleHipChange(value) {
     this.props.updateHipSelection({ temporaryHipValue: value.option.id });
+    this.props.setDressFitError({
+      bustFitError: this.props.bustFitError,
+      waistFitError: this.props.waistFitError,
+      hipsFitError: false,
+    });
+  }
+
+  isValid() {
+    const {
+      temporaryBustValue,
+      temporaryWaistValue,
+      temporaryHipValue,
+      setDressFitError,
+    } = this.props;
+    const errors = { bustFitError: false, waistFitError: false, hipsFitError: false };
+    let isValid = true;
+
+    if (!temporaryBustValue) {
+      isValid = false;
+      errors.bustFitError = true;
+    }
+
+    if (!temporaryWaistValue) {
+      isValid = false;
+      errors.waistFitError = true;
+    }
+
+    if (!temporaryHipValue) {
+      isValid = false;
+      errors.hipsFitError = true;
+    }
+    setDressFitError(errors);
+    return isValid;
   }
 
   render() {
@@ -78,6 +134,9 @@ class CurrentDressFitForm extends PureComponent {
       temporaryBustValue,
       temporaryWaistValue,
       temporaryHipValue,
+      bustFitError,
+      waistFitError,
+      hipsFitError,
     } = this.props;
 
     return (
@@ -95,7 +154,7 @@ class CurrentDressFitForm extends PureComponent {
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
-                'u-color-red': null,
+                'u-color-red': bustFitError,
               },
             )}
           >
@@ -107,6 +166,8 @@ class CurrentDressFitForm extends PureComponent {
                 id="bust-fit-issue"
                 className="sort-options"
                 label="Select"
+                error={bustFitError}
+                inlineMeta={bustFitError ? 'Please select your bust fit' : null}
                 options={this.generateFitIssueOptions(temporaryBustValue)}
                 onChange={this.handleBustChange}
               />
@@ -119,7 +180,7 @@ class CurrentDressFitForm extends PureComponent {
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
-                'u-color-red': null,
+                'u-color-red': waistFitError,
               },
             )}
           >
@@ -131,6 +192,8 @@ class CurrentDressFitForm extends PureComponent {
                 id="bust-fit-issue"
                 className="sort-options"
                 label="Select"
+                error={waistFitError}
+                inlineMeta={waistFitError ? 'Please select your waist fit' : null}
                 options={this.generateFitIssueOptions(temporaryWaistValue)}
                 onChange={this.handleWaistChange}
               />
@@ -143,7 +206,7 @@ class CurrentDressFitForm extends PureComponent {
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
-                'u-color-red': null,
+                'u-color-red': hipsFitError,
               },
             )}
           >
@@ -155,6 +218,8 @@ class CurrentDressFitForm extends PureComponent {
                 id="bust-fit-issue"
                 className="sort-options"
                 label="Select"
+                error={hipsFitError}
+                inlineMeta={hipsFitError ? 'Please select your hips fit' : null}
                 options={this.generateFitIssueOptions(temporaryHipValue)}
                 onChange={this.handleHipChange}
               />
@@ -170,14 +235,19 @@ class CurrentDressFitForm extends PureComponent {
 CurrentDressFitForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
+  validationHandler: PropTypes.func.isRequired,
   // Redux Props
   temporaryBustValue: PropTypes.string,
   temporaryWaistValue: PropTypes.string,
   temporaryHipValue: PropTypes.string,
+  bustFitError: PropTypes.bool,
+  waistFitError: PropTypes.bool,
+  hipsFitError: PropTypes.bool,
   // Redux Actions
   updateBustSelection: PropTypes.func.isRequired,
   updateWaistSelection: PropTypes.func.isRequired,
   updateHipSelection: PropTypes.func.isRequired,
+  setDressFitError: PropTypes.func.isRequired,
 };
 
 CurrentDressFitForm.defaultProps = {
@@ -185,7 +255,9 @@ CurrentDressFitForm.defaultProps = {
   temporaryBustValue: null,
   temporaryWaistValue: null,
   temporaryHipValue: null,
+  bustFitError: false,
+  waistFitError: false,
+  hipsFitError: false,
 };
-
 
 export default connect(stateToProps, dispatchToProps)(CurrentDressFitForm);

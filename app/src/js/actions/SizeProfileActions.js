@@ -1,5 +1,7 @@
 import SizeProfileConstants from '../constants/SizeProfileConstants';
 
+// ERROR ACTIONS
+
 export function setStandardSizeError({
   standardHeightError = false,
   standardSizeError = false,
@@ -34,6 +36,21 @@ export function setBodySizeError({
     ageError,
   };
 }
+
+export function setDressFitError({
+  bustFitError = false,
+  waistFitError = false,
+  hipsFitError = false,
+}) {
+  return {
+    type: SizeProfileConstants.SET_DRESS_FIT_ERROR,
+    bustFitError,
+    waistFitError,
+    hipsFitError,
+  };
+}
+
+// UPDATE ACTIONS
 
 export function updateMeasurementMetric({ selectedMeasurementMetric, temporaryMeasurementMetric }) {
   return {
@@ -154,6 +171,7 @@ export default {
   setStandardSizeError,
   setClothingSizeError,
   setBodySizeError,
+  setDressFitError,
   updateMeasurementMetric,
   updateHeightSelection,
   updateWeightSelection,

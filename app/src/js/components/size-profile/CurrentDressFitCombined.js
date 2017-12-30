@@ -40,7 +40,9 @@ class CurrentDressFitCombined extends Component {
   }
 
   handleNextSelection() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERVIEW_STEP });
+    if (this.dressFitForm.isValid()) {
+      this.props.jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERVIEW_STEP });
+    }
   }
 
   render() {
@@ -64,6 +66,7 @@ class CurrentDressFitCombined extends Component {
           <div className="col-6">
             <CurrentDressFitForm
               containerClassNames="u-mt-normal u-mb-big"
+              validationHandler={ref => (this.dressFitForm = ref)}
             />
           </div>
         </div>
