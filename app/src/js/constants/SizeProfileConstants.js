@@ -18,6 +18,7 @@ const actionTypes = assign({},
     'SET_CLOTHING_SIZE_ERROR',
     'SET_BODY_SIZE_ERROR',
     'SET_DRESS_FIT_ERROR',
+    'SET_DRESS_SIZE_ERROR',
   ]),
 );
 

@@ -22,18 +22,18 @@ import '../../../css/components/CurrentDressSizeForm.scss';
 function stateToProps(state) {
   return {
     temporaryFittedDressSize: state.$$sizeProfileState.get('temporaryFittedDressSize'),
-    sizeError: state.$$sizeProfileState.get('sizeError'),
+    dressSizeError: state.$$sizeProfileState.get('dressSizeError'),
   };
 }
 
 function dispatchToProps(dispatch) {
   const {
-    setSizeProfileError,
+    setDressSizeError,
     updateFittedDressSizeSelection,
   } = bindActionCreators(SizeProfileActions, dispatch);
 
   return {
-    setSizeProfileError,
+    setDressSizeError,
     updateFittedDressSizeSelection,
   };
 }
@@ -44,8 +44,25 @@ class CurrentDressSizeForm extends PureComponent {
     autoBind(this);
   }
 
+  componentDidMount() {
+    this.props.validationHandler(this);
+  }
+
+  componentWillUnmount() {
+    this.props.validationHandler(undefined);
+  }
+
+  isValid() {
+    if (!this.props.temporaryFittedDressSize) {
+      this.props.setDressSizeError({ dressSizeError: true });
+      return false;
+    }
+    return true;
+  }
+
   handleDressSizeSelection(s) {
     return () => {
+      this.props.setDressSizeError({ dressSizeError: false });
       this.props.updateFittedDressSizeSelection({ temporaryFittedDressSize: s });
     };
   }
@@ -53,7 +70,7 @@ class CurrentDressSizeForm extends PureComponent {
   render() {
     const {
       temporaryFittedDressSize,
-      sizeError,
+      dressSizeError,
       containerClassNames,
     } = this.props;
 
@@ -81,7 +98,7 @@ class CurrentDressSizeForm extends PureComponent {
               </div>
             ))}
           </div>
-          { sizeError ?
+          { dressSizeError ?
             <div className="CurrentDressSizeForm__size-error-text">
               <p className="p u-color-red u-text-align-left u-mb-small u-mt-small">
                 Please select a size
@@ -98,18 +115,19 @@ class CurrentDressSizeForm extends PureComponent {
 CurrentDressSizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
+  validationHandler: PropTypes.func.isRequired,
   // Redux Props
   temporaryFittedDressSize: PropTypes.number,
-  sizeError: PropTypes.bool,
+  dressSizeError: PropTypes.bool,
   // Redux Actions
   updateFittedDressSizeSelection: PropTypes.func.isRequired,
+  setDressSizeError: PropTypes.func.isRequired,
 };
 
 CurrentDressSizeForm.defaultProps = {
   containerClassNames: 'u-mt-normal u-mb-huge',
   temporaryFittedDressSize: null,
-  sizeError: false,
+  dressSizeError: false,
 };
-
 
 export default connect(stateToProps, dispatchToProps)(CurrentDressSizeForm);

@@ -50,6 +50,15 @@ export function setDressFitError({
   };
 }
 
+export function setDressSizeError({
+  dressSizeError = false,
+}) {
+  return {
+    type: SizeProfileConstants.SET_DRESS_SIZE_ERROR,
+    dressSizeError,
+  };
+}
+
 // UPDATE ACTIONS
 
 export function updateMeasurementMetric({ selectedMeasurementMetric, temporaryMeasurementMetric }) {
@@ -172,6 +181,7 @@ export default {
   setClothingSizeError,
   setBodySizeError,
   setDressFitError,
+  setDressSizeError,
   updateMeasurementMetric,
   updateHeightSelection,
   updateWeightSelection,

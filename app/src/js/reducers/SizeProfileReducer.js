@@ -73,6 +73,11 @@ export default function SizeProfileReducer($$state = $$initialState, action = nu
         hipsFitError: action.hipsFitError,
       });
     }
+    case SizeProfileConstants.SET_DRESS_SIZE_ERROR: {
+      return $$state.merge({
+        dressSizeError: action.dressSizeError,
+      });
+    }
     // HEIGHT
     case SizeProfileConstants.UPDATE_MEASUREMENT_METRIC: {
       if (action.selectedMeasurementMetric) {
