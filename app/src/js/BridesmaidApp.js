@@ -11,11 +11,11 @@ import { render } from 'react-dom';
 import Raven from 'raven-js';
 
 // Components
-import BDAppMain from './components/bridesmaid_ `pdp/BDAppMain';
+import BDAppMain from './components/bridesmaid_pdp/BDAppMain';
 import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
-import ColorSelectionModal from './components/pdp/ColorSelectionModal';
+import BDColorSelectionModal from './components/bridesmaid_pdp/BDColorSelectionModal';
 import ShareModal from './components/pdp/ShareModal';
 import ImageLightboxModal from './components/pdp/ImageLightboxModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
@@ -133,7 +133,7 @@ class BridesmaidApp extends Component {
           <BDAppMain />
           <OnboardingModal />
           <ProductFabricModal />
-          <ColorSelectionModal />
+          <BDColorSelectionModal />
           <ShareModal />
           <ImageLightboxModal />
           <StyleSelectionModal />

@@ -19,7 +19,7 @@ import ModalConstants from '../../constants/ModalConstants';
 import AddToCartButtonLedgeMobile from '../pdp/AddToCartButtonLedgeMobile';
 import CustomizationButtonLedge from '../pdp/CustomizationButtonLedge';
 import ProductDescription from '../pdp/ProductDescription';
-import ProductDisplayOptionsTouch from '../pdp/ProductDisplayOptionsTouch';
+import BDProductDisplayOptionsTouch from './BDProductDisplayOptionsTouch';
 import ProductOptions from '../pdp/ProductOptions';
 import ProductGrid from '../pdp/ProductGrid';
 import ProductFabricInfo from '../pdp/ProductFabricInfo';
@@ -76,7 +76,7 @@ class BDAppMain extends Component {
           className="BDAppMain u-height--full"
         >
           { breakpoint === 'mobile' || breakpoint === 'tablet'
-            ? <ProductDisplayOptionsTouch />
+            ? <BDProductDisplayOptionsTouch breakpoint={breakpoint} />
             : (
               <div>
                 <ProductOptions />
