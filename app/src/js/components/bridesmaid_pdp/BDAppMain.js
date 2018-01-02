@@ -16,18 +16,18 @@ import * as ModalActions from '../../actions/ModalActions';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
-import AddToCartButtonLedgeMobile from './AddToCartButtonLedgeMobile';
-import CustomizationButtonLedge from './CustomizationButtonLedge';
-import ProductDescription from './ProductDescription';
-import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
-import ProductOptions from './ProductOptions';
-import ProductGrid from './ProductGrid';
-import ProductFabricInfo from './ProductFabricInfo';
+import AddToCartButtonLedgeMobile from '../pdp/AddToCartButtonLedgeMobile';
+import CustomizationButtonLedge from '../pdp/CustomizationButtonLedge';
+import ProductDescription from '../pdp/ProductDescription';
+import ProductDisplayOptionsTouch from '../pdp/ProductDisplayOptionsTouch';
+import ProductOptions from '../pdp/ProductOptions';
+import ProductGrid from '../pdp/ProductGrid';
+import ProductFabricInfo from '../pdp/ProductFabricInfo';
 
 // import FameDifference from './FameDifference';
 
 // CSS
-import '../../../css/components/AppMain.scss';
+import '../../../css/components/BDAppMain.scss';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -49,7 +49,7 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class AppMain extends Component {
+class BDAppMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,12 +69,11 @@ class AppMain extends Component {
       garmentCareInformation,
       sku,
     } = this.props;
-    console.log('are we in render');
 
     return (
-      <div className="AppMain__wrapper">
+      <div className="BDAppMain__wrapper">
         <div
-          className="AppMain u-height--full"
+          className="BDAppMain u-height--full"
         >
           { breakpoint === 'mobile' || breakpoint === 'tablet'
             ? <ProductDisplayOptionsTouch />
@@ -86,7 +85,7 @@ class AppMain extends Component {
           }
 
           <div className="layout-container">
-            <div className="grid-2_sm-1 AppMain__product-info">
+            <div className="grid-2_sm-1 BDAppMain__product-info">
               <div className="col grid-middle">
                 <ProductDescription />
               </div>
@@ -127,7 +126,7 @@ class AppMain extends Component {
   }
 }
 
-AppMain.propTypes = {
+BDAppMain.propTypes = {
   // Redux Props
   activateModal: PropTypes.func.isRequired,
   fabric: PropTypes.shape({
@@ -143,9 +142,9 @@ AppMain.propTypes = {
   breakpoint: PropTypes.string.isRequired,
 };
 
-AppMain.defaultProps = {
+BDAppMain.defaultProps = {
   cartDrawerOpen: false,
   sku: null,
 };
 
-export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AppMain));
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(BDAppMain));
