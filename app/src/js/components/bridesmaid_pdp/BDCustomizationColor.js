@@ -10,7 +10,7 @@ import ModalActions from '../../actions/ModalActions';
 import CustomizationActions from '../../actions/CustomizationActions';
 
 // UI Components
-import BDColorSelection from '../bridesmaid_pdp/BDColorSelection';
+import BDColorSelections from '../bridesmaid_pdp/BDColorSelections';
 import BDProductCustomization from '../bridesmaid_pdp/BDProductCustomization';
 
 function stateToProps(state) {
@@ -84,7 +84,7 @@ class BDProductCustomizationColor extends PureComponent {
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        <BDColorSelection
+        <BDColorSelections
           productColors={productDefaultColors.concat(productSecondaryColors)}
           productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
           temporaryColorId={temporaryColorId}

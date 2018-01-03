@@ -16,6 +16,7 @@ import CustomizationDrawer from './components/pdp/CustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import BDColorSelectionModal from './components/bridesmaid_pdp/BDColorSelectionModal';
+import BDCustomizationSelectionModal from './components/bridesmaid_pdp/BDCustomizationSelectionModal';
 import ShareModal from './components/pdp/ShareModal';
 import ImageLightboxModal from './components/pdp/ImageLightboxModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
@@ -134,6 +135,7 @@ class BridesmaidApp extends Component {
           <OnboardingModal />
           <ProductFabricModal />
           <BDColorSelectionModal />
+          <BDCustomizationSelectionModal />
           <ShareModal />
           <ImageLightboxModal />
           <StyleSelectionModal />

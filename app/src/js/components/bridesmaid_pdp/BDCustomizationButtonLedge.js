@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { TransitionMotion } from 'react-motion';
 
 // CSS
+// TODO: NEXT figure out what's going on here....
 import '../../../css/components/CustomizationButtonLedge.scss';
 
 // Utilities
@@ -136,17 +137,8 @@ class CustomizationButtonLedge extends Component {
     this.closeCustomization();
   }
 
-  saveStyleSelection() {
-    const {
-      setShareableQueryParams,
-      temporaryStyleCustomizations,
-      updateCustomizationStyleSelection,
-    } = this.props;
-    updateCustomizationStyleSelection({
-      selectedStyleCustomizations: temporaryStyleCustomizations,
-    });
-    setShareableQueryParams({ customizations: temporaryStyleCustomizations });
-    this.closeCustomization();
+  saveCustomizationSelection() {
+    console.log('determine which customization option to save....');
   }
 
   saveSizeSelection() {
@@ -186,12 +178,11 @@ class CustomizationButtonLedge extends Component {
       return this.saveColorSelection;
     }
 
-    // if (
-    //   activeModalId === BDModalConstants.STYLE_SELECTION_MODAL
-    //   || productCustomizationDrawer === STYLE_CUSTOMIZE
-    // ) {
-    //   return this.saveStyleSelection;
-    // }
+    if (
+      activeModalId === BDModalConstants.BD_CUSTOMIZATION_MODAL
+    ) {
+      return this.saveCustomizationSelection;
+    }
     //
     // if (
     //   activeModalId === BDModalConstants.SIZE_SELECTION_MODAL
@@ -212,8 +203,7 @@ class CustomizationButtonLedge extends Component {
     return modalIsOpen
     && (
       (activeModalId === BDModalConstants.BD_COLOR_SELECTION_MODAL)
-      // || (activeModalId === BDModalConstants.STYLE_SELECTION_MODAL)
-      // || (activeModalId === BDModalConstants.SIZE_SELECTION_MODAL)
+      || (activeModalId === BDModalConstants.BD_CUSTOMIZATION_MODAL)
     );
   }
 
@@ -293,7 +283,7 @@ CustomizationButtonLedge.propTypes = {
   temporaryDressSize: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string.isRequired,
-  temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
+  // temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
@@ -303,7 +293,7 @@ CustomizationButtonLedge.propTypes = {
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
-  updateCustomizationStyleSelection: PropTypes.func.isRequired,
+  // updateCustomizationStyleSelection: PropTypes.func.isRequired,
   productDefaultColors: PropTypes.arrayOf(PropTypes.object),
   setExpressMakingStatus: PropTypes.func,
 };
