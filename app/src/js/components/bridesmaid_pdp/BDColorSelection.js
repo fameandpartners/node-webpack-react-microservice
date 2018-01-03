@@ -11,7 +11,7 @@ import {
 } from '../../utilities/color';
 
 // CSS
-import '../../../css/components/ColorSwatches.scss';
+import '../../../css/components/BDColorSelection.scss';
 
 class BDColorSelection extends PureComponent {
   constructor(props) {
@@ -29,10 +29,7 @@ class BDColorSelection extends PureComponent {
     const background = generateBackgroundValueFromColor(color);
 
     return (
-      <div
-        key={color.id}
-        className="col-4 u-mb-big"
-      >
+      <div className="u-display--inline-block" key={color.id}>
         <div
           onClick={this.handleColorSelection(color)}
           className={classnames([
@@ -55,34 +52,33 @@ class BDColorSelection extends PureComponent {
             )}
             />
           </div>
-          <span
-            className={classnames(
-            'BDColorSelection__touch-display-text',
-            'u-width--full u-left',
-          )}
-          >
-            <h6 className="BDColorSelection__text">
-              {color.presentation}
-              {price ? <span>&nbsp;{formatCents(price, 0)}</span> : null }
-            </h6>
-          </span>
         </div>
+        <span
+          className={classnames(
+              'BDColorSelection__touch-display-text',
+              'u-width--full u-left',
+            )}
+        >
+          <h6 className="BDColorSelection__text">
+            {color.presentation}
+            {price ? <span>&nbsp;{formatCents(price, 0)}</span> : null }
+          </h6>
+        </span>
       </div>
     );
   }
 
   render() {
     const {
-      productDefaultColors,
+      productColors,
       // productSecondaryColors,
       // productSecondaryColorsCentsPrice,
     } = this.props;
 
     return (
-      <div
-        className="BDColorSelection u-mt-normal u-text-align-left"
-      >
-        { productDefaultColors.map(c => this.generateColorSwatch(c, 0))}
+      // eslint-disable-next-line
+      <div className="BDColorSelection u-white-space--nowrap u-text-align-left u-height--full u-overflow-x--scroll">
+        { productColors.map(c => this.generateColorSwatch(c, 0))}
 
         {
           // productSecondaryColors.length
@@ -106,7 +102,7 @@ class BDColorSelection extends PureComponent {
 
 BDColorSelection.propTypes = {
   // Passed Props
-  productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
+  productColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     hexValue: PropTypes.string,

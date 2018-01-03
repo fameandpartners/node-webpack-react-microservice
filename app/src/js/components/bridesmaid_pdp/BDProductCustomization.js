@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+
+// CSS
+import '../../../css/components/BDProductCustomization.scss';
 
 // UI Components
 // import BDProductCustomizationNavigation from './ProductCustomizationNavigation';
@@ -15,50 +17,24 @@ class BDProductCustomization extends PureComponent {
   render() {
     const {
       children,
-      hasNavItems,
+      // hasNavItems,
     } = this.props;
 
     return (
-      <div className="BDProductCustomization u-height--full u-flex--col">
-        <div className="BDProductCustomization__header">
-          { hasNavItems
-            ? (
-              <div className="grid-12">
-                <div className="col-1">
-                  BDProductCustomizationNavigation
-                </div>
-              </div>
-            )
-            : null
-          }
-        </div>
-        <div className="u-flex--1">
+      <div className="BDProductCustomization u-height--full u-flex u-flex--col">
+
+        <div className="grid-center u-flex u-flex--1">
           <a href="https://placeholder.com">
-            <img src="http://via.placeholder.com/600x600" alt="stupid" />
+            <img className="u-height--full" src="http://via.placeholder.com/600x600" alt="stupid" />
           </a>
         </div>
-        <div
-          className={classnames(
-            [
-              'BDProductCustomization__wrapper',
-              'u-text-align--center u-flex--1',
-            ],
-        )}
-        >
 
-          <div className="grid-center-noGutter">
-            <div
-              className={classnames(
-                'BDProductCustomization__content',
-              )}
-            >
-              { children }
-            </div>
+        <div className="BDProductCustomization__wrapper u-text-align--center">
+          <div className="BDProductCustomization__content u-height--full u-width--full">
+            { children }
           </div>
         </div>
-        <div className="ButtonLedge--height">
-          Fake Bottom
-        </div>
+        <div className="ButtonLedge--height __fake__" />
       </div>
     );
   }
@@ -67,7 +43,7 @@ class BDProductCustomization extends PureComponent {
 BDProductCustomization.propTypes = {
   // Normal Props
   children: PropTypes.node.isRequired,
-  hasNavItems: PropTypes.bool,
+  // hasNavItems: PropTypes.bool,
   // productCustomizationDrawer: PropTypes.string,
   // handleDrawerSelection: PropTypes.func.isRequired,
 };
@@ -79,3 +55,16 @@ BDProductCustomization.defaultProps = {
 
 
 export default BDProductCustomization;
+
+// <div className="BDProductCustomization__header">
+//   { hasNavItems
+//     ? (
+//       <div className="grid-12">
+//         <div className="col-1">
+//           BDProductCustomizationNavigation
+//         </div>
+//       </div>
+//     )
+//     : null
+//   }
+// </div>

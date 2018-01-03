@@ -84,10 +84,8 @@ class BDProductCustomizationColor extends PureComponent {
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        New Color Selection Stuff
         <BDColorSelection
-          productDefaultColors={productDefaultColors}
-          productSecondaryColors={productSecondaryColors}
+          productColors={productDefaultColors.concat(productSecondaryColors)}
           productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
           temporaryColorId={temporaryColorId}
           handleColorSelection={this.handleColorSelection}
