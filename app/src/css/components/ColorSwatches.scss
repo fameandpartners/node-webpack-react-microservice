@@ -1,16 +1,16 @@
-.ColorSwatches {
+.BDColorSelection {
   padding-bottom: 100px;
 }
 
 // TURNING OFF UNTIL WE HAVE TIME TO EXPERIMENT
-// .ColorSwatches__transform-wrapper {
+// .BDColorSelection__transform-wrapper {
 //   transition: 500ms transform ease-in-out;
 // }
-// .ColorSwatches__transform-wrapper:hover {
+// .BDColorSelection__transform-wrapper:hover {
 //   transform: translate3d(0, -3px, 0);
 // }
 
-.ColorSwatches__swatch::after {
+.BDColorSelection__swatch::after {
   padding-top: 100%;
   float: left;
   content: '';
@@ -22,42 +22,42 @@
 }
 
 
-.ColorSwatches__swatch:hover::after {
+.BDColorSelection__swatch:hover::after {
   opacity: 1;
 }
 
-.ColorSwatches__swatch--dark {
+.BDColorSelection__swatch--dark {
   color: $c-white;
 }
 
-.ColorSwatches__wrapper {
+.BDColorSelection__wrapper {
   background-size: cover;
 }
 
-.ColorSwatches__wrapper--extreme-light {
+.BDColorSelection__wrapper--extreme-light {
   border: 1px solid $c-neutral-4;
 }
 
-.ColorSwatches__wrapper.ColorSwatches__wrapper--active {
+.BDColorSelection__wrapper.BDColorSelection__wrapper--active {
   // Necessary double class for IE Bug which doesn't respect specificity
   outline: 3px solid $c-hover-gray;
   outline-offset: 3px;
 }
 
-.ColorSwatches__swatch {
+.BDColorSelection__swatch {
   opacity: 1;
   transition: $standard-transition-time opacity;
   font-weight: 500;
 }
 
-.ColorSwatches__touch-display-text {
+.BDColorSelection__touch-display-text {
   padding-top: 10px;
   margin-bottom: -60px;
   display: block;
   line-height: 1;
 }
 
-.ColorSwatches__text {
+.BDColorSelection__text {
   display: inline-block;
   padding-top: 10px;
 }

@@ -10,8 +10,8 @@ import ModalActions from '../../actions/ModalActions';
 import CustomizationActions from '../../actions/CustomizationActions';
 
 // UI Components
-import ColorSwatches from '../pdp/ColorSwatches';
-import ProductCustomization from '../pdp/ProductCustomization';
+import BDColorSelection from '../bridesmaid_pdp/BDColorSelection';
+import BDProductCustomization from '../bridesmaid_pdp/BDProductCustomization';
 
 function stateToProps(state) {
   return {
@@ -79,20 +79,20 @@ class BDProductCustomizationColor extends PureComponent {
     } = this.props;
 
     return (
-      <ProductCustomization
+      <BDProductCustomization
         hasNavItems={hasNavItems}
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        New Stuff
-        <ColorSwatches
+        New Color Selection Stuff
+        <BDColorSelection
           productDefaultColors={productDefaultColors}
           productSecondaryColors={productSecondaryColors}
           productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
           temporaryColorId={temporaryColorId}
           handleColorSelection={this.handleColorSelection}
         />
-      </ProductCustomization>
+      </BDProductCustomization>
     );
   }
 }
