@@ -41,37 +41,20 @@ class ShopAllNavigationDesktop extends PureComponent {
 
     let headerAd;
 
-    if (auSite) {
-      headerAd = (
-        <div className="HeaderNavigationDesktop__ad">
-          <a href="/dresses/wedding-guests">
-            <img
-              alt="Fall Weddings Ad"
-              className="u-width--full"
-              src={fallWeddings}
-            />
-          </a>
-          <a href="/dresses/wedding-guests" className="link">
-            <span>Shop Wedding Guests</span>
-          </a>
-        </div>
-      );
-    } else {
-      headerAd = (
-        <div className="HeaderNavigationDesktop__ad">
-          <a href="/sample-sale">
-            <img
-              alt="Sample Sale Ad"
-              className="u-width--full"
-              src={sampleSale}
-            />
-          </a>
-          <a href="/sample-sale" className="link">
-            <span>Shop up to 40% OFF SAMPLE SALE</span>
-          </a>
-        </div>
-      );
-    }
+    headerAd = (
+      <div className="HeaderNavigationDesktop__ad">
+        <a href="/dresses/wedding-guests">
+          <img
+            alt="Fall Weddings Ad"
+            className="u-width--full"
+            src={fallWeddings}
+          />
+        </a>
+        <a href="/dresses/wedding-guests" className="link">
+          <span>Shop Wedding Guests</span>
+        </a>
+      </div>
+    );
 
     return (
       <div
