@@ -137,11 +137,6 @@ const navigationLinks = {
         text: 'Made in 48 Hours',
         url: '/getitquick',
       },
-      {
-        text: 'Sample Sale',
-        url: '/sample-sale',
-        shouldHide: siteVersionAU(),
-      },
     ],
     COLLECTIONS: [
       {
