@@ -10,7 +10,7 @@ export const $$initialState = Immutable.fromJS({
   // 'SILHOUTTE_CUSTOMIZE',
   // 'DETAILS_CUSTOMIZE'
   // ]
-  bdCustomizationSection: null,
+  activeBDCustomizationHeading: null,
 
   // // String ['COLOR_CUSTOMIZE', 'STYLE_CUSTOMIZE', 'SIZE_PROFILE']
   // productCustomizationDrawer: null,
@@ -66,7 +66,7 @@ export default function CartReducer($$state = $$initialState, action = null) {
     // GENERAL
     case BDCustomizationConstants.SET_BD_CUSTOMIZATION_SECTION: {
       return $$state.merge({
-        bdCustomizationSection: action.sectionId,
+        activeBDCustomizationHeading: action.sectionId,
       });
     }
     // case CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER: {

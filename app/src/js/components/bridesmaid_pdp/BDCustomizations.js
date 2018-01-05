@@ -6,8 +6,7 @@ import { bindActionCreators } from 'redux';
 import noop from '../../libs/noop';
 
 // Actions
-import ModalActions from '../../actions/ModalActions';
-import CustomizationActions from '../../actions/CustomizationActions';
+import BDActions from '../../actions/BDActions';
 
 // UI Components
 import BDProductCustomization from '../bridesmaid_pdp/BDProductCustomization';
@@ -16,20 +15,17 @@ import BDCustomizationSelections from '../bridesmaid_pdp/BDCustomizationSelectio
 function stateToProps(state) {
   return {
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
+    activeBDCustomizationHeading: state.$$bdCustomizationState.get('activeBDCustomizationHeading'),
   };
 }
 
 function dispatchToProps(dispatch) {
-  const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const {
-    changeCustomizationDrawer,
-    selectProductColor,
-  } = bindActionCreators(CustomizationActions, dispatch);
+    setBDCustomizationSection,
+  } = bindActionCreators(BDActions, dispatch);
 
   return {
-    activateModal,
-    changeCustomizationDrawer,
-    selectProductColor,
+    setBDCustomizationSection,
   };
 }
 
@@ -39,8 +35,15 @@ class BDProductCustomizationColor extends PureComponent {
     autoBind(this);
   }
 
+  handleHeadingClick(groupName) {
+    this.props.setBDCustomizationSection({
+      sectionId: groupName,
+    });
+  }
+
   render() {
     const {
+      activeBDCustomizationHeading,
       hasNavItems,
       productCustomizationDrawer,
     } = this.props;
@@ -50,6 +53,8 @@ class BDProductCustomizationColor extends PureComponent {
         hasNavItems={hasNavItems}
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
+        activeHeading={activeBDCustomizationHeading}
+        onCustomizationHeadingGroupClick={this.handleHeadingClick}
       >
         <BDCustomizationSelections />
       </BDProductCustomization>
@@ -61,10 +66,14 @@ BDProductCustomizationColor.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
   // Redux Props
+  activeBDCustomizationHeading: PropTypes.string,
   productCustomizationDrawer: PropTypes.string,
+  // Redux Funcs
+  setBDCustomizationSection: PropTypes.func.isRequired,
 };
 
 BDProductCustomizationColor.defaultProps = {
+  activeBDCustomizationHeading: null,
   hasNavItems: true,
   productCustomizationDrawer: null,
   productSecondaryColorsCentsPrice: 0,

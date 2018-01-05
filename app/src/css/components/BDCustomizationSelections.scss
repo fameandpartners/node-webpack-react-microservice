@@ -1,3 +1,21 @@
 .BDCustomizationSelections {
-  padding: 15px;
+  padding: 0 15px;
+}
+
+.BDCustomizationSelections__group-name {
+  margin-right: 12px;
+}
+
+.BDCustomizationSelections__groups {
+  margin-top: -24px;
+  margin-left: 20px;
+}
+
+.BDCustomizationSelections__group-name {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.BDCustomizationSelections__group-name--active {
+  border-bottom: 2px solid rgb(0, 0, 0);
 }

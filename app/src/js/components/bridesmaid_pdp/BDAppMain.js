@@ -16,7 +16,7 @@ import * as ModalActions from '../../actions/ModalActions';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
-import AddToCartButtonLedgeMobile from '../pdp/AddToCartButtonLedgeMobile';
+import BDAddToCartButtonLedge from '../bridesmaid_pdp/BDAddToCartButtonLedge';
 import BDCustomizationButtonLedge from '../bridesmaid_pdp/BDCustomizationButtonLedge';
 import ProductDescription from '../pdp/ProductDescription';
 import BDProductDisplayOptionsTouch from './BDProductDisplayOptionsTouch';
@@ -118,7 +118,7 @@ class BDAppMain extends Component {
 
 
         <div className="u-position--fixed u-width--full u-bottom">
-          <AddToCartButtonLedgeMobile />
+          <BDAddToCartButtonLedge />
         </div>
         <BDCustomizationButtonLedge />
       </div>

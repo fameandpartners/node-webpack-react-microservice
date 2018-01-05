@@ -100,7 +100,6 @@ class BDCustomizationSelections extends PureComponent {
   handleSelection() {
 
   }
-
   render() {
     const options = this.generateCustomizationOptions();
     console.log('options', options);
