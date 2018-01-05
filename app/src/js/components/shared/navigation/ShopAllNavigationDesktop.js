@@ -9,7 +9,6 @@ import win from '../../../polyfills/windowPolyfill';
 
 // Assets
 import fallWeddings from '../../../../img/fall-weddings.jpg';
-import sampleSale from '../../../../img/SampleSale-ShopAllTile.jpg';
 import '../../../../css/components/ShopAllNavigationDesktop.scss';
 
 // Constants
@@ -23,10 +22,6 @@ class ShopAllNavigationDesktop extends PureComponent {
   constructor(props) {
     super(props);
     autobind(this);
-
-    this.state = {
-      auSite: win.ApplicationStateData ? win.ApplicationStateData.auSite : false,
-    };
   }
 
   render() {
@@ -34,10 +29,6 @@ class ShopAllNavigationDesktop extends PureComponent {
       breakpoint,
       childRef,
     } = this.props;
-
-    const {
-      auSite,
-    } = this.state;
 
     let headerAd;
 
