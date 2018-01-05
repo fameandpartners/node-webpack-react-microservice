@@ -4,9 +4,6 @@ import autobind from 'react-autobind';
 import Resize from '../../../decorators/Resize';
 import PDPBreakpoints from '../../../libs/PDPBreakpoints';
 
-// Polyfills
-import win from '../../../polyfills/windowPolyfill';
-
 // Assets
 import fallWeddings from '../../../../img/fall-weddings.jpg';
 import '../../../../css/components/ShopAllNavigationDesktop.scss';
@@ -30,9 +27,7 @@ class ShopAllNavigationDesktop extends PureComponent {
       childRef,
     } = this.props;
 
-    let headerAd;
-
-    headerAd = (
+    const headerAd = (
       <div className="HeaderNavigationDesktop__ad">
         <a href="/dresses/wedding-guests">
           <img
