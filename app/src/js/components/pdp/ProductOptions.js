@@ -234,17 +234,6 @@ class ProductOptions extends Component {
     return expressMakingSelected ? '4-6 business days' : deliveryCopy;
   }
 
-  generateNewYearsCopy() {
-    const { deliveryCopy, expressMakingSelected } = this.props;
-    const copy = expressMakingSelected ? '4-6 business days' : deliveryCopy;
-    if (copy === '7 - 10 business days') {
-      return 'Place your order by 12/15 to get it in time for NYE!';
-    } else if (copy === '4-6 business days') {
-      return 'Place Express Making orders by 12/20 to get them in time for NYE!';
-    }
-    return '';
-  }
-
   render() {
     const {
       auSite,
@@ -352,13 +341,6 @@ class ProductOptions extends Component {
                     : null
                   }
                   <br />
-                  {
-                    deliveryCopy
-                    ? this.generateNewYearsCopy()
-                    : null
-                  }
-                  <br />
-
                 </p>
                 <ProductSecondaryActions />
               </div> : null

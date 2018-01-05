@@ -56,10 +56,6 @@ const navigationLinks = {
         type: 'divider',
       },
       {
-        text: 'Wedding Styling',
-        url: '/wedding-consultation',
-      },
-      {
         text: 'The Wedding App',
         url: '/wedding-atelier',
       },
