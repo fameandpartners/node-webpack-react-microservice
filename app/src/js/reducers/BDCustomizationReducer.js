@@ -12,11 +12,11 @@ export const $$initialState = Immutable.fromJS({
   // ]
   activeBDCustomizationHeading: null,
 
-  // // String ['COLOR_CUSTOMIZE', 'STYLE_CUSTOMIZE', 'SIZE_PROFILE']
-  // productCustomizationDrawer: null,
-  //
+  // // String ['?', '?', '?']
+  bdProductCustomizationDrawer: null,
+
   // // Bool
-  // productCustomizationDrawerOpen: false,
+  productCustomizationDrawerOpen: false,
   //
   // // String ['cm', 'inch']
   // temporaryMeasurementMetric: UNITS.INCH,
@@ -69,12 +69,13 @@ export default function CartReducer($$state = $$initialState, action = null) {
         activeBDCustomizationHeading: action.sectionId,
       });
     }
-    // case CustomizationConstants.ACTIVATE_CUSTOMIZATION_DRAWER: {
-    //   return $$state.merge({
-    //     productCustomizationDrawer: action.productCustomizationDrawer,
-    //     productCustomizationDrawerOpen: action.isActive,
-    //   });
-    // }
+
+    case BDCustomizationConstants.BD_ACTIVATE_CUSTOMIZATION_DRAWER: {
+      return $$state.merge({
+        bdProductCustomizationDrawer: action.productCustomizationDrawer,
+        bdProductCustomizationDrawerOpen: action.isActive,
+      });
+    }
     // case CustomizationConstants.SET_SIZE_PROFILE_ERROR: {
     //   return $$state.merge({
     //     heightError: action.heightError,

@@ -20,7 +20,7 @@ import BDAddToCartButtonLedge from '../bridesmaid_pdp/BDAddToCartButtonLedge';
 import BDCustomizationButtonLedge from '../bridesmaid_pdp/BDCustomizationButtonLedge';
 import ProductDescription from '../pdp/ProductDescription';
 import BDProductDisplayOptionsTouch from './BDProductDisplayOptionsTouch';
-import ProductOptions from '../pdp/ProductOptions';
+import BDProductOptions from '../bridesmaid_pdp/BDProductOptions';
 import ProductGrid from '../pdp/ProductGrid';
 import ProductFabricInfo from '../pdp/ProductFabricInfo';
 
@@ -79,7 +79,7 @@ class BDAppMain extends Component {
             ? <BDProductDisplayOptionsTouch breakpoint={breakpoint} />
             : (
               <div>
-                <ProductOptions />
+                <BDProductOptions />
               </div>
             )
           }

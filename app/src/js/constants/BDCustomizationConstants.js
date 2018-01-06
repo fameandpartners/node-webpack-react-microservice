@@ -4,7 +4,7 @@ import mirrorCreator from 'mirror-creator';
 const actionTypes = assign({},
   mirrorCreator([
     'ACTIVATE_BD_COLOR_DRAWER',
-    'ACTIVATE_BD_CUSTOMIZATION_DRAWER',
+    'BD_ACTIVATE_CUSTOMIZATION_DRAWER',
     'SET_BD_CUSTOMIZATION_SECTION',
     'SELECT_PRODUCT_COLOR',
   ]),
