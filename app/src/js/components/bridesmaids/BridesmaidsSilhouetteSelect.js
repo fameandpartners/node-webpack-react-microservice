@@ -5,11 +5,14 @@ import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
+import classnames from 'classnames';
 
+// CSS
+import '../../../css/components/BridesmaidsSilhouetteSelect.scss';
 
-function stateToProps(state) {
+function stateToProps({ $$bridesmaidsFilterState }) {
   return {
-    lineItemImages: [],
+    temporarySilhouetteId: $$bridesmaidsFilterState.get('temporarySilhouette').get('id'),
   };
 }
 
@@ -22,12 +25,19 @@ class BridesmaidsSilhouetteSelect extends Component {
   getFilterSilhouettes() {
     const {
       filterSilhouettes,
+      temporarySilhouetteId,
     } = this.props;
 
     return filterSilhouettes
       .map((item, index) => (
         <div className="col-4" key={item.image + index}>
-          <div className="brick u-cursor--pointer">
+          <div className={classnames([
+              'brick u-cursor--pointer',
+              {
+                'Silhouette--selected': temporarySilhouetteId == item.id
+              }
+            ])}
+          >
             <img className="u-width--full" alt={item.name} src={item.image} />
             <p>{item.name}</p>
             <p>{item.description}</p>
@@ -55,6 +65,11 @@ BridesmaidsSilhouetteSelect.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string,
   })).isRequired,
+  temporarySilhouetteId: PropTypes.number,
+};
+
+BridesmaidsSilhouetteSelect.defaultProps = {
+  temporarySilhouetteId: '',
 };
 
 export default connect(stateToProps, null)(BridesmaidsSilhouetteSelect);

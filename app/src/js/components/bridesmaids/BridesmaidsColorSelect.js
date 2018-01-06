@@ -7,14 +7,14 @@ import noop from '../../libs/noop';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
-import CustomizationActions from '../../actions/CustomizationActions';
+import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
 
 // UI Components
 import BridesmaidsColorSwatches from './BridesmaidsColorSwatches';
 
-function stateToProps() {
+function stateToProps({ $$bridesmaidsFilterState }) {
   return {
-    temporaryColorId: 77,
+    temporaryColorId: $$bridesmaidsFilterState.get('temporaryColor').get('id'),
   };
 }
 
@@ -22,7 +22,7 @@ function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const {
     selectProductColor,
-  } = bindActionCreators(CustomizationActions, dispatch);
+  } = bindActionCreators(BridesmaidsFilterActions, dispatch);
 
   return {
     activateModal,
