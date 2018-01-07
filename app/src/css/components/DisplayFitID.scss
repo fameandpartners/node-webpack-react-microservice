@@ -1,0 +1,67 @@
+.FitIDOverview__body-fit-wrapper {
+  height: 130px;
+  background-color: $c-background-gray;
+  position: relative;
+
+  .edit-body-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 30px;
+    margin-top: 30px;
+  }
+}
+
+.FitIDOverview {
+  .WizardStep__title {
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+
+  .ButtonBox {
+    padding: 50px 120px;
+  }
+
+  .body-fit-title {
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.FitIDOverview__body-fit-list {
+  li {
+    float: left;
+    margin-right: 35px;
+    margin-left: 35px;
+    margin-top: 45px;
+  }
+}
+
+.CustomDressFit--overview {
+  margin-top: 60px;
+
+  tr.bottom-space>td {
+    padding-bottom: 30px;
+  }
+
+  td {
+    text-align: left;
+  }
+
+  td>span {
+    padding: 0 20px;
+  }
+
+  td>a {
+    padding: 0 20px;
+  }
+
+}
+
+.ButtonBox {
+  .GetResults--link {
+    display: block;
+    margin-top: 30px;
+  }
+}

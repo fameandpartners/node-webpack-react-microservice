@@ -20,6 +20,9 @@ import {
 import Button from '../generic/Button';
 import WizardStep from '../wizard/WizardStep';
 
+// CSS
+import '../../../css/components/DisplayFitID.scss';
+
 function stateToProps(state) {
   return {
     temporaryMeasurementMetric: state.$$sizeProfileState.get('temporaryMeasurementMetric'),
@@ -135,7 +138,7 @@ class FitIDOverview extends Component {
             </div>
 
             <a
-              className="link link--static"
+              className="edit-body-link link"
               onClick={this.handleOpenEditBodyFit}
             >
               Edit
@@ -143,14 +146,60 @@ class FitIDOverview extends Component {
 
           </div>
 
-          <div className="ButtonBox ButtonBox--center">
 
+          <div className="grid-center-noGutter">
+            <table className="CustomDressFit--overview">
+              <tr className="bottom-space">
+                <td><span className="body-fit-title">Bust Fit</span></td>
+                <td><span className="body-fit-value">Often too tight</span></td>
+                <td>
+                  <a
+                    className="link"
+                    onClick={this.handleOpenEditBodyFit}
+                  >
+                    Edit
+                  </a>
+                </td>
+              </tr>
+              <tr className="bottom-space">
+                <td><span className="body-fit-title">Waist Fit</span></td>
+                <td><span className="body-fit-value">No fit issues</span></td>
+                <td>
+                  <a
+                    className="link"
+                    onClick={this.handleOpenEditBodyFit}
+                  >
+                    Edit
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td><span className="body-fit-title">Hip Fit</span></td>
+                <td><span className="body-fit-value">No fit issues</span></td>
+                <td>
+                  <a
+                    className="link"
+                    onClick={this.handleOpenEditBodyFit}
+                  >
+                    Edit
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div className="ButtonBox ButtonBox--center">
             <Button
               className="FitIDOverview__button button-height-big"
-              text="Save your Fit I.D. to your profile"
+              text="Save your Fit I.D. to your Profile"
               handleClick={this.saveFitID}
             />
-
+            <a
+              className="GetResults--link link"
+              onClick={this.handleOpenEditBodyFit}
+            >
+              Just get my FIT I.D. results
+            </a>
           </div>
 
         </div>
