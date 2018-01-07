@@ -75,18 +75,18 @@ class FitIDOverview extends Component {
   }
 
   handleOpenEditBustFit() {
-    this.props.updateEditingStep({ isEditingStep: true });
-    this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
+    this.props.updateEditingStep({ isEditingStep: true, editSectionId: 'bust' });
+    this.props.jumpToStep({ activeStepId: WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP });
   }
 
   handleOpenEditWaistFit() {
-    this.props.updateEditingStep({ isEditingStep: true });
-    this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
+    this.props.updateEditingStep({ isEditingStep: true, editSectionId: 'waist' });
+    this.props.jumpToStep({ activeStepId: WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP });
   }
 
   handleOpenEditHipFit() {
-    this.props.updateEditingStep({ isEditingStep: true });
-    this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
+    this.props.updateEditingStep({ isEditingStep: true, editSectionId: 'hip' });
+    this.props.jumpToStep({ activeStepId: WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP });
   }
 
   heightText() {
@@ -169,42 +169,44 @@ class FitIDOverview extends Component {
 
           <div className="grid-center-noGutter">
             <table className="CustomDressFit--overview">
-              <tr className="bottom-space">
-                <td><span className="body-fit-title">Bust Fit</span></td>
-                <td><span className="body-fit-value">{temporaryBustValue}</span></td>
-                <td>
-                  <a
-                    className="link"
-                    onClick={this.handleOpenEditBustFit}
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
-              <tr className="bottom-space">
-                <td><span className="body-fit-title">Waist Fit</span></td>
-                <td><span className="body-fit-value">{temporaryWaistValue}</span></td>
-                <td>
-                  <a
-                    className="link"
-                    onClick={this.handleOpenEditWaistFit}
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td><span className="body-fit-title">Hip Fit</span></td>
-                <td><span className="body-fit-value">{temporaryHipValue}</span></td>
-                <td>
-                  <a
-                    className="link"
-                    onClick={this.handleOpenEditHipFit}
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
+              <tbody>
+                <tr className="bottom-space">
+                  <td><span className="body-fit-title">Bust Fit</span></td>
+                  <td><span className="body-fit-value">{temporaryBustValue}</span></td>
+                  <td>
+                    <a
+                      className="link"
+                      onClick={this.handleOpenEditBustFit}
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+                <tr className="bottom-space">
+                  <td><span className="body-fit-title">Waist Fit</span></td>
+                  <td><span className="body-fit-value">{temporaryWaistValue}</span></td>
+                  <td>
+                    <a
+                      className="link"
+                      onClick={this.handleOpenEditWaistFit}
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span className="body-fit-title">Hip Fit</span></td>
+                  <td><span className="body-fit-value">{temporaryHipValue}</span></td>
+                  <td>
+                    <a
+                      className="link"
+                      onClick={this.handleOpenEditHipFit}
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
 

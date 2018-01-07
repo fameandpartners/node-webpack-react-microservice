@@ -137,7 +137,11 @@ class CurrentDressFitForm extends PureComponent {
       bustFitError,
       waistFitError,
       hipsFitError,
+      editSectionId,
     } = this.props;
+
+    console.log('EDIT YEAH');
+    console.log(editSectionId);
 
     return (
       <div
@@ -149,12 +153,20 @@ class CurrentDressFitForm extends PureComponent {
         <p className="h6 u-text-align-left u-mb-xs">
           How do fitted dresses in <strong>your size</strong> tend to fit?
         </p>
-        <div className="CurrentDressFitForm__height u-mb-normal">
+        <div
+          className={classnames(
+            'CurrentDressFitForm__height u-mb-normal',
+            {
+              'u-display-none': editSectionId && editSectionId !== 'bust',
+            },
+          )}
+        >
           <p
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
                 'u-color-red': bustFitError,
+                'u-display-none': editSectionId && editSectionId === 'bust',
               },
             )}
           >
@@ -175,12 +187,20 @@ class CurrentDressFitForm extends PureComponent {
           </div>
         </div>
 
-        <div className="CurrentDressFitForm__height u-mb-normal">
+        <div
+          className={classnames(
+            'CurrentDressFitForm__height u-mb-normal',
+            {
+              'u-display-none': editSectionId && editSectionId !== 'waist',
+            },
+          )}
+        >
           <p
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
                 'u-color-red': waistFitError,
+                'u-display-none': editSectionId && editSectionId === 'waist',
               },
             )}
           >
@@ -201,12 +221,20 @@ class CurrentDressFitForm extends PureComponent {
           </div>
         </div>
 
-        <div className="CurrentDressFitForm__height u-mb-normal">
+        <div
+          className={classnames(
+            'CurrentDressFitForm__height u-mb-normal',
+            {
+              'u-display-none': editSectionId && editSectionId !== 'hip',
+            },
+          )}
+        >
           <p
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
               {
                 'u-color-red': hipsFitError,
+                'u-display-none': editSectionId && editSectionId === 'hip',
               },
             )}
           >
@@ -236,6 +264,7 @@ CurrentDressFitForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
   validationHandler: PropTypes.func.isRequired,
+  editSectionId: PropTypes.string,
   // Redux Props
   temporaryBustValue: PropTypes.string,
   temporaryWaistValue: PropTypes.string,
@@ -252,6 +281,7 @@ CurrentDressFitForm.propTypes = {
 
 CurrentDressFitForm.defaultProps = {
   containerClassNames: 'u-mt-normal u-mb-huge',
+  editSectionId: null,
   temporaryBustValue: null,
   temporaryWaistValue: null,
   temporaryHipValue: null,

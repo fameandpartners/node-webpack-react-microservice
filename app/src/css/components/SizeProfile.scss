@@ -17,6 +17,10 @@
   margin: 0 auto;
 }
 
+.WizardStep__headline {
+  text-transform: capitalize;
+}
+
 .SizeProfileModal__fixed-width-big {
   width: 800px;
 }
@@ -36,6 +40,10 @@
     background-color: $c-white;
     border: 2px solid $c-black;
   }
+}
+
+.u-display-none {
+  display: none;
 }
 
 .u-height-big {

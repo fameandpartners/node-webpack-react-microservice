@@ -9,10 +9,11 @@ export function jumpToStep({ activeStepId, previousStepId, shouldAppear = true }
   };
 }
 
-export function updateEditingStep({ isEditingStep }) {
+export function updateEditingStep({ isEditingStep, editSectionId = null }) {
   return {
     type: WizardConstants.EDIT_STEP,
     isEditingStep,
+    editSectionId,
   };
 }
 

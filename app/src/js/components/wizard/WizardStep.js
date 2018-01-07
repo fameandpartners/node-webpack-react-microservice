@@ -60,7 +60,7 @@ class WizardStep extends PureComponent {
             <h3 className="h7">{`${currentStep} of ${totalSteps}`}</h3>
           }
           { headline &&
-            <h3 className="h6">{headline}</h3>
+            <h3 className="WizardStep__headline h6">{headline}</h3>
           }
         </div>
 

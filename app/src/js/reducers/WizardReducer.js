@@ -5,6 +5,7 @@ export const $$initialState = Immutable.fromJS({
   activeStepId: null,
   shouldAppear: false,
   isEditingStep: false,
+  editSectionId: null,
 });
 
 export default function WizardReducer($$state = $$initialState, action = null) {
@@ -19,6 +20,7 @@ export default function WizardReducer($$state = $$initialState, action = null) {
     case WizardConstants.EDIT_STEP: {
       return $$state.merge({
         isEditingStep: action.isEditingStep,
+        editSectionId: action.editSectionId,
       });
     }
     default: {

@@ -16,13 +16,22 @@ import WizardStep from '../wizard/WizardStep';
 import CurrentDressSizeForm from './CurrentDressSizeForm';
 import CurrentDressFitForm from './CurrentDressFitForm';
 
-function stateToProps() {
-  return {};
+function stateToProps(state) {
+  return {
+    isEditingStep: state.$$wizardState.get('isEditingStep'),
+    editSectionId: state.$$wizardState.get('editSectionId'),
+  };
 }
 
 function dispatchToProps(dispatch) {
-  const { jumpToStep } = bindActionCreators(WizardActions, dispatch);
-  return { jumpToStep };
+  const {
+    jumpToStep,
+    updateEditingStep,
+  } = bindActionCreators(WizardActions, dispatch);
+  return {
+    jumpToStep,
+    updateEditingStep,
+  };
 }
 
 class CurrentDressFitCombined extends Component {
@@ -40,6 +49,12 @@ class CurrentDressFitCombined extends Component {
   }
 
   handleNextSelection() {
+    const {
+      jumpToStep,
+      isEditingStep,
+      updateEditingStep,
+    } = this.props;
+
     let isValid = true;
     if (!this.dressFitForm.isValid()) {
       isValid = false;
@@ -50,19 +65,31 @@ class CurrentDressFitCombined extends Component {
     if (!isValid) {
       return;
     }
-    this.props.jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERVIEW_STEP });
+
+    if (isEditingStep) {
+      updateEditingStep({ isEditingStep: false });
+      jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERVIEW_STEP });
+    } else {
+      jumpToStep({ activeStepId: WizardConstants.FIT_ID_OVERVIEW_STEP });
+    }
   }
 
   render() {
+    const {
+      editSectionId,
+      isEditingStep,
+    } = this.props;
+
     return (
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
-        currentStep={3}
-        totalSteps={3}
+        currentStep={isEditingStep ? null : 3}
+        totalSteps={isEditingStep ? null : 3}
         modalClassName="full-padding-big u-flex u-flex--1"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
+        headline={isEditingStep ? `Edit ${editSectionId} Info` : null}
       >
         <div className="grid-12-noGutter">
           <div className="col-6">
@@ -76,6 +103,7 @@ class CurrentDressFitCombined extends Component {
             <CurrentDressFitForm
               containerClassNames="u-mt-normal u-mb-big"
               validationHandler={ref => (this.dressFitForm = ref)}
+              editSectionId={editSectionId}
             />
           </div>
         </div>
@@ -83,7 +111,7 @@ class CurrentDressFitCombined extends Component {
         <div className="ButtonBox--center">
           <Button
             className="SelectSizeProfile__button button-height-big"
-            text="Next"
+            text={isEditingStep ? 'Save' : 'Next'}
             handleClick={this.handleNextSelection}
           />
         </div>
@@ -95,9 +123,15 @@ class CurrentDressFitCombined extends Component {
 
 CurrentDressFitCombined.propTypes = {
   jumpToStep: PropTypes.func.isRequired,
+  updateEditingStep: PropTypes.func.isRequired,
+  // Redux Props
+  isEditingStep: PropTypes.bool,
+  editSectionId: PropTypes.string,
 };
 
 CurrentDressFitCombined.defaultProps = {
+  isEditingStep: false,
+  editSectionId: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(CurrentDressFitCombined);
