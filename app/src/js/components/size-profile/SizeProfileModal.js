@@ -5,7 +5,7 @@ import { string } from 'prop-types';
 
 // Components
 import WizardContainer from '../wizard/WizardContainer';
-// import SelectSizeProfile from './SelectSizeProfile';
+import SelectSizeProfile from './SelectSizeProfile';
 import StandardSizing from './StandardSizing';
 import AboutYouCombined from './AboutYouCombined';
 import PetiteOrPlusSurvey from './PetiteOrPlusSurvey';
@@ -40,8 +40,7 @@ class SizeProfileModal extends Component {
     const { activeStepId } = this.props;
     switch (activeStepId) {
       case WizardConstants.SELECT_SIZE_PROFILE_STEP:
-        // return <SelectSizeProfile />;
-        return <FitIDOverview />;
+        return <SelectSizeProfile />;
       case WizardConstants.STANDARD_SIZING_STEP:
         return <StandardSizing />;
       case WizardConstants.OVERALL_FIT_STEP:

@@ -29,9 +29,9 @@ function stateToProps(state) {
     temporaryHeightValue: state.$$sizeProfileState.get('temporaryHeightValue'),
     temporaryWeightValue: state.$$sizeProfileState.get('temporaryWeightValue'),
     temporaryAgeValue: state.$$sizeProfileState.get('temporaryAgeValue'),
-    // temporaryBustValue: state.$$sizeProfileState.get('temporaryBustValue'),
-    // temporaryWaistValue: state.$$sizeProfileState.get('temporaryWaistValue'),
-    // temporaryHipValue: state.$$sizeProfileState.get('temporaryHipValue'),
+    temporaryBustValue: state.$$sizeProfileState.get('temporaryBustValue'),
+    temporaryWaistValue: state.$$sizeProfileState.get('temporaryWaistValue'),
+    temporaryHipValue: state.$$sizeProfileState.get('temporaryHipValue'),
   };
 }
 
@@ -65,7 +65,26 @@ class FitIDOverview extends Component {
     this.props.jumpToStep({ activeStepId: WizardConstants.COMPLETED_FIT_ID_STEP });
   }
 
+  showFitID() {
+    this.props.jumpToStep({ activeStepId: WizardConstants.COMPLETED_FIT_ID_STEP });
+  }
+
   handleOpenEditBodyFit() {
+    this.props.updateEditingStep({ isEditingStep: true });
+    this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
+  }
+
+  handleOpenEditBustFit() {
+    this.props.updateEditingStep({ isEditingStep: true });
+    this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
+  }
+
+  handleOpenEditWaistFit() {
+    this.props.updateEditingStep({ isEditingStep: true });
+    this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
+  }
+
+  handleOpenEditHipFit() {
     this.props.updateEditingStep({ isEditingStep: true });
     this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
   }
@@ -82,8 +101,6 @@ class FitIDOverview extends Component {
     } else if (temporaryMeasurementMetric === UNITS.INCH && temporaryHeightValue) { // INCH selected
       const totalInches = temporaryHeightValue;
       const option = find(INCH_SIZES, { totalInches });
-      console.log(INCH_SIZES);
-      console.log(option);
       return option ? `${option.ft}ft ${option.inch}in` : 'N/A';
     }
 
@@ -94,6 +111,9 @@ class FitIDOverview extends Component {
     const {
       temporaryWeightValue,
       temporaryAgeValue,
+      temporaryBustValue,
+      temporaryWaistValue,
+      temporaryHipValue,
     } = this.props;
 
     return (
@@ -151,11 +171,11 @@ class FitIDOverview extends Component {
             <table className="CustomDressFit--overview">
               <tr className="bottom-space">
                 <td><span className="body-fit-title">Bust Fit</span></td>
-                <td><span className="body-fit-value">Often too tight</span></td>
+                <td><span className="body-fit-value">{temporaryBustValue}</span></td>
                 <td>
                   <a
                     className="link"
-                    onClick={this.handleOpenEditBodyFit}
+                    onClick={this.handleOpenEditBustFit}
                   >
                     Edit
                   </a>
@@ -163,11 +183,11 @@ class FitIDOverview extends Component {
               </tr>
               <tr className="bottom-space">
                 <td><span className="body-fit-title">Waist Fit</span></td>
-                <td><span className="body-fit-value">No fit issues</span></td>
+                <td><span className="body-fit-value">{temporaryWaistValue}</span></td>
                 <td>
                   <a
                     className="link"
-                    onClick={this.handleOpenEditBodyFit}
+                    onClick={this.handleOpenEditWaistFit}
                   >
                     Edit
                   </a>
@@ -175,11 +195,11 @@ class FitIDOverview extends Component {
               </tr>
               <tr>
                 <td><span className="body-fit-title">Hip Fit</span></td>
-                <td><span className="body-fit-value">No fit issues</span></td>
+                <td><span className="body-fit-value">{temporaryHipValue}</span></td>
                 <td>
                   <a
                     className="link"
-                    onClick={this.handleOpenEditBodyFit}
+                    onClick={this.handleOpenEditHipFit}
                   >
                     Edit
                   </a>
@@ -196,7 +216,7 @@ class FitIDOverview extends Component {
             />
             <a
               className="GetResults--link link"
-              onClick={this.handleOpenEditBodyFit}
+              onClick={this.showFitID}
             >
               Just get my FIT I.D. results
             </a>
@@ -217,6 +237,9 @@ FitIDOverview.propTypes = {
   temporaryHeightValue: PropTypes.number,
   temporaryWeightValue: PropTypes.string,
   temporaryAgeValue: PropTypes.number,
+  temporaryBustValue: PropTypes.string,
+  temporaryWaistValue: PropTypes.string,
+  temporaryHipValue: PropTypes.string,
 };
 
 FitIDOverview.defaultProps = {
@@ -224,6 +247,9 @@ FitIDOverview.defaultProps = {
   temporaryHeightValue: null,
   temporaryWeightValue: null,
   temporaryAgeValue: null,
+  temporaryBustValue: null,
+  temporaryWaistValue: null,
+  temporaryHipValue: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(FitIDOverview);
