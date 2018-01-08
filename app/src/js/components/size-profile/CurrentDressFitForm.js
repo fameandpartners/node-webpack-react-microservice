@@ -140,9 +140,6 @@ class CurrentDressFitForm extends PureComponent {
       editSectionId,
     } = this.props;
 
-    console.log('EDIT YEAH');
-    console.log(editSectionId);
-
     return (
       <div
         className={classnames(

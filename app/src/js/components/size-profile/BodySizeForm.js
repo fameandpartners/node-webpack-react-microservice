@@ -174,12 +174,18 @@ class BodySizeForm extends PureComponent {
   }
 
   handleWeightChange({ value }) {
-    this.props.updateWeightSelection({ temporaryWeightValue: value });
-    this.props.setBodySizeError({
-      weightError: false,
-      heightError: this.props.heightError,
-      ageError: this.props.ageError,
-    });
+    const numVal = parseInt(value, 10);
+
+    if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
+      this.props.updateWeightSelection({
+        temporaryWeightValue: numVal,
+      });
+      this.props.setBodySizeError({
+        weightError: false,
+        heightError: this.props.heightError,
+        ageError: this.props.ageError,
+      });
+    }
   }
 
   handleAgeChange({ value }) {
@@ -332,13 +338,13 @@ class BodySizeForm extends PureComponent {
               },
             )}
           >
-            What's your weight?
+            What's your weight? (pounds)
           </p>
           <div className="grid-noGutter">
             <div className="col-10">
               <Input
                 id="height-option-cm"
-                type="text"
+                type="number"
                 error={weightError}
                 inlineMeta={weightError ? 'Please enter a valid weight' : null}
                 onChange={this.handleWeightChange}
@@ -388,7 +394,7 @@ BodySizeForm.propTypes = {
   heightError: PropTypes.bool,
   weightError: PropTypes.bool,
   ageError: PropTypes.bool,
-  temporaryWeightValue: PropTypes.string,
+  temporaryWeightValue: PropTypes.number,
   temporaryAgeValue: PropTypes.number,
   // Redux Actions
   setBodySizeError: PropTypes.func.isRequired,

@@ -3,9 +3,11 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classnames from 'classnames';
 
 // Actions
 import WizardActions from '../../actions/WizardActions';
+import SizeProfileActions from '../../actions/SizeProfileActions';
 
 // Constants
 import WizardConstants from '../../constants/WizardConstants';
@@ -14,13 +16,21 @@ import WizardConstants from '../../constants/WizardConstants';
 import Button from '../generic/Button';
 import WizardStep from '../wizard/WizardStep';
 
-function stateToProps() {
-  return {};
+function stateToProps(state) {
+  return {
+    temporaryWeightValue: state.$$sizeProfileState.get('temporaryWeightValue'),
+    temporaryBuysStandardSizing: state.$$sizeProfileState.get('temporaryBuysStandardSizing'),
+  };
 }
 
 function dispatchToProps(dispatch) {
   const { jumpToStep } = bindActionCreators(WizardActions, dispatch);
-  return { jumpToStep };
+  const { updateBuysStandardSizing } = bindActionCreators(SizeProfileActions, dispatch);
+
+  return {
+    jumpToStep,
+    updateBuysStandardSizing,
+  };
 }
 
 class PetiteOrPlusSurvey extends Component {
@@ -37,11 +47,27 @@ class PetiteOrPlusSurvey extends Component {
     this.props.jumpToStep({ activeStepId: WizardConstants.OVERALL_FIT_STEP });
   }
 
-  handleNextSelection() {
+  handleYesSelection() {
+    this.props.updateBuysStandardSizing({ temporaryBuysStandardSizing: false });
+    this.props.jumpToStep({ activeStepId: WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP });
+  }
+
+  handleNoSelection() {
+    this.props.updateBuysStandardSizing({ temporaryBuysStandardSizing: true });
     this.props.jumpToStep({ activeStepId: WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP });
   }
 
   render() {
+    const {
+      temporaryWeightValue,
+      temporaryBuysStandardSizing,
+    } = this.props;
+
+    let isPlus = false;
+    if (temporaryWeightValue) {
+      isPlus = temporaryWeightValue >= 150;
+    }
+
     return (
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
@@ -54,7 +80,7 @@ class PetiteOrPlusSurvey extends Component {
       >
         <div className="u-mb-big u-mt-big">
           <h4 className="WizardStep__title">
-            Do you ever buy clothing in petite sizes? (This can be on rare occasions)
+            Do you ever buy clothing in {isPlus ? 'Plus' : 'Petite'} sizes? (This can be on rare occasions)
           </h4>
         </div>
 
@@ -62,13 +88,23 @@ class PetiteOrPlusSurvey extends Component {
           <div className="col">
             <Button
               text="Yes"
-              handleClick={this.handleNextSelection}
-              className="Survey__button u-mr-small"
+              handleClick={this.handleYesSelection}
+              className={classnames(
+                'Survey__button u-mr-small',
+                {
+                  'button__value-selected': temporaryBuysStandardSizing === false,
+                },
+              )}
             />
             <Button
               text="No"
-              handleClick={this.handleNextSelection}
-              className="Survey__button"
+              handleClick={this.handleNoSelection}
+              className={classnames(
+                'Survey__button u-mr-small',
+                {
+                  'button__value-selected': temporaryBuysStandardSizing === true,
+                },
+              )}
             />
           </div>
         </div>
@@ -80,9 +116,15 @@ class PetiteOrPlusSurvey extends Component {
 
 PetiteOrPlusSurvey.propTypes = {
   jumpToStep: PropTypes.func.isRequired,
+  updateBuysStandardSizing: PropTypes.func.isRequired,
+  // Redux Props
+  temporaryWeightValue: PropTypes.number,
+  temporaryBuysStandardSizing: PropTypes.bool,
 };
 
 PetiteOrPlusSurvey.defaultProps = {
+  temporaryWeightValue: null,
+  temporaryBuysStandardSizing: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(PetiteOrPlusSurvey);

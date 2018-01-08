@@ -37,9 +37,12 @@
   height: 60px;
 
   &:hover {
-    background-color: $c-white;
     border: 2px solid $c-black;
   }
+}
+
+.button__value-selected {
+  border: 2px solid $c-black;
 }
 
 .u-display-none {

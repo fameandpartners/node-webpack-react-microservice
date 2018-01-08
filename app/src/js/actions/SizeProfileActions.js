@@ -176,6 +176,17 @@ export function updateFittedDressSizeSelection({
   };
 }
 
+export function updateBuysStandardSizing({
+  temporaryBuysStandardSizing,
+  selectedBuysStandardSizing,
+}) {
+  return {
+    type: SizeProfileConstants.UPDATE_BUYS_STANDARD_SIZING,
+    selectedBuysStandardSizing,
+    temporaryBuysStandardSizing,
+  };
+}
+
 export default {
   setStandardSizeError,
   setClothingSizeError,
@@ -193,4 +204,5 @@ export default {
   updateHipSelection,
   updateBraSelection,
   updateJeanSelection,
+  updateBuysStandardSizing,
 };
