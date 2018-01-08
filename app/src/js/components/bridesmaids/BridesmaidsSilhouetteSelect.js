@@ -7,6 +7,9 @@ import { bindActionCreators } from 'redux';
 import { find } from 'lodash';
 import classnames from 'classnames';
 
+// Actions
+import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
+
 // CSS
 import '../../../css/components/BridesmaidsSilhouetteSelect.scss';
 
@@ -16,10 +19,28 @@ function stateToProps({ $$bridesmaidsFilterState }) {
   };
 }
 
+function dispatchToProps(dispatch) {
+  const {
+    selectFilterSilhouette,
+  } = bindActionCreators(BridesmaidsFilterActions, dispatch);
+
+  return {
+    selectFilterSilhouette,
+  };
+}
+
 class BridesmaidsSilhouetteSelect extends Component {
   constructor(props) {
     super(props);
     autobind(this);
+  }
+
+  handleSilhouetteClick(temporarySilhouette) {
+    const {
+      selectFilterSilhouette,
+    } = this.props;
+
+    selectFilterSilhouette({ temporarySilhouette });
   }
 
   getFilterSilhouettes() {
@@ -31,10 +52,12 @@ class BridesmaidsSilhouetteSelect extends Component {
     return filterSilhouettes
       .map((item, index) => (
         <div className="col-4" key={item.image + index}>
-          <div className={classnames([
+          <div
+            onClick={() => this.handleSilhouetteClick(item)}
+            className={classnames([
               'brick u-cursor--pointer',
               {
-                'Silhouette--selected': temporarySilhouetteId == item.id
+                'DressFilterSilhouette--selected': item.id == temporarySilhouetteId
               }
             ])}
           >
@@ -66,10 +89,11 @@ BridesmaidsSilhouetteSelect.propTypes = {
     image: PropTypes.string,
   })).isRequired,
   temporarySilhouetteId: PropTypes.number,
+  selectFilterSilhouette: PropTypes.func.isRequired,
 };
 
 BridesmaidsSilhouetteSelect.defaultProps = {
   temporarySilhouetteId: '',
 };
 
-export default connect(stateToProps, null)(BridesmaidsSilhouetteSelect);
+export default connect(stateToProps, dispatchToProps)(BridesmaidsSilhouetteSelect);

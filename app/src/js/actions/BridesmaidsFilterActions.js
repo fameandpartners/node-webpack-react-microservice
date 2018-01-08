@@ -7,15 +7,42 @@ export function hydrateFiltersFromURL(queryObj) {
   };
 }
 
-export function selectProductColor({ selectedColor, temporaryColor }) {
+export function selectFilterColor({ selectedColor, temporaryColor }) {
   return {
-    type: BridesmaidsFilterConstants.SELECT_PRODUCT_COLOR,
+    type: BridesmaidsFilterConstants.SELECT_FILTER_COLOR,
     selectedColor,
     temporaryColor,
   };
 }
 
+export function selectFilterSilhouette({ selectedSilhouette, temporarySilhouette }) {
+  return {
+    type: BridesmaidsFilterConstants.SELECT_FILTER_SILHOUETTE,
+    selectedSilhouette,
+    temporarySilhouette,
+  };
+}
+
+export function selectFilterLength({ selectedLength, temporaryLength }) {
+  return {
+    type: BridesmaidsFilterConstants.SELECT_FILTER_LENGTH,
+    selectedLength,
+    temporaryLength,
+  };
+}
+
+export function updateFilterTopDetails({ selectedTopDetails, temporaryTopDetails }) {
+  return {
+    type: BridesmaidsFilterConstants.UPDATE_FILTER_TOP_DETAILS,
+    selectedTopDetails,
+    temporaryTopDetails,
+  };
+}
+
 export default {
   hydrateFiltersFromURL,
-  selectProductColor,
+  selectFilterColor,
+  selectFilterSilhouette,
+  selectFilterLength,
+  updateFilterTopDetails,
 };

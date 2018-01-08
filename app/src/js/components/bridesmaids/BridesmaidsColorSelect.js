@@ -21,12 +21,12 @@ function stateToProps({ $$bridesmaidsFilterState }) {
 function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
   const {
-    selectProductColor,
+    selectFilterColor,
   } = bindActionCreators(BridesmaidsFilterActions, dispatch);
 
   return {
     activateModal,
-    selectProductColor,
+    selectFilterColor,
   };
 }
 
@@ -39,14 +39,14 @@ class BridesmaidsColorSelect extends PureComponent {
 
   handleColorSelection(temporaryColor) {
     const {
-      selectProductColor,
+      selectFilterColor,
       filterColors,
       setExpressMakingStatus,
     } = this.props;
     if (!this.isExpressEligible(temporaryColor.id, filterColors)) {
       setExpressMakingStatus(false);
     }
-    selectProductColor({ temporaryColor });
+    selectFilterColor({ temporaryColor });
   }
 
   isExpressEligible(colorId, defaultColors) {
@@ -79,7 +79,7 @@ BridesmaidsColorSelect.propTypes = {
   })).isRequired,
   temporaryColorId: PropTypes.number,
   // Redux Actions
-  selectProductColor: PropTypes.func.isRequired,
+  selectFilterColor: PropTypes.func.isRequired,
   setExpressMakingStatus: PropTypes.func,
 };
 

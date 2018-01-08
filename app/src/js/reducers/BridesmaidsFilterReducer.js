@@ -39,7 +39,7 @@ export default function BridesmaidsFilterReducer($$state = $$initialState, actio
   switch (action.type) {
 
     // COLOR
-    case BridesmaidsFilterConstants.SELECT_PRODUCT_COLOR: {
+    case BridesmaidsFilterConstants.SELECT_FILTER_COLOR: {
       if (action.selectedColor) {
         return $$state.merge({
           temporaryColor: action.selectedColor,
@@ -47,6 +47,39 @@ export default function BridesmaidsFilterReducer($$state = $$initialState, actio
         });
       }
       return $$state.merge({ temporaryColor: action.temporaryColor });
+    }
+
+    // SILHOUETTE
+    case BridesmaidsFilterConstants.SELECT_FILTER_SILHOUETTE: {
+      if (action.selectedSilhouette) {
+        return $$state.merge({
+          temporarySilhouette: action.selectedSilhouette,
+          selectedSilhouette: action.selectedSilhouette,
+        });
+      }
+      return $$state.merge({ temporarySilhouette: action.temporarySilhouette });
+    }
+
+    // LENGTH
+    case BridesmaidsFilterConstants.SELECT_FILTER_LENGTH: {
+      if (action.selectedLength) {
+        return $$state.merge({
+          temporaryLength: action.selectedLength,
+          selectedLength: action.selectedLength,
+        });
+      }
+      return $$state.merge({ temporaryLength: action.temporaryLength });
+    }
+
+    // TOP DETAILS
+    case BridesmaidsFilterConstants.UPDATE_FILTER_TOP_DETAILS: {
+      if (action.selectedTopDetails) {
+        return $$state.merge({
+          temporaryTopDetails: action.selectedTopDetails,
+          selectedTopDetails: action.selectedTopDetails,
+        });
+      }
+      return $$state.merge({ temporaryTopDetails: action.temporaryTopDetails });
     }
 
     default: {
