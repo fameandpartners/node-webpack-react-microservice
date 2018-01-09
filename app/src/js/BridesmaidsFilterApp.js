@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
-import qs from 'qs';
+// import qs from 'qs';
 import { bindActionCreators } from 'redux';
 
 // // Sentry Error Tracking
@@ -29,7 +29,7 @@ import '../css/animations.scss';
 import '../css/components/FlashSale.scss';
 
 // Utilities
-import win from './polyfills/windowPolyfill';
+// import win from './polyfills/windowPolyfill';
 import {
   transformFilterColors,
   transformFilterSilhouettes,
@@ -45,6 +45,8 @@ import BridesmaidsColorSelect from './components/bridesmaids/BridesmaidsColorSel
 import BridesmaidsSilhouetteSelect from './components/bridesmaids/BridesmaidsSilhouetteSelect';
 import BridesmaidsLengthSelect from './components/bridesmaids/BridesmaidsLengthSelect';
 import BridesmaidsTopDetailSelect from './components/bridesmaids/BridesmaidsTopDetailSelect';
+import EmailCapture from './components/generic/EmailCapture';
+import ErrorMessage from './components/generic/ErrorMessage';
 
 // CSS
 import '../css/components/BridesmaidsFilterApp.scss';
@@ -70,12 +72,22 @@ function stateToProps({ $$bridesmaidsFilterState }) {
     $$bridesmaidsFilterState.get('$$bridesmaidsFilterTopDetails').toJS(),
   );
 
+  const selectedColor = $$bridesmaidsFilterState.get('selectedColor');
+  const selectedSilhouette = $$bridesmaidsFilterState.get('selectedSilhouette');
+  const selectedLength = $$bridesmaidsFilterState.get('selectedLength');
+  const selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
+
   return {
     lockBody: false,
     filterColors,
     filterSilhouettes,
     filterLengths,
     filterTopDetails,
+    // TO-DO: just pass these down to their respective components
+    selectedColorId: selectedColor ? selectedColor.get('id') : null,
+    selectedSilhouetteId: selectedSilhouette ? selectedSilhouette.get('id') : null,
+    selectedLengthId: selectedLength ? selectedLength.get('id') : null,
+    selectedTopDetails: selectedTopDetails ? selectedTopDetails.toJS() : null,
   };
 }
 
@@ -91,9 +103,7 @@ class BridesmaidsFilterApp extends Component {
     super(props);
 
     this.state = {
-      isOpen: false,
-      productsCurrentPage: null,
-      totalPages: null,
+      attemptFormSubmit: false,
     };
 
     autobind(this);
@@ -116,22 +126,43 @@ class BridesmaidsFilterApp extends Component {
     // });
   }
 
-  componentDidMount() {
-    const queryParams = win.location.search;
-    const hasSearchQueryParams = !!queryParams;
+  // componentDidMount() {
+  //   const queryParams = win.location.search;
+  //   const hasSearchQueryParams = !!queryParams;
 
-    if (hasSearchQueryParams) {
-      const parsedQueryObj = qs.parse(queryParams.slice(1));
-      this.props.hydrateFiltersFromURL({
-        page: parsedQueryObj.page,
-        sort: parsedQueryObj.sort || 'asc',
-        selectedColors: parsedQueryObj.color || [],
-        selectedSizes: parsedQueryObj.size,
-        selectedDressLengths: parsedQueryObj.length || [],
-      });
+  //   if (hasSearchQueryParams) {
+  //     const parsedQueryObj = qs.parse(queryParams.slice(1));
+  //     this.props.hydrateFiltersFromURL({
+  //       page: parsedQueryObj.page,
+  //       sort: parsedQueryObj.sort || 'asc',
+  //       selectedColors: parsedQueryObj.color || [],
+  //       selectedSizes: parsedQueryObj.size,
+  //       selectedDressLengths: parsedQueryObj.length || [],
+  //     });
+  //   }
+  // }
+
+  handleFilterSelectionSubmit() {
+    const {
+      /* eslint-disable react/prop-types */
+      selectedColorId,
+      selectedSilhouetteId,
+      selectedLengthId,
+      selectedTopDetails,
+      /* eslint-enable react/prop-types */
+    } = this.props;
+
+    this.setState({
+      attemptFormSubmit: true,
+    });
+
+    // TO-DO: seriously? ...fix this
+    if (selectedColorId && selectedSilhouetteId && selectedLengthId && selectedTopDetails) {
+      console.log('FORM READY TO SUBMIT');
+    } else {
+      console.log('INCOMPLETE FILTER SELECTIONS');
     }
   }
-
 
   render() {
     const {
@@ -141,7 +172,17 @@ class BridesmaidsFilterApp extends Component {
       filterSilhouettes,
       filterLengths,
       filterTopDetails,
+      /* eslint-disable react/prop-types */
+      selectedColorId,
+      selectedSilhouetteId,
+      selectedLengthId,
+      selectedTopDetails,
+      /* eslint-enable react/prop-types */
     } = this.props;
+
+    const {
+      attemptFormSubmit,
+    } = this.state;
 
     return (
       <div className="__react_root__">
@@ -166,11 +207,19 @@ class BridesmaidsFilterApp extends Component {
               <BridesmaidsColorSelect
                 filterColors={filterColors}
               />
+              <ErrorMessage
+                displayCondition={attemptFormSubmit && !selectedColorId}
+                message="Please select a dress color."
+              />
             </div>
             <h2>Choose your silhouette</h2>
             <div className="col-12">
               <BridesmaidsSilhouetteSelect
                 filterSilhouettes={filterSilhouettes}
+              />
+              <ErrorMessage
+                displayCondition={attemptFormSubmit && !selectedSilhouetteId}
+                message="Please select a dress silhouette."
               />
             </div>
             <div className="col-12">
@@ -178,12 +227,37 @@ class BridesmaidsFilterApp extends Component {
               <BridesmaidsLengthSelect
                 filterLengths={filterLengths}
               />
+              <ErrorMessage
+                displayCondition={attemptFormSubmit && !selectedLengthId}
+                message="Please select a dress length."
+              />
             </div>
             <div className="col-12">
               <h2>Choose the top details you like</h2>
               <BridesmaidsTopDetailSelect
                 filterTopDetails={filterTopDetails}
               />
+              <ErrorMessage
+                displayCondition={attemptFormSubmit && (selectedTopDetails.length < 1)}
+                message="Please select at least one dress top detail."
+              />
+            </div>
+            <div className="BridesmaidsFilterAppEmailCapture__wrapper col-12">
+              <h2>
+                <em>Your Collection</em> is waiting.
+                <br />
+                Enter your email to get access.
+              </h2>
+              <EmailCapture
+                className="u-text-align--left"
+                service="bronto"
+              />
+              <a
+                onClick={() => this.handleFilterSelectionSubmit()}
+                className="u-cursor--pointer"
+              >
+                Just take me to my Tailor-Made Market
+              </a>
             </div>
           </div>
         </div>
@@ -198,7 +272,7 @@ BridesmaidsFilterApp.propTypes = {
   // Redux
   lockBody: PropTypes.bool.isRequired,
   // Redux Functions
-  hydrateFiltersFromURL: PropTypes.func.isRequired,
+  // hydrateFiltersFromURL: PropTypes.func.isRequired,
   filterColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,

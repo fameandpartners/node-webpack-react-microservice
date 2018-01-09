@@ -13,8 +13,10 @@ import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
 import BridesmaidsColorSwatches from './BridesmaidsColorSwatches';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
+  const selectedColor = $$bridesmaidsFilterState.get('selectedColor');
+
   return {
-    temporaryColorId: $$bridesmaidsFilterState.get('temporaryColor').get('id'),
+    selectedColorId: selectedColor ? selectedColor.get('id') : null,
   };
 }
 
@@ -37,16 +39,16 @@ class BridesmaidsColorSelect extends PureComponent {
   }
 
 
-  handleColorSelection(temporaryColor) {
+  handleColorSelection(selectedColor) {
     const {
       selectFilterColor,
       filterColors,
       setExpressMakingStatus,
     } = this.props;
-    if (!this.isExpressEligible(temporaryColor.id, filterColors)) {
+    if (!this.isExpressEligible(selectedColor.id, filterColors)) {
       setExpressMakingStatus(false);
     }
-    selectFilterColor({ temporaryColor });
+    selectFilterColor({ selectedColor });
   }
 
   isExpressEligible(colorId, defaultColors) {
@@ -56,13 +58,13 @@ class BridesmaidsColorSelect extends PureComponent {
   render() {
     const {
       filterColors,
-      temporaryColorId,
+      selectedColorId,
     } = this.props;
 
     return (
       <BridesmaidsColorSwatches
         productDefaultColors={filterColors}
-        temporaryColorId={temporaryColorId}
+        selectedColorId={selectedColorId}
         handleColorSelection={this.handleColorSelection}
       />
     );
@@ -77,14 +79,14 @@ BridesmaidsColorSelect.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  temporaryColorId: PropTypes.number,
+  selectedColorId: PropTypes.number,
   // Redux Actions
   selectFilterColor: PropTypes.func.isRequired,
   setExpressMakingStatus: PropTypes.func,
 };
 
 BridesmaidsColorSelect.defaultProps = {
-  temporaryColorId: '',
+  selectedColorId: null,
   setExpressMakingStatus: noop,
 };
 

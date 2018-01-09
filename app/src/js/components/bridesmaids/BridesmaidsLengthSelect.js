@@ -14,8 +14,10 @@ import '../../../css/components/BridesmaidsLengthSelect.scss';
 import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
+  const selectedLength = $$bridesmaidsFilterState.get('selectedLength');
+
   return {
-    temporaryLengthId: $$bridesmaidsFilterState.get('temporaryLength').get('id'),
+    selectedLengthId: selectedLength ? selectedLength.get('id') : null,
   };
 }
 
@@ -35,18 +37,18 @@ class BridesmaidsLengthSelect extends Component {
     autobind(this);
   }
 
-  handleLengthClick(temporaryLength) {
+  handleLengthClick(selectedLength) {
     const {
       selectFilterLength,
     } = this.props;
 
-    selectFilterLength({ temporaryLength });
+    selectFilterLength({ selectedLength });
   }
 
   getFilterLengths() {
     const {
       filterLengths,
-      temporaryLengthId,
+      selectedLengthId,
     } = this.props;
 
     return filterLengths
@@ -57,7 +59,7 @@ class BridesmaidsLengthSelect extends Component {
             className={classnames(
               'brick u-cursor--pointer',
               {
-                'DressFilterLength--selected': item.id == temporaryLengthId
+                'DressFilterLength--selected': item.id == selectedLengthId
               }
             )}
           >

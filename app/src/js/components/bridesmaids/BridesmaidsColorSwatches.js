@@ -23,8 +23,8 @@ class BridesmaidsColorSwatches extends PureComponent {
   }
 
   generateColorSwatch(color) {
-    const { temporaryColorId } = this.props;
-    const isActive = temporaryColorId === color.id;
+    const { selectedColorId } = this.props;
+    const isActive = selectedColorId === color.id;
     const background = generateBackgroundValueFromColor(color);
 
     return (
@@ -92,11 +92,13 @@ BridesmaidsColorSwatches.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  temporaryColorId: PropTypes.number.isRequired,
+  selectedColorId: PropTypes.number,
   handleColorSelection: PropTypes.func.isRequired,
 };
 
-BridesmaidsColorSwatches.defaultProps = {};
+BridesmaidsColorSwatches.defaultProps = {
+  selectedColorId: null,
+};
 
 
 export default BridesmaidsColorSwatches;

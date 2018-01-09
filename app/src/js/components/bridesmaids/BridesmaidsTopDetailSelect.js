@@ -14,8 +14,10 @@ import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
 import '../../../css/components/BridesmaidsTopDetailSelect.scss';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
+  const selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
+
   return {
-    temporaryTopDetails: $$bridesmaidsFilterState.get('temporaryTopDetails').toJS(),
+    selectedTopDetails: selectedTopDetails ? selectedTopDetails.toJS() : null,
   };
 }
 
@@ -37,33 +39,33 @@ class BridesmaidsTopDetailSelect extends Component {
 
   hasDetailSelected(id) {
     const {
-      temporaryTopDetails,
+      selectedTopDetails,
     } = this.props;
 
-    return temporaryTopDetails.filter(item => item.id == id).length;
+    return selectedTopDetails.filter(item => item.id == id).length;
   }
 
   handleDetailClick(item) {
     const {
-      temporaryTopDetails,
+      selectedTopDetails,
       updateFilterTopDetails,
     } = this.props;
 
-    let updatedTopDetails = [...temporaryTopDetails];
+    let updatedTopDetails = [...selectedTopDetails];
 
-    if ((temporaryTopDetails.length > 2) && !this.hasDetailSelected(item.id)) {
+    if ((selectedTopDetails.length > 2) && !this.hasDetailSelected(item.id)) {
       return console.log('ERR: Cannot select more than 3 TOP DETAILS!');
     }
 
     if (this.hasDetailSelected(item.id)) {
       let indexToRemove = findIndex(updatedTopDetails, { id: item.id });
       updatedTopDetails.splice(indexToRemove, 1);
-      updateFilterTopDetails({ temporaryTopDetails: updatedTopDetails });
+      updateFilterTopDetails({ selectedTopDetails: updatedTopDetails });
     }
 
     if (!this.hasDetailSelected(item.id)) {
       updatedTopDetails.push(item);
-      updateFilterTopDetails({ temporaryTopDetails: updatedTopDetails });
+      updateFilterTopDetails({ selectedTopDetails: updatedTopDetails });
     }
   }
 
@@ -92,7 +94,7 @@ class BridesmaidsTopDetailSelect extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.temporaryTopDetails);
+    console.log(this.props.selectedTopDetails);
   }
 
   render() {
@@ -113,6 +115,11 @@ BridesmaidsTopDetailSelect.propTypes = {
     image: PropTypes.string,
   })).isRequired,
   updateFilterTopDetails: PropTypes.func.isRequired,
+  selectedTopDetails: PropTypes.array,
+};
+
+BridesmaidsTopDetailSelect.defaultProps = {
+  selectedTopDetails: [],
 };
 
 export default connect(stateToProps, dispatchToProps)(BridesmaidsTopDetailSelect);

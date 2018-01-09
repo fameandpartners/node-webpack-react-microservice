@@ -14,8 +14,10 @@ import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
 import '../../../css/components/BridesmaidsSilhouetteSelect.scss';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
+  const selectedSilhouette = $$bridesmaidsFilterState.get('selectedSilhouette');
+
   return {
-    temporarySilhouetteId: $$bridesmaidsFilterState.get('temporarySilhouette').get('id'),
+    selectedSilhouetteId: selectedSilhouette ? selectedSilhouette.get('id') : null,
   };
 }
 
@@ -35,18 +37,18 @@ class BridesmaidsSilhouetteSelect extends Component {
     autobind(this);
   }
 
-  handleSilhouetteClick(temporarySilhouette) {
+  handleSilhouetteClick(selectedSilhouette) {
     const {
       selectFilterSilhouette,
     } = this.props;
 
-    selectFilterSilhouette({ temporarySilhouette });
+    selectFilterSilhouette({ selectedSilhouette });
   }
 
   getFilterSilhouettes() {
     const {
       filterSilhouettes,
-      temporarySilhouetteId,
+      selectedSilhouetteId,
     } = this.props;
 
     return filterSilhouettes
@@ -57,7 +59,7 @@ class BridesmaidsSilhouetteSelect extends Component {
             className={classnames([
               'brick u-cursor--pointer',
               {
-                'DressFilterSilhouette--selected': item.id == temporarySilhouetteId
+                'DressFilterSilhouette--selected': item.id == selectedSilhouetteId
               }
             ])}
           >
@@ -88,12 +90,12 @@ BridesmaidsSilhouetteSelect.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string,
   })).isRequired,
-  temporarySilhouetteId: PropTypes.number,
+  selectedSilhouetteId: PropTypes.number,
   selectFilterSilhouette: PropTypes.func.isRequired,
 };
 
 BridesmaidsSilhouetteSelect.defaultProps = {
-  temporarySilhouetteId: '',
+  selectedSilhouetteId: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(BridesmaidsSilhouetteSelect);
