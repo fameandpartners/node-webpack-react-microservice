@@ -1,3 +1,8 @@
+// import request from 'superagent';
+
+// // polyfills
+// import win from '../polyfills/windowPolyfill';
+
 export function transformFilterColors(data) {
   /**
    *  INPUT:
@@ -55,4 +60,36 @@ export function transformFilterLengths(data) {
 
 export function transformFilterTopDetails(data) {
   return data.options;
+}
+
+export function sendFilterRequest(data) {
+  /**
+   * EXPECTED OBJECT:
+   *  {
+   *    selectedColor: 'Charcoal',
+   *    selectedSilhouette: 'Column',
+   *    selectedLength: 'Knee',
+   *    selectedTopDetails: ['Strappy', 'Open Neckline'],
+   *  }
+   */
+
+  const filterParamsObj = {
+    selectedColor: data.selectedColor.presentation,
+    selectedSilhouette: data.selectedSilhouette.name,
+    selectedLength: data.selectedLength.name,
+    selectedTopDetails: data.selectedTopDetails.map(i => i.name),
+  };
+
+  console.group('sendFilterRequest()');
+  console.log(filterParamsObj);
+  console.groupEnd();
+
+  // const csrf = win.document.querySelector('meta[name="csrf-token"]');
+  // const token = csrf ? csrf.content : '';
+
+  // return request
+  //   .post('SOME/API')
+  //   .send(filterParamsObj)
+  //   .set('X-CSRF-Token', token)
+  //   .set('Accept', 'application/json');
 }

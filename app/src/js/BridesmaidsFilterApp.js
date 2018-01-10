@@ -35,6 +35,7 @@ import {
   transformFilterSilhouettes,
   transformFilterLengths,
   transformFilterTopDetails,
+  sendFilterRequest,
 } from './utilities/bridesmaids-helpers';
 
 // Constants
@@ -88,6 +89,9 @@ function stateToProps({ $$bridesmaidsFilterState }) {
     selectedSilhouetteId: selectedSilhouette ? selectedSilhouette.get('id') : null,
     selectedLengthId: selectedLength ? selectedLength.get('id') : null,
     selectedTopDetails: selectedTopDetails ? selectedTopDetails.toJS() : null,
+
+    // temp. (given the above)
+    bridesmaidsFilterObj: $$bridesmaidsFilterState.toJS(),
   };
 }
 
@@ -103,28 +107,28 @@ class BridesmaidsFilterApp extends Component {
     super(props);
 
     this.state = {
-      attemptFormSubmit: false,
+      attemptedFormSubmit: false,
     };
 
     autobind(this);
   }
 
-  componentWillMount() {
-    /**
-     * NOTE:
-     *   Do we still need something like this for the
-     *   bridesmaids filter?
-     */
+  // componentWillMount() {
+  //   /**
+  //    * NOTE:
+  //    *   Do we still need something like this for the
+  //    *   bridesmaids filter?
+  //    */
 
-    // const queryParams = win.location.search;
-    // const parsedQueryObj = qs.parse(queryParams.slice(1));
+  //   const queryParams = win.location.search;
+  //   const parsedQueryObj = qs.parse(queryParams.slice(1));
 
-    // this.setState({
-    //   productsCurrentPage: Number(parsedQueryObj.page) || this.props.page,
-    // eslint-disable-next-line
-    //   totalPages: this.props.pageDresses.length ? Number(this.props.pageDresses[0].total_pages) : this.props.page,
-    // });
-  }
+  //   this.setState({
+  //     productsCurrentPage: Number(parsedQueryObj.page) || this.props.page,
+  //   eslint-disable-next-line
+  //     totalPages: this.props.pageDresses.length ? Number(this.props.pageDresses[0].total_pages) : this.props.page,
+  //   });
+  // }
 
   // componentDidMount() {
   //   const queryParams = win.location.search;
@@ -149,16 +153,18 @@ class BridesmaidsFilterApp extends Component {
       selectedSilhouetteId,
       selectedLengthId,
       selectedTopDetails,
+      bridesmaidsFilterObj,
       /* eslint-enable react/prop-types */
     } = this.props;
 
     this.setState({
-      attemptFormSubmit: true,
+      attemptedFormSubmit: true,
     });
 
     // TO-DO: seriously? ...fix this
     if (selectedColorId && selectedSilhouetteId && selectedLengthId && selectedTopDetails) {
       console.log('FORM READY TO SUBMIT');
+      sendFilterRequest(bridesmaidsFilterObj);
     } else {
       console.log('INCOMPLETE FILTER SELECTIONS');
     }
@@ -181,7 +187,7 @@ class BridesmaidsFilterApp extends Component {
     } = this.props;
 
     const {
-      attemptFormSubmit,
+      attemptedFormSubmit,
     } = this.state;
 
     return (
@@ -208,7 +214,7 @@ class BridesmaidsFilterApp extends Component {
                 filterColors={filterColors}
               />
               <ErrorMessage
-                displayCondition={attemptFormSubmit && !selectedColorId}
+                displayCondition={attemptedFormSubmit && !selectedColorId}
                 message="Please select a dress color."
               />
             </div>
@@ -218,7 +224,7 @@ class BridesmaidsFilterApp extends Component {
                 filterSilhouettes={filterSilhouettes}
               />
               <ErrorMessage
-                displayCondition={attemptFormSubmit && !selectedSilhouetteId}
+                displayCondition={attemptedFormSubmit && !selectedSilhouetteId}
                 message="Please select a dress silhouette."
               />
             </div>
@@ -228,7 +234,7 @@ class BridesmaidsFilterApp extends Component {
                 filterLengths={filterLengths}
               />
               <ErrorMessage
-                displayCondition={attemptFormSubmit && !selectedLengthId}
+                displayCondition={attemptedFormSubmit && !selectedLengthId}
                 message="Please select a dress length."
               />
             </div>
@@ -238,10 +244,12 @@ class BridesmaidsFilterApp extends Component {
                 filterTopDetails={filterTopDetails}
               />
               <ErrorMessage
-                displayCondition={attemptFormSubmit && (selectedTopDetails.length < 1)}
+                displayCondition={attemptedFormSubmit && (selectedTopDetails.length < 1)}
                 message="Please select at least one dress top detail."
               />
             </div>
+          </div>
+          <div className="grid-12">
             <div className="BridesmaidsFilterAppEmailCapture__wrapper col-12">
               <h2>
                 <em>Your Collection</em> is waiting.
