@@ -66,10 +66,10 @@ export function sendFilterRequest(data) {
   /**
    * EXPECTED OBJECT:
    *  {
-   *    selectedColor: 'Charcoal',
-   *    selectedSilhouette: 'Column',
-   *    selectedLength: 'Knee',
-   *    selectedTopDetails: ['Strappy', 'Open Neckline'],
+   *    selectedColor: string,
+   *    selectedSilhouette: string,
+   *    selectedLength: string,
+   *    selectedTopDetails: [string]
    *  }
    */
 
