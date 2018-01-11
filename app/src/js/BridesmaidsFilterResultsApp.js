@@ -78,7 +78,7 @@ class BridesmaidsFilterResultsApp extends Component {
     autobind(this);
 
     this.state = {
-      filteredDresses: []
+      filteredDresses: [],
     };
   }
 
@@ -88,6 +88,7 @@ class BridesmaidsFilterResultsApp extends Component {
 
     if (hasSearchQueryParams) {
       getFilteredResults(queryParams).end((err, res) => {
+        // eslint-disable-next-line
         console.log('getFilteredResults()', res.body.bridesmaid);
         this.setState({
           // just set 50 for testing... (current hardcoded string fetching 516)
@@ -95,6 +96,7 @@ class BridesmaidsFilterResultsApp extends Component {
         });
       });
     } else {
+      // eslint-disable-next-line
       console.log('NO QUERY PARAMS PRESENT IN URL!');
     }
   }
