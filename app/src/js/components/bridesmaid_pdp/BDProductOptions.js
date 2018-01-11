@@ -200,6 +200,8 @@ class ProductOptions extends Component {
   findColorSpecificFirstImageUrl() {
     const { $$productImages, colorId } = this.props;
     const productImages = $$productImages.toJS();
+    if (!productImages[0]) return null;
+
     const hasMatch = find(productImages, { colorId });
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
   }

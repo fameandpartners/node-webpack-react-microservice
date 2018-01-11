@@ -18,7 +18,6 @@ import ProductFabricModal from './components/pdp/ProductFabricModal';
 import BDColorSelectionModal from './components/bridesmaid_pdp/BDColorSelectionModal';
 import BDCustomizationSelectionModal from './components/bridesmaid_pdp/BDCustomizationSelectionModal';
 import ShareModal from './components/pdp/ShareModal';
-import ImageLightboxModal from './components/pdp/ImageLightboxModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
 import AfterpayModal from './components/pdp/AfterpayModal';
@@ -137,7 +136,6 @@ class BridesmaidApp extends Component {
           <BDColorSelectionModal />
           <BDCustomizationSelectionModal />
           <ShareModal />
-          <ImageLightboxModal />
           <StyleSelectionModal />
           <SizeModals />
           <AfterpayModal />

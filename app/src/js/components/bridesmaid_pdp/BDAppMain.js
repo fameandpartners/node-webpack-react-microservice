@@ -22,7 +22,7 @@ import ProductDescription from '../pdp/ProductDescription';
 import BDProductDisplayOptionsTouch from './BDProductDisplayOptionsTouch';
 import BDProductOptions from '../bridesmaid_pdp/BDProductOptions';
 import ProductGrid from '../pdp/ProductGrid';
-import ProductFabricInfo from '../pdp/ProductFabricInfo';
+// import ProductFabricInfo from '../pdp/ProductFabricInfo';
 
 // import FameDifference from './FameDifference';
 
@@ -33,7 +33,7 @@ function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
-    fabric: state.$$productState.get('fabric').toJS(),
+    // fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
     sku: state.$$productState.get('sku'),
   };
@@ -65,8 +65,8 @@ class BDAppMain extends Component {
   render() {
     const {
       breakpoint,
-      fabric,
-      garmentCareInformation,
+      // fabric,
+      // garmentCareInformation,
       sku,
     } = this.props;
 
@@ -90,11 +90,13 @@ class BDAppMain extends Component {
                 <ProductDescription />
               </div>
               <div className="col grid-middle">
-                <ProductFabricInfo
+                {
+                  /* <ProductFabricInfo
                   className="u-center"
                   fabric={fabric}
                   garmentCareInformation={garmentCareInformation}
-                />
+                /> */
+                }
               </div>
               {
                 sku
@@ -106,14 +108,6 @@ class BDAppMain extends Component {
             </div>
           </div>
 
-          { breakpoint === 'mobile' || breakpoint === 'tablet'
-              ? null
-              : (
-                <div className="u-gray-border--top layout-container u-mb-normal">
-                  <ProductGrid />
-                </div>
-              )
-            }
         </div>
 
 
@@ -129,13 +123,13 @@ class BDAppMain extends Component {
 BDAppMain.propTypes = {
   // Redux Props
   activateModal: PropTypes.func.isRequired,
-  fabric: PropTypes.shape({
-    id: PropTypes.string,
-    smallImg: PropTypes.string,
-    name: PropTypes.string,
-    description: PropTypes.string,
-  }).isRequired,
-  garmentCareInformation: PropTypes.string.isRequired,
+  // fabric: PropTypes.shape({
+  //   id: PropTypes.string,
+  //   smallImg: PropTypes.string,
+  //   name: PropTypes.string,
+  //   description: PropTypes.string,
+  // }).isRequired,
+  // garmentCareInformation: PropTypes.string.isRequired,
   sku: PropTypes.string,
 
   // Decorator Props
