@@ -1,5 +1,5 @@
 import request from 'superagent';
-import qs from 'qs';
+import { serializeObjectIntoQueryParams } from '../utilities/BOM';
 
 // polyfills
 import win from '../polyfills/windowPolyfill';
@@ -81,14 +81,7 @@ export function loadFilteredResultsPage(data) {
     selectedTopDetails: data.selectedTopDetails.map(i => i.name),
   };
 
-  console.group('sendFilterRequest()');
-  console.log(filterParamsObj);
-  console.log(qs.stringify(filterParamsObj, { encode: false }));
-  console.groupEnd();
-
-  // this should be parsed string above (currently only working query via David)
-  // eslint-disable-next-line
-  const queryString = 'selectedColor=Black&selectedLength=Maxi&selectedSilhouette=Silhouette1&selectedTopDetails[]=A-Line';
+  const queryString = serializeObjectIntoQueryParams(filterParamsObj);
   const pathToLoad = `${win.location.origin}${win.location.pathname}/dresses?${queryString}`;
 
   win.location = pathToLoad;
