@@ -35,7 +35,7 @@ import {
   transformFilterSilhouettes,
   transformFilterLengths,
   transformFilterTopDetails,
-  sendFilterRequest,
+  loadFilteredResultsPage,
 } from './utilities/bridesmaids-helpers';
 
 // Constants
@@ -164,7 +164,7 @@ class BridesmaidsFilterApp extends Component {
     // TO-DO: seriously? ...fix this
     if (selectedColorId && selectedSilhouetteId && selectedLengthId && selectedTopDetails) {
       console.log('FORM READY TO SUBMIT');
-      sendFilterRequest(bridesmaidsFilterObj);
+      loadFilteredResultsPage(bridesmaidsFilterObj);
     } else {
       console.log('INCOMPLETE FILTER SELECTIONS');
     }

@@ -7,6 +7,7 @@ import win from './polyfills/windowPolyfill';
 
 // Components
 import BridesmaidsFilterApp from './BridesmaidsFilterApp';
+import BridesmaidsFilterResultsApp from './BridesmaidsFilterResultsApp';
 import BlanketOverlay from './components/generic/BlanketOverlay';
 import HeaderWrapper from './components/shared/header/HeaderWrapper';
 import SideMenu from './components/shared/side_menu/SideMenu';
@@ -52,6 +53,11 @@ const store = AppStore(cleanData);
 // DRESS FILTER (BRIDESMAIDS)
 const BridesmaidsFilterAppComponent = <Provider store={store}><BridesmaidsFilterApp /></Provider>;
 renderComponent(BridesmaidsFilterAppComponent, 'bridesmaids-filter-root');
+
+// DRESS FILTER RESULTS (BRIDESMAIDS)
+// eslint-disable-next-line
+const BridesmaidsFilterResultsAppComponent = <Provider store={store}><BridesmaidsFilterResultsApp /></Provider>;
+renderComponent(BridesmaidsFilterResultsAppComponent, 'bridesmaids-filter-results-root');
 
 // BLANKET
 const BlanketComponent = <Provider store={store}><BlanketOverlay /></Provider>;

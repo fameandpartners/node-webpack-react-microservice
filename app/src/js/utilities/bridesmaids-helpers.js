@@ -1,7 +1,8 @@
-// import request from 'superagent';
+import request from 'superagent';
+import qs from 'qs';
 
-// // polyfills
-// import win from '../polyfills/windowPolyfill';
+// polyfills
+import win from '../polyfills/windowPolyfill';
 
 export function transformFilterColors(data) {
   /**
@@ -62,7 +63,7 @@ export function transformFilterTopDetails(data) {
   return data.options;
 }
 
-export function sendFilterRequest(data) {
+export function loadFilteredResultsPage(data) {
   /**
    * EXPECTED OBJECT:
    *  {
@@ -82,14 +83,23 @@ export function sendFilterRequest(data) {
 
   console.group('sendFilterRequest()');
   console.log(filterParamsObj);
+  console.log(qs.stringify(filterParamsObj, { encode: false }));
   console.groupEnd();
 
-  // const csrf = win.document.querySelector('meta[name="csrf-token"]');
-  // const token = csrf ? csrf.content : '';
+  // this should be parsed string above (currently only working query via David)
+  // eslint-disable-next-line
+  const queryString = 'selectedColor=Black&selectedLength=Maxi&selectedSilhouette=Silhouette1&selectedTopDetails[]=A-Line';
+  const pathToLoad = `${win.location.origin}${win.location.pathname}/dresses?${queryString}`;
 
-  // return request
-  //   .post('SOME/API')
-  //   .send(filterParamsObj)
-  //   .set('X-CSRF-Token', token)
-  //   .set('Accept', 'application/json');
+  win.location = pathToLoad;
+}
+
+export function getFilteredResults(searchParams) {
+  const csrf = win.document.querySelector('meta[name="csrf-token"]');
+  const token = csrf ? csrf.content : '';
+
+  return request
+    .get(`/api/v1/bridesmaids${searchParams}`)
+    .set('X-CSRF-Token', token)
+    .set('Accept', 'application/json');
 }
