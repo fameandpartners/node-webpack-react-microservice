@@ -1,5 +1,5 @@
+/* global window */
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
@@ -102,7 +102,6 @@ function dispatchToProps(dispatch) {
     hydrateFiltersFromURL: actions.hydrateFiltersFromURL,
   };
 }
- 
 
 class BridesmaidsFilterApp extends Component {
   constructor(props) {
@@ -147,7 +146,6 @@ class BridesmaidsFilterApp extends Component {
   //     });
   //   }
   // }
-  
 
   handleFilterSelectionSubmit() {
     const {
@@ -165,26 +163,21 @@ class BridesmaidsFilterApp extends Component {
     });
 
     // TO-DO: seriously? ...fix this
-    if (!selectedColorId){
-       this.handleScrollToElement(this._colorFilter);
-    }
-    else if (!selectedSilhouetteId){
-       this.handleScrollToElement(this._silhouetteFilter);
-    }
-    else if (!selectedLengthId){
-       this.handleScrollToElement(this._lengthFilter);
-    } 
-    else if (selectedTopDetails.length <1) {
-       this.handleScrollToElement(this._topDetailsFilter);
+    if (!selectedColorId) {
+      this.handleScrollToElement(this.colorFilter);
+    } else if (!selectedSilhouetteId) {
+      this.handleScrollToElement(this.silhouetteFilter);
+    } else if (!selectedLengthId) {
+      this.handleScrollToElement(this.lengthFilter);
+    } else if (selectedTopDetails.length < 1) {
+      this.handleScrollToElement(this.topDetailsFilter);
     } else {
-      console.log('FORM READY TO SUBMIT');
       loadFilteredResultsPage(bridesmaidsFilterObj);
     }
   }
 
   handleScrollToElement(ref) {
-    const node = ReactDOM.findDOMNode(ref);
-    window.scrollTo(0, node.offsetTop - 40); // 40 px for header bar
+    window.scrollTo(0, ref.offsetTop - 40); // 40 px for header bar
   }
 
 
@@ -226,9 +219,9 @@ class BridesmaidsFilterApp extends Component {
             }
           </div>
           <div className="grid-12-noGutter layout-container">
-            <h2 ref={(c) => this._colorFilter = c}>Choose your color</h2>    
+            <h2 ref={c => this.colorFilter = c}>Choose your color</h2>
             <div className="col-12">
-             <ErrorMessage
+              <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedColorId}
                 message="Please select a dress color."
               />
@@ -236,9 +229,9 @@ class BridesmaidsFilterApp extends Component {
                 filterColors={filterColors}
               />
             </div>
-            <h2 ref={(c) => this._silhouetteFilter = c}>Choose your silhouette</h2>
+            <h2 ref={c => this.silhouetteFilter = c}>Choose your silhouette</h2>
             <div className="col-12">
-            <ErrorMessage
+              <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedSilhouetteId}
                 message="Please select a dress silhouette."
               />
@@ -246,19 +239,19 @@ class BridesmaidsFilterApp extends Component {
                 filterSilhouettes={filterSilhouettes}
               />
             </div>
-            <h2 ref={(c) => this._lengthFilter = c}>Choose your length</h2>
+            <h2 ref={c => this.lengthFilter = c}>Choose your length</h2>
             <div className="col-12">
-                <ErrorMessage
+              <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedLengthId}
                 message="Please select a dress length."
               />
               <BridesmaidsLengthSelect
                 filterLengths={filterLengths}
-              />     
+              />
             </div>
-            <h2 ref={(c) => this._topDetailsFilter = c}>Choose the top details you like</h2>
-            <div className="col-12">             
-               <ErrorMessage
+            <h2 ref={c => this.topDetailsFilter = c}>Choose the top details you like</h2>
+            <div className="col-12">
+              <ErrorMessage
                 displayCondition={attemptedFormSubmit && (selectedTopDetails.length < 1)}
                 message="Please select at least one dress top detail."
               />
