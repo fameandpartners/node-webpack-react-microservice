@@ -39,36 +39,35 @@ class BridesmaidsProductGrid extends Component {
             // eslint-disable-next-line
             key={index}
             className="FlashSaleProduct__container col-4_sm-6"
-            onClick={this.goToImageHref(`/sample-sale/${dress.id}`)}
+            onClick={this.goToImageHref(`/bridesmaids-dresses/${dress.id}`)}
           >
             <a className="FlashSaleProduct__image-wrapper u-cursor--pointer">
               <img
                 className="FlashSaleProduct__image--original"
                 alt={dress.product_name}
                 src="http://via.placeholder.com/200x350"
+                //src={dress.image_urls[0]}
               />
               {/* <img
                 className="FlashSaleProduct__image--hover"
                 alt={dress.name}
-                src={dress.images[dress.images.length - 2]}
+                src={dress.image_urls[dress.images.length - 2]}
               /> */}
             </a>
             <div className="FlashSaleProduct__info grid-12">
               <div className="col-8">
-                <a href={`/sample-sale/${dress.id}`}>
+                <a href={`/bridesmaids-dresses/${dress.id}`}>
                   {dress.product_name}
                 </a>
               </div>
-              <div className="col-4 FlashSaleProduct__original-price">
+              <div className="col-4 FlashSaleProduct__current-price">
                 {this.formatPrice(dress.price.amount)}
               </div>
               {/* <div className="col-8 FlashSaleProductLine">
                 {dress.color}, {formatSizePresentationUS(dress.size)}, {dress.height}&nbsp;
                 {HEIGHT_VALS[dress.height.toLowerCase()]}
               </div>
-              <div className="col-4 FlashSaleProduct__current-price">
-                {this.formatPrice(dress.current_price)}
-              </div> */}
+            */}
             </div>
           </div>
         ))}
