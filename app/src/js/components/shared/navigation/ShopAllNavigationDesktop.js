@@ -5,7 +5,7 @@ import Resize from '../../../decorators/Resize';
 import PDPBreakpoints from '../../../libs/PDPBreakpoints';
 
 // Assets
-import fallWeddings from '../../../../img/fall-weddings.jpg';
+import fallWeddings from '../../../../img/ShopAll-Tile.jpg';
 import '../../../../css/components/ShopAllNavigationDesktop.scss';
 
 // Constants
@@ -29,15 +29,15 @@ class ShopAllNavigationDesktop extends PureComponent {
 
     const headerAd = (
       <div className="HeaderNavigationDesktop__ad">
-        <a href="/dresses/wedding-guests">
+        <a href="/coming-soon-custom-bridesmaid-dresses">
           <img
-            alt="Fall Weddings Ad"
+            alt="Custom Bridesmaid Dresses Ad"
             className="u-width--full"
             src={fallWeddings}
           />
         </a>
-        <a href="/dresses/wedding-guests" className="link">
-          <span>Shop Wedding Guests</span>
+        <a href="/coming-soon-custom-bridesmaid-dresses" className="link">
+          <span>Get 20&#37; Off CUSTOM BRIDESMAID DRESSES</span>
         </a>
       </div>
     );
