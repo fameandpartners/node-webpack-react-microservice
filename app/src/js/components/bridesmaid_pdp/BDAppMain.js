@@ -21,7 +21,7 @@ import BDCustomizationButtonLedge from '../bridesmaid_pdp/BDCustomizationButtonL
 import ProductDescription from '../pdp/ProductDescription';
 import BDProductDisplayOptionsTouch from './BDProductDisplayOptionsTouch';
 import BDProductOptions from '../bridesmaid_pdp/BDProductOptions';
-import ProductGrid from '../pdp/ProductGrid';
+// import ProductGrid from '../pdp/ProductGrid';
 // import ProductFabricInfo from '../pdp/ProductFabricInfo';
 
 // import FameDifference from './FameDifference';

@@ -14,6 +14,7 @@ import noop from '../../libs/noop';
 import { dressSizePresence } from '../../utilities/pdpValidations';
 
 // Actions
+import * as BDActions from '../../actions/BDActions';
 import * as CustomizationActions from '../../actions/CustomizationActions';
 import * as AppActions from '../../actions/AppActions';
 import * as ModalActions from '../../actions/ModalActions';
@@ -40,8 +41,8 @@ function stateToProps(state) {
     modalIsOpen: state.$$modalState.get('shouldAppear'),
     activeModalId: state.$$modalState.get('modalId'),
     // Customziation State
-    productCustomizationDrawerOpen: state.$$customizationState.get('productCustomizationDrawerOpen'),
-    productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
+    bdProductCustomizationDrawerOpen: state.$$bdCustomizationState.get('bdProductCustomizationDrawerOpen'),
+    bdProductCustomizationDrawer: state.$$bdCustomizationState.get('bdProductCustomizationDrawer'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
@@ -53,19 +54,12 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const appActions = bindActionCreators(AppActions, dispatch);
-  const customizationActions = bindActionCreators(CustomizationActions, dispatch);
+  const bdActions = bindActionCreators(BDActions, dispatch);
   const modalActions = bindActionCreators(ModalActions, dispatch);
   return {
     activateModal: modalActions.activateModal,
-    activateCustomizationDrawer: customizationActions.activateCustomizationDrawer,
-    selectProductColor: customizationActions.selectProductColor,
     setShareableQueryParams: appActions.setShareableQueryParams,
-    setSizeProfileError: customizationActions.setSizeProfileError,
-    updateDressSizeSelection: customizationActions.updateDressSizeSelection,
-    updateHeightSelection: customizationActions.updateHeightSelection,
-    updateMeasurementMetric: customizationActions.updateMeasurementMetric,
-    updateCustomizationStyleSelection: customizationActions.updateCustomizationStyleSelection,
-    setExpressMakingStatus: customizationActions.setExpressMakingStatus,
+    bdActivateCustomizationDrawer: bdActions.bdActivateCustomizationDrawer,
   };
 }
 
@@ -76,7 +70,7 @@ class CustomizationButtonLedge extends Component {
   }
 
   handleLeftButtonClick() {
-    this.props.activateCustomizationDrawer({ isActive: false });
+    this.props.bdActivateCustomizationDrawer({ isActive: false });
     this.closeCustomization({ shouldAppear: false });
   }
 
@@ -169,11 +163,11 @@ class CustomizationButtonLedge extends Component {
   }
 
   chooseCustomizationCallback() {
-    const { activeModalId, productCustomizationDrawer } = this.props;
+    const { activeModalId, bdProductCustomizationDrawer } = this.props;
     if (
       // Checks for modal or drawer scenario
       activeModalId === BDModalConstants.COLOR_SELECTION_MODAL
-      || productCustomizationDrawer === COLOR_CUSTOMIZE
+      || bdProductCustomizationDrawer === COLOR_CUSTOMIZE
     ) {
       return this.saveColorSelection;
     }
@@ -186,7 +180,7 @@ class CustomizationButtonLedge extends Component {
     //
     // if (
     //   activeModalId === BDModalConstants.SIZE_SELECTION_MODAL
-    //   || productCustomizationDrawer === SIZE_CUSTOMIZE
+    //   || bdProductCustomizationDrawer === SIZE_CUSTOMIZE
     // ) {
     //   return this.saveSizeSelection;
     // }
@@ -213,7 +207,7 @@ class CustomizationButtonLedge extends Component {
       return false;
     }
     return (
-      this.props.productCustomizationDrawerOpen || this.isCustomizationModalOpen()
+      this.props.bdProductCustomizationDrawerOpen || this.isCustomizationModalOpen()
     );
   }
 
@@ -270,8 +264,8 @@ CustomizationButtonLedge.propTypes = {
   modalIsOpen: PropTypes.bool.isRequired,
   activeModalId: PropTypes.string,
   // -- Customizations
-  productCustomizationDrawerOpen: PropTypes.bool,
-  productCustomizationDrawer: PropTypes.string,
+  bdProductCustomizationDrawerOpen: PropTypes.bool,
+  bdProductCustomizationDrawer: PropTypes.string,
   temporaryColor: PropTypes.shape({
     id: PropTypes.number,
     centsTotal: PropTypes.number,
@@ -287,12 +281,13 @@ CustomizationButtonLedge.propTypes = {
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   activateCustomizationDrawer: PropTypes.func.isRequired,
-  selectProductColor: PropTypes.func.isRequired,
-  setShareableQueryParams: PropTypes.func.isRequired,
-  setSizeProfileError: PropTypes.func.isRequired,
-  updateDressSizeSelection: PropTypes.func.isRequired,
-  updateHeightSelection: PropTypes.func.isRequired,
-  updateMeasurementMetric: PropTypes.func.isRequired,
+  bdActivateCustomizationDrawer: PropTypes.func.isRequired,
+  // selectProductColor: PropTypes.func.isRequired,
+  // setShareableQueryParams: PropTypes.func.isRequired,
+  // setSizeProfileError: PropTypes.func.isRequired,
+  // updateDressSizeSelection: PropTypes.func.isRequired,
+  // updateHeightSelection: PropTypes.func.isRequired,
+  // updateMeasurementMetric: PropTypes.func.isRequired,
   // updateCustomizationStyleSelection: PropTypes.func.isRequired,
   productDefaultColors: PropTypes.arrayOf(PropTypes.object),
   setExpressMakingStatus: PropTypes.func,
@@ -300,8 +295,8 @@ CustomizationButtonLedge.propTypes = {
 
 CustomizationButtonLedge.defaultProps = {
   activeModalId: null,
-  productCustomizationDrawerOpen: false,
-  productCustomizationDrawer: null,
+  bdProductCustomizationDrawerOpen: false,
+  bdProductCustomizationDrawer: null,
   temporaryColor: null,
   temporaryDressSize: null,
   temporaryHeightValue: null,

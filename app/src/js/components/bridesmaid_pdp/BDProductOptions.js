@@ -188,7 +188,7 @@ class ProductOptions extends Component {
   handleProductOptionClick(drawer) {
     return () => {
       this.props.bdActivateCustomizationDrawer({
-        productCustomizationDrawer: drawer,
+        bdProductCustomizationDrawer: drawer,
       });
     };
   }

@@ -72,7 +72,7 @@ export default function CartReducer($$state = $$initialState, action = null) {
 
     case BDCustomizationConstants.BD_ACTIVATE_CUSTOMIZATION_DRAWER: {
       return $$state.merge({
-        bdProductCustomizationDrawer: action.productCustomizationDrawer,
+        bdProductCustomizationDrawer: action.bdProductCustomizationDrawer,
         bdProductCustomizationDrawerOpen: action.isActive,
       });
     }

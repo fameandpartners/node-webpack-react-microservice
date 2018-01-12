@@ -106,8 +106,6 @@ class BDProductDisplayOptionsTouch extends Component {
     return (
       <div className="BDProductDisplayOptionsTouch">
 
-        <ProductImageSlider />
-
         <div className="BDProductDisplayOptionsTouch__options u-mb-normal u-mt-normal">
           <div
             onClick={this.handleOpenModalClick(BDModalConstants.BD_COLOR_SELECTION_MODAL)}

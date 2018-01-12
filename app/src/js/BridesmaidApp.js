@@ -12,7 +12,7 @@ import Raven from 'raven-js';
 
 // Components
 import BDAppMain from './components/bridesmaid_pdp/BDAppMain';
-import CustomizationDrawer from './components/pdp/CustomizationDrawer';
+import BDCustomizationDrawer from './components/bridesmaid_pdp/BDCustomizationDrawer';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import BDColorSelectionModal from './components/bridesmaid_pdp/BDColorSelectionModal';
@@ -55,7 +55,7 @@ function stateToProps(state) {
   const sideMenuOpen = state.$$appState.get('sideMenuOpen');
   const modalOpen = state.$$modalState.get('shouldAppear');
   const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
-  const customizationDrawerOpen = state.$$customizationState.get('productCustomizationDrawerOpen');
+  const customizationDrawerOpen = state.$$customizationState.get('bdProductCustomizationDrawerOpen');
 
   return {
     selectedColor: state.$$customizationState.get('selectedColor'),
@@ -129,7 +129,7 @@ class BridesmaidApp extends Component {
     return (
       <div className="__react_root__">
         <div className={`BridesmaidApp Root__wrapper ${lockBody ? 'BridesmaidApp--scroll-lock' : ''}`}>
-          <CustomizationDrawer />
+          <BDCustomizationDrawer />
           <BDAppMain />
           <OnboardingModal />
           <ProductFabricModal />
