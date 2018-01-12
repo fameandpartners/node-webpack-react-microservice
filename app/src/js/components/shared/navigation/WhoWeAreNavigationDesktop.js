@@ -41,7 +41,7 @@ class WhoWeAreNavigation extends PureComponent {
                 src={invitefriendsImg}
               />
             </a>
-            <a href="/it-girl" className="link">
+            <a href="/invite?img" className="link">
               <span>Tell your friends, GET $25 OFF</span>
             </a>
           </div>
