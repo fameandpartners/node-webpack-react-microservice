@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
@@ -101,6 +102,7 @@ function dispatchToProps(dispatch) {
     hydrateFiltersFromURL: actions.hydrateFiltersFromURL,
   };
 }
+ 
 
 class BridesmaidsFilterApp extends Component {
   constructor(props) {
@@ -145,6 +147,7 @@ class BridesmaidsFilterApp extends Component {
   //     });
   //   }
   // }
+  
 
   handleFilterSelectionSubmit() {
     const {
@@ -162,13 +165,28 @@ class BridesmaidsFilterApp extends Component {
     });
 
     // TO-DO: seriously? ...fix this
-    if (selectedColorId && selectedSilhouetteId && selectedLengthId && selectedTopDetails) {
+    if (!selectedColorId){
+       this.handleScrollToElement(this._colorFilter);
+    }
+    else if (!selectedSilhouetteId){
+       this.handleScrollToElement(this._silhouetteFilter);
+    }
+    else if (!selectedLengthId){
+       this.handleScrollToElement(this._lengthFilter);
+    } 
+    else if (selectedTopDetails.length <1) {
+       this.handleScrollToElement(this._topDetailsFilter);
+    } else {
       console.log('FORM READY TO SUBMIT');
       loadFilteredResultsPage(bridesmaidsFilterObj);
-    } else {
-      console.log('INCOMPLETE FILTER SELECTIONS');
     }
   }
+
+  handleScrollToElement(ref) {
+    const node = ReactDOM.findDOMNode(ref);
+    window.scrollTo(0, node.offsetTop - 40); // 40 px for header bar
+  }
+
 
   render() {
     const {
@@ -208,44 +226,44 @@ class BridesmaidsFilterApp extends Component {
             }
           </div>
           <div className="grid-12-noGutter layout-container">
-            <h2>Choose your color</h2>
+            <h2 ref={(c) => this._colorFilter = c}>Choose your color</h2>    
             <div className="col-12">
-              <BridesmaidsColorSelect
-                filterColors={filterColors}
-              />
-              <ErrorMessage
+             <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedColorId}
                 message="Please select a dress color."
               />
-            </div>
-            <h2>Choose your silhouette</h2>
-            <div className="col-12">
-              <BridesmaidsSilhouetteSelect
-                filterSilhouettes={filterSilhouettes}
+              <BridesmaidsColorSelect
+                filterColors={filterColors}
               />
-              <ErrorMessage
+            </div>
+            <h2 ref={(c) => this._silhouetteFilter = c}>Choose your silhouette</h2>
+            <div className="col-12">
+            <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedSilhouetteId}
                 message="Please select a dress silhouette."
               />
-            </div>
-            <div className="col-12">
-              <h2>Choose your length</h2>
-              <BridesmaidsLengthSelect
-                filterLengths={filterLengths}
+              <BridesmaidsSilhouetteSelect
+                filterSilhouettes={filterSilhouettes}
               />
-              <ErrorMessage
+            </div>
+            <h2 ref={(c) => this._lengthFilter = c}>Choose your length</h2>
+            <div className="col-12">
+                <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedLengthId}
                 message="Please select a dress length."
               />
+              <BridesmaidsLengthSelect
+                filterLengths={filterLengths}
+              />     
             </div>
-            <div className="col-12">
-              <h2>Choose the top details you like</h2>
-              <BridesmaidsTopDetailSelect
-                filterTopDetails={filterTopDetails}
-              />
-              <ErrorMessage
+            <h2 ref={(c) => this._topDetailsFilter = c}>Choose the top details you like</h2>
+            <div className="col-12">             
+               <ErrorMessage
                 displayCondition={attemptedFormSubmit && (selectedTopDetails.length < 1)}
                 message="Please select at least one dress top detail."
+              />
+              <BridesmaidsTopDetailSelect
+                filterTopDetails={filterTopDetails}
               />
             </div>
           </div>
