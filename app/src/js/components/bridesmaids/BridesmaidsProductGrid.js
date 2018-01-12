@@ -46,7 +46,7 @@ class BridesmaidsProductGrid extends Component {
                 className="FlashSaleProduct__image--original"
                 alt={dress.product_name}
                 src="http://via.placeholder.com/200x350"
-                //src={dress.image_urls[0]}
+                // src={dress.image_urls[0]}
               />
               {/* <img
                 className="FlashSaleProduct__image--hover"
