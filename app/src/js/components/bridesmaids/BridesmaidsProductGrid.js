@@ -60,7 +60,7 @@ class BridesmaidsProductGrid extends Component {
                 </a>
               </div>
               <div className="col-4 FlashSaleProduct__original-price">
-                {this.formatPrice(dress.price.price.amount)}
+                {this.formatPrice(dress.price.amount)}
               </div>
               {/* <div className="col-8 FlashSaleProductLine">
                 {dress.color}, {formatSizePresentationUS(dress.size)}, {dress.height}&nbsp;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
-// import qs from 'qs';
+import qs from 'qs';
 import { bindActionCreators } from 'redux';
 
 // // Sentry Error Tracking
@@ -43,6 +43,7 @@ import {
 
 // Components
 import BridesmaidsProductGrid from './components/bridesmaids/BridesmaidsProductGrid';
+import BridesmaidsFilterHeader from './components/bridesmaids/BridesmaidsFilterHeader';
 // import BridesmaidsColorSelect from './components/bridesmaids/BridesmaidsColorSelect';
 // import BridesmaidsSilhouetteSelect from './components/bridesmaids/BridesmaidsSilhouetteSelect';
 // import BridesmaidsLengthSelect from './components/bridesmaids/BridesmaidsLengthSelect';
@@ -87,13 +88,21 @@ class BridesmaidsFilterResultsApp extends Component {
     const hasSearchQueryParams = !!queryParams;
 
     if (hasSearchQueryParams) {
+      const parsedQueryObj = qs.parse(queryParams.slice(1));
+
       getFilteredResults(queryParams).end((err, res) => {
         // eslint-disable-next-line
         console.log('getFilteredResults()', res.body.bridesmaid);
         this.setState({
-          // just set 50 for testing... (current hardcoded string fetching 516)
-          filteredDresses: res.body.bridesmaid.slice(466),
+          filteredDresses: res.body.bridesmaid,
         });
+      });
+
+      this.props.hydrateFiltersFromURL({
+        selectedColor: parsedQueryObj.selectedColor || '',
+        selectedSilhouette: parsedQueryObj.selectedSilhouette || '',
+        selectedLength: parsedQueryObj.selectedLength || '',
+        selectedTopDetails: parsedQueryObj.selectedTopDetails || [],
       });
     } else {
       // eslint-disable-next-line
@@ -116,6 +125,7 @@ class BridesmaidsFilterResultsApp extends Component {
           <div className="FlashSaleBanner__wrapper">
             Here's Your Exclusive Collection
           </div>
+          <BridesmaidsFilterHeader />
           <div className="grid-12-noGutter layout-container">
             <div className="col-12">
               <BridesmaidsProductGrid products={filteredDresses} />
@@ -130,6 +140,7 @@ class BridesmaidsFilterResultsApp extends Component {
 BridesmaidsFilterResultsApp.propTypes = {
   // Redux
   lockBody: PropTypes.bool.isRequired,
+  hydrateFiltersFromURL: PropTypes.func.isRequired,
 };
 
 // eslint-disable-next-line

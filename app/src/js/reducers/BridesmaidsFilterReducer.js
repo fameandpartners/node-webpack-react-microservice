@@ -31,6 +31,16 @@ export default function BridesmaidsFilterReducer($$state = $$initialState, actio
       return $$state.merge({ selectedTopDetails: action.selectedTopDetails });
     }
 
+    // HYDRATING SELECTED FILTERS
+    case BridesmaidsFilterConstants.HYDRATE_FILTERS_FROM_URL: {
+      return $$state.merge({
+        selectedColor: action.queryObj.selectedColor,
+        selectedSilhouette: action.queryObj.selectedSilhouette,
+        selectedLength: action.queryObj.selectedLength,
+        selectedTopDetails: action.queryObj.selectedTopDetails,
+      });
+    }
+
     default: {
       return $$state;
     }
