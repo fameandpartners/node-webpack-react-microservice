@@ -6,14 +6,6 @@ import classnames from 'classnames';
 import noop from '../../../libs/noop';
 
 // Constants
-import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
-
-// Components
-import FadeIn from '../../generic/FadeIn';
-import ShopAllNavigation from '../navigation/ShopAllNavigationDesktop';
-import WhoWeAreNavigation from '../navigation/WhoWeAreNavigationDesktop';
-
-// Constants
 import * as modalAnimations from '../../../utilities/modal-animation';
 
 // CSS
@@ -42,30 +34,6 @@ class HeaderNavigation extends Component {
 
   willLeave() {
     return modalAnimations.STANDARD_WILL_LEAVE;
-  }
-
-  generateHeaderNavigationContents() {
-    const { openNavItem } = this.props;
-    switch (openNavItem) {
-      case NAVIGATION_CONTAINERS.SHOP_ALL:
-        return (
-          <FadeIn key={NAVIGATION_CONTAINERS.SHOP_ALL}>
-            <ShopAllNavigation
-              childRef={el => this.childElement = el}
-            />
-          </FadeIn>
-        );
-      case NAVIGATION_CONTAINERS.WHO_WE_ARE:
-        return (
-          <FadeIn key={NAVIGATION_CONTAINERS.WHO_WE_ARE}>
-            <WhoWeAreNavigation
-              childRef={el => this.childElement = el}
-            />
-          </FadeIn>
-        );
-      default:
-        return null;
-    }
   }
 
   setToChildHeight() {
@@ -109,7 +77,9 @@ class HeaderNavigation extends Component {
                   opacity: style.opacity,
                 }}
               >
-                {this.generateHeaderNavigationContents()}
+                <div ref={c => this.childElement = c}>
+                  {this.props.generateHeaderNavigationContents()}
+                </div>
               </div>
             );
           }
@@ -123,7 +93,9 @@ class HeaderNavigation extends Component {
 HeaderNavigation.propTypes = {
   isActive: PropTypes.bool.isRequired,
   openNavItem: PropTypes.string,
+  // Funcs
   handleAnimationEnd: PropTypes.func,
+  generateHeaderNavigationContents: PropTypes.func.isRequired,
 };
 
 HeaderNavigation.defaultProps = {

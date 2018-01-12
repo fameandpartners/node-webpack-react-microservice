@@ -9,8 +9,18 @@ import classnames from 'classnames';
 // CSS
 import '../../../css/components/BridesmaidsFilterHeader.scss';
 
+// Components
+import BridesmaidsTabs from './BridesmaidsTabs';
+// import BridesmaidsColorSelect from '../../components/bridesmaids/BridesmaidsColorSelect';
+// import BridesmaidsSilhouette from '../../components/bridesmaids/BridesmaidsSilhouette';
+// import BridesmaidsLengthSelect from '../../components/bridesmaids/BridesmaidsLengthSelect';
+// import BridesmaidsTopDetailSelect from '../../components/bridesmaids/BridesmaidsTopDetailSelect';
+
 // Actions
 import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
+
+// Constants
+import BridesmaidsHeaderFilterConstants from '../../constants/BridesmaidsFilterHeaderConstants';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
   const selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
@@ -51,16 +61,21 @@ class BridesmaidsFilterHeader extends Component {
     return '';
   }
 
+  generateTopStyleText() {
+    const { selectedTopDetails } = this.props;
+    if (selectedTopDetails.length < 2) {
+      return `Top Style: ${selectedTopDetails}`;
+    }
+
+    return `Top Style: ${selectedTopDetails.length} Filters`;
+  }
+
   render() {
     const {
       selectedColor,
       selectedSilhouette,
       selectedLength,
-      selectedTopDetails,
     } = this.props;
-
-    // eslint-disable-next-line
-    console.log(selectedTopDetails);
 
     return (
       <div
@@ -71,44 +86,40 @@ class BridesmaidsFilterHeader extends Component {
           },
         )}
       >
-        <div className="col-3_sm-6">
-          <a
-            className="u-cursor--pointer"
-            onClick={() => console.log('SHOW COLOR FILTER DRAWER')}
-          >
-            Color: {selectedColor}
-          </a>
-        </div>
-        <div className="col-3_sm-6">
-          <a
-            className="u-cursor--pointer"
-            onClick={() => console.log('SHOW SILHOUETTE FILTER DRAWER')}
-          >
-            Silhouette: {selectedSilhouette}
-          </a>
-        </div>
-        <div className="col-3_sm-6">
-          <a
-            className="u-cursor--pointer"
-            onClick={() => console.log('SHOW LENGTH FILTER DRAWER')}
-          >
-            Length: {selectedLength}
-          </a>
-        </div>
-        <div className="col-3_sm-6">
-          <a
-            className="u-cursor--pointer"
-            onClick={() => console.log('SHOW TOP DETAILS FILTER DRAWER')}
-          >
-            { selectedTopDetails.length < 2
-              ? (
-                <span>Top Style: {selectedTopDetails}</span>
-              ) : (
-                <span>Top Style: {selectedTopDetails.length} Filters</span>
-              )
-            }
-          </a>
-        </div>
+        <BridesmaidsTabs
+          filters={[
+            {
+              id: BridesmaidsHeaderFilterConstants.SELECTED_COLOR,
+              heading: `Color: ${selectedColor}`,
+              content: (
+                <h1>SELECTED COLOR FILTER HERE</h1>
+              ),
+            },
+            {
+              id: BridesmaidsHeaderFilterConstants.SELECTED_SILHOUETTE,
+              heading: `Silhouette: ${selectedSilhouette}`,
+              content: (
+                <h1>SELECTED SILHOUETTE FILTER HERE</h1>
+              ),
+            },
+            {
+              id: BridesmaidsHeaderFilterConstants.SELECTED_LENGTH,
+              heading: `Length: ${selectedLength}`,
+              content: (
+                <h1>SELECTED LENGTH FILTER HERE</h1>
+              ),
+            },
+            {
+              id: BridesmaidsHeaderFilterConstants.SELECTED_TOP_DETAILS,
+              heading: this.generateTopStyleText(),
+              content: (
+                <h1>SELECTED LENGTH FILTER HERE</h1>
+              ),
+            },
+          ]}
+          headingClasses="SizeGuideTabs__heading"
+          contentClasses="SizeGuideTabs__content layout-container"
+        />
       </div>
     );
   }
