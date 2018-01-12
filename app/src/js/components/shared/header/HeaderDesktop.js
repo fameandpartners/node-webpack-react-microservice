@@ -13,6 +13,9 @@ import * as CartActions from '../../../actions/CartActions';
 // Components
 import HeaderActionButtons from './HeaderActionButtons';
 import HeaderNavigation from './HeaderNavigation';
+import FadeIn from '../../generic/FadeIn';
+import ShopAllNavigation from '../navigation/ShopAllNavigationDesktop';
+import WhoWeAreNavigation from '../navigation/WhoWeAreNavigationDesktop';
 
 // CSS
 import '../../../../css/components/Header.scss';
@@ -63,6 +66,26 @@ class Header extends Component {
     this.setState({ searchBarActive: true });
   }
 
+  generateHeaderNavigationContents() {
+    const { openNavItem } = this.state;
+    switch (openNavItem) {
+      case NAVIGATION_CONTAINERS.SHOP_ALL:
+        return (
+          <FadeIn key={NAVIGATION_CONTAINERS.SHOP_ALL}>
+            <ShopAllNavigation />
+          </FadeIn>
+        );
+      case NAVIGATION_CONTAINERS.WHO_WE_ARE:
+        return (
+          <FadeIn key={NAVIGATION_CONTAINERS.WHO_WE_ARE}>
+            <WhoWeAreNavigation />
+          </FadeIn>
+        );
+      default:
+        return null;
+    }
+  }
+
   render() {
     const { isHovering } = this.props;
     const { openNavItem } = this.state;
@@ -96,6 +119,7 @@ class Header extends Component {
           isActive={isHovering}
           openNavItem={openNavItem}
           handleAnimationEnd={this.handleAnimationEnd}
+          generateHeaderNavigationContents={this.generateHeaderNavigationContents}
         />
       </header>
     );

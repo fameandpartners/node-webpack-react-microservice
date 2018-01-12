@@ -1,3 +1,7 @@
+.BridesmaidsFilterHeader__wrapper {
+  height: 100px;
+}
+
 .BridesmaidsFilterHeader__wrapperColor--Ivory {
   background-color: #fffff0;
 }
@@ -69,3 +73,40 @@
 .BridesmaidsFilterHeader__wrapperColor--Lilac {
   background-color: #c8a2c8;
 }
+
+.SizeGuideTabs__heading {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.SizeGuideTabs__heading {
+  padding: 22px 10px 14px 10px;
+  background: $c-white;
+  border-bottom: 2px solid $c-neutral-4;
+}
+
+.SizeGuideTabs__content {
+  margin-top: 86px;
+  padding: 0 5px;
+
+  @include sm {
+    padding: 0 60px;
+  }
+}
+
+.SizeGuideTabs__heading .Tabs__list {
+  text-align: left;
+  width: 400px;
+}
+
+.SizeGuideTabs__heading .Tabs__link {
+  font-size: 1.4em;
+  margin: 15px 20px 5px;
+  padding-bottom: 12px;
+}
+
+.SizeGuideTabs__heading .Tabs__link--active {
+  border-bottom: 3px solid $c-black;
+}
+
