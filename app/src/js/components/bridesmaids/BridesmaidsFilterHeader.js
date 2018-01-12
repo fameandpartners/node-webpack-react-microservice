@@ -100,7 +100,13 @@ class BridesmaidsFilterHeader extends Component {
             className="u-cursor--pointer"
             onClick={() => console.log('SHOW TOP DETAILS FILTER DRAWER')}
           >
-            Top Style: {selectedTopDetails.length} Filters
+            { selectedTopDetails.length < 2
+              ? (
+                <span>Top Style: {selectedTopDetails}</span>
+              ) : (
+                <span>Top Style: {selectedTopDetails.length} Filters</span>
+              )
+            }
           </a>
         </div>
       </div>
