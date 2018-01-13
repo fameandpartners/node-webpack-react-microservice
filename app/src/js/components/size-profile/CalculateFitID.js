@@ -8,10 +8,9 @@ import { bindActionCreators } from 'redux';
 import WizardActions from '../../actions/WizardActions';
 
 // Constants
-// import WizardConstants from '../../constants/WizardConstants';
+import WizardConstants from '../../constants/WizardConstants';
 
 // Components
-// import WizardStep from '../wizard/WizardStep';
 
 function stateToProps() {
   return {};
@@ -22,10 +21,38 @@ function dispatchToProps(dispatch) {
   return { jumpToStep };
 }
 
+let intervalId = null;
+let secondsElapsed = 0;
 class CalculateFitID extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+  }
+
+  componentDidMount() {
+    intervalId = setInterval(this.calculating, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(intervalId);
+  }
+
+  calculating() {
+    switch (secondsElapsed) {
+      case 0:
+        this.firstCheck.classList.remove('waiting');
+        break;
+      case 1:
+        this.secondCheck.classList.remove('waiting');
+        break;
+      case 2:
+        this.thirdCheck.classList.remove('waiting');
+        break;
+      default:
+        this.props.jumpToStep({ activeStepId: WizardConstants.COMPLETED_FIT_ID_STEP });
+        break;
+    }
+    secondsElapsed += 1;
   }
 
   handleCloseWizard() {
@@ -39,15 +66,15 @@ class CalculateFitID extends Component {
           Calculating your personalized fit I.D.
         </h3>
         <ul className="Calc__list">
-          <li>
+          <li ref={c => this.firstCheck = c} className="waiting">
             <div className="checkmark" />
             <span className="Calc__label">Bust</span>
           </li>
-          <li>
+          <li ref={c => this.secondCheck = c} className="waiting">
             <div className="checkmark" />
             <span className="Calc__label">Waist</span>
           </li>
-          <li className="waiting">
+          <li ref={c => this.thirdCheck = c} className="waiting">
             <div className="checkmark" />
             <span className="Calc__label">Hips</span>
           </li>

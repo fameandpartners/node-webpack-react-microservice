@@ -62,11 +62,11 @@ class FitIDOverview extends Component {
   }
 
   saveFitID() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.COMPLETED_FIT_ID_STEP });
+    this.props.jumpToStep({ activeStepId: WizardConstants.CALCULATE_FIT_ID_STEP });
   }
 
   showFitID() {
-    this.props.jumpToStep({ activeStepId: WizardConstants.COMPLETED_FIT_ID_STEP });
+    this.props.jumpToStep({ activeStepId: WizardConstants.CALCULATE_FIT_ID_STEP });
   }
 
   handleOpenEditBodyFit() {

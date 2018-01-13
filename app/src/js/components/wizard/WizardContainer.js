@@ -89,6 +89,7 @@ class WizardContainer extends Component {
       dimBackground,
       height,
       wizardContainerClass,
+      wizardWrapperClass,
       zIndex,
       children,
       fullScreen,
@@ -113,6 +114,7 @@ class WizardContainer extends Component {
         <div
           className={classnames([
             'WizardContainer__content-wrapper u-center col',
+            wizardWrapperClass,
             {
               WizardContainer__fullScreen: fullScreen,
               'u-width--full': fullWidth,
@@ -169,6 +171,7 @@ WizardContainer.propTypes = {
   dimBackground: PropTypes.bool,
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   wizardContainerClass: PropTypes.string,
+  wizardWrapperClass: PropTypes.string,
   fullScreen: PropTypes.bool,
   flexWidth: PropTypes.bool,
   fullWidth: PropTypes.bool,
@@ -192,6 +195,7 @@ WizardContainer.defaultProps = {
   fullWidth: false,
   height: null,
   wizardContainerClass: '',
+  wizardWrapperClass: '',
   zIndex: 999,
   stepIds: [],
   // Redux

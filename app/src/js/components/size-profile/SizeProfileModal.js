@@ -5,7 +5,7 @@ import { string } from 'prop-types';
 
 // Components
 import WizardContainer from '../wizard/WizardContainer';
-// import SelectSizeProfile from './SelectSizeProfile';
+import SelectSizeProfile from './SelectSizeProfile';
 import StandardSizing from './StandardSizing';
 import AboutYouCombined from './AboutYouCombined';
 import PetiteOrPlusSurvey from './PetiteOrPlusSurvey';
@@ -41,8 +41,7 @@ class SizeProfileModal extends Component {
     const { activeStepId } = this.props;
     switch (activeStepId) {
       case WizardConstants.SELECT_SIZE_PROFILE_STEP:
-        // return <SelectSizeProfile />;
-        return <CalculateFitID />;
+        return <SelectSizeProfile />;
       case WizardConstants.STANDARD_SIZING_STEP:
         return <StandardSizing />;
       case WizardConstants.OVERALL_FIT_STEP:
@@ -53,6 +52,8 @@ class SizeProfileModal extends Component {
         return <CurrentDressFitCombined />;
       case WizardConstants.FIT_ID_OVERVIEW_STEP:
         return <FitIDOverview />;
+      case WizardConstants.CALCULATE_FIT_ID_STEP:
+        return <CalculateFitID />;
       case WizardConstants.COMPLETED_FIT_ID_STEP:
         return <CompletedFitID />;
       default:
@@ -65,10 +66,20 @@ class SizeProfileModal extends Component {
     switch (activeStepId) {
       case WizardConstants.STANDARD_SIZING_STEP:
         return 'SizeProfileModal__fixed-width-small';
-      case WizardConstants.SELECT_SIZE_PROFILE_STEP:
+      case WizardConstants.CALCULATE_FIT_ID_STEP:
         return 'SizeProfileModal__fixed-width-small_square';
       default:
-        return 'SizeProfileModal__fixed-width-big';
+        return 'SizeProfileModal__fixed-width-big u-height-big';
+    }
+  }
+
+  wrapperClassName() {
+    const { activeStepId } = this.props;
+    switch (activeStepId) {
+      case WizardConstants.CALCULATE_FIT_ID_STEP:
+        return '';
+      default:
+        return 'u-height-big';
     }
   }
 
@@ -76,6 +87,7 @@ class SizeProfileModal extends Component {
     return (
       <WizardContainer
         wizardContainerClass="SizeProfileWizardContainer grid-middle"
+        wizardWrapperClass={this.wrapperClassName()}
         stepIds={[
           WizardConstants.SELECT_SIZE_PROFILE_STEP,
           WizardConstants.STANDARD_SIZING_STEP,
@@ -83,6 +95,7 @@ class SizeProfileModal extends Component {
           WizardConstants.PETITE_PLUS_SURVEY_STEP,
           WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP,
           WizardConstants.FIT_ID_OVERVIEW_STEP,
+          WizardConstants.CALCULATE_FIT_ID_STEP,
           WizardConstants.COMPLETED_FIT_ID_STEP,
         ]}
         flexWidth
