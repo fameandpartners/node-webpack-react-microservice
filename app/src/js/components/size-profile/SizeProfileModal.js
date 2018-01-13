@@ -5,13 +5,14 @@ import { string } from 'prop-types';
 
 // Components
 import WizardContainer from '../wizard/WizardContainer';
-import SelectSizeProfile from './SelectSizeProfile';
+// import SelectSizeProfile from './SelectSizeProfile';
 import StandardSizing from './StandardSizing';
 import AboutYouCombined from './AboutYouCombined';
 import PetiteOrPlusSurvey from './PetiteOrPlusSurvey';
 import CurrentDressFitCombined from './CurrentDressFitCombined';
 import FitIDOverview from './FitIDOverview';
 import CompletedFitID from './CompletedFitID';
+import CalculateFitID from './CalculateFitID';
 
 // Constants
 import WizardConstants from '../../constants/WizardConstants';
@@ -40,7 +41,8 @@ class SizeProfileModal extends Component {
     const { activeStepId } = this.props;
     switch (activeStepId) {
       case WizardConstants.SELECT_SIZE_PROFILE_STEP:
-        return <SelectSizeProfile />;
+        // return <SelectSizeProfile />;
+        return <CalculateFitID />;
       case WizardConstants.STANDARD_SIZING_STEP:
         return <StandardSizing />;
       case WizardConstants.OVERALL_FIT_STEP:
@@ -63,6 +65,8 @@ class SizeProfileModal extends Component {
     switch (activeStepId) {
       case WizardConstants.STANDARD_SIZING_STEP:
         return 'SizeProfileModal__fixed-width-small';
+      case WizardConstants.SELECT_SIZE_PROFILE_STEP:
+        return 'SizeProfileModal__fixed-width-small_square';
       default:
         return 'SizeProfileModal__fixed-width-big';
     }
