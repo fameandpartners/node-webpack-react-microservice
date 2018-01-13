@@ -17,6 +17,7 @@ function stateToProps({ $$bridesmaidsFilterState }) {
 
   return {
     selectedColorId: selectedColor ? selectedColor.get('id') : null,
+    filterColors: $$bridesmaidsFilterState.get('$$bridesmaidsFilterColors').toJS(),
   };
 }
 

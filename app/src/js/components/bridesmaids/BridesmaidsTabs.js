@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import classnames from 'classnames';
 import { find } from 'lodash';
-// import ReactHoverObserver from 'react-hover-observer';
 
 // Components
 import HeaderNavigation from '../shared/header/HeaderNavigation';
@@ -22,16 +21,15 @@ class BridesmaidsTabs extends PureComponent {
     };
   }
 
-  handleTabChange(clickedTab) {
+  handleAnimationEnd() {
     this.setState({
-      selectedTabId: clickedTab,
+      selectedTabId: null,
     });
   }
 
-  componentWillMount() {
+  handleTabChange(clickedTab) {
     this.setState({
-      // set initial tab on load
-      selectedTabId: this.props.filters[0].id,
+      selectedTabId: clickedTab,
     });
   }
 
@@ -39,13 +37,15 @@ class BridesmaidsTabs extends PureComponent {
     const { selectedTabId } = this.state;
     const { filters } = this.props;
 
-    return find(filters, { id: selectedTabId });
+    const activeFilter = find(filters, { id: selectedTabId });
+    return activeFilter ? activeFilter.content : null;
   }
 
   render() {
     const {
       filters,
       headingClasses,
+      isHovering,
       // contentClasses,
     } = this.props;
 
@@ -56,7 +56,7 @@ class BridesmaidsTabs extends PureComponent {
     // const selectedTabObj = filters.filter(item => item.id === selectedTabId)[0];
 
     return (
-      <div className="Tabs u-position--relative">
+      <div className="Tabs u-position--relative u-width--full">
         <div
           className={classnames(
             headingClasses,
@@ -81,6 +81,7 @@ class BridesmaidsTabs extends PureComponent {
           </ul>
         </div>
         <HeaderNavigation
+          isActive={isHovering && selectedTabId}
           openNavItem={selectedTabId}
           handleAnimationEnd={this.handleAnimationEnd}
           generateHeaderNavigationContents={this.generateHeaderNavigationContents}
@@ -99,6 +100,7 @@ BridesmaidsTabs.propTypes = {
     }),
   })).isRequired,
   headingClasses: PropTypes.string,
+  isHovering: PropTypes.bool.isRequired,
   // contentClasses: PropTypes.string,
 };
 

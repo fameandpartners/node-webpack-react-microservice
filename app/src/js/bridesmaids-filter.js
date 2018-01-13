@@ -5,6 +5,9 @@ import { Provider } from 'react-redux';
 import { assign } from 'lodash';
 import win from './polyfills/windowPolyfill';
 
+// Transforms
+import { transformBridesmaidColors } from './transforms/bridesmaid';
+
 // Components
 import BridesmaidsFilterApp from './BridesmaidsFilterApp';
 import BridesmaidsFilterResultsApp from './BridesmaidsFilterResultsApp';
@@ -36,7 +39,7 @@ let $$bridesmaidsFilterState = {};
 
 if (win.BridesmaidsFilterData) {
   $$bridesmaidsFilterState = {
-    $$bridesmaidsFilterColors: win.BridesmaidsFilterData.colors,
+    $$bridesmaidsFilterColors: transformBridesmaidColors(win.BridesmaidsFilterData.colors),
     $$bridesmaidsFilterSilhouettes: win.BridesmaidsFilterData.silhouettes,
     $$bridesmaidsFilterLengths: win.BridesmaidsFilterData.lengths,
     $$bridesmaidsFilterTopDetails: win.BridesmaidsFilterData.top_details,

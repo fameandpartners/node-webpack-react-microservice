@@ -17,6 +17,7 @@ class HeaderNavigation extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+    this.containerHeight = 0;
   }
 
   defaultStyles() {
@@ -42,15 +43,14 @@ class HeaderNavigation extends Component {
     }
   }
 
-  componentDidMount() {
-    this.setToChildHeight();
-    this.forceUpdate();
-  }
-
   componentDidUpdate(lastProps) {
     if (lastProps.openNavItem !== this.props.openNavItem) {
-      this.setToChildHeight();
-      this.forceUpdate();
+      setTimeout(() => {
+        this.forceUpdate(); // A little ugly, but the ref needs an additional rendering pass
+        // ... because it inconsistently attaches
+        this.setToChildHeight();
+        this.forceUpdate();
+      });
     }
   }
 

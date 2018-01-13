@@ -10,7 +10,7 @@ import {
 } from '../../utilities/color';
 
 // CSS
-import '../../../css/components/ColorSwatches.scss';
+import '../../../css/components/BridesmaidColorSwatches.scss';
 
 class BridesmaidsColorSwatches extends PureComponent {
   constructor(props) {
@@ -30,37 +30,37 @@ class BridesmaidsColorSwatches extends PureComponent {
     return (
       <div
         key={color.id}
-        className="col-2 u-mb-big"
+        className="col u-mb-big"
       >
         <div
           onClick={this.handleColorSelection(color)}
           className={classnames([
-            'ColorSwatches__wrapper',
+            'BridesmaidColorSwatches__wrapper',
             'col u-cursor--pointer u-height--full u-position--relative',
             {
-              'ColorSwatches__wrapper--active': isActive,
-              'ColorSwatches__wrapper--extreme-light': isExtremeLightLuminance(color),
+              'BridesmaidColorSwatches__wrapper--active': isActive,
+              'BridesmaidColorSwatches__wrapper--extreme-light': isExtremeLightLuminance(color),
             },
           ])}
           style={{ background }}
         >
-          <div className="ColorSwatches__transform-wrapper">
+          <div className="BridesmaidColorSwatches__transform-wrapper">
             <div
               className={classnames(
-              'ColorSwatches__swatch',
+              'BridesmaidColorSwatches__swatch',
                 {
-                  'ColorSwatches__swatch--pattern': !!color.patternUrl,
+                  'BridesmaidColorSwatches__swatch--pattern': !!color.patternUrl,
                 },
             )}
             />
           </div>
           <span
             className={classnames(
-            'ColorSwatches__touch-display-text',
+            'BridesmaidColorSwatches__touch-display-text',
             'u-width--full u-left',
           )}
           >
-            <h6 className="ColorSwatches__text">
+            <h6 className="BridesmaidColorSwatches__text">
               {color.presentation}
             </h6>
           </span>
@@ -75,8 +75,8 @@ class BridesmaidsColorSwatches extends PureComponent {
     } = this.props;
 
     return (
-      <div className="ColorSwatches u-mt-normal u-text-align-left">
-        <div className="grid-12">
+      <div className="BridesmaidColorSwatches layout-container u-mt-normal u-text-align-left">
+        <div className="grid-9">
           { productDefaultColors.map(c => this.generateColorSwatch(c, 0))}
         </div>
       </div>

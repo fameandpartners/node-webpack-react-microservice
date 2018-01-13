@@ -1,12 +1,25 @@
 import Immutable from 'immutable';
+import { find } from 'lodash';
 import BridesmaidsFilterConstants from '../constants/BridesmaidsFilterConstants';
+
 
 export const $$initialState = Immutable.fromJS({
   selectedColor: null,
   selectedSilhouette: null,
   selectedLength: null,
   selectedTopDetails: [],
+
+  // Init State, will not be touched post init
+  $$bridesmaidsFilterColors: null,
+  $$bridesmaidsFilterSilhouettes: null,
+  $$bridesmaidsFilterLengths: null,
+  $$bridesmaidsFilterTopDetails: null,
 });
+
+function findColorByPresentation(presentation, { $$state }) {
+  const foundColor = find($$state.get('$$bridesmaidsFilterColors').toJS(), { presentation });
+  return foundColor || null;
+}
 
 export default function BridesmaidsFilterReducer($$state = $$initialState, action = null) {
   switch (action.type) {
@@ -34,7 +47,7 @@ export default function BridesmaidsFilterReducer($$state = $$initialState, actio
     // HYDRATING SELECTED FILTERS
     case BridesmaidsFilterConstants.HYDRATE_FILTERS_FROM_URL: {
       return $$state.merge({
-        selectedColor: action.queryObj.selectedColor,
+        selectedColor: findColorByPresentation(action.queryObj.selectedColor, { $$state }),
         selectedSilhouette: action.queryObj.selectedSilhouette,
         selectedLength: action.queryObj.selectedLength,
         selectedTopDetails: action.queryObj.selectedTopDetails,
