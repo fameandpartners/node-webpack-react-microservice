@@ -18,6 +18,7 @@ import Select from '../form/Select';
 
 // CSS
 import '../../../css/components/StandardSizeForm.scss';
+import '../../../css/components/CurrentDressSizeForm.scss';
 
 function stateToProps(state) {
   return {
@@ -147,9 +148,10 @@ class CurrentDressFitForm extends PureComponent {
           containerClassNames,
         )}
       >
-        <p className="h6 u-text-align-left u-mb-xs">
-          How do fitted dresses in <strong>your size</strong> tend to fit?
-        </p>
+        <h4 className="u-text-align-left u-mb-normal">
+          How do fitted dresses in <br />
+          <span className="title__emphasize">your size</span> tend to fit?
+        </h4>
         <div
           className={classnames(
             'CurrentDressFitForm__height u-mb-normal',
@@ -158,17 +160,17 @@ class CurrentDressFitForm extends PureComponent {
             },
           )}
         >
-          <p
+          <h4
             className={classnames(
-              'h6 u-mb-xs u-text-align--left',
+              'u-mb-xs u-text-align--left',
               {
                 'u-color-red': bustFitError,
                 'u-display-none': editSectionId && editSectionId === 'bust',
               },
             )}
           >
-            Your BUST?
-          </p>
+            Your <span className="title__emphasize">Bust</span>
+          </h4>
           <div className="grid-noGutter">
             <div className="col-10">
               <Select
@@ -192,17 +194,17 @@ class CurrentDressFitForm extends PureComponent {
             },
           )}
         >
-          <p
+          <h4
             className={classnames(
-              'h6 u-mb-xs u-text-align--left',
+              'u-mb-xs u-text-align--left',
               {
                 'u-color-red': waistFitError,
                 'u-display-none': editSectionId && editSectionId === 'waist',
               },
             )}
           >
-            Your Waist?
-          </p>
+            Your <span className="title__emphasize">Waist</span>
+          </h4>
           <div className="grid-noGutter">
             <div className="col-10">
               <Select
@@ -226,17 +228,17 @@ class CurrentDressFitForm extends PureComponent {
             },
           )}
         >
-          <p
+          <h4
             className={classnames(
-              'h6 u-mb-xs u-text-align--left',
+              'u-mb-xs u-text-align--left',
               {
                 'u-color-red': hipsFitError,
                 'u-display-none': editSectionId && editSectionId === 'hip',
               },
             )}
           >
-            Your Hips?
-          </p>
+            Your <span className="title__emphasize">Hips</span>
+          </h4>
           <div className="grid-noGutter">
             <div className="col-10">
               <Select

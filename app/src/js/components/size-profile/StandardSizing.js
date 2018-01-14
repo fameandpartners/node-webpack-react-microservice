@@ -52,7 +52,7 @@ class StandardSizing extends Component {
         handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
         modalClassName="full-padding-big u-flex u-flex--1"
-        modalContentClassName="u-width--full u-overflow-y--scroll"
+        modalContentClassName="u-width--full u-overflow-y--scroll u-height-normal"
         modalWrapperClassName="u-flex--col"
       >
         <StandardSizeForm

@@ -74,7 +74,7 @@ class PetiteOrPlusSurvey extends Component {
         handlePreviousStep={this.handlePreviousStep}
         currentStep={2}
         totalSteps={3}
-        modalClassName="full-padding-big u-flex u-flex--1"
+        modalClassName="full-padding-big u-flex u-flex--1 u-vh-normal"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >

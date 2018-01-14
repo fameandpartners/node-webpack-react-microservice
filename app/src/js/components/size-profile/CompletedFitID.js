@@ -79,7 +79,7 @@ class CompletedFitID extends Component {
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
-        modalClassName="full-padding-big u-flex u-flex--1"
+        modalClassName="full-padding-big u-flex u-flex--1 u-vh-big"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >

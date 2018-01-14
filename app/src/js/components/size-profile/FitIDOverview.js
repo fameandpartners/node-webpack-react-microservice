@@ -120,7 +120,7 @@ class FitIDOverview extends Component {
       <WizardStep
         handlePreviousStep={this.handlePreviousStep}
         handleCloseWizard={this.handleCloseWizard}
-        modalClassName="u-flex u-flex--1"
+        modalClassName="u-flex u-flex--1 u-vh-big"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
@@ -140,7 +140,7 @@ class FitIDOverview extends Component {
                 </li>
                 <li>
                   <span className="body-fit-title">Weight</span>
-                  <span className="body-fit-value">{temporaryWeightValue}</span>
+                  <span className="body-fit-value">{temporaryWeightValue}lbs</span>
                 </li>
                 <li>
                   <span className="body-fit-title">Age</span>

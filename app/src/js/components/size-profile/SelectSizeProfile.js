@@ -45,7 +45,7 @@ class SelectSizeProfile extends Component {
     return (
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
-        modalClassName="full-padding-big u-flex u-flex--1"
+        modalClassName="full-padding-big u-flex u-flex--1 u-vh-normal"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
@@ -59,7 +59,7 @@ class SelectSizeProfile extends Component {
           <div className="ButtonBox--medium-width ButtonBox--center">
             <Button
               className="SelectSizeProfile__button button-height-big"
-              text="Use a fit I.D."
+              text={['Use a ', <span className="title__emphasize">fit I.D.</span>]}
               handleClick={this.handleFitIDClick}
             />
           </div>

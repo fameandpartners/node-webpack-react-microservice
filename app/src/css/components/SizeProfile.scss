@@ -10,6 +10,7 @@
 .WizardStep__description {
   max-width: 300px;
   margin: 0 auto;
+  line-height: 1.4em;
 }
 
 .WizardStep__info {
@@ -60,6 +61,14 @@
 
 .full-padding-big {
   padding: 50px;
+}
+
+.u-padding-big {
+  padding: 0 50px 50px;
+}
+
+.title__emphasize {
+  font-weight: bolder;
 }
 
 .align-items--flex-end {

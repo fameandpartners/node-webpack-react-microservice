@@ -60,6 +60,7 @@ function stateToProps(state) {
   const customizationDrawerOpen = state.$$customizationState.get('productCustomizationDrawerOpen');
   const productDefaultFabrics = state.$$productState.get('productDefaultFabrics').toJS();
   const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics').toJS();
+  const wizardOpen = state.$$wizardState.get('shouldAppear');
 
   return {
     fabrics: productDefaultFabrics.concat(productSecondaryFabrics),
@@ -67,7 +68,8 @@ function stateToProps(state) {
     $$productDefaultColors: state.$$productState.get('productDefaultColors'),
     $$productSecondaryColors: state.$$productState.get('productSecondaryColors'),
     $$addonOptions: state.$$customizationState.get('addons').get('addonOptions'),
-    lockBody: (sideMenuOpen || modalOpen || cartDrawerOpen || customizationDrawerOpen),
+    lockBody: (sideMenuOpen || modalOpen || cartDrawerOpen
+      || customizationDrawerOpen || wizardOpen),
   };
 }
 

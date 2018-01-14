@@ -38,6 +38,14 @@
   }
 }
 
+.CurrentDressFitCombined__header-image {
+  width: 750px;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  object-position: 50% 30%;
+}
+
 .CompletedFitID__body-fit-list {
   margin: 0 auto;
   display: inline-block;

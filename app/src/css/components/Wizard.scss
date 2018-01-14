@@ -6,6 +6,18 @@
   height: 100%;
 }
 
+.WizardStep__content {
+  overflow-y: scroll;
+}
+
+.u-vh-normal {
+  height: 85vh;
+}
+
+.u-vh-big {
+  height: 91vh;
+}
+
 .WizardContainer--dim-background {
   background: $c-dim-background;
 }

@@ -108,7 +108,7 @@ class AboutYouCombined extends Component {
         handlePreviousStep={this.handlePreviousStep}
         currentStep={isEditingStep ? null : 1}
         totalSteps={isEditingStep ? null : 3}
-        modalClassName="full-padding-big u-flex u-flex--1"
+        modalClassName="full-padding-big u-flex u-flex--1 u-vh-normal"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >

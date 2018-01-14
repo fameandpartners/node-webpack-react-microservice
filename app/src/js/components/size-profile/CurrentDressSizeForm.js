@@ -82,9 +82,10 @@ class CurrentDressSizeForm extends PureComponent {
         )}
       >
         <div>
-          <p className="h6 u-text-align-left u-mb-xs">
-            In <strong>US sizes</strong>, what fitted dress size do you typically wear?
-          </p>
+          <h4 className="u-text-align-left u-mb-big">
+            In <span className="title__emphasize">US sizes</span>,
+            what fitted dress size do you typically wear?
+          </h4>
           <div className="CurrentDressSizeForm__size grid-12-spaceBetween">
             { US_SIZES.map(s => (
               <div key={s} className="col-3">
