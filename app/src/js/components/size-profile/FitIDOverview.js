@@ -101,7 +101,7 @@ class FitIDOverview extends Component {
     } else if (temporaryMeasurementMetric === UNITS.INCH && temporaryHeightValue) { // INCH selected
       const totalInches = temporaryHeightValue;
       const option = find(INCH_SIZES, { totalInches });
-      return option ? `${option.ft}ft ${option.inch}in` : 'N/A';
+      return option ? `${option.ft}' ${option.inch}"` : 'N/A';
     }
 
     return 'N/A';

@@ -30,11 +30,13 @@ class CalculateFitID extends Component {
   }
 
   componentDidMount() {
+    secondsElapsed = 0;
     intervalId = setInterval(this.calculating, 1000);
   }
 
   componentWillUnmount() {
     clearInterval(intervalId);
+    secondsElapsed = 0;
   }
 
   calculating() {
