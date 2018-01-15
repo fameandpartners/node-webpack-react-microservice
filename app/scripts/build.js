@@ -25,7 +25,7 @@ var printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 var useYarn = false;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appPdpHtml, paths.appPdpJs])) {
+if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
 
