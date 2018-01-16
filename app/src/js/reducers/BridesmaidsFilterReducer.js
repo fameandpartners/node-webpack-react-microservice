@@ -35,7 +35,7 @@ function findTopDetailsByName(topDetails, { $$state }) {
   let foundTopDetails = [];
   if (topDetails && topDetails.length) {
     topDetails.forEach((name) => {
-      const foundDetail = find($$state.get('$$bridesmaidsFilterLengths').toJS(), { name });
+      const foundDetail = find($$state.get('$$bridesmaidsFilterTopDetails').toJS(), { name });
       if (foundDetail) {
         foundTopDetails = foundTopDetails.concat(foundDetail);
       }
