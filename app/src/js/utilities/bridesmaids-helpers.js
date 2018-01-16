@@ -32,21 +32,19 @@ export function transformFilterColors(data) {
    *   }]
    */
 
-  const colors = data.table.default || [];
+  const colors = data || [];
 
   return colors.map((c) => {
-    const optionValue = c.option_value;
-    const optionValueVal = optionValue.value || '';
-    const hasPatternImage = optionValueVal ? optionValueVal.indexOf('.') > -1 : false;
+    const hasPatternImage = c.patternUrl ? c.patternUrl.indexOf('.') > -1 : false;
     const cfPath = process.env.CLOUDFRONT_BASE_PATH || 'https://dekbm9314em3c.cloudfront.net';
     const ASSET_BASE_PATH = '/assets/product-color-images';
 
     return {
-      id: optionValue.id,
-      name: optionValue.name,
-      presentation: optionValue.presentation,
-      hexValue: hasPatternImage ? '' : optionValueVal,
-      patternUrl: hasPatternImage ? `${cfPath}${ASSET_BASE_PATH}/${optionValueVal}` : '',
+      id: c.id,
+      name: c.name,
+      presentation: c.presentation,
+      hexValue: hasPatternImage ? '' : c.hexValue,
+      patternUrl: hasPatternImage ? `${cfPath}${ASSET_BASE_PATH}/${c.patternUrl}` : '',
     };
   });
 }
