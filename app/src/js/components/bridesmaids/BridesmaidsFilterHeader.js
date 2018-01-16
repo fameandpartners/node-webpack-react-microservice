@@ -20,6 +20,7 @@ import BridesmaidsTopDetailSelect from '../../components/bridesmaids/Bridesmaids
 
 // Utilities
 import { isExtremeLightLuminance } from '../../utilities/color';
+import { loadFilteredResultsPage } from '../../utilities/bridesmaids-helpers';
 
 // Actions
 import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
@@ -38,6 +39,7 @@ function stateToProps({ $$bridesmaidsFilterState }) {
     selectedSilhouette: $$selectedSilhouette ? $$selectedSilhouette.toJS() : { name: '' },
     selectedLength: $$selectedLength ? $$selectedLength.toJS() : { name: '' },
     selectedTopDetails: $$selectedTopDetails ? $$selectedTopDetails.toJS() : [],
+    bridesmaidsFilterObj: $$bridesmaidsFilterState.toJS(),
   };
 }
 
@@ -68,21 +70,36 @@ class BridesmaidsFilterHeader extends Component {
   }
 
   handleColorSelection() {
-    console.log('Doin the magic');
+    const {
+      /* eslint-disable react/prop-types */
+      bridesmaidsFilterObj,
+      /* eslint-enable react/prop-types */
+    } = this.props;
+    loadFilteredResultsPage(bridesmaidsFilterObj);
   }
 
   handleLengthSelection() {
-    console.log('Doin the magic');
+    const {
+      /* eslint-disable react/prop-types */
+      bridesmaidsFilterObj,
+      /* eslint-enable react/prop-types */
+    } = this.props;
+    loadFilteredResultsPage(bridesmaidsFilterObj);
   }
 
   handleSilhouetteSelection() {
-    console.log('Doin the magic');
+    const {
+      /* eslint-disable react/prop-types */
+      bridesmaidsFilterObj,
+      /* eslint-enable react/prop-types */
+    } = this.props;
+    loadFilteredResultsPage(bridesmaidsFilterObj);
   }
 
   generateTopStyleText() {
     const { selectedTopDetails } = this.props;
     if (selectedTopDetails.length === 1) {
-      return `Top Style: ${selectedTopDetails.name}`;
+      return `Top Style: ${selectedTopDetails[0].name}`;
     }
 
     return `Top Style: ${selectedTopDetails.length} Filters`;
