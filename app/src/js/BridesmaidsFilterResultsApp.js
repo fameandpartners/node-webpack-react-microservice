@@ -122,7 +122,7 @@ class BridesmaidsFilterResultsApp extends Component {
     return (
       <div className="__react_root__">
         <div className={`FlashSaleListApp Root__wrapper ${lockBody ? 'FlashSaleApp--scroll-lock' : ''}`}>
-          <div className="FlashSaleBanner__wrapper">
+          <div className="FlashSaleBanner__wrapper grid-center-middle">
             Here's Your Exclusive Collection
           </div>
           <BridesmaidsFilterHeader />

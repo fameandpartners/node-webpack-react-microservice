@@ -15,9 +15,11 @@ import '../../../css/components/BridesmaidsTopDetailSelect.scss';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
   const selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
+  const $$bridesmaidsFilterTopDetails = $$bridesmaidsFilterState.get('$$bridesmaidsFilterTopDetails');
 
   return {
     selectedTopDetails: selectedTopDetails ? selectedTopDetails.toJS() : null,
+    bridesmaidsFilterTopDetails: $$bridesmaidsFilterTopDetails ? $$bridesmaidsFilterTopDetails.toJS() : [],
   };
 }
 
@@ -71,10 +73,10 @@ class BridesmaidsTopDetailSelect extends Component {
 
   getFilterTopDetails() {
     const {
-      filterTopDetails,
+      bridesmaidsFilterTopDetails,
     } = this.props;
 
-    return filterTopDetails
+    return bridesmaidsFilterTopDetails
       .map((item, index) => (
         <div className="col-3" key={item.image + index}>
           <div
@@ -109,7 +111,7 @@ class BridesmaidsTopDetailSelect extends Component {
 }
 
 BridesmaidsTopDetailSelect.propTypes = {
-  filterTopDetails: PropTypes.arrayOf(PropTypes.shape({
+  bridesmaidsFilterTopDetails: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     image: PropTypes.string,

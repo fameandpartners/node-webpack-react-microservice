@@ -185,10 +185,6 @@ class BridesmaidsFilterApp extends Component {
     const {
       breakpoint,
       lockBody,
-      filterColors,
-      filterSilhouettes,
-      filterLengths,
-      filterTopDetails,
       /* eslint-disable react/prop-types */
       selectedColorId,
       selectedSilhouetteId,
@@ -225,9 +221,7 @@ class BridesmaidsFilterApp extends Component {
                 displayCondition={attemptedFormSubmit && !selectedColorId}
                 message="Please select a dress color."
               />
-              <BridesmaidsColorSelect
-                filterColors={filterColors}
-              />
+              <BridesmaidsColorSelect />
             </div>
             <h2 ref={c => this.silhouetteFilter = c}>Choose your silhouette</h2>
             <div className="col-12">
@@ -235,9 +229,7 @@ class BridesmaidsFilterApp extends Component {
                 displayCondition={attemptedFormSubmit && !selectedSilhouetteId}
                 message="Please select a dress silhouette."
               />
-              <BridesmaidsSilhouetteSelect
-                filterSilhouettes={filterSilhouettes}
-              />
+              <BridesmaidsSilhouetteSelect />
             </div>
             <h2 ref={c => this.lengthFilter = c}>Choose your length</h2>
             <div className="col-12">
@@ -245,9 +237,7 @@ class BridesmaidsFilterApp extends Component {
                 displayCondition={attemptedFormSubmit && !selectedLengthId}
                 message="Please select a dress length."
               />
-              <BridesmaidsLengthSelect
-                filterLengths={filterLengths}
-              />
+              <BridesmaidsLengthSelect />
             </div>
             <h2 ref={c => this.topDetailsFilter = c}>Choose the top details you like</h2>
             <div className="col-12">
@@ -255,9 +245,7 @@ class BridesmaidsFilterApp extends Component {
                 displayCondition={attemptedFormSubmit && (selectedTopDetails.length < 1)}
                 message="Please select at least one dress top detail."
               />
-              <BridesmaidsTopDetailSelect
-                filterTopDetails={filterTopDetails}
-              />
+              <BridesmaidsTopDetailSelect />
             </div>
           </div>
           <div className="grid-12">
@@ -292,28 +280,6 @@ BridesmaidsFilterApp.propTypes = {
   lockBody: PropTypes.bool.isRequired,
   // Redux Functions
   // hydrateFiltersFromURL: PropTypes.func.isRequired,
-  filterColors: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    hexValue: PropTypes.string,
-    patternUrl: PropTypes.string,
-  })).isRequired,
-  filterSilhouettes: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    description: PropTypes.string,
-    image: PropTypes.string,
-  })).isRequired,
-  filterLengths: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    image: PropTypes.string,
-  })).isRequired,
-  filterTopDetails: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    image: PropTypes.string,
-  })).isRequired,
 };
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(BridesmaidsFilterApp));

@@ -13,9 +13,9 @@ import '../../../css/components/BridesmaidsFilterHeader.scss';
 // Components
 import BridesmaidsTabs from './BridesmaidsTabs';
 import BridesmaidsColorSelect from '../../components/bridesmaids/BridesmaidsColorSelect';
-// import BridesmaidsSilhouette from '../../components/bridesmaids/BridesmaidsSilhouette';
-// import BridesmaidsLengthSelect from '../../components/bridesmaids/BridesmaidsLengthSelect';
-// import BridesmaidsTopDetailSelect from '../../components/bridesmaids/BridesmaidsTopDetailSelect';
+import BridesmaidsSilhouetteSelect from '../../components/bridesmaids/BridesmaidsSilhouetteSelect';
+import BridesmaidsLengthSelect from '../../components/bridesmaids/BridesmaidsLengthSelect';
+import BridesmaidsTopDetailSelect from '../../components/bridesmaids/BridesmaidsTopDetailSelect';
 
 
 // Utilities
@@ -28,14 +28,16 @@ import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
 import BridesmaidsHeaderFilterConstants from '../../constants/BridesmaidsFilterHeaderConstants';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
-  const selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
+  const $$selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
   const $$selectedColor = $$bridesmaidsFilterState.get('selectedColor');
+  const $$selectedSilhouette = $$bridesmaidsFilterState.get('selectedSilhouette');
+  const $$selectedLength = $$bridesmaidsFilterState.get('selectedLength');
 
   return {
     selectedColor: $$selectedColor ? $$selectedColor.toJS() : { presentation: '' },
-    selectedSilhouette: $$bridesmaidsFilterState.get('selectedSilhouette'),
-    selectedLength: $$bridesmaidsFilterState.get('selectedLength'),
-    selectedTopDetails: selectedTopDetails ? selectedTopDetails.toJS() : [],
+    selectedSilhouette: $$selectedSilhouette ? $$selectedSilhouette.toJS() : { name: '' },
+    selectedLength: $$selectedLength ? $$selectedLength.toJS() : { name: '' },
+    selectedTopDetails: $$selectedTopDetails ? $$selectedTopDetails.toJS() : [],
   };
 }
 
@@ -67,8 +69,8 @@ class BridesmaidsFilterHeader extends Component {
 
   generateTopStyleText() {
     const { selectedTopDetails } = this.props;
-    if (selectedTopDetails.length < 2) {
-      return `Top Style: ${selectedTopDetails}`;
+    if (selectedTopDetails.length === 1) {
+      return `Top Style: ${selectedTopDetails.name}`;
     }
 
     return `Top Style: ${selectedTopDetails.length} Filters`;
@@ -80,20 +82,20 @@ class BridesmaidsFilterHeader extends Component {
       selectedSilhouette,
       selectedLength,
     } = this.props;
-    console.log('--->');
+    const isLight = isExtremeLightLuminance({ hexValue: selectedColor.hexValue });
 
     return (
       <div
         className={classnames(
           'BridesmaidsFilterHeader__wrapper',
-          { 'BridesmaidsFilterHeader__wrapper--light': isExtremeLightLuminance({ hexValue: selectedColor.hexValue }) },
+          { 'BridesmaidsFilterHeader__wrapper--light': isLight },
 
         )}
         style={{
           backgroundColor: selectedColor.hexValue,
         }}
       >
-        <ReactHoverObserver hoverOffDelayInMs={1000000}>
+        <ReactHoverObserver hoverOffDelayInMs={100}>
           <BridesmaidsTabs
             filters={[
               {
@@ -105,23 +107,23 @@ class BridesmaidsFilterHeader extends Component {
               },
               {
                 id: BridesmaidsHeaderFilterConstants.SELECTED_SILHOUETTE,
-                heading: `Silhouette: ${selectedSilhouette}`,
+                heading: `Silhouette: ${selectedSilhouette.name}`,
                 content: (
-                  <h1>SELECTED SILHOUETTE FILTER HERE</h1>
+                  <BridesmaidsSilhouetteSelect />
                 ),
               },
               {
                 id: BridesmaidsHeaderFilterConstants.SELECTED_LENGTH,
-                heading: `Length: ${selectedLength}`,
+                heading: `Length: ${selectedLength.name}`,
                 content: (
-                  <h1>SELECTED LENGTH FILTER HERE</h1>
+                  <BridesmaidsLengthSelect />
                 ),
               },
               {
                 id: BridesmaidsHeaderFilterConstants.SELECTED_TOP_DETAILS,
                 heading: this.generateTopStyleText(),
                 content: (
-                  <h1>SELECTED LENGTH FILTER HERE</h1>
+                  <BridesmaidsTopDetailSelect />
                 ),
               },
             ]}

@@ -6,9 +6,10 @@ import { find } from 'lodash';
 
 // Components
 import HeaderNavigation from '../shared/header/HeaderNavigation';
+import Caret from '../generic/Caret';
 
 // CSS
-import '../../../css/components/Tabs.scss';
+import '../../../css/components/BridesmaidsTabs.scss';
 
 /* eslint-disable react/prefer-stateless-function */
 class BridesmaidsTabs extends PureComponent {
@@ -53,16 +54,14 @@ class BridesmaidsTabs extends PureComponent {
       selectedTabId,
     } = this.state;
 
-    // const selectedTabObj = filters.filter(item => item.id === selectedTabId)[0];
-
     return (
-      <div className="Tabs u-position--relative u-width--full">
+      <div className="Tabs layout-container u-position--relative u-width--full">
         <div
           className={classnames(
             headingClasses,
           )}
         >
-          <ul className="Tabs__list">
+          <ul className="Tabs__list grid-middle">
             {filters.map(
               item =>
                 <li
@@ -75,17 +74,23 @@ class BridesmaidsTabs extends PureComponent {
                     },
                   )}
                 >
-                  {item.heading}
+                  <span className="u-mr--small">{item.heading}</span>
+                  <span className="BridesmaidsTabs__caret-wrapper">
+                    <Caret height="20px" width="12px" />
+                  </span>
                 </li>,
             )}
           </ul>
         </div>
-        <HeaderNavigation
-          isActive={isHovering && selectedTabId}
-          openNavItem={selectedTabId}
-          handleAnimationEnd={this.handleAnimationEnd}
-          generateHeaderNavigationContents={this.generateHeaderNavigationContents}
-        />
+
+        <div className="u-position--absolute">
+          <HeaderNavigation
+            isActive={(isHovering && selectedTabId)}
+            openNavItem={selectedTabId}
+            handleAnimationEnd={this.handleAnimationEnd}
+            generateHeaderNavigationContents={this.generateHeaderNavigationContents}
+          />
+        </div>
       </div>
     );
   }

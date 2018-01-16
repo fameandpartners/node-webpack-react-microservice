@@ -15,8 +15,10 @@ import '../../../css/components/BridesmaidsSilhouetteSelect.scss';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
   const selectedSilhouette = $$bridesmaidsFilterState.get('selectedSilhouette');
+  const bridesmaidsFilterSilhouttes = $$bridesmaidsFilterState.get('$$bridesmaidsFilterSilhouettes').toJS();
 
   return {
+    bridesmaidsFilterSilhouettes: bridesmaidsFilterSilhouttes || [],
     selectedSilhouetteId: selectedSilhouette ? selectedSilhouette.get('id') : null,
   };
 }
@@ -47,11 +49,11 @@ class BridesmaidsSilhouetteSelect extends Component {
 
   getFilterSilhouettes() {
     const {
-      filterSilhouettes,
+      bridesmaidsFilterSilhouettes,
       selectedSilhouetteId,
     } = this.props;
 
-    return filterSilhouettes
+    return bridesmaidsFilterSilhouettes
       .map((item, index) => (
         <div className="col-4" key={item.image + index}>
           <div
@@ -84,7 +86,7 @@ class BridesmaidsSilhouetteSelect extends Component {
 }
 
 BridesmaidsSilhouetteSelect.propTypes = {
-  filterSilhouettes: PropTypes.arrayOf(PropTypes.shape({
+  bridesmaidsFilterSilhouettes: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     description: PropTypes.string,

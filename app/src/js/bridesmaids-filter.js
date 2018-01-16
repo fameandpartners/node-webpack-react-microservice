@@ -40,9 +40,9 @@ let $$bridesmaidsFilterState = {};
 if (win.BridesmaidsFilterData) {
   $$bridesmaidsFilterState = {
     $$bridesmaidsFilterColors: transformBridesmaidColors(win.BridesmaidsFilterData.colors),
-    $$bridesmaidsFilterSilhouettes: win.BridesmaidsFilterData.silhouettes,
-    $$bridesmaidsFilterLengths: win.BridesmaidsFilterData.lengths,
-    $$bridesmaidsFilterTopDetails: win.BridesmaidsFilterData.top_details,
+    $$bridesmaidsFilterSilhouettes: win.BridesmaidsFilterData.silhouettes.options,
+    $$bridesmaidsFilterLengths: win.BridesmaidsFilterData.lengths.options,
+    $$bridesmaidsFilterTopDetails: win.BridesmaidsFilterData.top_details.options,
   };
 }
 

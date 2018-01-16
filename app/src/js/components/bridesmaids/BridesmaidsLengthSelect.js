@@ -15,9 +15,11 @@ import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
   const selectedLength = $$bridesmaidsFilterState.get('selectedLength');
+  const $$bridesmaidsFilterLengths = $$bridesmaidsFilterState.get('$$bridesmaidsFilterLengths');
 
   return {
     selectedLengthId: selectedLength ? selectedLength.get('id') : null,
+    bridesmaidsFilterLengths: $$bridesmaidsFilterLengths ? $$bridesmaidsFilterLengths.toJS() : [],
   };
 }
 
@@ -47,11 +49,11 @@ class BridesmaidsLengthSelect extends Component {
 
   getFilterLengths() {
     const {
-      filterLengths,
+      bridesmaidsFilterLengths,
       selectedLengthId,
     } = this.props;
 
-    return filterLengths
+    return bridesmaidsFilterLengths
       .map((item, index) => (
         <div className="col-2" key={item.image + index}>
           <div
@@ -83,7 +85,7 @@ class BridesmaidsLengthSelect extends Component {
 }
 
 BridesmaidsLengthSelect.propTypes = {
-  filterLengths: PropTypes.arrayOf(PropTypes.shape({
+  bridesmaidsFilterLengths: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     image: PropTypes.string,

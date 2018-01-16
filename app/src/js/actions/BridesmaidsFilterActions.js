@@ -2,7 +2,7 @@ import BridesmaidsFilterConstants from '../constants/BridesmaidsFilterConstants'
 
 export function hydrateFiltersFromURL(queryObj) {
   return {
-    type: BridesmaidsFilterConstants.HYDRATE_FILTERS_FROM_URL,
+    type: BridesmaidsFilterConstants.HYDRATE_BRIDESMAID_FILTERS_FROM_URL,
     queryObj,
   };
 }
