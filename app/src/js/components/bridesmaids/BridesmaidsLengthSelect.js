@@ -45,6 +45,7 @@ class BridesmaidsLengthSelect extends Component {
     } = this.props;
 
     selectFilterLength({ selectedLength });
+    this.props.handleSelection();
   }
 
   getFilterLengths() {

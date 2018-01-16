@@ -180,6 +180,8 @@ class BridesmaidsFilterApp extends Component {
     window.scrollTo(0, ref.offsetTop - 40); // 40 px for header bar
   }
 
+  handleSelection() {
+  }
 
   render() {
     const {
@@ -221,7 +223,9 @@ class BridesmaidsFilterApp extends Component {
                 displayCondition={attemptedFormSubmit && !selectedColorId}
                 message="Please select a dress color."
               />
-              <BridesmaidsColorSelect />
+              <BridesmaidsColorSelect
+                handleSelection={this.handleSelection}
+              />
             </div>
             <h2 ref={c => this.silhouetteFilter = c}>Choose your silhouette</h2>
             <div className="col-12">
@@ -229,7 +233,9 @@ class BridesmaidsFilterApp extends Component {
                 displayCondition={attemptedFormSubmit && !selectedSilhouetteId}
                 message="Please select a dress silhouette."
               />
-              <BridesmaidsSilhouetteSelect />
+              <BridesmaidsSilhouetteSelect
+                handleSelection={this.handleSelection}
+              />
             </div>
             <h2 ref={c => this.lengthFilter = c}>Choose your length</h2>
             <div className="col-12">
@@ -237,7 +243,9 @@ class BridesmaidsFilterApp extends Component {
                 displayCondition={attemptedFormSubmit && !selectedLengthId}
                 message="Please select a dress length."
               />
-              <BridesmaidsLengthSelect />
+              <BridesmaidsLengthSelect
+                handleSelection={this.handleSelection}
+              />
             </div>
             <h2 ref={c => this.topDetailsFilter = c}>Choose the top details you like</h2>
             <div className="col-12">

@@ -50,6 +50,7 @@ class BridesmaidsColorSelect extends PureComponent {
       setExpressMakingStatus(false);
     }
     selectFilterColor({ selectedColor });
+    this.props.handleSelection();
   }
 
   isExpressEligible(colorId, defaultColors) {
@@ -84,6 +85,7 @@ BridesmaidsColorSelect.propTypes = {
   // Redux Actions
   selectFilterColor: PropTypes.func.isRequired,
   setExpressMakingStatus: PropTypes.func,
+  handleSelection: PropTypes.func.isRequired,
 };
 
 BridesmaidsColorSelect.defaultProps = {

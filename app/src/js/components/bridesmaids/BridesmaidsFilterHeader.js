@@ -67,6 +67,18 @@ class BridesmaidsFilterHeader extends Component {
     return '';
   }
 
+  handleColorSelection() {
+    console.log('Doin the magic');
+  }
+
+  handleLengthSelection() {
+    console.log('Doin the magic');
+  }
+
+  handleSilhouetteSelection() {
+    console.log('Doin the magic');
+  }
+
   generateTopStyleText() {
     const { selectedTopDetails } = this.props;
     if (selectedTopDetails.length === 1) {
@@ -102,21 +114,27 @@ class BridesmaidsFilterHeader extends Component {
                 id: BridesmaidsHeaderFilterConstants.SELECTED_COLOR,
                 heading: `Color: ${selectedColor.presentation}`,
                 content: (
-                  <BridesmaidsColorSelect />
+                  <BridesmaidsColorSelect
+                    handleSelection={this.handleColorSelection}
+                  />
                 ),
               },
               {
                 id: BridesmaidsHeaderFilterConstants.SELECTED_SILHOUETTE,
                 heading: `Silhouette: ${selectedSilhouette.name}`,
                 content: (
-                  <BridesmaidsSilhouetteSelect />
+                  <BridesmaidsSilhouetteSelect
+                    handleSelection={this.handleSilhouetteSelection}
+                  />
                 ),
               },
               {
                 id: BridesmaidsHeaderFilterConstants.SELECTED_LENGTH,
                 heading: `Length: ${selectedLength.name}`,
                 content: (
-                  <BridesmaidsLengthSelect />
+                  <BridesmaidsLengthSelect
+                    handleSelection={this.handleLengthSelection}
+                  />
                 ),
               },
               {

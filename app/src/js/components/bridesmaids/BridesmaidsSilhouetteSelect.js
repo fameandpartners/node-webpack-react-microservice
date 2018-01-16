@@ -45,6 +45,7 @@ class BridesmaidsSilhouetteSelect extends Component {
     } = this.props;
 
     selectFilterSilhouette({ selectedSilhouette });
+    this.props.handleSelection();
   }
 
   getFilterSilhouettes() {
