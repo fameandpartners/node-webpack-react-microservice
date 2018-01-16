@@ -1,4 +1,5 @@
 import AppReducer, { $$initialState as $$appState } from './AppReducer';
+import BDCustomizationReducer, { $$initialState as $$bdCustomizationState } from './BDCustomizationReducer';
 import ModalReducer, { $$initialState as $$modalState } from './ModalReducer';
 import ProductReducer, { $$initialState as $$productState } from './ProductReducer';
 import CartReducer, { $$initialState as $$cartState } from './CartReducer';
@@ -9,6 +10,7 @@ import BridesmaidsFilterReducer, { $$initialState as $$bridesmaidsFilterState } 
 
 export default {
   $$appState: AppReducer,
+  $$bdCustomizationState: BDCustomizationReducer,
   $$modalState: ModalReducer,
   $$productState: ProductReducer,
   $$cartState: CartReducer,
@@ -20,6 +22,7 @@ export default {
 
 export const initialStates = {
   $$appState,
+  $$bdCustomizationState,
   $$modalState,
   $$productState,
   $$cartState,

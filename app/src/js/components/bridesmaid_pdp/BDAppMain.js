@@ -16,24 +16,24 @@ import * as ModalActions from '../../actions/ModalActions';
 import ModalConstants from '../../constants/ModalConstants';
 
 // PDP specific UI Components
-import AddToCartButtonLedgeMobile from './AddToCartButtonLedgeMobile';
-import CustomizationButtonLedge from './CustomizationButtonLedge';
-import ProductDescription from './ProductDescription';
-import ProductDisplayOptionsTouch from './ProductDisplayOptionsTouch';
-import ProductOptions from './ProductOptions';
-import ProductGrid from './ProductGrid';
-import ProductFabricInfo from './ProductFabricInfo';
+import BDAddToCartButtonLedge from '../bridesmaid_pdp/BDAddToCartButtonLedge';
+import BDCustomizationButtonLedge from '../bridesmaid_pdp/BDCustomizationButtonLedge';
+import ProductDescription from '../pdp/ProductDescription';
+import BDProductDisplayOptionsTouch from './BDProductDisplayOptionsTouch';
+import BDProductOptions from '../bridesmaid_pdp/BDProductOptions';
+// import ProductGrid from '../pdp/ProductGrid';
+// import ProductFabricInfo from '../pdp/ProductFabricInfo';
 
 // import FameDifference from './FameDifference';
 
 // CSS
-import '../../../css/components/AppMain.scss';
+import '../../../css/components/BDAppMain.scss';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
-    fabric: state.$$productState.get('fabric').toJS(),
+    // fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
     sku: state.$$productState.get('sku'),
   };
@@ -49,7 +49,7 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class AppMain extends Component {
+class BDAppMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,37 +65,38 @@ class AppMain extends Component {
   render() {
     const {
       breakpoint,
-      fabric,
-      garmentCareInformation,
+      // fabric,
+      // garmentCareInformation,
       sku,
     } = this.props;
-    console.log('are we in render');
 
     return (
-      <div className="AppMain__wrapper">
+      <div className="BDAppMain__wrapper">
         <div
-          className="AppMain u-height--full"
+          className="BDAppMain u-height--full"
         >
           { breakpoint === 'mobile' || breakpoint === 'tablet'
-            ? <ProductDisplayOptionsTouch />
+            ? <BDProductDisplayOptionsTouch breakpoint={breakpoint} />
             : (
               <div>
-                <ProductOptions />
+                <BDProductOptions />
               </div>
             )
           }
 
           <div className="layout-container">
-            <div className="grid-2_sm-1 AppMain__product-info">
+            <div className="grid-2_sm-1 BDAppMain__product-info">
               <div className="col grid-middle">
                 <ProductDescription />
               </div>
               <div className="col grid-middle">
-                <ProductFabricInfo
+                {
+                  /* <ProductFabricInfo
                   className="u-center"
                   fabric={fabric}
                   garmentCareInformation={garmentCareInformation}
-                />
+                /> */
+                }
               </div>
               {
                 sku
@@ -107,45 +108,37 @@ class AppMain extends Component {
             </div>
           </div>
 
-          { breakpoint === 'mobile' || breakpoint === 'tablet'
-              ? null
-              : (
-                <div className="u-gray-border--top layout-container u-mb-normal">
-                  <ProductGrid />
-                </div>
-              )
-            }
         </div>
 
 
         <div className="u-position--fixed u-width--full u-bottom">
-          <AddToCartButtonLedgeMobile />
+          <BDAddToCartButtonLedge />
         </div>
-        <CustomizationButtonLedge />
+        <BDCustomizationButtonLedge />
       </div>
     );
   }
 }
 
-AppMain.propTypes = {
+BDAppMain.propTypes = {
   // Redux Props
   activateModal: PropTypes.func.isRequired,
-  fabric: PropTypes.shape({
-    id: PropTypes.string,
-    smallImg: PropTypes.string,
-    name: PropTypes.string,
-    description: PropTypes.string,
-  }).isRequired,
-  garmentCareInformation: PropTypes.string.isRequired,
+  // fabric: PropTypes.shape({
+  //   id: PropTypes.string,
+  //   smallImg: PropTypes.string,
+  //   name: PropTypes.string,
+  //   description: PropTypes.string,
+  // }).isRequired,
+  // garmentCareInformation: PropTypes.string.isRequired,
   sku: PropTypes.string,
 
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
 };
 
-AppMain.defaultProps = {
+BDAppMain.defaultProps = {
   cartDrawerOpen: false,
   sku: null,
 };
 
-export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(AppMain));
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(BDAppMain));

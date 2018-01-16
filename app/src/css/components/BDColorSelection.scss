@@ -1,0 +1,46 @@
+.BDColorSelection {
+  padding: 15px;
+}
+
+.BDColorSelection__swatch:hover::after {
+  opacity: 1;
+}
+
+.BDColorSelection__swatch--dark {
+  color: $c-white;
+}
+
+.BDColorSelection__wrapper {
+  margin-right: 15px;
+  height: 100px;
+  width: 100px;
+  background-size: cover;
+}
+
+.BDColorSelection__wrapper--extreme-light {
+  border: 1px solid $c-neutral-4;
+}
+
+.BDColorSelection__wrapper.BDColorSelection__wrapper--active {
+  // Necessary double class for IE Bug which doesn't respect specificity
+  outline: 3px solid $c-hover-gray;
+  outline-offset: 3px;
+}
+
+.BDColorSelection__swatch {
+  opacity: 1;
+  transition: $standard-transition-time opacity;
+  font-weight: 500;
+}
+
+.BDColorSelection__touch-display-text {
+  padding-top: 10px;
+  margin-bottom: -60px;
+  display: block;
+  line-height: 1;
+}
+
+.BDColorSelection__text {
+  display: inline-block;
+  padding-top: 10px;
+}

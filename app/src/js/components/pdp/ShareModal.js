@@ -56,6 +56,7 @@ class ShareModal extends Component {
   findColorSpecificFirstImageUrl() {
     const { $$productImages, colorId } = this.props;
     const productImages = $$productImages.toJS();
+    if (!productImages || !productImages.length) { return ''; }
     const hasMatch = find(productImages, { colorId });
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
   }
