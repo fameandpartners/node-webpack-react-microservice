@@ -72,6 +72,13 @@
   }
 }
 
+.bottom-right-tiny {
+  width: 8%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 .Button--disabled {
   color: $c-black;
   background-color: $c-background-gray;
