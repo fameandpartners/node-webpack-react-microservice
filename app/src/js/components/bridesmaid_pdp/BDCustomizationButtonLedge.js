@@ -11,20 +11,20 @@ import '../../../css/components/CustomizationButtonLedge.scss';
 
 // Utilities
 import noop from '../../libs/noop';
-import { dressSizePresence } from '../../utilities/pdpValidations';
+// import { dressSizePresence } from '../../utilities/pdpValidations';
 
 // Actions
 import * as BDActions from '../../actions/BDActions';
-import * as CustomizationActions from '../../actions/CustomizationActions';
+// import * as CustomizationActions from '../../actions/CustomizationActions';
 import * as AppActions from '../../actions/AppActions';
 import * as ModalActions from '../../actions/ModalActions';
 
 // Constants
 import BDModalConstants from '../../constants/BDModalConstants';
 import * as modalAnimations from '../../utilities/modal-animation';
-import {
-  COLOR_CUSTOMIZE,
-} from '../../constants/BDCustomizationConstants';
+// import {
+//   COLOR_CUSTOMIZE,
+// } from '../../constants/BDCustomizationConstants';
 
 import {
   UNITS,
@@ -75,11 +75,11 @@ class CustomizationButtonLedge extends Component {
   }
 
   closeCustomization() {
-    const { activateModal, activateCustomizationDrawer } = this.props;
+    const { activateModal, bdActivateCustomizationDrawer } = this.props;
     if (this.isCustomizationModalOpen()) {
       activateModal({ shouldAppear: false });
     } else {
-      activateCustomizationDrawer({ isActive: false });
+      bdActivateCustomizationDrawer({ isActive: false });
     }
   }
 
@@ -100,93 +100,24 @@ class CustomizationButtonLedge extends Component {
     );
   }
 
-  validateSizeSelection() {
-    const { setSizeProfileError, temporaryDressSize } = this.props;
-    const errors = { heightError: false, sizeError: false };
-
-    if (this.hasHeightError() || !dressSizePresence(temporaryDressSize)) {
-      if (this.hasHeightError()) { errors.heightError = true; }
-      if (!temporaryDressSize) { errors.sizeError = true; }
-      setSizeProfileError(errors);
-      return false;
-    }
-
-    setSizeProfileError(errors);
-    return true;
+  handleCustomizationSave() {
+    console.log('oook, save dis');
   }
 
-  saveColorSelection() {
-    const {
-      selectProductColor,
-      setShareableQueryParams,
-      temporaryColor,
-      productDefaultColors,
-      setExpressMakingStatus,
-    } = this.props;
-    if (!this.isExpressEligible(temporaryColor.id, productDefaultColors)) {
-      setExpressMakingStatus(false);
-    }
-    selectProductColor({ selectedColor: temporaryColor });
-    setShareableQueryParams({ color: temporaryColor.id });
-    this.closeCustomization();
-  }
-
-  saveCustomizationSelection() {
-    console.log('determine which customization option to save....');
-  }
-
-  saveSizeSelection() {
-    const {
-      temporaryDressSize,
-      temporaryMeasurementMetric,
-      temporaryHeightValue,
-      updateDressSizeSelection,
-      updateHeightSelection,
-      updateMeasurementMetric,
-    } = this.props;
-    if (!this.validateSizeSelection()) return null;
-
-    updateDressSizeSelection({
-      selectedDressSize: temporaryDressSize,
-    });
-
-    updateHeightSelection({
-      selectedHeightValue: temporaryHeightValue,
-    });
-
-    updateMeasurementMetric({
-      selectedMeasurementMetric: temporaryMeasurementMetric,
-    });
-
-    this.closeCustomization();
-    return null;
-  }
-
-  chooseCustomizationCallback() {
-    const { activeModalId, bdProductCustomizationDrawer } = this.props;
-    if (
-      // Checks for modal or drawer scenario
-      activeModalId === BDModalConstants.COLOR_SELECTION_MODAL
-      || bdProductCustomizationDrawer === COLOR_CUSTOMIZE
-    ) {
-      return this.saveColorSelection;
-    }
-
-    if (
-      activeModalId === BDModalConstants.BD_CUSTOMIZATION_MODAL
-    ) {
-      return this.saveCustomizationSelection;
-    }
-    //
-    // if (
-    //   activeModalId === BDModalConstants.SIZE_SELECTION_MODAL
-    //   || bdProductCustomizationDrawer === SIZE_CUSTOMIZE
-    // ) {
-    //   return this.saveSizeSelection;
-    // }
-
-    return noop;
-  }
+  // validateSizeSelection() {
+  //   const { setSizeProfileError, temporaryDressSize } = this.props;
+  //   const errors = { heightError: false, sizeError: false };
+  //
+  //   if (this.hasHeightError() || !dressSizePresence(temporaryDressSize)) {
+  //     if (this.hasHeightError()) { errors.heightError = true; }
+  //     if (!temporaryDressSize) { errors.sizeError = true; }
+  //     setSizeProfileError(errors);
+  //     return false;
+  //   }
+  //
+  //   setSizeProfileError(errors);
+  //   return true;
+  // }
 
   isCustomizationModalOpen() {
     const {
@@ -245,7 +176,7 @@ class CustomizationButtonLedge extends Component {
                 <ButtonLedge
                   addHeight
                   handleLeftButtonClick={this.handleLeftButtonClick}
-                  handleRightButtonClick={this.chooseCustomizationCallback()}
+                  handleRightButtonClick={this.handleCustomizationSave}
                 />
               </div>
             );
@@ -265,23 +196,23 @@ CustomizationButtonLedge.propTypes = {
   activeModalId: PropTypes.string,
   // -- Customizations
   bdProductCustomizationDrawerOpen: PropTypes.bool,
-  bdProductCustomizationDrawer: PropTypes.string,
-  temporaryColor: PropTypes.shape({
-    id: PropTypes.number,
-    centsTotal: PropTypes.number,
-    name: PropTypes.string,
-    presentation: PropTypes.string,
-    hexValue: PropTypes.string,
-    patternUrl: PropTypes.string,
-  }).isRequired,
-  temporaryDressSize: PropTypes.number,
+  // bdProductCustomizationDrawer: PropTypes.string,
+  // temporaryColor: PropTypes.shape({
+  //   id: PropTypes.number,
+  //   centsTotal: PropTypes.number,
+  //   name: PropTypes.string,
+  //   presentation: PropTypes.string,
+  //   hexValue: PropTypes.string,
+  //   patternUrl: PropTypes.string,
+  // }).isRequired,
+  // temporaryDressSize: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string.isRequired,
   // temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
-  activateCustomizationDrawer: PropTypes.func.isRequired,
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
+  // bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   // selectProductColor: PropTypes.func.isRequired,
   // setShareableQueryParams: PropTypes.func.isRequired,
   // setSizeProfileError: PropTypes.func.isRequired,
@@ -289,8 +220,8 @@ CustomizationButtonLedge.propTypes = {
   // updateHeightSelection: PropTypes.func.isRequired,
   // updateMeasurementMetric: PropTypes.func.isRequired,
   // updateCustomizationStyleSelection: PropTypes.func.isRequired,
-  productDefaultColors: PropTypes.arrayOf(PropTypes.object),
-  setExpressMakingStatus: PropTypes.func,
+  // productDefaultColors: PropTypes.arrayOf(PropTypes.object),
+  // setExpressMakingStatus: PropTypes.func,
 };
 
 CustomizationButtonLedge.defaultProps = {

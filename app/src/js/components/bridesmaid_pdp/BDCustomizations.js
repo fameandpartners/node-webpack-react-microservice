@@ -10,12 +10,29 @@ import BDActions from '../../actions/BDActions';
 
 // UI Components
 import BDProductCustomization from '../bridesmaid_pdp/BDProductCustomization';
-import BDCustomizationSelections from '../bridesmaid_pdp/BDCustomizationSelections';
+// import BDCustomizationSelections from '../bridesmaid_pdp/BDCustomizationSelections';
+
+// Inner Child Contents
+// import BridesmaidsColorSelect from '../../components/bridesmaids/BridesmaidsColorSelect';
+import BDCustomizationSilhouetteSelect from './BDCustomizationSilhouetteSelect';
+// import BridesmaidsLengthSelect from '../../components/bridesmaids/BridesmaidsLengthSelect';
+// import BridesmaidsTopDetailSelect from '../../components/bridesmaids/BridesmaidsTopDetailSelect';
+
+// Constants
+import {
+  COLOR_CUSTOMIZE,
+  LENGTH_CUSTOMIZE,
+  BODICE_CUSTOMIZE,
+  STRAPS_SLEEVES_CUSTOMIZE,
+  SILHOUTTE_CUSTOMIZE,
+  DETAILS_CUSTOMIZE,
+} from '../../constants/BDCustomizationConstants';
+
 
 function stateToProps(state) {
   return {
-    productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     activeBDCustomizationHeading: state.$$bdCustomizationState.get('activeBDCustomizationHeading'),
+    bdProductCustomizationDrawer: state.$$bdCustomizationState.get('bdProductCustomizationDrawer'),
   };
 }
 
@@ -41,22 +58,41 @@ class BDProductCustomizationColor extends PureComponent {
     });
   }
 
+  generateColorCustomizeOptions() {
+
+  }
+
+  generateCustomizationOptions() {
+    const { bdProductCustomizationDrawer } = this.props;
+    switch (bdProductCustomizationDrawer) {
+      case COLOR_CUSTOMIZE:
+      case LENGTH_CUSTOMIZE:
+      case BODICE_CUSTOMIZE:
+      case STRAPS_SLEEVES_CUSTOMIZE:
+      case SILHOUTTE_CUSTOMIZE:
+        return (
+          <BDCustomizationSilhouetteSelect />
+        );
+      case DETAILS_CUSTOMIZE:
+      default:
+        return null;
+    }
+  }
+
   render() {
     const {
-      activeBDCustomizationHeading,
+      bdProductCustomizationDrawer,
       hasNavItems,
-      productCustomizationDrawer,
     } = this.props;
 
     return (
       <BDProductCustomization
         hasNavItems={hasNavItems}
         handleDrawerSelection={this.handleDrawerSelection}
-        productCustomizationDrawer={productCustomizationDrawer}
-        activeHeading={activeBDCustomizationHeading}
+        activeHeading={bdProductCustomizationDrawer}
         onCustomizationHeadingGroupClick={this.handleHeadingClick}
       >
-        <BDCustomizationSelections />
+        {this.generateCustomizationOptions()}
       </BDProductCustomization>
     );
   }
@@ -66,8 +102,7 @@ BDProductCustomizationColor.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
   // Redux Props
-  activeBDCustomizationHeading: PropTypes.string,
-  productCustomizationDrawer: PropTypes.string,
+  bdProductCustomizationDrawer: PropTypes.string,
   // Redux Funcs
   setBDCustomizationSection: PropTypes.func.isRequired,
 };
@@ -75,7 +110,7 @@ BDProductCustomizationColor.propTypes = {
 BDProductCustomizationColor.defaultProps = {
   activeBDCustomizationHeading: null,
   hasNavItems: true,
-  productCustomizationDrawer: null,
+  bdProductCustomizationDrawer: null,
   productSecondaryColorsCentsPrice: 0,
   temporaryColorId: '',
   setExpressMakingStatus: noop,

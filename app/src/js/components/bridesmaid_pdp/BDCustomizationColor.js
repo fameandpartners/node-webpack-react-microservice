@@ -18,7 +18,7 @@ function stateToProps(state) {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
     productSecondaryColorsCentsPrice: state.$$productState.get('productSecondaryColorsCentsPrice'),
-    productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
+    bdProductCustomizationDrawer: state.$$customizationState.get('bdProductCustomizationDrawer'),
     temporaryColorId: state.$$customizationState.get('temporaryColor').get('id'),
   };
 }
@@ -71,7 +71,7 @@ class BDProductCustomizationColor extends PureComponent {
   render() {
     const {
       hasNavItems,
-      productCustomizationDrawer,
+      bdProductCustomizationDrawer,
       productDefaultColors,
       productSecondaryColors,
       productSecondaryColorsCentsPrice,
@@ -82,7 +82,7 @@ class BDProductCustomizationColor extends PureComponent {
       <BDProductCustomization
         hasNavItems={hasNavItems}
         handleDrawerSelection={this.handleDrawerSelection}
-        productCustomizationDrawer={productCustomizationDrawer}
+        activeHeading={bdProductCustomizationDrawer}
       >
         <BDColorSelections
           productColors={productDefaultColors.concat(productSecondaryColors)}
@@ -99,7 +99,7 @@ BDProductCustomizationColor.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
   // Redux Props
-  productCustomizationDrawer: PropTypes.string,
+  bdProductCustomizationDrawer: PropTypes.string,
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -123,7 +123,7 @@ BDProductCustomizationColor.propTypes = {
 
 BDProductCustomizationColor.defaultProps = {
   hasNavItems: true,
-  productCustomizationDrawer: null,
+  bdProductCustomizationDrawer: null,
   productSecondaryColorsCentsPrice: 0,
   temporaryColorId: '',
   setExpressMakingStatus: noop,

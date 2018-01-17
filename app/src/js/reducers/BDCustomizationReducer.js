@@ -66,7 +66,7 @@ export default function CartReducer($$state = $$initialState, action = null) {
     // GENERAL
     case BDCustomizationConstants.SET_BD_CUSTOMIZATION_SECTION: {
       return $$state.merge({
-        activeBDCustomizationHeading: action.sectionId,
+        bdProductCustomizationDrawer: action.sectionId,
       });
     }
 

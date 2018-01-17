@@ -14,7 +14,7 @@ import '../../../css/components/CustomizationDrawer.scss';
 import BDCustomizations from './BDCustomizations';
 import ProductCustomizationColor from '../pdp/ProductCustomizationColor';
 import ProductCustomizationStyle from '../pdp/ProductCustomizationStyle';
-import ProductCustomizationSize from '../pdp/ProductCustomizationSize';
+// import ProductCustomizationSize from '../pdp/ProductCustomizationSize';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
@@ -45,7 +45,7 @@ class BDCustomizationDrawer extends PureComponent {
   }
 
   renderCustomizationContents() {
-    console.log('here???');
+    console.log('TODO: @elgrecode will need to add size back');
     const { breakpoint, bdProductCustomizationDrawer } = this.props;
     const hasNavItems = breakpoint === 'desktop';
 

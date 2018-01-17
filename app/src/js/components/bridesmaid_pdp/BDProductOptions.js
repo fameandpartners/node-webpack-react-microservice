@@ -22,7 +22,6 @@ import {
 } from '../../utilities/pdp';
 
 // Constants
-import CustomizationConstants from '../../constants/CustomizationConstants';
 import BDCustomizationConstants from '../../constants/BDCustomizationConstants';
 import ModalConstants from '../../constants/ModalConstants';
 
@@ -240,25 +239,31 @@ class ProductOptions extends Component {
                 }
               />
               <ProductOptionsRow
-                leftNode={<span>{BDCustomizationConstants.COLOR_HEADLINE}</span>}
+                leftNode={<span>{BDCustomizationConstants.headlines.COLOR_CUSTOMIZE}</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected
                 rightNode={this.generateColorSelectionNode()}
-                handleClick={this.handleProductOptionClick(CustomizationConstants.COLOR_CUSTOMIZE)}
+                handleClick={
+                  this.handleProductOptionClick(BDCustomizationConstants.COLOR_CUSTOMIZE)
+                }
               />
               <ProductOptionsRow
-                leftNode={<span>{BDCustomizationConstants.LENGTH_HEADLINE}</span>}
+                leftNode={<span>{BDCustomizationConstants.headlines.LENGTH_CUSTOMIZE}</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={sizeProfilePresence(selectedDressSize, selectedHeightValue)}
                 rightNode={this.generateLengthNode()}
-                handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
+                handleClick={
+                  this.handleProductOptionClick(BDCustomizationConstants.LENGTH_CUSTOMIZE)
+                }
               />
               <ProductOptionsRow
-                leftNode={<span>{BDCustomizationConstants.CUSTOMIZATIONS_HEADLINE}</span>}
+                leftNode={<span>{BDCustomizationConstants.headlines.CUSTOMIZATIONS_HEADLINE}</span>}
                 leftNodeClassName="u-uppercase"
                 optionIsSelected={!!selectedStyleCustomizations.length}
                 rightNode={this.generateAddonSelectionNode()}
-                handleClick={this.handleProductOptionClick(CustomizationConstants.STYLE_CUSTOMIZE)}
+                handleClick={
+                  this.handleProductOptionClick(BDCustomizationConstants.BODICE_CUSTOMIZE)
+                }
               />
             </div>
 

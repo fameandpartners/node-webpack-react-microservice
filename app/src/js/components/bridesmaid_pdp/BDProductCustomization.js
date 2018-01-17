@@ -5,6 +5,26 @@ import classnames from 'classnames';
 
 // CSS
 import '../../../css/components/BDProductCustomization.scss';
+import '../../../css/components/BDCustomizationSelections.scss';
+
+import {
+  COLOR_CUSTOMIZE,
+  LENGTH_CUSTOMIZE,
+  BODICE_CUSTOMIZE,
+  STRAPS_SLEEVES_CUSTOMIZE,
+  SILHOUTTE_CUSTOMIZE,
+  DETAILS_CUSTOMIZE,
+  headlines,
+} from '../../constants/BDCustomizationConstants';
+
+const customizationHeadings = [
+  COLOR_CUSTOMIZE,
+  LENGTH_CUSTOMIZE,
+  BODICE_CUSTOMIZE,
+  STRAPS_SLEEVES_CUSTOMIZE,
+  SILHOUTTE_CUSTOMIZE,
+  DETAILS_CUSTOMIZE,
+];
 
 // UI Components
 // import BDProductCustomizationNavigation from './ProductCustomizationNavigation';
@@ -13,9 +33,6 @@ class BDProductCustomization extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-    this.state = {
-      groups: ['Length', 'Bodice', 'Straps & Sleeves', 'Silhouette', 'Details'],
-    };
   }
 
   handleHeadingClick(groupName) {
@@ -28,18 +45,19 @@ class BDProductCustomization extends PureComponent {
   /* eslint-disable max-len */
   generateGroupNameHeadings() {
     const { activeHeading } = this.props;
+    console.log('ooooook_>', customizationHeadings);
     return (
       <ul>
-        {this.state.groups.map(g => (
+        {customizationHeadings.map(g => (
           <li
             key={g}
             className={classnames(
-              'BDCustomizationSelections__group-name',
+              'BDCustomizationSelections__group-name u-display--inline-block',
               { 'BDCustomizationSelections__group-name--active': activeHeading === g },
             )}
             onClick={this.handleHeadingClick(g)}
           >
-            {g}
+            {headlines[g]}
           </li>
         ))}
       </ul>

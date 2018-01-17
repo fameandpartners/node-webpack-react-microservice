@@ -2,10 +2,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { assign } from 'lodash';
 import win from './polyfills/windowPolyfill';
 
 // Components
 import BridesmaidApp from './BridesmaidApp'; // Current Pdp, poor name
+
+// Transforms
+import { transformBridesmaidColors } from './transforms/bridesmaid';
 
 // Standard Components that will be included in old site
 import BlanketOverlay from './components/generic/BlanketOverlay';
@@ -33,13 +37,27 @@ function renderComponent(Component, idSelectorStr) {
   }
 }
 
-// MAIN PDP
-// const pdpData = win.__data ? transformProductJSON(win.__data) : {};
-// eslint-disable-next-line
-const cleanData = win.__data;
+// BRIDESMAID PDP
+
 // eslint-disable-next-line
 const untransformedData = win.__untransformedData || {};
-const pdpData = cleanData || transformProductJSON(untransformedData);
+let $$bridesmaidsFilterState = {};
+
+if (win.BridesmaidsFilterData) {
+  $$bridesmaidsFilterState = {
+    $$bridesmaidsFilterColors: transformBridesmaidColors(win.BridesmaidsFilterData.colors),
+    $$bridesmaidsFilterSilhouettes: win.BridesmaidsFilterData.silhouettes.options,
+    $$bridesmaidsFilterLengths: win.BridesmaidsFilterData.lengths.options,
+    $$bridesmaidsFilterTopDetails: win.BridesmaidsFilterData.top_details.options,
+  };
+}
+
+const pdpData = assign({},
+  transformProductJSON(untransformedData),
+  { $$bridesmaidsFilterState },
+);
+
+
 const store = AppStore(pdpData);
 const BridesmaidAppComponent = <Provider store={store}><BridesmaidApp /></Provider>;
 renderComponent(BridesmaidAppComponent, 'bridesmaid-root');

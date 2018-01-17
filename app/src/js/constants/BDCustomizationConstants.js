@@ -22,13 +22,15 @@ const productCustomizationDrawers = assign({},
 );
 
 const productCustomizationHeadlines = {
-  COLOR_HEADLINE: 'Color',
-  LENGTH_HEADLINE: 'Length',
-  BODICE_HEADLINE: 'Bodice',
-  STRAPS_HEADLINE: 'Straps & Sleeves',
-  SILHOUTTE_HEADLINE: 'Straps & Sleeves',
-  DETAILS_HEADLINE: 'Details',
-  CUSTOMIZATIONS_HEADLINE: 'Customizations',
+  headlines: {
+    COLOR_CUSTOMIZE: 'Color',
+    LENGTH_CUSTOMIZE: 'Length',
+    BODICE_CUSTOMIZE: 'Bodice',
+    STRAPS_SLEEVES_CUSTOMIZE: 'Straps & Sleeves',
+    SILHOUTTE_CUSTOMIZE: 'Silhouette',
+    DETAILS_CUSTOMIZE: 'Details',
+    CUSTOMIZATIONS_HEADLINE: 'Customizations',
+  },
 };
 
 export default assign({},
