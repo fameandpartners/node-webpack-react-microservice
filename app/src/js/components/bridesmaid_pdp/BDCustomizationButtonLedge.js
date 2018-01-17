@@ -21,6 +21,7 @@ import * as ModalActions from '../../actions/ModalActions';
 
 // Constants
 import BDModalConstants from '../../constants/BDModalConstants';
+import ModalConstants from '../../constants/ModalConstants';
 import * as modalAnimations from '../../utilities/modal-animation';
 // import {
 //   COLOR_CUSTOMIZE,
@@ -129,12 +130,13 @@ class CustomizationButtonLedge extends Component {
     && (
       (activeModalId === BDModalConstants.BD_COLOR_SELECTION_MODAL)
       || (activeModalId === BDModalConstants.BD_CUSTOMIZATION_MODAL)
+      || (activeModalId === ModalConstants.SIZE_SELECTION_MODAL)
     );
   }
 
   isCustomizationOpen() {
     const { activeModalId, modalIsOpen } = this.props;
-    if (modalIsOpen && activeModalId === BDModalConstants.SIZE_GUIDE_MODAL) {
+    if (modalIsOpen && activeModalId === ModalConstants.SIZE_GUIDE_MODAL) {
       return false;
     }
     return (
