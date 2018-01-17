@@ -12,6 +12,8 @@ import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
 
 // CSS
 import '../../../css/components/BridesmaidsTopDetailSelect.scss';
+import SubmitButton from '../../../js/components/generic/Button';
+
 
 function stateToProps({ $$bridesmaidsFilterState }) {
   const selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
@@ -104,6 +106,11 @@ class BridesmaidsTopDetailSelect extends Component {
       <div className="ProductGrid">
         <div className="App__photo-montage masonry grid-12">
           {this.getFilterTopDetails()}
+          <SubmitButton
+            className="float--right bottom-right-tiny"
+            handleClick={this.handleLengthSelection}
+            text={'Apply'}
+          />
         </div>
       </div>
     );

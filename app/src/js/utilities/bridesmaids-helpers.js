@@ -80,7 +80,7 @@ export function loadFilteredResultsPage(data) {
   };
 
   const queryString = serializeObjectIntoQueryParams(filterParamsObj);
-  const pathToLoad = `${win.location.origin}${win.location.pathname}/dresses?${queryString}`;
+  const pathToLoad = `${win.location.origin}/bridesmaids/dresses?${queryString}`;
 
   win.location = pathToLoad;
 }
