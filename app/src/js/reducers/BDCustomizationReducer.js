@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import Immutable from 'immutable';
 import BDCustomizationConstants from '../constants/BDCustomizationConstants';
 
@@ -17,7 +18,10 @@ export const $$initialState = Immutable.fromJS({
 
   // // Bool
   productCustomizationDrawerOpen: false,
-  //
+
+
+  temporaryCustomizationDetails: [],
+  selectedCustomizationDetails: [],
   // // String ['cm', 'inch']
   // temporaryMeasurementMetric: UNITS.INCH,
   // selectedMeasurementMetric: UNITS.INCH,
@@ -74,6 +78,22 @@ export default function CartReducer($$state = $$initialState, action = null) {
       return $$state.merge({
         bdProductCustomizationDrawer: action.bdProductCustomizationDrawer,
         bdProductCustomizationDrawerOpen: action.isActive,
+      });
+    }
+
+    case BDCustomizationConstants.SELECT_BD_CUSTOMIZATION_DETAIL: {
+      const { detailGuid } = action;
+      const $$temporaryCustomizationDetails = $$state.get('temporaryCustomizationDetails');
+      const optionAlreadySelected = $$temporaryCustomizationDetails.includes(detailGuid);
+
+      if (optionAlreadySelected) { // Removal
+        return $$state.merge({
+          temporaryCustomizationDetails: $$temporaryCustomizationDetails.filterNot(t => t === detailGuid),
+        });
+      }
+
+      return $$state.merge({ // Addition
+        temporaryCustomizationDetails: $$temporaryCustomizationDetails.push(detailGuid),
       });
     }
     // case CustomizationConstants.SET_SIZE_PROFILE_ERROR: {

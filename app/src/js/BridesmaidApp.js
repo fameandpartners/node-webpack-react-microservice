@@ -55,7 +55,7 @@ function stateToProps(state) {
   const sideMenuOpen = state.$$appState.get('sideMenuOpen');
   const modalOpen = state.$$modalState.get('shouldAppear');
   const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
-  const customizationDrawerOpen = state.$$customizationState.get('bdProductCustomizationDrawerOpen');
+  const customizationDrawerOpen = state.$$bdCustomizationState.get('bdProductCustomizationDrawerOpen');
 
   return {
     selectedColor: state.$$customizationState.get('selectedColor'),

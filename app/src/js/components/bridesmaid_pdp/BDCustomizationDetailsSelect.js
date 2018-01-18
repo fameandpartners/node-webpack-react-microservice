@@ -1,34 +1,33 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
 // Actions
-import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
+import * as BDActions from '../../actions/BDActions';
 
 // CSS
 import '../../../css/components/BDCustomizationDetailsSelect.scss';
 
-function stateToProps({ $$customizationState }) {
-  console.log('addonOptions', $$customizationState.get('addons'));
+function stateToProps({ $$bdCustomizationState, $$customizationState }) {
   const addonOptions = $$customizationState.get('addons').toJS().addonOptions;
-  console.log('addonOptions', addonOptions);
+  const $$temporaryCustomizationDetails = $$bdCustomizationState.get('temporaryCustomizationDetails').toJS();
 
   return {
     addonOptions,
+    $$temporaryCustomizationDetails,
   };
 }
 
 function dispatchToProps(dispatch) {
-  const {
-    selectFilterSilhouette,
-  } = bindActionCreators(BridesmaidsFilterActions, dispatch);
+  const { selectBDCustomizationDetail } = bindActionCreators(BDActions, dispatch);
 
   return {
-    selectFilterSilhouette,
+    selectBDCustomizationDetail,
   };
 }
 
@@ -39,12 +38,18 @@ class BDCustomizationDetailsSelect extends Component {
   }
 
   handleCustomizationSelection(item) {
-    console.log('clicking....', item);
+    // 3 things to occur
+    const { selectBDCustomizationDetail } = this.props;
+    selectBDCustomizationDetail({ detailGuid: item.id });
+    // 1: make a temporary selection or removal of customization
+    // 2: Send a request to get incompatibilities
+    // 3: Create new url naming structure to be shared in shareable link
   }
 
   getAddonDetailOptions() {
     const {
       addonOptions,
+      $$temporaryCustomizationDetails,
     } = this.props;
 
     return addonOptions
@@ -52,14 +57,15 @@ class BDCustomizationDetailsSelect extends Component {
         <div className="u-display--inline-block u-mr--normal" key={item.id}>
           <div
             onClick={() => this.handleCustomizationSelection(item)}
-            className={classnames([
-              'BDCustomizationDetailsSelect__image-wrapper u-cursor--pointer',
-              {
-                'BDCustomizationDetailsSelect--selected': item.id === false,
-              },
-            ])}
+            className="BDCustomizationDetailsSelect__image-wrapper u-cursor--pointer"
           >
-            <img className="u-width--full" alt={item.id} src="http://via.placeholder.com/142x142" />
+            <img
+              className={classnames({
+                'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id),
+              })}
+              alt={item.id}
+              src="http://via.placeholder.com/142x142"
+            />
             <div className="BDCustomizationDetailsSelect__description">{item.description}</div>
           </div>
         </div>
@@ -85,6 +91,9 @@ BDCustomizationDetailsSelect.propTypes = {
     centsTotal: PropTypes.number,
     img: PropTypes.string,
   }),
+  $$temporaryCustomizationDetails: ImmutablePropTypes.list.isRequired,
+  // Redux Funcs
+  selectBDCustomizationDetail: PropTypes.func.isRequired,
 };
 
 BDCustomizationDetailsSelect.defaultProps = {

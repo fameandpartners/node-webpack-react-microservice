@@ -1,3 +1,7 @@
+.BDCustomizationDetailsSelect {
+  padding-top: 10px;
+}
+
 .BDCustomizationDetailsSelect__image-wrapper {
   max-width: 142px;
 }
@@ -6,4 +10,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.BDCustomizationDetailsSelect--selected {
+  outline: 3px solid $c-hover-gray;
+  outline-offset: 3px;
 }
