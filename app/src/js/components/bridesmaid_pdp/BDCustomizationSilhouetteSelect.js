@@ -53,11 +53,10 @@ class BridesmaidsSilhouetteSelect extends Component {
       bridesmaidsFilterSilhouettes,
       selectedSilhouetteId,
     } = this.props;
-    console.log('rendering---> Silh');
 
     return bridesmaidsFilterSilhouettes
       .map((item, index) => (
-        <div className="col-4" key={item.image + index}>
+        <div key={item.image + index}>
           <div
             onClick={() => this.handleSilhouetteClick(item)}
             className={classnames([

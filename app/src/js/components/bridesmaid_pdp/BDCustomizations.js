@@ -15,6 +15,7 @@ import BDProductCustomization from '../bridesmaid_pdp/BDProductCustomization';
 // Inner Child Contents
 // import BridesmaidsColorSelect from '../../components/bridesmaids/BridesmaidsColorSelect';
 import BDCustomizationSilhouetteSelect from './BDCustomizationSilhouetteSelect';
+import BDCustomizationDetailsSelect from './BDCustomizationDetailsSelect';
 // import BridesmaidsLengthSelect from '../../components/bridesmaids/BridesmaidsLengthSelect';
 // import BridesmaidsTopDetailSelect from '../../components/bridesmaids/BridesmaidsTopDetailSelect';
 
@@ -74,6 +75,9 @@ class BDProductCustomizationColor extends PureComponent {
           <BDCustomizationSilhouetteSelect />
         );
       case DETAILS_CUSTOMIZE:
+        return (
+          <BDCustomizationDetailsSelect />
+        );
       default:
         return null;
     }

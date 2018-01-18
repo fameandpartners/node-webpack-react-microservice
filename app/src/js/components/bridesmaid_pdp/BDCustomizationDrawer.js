@@ -8,7 +8,7 @@ import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // CSS
-import '../../../css/components/CustomizationDrawer.scss';
+import '../../../css/components/BDCustomizationDrawer.scss';
 
 // UI Components
 import BDCustomizations from './BDCustomizations';
@@ -75,7 +75,6 @@ class BDCustomizationDrawer extends PureComponent {
     const {
       bdProductCustomizationDrawerOpen,
     } = this.props;
-    console.log('bdProductCustomizationDrawerOpen', bdProductCustomizationDrawerOpen);
 
     return (
       <TransitionMotion
@@ -90,7 +89,7 @@ class BDCustomizationDrawer extends PureComponent {
               <div
                 key={key}
                 className={classnames(
-                  'CustomizationDrawer__wrapper u-height--full u-width--full typography',
+                  'BDCustomizationDrawer__wrapper u-height--full u-width--full typography',
                   { 'u-pointerEvents--none': !bdProductCustomizationDrawerOpen },
                 )}
                 style={{
