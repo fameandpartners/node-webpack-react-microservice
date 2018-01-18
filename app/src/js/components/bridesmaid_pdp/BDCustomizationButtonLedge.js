@@ -23,15 +23,15 @@ import * as ModalActions from '../../actions/ModalActions';
 import BDModalConstants from '../../constants/BDModalConstants';
 import ModalConstants from '../../constants/ModalConstants';
 import * as modalAnimations from '../../utilities/modal-animation';
-// import {
-//   COLOR_CUSTOMIZE,
-// } from '../../constants/BDCustomizationConstants';
-
 import {
-  UNITS,
-  MIN_CM,
-  MAX_CM,
-} from '../../constants/ProductConstants';
+  DETAILS_CUSTOMIZE,
+} from '../../constants/BDCustomizationConstants';
+
+// import {
+//   UNITS,
+//   MIN_CM,
+//   MAX_CM,
+// } from '../../constants/ProductConstants';
 
 // UI Components
 import ButtonLedge from '../generic/ButtonLedge';
@@ -50,6 +50,9 @@ function stateToProps(state) {
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
     temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
+
+    // Customization Selections
+    temporaryCustomizationDetails: state.$$bdCustomizationState.get('temporaryCustomizationDetails').toJS(),
   };
 }
 
@@ -61,6 +64,7 @@ function dispatchToProps(dispatch) {
     activateModal: modalActions.activateModal,
     setShareableQueryParams: appActions.setShareableQueryParams,
     bdActivateCustomizationDrawer: bdActions.bdActivateCustomizationDrawer,
+    saveBDCustomizationDetailSelections: bdActions.saveBDCustomizationDetailSelections,
   };
 }
 
@@ -88,21 +92,36 @@ class CustomizationButtonLedge extends Component {
     return defaultColors.filter(color => color.id === colorId).length > 0;
   }
 
-  hasHeightError() {
-    const {
-     temporaryMeasurementMetric,
-     temporaryHeightValue,
-   } = this.props;
+  // hasHeightError() {
+  //   const {
+  //    temporaryMeasurementMetric,
+  //    temporaryHeightValue,
+  //  } = this.props;
+  //
+  //   return (
+  //    !(temporaryHeightValue && temporaryMeasurementMetric) || // Not Present
+  //    (temporaryMeasurementMetric === UNITS.CM &&
+  //    (temporaryHeightValue < MIN_CM || temporaryHeightValue > MAX_CM))
+  //   );
+  // }
 
-    return (
-     !(temporaryHeightValue && temporaryMeasurementMetric) || // Not Present
-     (temporaryMeasurementMetric === UNITS.CM &&
-     (temporaryHeightValue < MIN_CM || temporaryHeightValue > MAX_CM))
-    );
+  handleDetailSave() {
+    const {
+      temporaryCustomizationDetails,
+      saveBDCustomizationDetailSelections,
+    } = this.props;
+
+    saveBDCustomizationDetailSelections({ temporaryCustomizationDetails });
   }
 
   handleCustomizationSave() {
-    console.log('oook, save dis');
+    const {
+      bdProductCustomizationDrawer,
+    } = this.props;
+    if (bdProductCustomizationDrawer === DETAILS_CUSTOMIZE) {
+      this.handleDetailSave();
+    }
+    // selectedCustomizationDetails
   }
 
   // validateSizeSelection() {
@@ -191,6 +210,7 @@ class CustomizationButtonLedge extends Component {
   }
 }
 
+/* eslint-disable react/forbid-prop-types */
 CustomizationButtonLedge.propTypes = {
   // Redux Props
   // -- Modal
@@ -198,7 +218,12 @@ CustomizationButtonLedge.propTypes = {
   activeModalId: PropTypes.string,
   // -- Customizations
   bdProductCustomizationDrawerOpen: PropTypes.bool,
-  // bdProductCustomizationDrawer: PropTypes.string,
+  bdProductCustomizationDrawer: PropTypes.string,
+
+  // Detail Selection
+  temporaryCustomizationDetails: PropTypes.array,
+
+  // Color Section
   // temporaryColor: PropTypes.shape({
   //   id: PropTypes.number,
   //   centsTotal: PropTypes.number,
@@ -207,13 +232,16 @@ CustomizationButtonLedge.propTypes = {
   //   hexValue: PropTypes.string,
   //   patternUrl: PropTypes.string,
   // }).isRequired,
+  //
+  // Height / Size
   // temporaryDressSize: PropTypes.number,
-  temporaryHeightValue: PropTypes.number,
-  temporaryMeasurementMetric: PropTypes.string.isRequired,
+  // temporaryHeightValue: PropTypes.number,
+  // temporaryMeasurementMetric: PropTypes.string.isRequired,
   // temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
+  saveBDCustomizationDetailSelections: PropTypes.func.isRequired,
   // bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   // selectProductColor: PropTypes.func.isRequired,
   // setShareableQueryParams: PropTypes.func.isRequired,
@@ -230,10 +258,11 @@ CustomizationButtonLedge.defaultProps = {
   activeModalId: null,
   bdProductCustomizationDrawerOpen: false,
   bdProductCustomizationDrawer: null,
-  temporaryColor: null,
-  temporaryDressSize: null,
-  temporaryHeightValue: null,
-  temporaryStyleCustomizations: [],
+  temporaryCustomizationDetails: [],
+  // temporaryColor: null,
+  // temporaryDressSize: null,
+  // temporaryHeightValue: null,
+  // temporaryStyleCustomizations: [],
   productDefaultColors: [],
   setExpressMakingStatus: noop,
 };

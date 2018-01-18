@@ -81,6 +81,14 @@ export default function CartReducer($$state = $$initialState, action = null) {
       });
     }
 
+    case BDCustomizationConstants.SAVE_BD_CUSTOMIZATION_DETAIL_SELECTIONS: {
+      const { temporaryCustomizationDetails } = action;
+
+      return $$state.merge({
+        selectedCustomizationDetails: temporaryCustomizationDetails,
+      });
+    }
+
     case BDCustomizationConstants.SELECT_BD_CUSTOMIZATION_DETAIL: {
       const { detailGuid } = action;
       const $$temporaryCustomizationDetails = $$state.get('temporaryCustomizationDetails');

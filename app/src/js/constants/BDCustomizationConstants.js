@@ -6,8 +6,13 @@ const actionTypes = assign({},
     'ACTIVATE_BD_COLOR_DRAWER',
     'BD_ACTIVATE_CUSTOMIZATION_DRAWER',
     'SET_BD_CUSTOMIZATION_SECTION',
-    'SELECT_PRODUCT_COLOR',
+
+    // Customization selection screen
+    'SAVE_BD_CUSTOMIZATION_DETAIL_SELECTIONS',
     'SELECT_BD_CUSTOMIZATION_DETAIL',
+
+    // Color selection Screen
+    'SELECT_PRODUCT_COLOR',
   ]),
 );
 

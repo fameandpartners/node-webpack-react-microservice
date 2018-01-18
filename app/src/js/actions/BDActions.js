@@ -11,6 +11,13 @@ export function bdActivateCustomizationDrawer({
   };
 }
 
+export function saveBDCustomizationDetailSelections({ temporaryCustomizationDetails }) {
+  return {
+    type: BDCustomizationConstants.SAVE_BD_CUSTOMIZATION_DETAIL_SELECTIONS,
+    temporaryCustomizationDetails,
+  };
+}
+
 export function selectBDCustomizationDetail({ detailGuid }) {
   return {
     type: BDCustomizationConstants.SELECT_BD_CUSTOMIZATION_DETAIL,
