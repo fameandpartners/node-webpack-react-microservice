@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
+// Services
+// import BDService from '../../services/BDService';
+
 // Actions
 import * as BDActions from '../../actions/BDActions';
 
@@ -15,7 +18,7 @@ import '../../../css/components/BDCustomizationDetailsSelect.scss';
 
 function stateToProps({ $$bdCustomizationState, $$customizationState }) {
   const addonOptions = $$customizationState.get('addons').toJS().addonOptions;
-  const $$temporaryCustomizationDetails = $$bdCustomizationState.get('temporaryCustomizationDetails').toJS();
+  const $$temporaryCustomizationDetails = $$bdCustomizationState.get('temporaryCustomizationDetails');
 
   return {
     addonOptions,
@@ -24,10 +27,10 @@ function stateToProps({ $$bdCustomizationState, $$customizationState }) {
 }
 
 function dispatchToProps(dispatch) {
-  const { selectBDCustomizationDetail } = bindActionCreators(BDActions, dispatch);
+  const { setBDTemporaryCustomizationDetails } = bindActionCreators(BDActions, dispatch);
 
   return {
-    selectBDCustomizationDetail,
+    setBDTemporaryCustomizationDetails,
   };
 }
 
@@ -37,11 +40,29 @@ class BDCustomizationDetailsSelect extends Component {
     autobind(this);
   }
 
+  checkForIncompatabilities(customizationIds) {
+    console.log('here are my customizationIds', customizationIds);
+    // BDService.getBridesmaidsIncompatabilities();
+    // customization_ids].sort.join(','), params[:length], params[:silhouette], params[:neckline], params[:product_id]
+  }
+
+  createNewTemporaryFilters(detailGuid) {
+    const { $$temporaryCustomizationDetails } = this.props;
+    const optionAlreadySelected = $$temporaryCustomizationDetails.includes(detailGuid);
+
+    if (optionAlreadySelected) { // Removal
+      return $$temporaryCustomizationDetails.filterNot(t => t === detailGuid);
+    }
+
+    return $$temporaryCustomizationDetails.push(detailGuid); // Add
+  }
+
   handleCustomizationSelection(item) {
     // 3 things to occur
-    const { selectBDCustomizationDetail } = this.props;
-    selectBDCustomizationDetail({ detailGuid: item.id });
-    // 2: TODO:NEXT Send a request to get incompatibilities
+    const { setBDTemporaryCustomizationDetails } = this.props;
+    const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id);
+    setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: $$newTemporaryDetails });
+    this.checkForIncompatabilities($$newTemporaryDetails.toJS());
     // 3: Create new url naming structure to be shared in shareable link
   }
 
@@ -92,7 +113,7 @@ BDCustomizationDetailsSelect.propTypes = {
   }),
   $$temporaryCustomizationDetails: ImmutablePropTypes.list.isRequired,
   // Redux Funcs
-  selectBDCustomizationDetail: PropTypes.func.isRequired,
+  setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
 };
 
 BDCustomizationDetailsSelect.defaultProps = {

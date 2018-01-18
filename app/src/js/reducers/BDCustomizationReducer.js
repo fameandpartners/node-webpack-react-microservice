@@ -89,19 +89,10 @@ export default function CartReducer($$state = $$initialState, action = null) {
       });
     }
 
-    case BDCustomizationConstants.SELECT_BD_CUSTOMIZATION_DETAIL: {
-      const { detailGuid } = action;
-      const $$temporaryCustomizationDetails = $$state.get('temporaryCustomizationDetails');
-      const optionAlreadySelected = $$temporaryCustomizationDetails.includes(detailGuid);
-
-      if (optionAlreadySelected) { // Removal
-        return $$state.merge({
-          temporaryCustomizationDetails: $$temporaryCustomizationDetails.filterNot(t => t === detailGuid),
-        });
-      }
-
+    case BDCustomizationConstants.SET_BD_TEMPORARY_CUSTOMIZATION_DETAILS: {
+      const { temporaryCustomizationDetails } = action;
       return $$state.merge({ // Addition
-        temporaryCustomizationDetails: $$temporaryCustomizationDetails.push(detailGuid),
+        temporaryCustomizationDetails,
       });
     }
     // case CustomizationConstants.SET_SIZE_PROFILE_ERROR: {

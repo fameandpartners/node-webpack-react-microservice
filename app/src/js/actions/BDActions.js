@@ -18,10 +18,10 @@ export function saveBDCustomizationDetailSelections({ temporaryCustomizationDeta
   };
 }
 
-export function selectBDCustomizationDetail({ detailGuid }) {
+export function setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails }) {
   return {
-    type: BDCustomizationConstants.SELECT_BD_CUSTOMIZATION_DETAIL,
-    detailGuid,
+    type: BDCustomizationConstants.SET_BD_TEMPORARY_CUSTOMIZATION_DETAILS,
+    temporaryCustomizationDetails,
   };
 }
 
@@ -35,6 +35,6 @@ export function setBDCustomizationSection({ sectionId }) {
 
 export default {
   bdActivateCustomizationDrawer,
-  selectBDCustomizationDetail,
+  setBDTemporaryCustomizationDetails,
   setBDCustomizationSection,
 };
