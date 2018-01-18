@@ -15,11 +15,15 @@ import {
   isExtremeLightLuminance,
   generateBackgroundValueFromColor,
 } from '../../utilities/color';
+
 import {
   addonSelectionDisplayText,
   calculateSubTotal,
-  retrieveSelectedAddonOptions,
 } from '../../utilities/pdp';
+
+import {
+  retrieveBDSelectedAddonOptions,
+} from '../../utilities/bridesmaids';
 
 // Constants
 import BDCustomizationConstants from '../../constants/BDCustomizationConstants';
@@ -70,7 +74,7 @@ function stateToProps(state) {
     expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
-    selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
+    selectedCustomizationDetails: state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS(),
   };
 }
 
@@ -124,9 +128,12 @@ class ProductOptions extends Component {
   generateAddonSelectionNode() {
     const {
       addonOptions,
-      selectedStyleCustomizations,
+      selectedCustomizationDetails,
     } = this.props;
-    const selectedOptions = retrieveSelectedAddonOptions(addonOptions, selectedStyleCustomizations);
+    const selectedOptions = retrieveBDSelectedAddonOptions(
+      addonOptions,
+      selectedCustomizationDetails,
+    );
     const displayText = addonSelectionDisplayText({ selectedAddonOptions: selectedOptions });
 
     return displayText
@@ -150,11 +157,11 @@ class ProductOptions extends Component {
       colorCentsTotal,
       expressMakingSelected,
       addonOptions,
-      selectedStyleCustomizations,
+      selectedCustomizationDetails,
     } = this.props;
-    const selectedAddonOptions = retrieveSelectedAddonOptions(
+    const selectedAddonOptions = retrieveBDSelectedAddonOptions(
       addonOptions,
-      selectedStyleCustomizations,
+      selectedCustomizationDetails,
     );
     return calculateSubTotal(
       { colorCentsTotal, productCentsBasePrice, selectedAddonOptions, expressMakingSelected },
@@ -210,7 +217,7 @@ class ProductOptions extends Component {
       auSite,
       productTitle,
       isActive,
-      selectedStyleCustomizations,
+      selectedCustomizationDetails,
       selectedDressSize,
       selectedHeightValue,
     } = this.props;
@@ -259,7 +266,7 @@ class ProductOptions extends Component {
               <ProductOptionsRow
                 leftNode={<span>{BDCustomizationConstants.headlines.CUSTOMIZATIONS_HEADLINE}</span>}
                 leftNodeClassName="u-uppercase"
-                optionIsSelected={!!selectedStyleCustomizations.length}
+                optionIsSelected={!!selectedCustomizationDetails.length}
                 rightNode={this.generateAddonSelectionNode()}
                 handleClick={
                   this.handleProductOptionClick(BDCustomizationConstants.BODICE_CUSTOMIZE)
@@ -337,7 +344,7 @@ ProductOptions.propTypes = {
   ),
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
-  selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.number).isRequired,
   //* Redux Actions
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,

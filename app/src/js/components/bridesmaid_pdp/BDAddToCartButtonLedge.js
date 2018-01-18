@@ -17,7 +17,7 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // UI
 import ButtonLedge from '../generic/ButtonLedge';
-import AddToCartButton from '../pdp/AddToCartButton';
+import BDAddToCartButton from '../bridesmaid_pdp/BDAddToCartButton';
 
 // Utilities
 import { sizingDisplayText } from '../../utilities/pdp';
@@ -96,7 +96,7 @@ class BDAddToCartButtonLedge extends Component {
         <ButtonLedge
           addHeight
           leftText={this.generateSizingButtonText()}
-          rightNode={(<AddToCartButton />)}
+          rightNode={(<BDAddToCartButton />)}
           handleLeftButtonClick={this.leftNodeSizeClick()}
         />
         <p className="u-mb-small">

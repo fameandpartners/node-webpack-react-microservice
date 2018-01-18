@@ -45,7 +45,6 @@ class BDProductCustomization extends PureComponent {
   /* eslint-disable max-len */
   generateGroupNameHeadings() {
     const { activeHeading } = this.props;
-    console.log('ooooook_>', customizationHeadings);
     return (
       <ul>
         {customizationHeadings.map(g => (

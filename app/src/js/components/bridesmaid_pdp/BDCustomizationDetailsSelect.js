@@ -41,8 +41,7 @@ class BDCustomizationDetailsSelect extends Component {
     // 3 things to occur
     const { selectBDCustomizationDetail } = this.props;
     selectBDCustomizationDetail({ detailGuid: item.id });
-    // 1: make a temporary selection or removal of customization
-    // 2: Send a request to get incompatibilities
+    // 2: TODO:NEXT Send a request to get incompatibilities
     // 3: Create new url naming structure to be shared in shareable link
   }
 
