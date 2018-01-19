@@ -76,7 +76,7 @@ class BDCustomizationDetailsSelect extends Component {
   handleCustomizationSelection(item) {
     // 3 things to occur
     const { setBDTemporaryCustomizationDetails } = this.props;
-    const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id);
+    const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id.toLowerCase());
     setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: $$newTemporaryDetails });
     this.checkForIncompatabilities($$newTemporaryDetails.toJS());
     // 3: Create new url naming structure to be shared in shareable link
@@ -97,7 +97,7 @@ class BDCustomizationDetailsSelect extends Component {
           >
             <img
               className={classnames({
-                'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id),
+                'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
               })}
               alt={item.id}
               src="http://via.placeholder.com/142x142"

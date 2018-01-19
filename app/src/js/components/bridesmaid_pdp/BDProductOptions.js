@@ -89,7 +89,7 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class ProductOptions extends Component {
+class BDProductOptions extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -312,7 +312,7 @@ class ProductOptions extends Component {
   }
 }
 
-ProductOptions.propTypes = {
+BDProductOptions.propTypes = {
   //* Redux Properties
   auSite: PropTypes.bool.isRequired,
   // PRODUCT
@@ -344,14 +344,14 @@ ProductOptions.propTypes = {
   ),
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
-  selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
   //* Redux Actions
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
 
 };
 
-ProductOptions.defaultProps = {
+BDProductOptions.defaultProps = {
   addonOptions: [],
   colorCentsTotal: 0,
   selectedDressSize: null,
@@ -360,4 +360,4 @@ ProductOptions.defaultProps = {
   expressMakingSelected: false,
 };
 
-export default connect(stateToProps, dispatchToProps)(ProductOptions);
+export default connect(stateToProps, dispatchToProps)(BDProductOptions);

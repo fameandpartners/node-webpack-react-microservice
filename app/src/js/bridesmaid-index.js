@@ -42,7 +42,8 @@ function renderComponent(Component, idSelectorStr) {
 // eslint-disable-next-line
 const untransformedData = win.__untransformedData || {};
 let $$bridesmaidsFilterState = {};
-// let $$bdCustomizationState = {};
+let $$bdCustomizationState = {};
+
 
 if (win.BridesmaidsFilterData) {
   $$bridesmaidsFilterState = {
@@ -53,9 +54,17 @@ if (win.BridesmaidsFilterData) {
   };
 }
 
+if (untransformedData && untransformedData.selectedCustomizations) {
+  $$bdCustomizationState = {
+    temporaryCustomizationDetails: untransformedData.selectedCustomizations,
+    selectedCustomizationDetails: untransformedData.selectedCustomizations,
+  };
+}
+
 const pdpData = assign({},
   transformProductJSON(untransformedData),
   { $$bridesmaidsFilterState },
+  { $$bdCustomizationState },
 );
 
 
