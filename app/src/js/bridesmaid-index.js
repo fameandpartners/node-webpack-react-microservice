@@ -37,11 +37,12 @@ function renderComponent(Component, idSelectorStr) {
   }
 }
 
-// BRIDESMAID PDP
+// ------ BRIDESMAID PDP ---------
 
 // eslint-disable-next-line
 const untransformedData = win.__untransformedData || {};
 let $$bridesmaidsFilterState = {};
+// let $$bdCustomizationState = {};
 
 if (win.BridesmaidsFilterData) {
   $$bridesmaidsFilterState = {

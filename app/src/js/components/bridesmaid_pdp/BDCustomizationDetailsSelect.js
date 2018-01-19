@@ -9,6 +9,9 @@ import classnames from 'classnames';
 
 // Services
 // import BDService from '../../services/BDService';
+//
+// Utilities
+import { generateCustomizationImage } from '../../utilities/bridesmaids';
 
 // Actions
 import * as BDActions from '../../actions/BDActions';
@@ -16,12 +19,13 @@ import * as BDActions from '../../actions/BDActions';
 // CSS
 import '../../../css/components/BDCustomizationDetailsSelect.scss';
 
-function stateToProps({ $$bdCustomizationState, $$customizationState }) {
+function stateToProps({ $$bdCustomizationState, $$customizationState, $$productState }) {
   const addonOptions = $$customizationState.get('addons').toJS().addonOptions;
   const $$temporaryCustomizationDetails = $$bdCustomizationState.get('temporaryCustomizationDetails');
 
   return {
     addonOptions,
+    sku: $$productState.get('sku'),
     $$temporaryCustomizationDetails,
   };
 }
@@ -57,6 +61,18 @@ class BDCustomizationDetailsSelect extends Component {
     return $$temporaryCustomizationDetails.push(detailGuid); // Add
   }
 
+  generateImageNameForCustomizationId(customizationId) {
+    const { $$temporaryCustomizationDetails, sku } = this.props;
+    const imageStr = generateCustomizationImage({
+      sku,
+      customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
+      imgSizeStr: '800x800',
+      length: 'maxi',
+      colorCode: '000',
+    });
+    return imageStr;
+  }
+
   handleCustomizationSelection(item) {
     // 3 things to occur
     const { setBDTemporaryCustomizationDetails } = this.props;
@@ -87,6 +103,7 @@ class BDCustomizationDetailsSelect extends Component {
               src="http://via.placeholder.com/142x142"
             />
             <div className="BDCustomizationDetailsSelect__description">{item.description}</div>
+            <div className="BDCustomizationDetailsSelect__description">{this.generateImageNameForCustomizationId(item.id)}</div>
           </div>
         </div>
       ));
@@ -103,6 +120,7 @@ class BDCustomizationDetailsSelect extends Component {
 }
 
 BDCustomizationDetailsSelect.propTypes = {
+  $$temporaryCustomizationDetails: ImmutablePropTypes.list.isRequired,
   addonOptions: PropTypes.arrayOf({
     id: PropTypes.string,
     description: PropTypes.string,
@@ -111,7 +129,7 @@ BDCustomizationDetailsSelect.propTypes = {
     centsTotal: PropTypes.number,
     img: PropTypes.string,
   }),
-  $$temporaryCustomizationDetails: ImmutablePropTypes.list.isRequired,
+  sku: PropTypes.string.isRequired,
   // Redux Funcs
   setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
 };

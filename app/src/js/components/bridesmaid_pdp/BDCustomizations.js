@@ -66,15 +66,18 @@ class BDProductCustomizationColor extends PureComponent {
   generateCustomizationOptions() {
     const { bdProductCustomizationDrawer } = this.props;
     switch (bdProductCustomizationDrawer) {
-      case COLOR_CUSTOMIZE:
-      case LENGTH_CUSTOMIZE:
       case BODICE_CUSTOMIZE:
       case STRAPS_SLEEVES_CUSTOMIZE:
+      case DETAILS_CUSTOMIZE:
+        return (
+          <BDCustomizationDetailsSelect />
+        );
       case SILHOUTTE_CUSTOMIZE:
         return (
           <BDCustomizationSilhouetteSelect />
         );
-      case DETAILS_CUSTOMIZE:
+      case COLOR_CUSTOMIZE:
+      case LENGTH_CUSTOMIZE:
         return (
           <BDCustomizationDetailsSelect />
         );
