@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
 // Services
-// import BDService from '../../services/BDService';
-//
+import BDService from '../../services/BDService';
+
 // Utilities
 import { generateCustomizationImage } from '../../utilities/bridesmaids';
 
@@ -27,6 +27,7 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     addonOptions,
     sku: $$productState.get('sku'),
     $$temporaryCustomizationDetails,
+    temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
   };
 }
 
@@ -45,8 +46,21 @@ class BDCustomizationDetailsSelect extends Component {
   }
 
   checkForIncompatabilities(customizationIds) {
-    console.log('here are my customizationIds', customizationIds);
-    // BDService.getBridesmaidsIncompatabilities();
+    const {
+      sku,
+      temporaryBDCustomizationLength,
+    } = this.props;
+    console.log('this.props', this.props);
+
+    BDService.getBridesmaidsIncompatabilities({
+      length: temporaryBDCustomizationLength,
+      customizationIds,
+      productId: sku,
+    }).then((res) => {
+      console.log('res', res);
+    });
+    // const length
+    // params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
     // customization_ids].sort.join(','), params[:length], params[:silhouette], params[:neckline], params[:product_id]
   }
 
@@ -130,12 +144,14 @@ BDCustomizationDetailsSelect.propTypes = {
     img: PropTypes.string,
   }),
   sku: PropTypes.string.isRequired,
+  temporaryBDCustomizationLength: PropTypes.string,
   // Redux Funcs
   setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
 };
 
 BDCustomizationDetailsSelect.defaultProps = {
   addonOptions: [],
+  temporaryBDCustomizationLength: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(BDCustomizationDetailsSelect);

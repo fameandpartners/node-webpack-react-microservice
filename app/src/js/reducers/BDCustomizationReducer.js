@@ -19,7 +19,15 @@ export const $$initialState = Immutable.fromJS({
   // // Bool
   productCustomizationDrawerOpen: false,
 
+  // Color
+  temporaryBDCustomizationColor: 'ivory',
+  selectedBDCustomizationColor: 'ivory',
 
+  // Length
+  temporaryBDCustomizationLength: 'maxi',
+  selectedBDCustomizationLength: 'maxi',
+
+  // Details
   temporaryCustomizationDetails: [],
   selectedCustomizationDetails: [],
   // // String ['cm', 'inch']
