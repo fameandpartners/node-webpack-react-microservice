@@ -1,6 +1,20 @@
-// import { assign, find } from 'lodash';
+import {
+  lengthNames,
+} from '../constants/BDCustomizationConstants';
 
-function transformBridesmaidColors(colorsData) {
+
+export function determineSelectedLengthStr(selectedCustomizationsArr) {
+  let matchStr = '';
+  selectedCustomizationsArr.forEach((customizationId) => {
+    if (Object.keys(lengthNames).indexOf(customizationId) > -1) { // we have an L customization
+      matchStr = lengthNames[customizationId];
+    }
+  });
+
+  return matchStr;
+}
+
+export function transformBridesmaidColors(colorsData) {
   const colorValArray = colorsData.table.default;
   return colorValArray.map((c) => {
     const optionValue = c.option_value;
@@ -19,6 +33,20 @@ function transformBridesmaidColors(colorsData) {
   });
 }
 
+export function transformBridesmaidIncompatabilities(productJSON) {
+  if (
+    productJSON.available_options
+    && productJSON.available_options.table.customizations
+    && productJSON.available_options.table.customizations.table.incompatabilities
+  ) {
+    return productJSON.available_options.table.customizations.table.incompatabilities.map(i => i);
+  }
+  return [];
+}
+
+
 export default {
+  determineSelectedLengthStr,
   transformBridesmaidColors,
+  transformBridesmaidIncompatabilities,
 };

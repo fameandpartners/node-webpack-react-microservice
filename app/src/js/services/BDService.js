@@ -4,7 +4,7 @@ import request from 'superagent';
 import win from '../polyfills/windowPolyfill';
 
 function getBridesmaidsIncompatabilities({
-  length,
+  length = '',
   customizationIds,
   productId,
 }) {
@@ -15,9 +15,9 @@ function getBridesmaidsIncompatabilities({
   return request
     .get('/api/v1/bridesmaids/incompatabilities')
     .query({
-      length,
+      length: length.toLowerCase(),
       product_id: productId,
-      customization_ids: customizationIds,
+      'customization_ids[]': customizationIds,
     })
     .set('X-CSRF-Token', token)
     .set('Accept', 'application/json');

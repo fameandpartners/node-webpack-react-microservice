@@ -7,6 +7,7 @@ const actionTypes = assign({},
     'BD_ACTIVATE_CUSTOMIZATION_DRAWER',
     'SET_BD_CUSTOMIZATION_SECTION',
     'SET_BD_TEMPORARY_CUSTOMIZATION_DETAILS',
+    'SET_BD_TEMPORARY_LENGTH',
 
     // Customization selection screen
     'SAVE_BD_CUSTOMIZATION_DETAIL_SELECTIONS',
@@ -40,8 +41,26 @@ const productCustomizationHeadlines = {
   },
 };
 
+const productCustomizationGroupNames = {
+  groupNames: {
+    LENGTH_CUSTOMIZE: 'Lengths',
+  },
+};
+
+const productCustomizationlengthNames = {
+  lengthNames: {
+    l0: 'Cheeky',
+    l1: 'Short',
+    l2: 'Midi',
+    l3: 'Ankle',
+    l4: 'Full',
+  },
+};
+
 export default assign({},
   actionTypes,
   productCustomizationDrawers,
   productCustomizationHeadlines,
+  productCustomizationGroupNames,
+  productCustomizationlengthNames,
 );

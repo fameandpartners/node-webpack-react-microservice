@@ -9,7 +9,11 @@ import win from './polyfills/windowPolyfill';
 import BridesmaidApp from './BridesmaidApp'; // Current Pdp, poor name
 
 // Transforms
-import { transformBridesmaidColors } from './transforms/bridesmaid';
+import {
+  determineSelectedLengthStr,
+  transformBridesmaidColors,
+  transformBridesmaidIncompatabilities,
+} from './transforms/bridesmaid';
 
 // Standard Components that will be included in old site
 import BlanketOverlay from './components/generic/BlanketOverlay';
@@ -55,9 +59,13 @@ if (win.BridesmaidsFilterData) {
 }
 
 if (untransformedData && untransformedData.selectedCustomizations) {
+  const length = determineSelectedLengthStr(untransformedData.selectedCustomizations);
   $$bdCustomizationState = {
+    incompatabilities: transformBridesmaidIncompatabilities(untransformedData.product),
     temporaryCustomizationDetails: untransformedData.selectedCustomizations,
     selectedCustomizationDetails: untransformedData.selectedCustomizations,
+    temporaryBDCustomizationLength: length,
+    selectedBDCustomizationLength: length,
   };
 }
 

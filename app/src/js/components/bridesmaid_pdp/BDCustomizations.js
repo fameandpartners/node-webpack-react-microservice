@@ -27,6 +27,7 @@ import {
   STRAPS_SLEEVES_CUSTOMIZE,
   SILHOUTTE_CUSTOMIZE,
   DETAILS_CUSTOMIZE,
+  groupNames,
 } from '../../constants/BDCustomizationConstants';
 
 
@@ -70,7 +71,9 @@ class BDProductCustomizationColor extends PureComponent {
       case STRAPS_SLEEVES_CUSTOMIZE:
       case DETAILS_CUSTOMIZE:
         return (
-          <BDCustomizationDetailsSelect />
+          <BDCustomizationDetailsSelect
+            groupName={null}
+          />
         );
       case SILHOUTTE_CUSTOMIZE:
         return (
@@ -79,7 +82,9 @@ class BDProductCustomizationColor extends PureComponent {
       case COLOR_CUSTOMIZE:
       case LENGTH_CUSTOMIZE:
         return (
-          <BDCustomizationDetailsSelect />
+          <BDCustomizationDetailsSelect
+            groupName={groupNames[LENGTH_CUSTOMIZE]}
+          />
         );
       default:
         return null;

@@ -16,6 +16,10 @@ import { generateCustomizationImage } from '../../utilities/bridesmaids';
 // Actions
 import * as BDActions from '../../actions/BDActions';
 
+// Constants
+import BDCustomizationConstants from '../../constants/BDCustomizationConstants';
+
+
 // CSS
 import '../../../css/components/BDCustomizationDetailsSelect.scss';
 
@@ -26,16 +30,21 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
   return {
     addonOptions,
     sku: $$productState.get('sku'),
+    productId: $$productState.get('productId'),
     $$temporaryCustomizationDetails,
     temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
   };
 }
 
 function dispatchToProps(dispatch) {
-  const { setBDTemporaryCustomizationDetails } = bindActionCreators(BDActions, dispatch);
+  const {
+    setBDTemporaryCustomizationDetails,
+    setBDTemporaryLength,
+  } = bindActionCreators(BDActions, dispatch);
 
   return {
     setBDTemporaryCustomizationDetails,
+    setBDTemporaryLength,
   };
 }
 
@@ -45,17 +54,20 @@ class BDCustomizationDetailsSelect extends Component {
     autobind(this);
   }
 
-  checkForIncompatabilities(customizationIds) {
+  checkForIncompatabilities({
+    customizationIds,
+    length,
+  }) {
     const {
-      sku,
+      productId,
       temporaryBDCustomizationLength,
+      $$temporaryCustomizationDetails,
     } = this.props;
-    console.log('this.props', this.props);
 
     BDService.getBridesmaidsIncompatabilities({
-      length: temporaryBDCustomizationLength,
-      customizationIds,
-      productId: sku,
+      length: length || temporaryBDCustomizationLength,
+      customizationIds: customizationIds || $$temporaryCustomizationDetails.toJS(),
+      productId,
     }).then((res) => {
       console.log('res', res);
     });
@@ -76,19 +88,22 @@ class BDCustomizationDetailsSelect extends Component {
   }
 
   generateImageNameForCustomizationId(customizationId) {
-    const { $$temporaryCustomizationDetails, sku } = this.props;
-    const imageStr = generateCustomizationImage({
+    const {
+      $$temporaryCustomizationDetails,
+      temporaryBDCustomizationLength,
       sku,
+    } = this.props;
+    const imageStr = generateCustomizationImage({
+      sku: sku.toLowerCase(),
       customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
-      imgSizeStr: '800x800',
-      length: 'maxi',
+      imgSizeStr: '142x142',
+      length: temporaryBDCustomizationLength,
       colorCode: '000',
     });
     return imageStr;
   }
 
   handleCustomizationSelection(item) {
-    // 3 things to occur
     const { setBDTemporaryCustomizationDetails } = this.props;
     const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id.toLowerCase());
     setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: $$newTemporaryDetails });
@@ -96,31 +111,91 @@ class BDCustomizationDetailsSelect extends Component {
     // 3: Create new url naming structure to be shared in shareable link
   }
 
-  getAddonDetailOptions() {
+  handleLengthSelection(item) {
+    const { setBDTemporaryLength } = this.props;
+    const lengthStrChoice = BDCustomizationConstants.lengthNames[item.id];
+    setBDTemporaryLength({ temporaryBDCustomizationLength: lengthStrChoice });
+    this.checkForIncompatabilities({
+      length: lengthStrChoice,
+    });
+    // // 3 things to occur
+    // const { setBDTemporaryCustomizationDetails } = this.props;
+    // const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id.toLowerCase());
+    // setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: $$newTemporaryDetails });
+    // this.checkForIncompatabilities($$newTemporaryDetails.toJS());
+    // // 3: Create new url naming structure to be shared in shareable link
+  }
+
+  generateLengthDetailOptions() {
     const {
       addonOptions,
-      $$temporaryCustomizationDetails,
+      groupName,
+      temporaryBDCustomizationLength,
     } = this.props;
 
     return addonOptions
-      .map(item => (
+    .filter(ao => ao.group === groupName)
+    .map((item) => {
+      const lengthStr = BDCustomizationConstants.lengthNames[item.id];
+      return (
         <div className="u-display--inline-block u-mr--normal" key={item.id}>
           <div
-            onClick={() => this.handleCustomizationSelection(item)}
+            onClick={() => this.handleLengthSelection(item)}
             className="BDCustomizationDetailsSelect__image-wrapper u-cursor--pointer"
           >
             <img
               className={classnames({
-                'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
+                'BDCustomizationDetailsSelect--selected': temporaryBDCustomizationLength === lengthStr,
               })}
               alt={item.id}
-              src="http://via.placeholder.com/142x142"
+              src={this.generateImageNameForCustomizationId(item.id)}
             />
-            <div className="BDCustomizationDetailsSelect__description">{item.description}</div>
-            <div className="BDCustomizationDetailsSelect__description">{this.generateImageNameForCustomizationId(item.id)}</div>
+            <div className="BDCustomizationDetailsSelect__description">
+              {lengthStr}
+            </div>
           </div>
         </div>
-      ));
+      );
+    });
+  }
+
+  generateGenericDetailOptions() {
+    const {
+      addonOptions,
+      groupName,
+      $$temporaryCustomizationDetails,
+    } = this.props;
+
+    return addonOptions
+    .filter(ao => ao.group === groupName)
+    .map(item => (
+      <div className="u-display--inline-block u-mr--normal" key={item.id}>
+        <div
+          onClick={() => this.handleCustomizationSelection(item)}
+          className="BDCustomizationDetailsSelect__image-wrapper u-cursor--pointer"
+        >
+          <img
+            className={classnames({
+              'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
+            })}
+            alt={item.id}
+            src="http://via.placeholder.com/142x142"
+          />
+          <div className="BDCustomizationDetailsSelect__description">{item.description}</div>
+          <div className="BDCustomizationDetailsSelect__description">{this.generateImageNameForCustomizationId(item.id)}</div>
+        </div>
+      </div>
+    ));
+  }
+
+  getAddonDetailOptions() {
+    const { groupName } = this.props;
+
+    if (groupName === BDCustomizationConstants.groupNames.LENGTH_CUSTOMIZE) {
+      return this.generateLengthDetailOptions();
+    }
+
+    return this.generateGenericDetailOptions();
   }
 
 
@@ -143,14 +218,18 @@ BDCustomizationDetailsSelect.propTypes = {
     centsTotal: PropTypes.number,
     img: PropTypes.string,
   }),
+  groupName: PropTypes.string,
+  productId: PropTypes.number.isRequired,
   sku: PropTypes.string.isRequired,
   temporaryBDCustomizationLength: PropTypes.string,
   // Redux Funcs
   setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
+  setBDTemporaryLength: PropTypes.func.isRequired,
 };
 
 BDCustomizationDetailsSelect.defaultProps = {
   addonOptions: [],
+  groupName: null,
   temporaryBDCustomizationLength: null,
 };
 
