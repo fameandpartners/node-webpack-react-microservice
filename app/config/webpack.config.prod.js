@@ -48,6 +48,10 @@ module.exports = {
       require.resolve('./polyfills'),
       paths.flashIndexJs,
     ],
+    swatch: [
+      require.resolve('./polyfills'),
+      paths.swatchIndexJs,
+    ],
   },
   output: {
     // The build folder.

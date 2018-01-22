@@ -66,6 +66,8 @@ app.get('/webpack/asset-manifest', (req, res) => {
     cssBundle: clientAssets['pdp.css'],
     flashJsBundle: clientAssets['flash.js'],
     flashCssBundle: clientAssets['flash.css'],
+    swatchJsBundle: clientAssets['swatch.js'],
+    swatchCssBundle: clientAssets['swatch.css'],
   }
   res.send(asset_paths);
 });
