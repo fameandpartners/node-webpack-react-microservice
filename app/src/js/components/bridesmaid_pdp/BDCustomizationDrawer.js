@@ -45,7 +45,6 @@ class BDCustomizationDrawer extends PureComponent {
   }
 
   renderCustomizationContents() {
-    console.log('TODO: @elgrecode will need to add size back');
     const { breakpoint, bdProductCustomizationDrawer } = this.props;
     const hasNavItems = breakpoint === 'desktop';
 
@@ -113,11 +112,12 @@ BDCustomizationDrawer.propTypes = {
   breakpoint: PropTypes.string.isRequired,
   // Redux Props
   bdProductCustomizationDrawer: PropTypes.string,
-  bdProductCustomizationDrawerOpen: PropTypes.bool.isRequired,
+  bdProductCustomizationDrawerOpen: PropTypes.bool,
 };
 
 BDCustomizationDrawer.defaultProps = {
   bdProductCustomizationDrawer: null,
+  bdProductCustomizationDrawerOpen: false,
   selectedColorId: '',
   activeModalId: null,
 };

@@ -19,9 +19,20 @@ export const $$initialState = Immutable.fromJS({
   // // Bool
   productCustomizationDrawerOpen: false,
 
+  // Color
+  temporaryBDCustomizationColor: 'ivory',
+  selectedBDCustomizationColor: 'ivory',
 
+  // Length
+  temporaryBDCustomizationLength: 'midi',
+  selectedBDCustomizationLength: 'midi',
+
+  // Details
   temporaryCustomizationDetails: [],
   selectedCustomizationDetails: [],
+
+  incompatabilities: [],
+
   // // String ['cm', 'inch']
   // temporaryMeasurementMetric: UNITS.INCH,
   // selectedMeasurementMetric: UNITS.INCH,
@@ -93,6 +104,13 @@ export default function CartReducer($$state = $$initialState, action = null) {
       const { temporaryCustomizationDetails } = action;
       return $$state.merge({ // Addition
         temporaryCustomizationDetails,
+      });
+    }
+
+    case BDCustomizationConstants.SET_BD_TEMPORARY_LENGTH: {
+      const { temporaryBDCustomizationLength } = action;
+      return $$state.merge({ // Addition
+        temporaryBDCustomizationLength,
       });
     }
     // case CustomizationConstants.SET_SIZE_PROFILE_ERROR: {

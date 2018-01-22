@@ -73,8 +73,8 @@ class BDProductCustomization extends PureComponent {
     return (
       <div className="BDProductCustomization u-height--full u-flex u-flex--col">
 
-        <div className="grid-center u-flex u-flex--1">
-          <a className="u-height--full">
+        <div className="grid-center-bottom u-flex u-flex--1">
+          <a className="BDProductCustomization__main-image-wrapper">
             <img className="u-height--full" src="http://via.placeholder.com/600x600" alt="stupid" />
           </a>
         </div>

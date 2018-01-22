@@ -27,6 +27,7 @@ import {
   STRAPS_SLEEVES_CUSTOMIZE,
   SILHOUTTE_CUSTOMIZE,
   DETAILS_CUSTOMIZE,
+  groupNames,
 } from '../../constants/BDCustomizationConstants';
 
 
@@ -66,17 +67,24 @@ class BDProductCustomizationColor extends PureComponent {
   generateCustomizationOptions() {
     const { bdProductCustomizationDrawer } = this.props;
     switch (bdProductCustomizationDrawer) {
-      case COLOR_CUSTOMIZE:
-      case LENGTH_CUSTOMIZE:
       case BODICE_CUSTOMIZE:
       case STRAPS_SLEEVES_CUSTOMIZE:
+      case DETAILS_CUSTOMIZE:
+        return (
+          <BDCustomizationDetailsSelect
+            groupName={null}
+          />
+        );
       case SILHOUTTE_CUSTOMIZE:
         return (
           <BDCustomizationSilhouetteSelect />
         );
-      case DETAILS_CUSTOMIZE:
+      case COLOR_CUSTOMIZE:
+      case LENGTH_CUSTOMIZE:
         return (
-          <BDCustomizationDetailsSelect />
+          <BDCustomizationDetailsSelect
+            groupName={groupNames[LENGTH_CUSTOMIZE]}
+          />
         );
       default:
         return null;

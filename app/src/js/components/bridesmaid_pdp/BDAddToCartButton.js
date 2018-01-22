@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
@@ -253,6 +254,7 @@ BDAddToCartButton.propTypes = {
   addToCartLoading: PropTypes.bool,
   $$productState: PropTypes.object.isRequired,
   $$customizationState: PropTypes.object.isRequired,
+  $$bdCustomizationState: ImmutablePropTypes.map.isRequired,
   colorCentsTotal: PropTypes.number,
   expressMakingSelected: PropTypes.bool,
   isActive: PropTypes.bool.isRequired,

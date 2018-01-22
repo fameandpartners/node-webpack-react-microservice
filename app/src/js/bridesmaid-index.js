@@ -9,7 +9,11 @@ import win from './polyfills/windowPolyfill';
 import BridesmaidApp from './BridesmaidApp'; // Current Pdp, poor name
 
 // Transforms
-import { transformBridesmaidColors } from './transforms/bridesmaid';
+import {
+  determineSelectedLengthStr,
+  transformBridesmaidColors,
+  transformBridesmaidIncompatabilities,
+} from './transforms/bridesmaid';
 
 // Standard Components that will be included in old site
 import BlanketOverlay from './components/generic/BlanketOverlay';
@@ -37,11 +41,13 @@ function renderComponent(Component, idSelectorStr) {
   }
 }
 
-// BRIDESMAID PDP
+// ------ BRIDESMAID PDP ---------
 
 // eslint-disable-next-line
 const untransformedData = win.__untransformedData || {};
 let $$bridesmaidsFilterState = {};
+let $$bdCustomizationState = {};
+
 
 if (win.BridesmaidsFilterData) {
   $$bridesmaidsFilterState = {
@@ -52,9 +58,21 @@ if (win.BridesmaidsFilterData) {
   };
 }
 
+if (untransformedData && untransformedData.selectedCustomizations) {
+  const length = determineSelectedLengthStr(untransformedData.selectedCustomizations);
+  $$bdCustomizationState = {
+    incompatabilities: transformBridesmaidIncompatabilities(untransformedData.product),
+    temporaryCustomizationDetails: untransformedData.selectedCustomizations,
+    selectedCustomizationDetails: untransformedData.selectedCustomizations,
+    temporaryBDCustomizationLength: length,
+    selectedBDCustomizationLength: length,
+  };
+}
+
 const pdpData = assign({},
   transformProductJSON(untransformedData),
   { $$bridesmaidsFilterState },
+  { $$bdCustomizationState },
 );
 
 

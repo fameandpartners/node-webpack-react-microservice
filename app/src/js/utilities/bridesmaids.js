@@ -8,8 +8,36 @@ function filterSelectedAddons(addonOptions, selectedCustomizationDetails) {
     }));
 }
 
+function stringifySortCustomizationCodes(customizationIds) {
+  if (customizationIds && customizationIds.length) {
+    return customizationIds.sort().join('-');
+  }
+
+  return 'default';
+}
+
 export function retrieveBDSelectedAddonOptions(addonOptions, selectedCustomizationDetails) {
   return addonOptions.filter(a => selectedCustomizationDetails.indexOf(a.id) > -1);
+}
+
+export function generateCustomizationImage({
+  sku = null,
+  customizationIds,
+  imgSizeStr = '142x142',
+  length = 'maxi',
+  colorCode = '000',
+}) {
+  const BASE_URL = 'assets.fameandpartners.com/renders';
+  const SKU = sku;
+  const IMG_SIZE = imgSizeStr;
+  const SIDE = 'front';
+  const CODE_NAME = stringifySortCustomizationCodes(customizationIds);
+  const LENGTH = length;
+  const COLOR_CODE = colorCode;
+
+  // We are trying to make a string such as the one below
+  // assets.fameandpartners.com/renders/fp_1265/800x800/front-default-maxi-000.png
+  return `${BASE_URL}/${SKU}/${IMG_SIZE}/${SIDE}-${CODE_NAME}-${LENGTH}-${COLOR_CODE}.png`;
 }
 
 export function bdAccumulateCustomizationSelections({

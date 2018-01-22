@@ -17,7 +17,7 @@ import { addonSelectionDisplayText } from '../../utilities/pdp';
 import { formatCents } from '../../utilities/accounting';
 
 // UI Components
-import ProductImageSlider from '../pdp/ProductImageSlider';
+// import ProductImageSlider from '../pdp/ProductImageSlider';
 // REMOVE COMPONENTS
 import CliqueCallout from '../pdp/CliqueCallout';
 

@@ -25,6 +25,13 @@ export function setBDTemporaryCustomizationDetails({ temporaryCustomizationDetai
   };
 }
 
+export function setBDTemporaryLength({ temporaryBDCustomizationLength }) {
+  return {
+    type: BDCustomizationConstants.SET_BD_TEMPORARY_LENGTH,
+    temporaryBDCustomizationLength,
+  };
+}
+
 export function setBDCustomizationSection({ sectionId }) {
   return {
     type: BDCustomizationConstants.SET_BD_CUSTOMIZATION_SECTION,
@@ -36,5 +43,6 @@ export function setBDCustomizationSection({ sectionId }) {
 export default {
   bdActivateCustomizationDrawer,
   setBDTemporaryCustomizationDetails,
+  setBDTemporaryLength,
   setBDCustomizationSection,
 };
