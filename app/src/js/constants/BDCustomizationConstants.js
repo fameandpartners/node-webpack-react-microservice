@@ -8,6 +8,7 @@ const actionTypes = assign({},
     'SET_BD_CUSTOMIZATION_SECTION',
     'SET_BD_TEMPORARY_CUSTOMIZATION_DETAILS',
     'SET_BD_TEMPORARY_LENGTH',
+    'SET_BD_INCOMPATABILITIES',
 
     // Customization selection screen
     'SAVE_BD_CUSTOMIZATION_DETAIL_SELECTIONS',

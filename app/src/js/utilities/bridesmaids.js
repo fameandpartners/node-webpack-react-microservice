@@ -25,19 +25,21 @@ export function generateCustomizationImage({
   customizationIds,
   imgSizeStr = '142x142',
   length = 'maxi',
-  colorCode = '000',
+  colorCode = '164',
 }) {
-  const BASE_URL = 'assets.fameandpartners.com/renders';
+  const BASE_URL = '//assets.fameandpartners.com/renders/composites';
   const SKU = sku;
   const IMG_SIZE = imgSizeStr;
   const SIDE = 'front';
   const CODE_NAME = stringifySortCustomizationCodes(customizationIds);
-  const LENGTH = length;
-  const COLOR_CODE = colorCode;
+  const LENGTH = length.toLowerCase();
+  const COLOR_CODE = '0001'; // color code mapping NOT id
 
   // We are trying to make a string such as the one below
   // assets.fameandpartners.com/renders/fp_1265/800x800/front-default-maxi-000.png
-  return `${BASE_URL}/${SKU}/${IMG_SIZE}/${SIDE}-${CODE_NAME}-${LENGTH}-${COLOR_CODE}.png`;
+  // assets.fameandpartners.com/renders/composites
+  // /fp-js1007-102/142x142/a5-b21-t64-cheeky-front-0002.png
+  return `${BASE_URL}/${SKU}/${IMG_SIZE}/${CODE_NAME}-${LENGTH}-${SIDE}-${COLOR_CODE}.png`;
 }
 
 export function bdAccumulateCustomizationSelections({

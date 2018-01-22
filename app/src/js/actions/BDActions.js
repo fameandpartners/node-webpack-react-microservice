@@ -39,10 +39,18 @@ export function setBDCustomizationSection({ sectionId }) {
   };
 }
 
+export function setBDIncompatabilities({ incompatabilities }) {
+  return {
+    type: BDCustomizationConstants.SET_BD_INCOMPATABILITIES,
+    incompatabilities,
+  };
+}
+
 
 export default {
   bdActivateCustomizationDrawer,
   setBDTemporaryCustomizationDetails,
   setBDTemporaryLength,
   setBDCustomizationSection,
+  setBDIncompatabilities,
 };
