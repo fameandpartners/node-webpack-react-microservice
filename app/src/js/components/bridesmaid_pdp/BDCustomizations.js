@@ -72,7 +72,7 @@ class BDProductCustomizationColor extends PureComponent {
       case DETAILS_CUSTOMIZE:
         return (
           <BDCustomizationDetailsSelect
-            groupName={null}
+            groupName={groupNames[bdProductCustomizationDrawer]}
           />
         );
       case SILHOUTTE_CUSTOMIZE:

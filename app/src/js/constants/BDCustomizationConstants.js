@@ -45,6 +45,11 @@ const productCustomizationHeadlines = {
 const productCustomizationGroupNames = {
   groupNames: {
     LENGTH_CUSTOMIZE: 'Lengths',
+    COLOR_CUSTOMIZE: 'Color',
+    BODICE_CUSTOMIZE: 'Bodice',
+    STRAPS_SLEEVES_CUSTOMIZE: 'Straps & Sleeves',
+    SILHOUTTE_CUSTOMIZE: 'Silhouette',
+    DETAILS_CUSTOMIZE: 'Details',
   },
 };
 

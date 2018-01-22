@@ -41,13 +41,13 @@ function dispatchToProps(dispatch) {
   const {
     setBDTemporaryCustomizationDetails,
     setBDTemporaryLength,
-    setIncompatabilities,
+    setBDIncompatabilities,
   } = bindActionCreators(BDActions, dispatch);
 
   return {
     setBDTemporaryCustomizationDetails,
     setBDTemporaryLength,
-    setIncompatabilities,
+    setBDIncompatabilities,
   };
 }
 
@@ -65,7 +65,7 @@ class BDCustomizationDetailsSelect extends Component {
       productId,
       temporaryBDCustomizationLength,
       $$temporaryCustomizationDetails,
-      setIncompatabilities,
+      setBDIncompatabilities,
     } = this.props;
 
     BDService.getBridesmaidsIncompatabilities({
@@ -73,7 +73,7 @@ class BDCustomizationDetailsSelect extends Component {
       customizationIds: customizationIds || $$temporaryCustomizationDetails.toJS(),
       productId,
     }).then((res) => {
-      setIncompatabilities({ incompatabilities: res.body.incompatible_ids });
+      setBDIncompatabilities({ incompatabilities: res.body.incompatible_ids });
     });
     // const length
     // params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
@@ -233,7 +233,7 @@ BDCustomizationDetailsSelect.propTypes = {
   // Redux Funcs
   setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
   setBDTemporaryLength: PropTypes.func.isRequired,
-  setIncompatabilities: PropTypes.func.isRequired,
+  setBDIncompatabilities: PropTypes.func.isRequired,
 };
 
 BDCustomizationDetailsSelect.defaultProps = {

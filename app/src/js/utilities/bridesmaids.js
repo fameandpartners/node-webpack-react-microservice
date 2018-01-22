@@ -1,3 +1,8 @@
+import { uniq } from 'lodash';
+import { lengthNames } from '../constants/BDCustomizationConstants';
+import { formatCents } from './accounting';
+import { EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
+
 function filterSelectedAddons(addonOptions, selectedCustomizationDetails) {
   return addonOptions
     .filter(a => selectedCustomizationDetails.indexOf(a.id) > -1)
@@ -8,9 +13,31 @@ function filterSelectedAddons(addonOptions, selectedCustomizationDetails) {
     }));
 }
 
+export function calculateBDSubTotal({
+  colorCentsTotal = 0,
+  productCentsBasePrice = 0,
+  selectedAddonOptions = [],
+  expressMakingSelected = false,
+}, currencySymbol = '$') {
+  const expressMakingCharge = expressMakingSelected ? EXPRESS_MAKING_PRICE_CENTS : 0;
+  const customizationStyleCents = selectedAddonOptions
+    .reduce((prev, curr) => prev + parseInt(curr.centsTotal, 10), 0);
+
+  return formatCents(
+    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice + expressMakingCharge),
+    0,
+    (currencySymbol || ''),
+  );
+}
+
 function stringifySortCustomizationCodes(customizationIds) {
   if (customizationIds && customizationIds.length) {
-    return customizationIds.sort().join('-');
+    const lengthNameKeys = Object.keys(lengthNames);
+    const filteredCustomziationIds = customizationIds.filter(
+      id => lengthNameKeys.indexOf(id) === -1,
+    );
+
+    return uniq(filteredCustomziationIds.sort()).join('-');
   }
 
   return 'default';
@@ -81,6 +108,7 @@ export function bdAccumulateCustomizationSelections({
 }
 
 export default {
+  calculateBDSubTotal,
   bdAccumulateCustomizationSelections,
   retrieveBDSelectedAddonOptions,
 };
