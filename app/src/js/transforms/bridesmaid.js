@@ -44,7 +44,6 @@ export function transformBridesmaidIncompatabilities(productJSON) {
 
 
 export default {
-  transformBridesmaidColors,
   determineSelectedLengthStr,
   transformBridesmaidColors,
   transformBridesmaidIncompatabilities,
