@@ -21,7 +21,7 @@ export function transformBridesmaidColors(colorsData) {
 }
 
 export function determineSelectedLengthStr(selectedCustomizationsArr) {
-  let matchStr = '';
+  let matchStr = 'Cheeky';
   selectedCustomizationsArr.forEach((customizationId) => {
     if (Object.keys(lengthNames).indexOf(customizationId) > -1) { // we have an L customization
       matchStr = lengthNames[customizationId];

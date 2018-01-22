@@ -31,6 +31,7 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     addonOptions,
     sku: $$productState.get('sku'),
     productId: $$productState.get('productId'),
+    incompatabilities: $$bdCustomizationState.get('incompatabilities'),
     $$temporaryCustomizationDetails,
     temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
   };
@@ -40,11 +41,13 @@ function dispatchToProps(dispatch) {
   const {
     setBDTemporaryCustomizationDetails,
     setBDTemporaryLength,
+    setIncompatabilities,
   } = bindActionCreators(BDActions, dispatch);
 
   return {
     setBDTemporaryCustomizationDetails,
     setBDTemporaryLength,
+    setIncompatabilities,
   };
 }
 
@@ -62,6 +65,7 @@ class BDCustomizationDetailsSelect extends Component {
       productId,
       temporaryBDCustomizationLength,
       $$temporaryCustomizationDetails,
+      setIncompatabilities,
     } = this.props;
 
     BDService.getBridesmaidsIncompatabilities({
@@ -69,7 +73,7 @@ class BDCustomizationDetailsSelect extends Component {
       customizationIds: customizationIds || $$temporaryCustomizationDetails.toJS(),
       productId,
     }).then((res) => {
-      console.log('res', res);
+      setIncompatabilities({ incompatabilities: res.body.incompatible_ids });
     });
     // const length
     // params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
@@ -107,7 +111,9 @@ class BDCustomizationDetailsSelect extends Component {
     const { setBDTemporaryCustomizationDetails } = this.props;
     const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id.toLowerCase());
     setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: $$newTemporaryDetails });
-    this.checkForIncompatabilities($$newTemporaryDetails.toJS());
+    this.checkForIncompatabilities({
+      customizationIds: $$newTemporaryDetails.toJS(),
+    });
     // 3: Create new url naming structure to be shared in shareable link
   }
 
@@ -130,11 +136,13 @@ class BDCustomizationDetailsSelect extends Component {
     const {
       addonOptions,
       groupName,
+      incompatabilities,
       temporaryBDCustomizationLength,
     } = this.props;
 
     return addonOptions
     .filter(ao => ao.group === groupName)
+    .filter(item => !(incompatabilities.indexOf(item.id) > -1))
     .map((item) => {
       const lengthStr = BDCustomizationConstants.lengthNames[item.id];
       return (
@@ -179,10 +187,9 @@ class BDCustomizationDetailsSelect extends Component {
               'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
             })}
             alt={item.id}
-            src="http://via.placeholder.com/142x142"
+            src={this.generateImageNameForCustomizationId(item.id)}
           />
           <div className="BDCustomizationDetailsSelect__description">{item.description}</div>
-          <div className="BDCustomizationDetailsSelect__description">{this.generateImageNameForCustomizationId(item.id)}</div>
         </div>
       </div>
     ));
@@ -219,17 +226,20 @@ BDCustomizationDetailsSelect.propTypes = {
     img: PropTypes.string,
   }),
   groupName: PropTypes.string,
+  incompatabilities: PropTypes.arrayOf(PropTypes.string),
   productId: PropTypes.number.isRequired,
   sku: PropTypes.string.isRequired,
   temporaryBDCustomizationLength: PropTypes.string,
   // Redux Funcs
   setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
   setBDTemporaryLength: PropTypes.func.isRequired,
+  setIncompatabilities: PropTypes.func.isRequired,
 };
 
 BDCustomizationDetailsSelect.defaultProps = {
   addonOptions: [],
   groupName: null,
+  incompatabilities: [],
   temporaryBDCustomizationLength: null,
 };
 

@@ -113,6 +113,13 @@ export default function CartReducer($$state = $$initialState, action = null) {
         temporaryBDCustomizationLength,
       });
     }
+
+    case BDCustomizationConstants.SET_BD_INCOMPATABILITIES: {
+      const { incompatabilities } = action;
+      return $$state.merge({ // Addition
+        incompatabilities,
+      });
+    }
     // case CustomizationConstants.SET_SIZE_PROFILE_ERROR: {
     //   return $$state.merge({
     //     heightError: action.heightError,
