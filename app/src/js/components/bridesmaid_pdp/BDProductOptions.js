@@ -17,11 +17,11 @@ import {
 } from '../../utilities/color';
 
 import {
-  addonSelectionDisplayText,
   calculateSubTotal,
 } from '../../utilities/pdp';
 
 import {
+  addonSelectionDisplayText,
   retrieveBDSelectedAddonOptions,
 } from '../../utilities/bridesmaids';
 
@@ -144,9 +144,15 @@ class BDProductOptions extends Component {
   }
 
   generateLengthNode() {
-    return true ? (
+    const { selectedCustomizationDetails } = this.props;
+    const lengthKeys = Object.keys(BDCustomizationConstants.lengthNames);
+    const foundLengthId = selectedCustomizationDetails.find(
+      id => lengthKeys.indexOf(id) > -1,
+    );
+
+    return foundLengthId ? (
       <span>
-        [Ankle Length]
+        {BDCustomizationConstants.lengthNames[foundLengthId]}
       </span>
     ) : null;
   }

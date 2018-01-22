@@ -171,11 +171,13 @@ class BDCustomizationDetailsSelect extends Component {
     const {
       addonOptions,
       groupName,
+      incompatabilities,
       $$temporaryCustomizationDetails,
     } = this.props;
 
     return addonOptions
     .filter(ao => ao.group === groupName)
+    .filter(item => !(incompatabilities.indexOf(item.id) > -1))
     .map(item => (
       <div className="u-display--inline-block u-mr--normal" key={item.id}>
         <div
