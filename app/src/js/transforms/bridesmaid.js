@@ -1,20 +1,19 @@
 // import { assign, find } from 'lodash';
 
 function transformBridesmaidColors(colorsData) {
-  const colorValArray = colorsData.table.default;
+  const colorValArray = colorsData;
   return colorValArray.map((c) => {
-    const optionValue = c.option_value;
-    const optionValueVal = optionValue.value || '';
-    const hasPatternImage = optionValueVal ? optionValueVal.indexOf('.') > -1 : false;
+    const colorHex = c.color_hex || '';
+    const hasPatternImage = colorHex ? colorHex.indexOf('.') > -1 : false;
     const cfPath = process.env.CLOUDFRONT_BASE_PATH || 'https://dekbm9314em3c.cloudfront.net';
     const ASSET_BASE_PATH = '/assets/product-color-images';
 
     return {
-      id: optionValue.id,
-      name: optionValue.name,
-      presentation: optionValue.presentation,
-      hexValue: hasPatternImage ? '' : optionValueVal,
-      patternUrl: hasPatternImage ? `${cfPath}${ASSET_BASE_PATH}/${optionValueVal}` : '',
+      id: c.color_id,
+      // name: optionValue.name,
+      presentation: c.color_name,
+      hexValue: hasPatternImage ? '' : colorHex,
+      patternUrl: hasPatternImage ? `${cfPath}${ASSET_BASE_PATH}/${colorHex}` : '',
     };
   });
 }
