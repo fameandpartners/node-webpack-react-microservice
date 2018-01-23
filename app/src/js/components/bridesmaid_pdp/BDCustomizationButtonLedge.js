@@ -26,10 +26,6 @@ import * as modalAnimations from '../../utilities/modal-animation';
 
 
 import {
-  DETAILS_CUSTOMIZE,
-} from '../../constants/BDCustomizationConstants';
-
-import {
   UNITS,
   MIN_CM,
   MAX_CM,
@@ -45,16 +41,12 @@ function stateToProps(state) {
     activeModalId: state.$$modalState.get('modalId'),
     // Customziation State
     bdProductCustomizationDrawerOpen: state.$$bdCustomizationState.get('bdProductCustomizationDrawerOpen'),
-    bdProductCustomizationDrawer: state.$$bdCustomizationState.get('bdProductCustomizationDrawer'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
     temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
-
-    // Customization Selections
-    temporaryCustomizationDetails: state.$$bdCustomizationState.get('temporaryCustomizationDetails').toJS(),
   };
 }
 
@@ -251,10 +243,6 @@ CustomizationButtonLedge.propTypes = {
   activeModalId: PropTypes.string,
   // -- Customizations
   bdProductCustomizationDrawerOpen: PropTypes.bool,
-  bdProductCustomizationDrawer: PropTypes.string,
-
-  // Detail Selection
-  temporaryCustomizationDetails: PropTypes.array,
 
   // Color Section
   // temporaryColor: PropTypes.shape({
@@ -290,8 +278,6 @@ CustomizationButtonLedge.propTypes = {
 CustomizationButtonLedge.defaultProps = {
   activeModalId: null,
   bdProductCustomizationDrawerOpen: false,
-  bdProductCustomizationDrawer: null,
-  temporaryCustomizationDetails: [],
   // temporaryColor: null,
   temporaryDressSize: null,
   temporaryHeightValue: null,

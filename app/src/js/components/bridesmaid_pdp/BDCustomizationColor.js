@@ -3,11 +3,11 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import noop from '../../libs/noop';
 
 // Actions
 import ModalActions from '../../actions/ModalActions';
 import CustomizationActions from '../../actions/CustomizationActions';
+import BDActions from '../../actions/BDActions';
 
 // UI Components
 import BDColorSelections from '../bridesmaid_pdp/BDColorSelections';
@@ -23,15 +23,13 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
-  const {
-    changeCustomizationDrawer,
-    selectProductColor,
-  } = bindActionCreators(CustomizationActions, dispatch);
+  const { changeCustomizationDrawer } = bindActionCreators(CustomizationActions, dispatch);
+  const { setBDTemporaryColor } = bindActionCreators(BDActions, dispatch);
 
   return {
     activateModal,
     changeCustomizationDrawer,
-    selectProductColor,
+    setBDTemporaryColor,
   };
 }
 
@@ -50,16 +48,11 @@ class BDProductCustomizationColor extends PureComponent {
     this.props.activateModal({ shouldAppear: false });
   }
 
-  handleColorSelection(temporaryColor) {
-    const {
-      selectProductColor,
-      productDefaultColors,
-      setExpressMakingStatus,
-    } = this.props;
-    if (!this.isExpressEligible(temporaryColor.id, productDefaultColors)) {
-      setExpressMakingStatus(false);
-    }
-    selectProductColor({ temporaryColor });
+  handleColorSelection(color) {
+    const { setBDTemporaryColor } = this.props;
+    setBDTemporaryColor({
+      temporaryBDCustomizationColor: color.presentation,
+    });
   }
 
   isExpressEligible(colorId, defaultColors) {
@@ -105,15 +98,13 @@ BDProductCustomizationColor.propTypes = {
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   changeCustomizationDrawer: PropTypes.func.isRequired,
-  selectProductColor: PropTypes.func.isRequired,
-  setExpressMakingStatus: PropTypes.func,
+  setBDTemporaryColor: PropTypes.func.isRequired,
 };
 
 BDProductCustomizationColor.defaultProps = {
   hasNavItems: true,
   bdProductCustomizationDrawer: null,
   temporaryBDCustomizationColor: '',
-  setExpressMakingStatus: noop,
 };
 
 

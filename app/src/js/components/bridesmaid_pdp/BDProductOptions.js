@@ -9,7 +9,6 @@ import classnames from 'classnames';
 
 // Utilities
 import noop from '../../libs/noop';
-import { formatCents } from '../../utilities/accounting';
 import { sizeProfilePresence } from '../../utilities/pdpValidations';
 import {
   isExtremeLightLuminance,

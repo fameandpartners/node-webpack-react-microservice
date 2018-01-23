@@ -12,13 +12,12 @@ import '../../../css/components/BDCustomizationDrawer.scss';
 
 // UI Components
 import BDCustomizations from './BDCustomizations';
-import ProductCustomizationColor from '../pdp/ProductCustomizationColor';
 import ProductCustomizationStyle from '../pdp/ProductCustomizationStyle';
 // import ProductCustomizationSize from '../pdp/ProductCustomizationSize';
 
 // Constants
 import * as modalAnimations from '../../utilities/modal-animation';
-import { COLOR_CUSTOMIZE, LENGTH_CUSTOMIZE } from '../../constants/CustomizationConstants';
+import { LENGTH_CUSTOMIZE } from '../../constants/CustomizationConstants';
 
 function stateToProps(state) {
   const selectedColor = state.$$bdCustomizationState.get('selectedColor');

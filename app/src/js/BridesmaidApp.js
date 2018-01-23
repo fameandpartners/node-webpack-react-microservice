@@ -1,11 +1,9 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { render } from 'react-dom';
 
 // Sentry Error Tracking
 import Raven from 'raven-js';
@@ -26,10 +24,11 @@ import AfterpayModal from './components/pdp/AfterpayModal';
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
 
 // Services
-import { getUserCart } from './services/UserService';
+import BDService from './services/BDService';
 
 // Actions
 import * as AppActions from './actions/AppActions';
+import * as BDActions from './actions/BDActions';
 import * as CustomizationActions from './actions/CustomizationActions';
 
 // Polyfills
@@ -63,6 +62,10 @@ function stateToProps(state) {
     $$productSecondaryColors: state.$$productState.get('productSecondaryColors'),
     $$addonOptions: state.$$customizationState.get('addons').get('addonOptions'),
     lockBody: (sideMenuOpen || modalOpen || cartDrawerOpen || customizationDrawerOpen),
+    // Necessary for Incompatabilities Call
+    productId: state.$$productState.get('productId'),
+    customizationIds: state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS(),
+    length: state.$$bdCustomizationState.get('selectedBDCustomizationLength'),
   };
 }
 
@@ -72,9 +75,14 @@ function dispatchToProps(dispatch) {
     selectProductColor,
     updateCustomizationStyleSelection,
   } = bindActionCreators(CustomizationActions, dispatch);
+  const {
+    setBDIncompatabilities,
+  } = bindActionCreators(BDActions, dispatch);
+
 
   return {
     selectProductColor,
+    setBDIncompatabilities,
     setShareableQueryParams,
     updateCustomizationStyleSelection,
   };
@@ -85,6 +93,23 @@ class BridesmaidApp extends Component {
     super(props);
     this.state = { isOpen: false };
     autoBind(this);
+  }
+
+  checkForIncompatabilities() {
+    const {
+      productId,
+      customizationIds,
+      length,
+      setBDIncompatabilities,
+    } = this.props;
+
+    BDService.getBridesmaidsIncompatabilities({
+      length,
+      customizationIds,
+      productId,
+    }).then((res) => {
+      setBDIncompatabilities({ incompatabilities: res.body.incompatible_ids });
+    });
   }
 
   componentWillMount() {
@@ -124,6 +149,10 @@ class BridesmaidApp extends Component {
     }
   }
 
+  componentDidMount() {
+    this.checkForIncompatabilities();
+  }
+
   render() {
     const { lockBody } = this.props;
     return (
@@ -155,6 +184,11 @@ BridesmaidApp.propTypes = {
   selectProductColor: PropTypes.func.isRequired,
   setShareableQueryParams: PropTypes.func.isRequired,
   updateCustomizationStyleSelection: PropTypes.func.isRequired,
+  // Necessary for incompat Call
+  productId: PropTypes.string.isRequired,
+  customizationIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  length: PropTypes.string.isRequired,
+  setBDIncompatabilities: PropTypes.func.isRequired,
 };
 
 export default connect(stateToProps, dispatchToProps)(BridesmaidApp);

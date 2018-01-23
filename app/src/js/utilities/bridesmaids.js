@@ -96,7 +96,6 @@ export function generateCustomizationImage({
   const COLOR_CODE = colorCode; // color code mapping NOT id
 
   // We are trying to make a string such as the one below
-  // assets.fameandpartners.com/renders/fp_1265/800x800/front-default-maxi-000.png
   // assets.fameandpartners.com/renders/composites
   // /fp-js1007-102/142x142/a5-b21-t64-cheeky-front-0002.png
   return `${BASE_URL}/${SKU}/${IMG_SIZE}/${CODE_NAME}-${LENGTH}-${SIDE}-${COLOR_CODE}.png`;

@@ -14,7 +14,7 @@ import {
   separateHexColorsInString,
 } from '../../utilities/color';
 import { addonSelectionDisplayText } from '../../utilities/pdp';
-import { formatCents } from '../../utilities/accounting';
+import { removeLengthFromAddons } from '../../utilities/bridesmaids';
 
 // UI Components
 // import ProductImageSlider from '../pdp/ProductImageSlider';
@@ -41,13 +41,16 @@ import '../../../css/components/BDProductDisplayOptionsTouch.scss';
 
 
 function stateToProps(state) {
-  const selectedColor = state.$$customizationState.get('selectedColor');
+  const selectedColorPresentation = state.$$bdCustomizationState.get('selectedBDCustomizationColor');
+  const productDefaultColors = state.$$productState.get('productDefaultColors').toJS();
+  const selectedColor = productDefaultColors.find(
+    c => selectedColorPresentation === c.presentation,
+  );
   // Which part of the Redux global state does our component want to receive as props?
   return {
     addonOptions: state.$$customizationState.get('addons').get('addonOptions').toJS(),
-    selectedColor: state.$$customizationState.get('selectedColor').toJS(),
-    selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
-    colorCentsTotal: selectedColor.get('centsTotal'),
+    selectedColor,
+    selectedCustomizationDetails: state.$$bdCustomizationState.get('selectedCustomizationDetails'),
   };
 }
 
@@ -67,15 +70,17 @@ class BDProductDisplayOptionsTouch extends Component {
   }
 
   retrieveSelectedAddonOptions() {
-    const { addonOptions, selectedStyleCustomizations } = this.props;
-    return addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1);
+    const { addonOptions, selectedCustomizationDetails } = this.props;
+    return removeLengthFromAddons(addonOptions).filter(
+      a => selectedCustomizationDetails.indexOf(a.id) > -1,
+    );
   }
 
   generateAddonButtonText(selectedAddonOptions) {
     if (selectedAddonOptions && selectedAddonOptions.length) {
       return addonSelectionDisplayText({ selectedAddonOptions });
     }
-    return '-';
+    return 'Choose Your Customizations';
   }
 
   handleOpenModalClick(modalId) {
@@ -95,7 +100,6 @@ class BDProductDisplayOptionsTouch extends Component {
     const {
       breakpoint,
       selectedColor,
-      colorCentsTotal,
     } = this.props;
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     const background = generateBackgroundValueFromColor(selectedColor);
@@ -124,13 +128,7 @@ class BDProductDisplayOptionsTouch extends Component {
                 )}
                 >
                   <span>{COLOR_HEADLINE}</span><br />
-                  <span>{selectedColor.presentation} &nbsp;
-                    {
-                      colorCentsTotal ?
-                      `+(${formatCents(colorCentsTotal, 0)})`
-                      : null
-                    }
-                  </span>
+                  <span>{selectedColor.presentation}</span>
 
                 </div>
               </div>
@@ -189,21 +187,19 @@ BDProductDisplayOptionsTouch.propTypes = {
   // Redux Properties
   addonOptions: PropTypes.array.isRequired,
   breakpoint: PropTypes.string.isRequired,
-  colorCentsTotal: PropTypes.number,
   selectedColor: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     centsTotal: PropTypes.number,
     hexValue: PropTypes.string,
   }).isRequired,
-  selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
+  selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   setBDCustomizationSection: PropTypes.func.isRequired,
 };
 BDProductDisplayOptionsTouch.defaultProps = {
-  selectedStyleCustomizations: [],
-  colorCentsTotal: 0,
+  selectedCustomizationDetails: [],
 };
 
 export default connect(stateToProps, dispatchToProps)(BDProductDisplayOptionsTouch);

@@ -24,8 +24,8 @@ export const $$initialState = Immutable.fromJS({
   selectedBDCustomizationColor: 'Ivory',
 
   // Length
-  temporaryBDCustomizationLength: 'midi',
-  selectedBDCustomizationLength: 'midi',
+  temporaryBDCustomizationLength: 'ankle',
+  selectedBDCustomizationLength: 'ankle',
 
   // Details
   temporaryCustomizationDetails: [],
