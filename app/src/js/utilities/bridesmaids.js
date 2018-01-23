@@ -75,7 +75,7 @@ export function addonSelectionDisplayText({ selectedAddonOptions }) {
   if (filteredAddonSelections.length === 1) { // One customization
     return `${filteredAddonSelections[0].description} +${formatCents(parseInt(filteredAddonSelections[0].centsTotal, 10), 0)}`;
   } else if (filteredAddonSelections.length > 1) { // Multiple customizations
-    return `${filteredAddonSelections.length} Additions ${reduceCustomizationSelectionPrice({ filteredAddonSelections })}`;
+    return `${filteredAddonSelections.length} Additions ${reduceCustomizationSelectionPrice({ selectedAddonOptions: filteredAddonSelections })}`;
   }
   return null;
 }
