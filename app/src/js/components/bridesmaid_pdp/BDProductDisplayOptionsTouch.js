@@ -17,7 +17,8 @@ import { addonSelectionDisplayText } from '../../utilities/pdp';
 import { removeLengthFromAddons } from '../../utilities/bridesmaids';
 
 // UI Components
-// import ProductImageSlider from '../pdp/ProductImageSlider';
+import BDProductImageSlider from '../bridesmaid_pdp/BDProductImageSlider';
+
 // REMOVE COMPONENTS
 import CliqueCallout from '../pdp/CliqueCallout';
 
@@ -109,6 +110,8 @@ class BDProductDisplayOptionsTouch extends Component {
 
     return (
       <div className="BDProductDisplayOptionsTouch">
+
+        <BDProductImageSlider />
 
         <div className="BDProductDisplayOptionsTouch__options u-mb-normal u-mt-normal">
           <div

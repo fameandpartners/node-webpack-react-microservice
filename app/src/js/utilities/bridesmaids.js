@@ -81,16 +81,17 @@ export function addonSelectionDisplayText({ selectedAddonOptions }) {
 }
 
 export function generateCustomizationImage({
-  sku = null,
+  colorCode,
   customizationIds,
   imgSizeStr = '142x142',
   length = 'maxi',
-  colorCode,
+  side = 'front',
+  sku = null,
 }) {
   const BASE_URL = '//assets.fameandpartners.com/renders/composites';
   const SKU = sku;
   const IMG_SIZE = imgSizeStr;
-  const SIDE = 'front';
+  const SIDE = side;
   const CODE_NAME = stringifySortCustomizationCodes(customizationIds);
   const LENGTH = length.toLowerCase();
   const COLOR_CODE = colorCode; // color code mapping NOT id

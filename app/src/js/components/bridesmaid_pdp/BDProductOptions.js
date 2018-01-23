@@ -62,13 +62,11 @@ function stateToProps(state) {
     productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
-    $$productImages: state.$$productState.get('productImages'),
     productDefaultColors,
     isActive: state.$$productState.get('isActive'),
     sku: state.$$productState.get('sku'),
 
     // COLOR
-    colorId: selectedColor.id,
     colorName: selectedColor.presentation,
     colorCentsTotal: selectedColor.centsTotal,
     colorHexValue: selectedColor.hexValue,
@@ -225,19 +223,6 @@ class BDProductOptions extends Component {
     };
   }
 
-  /**
-   * Checks for our current color amongst images and returns that image, or default
-   * @return {String} imageUrl
-   */
-  findColorSpecificFirstImageUrl() {
-    const { $$productImages, colorId } = this.props;
-    const productImages = $$productImages.toJS();
-    if (!productImages[0]) return null;
-
-    const hasMatch = find(productImages, { colorId });
-    return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
-  }
-
   render() {
     const {
       auSite,
@@ -343,21 +328,11 @@ BDProductOptions.propTypes = {
   //* Redux Properties
   auSite: PropTypes.bool.isRequired,
   // PRODUCT
-  $$productImages: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
-    id: PropTypes.number,
-    colorId: PropTypes.number,
-    smallImg: PropTypes.string,
-    bigImg: PropTypes.string,
-    height: PropTypes.number,
-    width: PropTypes.number,
-    position: PropTypes.number,
-  })).isRequired,
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
   sku: PropTypes.string.isRequired,
   // COLOR
-  colorId: PropTypes.number.isRequired,
   colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
