@@ -73,6 +73,10 @@ class BridesmaidsTopDetailSelect extends Component {
     }
   }
 
+   handleSubmitClick() {
+    this.props.handleSelection();
+  }
+
   getFilterTopDetails() {
     const {
       bridesmaidsFilterTopDetails,
@@ -106,11 +110,13 @@ class BridesmaidsTopDetailSelect extends Component {
       <div className="ProductGrid">
         <div className="App__photo-montage masonry grid-12">
           {this.getFilterTopDetails()}
-          <SubmitButton
+
+          {this.props.handleSelection ? <SubmitButton
             className="float--right bottom-right-tiny"
-            handleClick={this.handleLengthSelection}
-            text={'Apply'}
-          />
+            handleClick={this.handleSubmitClick}
+            text={'Apply'} 
+          /> : null
+        }
         </div>
       </div>
     );

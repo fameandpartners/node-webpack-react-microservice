@@ -158,7 +158,9 @@ class BridesmaidsFilterHeader extends Component {
                 id: BridesmaidsHeaderFilterConstants.SELECTED_TOP_DETAILS,
                 heading: this.generateTopStyleText(),
                 content: (
-                  <BridesmaidsTopDetailSelect />
+                  <BridesmaidsTopDetailSelect
+                    handleSelection={this.handleLengthSelection}
+                  />
                 ),
               },
             ]}
