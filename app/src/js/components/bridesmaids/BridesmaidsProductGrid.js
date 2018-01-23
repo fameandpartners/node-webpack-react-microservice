@@ -56,7 +56,7 @@ class BridesmaidsProductGrid extends Component {
             </a>
             <div className="FlashSaleProduct__info grid-12">
               <div className="col-8">
-                <a href={`/bridesmaids-dresses/${dress.id}`}>
+                <a href={`/bridesmaid-dresses/${dress.id}`}>
                   {dress.product_name}
                 </a>
               </div>
