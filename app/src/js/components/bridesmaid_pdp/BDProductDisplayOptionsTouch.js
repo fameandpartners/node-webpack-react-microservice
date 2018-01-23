@@ -26,10 +26,9 @@ import CliqueCallout from '../pdp/CliqueCallout';
 import BDModalConstants from '../../constants/BDModalConstants';
 import {
   BODICE_CUSTOMIZE,
-  COLOR_HEADLINE,
+  COLOR_CUSTOMIZE,
   LENGTH_CUSTOMIZE,
-  LENGTH_HEADLINE,
-  CUSTOMIZATIONS_HEADLINE,
+  headlines,
 } from '../../constants/BDCustomizationConstants';
 
 
@@ -39,7 +38,6 @@ import * as BDActions from '../../actions/BDActions';
 
 // CSS
 import '../../../css/components/BDProductDisplayOptionsTouch.scss';
-
 
 function stateToProps(state) {
   const selectedColorPresentation = state.$$bdCustomizationState.get('selectedBDCustomizationColor');
@@ -52,6 +50,7 @@ function stateToProps(state) {
     addonOptions: state.$$customizationState.get('addons').get('addonOptions').toJS(),
     selectedColor,
     selectedCustomizationDetails: state.$$bdCustomizationState.get('selectedCustomizationDetails'),
+    selectedBDCustomizationLength: state.$$bdCustomizationState.get('selectedBDCustomizationLength'),
   };
 }
 
@@ -101,6 +100,7 @@ class BDProductDisplayOptionsTouch extends Component {
     const {
       breakpoint,
       selectedColor,
+      selectedBDCustomizationLength,
     } = this.props;
     const selectedAddonOptions = this.retrieveSelectedAddonOptions();
     const background = generateBackgroundValueFromColor(selectedColor);
@@ -130,7 +130,7 @@ class BDProductDisplayOptionsTouch extends Component {
                   { 'BDProductDisplayOptionsTouch__background-text': !!selectedColor.patternUrl || hasDuoTone },
                 )}
                 >
-                  <span>{COLOR_HEADLINE}</span><br />
+                  <span>{headlines[COLOR_CUSTOMIZE]}</span><br />
                   <span>{selectedColor.presentation}</span>
 
                 </div>
@@ -149,8 +149,8 @@ class BDProductDisplayOptionsTouch extends Component {
               >
                 <div className="grid-middle-noGutter u-height--full">
                   <div className="col">
-                    <span>{LENGTH_HEADLINE}</span><br />
-                    <span>[Mini +$10]</span>
+                    <span>{headlines[LENGTH_CUSTOMIZE]}</span><br />
+                    <span>{selectedBDCustomizationLength}</span>
                   </div>
                 </div>
               </div>
@@ -160,7 +160,7 @@ class BDProductDisplayOptionsTouch extends Component {
           <div
             role="button"
             onClick={this.handleOpenBDCustomizationModal(
-              breakpoint === 'tablet' ? LENGTH_CUSTOMIZE : BODICE_CUSTOMIZE,
+              breakpoint === 'tablet' ? BODICE_CUSTOMIZE : LENGTH_CUSTOMIZE,
             )}
             className={classnames(
               'Button Button--tertiary BDProductDisplayOptionsTouch__option u-display--inline-block',
@@ -169,7 +169,7 @@ class BDProductDisplayOptionsTouch extends Component {
           >
             <div className="grid-middle-noGutter u-height--full">
               <div className="col">
-                <span>{CUSTOMIZATIONS_HEADLINE}</span><br />
+                <span>{headlines.CUSTOMIZATIONS_HEADLINE}</span><br />
                 <span>{this.generateAddonButtonText(selectedAddonOptions)}</span>
               </div>
             </div>
@@ -196,6 +196,7 @@ BDProductDisplayOptionsTouch.propTypes = {
     centsTotal: PropTypes.number,
     hexValue: PropTypes.string,
   }).isRequired,
+  selectedBDCustomizationLength: PropTypes.string.isRequired,
   selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
