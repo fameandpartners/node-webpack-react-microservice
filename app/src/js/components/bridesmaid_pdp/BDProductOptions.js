@@ -22,6 +22,7 @@ import {
 
 import {
   addonSelectionDisplayText,
+  generateCustomizationImage,
   retrieveBDSelectedAddonOptions,
 } from '../../utilities/bridesmaids';
 
@@ -61,6 +62,7 @@ function stateToProps(state) {
     $$productImages: state.$$productState.get('productImages'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     isActive: state.$$productState.get('isActive'),
+    sku: state.$$productState.get('sku'),
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -75,6 +77,7 @@ function stateToProps(state) {
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedCustomizationDetails: state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS(),
+    selectedBDCustomizationLength: state.$$bdCustomizationState.get('selectedBDCustomizationLength'),
   };
 }
 
@@ -123,6 +126,22 @@ class BDProductOptions extends Component {
         />
       </span>
     );
+  }
+
+  generateImageNameForSelections() {
+    const {
+      selectedCustomizationDetails,
+      selectedBDCustomizationLength,
+      sku,
+    } = this.props;
+    const imageStr = generateCustomizationImage({
+      sku: sku.toLowerCase(),
+      customizationIds: selectedCustomizationDetails,
+      imgSizeStr: '800x800',
+      length: selectedBDCustomizationLength,
+      colorCode: '000',
+    });
+    return imageStr;
   }
 
   generateAddonSelectionNode() {
@@ -234,7 +253,7 @@ class BDProductOptions extends Component {
           <div
             className="ProductOptions__primary-image-wrapper u-cursor--pointer"
             style={{
-              backgroundImage: `url(${this.findColorSpecificFirstImageUrl()})`,
+              backgroundImage: `url(${this.generateImageNameForSelections()})`,
             }}
             onClick={this.showImageLightboxModal}
           />
@@ -334,6 +353,7 @@ BDProductOptions.propTypes = {
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
+  sku: PropTypes.string.isRequired,
   // COLOR
   colorId: PropTypes.number.isRequired,
   colorCentsTotal: PropTypes.number,
@@ -351,6 +371,7 @@ BDProductOptions.propTypes = {
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedBDCustomizationLength: PropTypes.string.isRequired,
   //* Redux Actions
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,

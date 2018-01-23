@@ -49,12 +49,6 @@ class BDCustomizationDrawer extends PureComponent {
     const hasNavItems = breakpoint === 'desktop';
 
     switch (bdProductCustomizationDrawer) {
-      case COLOR_CUSTOMIZE:
-        return (
-          <ProductCustomizationColor
-            hasNavItems={hasNavItems}
-          />
-        );
       case LENGTH_CUSTOMIZE:
         return (
           <ProductCustomizationStyle

@@ -16,6 +16,9 @@ import { generateCustomizationImage } from '../../utilities/bridesmaids';
 // Actions
 import * as BDActions from '../../actions/BDActions';
 
+// Components
+import BDColorSelections from '../bridesmaid_pdp/BDColorSelections';
+
 // Constants
 import BDCustomizationConstants from '../../constants/BDCustomizationConstants';
 
@@ -34,6 +37,8 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     incompatabilities: $$bdCustomizationState.get('incompatabilities'),
     $$temporaryCustomizationDetails,
     temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
+    productDefaultColors: $$productState.get('productDefaultColors').toJS(),
+    selectedBDCustomizationColor: $$customizationState.get('selectedBDCustomizationColor'),
   };
 }
 
@@ -124,25 +129,18 @@ class BDCustomizationDetailsSelect extends Component {
     this.checkForIncompatabilities({
       length: lengthStrChoice,
     });
-    // // 3 things to occur
-    // const { setBDTemporaryCustomizationDetails } = this.props;
-    // const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id.toLowerCase());
-    // setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: $$newTemporaryDetails });
-    // this.checkForIncompatabilities($$newTemporaryDetails.toJS());
-    // // 3: Create new url naming structure to be shared in shareable link
+    // TODO: @elgrecode 3: Create new url naming structure to be shared in shareable link
   }
 
   generateLengthDetailOptions() {
     const {
       addonOptions,
       groupName,
-      incompatabilities,
       temporaryBDCustomizationLength,
     } = this.props;
 
     return addonOptions
     .filter(ao => ao.group === groupName)
-    .filter(item => !(incompatabilities.indexOf(item.id) > -1))
     .map((item) => {
       const lengthStr = BDCustomizationConstants.lengthNames[item.id];
       return (
@@ -198,10 +196,23 @@ class BDCustomizationDetailsSelect extends Component {
   }
 
   getAddonDetailOptions() {
-    const { groupName } = this.props;
+    const {
+      groupName,
+      productDefaultColors,
+      selectedBDCustomizationColor,
+    } = this.props;
 
     if (groupName === BDCustomizationConstants.groupNames.LENGTH_CUSTOMIZE) {
       return this.generateLengthDetailOptions();
+    }
+    if (groupName === BDCustomizationConstants.groupNames.COLOR_CUSTOMIZE) {
+      return (
+        <BDColorSelections
+          productColors={productDefaultColors}
+          temporaryColorId={selectedBDCustomizationColor}
+          handleColorSelection={this.handleColorSelection}
+        />
+      );
     }
 
     return this.generateGenericDetailOptions();
@@ -217,6 +228,7 @@ class BDCustomizationDetailsSelect extends Component {
   }
 }
 
+/* eslint-disable react/forbid-prop-types */
 BDCustomizationDetailsSelect.propTypes = {
   $$temporaryCustomizationDetails: ImmutablePropTypes.list.isRequired,
   addonOptions: PropTypes.arrayOf({
@@ -230,6 +242,8 @@ BDCustomizationDetailsSelect.propTypes = {
   groupName: PropTypes.string,
   incompatabilities: PropTypes.arrayOf(PropTypes.string),
   productId: PropTypes.number.isRequired,
+  productDefaultColors: PropTypes.array.isRequired,
+  selectedBDCustomizationColor: PropTypes.string.isRequired,
   sku: PropTypes.string.isRequired,
   temporaryBDCustomizationLength: PropTypes.string,
   // Redux Funcs

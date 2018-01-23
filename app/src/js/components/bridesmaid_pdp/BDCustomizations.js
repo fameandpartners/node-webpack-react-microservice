@@ -13,12 +13,7 @@ import BDProductCustomization from '../bridesmaid_pdp/BDProductCustomization';
 // import BDCustomizationSelections from '../bridesmaid_pdp/BDCustomizationSelections';
 
 // Inner Child Contents
-// import BridesmaidsColorSelect from '../../components/bridesmaids/BridesmaidsColorSelect';
-import BDCustomizationSilhouetteSelect from './BDCustomizationSilhouetteSelect';
 import BDCustomizationDetailsSelect from './BDCustomizationDetailsSelect';
-// import BridesmaidsLengthSelect from '../../components/bridesmaids/BridesmaidsLengthSelect';
-// import BridesmaidsTopDetailSelect from '../../components/bridesmaids/BridesmaidsTopDetailSelect';
-
 // Constants
 import {
   COLOR_CUSTOMIZE,
@@ -60,26 +55,22 @@ class BDProductCustomizationColor extends PureComponent {
     });
   }
 
-  generateColorCustomizeOptions() {
-
-  }
-
   generateCustomizationOptions() {
-    const { bdProductCustomizationDrawer } = this.props;
+    const {
+      bdProductCustomizationDrawer,
+    } = this.props;
+
     switch (bdProductCustomizationDrawer) {
       case BODICE_CUSTOMIZE:
       case STRAPS_SLEEVES_CUSTOMIZE:
       case DETAILS_CUSTOMIZE:
+      case SILHOUTTE_CUSTOMIZE:
+      case COLOR_CUSTOMIZE:
         return (
           <BDCustomizationDetailsSelect
             groupName={groupNames[bdProductCustomizationDrawer]}
           />
         );
-      case SILHOUTTE_CUSTOMIZE:
-        return (
-          <BDCustomizationSilhouetteSelect />
-        );
-      case COLOR_CUSTOMIZE:
       case LENGTH_CUSTOMIZE:
         return (
           <BDCustomizationDetailsSelect
@@ -110,6 +101,7 @@ class BDProductCustomizationColor extends PureComponent {
   }
 }
 
+/* eslint-disable react/forbid-prop-types */
 BDProductCustomizationColor.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,

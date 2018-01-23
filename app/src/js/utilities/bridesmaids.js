@@ -3,7 +3,7 @@ import { lengthNames } from '../constants/BDCustomizationConstants';
 import { formatCents } from './accounting';
 import { EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
 
-export function removeLengthIdsFromCustomizationIds(customizationIds) {
+export function removeLengthIdsFromCustomizationIds(customizationIds = []) {
   const lengthNameKeys = Object.keys(lengthNames);
   return customizationIds.filter(
     id => lengthNameKeys.indexOf(id) === -1,
@@ -48,7 +48,8 @@ export function calculateBDSubTotal({
 }
 
 function stringifySortCustomizationCodes(customizationIds) {
-  if (customizationIds && customizationIds.length) {
+  const filteredCustomizations = removeLengthIdsFromCustomizationIds(customizationIds);
+  if (filteredCustomizations && filteredCustomizations.length) {
     return uniq(removeLengthIdsFromCustomizationIds(customizationIds).sort()).join('-');
   }
 
