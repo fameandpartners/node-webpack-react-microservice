@@ -38,19 +38,21 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     $$temporaryCustomizationDetails,
     temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
     productDefaultColors: $$productState.get('productDefaultColors').toJS(),
-    selectedBDCustomizationColor: $$customizationState.get('selectedBDCustomizationColor'),
+    temporaryBDCustomizationColor: $$bdCustomizationState.get('temporaryBDCustomizationColor'),
   };
 }
 
 function dispatchToProps(dispatch) {
   const {
     setBDTemporaryCustomizationDetails,
+    setBDTemporaryColor,
     setBDTemporaryLength,
     setBDIncompatabilities,
   } = bindActionCreators(BDActions, dispatch);
 
   return {
     setBDTemporaryCustomizationDetails,
+    setBDTemporaryColor,
     setBDTemporaryLength,
     setBDIncompatabilities,
   };
@@ -98,16 +100,18 @@ class BDCustomizationDetailsSelect extends Component {
 
   generateImageNameForCustomizationId(customizationId) {
     const {
+      temporaryBDCustomizationColor,
       $$temporaryCustomizationDetails,
       temporaryBDCustomizationLength,
       sku,
     } = this.props;
+    const { colorNames } = BDCustomizationConstants;
     const imageStr = generateCustomizationImage({
       sku: sku.toLowerCase(),
       customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
       imgSizeStr: '142x142',
       length: temporaryBDCustomizationLength,
-      colorCode: '000',
+      colorCode: colorNames[temporaryBDCustomizationColor],
     });
     return imageStr;
   }
@@ -130,6 +134,13 @@ class BDCustomizationDetailsSelect extends Component {
       length: lengthStrChoice,
     });
     // TODO: @elgrecode 3: Create new url naming structure to be shared in shareable link
+  }
+
+  handleColorSelection(color) {
+    const { setBDTemporaryColor } = this.props;
+    setBDTemporaryColor({
+      temporaryBDCustomizationColor: color.presentation,
+    });
   }
 
   generateLengthDetailOptions() {
@@ -199,7 +210,7 @@ class BDCustomizationDetailsSelect extends Component {
     const {
       groupName,
       productDefaultColors,
-      selectedBDCustomizationColor,
+      temporaryBDCustomizationColor,
     } = this.props;
 
     if (groupName === BDCustomizationConstants.groupNames.LENGTH_CUSTOMIZE) {
@@ -209,7 +220,7 @@ class BDCustomizationDetailsSelect extends Component {
       return (
         <BDColorSelections
           productColors={productDefaultColors}
-          temporaryColorId={selectedBDCustomizationColor}
+          selectedColor={temporaryBDCustomizationColor}
           handleColorSelection={this.handleColorSelection}
         />
       );
@@ -243,10 +254,11 @@ BDCustomizationDetailsSelect.propTypes = {
   incompatabilities: PropTypes.arrayOf(PropTypes.string),
   productId: PropTypes.number.isRequired,
   productDefaultColors: PropTypes.array.isRequired,
-  selectedBDCustomizationColor: PropTypes.string.isRequired,
+  temporaryBDCustomizationColor: PropTypes.string.isRequired,
   sku: PropTypes.string.isRequired,
   temporaryBDCustomizationLength: PropTypes.string,
   // Redux Funcs
+  setBDTemporaryColor: PropTypes.func.isRequired,
   setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
   setBDTemporaryLength: PropTypes.func.isRequired,
   setBDIncompatabilities: PropTypes.func.isRequired,

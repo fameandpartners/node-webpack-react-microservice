@@ -24,8 +24,8 @@ class BDColorSelection extends PureComponent {
   }
 
   generateColorSwatch(color, price = 0) {
-    const { temporaryColorId } = this.props;
-    const isActive = temporaryColorId === color.id;
+    const { selectedColor } = this.props;
+    const isActive = selectedColor === color.presentation;
     const background = generateBackgroundValueFromColor(color);
 
     return (
@@ -71,30 +71,12 @@ class BDColorSelection extends PureComponent {
   render() {
     const {
       productColors,
-      // productSecondaryColors,
-      // productSecondaryColorsCentsPrice,
     } = this.props;
 
     return (
       // eslint-disable-next-line
       <div className="BDColorSelection u-white-space--nowrap u-text-align-left u-height--full u-overflow-x--scroll">
         { productColors.map(c => this.generateColorSwatch(c, 0))}
-
-        {
-          // productSecondaryColors.length
-          // ? (
-          //   <div>
-          //     <h5 className="u-mb-small textAlign--left">
-          //       Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
-          //     </h5>
-          //     <div className="u-mb-normal grid-12">
-          //       { productSecondaryColors.map(c =>
-          //         this.generateColorSwatch(c, productSecondaryColorsCentsPrice))
-          //       }
-          //     </div>
-          //   </div>
-          // ) : null
-        }
       </div>
     );
   }
@@ -116,7 +98,7 @@ BDColorSelection.propTypes = {
   //   patternUrl: PropTypes.string,
   // })).isRequired,
   // productSecondaryColorsCentsPrice: PropTypes.number.isRequired,
-  temporaryColorId: PropTypes.number.isRequired,
+  selectedColor: PropTypes.string.isRequired,
   handleColorSelection: PropTypes.func.isRequired,
 };
 

@@ -16,10 +16,8 @@ import BDProductCustomization from '../bridesmaid_pdp/BDProductCustomization';
 function stateToProps(state) {
   return {
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
-    productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
-    productSecondaryColorsCentsPrice: state.$$productState.get('productSecondaryColorsCentsPrice'),
     bdProductCustomizationDrawer: state.$$customizationState.get('bdProductCustomizationDrawer'),
-    temporaryColorId: state.$$customizationState.get('temporaryColor').get('id'),
+    temporaryBDCustomizationColor: state.$$bdCustomizationState.get('temporaryBDCustomizationColor'),
   };
 }
 
@@ -73,9 +71,7 @@ class BDProductCustomizationColor extends PureComponent {
       hasNavItems,
       bdProductCustomizationDrawer,
       productDefaultColors,
-      productSecondaryColors,
-      productSecondaryColorsCentsPrice,
-      temporaryColorId,
+      temporaryBDCustomizationColor,
     } = this.props;
 
     return (
@@ -85,9 +81,8 @@ class BDProductCustomizationColor extends PureComponent {
         activeHeading={bdProductCustomizationDrawer}
       >
         <BDColorSelections
-          productColors={productDefaultColors.concat(productSecondaryColors)}
-          productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
-          temporaryColorId={temporaryColorId}
+          productColors={productDefaultColors}
+          selectedColor={temporaryBDCustomizationColor}
           handleColorSelection={this.handleColorSelection}
         />
       </BDProductCustomization>
@@ -106,14 +101,7 @@ BDProductCustomizationColor.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  productSecondaryColors: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    hexValue: PropTypes.string,
-    patternUrl: PropTypes.string,
-  })).isRequired,
-  productSecondaryColorsCentsPrice: PropTypes.number,
-  temporaryColorId: PropTypes.number,
+  temporaryBDCustomizationColor: PropTypes.string,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   changeCustomizationDrawer: PropTypes.func.isRequired,
@@ -124,8 +112,7 @@ BDProductCustomizationColor.propTypes = {
 BDProductCustomizationColor.defaultProps = {
   hasNavItems: true,
   bdProductCustomizationDrawer: null,
-  productSecondaryColorsCentsPrice: 0,
-  temporaryColorId: '',
+  temporaryBDCustomizationColor: '',
   setExpressMakingStatus: noop,
 };
 

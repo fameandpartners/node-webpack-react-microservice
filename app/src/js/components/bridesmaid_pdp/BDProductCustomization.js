@@ -2,6 +2,11 @@ import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
+
+import {
+  generateCustomizationImage,
+} from '../../utilities/bridesmaids';
 
 // CSS
 import '../../../css/components/BDProductCustomization.scss';
@@ -15,6 +20,7 @@ import {
   SILHOUTTE_CUSTOMIZE,
   DETAILS_CUSTOMIZE,
   headlines,
+  colorNames,
 } from '../../constants/BDCustomizationConstants';
 
 const customizationHeadings = [
@@ -29,6 +35,18 @@ const customizationHeadings = [
 // UI Components
 // import BDProductCustomizationNavigation from './ProductCustomizationNavigation';
 
+function stateToProps(state) {
+  return {
+    activeBDCustomizationHeading: state.$$bdCustomizationState.get('activeBDCustomizationHeading'),
+    bdProductCustomizationDrawer: state.$$bdCustomizationState.get('bdProductCustomizationDrawer'),
+    temporaryCustomizationDetails: state.$$bdCustomizationState.get('temporaryCustomizationDetails').toJS(),
+    temporaryBDCustomizationLength: state.$$bdCustomizationState.get('temporaryBDCustomizationLength'),
+    temporaryBDCustomizationColor: state.$$bdCustomizationState.get('temporaryBDCustomizationColor'),
+    sku: state.$$productState.get('sku'),
+  };
+}
+
+
 class BDProductCustomization extends PureComponent {
   constructor(props) {
     super(props);
@@ -40,6 +58,24 @@ class BDProductCustomization extends PureComponent {
       const { onCustomizationHeadingGroupClick } = this.props;
       onCustomizationHeadingGroupClick(groupName);
     };
+  }
+
+  generateImageNameForSelections() {
+    const {
+      temporaryBDCustomizationColor,
+      temporaryCustomizationDetails,
+      temporaryBDCustomizationLength,
+      sku,
+    } = this.props;
+
+    const imageStr = generateCustomizationImage({
+      sku: sku.toLowerCase(),
+      customizationIds: temporaryCustomizationDetails,
+      imgSizeStr: '800x800',
+      length: temporaryBDCustomizationLength,
+      colorCode: colorNames[temporaryBDCustomizationColor],
+    });
+    return imageStr;
   }
 
   /* eslint-disable max-len */
@@ -75,7 +111,7 @@ class BDProductCustomization extends PureComponent {
 
         <div className="grid-center-bottom u-flex u-flex--1">
           <a className="BDProductCustomization__main-image-wrapper">
-            <img className="u-height--full" src="http://via.placeholder.com/600x600" alt="stupid" />
+            <img className="u-height--full" src={this.generateImageNameForSelections()} alt="dress customization combinations" />
           </a>
         </div>
 
@@ -102,6 +138,11 @@ BDProductCustomization.propTypes = {
   // Passed Props
   children: PropTypes.node.isRequired,
   activeHeading: PropTypes.string,
+  // Redux Props
+  temporaryCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
+  temporaryBDCustomizationLength: PropTypes.string.isRequired,
+  temporaryBDCustomizationColor: PropTypes.string.isRequired,
+  sku: PropTypes.string.isRequired,
   // Func Props
   onCustomizationHeadingGroupClick: PropTypes.func,
   // hasNavItems: PropTypes.bool,
@@ -118,17 +159,4 @@ BDProductCustomization.defaultProps = {
 };
 
 
-export default BDProductCustomization;
-
-// <div className="BDProductCustomization__header">
-//   { hasNavItems
-//     ? (
-//       <div className="grid-12">
-//         <div className="col-1">
-//           BDProductCustomizationNavigation
-//         </div>
-//       </div>
-//     )
-//     : null
-//   }
-// </div>
+export default connect(stateToProps)(BDProductCustomization);

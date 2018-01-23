@@ -85,7 +85,7 @@ export function generateCustomizationImage({
   customizationIds,
   imgSizeStr = '142x142',
   length = 'maxi',
-  colorCode = '0001',
+  colorCode,
 }) {
   const BASE_URL = '//assets.fameandpartners.com/renders/composites';
   const SKU = sku;
@@ -93,7 +93,7 @@ export function generateCustomizationImage({
   const SIDE = 'front';
   const CODE_NAME = stringifySortCustomizationCodes(customizationIds);
   const LENGTH = length.toLowerCase();
-  const COLOR_CODE = '0001' || colorCode; // color code mapping NOT id
+  const COLOR_CODE = colorCode; // color code mapping NOT id
 
   // We are trying to make a string such as the one below
   // assets.fameandpartners.com/renders/fp_1265/800x800/front-default-maxi-000.png

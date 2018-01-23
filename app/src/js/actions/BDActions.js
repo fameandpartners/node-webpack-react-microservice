@@ -11,10 +11,16 @@ export function bdActivateCustomizationDrawer({
   };
 }
 
-export function saveBDCustomizationDetailSelections({ temporaryCustomizationDetails }) {
+export function saveBDTemporaryCustomizations() {
   return {
-    type: BDCustomizationConstants.SAVE_BD_CUSTOMIZATION_DETAIL_SELECTIONS,
-    temporaryCustomizationDetails,
+    type: BDCustomizationConstants.SAVE_BD_TEMPORARY_CUSTOMIZATIONS,
+  };
+}
+
+export function setBDTemporaryColor({ temporaryBDCustomizationColor }) {
+  return {
+    type: BDCustomizationConstants.SET_BD_TEMPORARY_COLOR,
+    temporaryBDCustomizationColor,
   };
 }
 
@@ -49,6 +55,7 @@ export function setBDIncompatabilities({ incompatabilities }) {
 
 export default {
   bdActivateCustomizationDrawer,
+  setBDTemporaryColor,
   setBDTemporaryCustomizationDetails,
   setBDTemporaryLength,
   setBDCustomizationSection,

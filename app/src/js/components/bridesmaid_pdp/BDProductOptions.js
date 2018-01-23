@@ -48,7 +48,11 @@ import afterpayImage from '../../../img/test/afterpay.png';
 
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
-  const selectedColor = state.$$customizationState.get('selectedColor');
+  const selectedColorPresentation = state.$$bdCustomizationState.get('selectedBDCustomizationColor');
+  const productDefaultColors = state.$$productState.get('productDefaultColors').toJS();
+  const selectedColor = productDefaultColors.find(
+    c => selectedColorPresentation === c.presentation,
+  );
   const addons = state.$$customizationState.get('addons');
 
   return {
@@ -60,16 +64,16 @@ function stateToProps(state) {
     productTitle: state.$$productState.get('productTitle'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     $$productImages: state.$$productState.get('productImages'),
-    productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
+    productDefaultColors,
     isActive: state.$$productState.get('isActive'),
     sku: state.$$productState.get('sku'),
 
     // COLOR
-    colorId: selectedColor.get('id'),
-    colorName: selectedColor.get('presentation'),
-    colorCentsTotal: selectedColor.get('centsTotal'),
-    colorHexValue: selectedColor.get('hexValue'),
-    patternUrl: selectedColor.get('patternUrl'),
+    colorId: selectedColor.id,
+    colorName: selectedColor.presentation,
+    colorCentsTotal: selectedColor.centsTotal,
+    colorHexValue: selectedColor.hexValue,
+    patternUrl: selectedColor.patternUrl,
 
     // SELECTIONS
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
@@ -78,6 +82,7 @@ function stateToProps(state) {
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedCustomizationDetails: state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS(),
     selectedBDCustomizationLength: state.$$bdCustomizationState.get('selectedBDCustomizationLength'),
+    selectedBDCustomizationColor: state.$$bdCustomizationState.get('selectedBDCustomizationColor'),
   };
 }
 
@@ -100,7 +105,6 @@ class BDProductOptions extends Component {
 
   generateColorSelectionNode() {
     const {
-      colorCentsTotal,
       colorName,
       colorHexValue,
       patternUrl,
@@ -113,10 +117,6 @@ class BDProductOptions extends Component {
     return (
       <span>
         <span>{colorName}</span>&nbsp;
-        { colorCentsTotal
-          ? <span>+{formatCents(colorCentsTotal, 0)}</span>
-          : null
-        }
         <span
           style={{ background }}
           className={classnames(
@@ -132,14 +132,16 @@ class BDProductOptions extends Component {
     const {
       selectedCustomizationDetails,
       selectedBDCustomizationLength,
+      selectedBDCustomizationColor,
       sku,
     } = this.props;
+    const { colorNames } = BDCustomizationConstants;
     const imageStr = generateCustomizationImage({
       sku: sku.toLowerCase(),
       customizationIds: selectedCustomizationDetails,
       imgSizeStr: '800x800',
       length: selectedBDCustomizationLength,
-      colorCode: '000',
+      colorCode: colorNames[selectedBDCustomizationColor],
     });
     return imageStr;
   }
@@ -254,6 +256,7 @@ class BDProductOptions extends Component {
             className="ProductOptions__primary-image-wrapper u-cursor--pointer"
             style={{
               backgroundImage: `url(${this.generateImageNameForSelections()})`,
+              backgroundSize: 'contain',
             }}
             onClick={this.showImageLightboxModal}
           />
@@ -372,6 +375,7 @@ BDProductOptions.propTypes = {
   selectedHeightValue: PropTypes.number,
   selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedBDCustomizationLength: PropTypes.string.isRequired,
+  selectedBDCustomizationColor: PropTypes.string.isRequired,
   //* Redux Actions
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,

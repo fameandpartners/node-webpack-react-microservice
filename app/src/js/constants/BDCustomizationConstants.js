@@ -6,12 +6,13 @@ const actionTypes = assign({},
     'ACTIVATE_BD_COLOR_DRAWER',
     'BD_ACTIVATE_CUSTOMIZATION_DRAWER',
     'SET_BD_CUSTOMIZATION_SECTION',
+    'SET_BD_TEMPORARY_COLOR',
     'SET_BD_TEMPORARY_CUSTOMIZATION_DETAILS',
     'SET_BD_TEMPORARY_LENGTH',
     'SET_BD_INCOMPATABILITIES',
 
     // Customization selection screen
-    'SAVE_BD_CUSTOMIZATION_DETAIL_SELECTIONS',
+    'SAVE_BD_TEMPORARY_CUSTOMIZATIONS',
     'SELECT_BD_CUSTOMIZATION_DETAIL',
 
     // Color selection Screen
@@ -63,8 +64,32 @@ const productCustomizationlengthNames = {
   },
 };
 
+const colorCustomizationNames = {
+  colorNames: {
+    'Bright Turquoise': '0000',
+    'Pale Blue': '0001',
+    Blush: '0002',
+    Guava: '0003',
+    Burgundy: '0004',
+    Champagne: '0005',
+    Ivory: '0006',
+    Lilac: '0007',
+    Mint: '0008',
+    'Pale Grey': '0009',
+    'Pale Pink': '0010',
+    Peach: '0011',
+    Red: '0012',
+    'Royal Blue': '0013',
+    Black: '0014',
+    'Sage Green': '0015',
+    Berry: '0016',
+    Navy: '0017',
+  },
+};
+
 export default assign({},
   actionTypes,
+  colorCustomizationNames,
   productCustomizationDrawers,
   productCustomizationHeadlines,
   productCustomizationGroupNames,

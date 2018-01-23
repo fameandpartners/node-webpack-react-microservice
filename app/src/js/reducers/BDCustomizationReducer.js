@@ -20,8 +20,8 @@ export const $$initialState = Immutable.fromJS({
   productCustomizationDrawerOpen: false,
 
   // Color
-  temporaryBDCustomizationColor: 'ivory',
-  selectedBDCustomizationColor: 'ivory',
+  temporaryBDCustomizationColor: 'Ivory',
+  selectedBDCustomizationColor: 'Ivory',
 
   // Length
   temporaryBDCustomizationLength: 'midi',
@@ -92,11 +92,11 @@ export default function CartReducer($$state = $$initialState, action = null) {
       });
     }
 
-    case BDCustomizationConstants.SAVE_BD_CUSTOMIZATION_DETAIL_SELECTIONS: {
-      const { temporaryCustomizationDetails } = action;
-
+    case BDCustomizationConstants.SAVE_BD_TEMPORARY_CUSTOMIZATIONS: {
       return $$state.merge({
-        selectedCustomizationDetails: temporaryCustomizationDetails,
+        selectedBDCustomizationColor: $$state.get('temporaryBDCustomizationColor'),
+        selectedBDCustomizationLength: $$state.get('temporaryBDCustomizationLength'),
+        selectedCustomizationDetails: $$state.get('temporaryCustomizationDetails'),
       });
     }
 
@@ -104,6 +104,13 @@ export default function CartReducer($$state = $$initialState, action = null) {
       const { temporaryCustomizationDetails } = action;
       return $$state.merge({ // Addition
         temporaryCustomizationDetails,
+      });
+    }
+
+    case BDCustomizationConstants.SET_BD_TEMPORARY_COLOR: {
+      const { temporaryBDCustomizationColor } = action;
+      return $$state.merge({ // Addition
+        temporaryBDCustomizationColor,
       });
     }
 

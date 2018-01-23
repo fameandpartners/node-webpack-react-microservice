@@ -66,7 +66,7 @@ function dispatchToProps(dispatch) {
   return {
     activateModal: modalActions.activateModal,
     bdActivateCustomizationDrawer: bdActions.bdActivateCustomizationDrawer,
-    saveBDCustomizationDetailSelections: bdActions.saveBDCustomizationDetailSelections,
+    saveBDTemporaryCustomizations: bdActions.saveBDTemporaryCustomizations,
     setSizeProfileError: customizationActions.setSizeProfileError,
     setShareableQueryParams: appActions.setShareableQueryParams,
     updateDressSizeSelection: customizationActions.updateDressSizeSelection,
@@ -140,23 +140,18 @@ class CustomizationButtonLedge extends Component {
   }
 
   handleDetailSave() {
-    const {
-      temporaryCustomizationDetails,
-      saveBDCustomizationDetailSelections,
-    } = this.props;
-
-    saveBDCustomizationDetailSelections({ temporaryCustomizationDetails });
+    this.props.saveBDTemporaryCustomizations();
   }
 
   handleCustomizationSave() {
     const {
       activeModalId,
-      bdProductCustomizationDrawer,
     } = this.props;
-    if (bdProductCustomizationDrawer === DETAILS_CUSTOMIZE) {
-      this.handleDetailSave();
-    } else if (activeModalId === ModalConstants.SIZE_SELECTION_MODAL) {
+    if (activeModalId === ModalConstants.SIZE_SELECTION_MODAL) {
       this.handleSaveSizeSelection();
+    } else {
+      // Everything else we save temporary into selections
+      this.handleDetailSave();
     }
 
     this.closeCustomization({ shouldAppear: false });
@@ -279,7 +274,7 @@ CustomizationButtonLedge.propTypes = {
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
-  saveBDCustomizationDetailSelections: PropTypes.func.isRequired,
+  saveBDTemporaryCustomizations: PropTypes.func.isRequired,
   // bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   // selectProductColor: PropTypes.func.isRequired,
   // setShareableQueryParams: PropTypes.func.isRequired,
