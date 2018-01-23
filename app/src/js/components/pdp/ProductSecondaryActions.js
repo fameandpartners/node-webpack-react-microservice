@@ -34,15 +34,20 @@ class ProductSecondaryActions extends Component {
   }
 
   render() {
+    const { shareText } = this.props;
     return (
       <div className="ProductSecondaryActions">
         <ul>
-          <li className="u-cursor--pointer u-display--inline">
+          <li
+            className="u-cursor--pointer u-display--inline"
+            onClick={this.handleOpenShareModalClick}
+          >
             <ShareIcon
-              onClick={this.handleOpenShareModalClick}
+              className="u-vertical-align--sub"
               width="40px"
               height="18px"
             />
+            { shareText }
           </li>
         </ul>
       </div>
@@ -51,11 +56,14 @@ class ProductSecondaryActions extends Component {
 }
 
 ProductSecondaryActions.propTypes = {
+  // Redux Props
+  shareText: PropTypes.string.isRequired,
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
 };
 
 ProductSecondaryActions.defaultProps = {
+  shareText: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductSecondaryActions);

@@ -1,0 +1,52 @@
+.BridesmaidsFilterHeader__wrapper {
+  color: $c-white;
+}
+
+.BridesmaidsFilterHeader__wrapper .HeaderNavigation {
+  padding: 20px;
+}
+
+.BridesmaidsFilterHeader__wrapper .Tabs {
+  z-index: 1;
+}
+
+.BridesmaidsFilterHeader__wrapper--light {
+  color: $c-black;
+}
+
+.BridesmaidsFilterHeader__wrapper path {
+  fill: $c-white;
+}
+
+.BridesmaidsFilterHeader__wrapper--light path {
+  fill: $c-black;
+}
+
+.Bridesmaids_SizeGuideTabs__heading {
+  top: 0;
+  width: 100%;
+}
+
+.Bridesmaids_SizeGuideTabs__content {
+  margin-top: 86px;
+  padding: 0 5px;
+
+  @include sm {
+    padding: 0 60px;
+  }
+}
+
+.Bridesmaids_SizeGuideTabs__heading .Tabs__list {
+  text-align: left;
+  height: 50px;
+}
+
+.Bridesmaids_SizeGuideTabs__heading .Tabs__link {
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 40px;
+}
+
+.Bridesmaids_SizeGuideTabs__heading .Tabs__link--active {
+  text-decoration: underline;
+}

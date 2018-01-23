@@ -17,7 +17,9 @@ class FadeIn extends Component {
 
   /* eslint-disable react/no-did-mount-set-state */
   componentDidMount() {
-    this.setState({ fadeIn: true });
+    setTimeout(() => {
+      this.setState({ fadeIn: true });
+    });
   }
 
   render() {

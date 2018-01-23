@@ -69,6 +69,7 @@ class AppMain extends Component {
       garmentCareInformation,
       sku,
     } = this.props;
+    console.log('are we in render');
 
     return (
       <div className="AppMain__wrapper">

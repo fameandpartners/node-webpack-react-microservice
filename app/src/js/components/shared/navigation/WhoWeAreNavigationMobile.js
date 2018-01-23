@@ -30,7 +30,7 @@ class WhoWeAreNavigationMobile extends PureComponent {
             className="ShopAllNavigationMobile__heading u-cursor--pointer u-mb-normal"
             onClick={this.props.handleReturnClick}
           >
-            <span className="u-position--relative u-display--inline u-mr-small">
+            <span className="u-position--relative u-display--inline u-mr--small">
               <Caret
                 left
                 width="10px"

@@ -160,6 +160,7 @@ export function transformAddons(productJSON) {
           return assign({}, {
             id: ao.table.id,
             description: ao.table.name,
+            group: ao.table.group,
             position: mappedImageLayer ? mappedImageLayer.position : '',
             price: ao.table.display_price,
             centsTotal: parseInt(ao.table.display_price.money.fractional, 10),
@@ -181,6 +182,7 @@ export function transformAddons(productJSON) {
     addonOptions: allCustomizations.map(ao => assign({}, {
       id: ao.table.id,
       description: ao.table.name,
+      group: ao.table.group,
       position: ao.table.position,
       price: ao.table.display_price,
       centsTotal: parseInt(ao.table.display_price.money.fractional, 10),

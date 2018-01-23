@@ -29,7 +29,7 @@ class ShopAllNavigationMobile extends PureComponent {
             onClick={handleReturnClick}
             className="ShopAllNavigationMobile__heading u-cursor--pointer u-mb-normal"
           >
-            <span className="u-position--relative u-display--inline u-mr-small">
+            <span className="u-position--relative u-display--inline u-mr--small">
               <Caret
                 left
                 width="10px"

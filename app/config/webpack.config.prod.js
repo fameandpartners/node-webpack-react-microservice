@@ -48,6 +48,10 @@ module.exports = {
       require.resolve('./polyfills'),
       paths.flashIndexJs,
     ],
+    bridesmaidsFilter: [
+      require.resolve('./polyfills'),
+      paths.bridesmaidsFilterJs,
+    ],
   },
   output: {
     // The build folder.
