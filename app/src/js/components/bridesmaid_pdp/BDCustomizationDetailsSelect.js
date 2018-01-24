@@ -117,6 +117,24 @@ class BDCustomizationDetailsSelect extends Component {
     return imageStr;
   }
 
+  generateImageNameForLengthCustomizationId(customizationId) {
+    const {
+      availableLengths,
+      temporaryBDCustomizationColor,
+      $$temporaryCustomizationDetails,
+      sku,
+    } = this.props;
+    const { colorNames } = BDCustomizationConstants;
+    const imageStr = generateCustomizationImage({
+      sku: sku.toLowerCase(),
+      customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
+      imgSizeStr: '142x142',
+      length: availableLengths[customizationId],
+      colorCode: colorNames[temporaryBDCustomizationColor],
+    });
+    return imageStr;
+  }
+
   handleCustomizationSelection(item) {
     const { setBDTemporaryCustomizationDetails } = this.props;
     const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id.toLowerCase());
@@ -170,7 +188,7 @@ class BDCustomizationDetailsSelect extends Component {
                 'BDCustomizationDetailsSelect--selected': temporaryBDCustomizationLength === lengthStr,
               })}
               alt={item.id}
-              src={this.generateImageNameForCustomizationId(item.id)}
+              src={this.generateImageNameForLengthCustomizationId(item.id)}
             />
             <div className="BDCustomizationDetailsSelect__description">
               {lengthStr}
