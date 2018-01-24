@@ -11,7 +11,10 @@ import classnames from 'classnames';
 import BDService from '../../services/BDService';
 
 // Utilities
-import { generateCustomizationImage } from '../../utilities/bridesmaids';
+import {
+  generateCustomizationImage,
+  removeLengthIdsFromCustomizationIds,
+  } from '../../utilities/bridesmaids';
 
 // Actions
 import * as BDActions from '../../actions/BDActions';
@@ -75,10 +78,11 @@ class BDCustomizationDetailsSelect extends Component {
       $$temporaryCustomizationDetails,
       setBDIncompatabilities,
     } = this.props;
+    const sanitizedCustomizationIds = customizationIds || $$temporaryCustomizationDetails.toJS();
 
     BDService.getBridesmaidsIncompatabilities({
       length: length || temporaryBDCustomizationLength,
-      customizationIds: customizationIds || $$temporaryCustomizationDetails.toJS(),
+      customizationIds: removeLengthIdsFromCustomizationIds(sanitizedCustomizationIds),
       productId,
     }).then((res) => {
       setBDIncompatabilities({ incompatabilities: res.body.incompatible_ids });

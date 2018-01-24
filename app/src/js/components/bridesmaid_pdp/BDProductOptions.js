@@ -76,7 +76,6 @@ function stateToProps(state) {
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedCustomizationDetails: state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS(),
-    selectedBDCustomizationLength: state.$$bdCustomizationState.get('selectedBDCustomizationLength'),
     selectedBDCustomizationColor: state.$$bdCustomizationState.get('selectedBDCustomizationColor'),
     availableLengths: state.$$bdCustomizationState.get('availableBDCustomizationLengths').toJS(),
   };
@@ -126,17 +125,23 @@ class BDProductOptions extends Component {
 
   generateImageNameForSelections() {
     const {
+      availableLengths,
       selectedCustomizationDetails,
-      selectedBDCustomizationLength,
       selectedBDCustomizationColor,
       sku,
     } = this.props;
+
+    const lengthKeys = Object.keys(availableLengths);
+    const foundLengthId = selectedCustomizationDetails.find(
+      id => lengthKeys.indexOf(id) > -1,
+    );
+
     const { colorNames } = BDCustomizationConstants;
     const imageStr = generateCustomizationImage({
       sku: sku.toLowerCase(),
       customizationIds: selectedCustomizationDetails,
       imgSizeStr: '800x800',
-      length: selectedBDCustomizationLength,
+      length: availableLengths[foundLengthId].replace('-', '_'),
       colorCode: colorNames[selectedBDCustomizationColor],
     });
     return imageStr;
@@ -352,7 +357,6 @@ BDProductOptions.propTypes = {
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selectedBDCustomizationLength: PropTypes.string.isRequired,
   selectedBDCustomizationColor: PropTypes.string.isRequired,
   //* Redux Actions
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
