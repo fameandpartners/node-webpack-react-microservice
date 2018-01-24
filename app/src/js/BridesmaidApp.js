@@ -23,6 +23,7 @@ import LoadingSpinner from './components/generic/LoadingSpinner';
 
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
+import { removeLengthIdsFromCustomizationIds } from './utilities/bridesmaids';
 
 // Services
 import BDService from './services/BDService';
@@ -107,14 +108,14 @@ class BridesmaidApp extends Component {
       setBDIncompatabilities,
       setBDIncompatabilitiesLoading,
     } = this.props;
+    const lengthKeys = Object.keys(availableLengths);
     const length = availableLengths[customizationIds.find(
-      ci => ci.charAt(0) === 'l',
-      )];
-
+      id => lengthKeys.indexOf(id) > -1,
+    )];
     setBDIncompatabilitiesLoading({ isLoading: true });
     BDService.getBridesmaidsIncompatabilities({
       length,
-      customizationIds,
+      customizationIds: removeLengthIdsFromCustomizationIds(customizationIds),
       productId,
     }).then((res) => {
       setBDIncompatabilities({ incompatabilities: res.body.incompatible_ids });
