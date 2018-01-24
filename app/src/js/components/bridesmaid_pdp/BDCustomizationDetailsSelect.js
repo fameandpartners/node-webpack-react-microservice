@@ -39,6 +39,7 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
     productDefaultColors: $$productState.get('productDefaultColors').toJS(),
     temporaryBDCustomizationColor: $$bdCustomizationState.get('temporaryBDCustomizationColor'),
+    availableLengths: $$bdCustomizationState.get('availableBDCustomizationLengths').toJS(),
   };
 }
 
@@ -127,8 +128,11 @@ class BDCustomizationDetailsSelect extends Component {
   }
 
   handleLengthSelection(item) {
-    const { setBDTemporaryLength } = this.props;
-    const lengthStrChoice = BDCustomizationConstants.lengthNames[item.id];
+    const {
+      availableLengths,
+      setBDTemporaryLength,
+    } = this.props;
+    const lengthStrChoice = availableLengths[item.id];
     setBDTemporaryLength({ temporaryBDCustomizationLength: lengthStrChoice });
     this.checkForIncompatabilities({
       length: lengthStrChoice,
@@ -146,6 +150,7 @@ class BDCustomizationDetailsSelect extends Component {
   generateLengthDetailOptions() {
     const {
       addonOptions,
+      availableLengths,
       groupName,
       temporaryBDCustomizationLength,
     } = this.props;
@@ -153,7 +158,7 @@ class BDCustomizationDetailsSelect extends Component {
     return addonOptions
     .filter(ao => ao.group === groupName)
     .map((item) => {
-      const lengthStr = BDCustomizationConstants.lengthNames[item.id];
+      const lengthStr = availableLengths[item.id];
       return (
         <div className="u-display--inline-block u-mr--normal" key={item.id}>
           <div
@@ -257,6 +262,7 @@ BDCustomizationDetailsSelect.propTypes = {
   temporaryBDCustomizationColor: PropTypes.string.isRequired,
   sku: PropTypes.string.isRequired,
   temporaryBDCustomizationLength: PropTypes.string,
+  availableLengths: PropTypes.object,
   // Redux Funcs
   setBDTemporaryColor: PropTypes.func.isRequired,
   setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
@@ -265,6 +271,7 @@ BDCustomizationDetailsSelect.propTypes = {
 };
 
 BDCustomizationDetailsSelect.defaultProps = {
+  availableLengths: null,
   addonOptions: [],
   groupName: null,
   incompatabilities: [],

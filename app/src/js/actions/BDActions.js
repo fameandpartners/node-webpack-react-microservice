@@ -52,6 +52,13 @@ export function setBDIncompatabilities({ incompatabilities }) {
   };
 }
 
+export function setBDIncompatabilitiesLoading({ isLoading }) {
+  return {
+    type: BDCustomizationConstants.SET_BD_INCOMPATABILITIES_LOADING,
+    isLoading,
+  };
+}
+
 
 export default {
   bdActivateCustomizationDrawer,
@@ -60,4 +67,5 @@ export default {
   setBDTemporaryLength,
   setBDCustomizationSection,
   setBDIncompatabilities,
+  setBDIncompatabilitiesLoading,
 };

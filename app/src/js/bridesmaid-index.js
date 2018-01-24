@@ -66,6 +66,7 @@ if (untransformedData && untransformedData.selectedCustomizations) {
     selectedCustomizationDetails: untransformedData.selectedCustomizations,
     temporaryBDCustomizationLength: length,
     selectedBDCustomizationLength: length,
+    availableBDCustomizationLengths: untransformedData.availableLengths,
   };
 }
 
