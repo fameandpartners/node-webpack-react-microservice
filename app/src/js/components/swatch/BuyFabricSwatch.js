@@ -37,8 +37,8 @@ class BuyFabricSwatch extends PureComponent {
 
   handleAddToCartClick() {
     console.log(this.currentOrderToJS());
-    
-    this.currentOrderToJS().forEach(function(swatch) {
+
+    this.currentOrderToJS().forEach((swatch) => {
       addToCart(swatch, '').end();
     });
   }
@@ -49,11 +49,10 @@ class BuyFabricSwatch extends PureComponent {
 
     const index = findIndex(currentOrder, { sku: swatch.sku });
     if (index >= 0) {
-      currentOrder.splice(index, 1);
-      updateFabricSwatchOrder({ swatchOrder: currentOrder });
+      updateFabricSwatchOrder({ swatchOrder: [] });
     } else {
-      currentOrder.push(swatch);
-      updateFabricSwatchOrder({ swatchOrder: currentOrder });
+      const swatchOrder = [swatch];
+      updateFabricSwatchOrder({ swatchOrder });
     }
   }
 
@@ -91,7 +90,8 @@ class BuyFabricSwatch extends PureComponent {
 
   currentOrderToJS() {
     const { swatchOrder } = this.props;
-    // must convert swatch data objects to JS from format stored in redux
+    // must convert swatch data objects to JS from format stored in redux,
+    // is there a better way to do this?
     return Array.from(swatchOrder).map(item => (item.toJS()));
   }
 
@@ -103,7 +103,7 @@ class BuyFabricSwatch extends PureComponent {
     return (
       <div>
         <h3 className="FabricSwatchSelectionTitle u-capitalize u-mt-normal u-mb-normal">
-          Choose your heavy georgette swatches
+          Choose your heavy georgette swatch
         </h3>
 
         <div className="FabricSwatchListWrapper u-mb-normal">
