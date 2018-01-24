@@ -56,23 +56,31 @@ function transformLineItem(lineItem, auSite) {
       dress_variant_id:   INT,
     }
   */
-
-  const sizeId = mapSizeIdFromSortKey(lineItem.selectedDressSize, auSite);
-
-  const transformed = {
-    color_id: lineItem.color.id,
-    customizations_ids: lineItem.addons.map(a => a.id),
-    dress_variant_id: getDressVariantId(
-      win.PdpDataFull.product.available_options.table.variants,
-      lineItem.color.id,
-      sizeId),
-    height_unit: lineItem.selectedMeasurementMetric,
-    height_value: lineItem.selectedHeightValue,
-    making_options_ids: [lineItem.expressMakingID || 0],
-    size_id: sizeId,
-    variant_id: win ? win.PdpDataFull.product.master_id : null,
-  };
-
+  let transformed;
+  if (lineItem.product_name.includes('Fabric Swatch')) {
+    transformed = {
+      product_id: lineItem.product_id,
+      product_name: lineItem.product_name,
+      color_id: lineItem.color_id,
+      color_name: lineItem.color_name,
+      variant_id: lineItem.variant_id,
+    };
+  } else {
+    const sizeId = mapSizeIdFromSortKey(lineItem.selectedDressSize, auSite);
+    transformed = {
+      color_id: lineItem.color.id,
+      customizations_ids: lineItem.addons.map(a => a.id),
+      dress_variant_id: getDressVariantId(
+        win.PdpDataFull.product.available_options.table.variants,
+        lineItem.color.id,
+        sizeId),
+      height_unit: lineItem.selectedMeasurementMetric,
+      height_value: lineItem.selectedHeightValue,
+      making_options_ids: [lineItem.expressMakingID || 0],
+      size_id: sizeId,
+      variant_id: win ? win.PdpDataFull.product.master_id : null,
+    };
+  }
   return transformed;
 }
 
@@ -81,7 +89,6 @@ export function addToCart(item, auSite) {
   const transformedLineItem = transformLineItem(item, auSite);
   const csrf = win.document.querySelector('meta[name="csrf-token"]');
   const token = csrf ? csrf.content : '';
-
   return request
     .post('/user_cart/products')
     .send(transformedLineItem)

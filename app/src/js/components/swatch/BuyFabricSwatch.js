@@ -8,6 +8,7 @@ import noop from '../../libs/noop';
 
 // Actions
 import * as FabricSwatchActions from '../../actions/FabricSwatchActions';
+import { addToCart } from '../../utilities/cart-helper';
 
 // UI Components
 import Button from '../generic/Button';
@@ -36,6 +37,10 @@ class BuyFabricSwatch extends PureComponent {
 
   handleAddToCartClick() {
     console.log(this.currentOrderToJS());
+    
+    this.currentOrderToJS().forEach(function(swatch) {
+      addToCart(swatch, '').end();
+    });
   }
 
   handleSwatchSelection(swatch) {
