@@ -88,7 +88,7 @@ export function generateCustomizationImage({
   side = 'front',
   sku = null,
 }) {
-  const BASE_URL = '//assets.fameandpartners.com/renders/composites';
+  const BASE_URL = '//d1h7wjzwtdym94.cloudfront.net/renders/composites';
   const SKU = sku;
   const IMG_SIZE = imgSizeStr;
   const SIDE = side;
