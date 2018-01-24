@@ -19,6 +19,7 @@ import ShareModal from './components/pdp/ShareModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
 import AfterpayModal from './components/pdp/AfterpayModal';
+import LoadingSpinner from './components/generic/LoadingSpinner';
 
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
@@ -66,6 +67,7 @@ function stateToProps(state) {
     productId: state.$$productState.get('productId'),
     customizationIds: state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS(),
     length: state.$$bdCustomizationState.get('selectedBDCustomizationLength'),
+    isLoading: state.$$bdCustomizationState.get('incompatabilitiesLoading'),
   };
 }
 
@@ -77,6 +79,7 @@ function dispatchToProps(dispatch) {
   } = bindActionCreators(CustomizationActions, dispatch);
   const {
     setBDIncompatabilities,
+    setBDIncompatabilitiesLoading,
   } = bindActionCreators(BDActions, dispatch);
 
 
@@ -85,6 +88,7 @@ function dispatchToProps(dispatch) {
     setBDIncompatabilities,
     setShareableQueryParams,
     updateCustomizationStyleSelection,
+    setBDIncompatabilitiesLoading,
   };
 }
 
@@ -101,14 +105,17 @@ class BridesmaidApp extends Component {
       customizationIds,
       length,
       setBDIncompatabilities,
+      setBDIncompatabilitiesLoading,
     } = this.props;
 
+    setBDIncompatabilitiesLoading({ isLoading: true });
     BDService.getBridesmaidsIncompatabilities({
       length,
       customizationIds,
       productId,
     }).then((res) => {
       setBDIncompatabilities({ incompatabilities: res.body.incompatible_ids });
+      setBDIncompatabilitiesLoading({ isLoading: false });
     });
   }
 
@@ -155,8 +162,10 @@ class BridesmaidApp extends Component {
 
   render() {
     const { lockBody } = this.props;
+    const { isLoading } = this.props;
     return (
       <div className="__react_root__">
+        { isLoading ? <LoadingSpinner /> :
         <div className={`BridesmaidApp Root__wrapper ${lockBody ? 'BridesmaidApp--scroll-lock' : ''}`}>
           <BDCustomizationDrawer />
           <BDAppMain />
@@ -169,6 +178,7 @@ class BridesmaidApp extends Component {
           <SizeModals />
           <AfterpayModal />
         </div>
+        }
       </div>
     );
   }
@@ -189,6 +199,12 @@ BridesmaidApp.propTypes = {
   customizationIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   length: PropTypes.string.isRequired,
   setBDIncompatabilities: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  setBDIncompatabilitiesLoading: PropTypes.func.isRequired,
+};
+
+BridesmaidApp.defaultProps = {
+  isLoading: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(BridesmaidApp);

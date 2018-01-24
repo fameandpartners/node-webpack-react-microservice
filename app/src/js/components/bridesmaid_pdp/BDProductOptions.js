@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { find } from 'lodash';
 import classnames from 'classnames';
 
 // Utilities
@@ -80,6 +78,7 @@ function stateToProps(state) {
     selectedCustomizationDetails: state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS(),
     selectedBDCustomizationLength: state.$$bdCustomizationState.get('selectedBDCustomizationLength'),
     selectedBDCustomizationColor: state.$$bdCustomizationState.get('selectedBDCustomizationColor'),
+    availableLengths: state.$$bdCustomizationState.get('availableBDCustomizationLengths').toJS(),
   };
 }
 
@@ -162,15 +161,18 @@ class BDProductOptions extends Component {
   }
 
   generateLengthNode() {
-    const { selectedCustomizationDetails } = this.props;
-    const lengthKeys = Object.keys(BDCustomizationConstants.lengthNames);
+    const {
+      availableLengths,
+      selectedCustomizationDetails,
+    } = this.props;
+    const lengthKeys = Object.keys(availableLengths);
     const foundLengthId = selectedCustomizationDetails.find(
       id => lengthKeys.indexOf(id) > -1,
     );
 
     return foundLengthId ? (
       <span>
-        {BDCustomizationConstants.lengthNames[foundLengthId]}
+        {availableLengths[foundLengthId]}
       </span>
     ) : null;
   }
@@ -345,6 +347,8 @@ BDProductOptions.propTypes = {
       name: PropTypes.string,
     }),
   ),
+  // eslint-disable-next-line
+  availableLengths:PropTypes.object,
   selectedDressSize: PropTypes.number,
   selectedHeightValue: PropTypes.number,
   selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -358,6 +362,7 @@ BDProductOptions.propTypes = {
 
 BDProductOptions.defaultProps = {
   addonOptions: [],
+  availableLengths: null,
   colorCentsTotal: 0,
   selectedDressSize: null,
   selectedHeightValue: null,

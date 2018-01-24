@@ -33,6 +33,8 @@ export const $$initialState = Immutable.fromJS({
 
   incompatabilities: [],
 
+  incompatabilitiesLoading: false,
+
   // // String ['cm', 'inch']
   // temporaryMeasurementMetric: UNITS.INCH,
   // selectedMeasurementMetric: UNITS.INCH,
@@ -127,6 +129,13 @@ export default function CartReducer($$state = $$initialState, action = null) {
         incompatabilities,
       });
     }
+
+    case BDCustomizationConstants.SET_BD_INCOMPATABILITIES_LOADING: {
+      return $$state.merge({ // Addition
+        incompatabilitiesLoading: action.isLoading,
+      });
+    }
+
     // case CustomizationConstants.SET_SIZE_PROFILE_ERROR: {
     //   return $$state.merge({
     //     heightError: action.heightError,

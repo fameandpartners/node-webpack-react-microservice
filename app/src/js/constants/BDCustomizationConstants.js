@@ -10,6 +10,7 @@ const actionTypes = assign({},
     'SET_BD_TEMPORARY_CUSTOMIZATION_DETAILS',
     'SET_BD_TEMPORARY_LENGTH',
     'SET_BD_INCOMPATABILITIES',
+    'SET_BD_INCOMPATABILITIES_LOADING',
 
     // Customization selection screen
     'SAVE_BD_TEMPORARY_CUSTOMIZATIONS',

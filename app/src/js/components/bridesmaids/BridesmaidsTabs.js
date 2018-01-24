@@ -83,7 +83,7 @@ class BridesmaidsTabs extends PureComponent {
           </ul>
         </div>
 
-        <div className="u-position--absolute">
+        <div className="BridesmaidsTabs__navigation-container u-position--absolute">
           <HeaderNavigation
             isActive={(isHovering && selectedTabId)}
             openNavItem={selectedTabId}
