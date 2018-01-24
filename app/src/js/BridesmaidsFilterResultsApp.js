@@ -49,6 +49,7 @@ import BridesmaidsFilterHeader from './components/bridesmaids/BridesmaidsFilterH
 // import BridesmaidsLengthSelect from './components/bridesmaids/BridesmaidsLengthSelect';
 // import BridesmaidsTopDetailSelect from './components/bridesmaids/BridesmaidsTopDetailSelect';
 // import ErrorMessage from './components/generic/ErrorMessage';
+import BridesmaidsFilterModal from './components/bridesmaids/BridesmaidsFilterModal';
 
 // CSS
 import '../css/components/BridesmaidsFilterResultsApp.scss';
@@ -132,6 +133,7 @@ class BridesmaidsFilterResultsApp extends Component {
             </div>
           </div>
         </div>
+        <BridesmaidsFilterModal />
       </div>
     );
   }

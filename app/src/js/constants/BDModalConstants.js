@@ -5,6 +5,7 @@ const modalIds = assign({},
   mirrorCreator([
     'BD_COLOR_SELECTION_MODAL',
     'BD_CUSTOMIZATION_MODAL',
+    'BD_FILTER_MODAL',
   ]),
 );
 

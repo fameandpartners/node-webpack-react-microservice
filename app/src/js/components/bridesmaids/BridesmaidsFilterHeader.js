@@ -7,6 +7,10 @@ import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 import ReactHoverObserver from 'react-hover-observer';
 
+// Breakpoint lib
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
+
 // CSS
 import '../../../css/components/BridesmaidsFilterHeader.scss';
 
@@ -24,9 +28,11 @@ import { loadFilteredResultsPage } from '../../utilities/bridesmaids-helpers';
 
 // Actions
 import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
+import ModalActions from '../../actions/ModalActions';
 
 // Constants
 import BridesmaidsHeaderFilterConstants from '../../constants/BridesmaidsFilterHeaderConstants';
+import BDModalConstants from '../../constants/BDModalConstants';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
   const $$selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
@@ -44,11 +50,11 @@ function stateToProps({ $$bridesmaidsFilterState }) {
 }
 
 function dispatchToProps(dispatch) {
-  const {
-    selectFilterLength,
-  } = bindActionCreators(BridesmaidsFilterActions, dispatch);
+  const { selectFilterLength } = bindActionCreators(BridesmaidsFilterActions, dispatch);
+  const { activateModal } = bindActionCreators(ModalActions, dispatch);
 
   return {
+    activateModal,
     selectFilterLength,
   };
 }
@@ -67,6 +73,10 @@ class BridesmaidsFilterHeader extends Component {
     }
 
     return '';
+  }
+
+  handleOpenFilterModalClick() {
+    this.props.activateModal({ modalId: BDModalConstants.BD_FILTER_MODAL });
   }
 
   handleColorSelection() {
@@ -107,6 +117,7 @@ class BridesmaidsFilterHeader extends Component {
 
   render() {
     const {
+      breakpoint,
       selectedColor,
       selectedSilhouette,
       selectedLength,
@@ -125,48 +136,58 @@ class BridesmaidsFilterHeader extends Component {
         }}
       >
         <ReactHoverObserver hoverOffDelayInMs={100}>
-          <BridesmaidsTabs
-            filters={[
-              {
-                id: BridesmaidsHeaderFilterConstants.SELECTED_COLOR,
-                heading: `Color: ${selectedColor.presentation}`,
-                content: (
-                  <BridesmaidsColorSelect
-                    handleSelection={this.handleColorSelection}
-                  />
-                ),
-              },
-              {
-                id: BridesmaidsHeaderFilterConstants.SELECTED_SILHOUETTE,
-                heading: `Silhouette: ${selectedSilhouette.name}`,
-                content: (
-                  <BridesmaidsSilhouetteSelect
-                    handleSelection={this.handleSilhouetteSelection}
-                  />
-                ),
-              },
-              {
-                id: BridesmaidsHeaderFilterConstants.SELECTED_LENGTH,
-                heading: `Length: ${selectedLength.name}`,
-                content: (
-                  <BridesmaidsLengthSelect
-                    handleSelection={this.handleLengthSelection}
-                  />
-                ),
-              },
-              {
-                id: BridesmaidsHeaderFilterConstants.SELECTED_TOP_DETAILS,
-                heading: this.generateTopStyleText(),
-                content: (
-                  <BridesmaidsTopDetailSelect
-                    handleSelection={this.handleLengthSelection}
-                  />
-                ),
-              },
-            ]}
-            headingClasses="Bridesmaids_SizeGuideTabs__heading u-position--relative"
-            contentClasses="Bridesmaids_SizeGuideTabs__content layout-container"
-          />
+          {
+            breakpoint === 'mobile' || breakpoint === 'tablet'
+            ? (
+              <div onClick={this.handleOpenFilterModalClick}>
+                Filter
+              </div>
+            )
+            : (
+              <BridesmaidsTabs
+                filters={[
+                  {
+                    id: BridesmaidsHeaderFilterConstants.SELECTED_COLOR,
+                    heading: `Color: ${selectedColor.presentation}`,
+                    content: (
+                      <BridesmaidsColorSelect
+                        handleSelection={this.handleColorSelection}
+                      />
+                  ),
+                  },
+                  {
+                    id: BridesmaidsHeaderFilterConstants.SELECTED_SILHOUETTE,
+                    heading: `Silhouette: ${selectedSilhouette.name}`,
+                    content: (
+                      <BridesmaidsSilhouetteSelect
+                        handleSelection={this.handleSilhouetteSelection}
+                      />
+                  ),
+                  },
+                  {
+                    id: BridesmaidsHeaderFilterConstants.SELECTED_LENGTH,
+                    heading: `Length: ${selectedLength.name}`,
+                    content: (
+                      <BridesmaidsLengthSelect
+                        handleSelection={this.handleLengthSelection}
+                      />
+                  ),
+                  },
+                  {
+                    id: BridesmaidsHeaderFilterConstants.SELECTED_TOP_DETAILS,
+                    heading: this.generateTopStyleText(),
+                    content: (
+                      <BridesmaidsTopDetailSelect
+                        handleSelection={this.handleLengthSelection}
+                      />
+                  ),
+                  },
+                ]}
+                headingClasses="Bridesmaids_SizeGuideTabs__heading u-position--relative"
+                contentClasses="Bridesmaids_SizeGuideTabs__content layout-container"
+              />
+            )
+          }
         </ReactHoverObserver>
       </div>
     );
@@ -174,10 +195,15 @@ class BridesmaidsFilterHeader extends Component {
 }
 
 BridesmaidsFilterHeader.propTypes = {
+  // Decorator Props
+  breakpoint: PropTypes.string.isRequired,
+  // Redux Props
   selectedColor: PropTypes.string,
   selectedSilhouette: PropTypes.string,
   selectedLength: PropTypes.string,
   selectedTopDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // Redux Funcs
+  activateModal: PropTypes.func.isRequired,
 };
 
 BridesmaidsFilterHeader.defaultProps = {
@@ -186,4 +212,6 @@ BridesmaidsFilterHeader.defaultProps = {
   selectedLength: '',
 };
 
-export default connect(stateToProps, dispatchToProps)(BridesmaidsFilterHeader);
+export default Resize(PDPBreakpoints)(
+  connect(stateToProps, dispatchToProps)(BridesmaidsFilterHeader),
+);
