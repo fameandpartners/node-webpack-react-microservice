@@ -84,7 +84,7 @@ class BridesmaidsTopDetailSelect extends Component {
 
     return bridesmaidsFilterTopDetails
       .map((item, index) => (
-        <div className="col-3" key={item.image + index}>
+        <div className="col-1" key={item.image + index}>
           <div
             onClick={() => this.handleDetailClick(item)}
             className={classnames(
@@ -95,8 +95,8 @@ class BridesmaidsTopDetailSelect extends Component {
             )}
           >
             <img className="u-width--full" alt={item.name} src={item.image} />
-            <p>{item.name}</p>
           </div>
+          <p>{item.name}</p>
         </div>
       ));
   }
@@ -106,16 +106,26 @@ class BridesmaidsTopDetailSelect extends Component {
   }
 
   render() {
+    const { bridesmaidsFilterTopDetails } = this.props;
+    const gridLength = bridesmaidsFilterTopDetails.length;
+
     return (
-      <div className="ProductGrid">
-        <div className="App__photo-montage masonry grid-12">
+      <div className="BridesmaidsTopDetailSelect">
+        <div
+          className={classnames(
+            'BridesmaidsTopDetailSelect__content u-center',
+            `grid-${gridLength}`
+          )}
+        >
           {this.getFilterTopDetails()}
 
-          {this.props.handleSelection ? <SubmitButton
-            className="float--right bottom-right-tiny"
-            handleClick={this.handleSubmitClick}
-            text={'Apply'} 
-          /> : null
+          {this.props.handleSelection ? (
+            <SubmitButton
+              className="float--right bottom-right-tiny"
+              handleClick={this.handleSubmitClick}
+              text={'Apply'}
+            />
+          ) : null
         }
         </div>
       </div>

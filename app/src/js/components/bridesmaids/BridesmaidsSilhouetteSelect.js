@@ -60,16 +60,16 @@ class BridesmaidsSilhouetteSelect extends Component {
           <div
             onClick={() => this.handleSilhouetteClick(item)}
             className={classnames([
-              'brick u-cursor--pointer',
+              'BridesmaidsSilhoutteSelect--image-wrapper u-cursor--pointer u-center',
               {
                 'DressFilterSilhouette--selected': item.id == selectedSilhouetteId
               }
             ])}
           >
-            <img className="u-width--full" alt={item.name} src={item.image} />
-            <p>{item.name}</p>
-            <p>{item.description}</p>
+            <img className="u-width--full u-height--full" alt={item.name} src={item.image} />
           </div>
+          <p>{item.name}</p>
+          <p>{item.description}</p>
         </div>
       ));
   }
@@ -77,8 +77,8 @@ class BridesmaidsSilhouetteSelect extends Component {
 
   render() {
     return (
-      <div className="ProductGrid">
-        <div className="App__photo-montage masonry grid-12">
+      <div className="BridesmaidsSilhoutteSelect">
+        <div className="BridesmaidsSilhoutteSelect__contents grid-12 u-center">
           {this.getFilterSilhouettes()}
         </div>
       </div>

@@ -217,8 +217,10 @@ class BridesmaidsFilterApp extends Component {
             }
           </div>
           <div className="grid-12-noGutter layout-container">
-            <h2 ref={c => this.colorFilter = c}>Choose your color</h2>
-            <div className="col-12">
+            <h3 className="h3 u-mb--small u-center" ref={c => this.colorFilter = c}>
+              Choose your color
+            </h3>
+            <div className="col-12 u-mb--normal">
               <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedColorId}
                 message="Please select a dress color."
@@ -227,8 +229,10 @@ class BridesmaidsFilterApp extends Component {
                 handleSelection={this.handleSelection}
               />
             </div>
-            <h2 ref={c => this.silhouetteFilter = c}>Choose your silhouette</h2>
-            <div className="col-12">
+            <h3 className="h3 u-mb--small u-center" ref={c => this.silhouetteFilter = c}>
+              Choose your silhouette
+            </h3>
+            <div className="col-12 u-mb--normal">
               <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedSilhouetteId}
                 message="Please select a dress silhouette."
@@ -237,8 +241,10 @@ class BridesmaidsFilterApp extends Component {
                 handleSelection={this.handleSelection}
               />
             </div>
-            <h2 ref={c => this.lengthFilter = c}>Choose your length</h2>
-            <div className="col-12">
+            <h3 className="h3 u-mb--small u-center" ref={c => this.lengthFilter = c}>
+              Choose your length
+            </h3>
+            <div className="col-12 u-mb--normal">
               <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedLengthId}
                 message="Please select a dress length."
@@ -247,7 +253,9 @@ class BridesmaidsFilterApp extends Component {
                 handleSelection={this.handleSelection}
               />
             </div>
-            <h2 ref={c => this.topDetailsFilter = c}>Choose the top details you like</h2>
+            <h3 className="h3 u-mb--small u-center" ref={c => this.topDetailsFilter = c}>
+              Choose the top details you like
+            </h3>
             <div className="col-12">
               <ErrorMessage
                 displayCondition={attemptedFormSubmit && (selectedTopDetails.length < 1)}

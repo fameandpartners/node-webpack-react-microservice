@@ -60,7 +60,7 @@ class BridesmaidsLengthSelect extends Component {
           <div
             onClick={() => this.handleLengthClick(item)}
             className={classnames(
-              'brick u-cursor--pointer',
+              'BridesmaidsLengthSelect--image-wrapper u-center u-cursor--pointer',
               {
                 'DressFilterLength--selected': item.id == selectedLengthId
               }
@@ -76,8 +76,8 @@ class BridesmaidsLengthSelect extends Component {
 
   render() {
     return (
-      <div className="ProductGrid">
-        <div className="App__photo-montage masonry grid-12">
+      <div className="BridesmaidsLengthSelect">
+        <div className="BridesmaidsLengthSelect__contents grid-12 u-center">
           {this.getFilterLengths()}
         </div>
       </div>
