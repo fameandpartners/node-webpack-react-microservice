@@ -39,7 +39,7 @@ class BridesmaidsProductGrid extends Component {
             // eslint-disable-next-line
             key={index}
             className="FlashSaleProduct__container col-4_sm-6"
-            onClick={this.goToImageHref(`/bridesmaids-dresses/${dress.id}`)}
+            onClick={this.goToImageHref(`/bridesmaid-dresses/${dress.id}`)}
           >
             <a className="FlashSaleProduct__image-wrapper u-cursor--pointer">
               <img
@@ -56,7 +56,7 @@ class BridesmaidsProductGrid extends Component {
             </a>
             <div className="FlashSaleProduct__info grid-12">
               <div className="col-8">
-                <a href={`/bridesmaids-dresses/${dress.id}`}>
+                <a href={`/bridesmaid-dresses/${dress.id}`}>
                   {dress.product_name}
                 </a>
               </div>
