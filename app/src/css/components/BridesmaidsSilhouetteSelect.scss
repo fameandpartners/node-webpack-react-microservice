@@ -1,6 +1,12 @@
-.BridesmaidsSilhoutteSelect--image-wrapper {
+.BridesmaidsSilhouetteSelect--image-wrapper {
   height: 200px;
   width: 200px;
+  opacity: 0.33;
+  transition: 300ms opacity ease-in-out;
+}
+
+.BridesmaidsSilhouetteSelect--selected.BridesmaidsSilhouetteSelect--image-wrapper {
+  opacity: 1;
 }
 
 .BridesmaidsSilhoutteSelect__contents {

@@ -201,7 +201,7 @@ class BridesmaidsFilterApp extends Component {
 
     return (
       <div className="__react_root__">
-        <div className={`FlashSaleListApp Root__wrapper ${lockBody ? 'FlashSaleApp--scroll-lock' : ''}`}>
+        <div className={`FlashSaleListApp Root__wrapper ${lockBody ? 'u-scroll-lock' : ''}`}>
           <div className="FlashSaleBanner__wrapper">
             { breakpoint === 'mobile' || breakpoint === 'tablet'
               ? (

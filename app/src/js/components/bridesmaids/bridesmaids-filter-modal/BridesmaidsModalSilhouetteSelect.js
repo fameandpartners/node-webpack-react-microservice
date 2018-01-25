@@ -8,18 +8,18 @@ import { find } from 'lodash';
 import classnames from 'classnames';
 
 // Actions
-import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
+import BridesmaidsFilterActions from '../../../actions/BridesmaidsFilterActions';
 
 // CSS
-import '../../../css/components/BridesmaidsSilhouetteSelect.scss';
+import '../../../../css/components/BridesmaidsSilhouetteSelect.scss';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
-  const selectedSilhouette = $$bridesmaidsFilterState.get('selectedSilhouette');
+  const temporarySilhouette = $$bridesmaidsFilterState.get('temporarySilhouette');
   const bridesmaidsFilterSilhouttes = $$bridesmaidsFilterState.get('$$bridesmaidsFilterSilhouettes').toJS();
 
   return {
     bridesmaidsFilterSilhouettes: bridesmaidsFilterSilhouttes || [],
-    selectedSilhouetteId: selectedSilhouette ? selectedSilhouette.get('id') : null,
+    temporarySilhouetteId: temporarySilhouette ? temporarySilhouette.get('id') : null,
   };
 }
 
@@ -39,37 +39,39 @@ class BridesmaidsSilhouetteSelect extends Component {
     autobind(this);
   }
 
-  handleSilhouetteClick(selectedSilhouette) {
+  handleSilhouetteClick(temporarySilhouette) {
     const {
       selectFilterSilhouette,
     } = this.props;
 
-    selectFilterSilhouette({ selectedSilhouette });
-    this.props.handleSelection();
+    selectFilterSilhouette({ temporarySilhouette });
   }
 
   getFilterSilhouettes() {
     const {
       bridesmaidsFilterSilhouettes,
-      selectedSilhouetteId,
+      temporarySilhouetteId,
     } = this.props;
 
     return bridesmaidsFilterSilhouettes
       .map((item, index) => (
-        <div className="col-4" key={item.image + index}>
+        <div className="grid-12 col" key={item.image + index}>
           <div
+            className="col-5"
             onClick={() => this.handleSilhouetteClick(item)}
             className={classnames([
-              'BridesmaidsSilhoutteSelect--image-wrapper u-cursor--pointer u-center',
+              'BridesmaidsSilhouetteSelect--image-wrapper u-cursor--pointer u-center',
               {
-                'BridesmaidsSilhoutteSelect--selected': item.id == selectedSilhouetteId
+                'BridesmaidsSilhouetteSelect--selected': item.id == temporarySilhouetteId
               }
             ])}
           >
             <img className="u-width--full u-height--full" alt={item.name} src={item.image} />
           </div>
-          <p>{item.name}</p>
-          <p>{item.description}</p>
+          <div className="col-7">
+            <h4 className="h4">{item.name}</h4>
+            <p>{item.description}</p>
+          </div>
         </div>
       ));
   }
@@ -77,8 +79,8 @@ class BridesmaidsSilhouetteSelect extends Component {
 
   render() {
     return (
-      <div className="BridesmaidsSilhoutteSelect">
-        <div className="BridesmaidsSilhoutteSelect__contents grid-12 u-center">
+      <div className="BridesmaidsModalSilhouetteSelect">
+        <div className="BridesmaidsModalSilhouetteSelect__contents typography">
           {this.getFilterSilhouettes()}
         </div>
       </div>
@@ -93,12 +95,12 @@ BridesmaidsSilhouetteSelect.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string,
   })).isRequired,
-  selectedSilhouetteId: PropTypes.number,
-  selectFilterSilhouette: PropTypes.func.isRequired,
+  temporarySilhouetteId: PropTypes.number,
+  // selectFilterSilhouette: PropTypes.func.isRequired,
 };
 
 BridesmaidsSilhouetteSelect.defaultProps = {
-  selectedSilhouetteId: null,
+  temporarySilhouetteId: null,
 };
 
 export default connect(stateToProps, dispatchToProps)(BridesmaidsSilhouetteSelect);

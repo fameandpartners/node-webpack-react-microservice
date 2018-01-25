@@ -14,6 +14,7 @@ import PDPBreakpoints from './libs/PDPBreakpoints';
 
 // Actions
 import * as BridesmaidsFilterActions from './actions/BridesmaidsFilterActions';
+import * as ModalActions from './actions/ModalActions';
 
 // Assets
 // ???
@@ -49,7 +50,7 @@ import BridesmaidsFilterHeader from './components/bridesmaids/BridesmaidsFilterH
 // import BridesmaidsLengthSelect from './components/bridesmaids/BridesmaidsLengthSelect';
 // import BridesmaidsTopDetailSelect from './components/bridesmaids/BridesmaidsTopDetailSelect';
 // import ErrorMessage from './components/generic/ErrorMessage';
-import BridesmaidsFilterModal from './components/bridesmaids/BridesmaidsFilterModal';
+import BridesmaidsFilterModal from './components/bridesmaids/bridesmaids-filter-modal/BridesmaidsFilterModal';
 
 // CSS
 import '../css/components/BridesmaidsFilterResultsApp.scss';
@@ -61,15 +62,18 @@ import '../css/components/BridesmaidsFilterResultsApp.scss';
 //   .install();
 
 
-function stateToProps() {
+function stateToProps(state) {
+  const modalOpen = state.$$modalState.get('shouldAppear');
   return {
-    lockBody: false,
+    lockBody: modalOpen,
   };
 }
 
 function dispatchToProps(dispatch) {
   const actions = bindActionCreators(BridesmaidsFilterActions, dispatch);
+  const modalActions = bindActionCreators(ModalActions, dispatch);
   return {
+    activateModal: modalActions.activateModal,
     hydrateFiltersFromURL: actions.hydrateFiltersFromURL,
   };
 }
@@ -117,6 +121,7 @@ class BridesmaidsFilterResultsApp extends Component {
     } = this.state;
 
     const {
+      activateModal,
       lockBody,
     } = this.props;
 
@@ -133,7 +138,9 @@ class BridesmaidsFilterResultsApp extends Component {
             </div>
           </div>
         </div>
-        <BridesmaidsFilterModal />
+        <BridesmaidsFilterModal
+          activateModal={activateModal}
+        />
       </div>
     );
   }
@@ -141,6 +148,7 @@ class BridesmaidsFilterResultsApp extends Component {
 
 BridesmaidsFilterResultsApp.propTypes = {
   // Redux
+  activateModal: PropTypes.func.isRequired,
   lockBody: PropTypes.bool.isRequired,
   hydrateFiltersFromURL: PropTypes.func.isRequired,
 };

@@ -139,8 +139,13 @@ class BridesmaidsFilterHeader extends Component {
           {
             breakpoint === 'mobile' || breakpoint === 'tablet'
             ? (
-              <div onClick={this.handleOpenFilterModalClick}>
-                Filter
+              <div className="u-display--inline u-cursor--pointer">
+                <div
+                  className="Tabs__list grid-middle"
+                  onClick={this.handleOpenFilterModalClick}
+                >
+                  Filter
+                </div>
               </div>
             )
             : (

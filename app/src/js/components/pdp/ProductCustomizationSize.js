@@ -244,7 +244,7 @@ class ProductCustomizationStyle extends PureComponent {
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        <div className="ProductCustomizationSize__layout-container u-mt-normal u-mb-huge">
+        <div className="ProductCustomizationSize__layout-container u-mt-normal u-mb--huge">
           <div className="u-mb-big">
             <h3 className="h4 u-mb-small">
               Let’s make it fit.
