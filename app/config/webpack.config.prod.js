@@ -55,6 +55,7 @@ module.exports = {
      bridesmaid: [
       require.resolve('./polyfills'),
       paths.bridesmaidIndexJs,
+    ],
     swatch: [
       require.resolve('./polyfills'),
       paths.swatchIndexJs,
