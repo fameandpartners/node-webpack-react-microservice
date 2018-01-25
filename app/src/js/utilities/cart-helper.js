@@ -57,7 +57,7 @@ function transformLineItem(lineItem, auSite) {
     }
   */
   let transformed;
-  if (lineItem.product_name.includes('Fabric Swatch')) {
+  if (lineItem.product_name && lineItem.product_name.includes('Fabric Swatch')) {
     transformed = {
       product_id: lineItem.product_id,
       product_name: lineItem.product_name,
