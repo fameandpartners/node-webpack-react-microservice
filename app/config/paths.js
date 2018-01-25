@@ -67,6 +67,7 @@ module.exports = {
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/js/index.js'),
   flashIndexJs: resolveApp('src/js/flash-sale.js'),
+  superCollectionJs: resolveApp('src/js/super-collection.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   cssSrc: resolveApp('src/css/global'),

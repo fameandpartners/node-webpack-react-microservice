@@ -48,6 +48,10 @@ module.exports = {
       require.resolve('./polyfills'),
       paths.flashIndexJs,
     ],
+    superCollection: [
+      require.resolve('./polyfills'),
+      paths.superCollectionIndexJs,
+    ],
   },
   output: {
     // The build folder.
