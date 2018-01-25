@@ -56,6 +56,10 @@ module.exports = {
       require.resolve('./polyfills'),
       paths.bridesmaidIndexJs,
     ],
+    swatch: [
+      require.resolve('./polyfills'),
+      paths.swatchIndexJs,
+    ],
   },
   output: {
     // The build folder.

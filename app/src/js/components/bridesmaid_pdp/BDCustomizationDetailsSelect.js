@@ -11,7 +11,10 @@ import classnames from 'classnames';
 import BDService from '../../services/BDService';
 
 // Utilities
-import { generateCustomizationImage } from '../../utilities/bridesmaids';
+import {
+  generateCustomizationImage,
+  removeLengthIdsFromCustomizationIds,
+  } from '../../utilities/bridesmaids';
 
 // Actions
 import * as BDActions from '../../actions/BDActions';
@@ -75,10 +78,11 @@ class BDCustomizationDetailsSelect extends Component {
       $$temporaryCustomizationDetails,
       setBDIncompatabilities,
     } = this.props;
+    const sanitizedCustomizationIds = customizationIds || $$temporaryCustomizationDetails.toJS();
 
     BDService.getBridesmaidsIncompatabilities({
       length: length || temporaryBDCustomizationLength,
-      customizationIds: customizationIds || $$temporaryCustomizationDetails.toJS(),
+      customizationIds: removeLengthIdsFromCustomizationIds(sanitizedCustomizationIds),
       productId,
     }).then((res) => {
       setBDIncompatabilities({ incompatabilities: res.body.incompatible_ids });
@@ -112,6 +116,24 @@ class BDCustomizationDetailsSelect extends Component {
       customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
       imgSizeStr: '142x142',
       length: temporaryBDCustomizationLength,
+      colorCode: colorNames[temporaryBDCustomizationColor],
+    });
+    return imageStr;
+  }
+
+  generateImageNameForLengthCustomizationId(customizationId) {
+    const {
+      availableLengths,
+      temporaryBDCustomizationColor,
+      $$temporaryCustomizationDetails,
+      sku,
+    } = this.props;
+    const { colorNames } = BDCustomizationConstants;
+    const imageStr = generateCustomizationImage({
+      sku: sku.toLowerCase(),
+      customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
+      imgSizeStr: '142x142',
+      length: availableLengths[customizationId],
       colorCode: colorNames[temporaryBDCustomizationColor],
     });
     return imageStr;
@@ -170,7 +192,7 @@ class BDCustomizationDetailsSelect extends Component {
                 'BDCustomizationDetailsSelect--selected': temporaryBDCustomizationLength === lengthStr,
               })}
               alt={item.id}
-              src={this.generateImageNameForCustomizationId(item.id)}
+              src={this.generateImageNameForLengthCustomizationId(item.id)}
             />
             <div className="BDCustomizationDetailsSelect__description">
               {lengthStr}

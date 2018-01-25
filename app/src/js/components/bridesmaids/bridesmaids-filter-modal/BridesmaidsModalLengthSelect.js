@@ -1,17 +1,15 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { find } from 'lodash';
 import classnames from 'classnames';
 
 // CSS
-import '../../../css/components/BridesmaidsLengthSelect.scss';
+// import '../../../css/components/BridesmaidsLengthSelect.scss';
 
 // Actions
-import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
+import BridesmaidsFilterActions from '../../../actions/BridesmaidsFilterActions';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
   const selectedLength = $$bridesmaidsFilterState.get('selectedLength');
@@ -45,7 +43,6 @@ class BridesmaidsLengthSelect extends Component {
     } = this.props;
 
     selectFilterLength({ selectedLength });
-    this.props.handleSelection();
   }
 
   getFilterLengths() {
@@ -56,14 +53,15 @@ class BridesmaidsLengthSelect extends Component {
 
     return bridesmaidsFilterLengths
       .map((item, index) => (
-        <div className="col-2" key={item.image + index}>
+        <div className="col-4" key={item.image + index}>
           <div
             onClick={() => this.handleLengthClick(item)}
             className={classnames(
               'BridesmaidsLengthSelect--image-wrapper u-center u-cursor--pointer',
+              'DressFilterLength',
               {
-                'DressFilterLength--selected': item.id == selectedLengthId
-              }
+                'DressFilterLength--selected': item.id === selectedLengthId,
+              },
             )}
           >
             <img className="u-width--full" alt={item.name} src={item.image} />
@@ -91,6 +89,8 @@ BridesmaidsLengthSelect.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
   })).isRequired,
+  selectedLengthId: PropTypes.string.isRequired,
+  // Redux Funcs
   selectFilterLength: PropTypes.func.isRequired,
 };
 

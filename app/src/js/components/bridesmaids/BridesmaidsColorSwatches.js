@@ -23,14 +23,16 @@ class BridesmaidsColorSwatches extends PureComponent {
   }
 
   generateColorSwatch(color) {
-    const { selectedColorId } = this.props;
+    const { selectedColorId, colClass } = this.props;
     const isActive = selectedColorId === color.id;
     const background = generateBackgroundValueFromColor(color);
 
     return (
       <div
         key={color.id}
-        className="col u-mb-big"
+        className={classnames(
+          `${colClass} u-mb-big`,
+        )}
       >
         <div
           onClick={this.handleColorSelection(color)}
@@ -71,12 +73,13 @@ class BridesmaidsColorSwatches extends PureComponent {
 
   render() {
     const {
+      gridClass,
       productDefaultColors,
     } = this.props;
 
     return (
       <div className="BridesmaidColorSwatches layout-container u-mt-normal u-text-align-left">
-        <div className="grid-9">
+        <div className={`${gridClass}`}>
           { productDefaultColors.map(c => this.generateColorSwatch(c, 0))}
         </div>
       </div>
@@ -86,6 +89,8 @@ class BridesmaidsColorSwatches extends PureComponent {
 
 BridesmaidsColorSwatches.propTypes = {
   // Passed Props
+  gridClass: PropTypes.string,
+  colClass: PropTypes.string,
   productDefaultColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -97,6 +102,8 @@ BridesmaidsColorSwatches.propTypes = {
 };
 
 BridesmaidsColorSwatches.defaultProps = {
+  gridClass: 'grid-9',
+  colClass: 'col',
   selectedColorId: null,
 };
 

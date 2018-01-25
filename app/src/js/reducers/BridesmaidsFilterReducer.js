@@ -4,9 +4,18 @@ import BridesmaidsFilterConstants from '../constants/BridesmaidsFilterConstants'
 
 
 export const $$initialState = Immutable.fromJS({
+  shouldChangeFilterPage: false,
+
+  temporaryColor: null,
   selectedColor: null,
+
+  temporarySilhouette: null,
   selectedSilhouette: null,
-  selectedLength: null,
+
+  temporaryLength: null,
+  selectedLength: [],
+
+  temporaryTopDetails: null,
   selectedTopDetails: [],
 
   // Init State, will not be touched post init
@@ -21,9 +30,9 @@ function findColorByPresentation(presentation, { $$state }) {
   return foundColor || null;
 }
 
-function findSilhoutteByName(name, { $$state }) {
-  const foundSilhoutte = find($$state.get('$$bridesmaidsFilterSilhouettes').toJS(), { name });
-  return foundSilhoutte || null;
+function findSilhouetteByName(name, { $$state }) {
+  const foundSilhouette = find($$state.get('$$bridesmaidsFilterSilhouettes').toJS(), { name });
+  return foundSilhouette || null;
 }
 
 function findLengthByName(name, { $$state }) {
@@ -47,34 +56,74 @@ function findTopDetailsByName(topDetails, { $$state }) {
 
 export default function BridesmaidsFilterReducer($$state = $$initialState, action = null) {
   switch (action.type) {
+    case BridesmaidsFilterConstants.BRIDESMAID_SHOULD_CHANGE_PAGE: {
+      return $$state.merge({
+        shouldChangeFilterPage: true,
+      });
+    }
+
+    case BridesmaidsFilterConstants.BRIDESMAID_SAVE_TEMPORARY_FILTER_SELECTIONS: {
+      return $$state.merge({
+        selectedColor: $$state.get('temporaryColor'),
+        selectedSilhouette: $$state.get('temporarySilhouette'),
+        selectedLength: $$state.get('temporaryLength'),
+        selectedTopDetails: $$state.get('temporaryTopDetails'),
+        shouldChangeFilterPage: true,
+      });
+    }
 
     // COLOR
     case BridesmaidsFilterConstants.SELECT_FILTER_COLOR: {
-      return $$state.merge({ selectedColor: action.selectedColor });
+      if (action.selectedColor) {
+        return $$state.merge({ selectedColor: action.selectedColor });
+      }
+
+      return $$state.merge({ temporaryColor: action.temporaryColor });
     }
 
     // SILHOUETTE
     case BridesmaidsFilterConstants.SELECT_FILTER_SILHOUETTE: {
-      return $$state.merge({ selectedSilhouette: action.selectedSilhouette });
+      if (action.selectedSilhoutte) {
+        return $$state.merge({ selectedSilhouette: action.selectedSilhouette });
+      }
+
+      return $$state.merge({ temporarySilhouette: action.temporarySilhouette });
     }
 
     // LENGTH
     case BridesmaidsFilterConstants.SELECT_FILTER_LENGTH: {
-      return $$state.merge({ selectedLength: action.selectedLength });
+      if (action.selectedLength) {
+        return $$state.merge({ selectedLength: action.selectedLength });
+      }
+
+      return $$state.merge({ temporaryLength: action.temporaryLength });
     }
 
     // TOP DETAILS
     case BridesmaidsFilterConstants.UPDATE_FILTER_TOP_DETAILS: {
-      return $$state.merge({ selectedTopDetails: action.selectedTopDetails });
+      if (action.selectedTopDetails) {
+        return $$state.merge({ selectedTopDetails: action.selectedTopDetails });
+      }
+
+      return $$state.merge({ temporaryTopDetails: action.temporaryTopDetails });
     }
 
     // HYDRATING SELECTED FILTERS
     case BridesmaidsFilterConstants.HYDRATE_BRIDESMAID_FILTERS_FROM_URL: {
+      const color = findColorByPresentation(action.queryObj.selectedColor, { $$state });
+      const silhouette = findSilhouetteByName(action.queryObj.selectedSilhouette, { $$state });
+      const length = findLengthByName(action.queryObj.selectedLength, { $$state });
+      const details = findTopDetailsByName(action.queryObj.selectedTopDetails, { $$state });
+
       return $$state.merge({
-        selectedColor: findColorByPresentation(action.queryObj.selectedColor, { $$state }),
-        selectedSilhouette: findSilhoutteByName(action.queryObj.selectedSilhouette, { $$state }),
-        selectedLength: findLengthByName(action.queryObj.selectedLength, { $$state }),
-        selectedTopDetails: findTopDetailsByName(action.queryObj.selectedTopDetails, { $$state }),
+        temporaryColor: color,
+        selectedColor: color,
+        temporarySilhouette: silhouette,
+        selectedSilhouette: silhouette,
+        temporaryLength: length,
+        selectedLength: length,
+        temporaryTopDetails: details,
+        selectedTopDetails: details,
       });
     }
 

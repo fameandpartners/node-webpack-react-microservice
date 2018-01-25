@@ -100,7 +100,7 @@
   margin-bottom: 50px;
 }
 
-.u-mb-huge {
+.u-mb--huge {
   margin-bottom: 150px;
 }
 
@@ -176,6 +176,10 @@
 .u-overflow-y--scroll {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+}
+
+.u-scroll-lock {
+  overflow-y: hidden;
 }
 
 .u-uppercase {

@@ -23,6 +23,7 @@ import LoadingSpinner from './components/generic/LoadingSpinner';
 
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
+import { removeLengthIdsFromCustomizationIds } from './utilities/bridesmaids';
 
 // Services
 import BDService from './services/BDService';
@@ -66,8 +67,8 @@ function stateToProps(state) {
     // Necessary for Incompatabilities Call
     productId: state.$$productState.get('productId'),
     customizationIds: state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS(),
-    length: state.$$bdCustomizationState.get('selectedBDCustomizationLength'),
     isLoading: state.$$bdCustomizationState.get('incompatabilitiesLoading'),
+    availableLengths: state.$$bdCustomizationState.get('availableBDCustomizationLengths').toJS(),
   };
 }
 
@@ -101,17 +102,20 @@ class BridesmaidApp extends Component {
 
   checkForIncompatabilities() {
     const {
-      productId,
+      availableLengths,
       customizationIds,
-      length,
+      productId,
       setBDIncompatabilities,
       setBDIncompatabilitiesLoading,
     } = this.props;
-
+    const lengthKeys = Object.keys(availableLengths);
+    const length = availableLengths[customizationIds.find(
+      id => lengthKeys.indexOf(id) > -1,
+    )];
     setBDIncompatabilitiesLoading({ isLoading: true });
     BDService.getBridesmaidsIncompatabilities({
       length,
-      customizationIds,
+      customizationIds: removeLengthIdsFromCustomizationIds(customizationIds),
       productId,
     }).then((res) => {
       setBDIncompatabilities({ incompatabilities: res.body.incompatible_ids });
@@ -197,14 +201,16 @@ BridesmaidApp.propTypes = {
   // Necessary for incompat Call
   productId: PropTypes.string.isRequired,
   customizationIds: PropTypes.arrayOf(PropTypes.string).isRequired,
-  length: PropTypes.string.isRequired,
   setBDIncompatabilities: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   setBDIncompatabilitiesLoading: PropTypes.func.isRequired,
+  availableLengths: PropTypes.object,
 };
 
 BridesmaidApp.defaultProps = {
+  availableLengths: null,
   isLoading: false,
+
 };
 
 export default connect(stateToProps, dispatchToProps)(BridesmaidApp);

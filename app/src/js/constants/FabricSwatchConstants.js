@@ -1,15 +1,13 @@
 import { assign } from 'lodash';
 import mirrorCreator from 'mirror-creator';
 
-const modalIds = assign({},
+const actionTypes = assign({},
   mirrorCreator([
-    'BD_COLOR_SELECTION_MODAL',
-    'BD_CUSTOMIZATION_MODAL',
-    'BD_FILTER_MODAL',
+    'UPDATE_FABRIC_SWATCH_ORDER',
   ]),
 );
 
 export default assign(
   {},
-  modalIds,
+  actionTypes,
 );

@@ -7,6 +7,10 @@ import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 import ReactHoverObserver from 'react-hover-observer';
 
+// Breakpoint lib
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
+
 // CSS
 import '../../../css/components/BridesmaidsFilterHeader.scss';
 
@@ -20,13 +24,14 @@ import BridesmaidsTopDetailSelect from '../../components/bridesmaids/Bridesmaids
 
 // Utilities
 import { isExtremeLightLuminance } from '../../utilities/color';
-import { loadFilteredResultsPage } from '../../utilities/bridesmaids-helpers';
 
 // Actions
 import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
+import ModalActions from '../../actions/ModalActions';
 
 // Constants
 import BridesmaidsHeaderFilterConstants from '../../constants/BridesmaidsFilterHeaderConstants';
+import BDModalConstants from '../../constants/BDModalConstants';
 
 function stateToProps({ $$bridesmaidsFilterState }) {
   const $$selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
@@ -45,10 +50,14 @@ function stateToProps({ $$bridesmaidsFilterState }) {
 
 function dispatchToProps(dispatch) {
   const {
+    bridesmaidShouldChangePage,
     selectFilterLength,
   } = bindActionCreators(BridesmaidsFilterActions, dispatch);
+  const { activateModal } = bindActionCreators(ModalActions, dispatch);
 
   return {
+    activateModal,
+    bridesmaidShouldChangePage,
     selectFilterLength,
   };
 }
@@ -69,31 +78,12 @@ class BridesmaidsFilterHeader extends Component {
     return '';
   }
 
-  handleColorSelection() {
-    const {
-      /* eslint-disable react/prop-types */
-      bridesmaidsFilterObj,
-      /* eslint-enable react/prop-types */
-    } = this.props;
-    loadFilteredResultsPage(bridesmaidsFilterObj);
+  handleOpenFilterModalClick() {
+    this.props.activateModal({ modalId: BDModalConstants.BD_FILTER_MODAL });
   }
 
-  handleLengthSelection() {
-    const {
-      /* eslint-disable react/prop-types */
-      bridesmaidsFilterObj,
-      /* eslint-enable react/prop-types */
-    } = this.props;
-    loadFilteredResultsPage(bridesmaidsFilterObj);
-  }
-
-  handleSilhouetteSelection() {
-    const {
-      /* eslint-disable react/prop-types */
-      bridesmaidsFilterObj,
-      /* eslint-enable react/prop-types */
-    } = this.props;
-    loadFilteredResultsPage(bridesmaidsFilterObj);
+  changeFilterPage() {
+    this.props.bridesmaidShouldChangePage();
   }
 
   generateTopStyleText() {
@@ -107,6 +97,7 @@ class BridesmaidsFilterHeader extends Component {
 
   render() {
     const {
+      breakpoint,
       selectedColor,
       selectedSilhouette,
       selectedLength,
@@ -125,48 +116,63 @@ class BridesmaidsFilterHeader extends Component {
         }}
       >
         <ReactHoverObserver hoverOffDelayInMs={100}>
-          <BridesmaidsTabs
-            filters={[
-              {
-                id: BridesmaidsHeaderFilterConstants.SELECTED_COLOR,
-                heading: `Color: ${selectedColor.presentation}`,
-                content: (
-                  <BridesmaidsColorSelect
-                    handleSelection={this.handleColorSelection}
-                  />
-                ),
-              },
-              {
-                id: BridesmaidsHeaderFilterConstants.SELECTED_SILHOUETTE,
-                heading: `Silhouette: ${selectedSilhouette.name}`,
-                content: (
-                  <BridesmaidsSilhouetteSelect
-                    handleSelection={this.handleSilhouetteSelection}
-                  />
-                ),
-              },
-              {
-                id: BridesmaidsHeaderFilterConstants.SELECTED_LENGTH,
-                heading: `Length: ${selectedLength.name}`,
-                content: (
-                  <BridesmaidsLengthSelect
-                    handleSelection={this.handleLengthSelection}
-                  />
-                ),
-              },
-              {
-                id: BridesmaidsHeaderFilterConstants.SELECTED_TOP_DETAILS,
-                heading: this.generateTopStyleText(),
-                content: (
-                  <BridesmaidsTopDetailSelect
-                    handleSelection={this.handleLengthSelection}
-                  />
-                ),
-              },
-            ]}
-            headingClasses="Bridesmaids_SizeGuideTabs__heading u-position--relative"
-            contentClasses="Bridesmaids_SizeGuideTabs__content layout-container"
-          />
+          {
+            breakpoint === 'mobile' || breakpoint === 'tablet'
+            ? (
+              <div className="u-display--inline u-cursor--pointer">
+                <div
+                  className="Tabs__list grid-middle"
+                  onClick={this.handleOpenFilterModalClick}
+                >
+                  Filter
+                </div>
+              </div>
+            )
+            : (
+              <BridesmaidsTabs
+                filters={[
+                  {
+                    id: BridesmaidsHeaderFilterConstants.SELECTED_COLOR,
+                    heading: `Color: ${selectedColor.presentation}`,
+                    content: (
+                      <BridesmaidsColorSelect
+                        handleSelection={this.changeFilterPage}
+                      />
+                  ),
+                  },
+                  {
+                    id: BridesmaidsHeaderFilterConstants.SELECTED_SILHOUETTE,
+                    heading: `Silhouette: ${selectedSilhouette.name}`,
+                    content: (
+                      <BridesmaidsSilhouetteSelect
+                        handleSelection={this.changeFilterPage}
+                      />
+                  ),
+                  },
+                  {
+                    id: BridesmaidsHeaderFilterConstants.SELECTED_LENGTH,
+                    heading: `Length: ${selectedLength.name}`,
+                    content: (
+                      <BridesmaidsLengthSelect
+                        handleSelection={this.changeFilterPage}
+                      />
+                  ),
+                  },
+                  {
+                    id: BridesmaidsHeaderFilterConstants.SELECTED_TOP_DETAILS,
+                    heading: this.generateTopStyleText(),
+                    content: (
+                      <BridesmaidsTopDetailSelect
+                        handleSelection={this.changeFilterPage}
+                      />
+                  ),
+                  },
+                ]}
+                headingClasses="Bridesmaids_SizeGuideTabs__heading u-position--relative"
+                contentClasses="Bridesmaids_SizeGuideTabs__content layout-container"
+              />
+            )
+          }
         </ReactHoverObserver>
       </div>
     );
@@ -174,10 +180,16 @@ class BridesmaidsFilterHeader extends Component {
 }
 
 BridesmaidsFilterHeader.propTypes = {
+  // Decorator Props
+  breakpoint: PropTypes.string.isRequired,
+  // Redux Props
+  bridesmaidShouldChangePage: PropTypes.func.isRequired,
   selectedColor: PropTypes.string,
   selectedSilhouette: PropTypes.string,
   selectedLength: PropTypes.string,
   selectedTopDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // Redux Funcs
+  activateModal: PropTypes.func.isRequired,
 };
 
 BridesmaidsFilterHeader.defaultProps = {
@@ -186,4 +198,6 @@ BridesmaidsFilterHeader.defaultProps = {
   selectedLength: '',
 };
 
-export default connect(stateToProps, dispatchToProps)(BridesmaidsFilterHeader);
+export default Resize(PDPBreakpoints)(
+  connect(stateToProps, dispatchToProps)(BridesmaidsFilterHeader),
+);

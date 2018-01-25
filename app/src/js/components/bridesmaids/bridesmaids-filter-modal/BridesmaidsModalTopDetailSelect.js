@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
@@ -8,20 +8,21 @@ import { findIndex } from 'lodash';
 import classnames from 'classnames';
 
 // Actions
-import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
+import BridesmaidsFilterActions from '../../../actions/BridesmaidsFilterActions';
 
 // CSS
-import '../../../css/components/BridesmaidsTopDetailSelect.scss';
-import SubmitButton from '../../../js/components/generic/Button';
+import '../../../../css/components/BridesmaidsTopDetailSelect.scss';
 
 
 function stateToProps({ $$bridesmaidsFilterState }) {
-  const selectedTopDetails = $$bridesmaidsFilterState.get('selectedTopDetails');
+  const temporaryTopDetails = $$bridesmaidsFilterState.get('temporaryTopDetails');
   const $$bridesmaidsFilterTopDetails = $$bridesmaidsFilterState.get('$$bridesmaidsFilterTopDetails');
 
   return {
-    selectedTopDetails: selectedTopDetails ? selectedTopDetails.toJS() : null,
-    bridesmaidsFilterTopDetails: $$bridesmaidsFilterTopDetails ? $$bridesmaidsFilterTopDetails.toJS() : [],
+    temporaryTopDetails: temporaryTopDetails ? temporaryTopDetails.toJS() : null,
+    bridesmaidsFilterTopDetails: $$bridesmaidsFilterTopDetails
+      ? $$bridesmaidsFilterTopDetails.toJS()
+      : [],
   };
 }
 
@@ -35,7 +36,7 @@ function dispatchToProps(dispatch) {
   };
 }
 
-class BridesmaidsTopDetailSelect extends Component {
+class BridesmaidsModalTopDetailSelect extends Component {
   constructor(props) {
     super(props);
     autobind(this);
@@ -43,38 +44,36 @@ class BridesmaidsTopDetailSelect extends Component {
 
   hasDetailSelected(id) {
     const {
-      selectedTopDetails,
+      temporaryTopDetails,
     } = this.props;
 
-    return selectedTopDetails.filter(item => item.id == id).length;
+    return temporaryTopDetails.filter(item => item.id === id).length;
   }
 
   handleDetailClick(item) {
     const {
-      selectedTopDetails,
+      temporaryTopDetails,
       updateFilterTopDetails,
     } = this.props;
 
-    let updatedTopDetails = [...selectedTopDetails];
+    const updatedTopDetails = [...temporaryTopDetails];
 
-    if ((selectedTopDetails.length > 2) && !this.hasDetailSelected(item.id)) {
+    if ((temporaryTopDetails.length > 2) && !this.hasDetailSelected(item.id)) {
       return console.log('ERR: Cannot select more than 3 TOP DETAILS!');
     }
 
     if (this.hasDetailSelected(item.id)) {
-      let indexToRemove = findIndex(updatedTopDetails, { id: item.id });
+      const indexToRemove = findIndex(updatedTopDetails, { id: item.id });
       updatedTopDetails.splice(indexToRemove, 1);
-      updateFilterTopDetails({ selectedTopDetails: updatedTopDetails });
+      updateFilterTopDetails({ temporaryTopDetails: updatedTopDetails });
     }
 
     if (!this.hasDetailSelected(item.id)) {
       updatedTopDetails.push(item);
-      updateFilterTopDetails({ selectedTopDetails: updatedTopDetails });
+      updateFilterTopDetails({ temporaryTopDetails: updatedTopDetails });
     }
-  }
 
-   handleSubmitClick() {
-    this.props.handleSelection();
+    return null;
   }
 
   getFilterTopDetails() {
@@ -84,15 +83,15 @@ class BridesmaidsTopDetailSelect extends Component {
 
     return bridesmaidsFilterTopDetails
       .map((item, index) => (
-        <div className="col-1" key={item.image + index}>
+        <div className="col-6" key={item.image + index}>
           <div
             onClick={() => this.handleDetailClick(item)}
             className={classnames(
               'DressFilterTopDetail',
               'brick u-cursor--pointer',
               {
-                'DressFilterTopDetail--selected': this.hasDetailSelected(item.id)
-              }
+                'DressFilterTopDetail--selected': this.hasDetailSelected(item.id),
+              },
             )}
           >
             <img className="u-width--full" alt={item.name} src={item.image} />
@@ -102,50 +101,38 @@ class BridesmaidsTopDetailSelect extends Component {
       ));
   }
 
-  componentDidMount() {
-    console.log(this.props.selectedTopDetails);
-  }
-
   render() {
     const { bridesmaidsFilterTopDetails } = this.props;
     const gridLength = bridesmaidsFilterTopDetails.length;
 
     return (
-      <div className="BridesmaidsTopDetailSelect">
+      <div className="BridesmaidsModalTopDetailSelect">
         <div
           className={classnames(
-            'BridesmaidsTopDetailSelect__content u-center',
-            `grid-${gridLength}`
+            'BridesmaidsTopDetailSelect__content u-center grid-12-center',
+            `grid-${gridLength}`,
           )}
         >
           {this.getFilterTopDetails()}
-
-          {this.props.handleSelection ? (
-            <SubmitButton
-              className="float--right bottom-right-tiny"
-              handleClick={this.handleSubmitClick}
-              text={'Apply'}
-            />
-          ) : null
-        }
         </div>
       </div>
     );
   }
 }
 
-BridesmaidsTopDetailSelect.propTypes = {
+BridesmaidsModalTopDetailSelect.propTypes = {
   bridesmaidsFilterTopDetails: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     image: PropTypes.string,
   })).isRequired,
+  temporaryTopDetails: PropTypes.array,
+  // Redux Funcs
   updateFilterTopDetails: PropTypes.func.isRequired,
-  selectedTopDetails: PropTypes.array,
 };
 
-BridesmaidsTopDetailSelect.defaultProps = {
-  selectedTopDetails: [],
+BridesmaidsModalTopDetailSelect.defaultProps = {
+  temporaryTopDetails: [],
 };
 
-export default connect(stateToProps, dispatchToProps)(BridesmaidsTopDetailSelect);
+export default connect(stateToProps, dispatchToProps)(BridesmaidsModalTopDetailSelect);

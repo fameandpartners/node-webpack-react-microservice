@@ -62,6 +62,7 @@ const productCustomizationlengthNames = {
     l2: 'Midi',
     l3: 'Ankle',
     l4: 'Full',
+    l5: 'Extra',
   },
 };
 

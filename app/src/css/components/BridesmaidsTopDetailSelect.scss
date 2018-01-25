@@ -1,4 +1,9 @@
+.DressFilterTopDetail {
+  transition: 300ms ease-in-out;
+  opacity: 0.33;
+}
+
 .DressFilterTopDetail--selected {
-  color: #f00;
   font-weight: bold;
+  opacity: 1;
 }
