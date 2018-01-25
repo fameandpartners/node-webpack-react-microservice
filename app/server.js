@@ -70,6 +70,8 @@ app.get('/webpack/asset-manifest', (req, res) => {
     bridesmaidCssBundle: clientAssets['bridesmaid.css'],
     bridesmaidsFilterJsBundle: clientAssets['bridesmaidsFilter.js'],
     bridesmaidsFilterCssBundle: clientAssets['bridesmaidsFilter.css'],
+    swatchJsBundle: clientAssets['swatch.js'],
+    swatchCssBundle: clientAssets['swatch.css'],
   }
   res.send(asset_paths);
 });

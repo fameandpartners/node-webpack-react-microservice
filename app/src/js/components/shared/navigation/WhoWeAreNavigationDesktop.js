@@ -6,7 +6,7 @@ import Resize from '../../../decorators/Resize';
 import PDPBreakpoints from '../../../libs/PDPBreakpoints';
 
 // Assets
-import internshipImg from '../../../../img/internship.jpg';
+import invitefriendsImg from '../../../../img/InsideFame-Tile.jpg';
 import '../../../../css/components/WhoWeAreNavigation.scss';
 
 // Constants
@@ -34,15 +34,15 @@ class WhoWeAreNavigation extends PureComponent {
           />
           { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
           <div className="WhoWeAreNavigation__ad">
-            <a href="/it-girl">
+            <a href="/invite?img">
               <img
-                alt="Internship Ad"
+                alt="Invite Friends Ad"
                 className="WhoWeAreNavigation__image u-width--full"
-                src={internshipImg}
+                src={invitefriendsImg}
               />
             </a>
-            <a href="/it-girl" className="link">
-              <span>Win an Internship</span>
+            <a href="/invite?img" className="link">
+              <span>Tell your friends, GET $25 OFF</span>
             </a>
           </div>
         }

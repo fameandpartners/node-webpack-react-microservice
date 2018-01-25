@@ -26,7 +26,7 @@ class ProductFabricInfo extends PureComponent {
             )
           }
           <span>
-            Due to dying process, product hue may<br />
+            Due to dyeing process, product hue may<br />
             look slightly different from image.
           </span>
         </div>
