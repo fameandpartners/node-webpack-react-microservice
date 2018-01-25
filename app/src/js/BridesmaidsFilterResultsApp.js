@@ -36,6 +36,7 @@ import {
   // transformFilterSilhouettes,
   // transformFilterLengths,
   // transformFilterTopDetails,
+  loadFilteredResultsPage,
   getFilteredResults,
 } from './utilities/bridesmaids-helpers';
 
@@ -61,11 +62,12 @@ import '../css/components/BridesmaidsFilterResultsApp.scss';
 //   .config('https://bc3111a59f064fbba31becef25d2fb7c@sentry.io/88252')
 //   .install();
 
-
-function stateToProps(state) {
-  const modalOpen = state.$$modalState.get('shouldAppear');
+function stateToProps({ $$bridesmaidsFilterState, $$modalState }) {
+  const modalOpen = $$modalState.get('shouldAppear');
   return {
     lockBody: modalOpen,
+    shouldChangeFilterPage: $$bridesmaidsFilterState.get('shouldChangeFilterPage'),
+    bridesmaidsFilterObj: $$bridesmaidsFilterState.toJS(),
   };
 }
 
@@ -86,6 +88,12 @@ class BridesmaidsFilterResultsApp extends Component {
     this.state = {
       filteredDresses: [],
     };
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.shouldChangeFilterPage) {
+      loadFilteredResultsPage(nextProps.bridesmaidsFilterObj);
+    }
   }
 
   componentDidMount() {
@@ -146,9 +154,12 @@ class BridesmaidsFilterResultsApp extends Component {
   }
 }
 
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/no-unused-prop-types */
 BridesmaidsFilterResultsApp.propTypes = {
   // Redux
   activateModal: PropTypes.func.isRequired,
+  bridesmaidsFilterObj: PropTypes.object.isRequired,
   lockBody: PropTypes.bool.isRequired,
   hydrateFiltersFromURL: PropTypes.func.isRequired,
 };

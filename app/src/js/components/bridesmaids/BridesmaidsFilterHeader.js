@@ -24,7 +24,6 @@ import BridesmaidsTopDetailSelect from '../../components/bridesmaids/Bridesmaids
 
 // Utilities
 import { isExtremeLightLuminance } from '../../utilities/color';
-import { loadFilteredResultsPage } from '../../utilities/bridesmaids-helpers';
 
 // Actions
 import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
@@ -50,11 +49,15 @@ function stateToProps({ $$bridesmaidsFilterState }) {
 }
 
 function dispatchToProps(dispatch) {
-  const { selectFilterLength } = bindActionCreators(BridesmaidsFilterActions, dispatch);
+  const {
+    bridesmaidShouldChangePage,
+    selectFilterLength,
+  } = bindActionCreators(BridesmaidsFilterActions, dispatch);
   const { activateModal } = bindActionCreators(ModalActions, dispatch);
 
   return {
     activateModal,
+    bridesmaidShouldChangePage,
     selectFilterLength,
   };
 }
@@ -79,31 +82,8 @@ class BridesmaidsFilterHeader extends Component {
     this.props.activateModal({ modalId: BDModalConstants.BD_FILTER_MODAL });
   }
 
-  handleColorSelection() {
-    const {
-      /* eslint-disable react/prop-types */
-      bridesmaidsFilterObj,
-      /* eslint-enable react/prop-types */
-    } = this.props;
-    loadFilteredResultsPage(bridesmaidsFilterObj);
-  }
-
-  handleLengthSelection() {
-    const {
-      /* eslint-disable react/prop-types */
-      bridesmaidsFilterObj,
-      /* eslint-enable react/prop-types */
-    } = this.props;
-    loadFilteredResultsPage(bridesmaidsFilterObj);
-  }
-
-  handleSilhouetteSelection() {
-    const {
-      /* eslint-disable react/prop-types */
-      bridesmaidsFilterObj,
-      /* eslint-enable react/prop-types */
-    } = this.props;
-    loadFilteredResultsPage(bridesmaidsFilterObj);
+  changeFilterPage() {
+    this.props.bridesmaidShouldChangePage();
   }
 
   generateTopStyleText() {
@@ -156,7 +136,7 @@ class BridesmaidsFilterHeader extends Component {
                     heading: `Color: ${selectedColor.presentation}`,
                     content: (
                       <BridesmaidsColorSelect
-                        handleSelection={this.handleColorSelection}
+                        handleSelection={this.changeFilterPage}
                       />
                   ),
                   },
@@ -165,7 +145,7 @@ class BridesmaidsFilterHeader extends Component {
                     heading: `Silhouette: ${selectedSilhouette.name}`,
                     content: (
                       <BridesmaidsSilhouetteSelect
-                        handleSelection={this.handleSilhouetteSelection}
+                        handleSelection={this.changeFilterPage}
                       />
                   ),
                   },
@@ -174,7 +154,7 @@ class BridesmaidsFilterHeader extends Component {
                     heading: `Length: ${selectedLength.name}`,
                     content: (
                       <BridesmaidsLengthSelect
-                        handleSelection={this.handleLengthSelection}
+                        handleSelection={this.changeFilterPage}
                       />
                   ),
                   },
@@ -183,7 +163,7 @@ class BridesmaidsFilterHeader extends Component {
                     heading: this.generateTopStyleText(),
                     content: (
                       <BridesmaidsTopDetailSelect
-                        handleSelection={this.handleLengthSelection}
+                        handleSelection={this.changeFilterPage}
                       />
                   ),
                   },
@@ -203,6 +183,7 @@ BridesmaidsFilterHeader.propTypes = {
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
   // Redux Props
+  bridesmaidShouldChangePage: PropTypes.func.isRequired,
   selectedColor: PropTypes.string,
   selectedSilhouette: PropTypes.string,
   selectedLength: PropTypes.string,

@@ -7,6 +7,18 @@ export function hydrateFiltersFromURL(queryObj) {
   };
 }
 
+export function bridesmaidShouldChangePage() {
+  return {
+    type: BridesmaidsFilterConstants.BRIDESMAID_SHOULD_CHANGE_PAGE,
+  };
+}
+
+export function saveTemporaryFilterSelections() {
+  return {
+    type: BridesmaidsFilterConstants.BRIDESMAID_SAVE_TEMPORARY_FILTER_SELECTIONS,
+  };
+}
+
 export function selectFilterColor({ selectedColor, temporaryColor }) {
   return {
     type: BridesmaidsFilterConstants.SELECT_FILTER_COLOR,
@@ -40,6 +52,7 @@ export function updateFilterTopDetails({ selectedTopDetails, temporaryTopDetails
 }
 
 export default {
+  bridesmaidShouldChangePage,
   hydrateFiltersFromURL,
   selectFilterColor,
   selectFilterSilhouette,

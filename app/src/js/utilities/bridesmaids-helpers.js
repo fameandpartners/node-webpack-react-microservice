@@ -65,10 +65,10 @@ export function loadFilteredResultsPage(data) {
   /**
    * EXPECTED OBJECT:
    *  {
-   *    selectedColor: string,
-   *    selectedSilhouette: string,
-   *    selectedLength: string,
-   *    selectedTopDetails: [string]
+   *    selectedColor: Object,
+   *    selectedSilhouette: Object,
+   *    selectedLength: Object,
+   *    selectedTopDetails: [Object]
    *  }
    */
 

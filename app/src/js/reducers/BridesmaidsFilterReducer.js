@@ -4,6 +4,8 @@ import BridesmaidsFilterConstants from '../constants/BridesmaidsFilterConstants'
 
 
 export const $$initialState = Immutable.fromJS({
+  shouldChangeFilterPage: false,
+
   temporaryColor: null,
   selectedColor: null,
 
@@ -54,6 +56,21 @@ function findTopDetailsByName(topDetails, { $$state }) {
 
 export default function BridesmaidsFilterReducer($$state = $$initialState, action = null) {
   switch (action.type) {
+    case BridesmaidsFilterConstants.BRIDESMAID_SHOULD_CHANGE_PAGE: {
+      return $$state.merge({
+        shouldChangeFilterPage: true,
+      });
+    }
+
+    case BridesmaidsFilterConstants.BRIDESMAID_SAVE_TEMPORARY_FILTER_SELECTIONS: {
+      return $$state.merge({
+        selectedColor: $$state.get('temporaryColor'),
+        selectedSilhouette: $$state.get('temporarySilhouette'),
+        selectedLength: $$state.get('temporaryLength'),
+        selectedTopDetails: $$state.get('temporaryTopDetails'),
+        shouldChangeFilterPage: true,
+      });
+    }
 
     // COLOR
     case BridesmaidsFilterConstants.SELECT_FILTER_COLOR: {

@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Components
 import ModalContainer from '../../modal/ModalContainer';
@@ -12,6 +13,9 @@ import BridesmaidsModalColorSelection from './BridesmaidsModalColorSelection';
 import BridesmaidsModalSilhouetteSelect from './BridesmaidsModalSilhouetteSelect';
 import BridesmaidsModalLengthSelect from './BridesmaidsModalLengthSelect';
 import BridesmaidsModalTopDetailSelect from './BridesmaidsModalTopDetailSelect';
+
+// Actions
+import * as BridesmaidsFilterActions from '../../../actions/BridesmaidsFilterActions';
 
 // Constants
 import BDModalConstants from '../../../constants/BDModalConstants';
@@ -34,9 +38,10 @@ function stateToProps({ $$bridesmaidsFilterState }) {
 }
 
 
-function dispatchToProps() {
+function dispatchToProps(dispatch) {
+  const actions = bindActionCreators(BridesmaidsFilterActions, dispatch);
   return {
-
+    saveTemporaryFilterSelections: actions.saveTemporaryFilterSelections,
   };
 }
 
@@ -48,6 +53,11 @@ class BridesmaidsFilterModal extends PureComponent {
 
   handleCloseModal() {
     this.props.activateModal({ shouldAppear: false });
+  }
+
+  handleApplyTemporarySelections() {
+    this.props.saveTemporaryFilterSelections();
+    this.handleCloseModal();
   }
 
   render() {
@@ -102,8 +112,8 @@ class BridesmaidsFilterModal extends PureComponent {
 
           <div className="BridesmaidsFilterModal__button u-position--fixed">
             <ButtonLedge
-              handleLeftButtonClick={() => {}}
-              handleRightButtonClick={() => {}}
+              handleLeftButtonClick={this.handleCloseModal}
+              handleRightButtonClick={this.handleApplyTemporarySelections}
               rightText="Apply"
             />
           </div>
@@ -117,6 +127,7 @@ BridesmaidsFilterModal.propTypes = {
   // Redux Props
   // Redux Actions
   activateModal: PropTypes.func.isRequired,
+  saveTemporaryFilterSelections: PropTypes.func.isRequired,
 };
 
 BridesmaidsFilterModal.defaultProps = {
