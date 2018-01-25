@@ -27,6 +27,14 @@ export const $$initialState = Immutable.fromJS({
   lineItems: [],
 });
 
+// hack to allow fabric swatch images
+function pluckCorrectImage(lineItem) {
+  if (lineItem.name.includes('Fabric Swatch')) {
+    return lineItem.color.image_file_name;
+  }
+  return lineItem.image.original;
+}
+
 function transformCartDataLineItems(lineItems) {
   return lineItems
     .filter(li => li.name !== 'RETURN_INSURANCE')
@@ -52,15 +60,6 @@ function transformCartDataLineItems(lineItems) {
       },
       addons: li.customizations,
     }));
-}
-
-// hack to allow fabric swatch images
-function pluckCorrectImage(lineItem) {
-  if (lineItem.name.includes('Fabric Swatch')) {
-    return lineItem.color.image_file_name;
-  } else {
-    return lineItem.image.original;
-  }
 }
 
 function transformCartData(cart) {

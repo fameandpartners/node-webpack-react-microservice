@@ -51,7 +51,13 @@ class FabricSwatchProduct extends PureComponent {
             className="FabricSwatchProduct"
             style={{ backgroundColor: swatch.color_hex }}
             onClick={this.handleOnClick}
-          />
+          >
+            <img
+              className="FabricSwatchProductImage"
+              src={swatch.color_image_url}
+              alt={`Swatch ${swatch.color_name}`}
+            />
+          </div>
         </div>
         <span className="FabricSwatchProductDetails">
           {this.productDisplayText()}
@@ -69,6 +75,7 @@ FabricSwatchProduct.propTypes = {
     color_name: PropTypes.string,
     color_id: PropTypes.number,
     color_hex: PropTypes.string,
+    color_image_url: PropTypes.string,
     price: PropTypes.float,
   }).isRequired,
   handleSwatchSelection: PropTypes.func.isRequired,
