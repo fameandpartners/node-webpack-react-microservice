@@ -138,8 +138,9 @@ class CustomizationButtonLedge extends Component {
   handleCustomizationSave() {
     const {
       activeModalId,
+      modalIsOpen,
     } = this.props;
-    if (activeModalId === ModalConstants.SIZE_SELECTION_MODAL) {
+    if (modalIsOpen && activeModalId === ModalConstants.SIZE_SELECTION_MODAL) {
       this.handleSaveSizeSelection();
     } else {
       // Everything else we save temporary into selections
