@@ -53,7 +53,9 @@ BodySection.propTypes = {
     type: PropTypes.string,
     title: PropTypes.string,
     sections: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
       img: PropTypes.string,
+      url: PropTypes.string,
     })),
   }).isRequired,
 };
