@@ -38,6 +38,7 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     sku: $$productState.get('sku'),
     productId: $$productState.get('productId'),
     incompatabilities: $$bdCustomizationState.get('incompatabilities'),
+    incompatabilitiesLoading: $$bdCustomizationState.get('incompatabilitiesLoading'),
     $$temporaryCustomizationDetails,
     temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
     productDefaultColors: $$productState.get('productDefaultColors').toJS(),
@@ -52,6 +53,7 @@ function dispatchToProps(dispatch) {
     setBDTemporaryColor,
     setBDTemporaryLength,
     setBDIncompatabilities,
+    setBDIncompatabilitiesLoading,
   } = bindActionCreators(BDActions, dispatch);
 
   return {
@@ -59,6 +61,7 @@ function dispatchToProps(dispatch) {
     setBDTemporaryColor,
     setBDTemporaryLength,
     setBDIncompatabilities,
+    setBDIncompatabilitiesLoading,
   };
 }
 
@@ -77,15 +80,25 @@ class BDCustomizationDetailsSelect extends Component {
       temporaryBDCustomizationLength,
       $$temporaryCustomizationDetails,
       setBDIncompatabilities,
+      setBDIncompatabilitiesLoading,
     } = this.props;
     const sanitizedCustomizationIds = customizationIds || $$temporaryCustomizationDetails.toJS();
 
+    setBDIncompatabilitiesLoading({ isLoading: true });
     BDService.getBridesmaidsIncompatabilities({
       length: length || temporaryBDCustomizationLength,
       customizationIds: removeLengthIdsFromCustomizationIds(sanitizedCustomizationIds),
       productId,
-    }).then((res) => {
-      setBDIncompatabilities({ incompatabilities: res.body.incompatible_ids });
+    }).then(({ body, error }) => {
+      if (error) {
+        console.log('perform some error handling');
+      }
+
+      setBDIncompatabilities({
+        temporaryCustomizationCombinationId: body.id,
+        incompatabilities: body.incompatible_ids,
+      });
+      setBDIncompatabilitiesLoading({ isLoading: false });
     });
     // const length
     // params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
@@ -208,6 +221,7 @@ class BDCustomizationDetailsSelect extends Component {
       addonOptions,
       groupName,
       incompatabilities,
+      incompatabilitiesLoading,
       $$temporaryCustomizationDetails,
     } = this.props;
 
@@ -223,6 +237,7 @@ class BDCustomizationDetailsSelect extends Component {
           <img
             className={classnames({
               'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
+              'BDCustomizationDetailsSelect--loading': incompatabilitiesLoading,
             })}
             alt={item.id}
             src={this.generateImageNameForCustomizationId(item.id)}
@@ -279,6 +294,7 @@ BDCustomizationDetailsSelect.propTypes = {
   }),
   groupName: PropTypes.string,
   incompatabilities: PropTypes.arrayOf(PropTypes.string),
+  incompatabilitiesLoading: PropTypes.arrayOf(PropTypes.string),
   productId: PropTypes.number.isRequired,
   productDefaultColors: PropTypes.array.isRequired,
   temporaryBDCustomizationColor: PropTypes.string.isRequired,
@@ -290,6 +306,7 @@ BDCustomizationDetailsSelect.propTypes = {
   setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
   setBDTemporaryLength: PropTypes.func.isRequired,
   setBDIncompatabilities: PropTypes.func.isRequired,
+  setBDIncompatabilitiesLoading: PropTypes.func.isRequired,
 };
 
 BDCustomizationDetailsSelect.defaultProps = {

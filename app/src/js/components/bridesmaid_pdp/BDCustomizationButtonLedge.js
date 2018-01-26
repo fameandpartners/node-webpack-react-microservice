@@ -12,6 +12,7 @@ import '../../../css/components/CustomizationButtonLedge.scss';
 // Utilities
 import noop from '../../libs/noop';
 import { dressSizePresence } from '../../utilities/pdpValidations';
+import { pushFiltersToUrl } from '../../utilities/bridesmaids';
 
 // Actions
 import * as BDActions from '../../actions/BDActions';
@@ -42,10 +43,12 @@ function stateToProps(state) {
     // Customziation State
     bdProductCustomizationDrawerOpen: state.$$bdCustomizationState.get('bdProductCustomizationDrawerOpen'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
-    temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
+    temporaryCustomizationCombinationId: state.$$bdCustomizationState.get('temporaryCustomizationCombinationId'),
+    temporaryBDCustomizationLength: state.$$bdCustomizationState.get('temporaryBDCustomizationLength'),
+    temporaryBDCustomizationColor: state.$$bdCustomizationState.get('temporaryBDCustomizationColor'),
+
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
-    temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
   };
 }
@@ -132,6 +135,17 @@ class CustomizationButtonLedge extends Component {
   }
 
   handleDetailSave() {
+    const {
+      temporaryCustomizationCombinationId,
+      temporaryBDCustomizationLength,
+      temporaryBDCustomizationColor,
+    } = this.props;
+
+    pushFiltersToUrl({
+      color: temporaryBDCustomizationColor,
+      id: temporaryCustomizationCombinationId,
+      length: temporaryBDCustomizationLength,
+    });
     this.props.saveBDTemporaryCustomizations();
   }
 
@@ -244,9 +258,12 @@ CustomizationButtonLedge.propTypes = {
   activeModalId: PropTypes.string,
   // -- Customizations
   bdProductCustomizationDrawerOpen: PropTypes.bool,
+  temporaryCustomizationCombinationId: PropTypes.string.isRequired,
+  temporaryBDCustomizationLength: PropTypes.string.isRequired,
+  temporaryBDCustomizationColor: PropTypes.string.isRequired,
 
   // Color Section
-  // temporaryColor: PropTypes.shape({
+  // temporaryCustomizationCombinationId: PropTypes.shape({
   //   id: PropTypes.number,
   //   centsTotal: PropTypes.number,
   //   name: PropTypes.string,
@@ -279,7 +296,7 @@ CustomizationButtonLedge.propTypes = {
 CustomizationButtonLedge.defaultProps = {
   activeModalId: null,
   bdProductCustomizationDrawerOpen: false,
-  // temporaryColor: null,
+  // temporaryCustomizationCombinationId: null,
   temporaryDressSize: null,
   temporaryHeightValue: null,
   // temporaryStyleCustomizations: [],
