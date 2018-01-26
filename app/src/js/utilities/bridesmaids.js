@@ -137,8 +137,6 @@ export function pushFiltersToUrl({ color, id, length }) {
   });
   // win.location.search = query;
   win.history.replaceState(null, '', `${id}?${query}`);
-  console.log('id', id);
-  console.log('here are the filters we are pushing to the url', query);
 }
 
 export function bdAccumulateCustomizationSelections({

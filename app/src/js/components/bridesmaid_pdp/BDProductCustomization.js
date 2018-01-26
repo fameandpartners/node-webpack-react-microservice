@@ -136,7 +136,7 @@ class BDProductCustomization extends PureComponent {
 
 BDProductCustomization.propTypes = {
   // Passed Props
-  children: PropTypes.node.isRequired,
+  children: PropTypes.isRequired,
   activeHeading: PropTypes.string,
   // Redux Props
   temporaryCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -151,6 +151,7 @@ BDProductCustomization.propTypes = {
 };
 
 BDProductCustomization.defaultProps = {
+  children: null,
   activeHeading: null,
   hasNavItems: true,
   showCustomizationGroups: false,

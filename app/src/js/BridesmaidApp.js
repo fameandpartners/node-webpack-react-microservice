@@ -15,11 +15,10 @@ import OnboardingModal from './components/onboarding/OnboardingModal';
 import ProductFabricModal from './components/pdp/ProductFabricModal';
 import BDColorSelectionModal from './components/bridesmaid_pdp/BDColorSelectionModal';
 import BDCustomizationSelectionModal from './components/bridesmaid_pdp/BDCustomizationSelectionModal';
-import ShareModal from './components/pdp/ShareModal';
+import BDShareModal from './components/bridesmaid_pdp/BDShareModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
 import AfterpayModal from './components/pdp/AfterpayModal';
-import LoadingSpinner from './components/generic/LoadingSpinner';
 
 // Utilities
 import {
@@ -157,14 +156,15 @@ class BridesmaidApp extends Component {
     }
   }
 
+
+  componentDidMount() {
+    this.checkForIncompatabilities();
+  }
+
   componentDidUpdate() {
     if (win && win.fixBody) {
       win.fixBody(this.props.lockBody);
     }
-  }
-
-  componentDidMount() {
-    this.checkForIncompatabilities();
   }
 
   render() {
@@ -178,7 +178,7 @@ class BridesmaidApp extends Component {
           <ProductFabricModal />
           <BDColorSelectionModal />
           <BDCustomizationSelectionModal />
-          <ShareModal />
+          <BDShareModal currentURL={win.location.href} />
           <StyleSelectionModal />
           <SizeModals />
           <AfterpayModal />
@@ -191,10 +191,10 @@ class BridesmaidApp extends Component {
 /* eslint-disable react/forbid-prop-types */
 BridesmaidApp.propTypes = {
   lockBody: PropTypes.bool.isRequired,
-  availableBDCustomizationLengths: PropTypes.array.isRequired,
+  availableBDCustomizationLengths: PropTypes.object.isRequired,
   $$productDefaultColors: ImmutablePropTypes.list.isRequired,
   // Necessary for incompat Call
-  productId: PropTypes.string.isRequired,
+  productId: PropTypes.number.isRequired,
   customizationIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   setBDIncompatabilitiesLoading: PropTypes.func.isRequired,
   availableLengths: PropTypes.object,
@@ -206,7 +206,7 @@ BridesmaidApp.propTypes = {
 
 BridesmaidApp.defaultProps = {
   availableLengths: null,
-
+  lockBody: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(BridesmaidApp);

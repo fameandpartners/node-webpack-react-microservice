@@ -111,7 +111,7 @@ class BDAppMain extends Component {
         </div>
 
 
-        <div className="u-position--fixed u-width--full u-bottom">
+        <div className="BDAppMain__button-ledge u-position--fixed u-width--full u-bottom">
           <BDAddToCartButtonLedge />
         </div>
         <BDCustomizationButtonLedge />

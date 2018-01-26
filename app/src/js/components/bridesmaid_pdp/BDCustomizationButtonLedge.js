@@ -258,48 +258,29 @@ CustomizationButtonLedge.propTypes = {
   activeModalId: PropTypes.string,
   // -- Customizations
   bdProductCustomizationDrawerOpen: PropTypes.bool,
-  temporaryCustomizationCombinationId: PropTypes.string.isRequired,
+  temporaryCustomizationCombinationId: PropTypes.number.isRequired,
   temporaryBDCustomizationLength: PropTypes.string.isRequired,
   temporaryBDCustomizationColor: PropTypes.string.isRequired,
-
-  // Color Section
-  // temporaryCustomizationCombinationId: PropTypes.shape({
-  //   id: PropTypes.number,
-  //   centsTotal: PropTypes.number,
-  //   name: PropTypes.string,
-  //   presentation: PropTypes.string,
-  //   hexValue: PropTypes.string,
-  //   patternUrl: PropTypes.string,
-  // }).isRequired,
-  //
-  // Height / Size
+  // -- Height / Size
   temporaryDressSize: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string.isRequired,
-  // temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
-  // Redux Actions
+
+  // Redux Funcs
   activateModal: PropTypes.func.isRequired,
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   saveBDTemporaryCustomizations: PropTypes.func.isRequired,
-  // bdActivateCustomizationDrawer: PropTypes.func.isRequired,
-  // selectProductColor: PropTypes.func.isRequired,
-  // setShareableQueryParams: PropTypes.func.isRequired,
   setSizeProfileError: PropTypes.func.isRequired,
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
-  // updateCustomizationStyleSelection: PropTypes.func.isRequired,
-  // productDefaultColors: PropTypes.arrayOf(PropTypes.object),
-  // setExpressMakingStatus: PropTypes.func,
 };
 
 CustomizationButtonLedge.defaultProps = {
   activeModalId: null,
   bdProductCustomizationDrawerOpen: false,
-  // temporaryCustomizationCombinationId: null,
   temporaryDressSize: null,
   temporaryHeightValue: null,
-  // temporaryStyleCustomizations: [],
   productDefaultColors: [],
   setExpressMakingStatus: noop,
 };

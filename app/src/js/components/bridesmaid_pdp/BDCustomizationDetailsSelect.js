@@ -294,17 +294,17 @@ class BDCustomizationDetailsSelect extends Component {
 /* eslint-disable react/forbid-prop-types */
 BDCustomizationDetailsSelect.propTypes = {
   $$temporaryCustomizationDetails: ImmutablePropTypes.list.isRequired,
-  addonOptions: PropTypes.arrayOf({
+  addonOptions: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     description: PropTypes.string,
     position: PropTypes.number,
     price: PropTypes.object,
     centsTotal: PropTypes.number,
     img: PropTypes.string,
-  }),
+  })),
   groupName: PropTypes.string,
-  incompatabilities: PropTypes.arrayOf(PropTypes.string),
-  incompatabilitiesLoading: PropTypes.arrayOf(PropTypes.string),
+  incompatabilities: PropTypes.object,
+  incompatabilitiesLoading: PropTypes.bool,
   productId: PropTypes.number.isRequired,
   productDefaultColors: PropTypes.array.isRequired,
   temporaryBDCustomizationColor: PropTypes.string.isRequired,
@@ -324,6 +324,7 @@ BDCustomizationDetailsSelect.defaultProps = {
   addonOptions: [],
   groupName: null,
   incompatabilities: [],
+  incompatabilitiesLoading: false,
   temporaryBDCustomizationLength: null,
 };
 

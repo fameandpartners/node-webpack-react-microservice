@@ -77,6 +77,7 @@ function stateToProps(state) {
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedCustomizationDetails: state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS(),
     selectedBDCustomizationColor: state.$$bdCustomizationState.get('selectedBDCustomizationColor'),
+    selectedBDCustomizationLength: state.$$bdCustomizationState.get('selectedBDCustomizationLength'),
     availableLengths: state.$$bdCustomizationState.get('availableBDCustomizationLengths').toJS(),
   };
 }
@@ -166,18 +167,9 @@ class BDProductOptions extends Component {
   }
 
   generateLengthNode() {
-    const {
-      availableLengths,
-      selectedCustomizationDetails,
-    } = this.props;
-    const lengthKeys = Object.keys(availableLengths);
-    const foundLengthId = selectedCustomizationDetails.find(
-      id => lengthKeys.indexOf(id) > -1,
-    );
-
-    return foundLengthId ? (
+    return this.props.selectedBDCustomizationLength ? (
       <span>
-        {availableLengths[foundLengthId]}
+        {this.props.selectedBDCustomizationLength}
       </span>
     ) : null;
   }
@@ -358,6 +350,7 @@ BDProductOptions.propTypes = {
   selectedHeightValue: PropTypes.number,
   selectedCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedBDCustomizationColor: PropTypes.string.isRequired,
+  selectedBDCustomizationLength: PropTypes.string.isRequired,
   //* Redux Actions
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
