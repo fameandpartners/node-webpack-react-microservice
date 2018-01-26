@@ -32,8 +32,8 @@ export const $$initialState = Immutable.fromJS({
   selectedCustomizationDetails: [],
 
   incompatabilities: [],
-
   incompatabilitiesLoading: false,
+  temporaryCustomizationCombinationId: null,
 
   // // String ['cm', 'inch']
   // temporaryMeasurementMetric: UNITS.INCH,
@@ -116,6 +116,14 @@ export default function CartReducer($$state = $$initialState, action = null) {
       });
     }
 
+    case BDCustomizationConstants.SET_BD_COLOR: {
+      const { selectedBDCustomizationColor } = action;
+      return $$state.merge({ // Addition
+        selectedBDCustomizationColor,
+        temporaryBDCustomizationColor: selectedBDCustomizationColor,
+      });
+    }
+
     case BDCustomizationConstants.SET_BD_TEMPORARY_LENGTH: {
       const { temporaryBDCustomizationLength } = action;
       return $$state.merge({ // Addition
@@ -123,10 +131,23 @@ export default function CartReducer($$state = $$initialState, action = null) {
       });
     }
 
+    case BDCustomizationConstants.SET_BD_LENGTH: {
+      const { selectedBDCustomizationLength } = action;
+      return $$state.merge({ // Addition
+        selectedBDCustomizationLength,
+        temporaryBDCustomizationLength: selectedBDCustomizationLength,
+      });
+    }
+
     case BDCustomizationConstants.SET_BD_INCOMPATABILITIES: {
-      const { incompatabilities } = action;
+      const {
+        incompatabilities,
+        temporaryCustomizationCombinationId,
+      } = action;
+
       return $$state.merge({ // Addition
         incompatabilities,
+        temporaryCustomizationCombinationId,
       });
     }
 
@@ -136,90 +157,6 @@ export default function CartReducer($$state = $$initialState, action = null) {
       });
     }
 
-    // case CustomizationConstants.SET_SIZE_PROFILE_ERROR: {
-    //   return $$state.merge({
-    //     heightError: action.heightError,
-    //     sizeError: action.sizeError,
-    //   });
-    // }
-    // case CustomizationConstants.CHANGE_CUSTOMIZATION_DRAWER: {
-    //   return $$state.merge({
-    //     productCustomizationDrawer: action.productCustomizationDrawer,
-    //   });
-    // }
-    // // COLOR
-    // case CustomizationConstants.SELECT_PRODUCT_COLOR: {
-    //   if (action.selectedColor) {
-    //     return $$state.merge({
-    //       temporaryColor: action.selectedColor,
-    //       selectedColor: action.selectedColor,
-    //     });
-    //   }
-    //   return $$state.merge({ temporaryColor: action.temporaryColor });
-    // }
-    // // HEIGHT
-    // case CustomizationConstants.UPDATE_MEASUREMENT_METRIC: {
-    //   if (action.selectedMeasurementMetric) {
-    //     return $$state.merge({
-    //       temporaryMeasurementMetric: action.selectedMeasurementMetric,
-    //       selectedMeasurementMetric: action.selectedMeasurementMetric,
-    //     });
-    //   }
-    //   return $$state.merge({
-    //     temporaryMeasurementMetric: action.temporaryMeasurementMetric,
-    //   });
-    // }
-    // case CustomizationConstants.UPDATE_HEIGHT_SELECTION: {
-    //   if (action.selectedHeightValue) {
-    //     return $$state.merge({
-    //       selectedHeightValue: action.selectedHeightValue,
-    //       temporaryHeightValue: action.selectedHeightValue,
-    //     });
-    //   }
-    //   return $$state.merge({
-    //     temporaryHeightValue: action.temporaryHeightValue,
-    //   });
-    // }
-    // case CustomizationConstants.UPDATE_DRESS_SIZE_SELECTION: {
-    //   if (typeof action.selectedDressSize === 'number') {
-    //     return $$state.merge({
-    //       selectedDressSize: action.selectedDressSize,
-    //       temporaryDressSize: action.selectedDressSize,
-    //     });
-    //   }
-    //
-    //   return $$state.merge({
-    //     temporaryDressSize: action.temporaryDressSize,
-    //   });
-    // }
-    // case CustomizationConstants.UPDATE_CUSTOMIZATION_STYLE_SELECTION: {
-    //   if (action.selectedStyleCustomizations) {
-    //     return $$state.merge({
-    //       temporaryStyleCustomizations: action.selectedStyleCustomizations,
-    //       selectedStyleCustomizations: action.selectedStyleCustomizations,
-    //     });
-    //   }
-    //   return $$state.merge({
-    //     temporaryStyleCustomizations: action.temporaryStyleCustomizations,
-    //   });
-    // }
-    // // STYLE
-    // case CustomizationConstants.SET_ACTIVE_ADDON_IMAGE_LAYERS: {
-    //   return $$state.merge({
-    //     addons: $$state.get('addons')
-    //     .merge({ selectedAddonImageLayers: action.addonImageLayers }),
-    //   });
-    // }
-    // case CustomizationConstants.SET_ADDON_BASE_LAYER: {
-    //   return $$state.merge({
-    //     addons: $$state.get('addons').merge({ baseSelected: action.baseSelected }),
-    //   });
-    // }
-    // case CustomizationConstants.SET_EXPRESS_MAKING_STATUS: {
-    //   return $$state.merge({
-    //     expressMakingSelected: action.status,
-    //   });
-    // }
     default: {
       return $$state;
     }

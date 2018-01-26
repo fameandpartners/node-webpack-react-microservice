@@ -1,5 +1,7 @@
 .BDCustomizationDetailsSelect {
   padding-top: 10px;
+  opacity: 1;
+  transition: 300ms opacity ease-in-out;
 }
 
 .BDCustomizationDetailsSelect__image-wrapper {
@@ -15,4 +17,8 @@
 .BDCustomizationDetailsSelect--selected {
   outline: 3px solid $c-hover-gray;
   outline-offset: 3px;
+}
+
+.BDCustomizationDetailsSelect--loading {
+  opacity: 0.4;
 }

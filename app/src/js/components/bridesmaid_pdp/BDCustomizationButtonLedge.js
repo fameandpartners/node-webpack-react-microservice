@@ -12,6 +12,7 @@ import '../../../css/components/CustomizationButtonLedge.scss';
 // Utilities
 import noop from '../../libs/noop';
 import { dressSizePresence } from '../../utilities/pdpValidations';
+import { pushFiltersToUrl } from '../../utilities/bridesmaids';
 
 // Actions
 import * as BDActions from '../../actions/BDActions';
@@ -42,10 +43,12 @@ function stateToProps(state) {
     // Customziation State
     bdProductCustomizationDrawerOpen: state.$$bdCustomizationState.get('bdProductCustomizationDrawerOpen'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
-    temporaryColor: state.$$customizationState.get('temporaryColor').toJS(),
+    temporaryCustomizationCombinationId: state.$$bdCustomizationState.get('temporaryCustomizationCombinationId'),
+    temporaryBDCustomizationLength: state.$$bdCustomizationState.get('temporaryBDCustomizationLength'),
+    temporaryBDCustomizationColor: state.$$bdCustomizationState.get('temporaryBDCustomizationColor'),
+
     temporaryDressSize: state.$$customizationState.get('temporaryDressSize'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
-    temporaryStyleCustomizations: state.$$customizationState.get('temporaryStyleCustomizations').toJS(),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
   };
 }
@@ -132,14 +135,26 @@ class CustomizationButtonLedge extends Component {
   }
 
   handleDetailSave() {
+    const {
+      temporaryCustomizationCombinationId,
+      temporaryBDCustomizationLength,
+      temporaryBDCustomizationColor,
+    } = this.props;
+
+    pushFiltersToUrl({
+      color: temporaryBDCustomizationColor,
+      id: temporaryCustomizationCombinationId,
+      length: temporaryBDCustomizationLength,
+    });
     this.props.saveBDTemporaryCustomizations();
   }
 
   handleCustomizationSave() {
     const {
       activeModalId,
+      modalIsOpen,
     } = this.props;
-    if (activeModalId === ModalConstants.SIZE_SELECTION_MODAL) {
+    if (modalIsOpen && activeModalId === ModalConstants.SIZE_SELECTION_MODAL) {
       this.handleSaveSizeSelection();
     } else {
       // Everything else we save temporary into selections
@@ -243,45 +258,29 @@ CustomizationButtonLedge.propTypes = {
   activeModalId: PropTypes.string,
   // -- Customizations
   bdProductCustomizationDrawerOpen: PropTypes.bool,
-
-  // Color Section
-  // temporaryColor: PropTypes.shape({
-  //   id: PropTypes.number,
-  //   centsTotal: PropTypes.number,
-  //   name: PropTypes.string,
-  //   presentation: PropTypes.string,
-  //   hexValue: PropTypes.string,
-  //   patternUrl: PropTypes.string,
-  // }).isRequired,
-  //
-  // Height / Size
+  temporaryCustomizationCombinationId: PropTypes.number.isRequired,
+  temporaryBDCustomizationLength: PropTypes.string.isRequired,
+  temporaryBDCustomizationColor: PropTypes.string.isRequired,
+  // -- Height / Size
   temporaryDressSize: PropTypes.number,
   temporaryHeightValue: PropTypes.number,
   temporaryMeasurementMetric: PropTypes.string.isRequired,
-  // temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
-  // Redux Actions
+
+  // Redux Funcs
   activateModal: PropTypes.func.isRequired,
   bdActivateCustomizationDrawer: PropTypes.func.isRequired,
   saveBDTemporaryCustomizations: PropTypes.func.isRequired,
-  // bdActivateCustomizationDrawer: PropTypes.func.isRequired,
-  // selectProductColor: PropTypes.func.isRequired,
-  // setShareableQueryParams: PropTypes.func.isRequired,
   setSizeProfileError: PropTypes.func.isRequired,
   updateDressSizeSelection: PropTypes.func.isRequired,
   updateHeightSelection: PropTypes.func.isRequired,
   updateMeasurementMetric: PropTypes.func.isRequired,
-  // updateCustomizationStyleSelection: PropTypes.func.isRequired,
-  // productDefaultColors: PropTypes.arrayOf(PropTypes.object),
-  // setExpressMakingStatus: PropTypes.func,
 };
 
 CustomizationButtonLedge.defaultProps = {
   activeModalId: null,
   bdProductCustomizationDrawerOpen: false,
-  // temporaryColor: null,
   temporaryDressSize: null,
   temporaryHeightValue: null,
-  // temporaryStyleCustomizations: [],
   productDefaultColors: [],
   setExpressMakingStatus: noop,
 };

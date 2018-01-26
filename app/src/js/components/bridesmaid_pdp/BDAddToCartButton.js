@@ -8,7 +8,10 @@ import Cookies from 'universal-cookie';
 import classnames from 'classnames';
 
 // Utilities
-import { calculateSubTotal } from '../../utilities/pdp';
+import {
+        calculateSubTotal,
+        retrieveSelectedAddonOptions,
+       } from '../../utilities/pdp';
 import { bdAccumulateCustomizationSelections } from '../../utilities/bridesmaids';
 import { sizeProfilePresence } from '../../utilities/pdpValidations';
 import noop from '../../libs/noop';
@@ -40,9 +43,8 @@ import '../../../css/components/AddToCartButton.scss';
 
 function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
-  const selectedStyleCustomizations = state.$$customizationState.get('selectedStyleCustomizations').toJS();
+  const selectedStyleCustomizations = state.$$bdCustomizationState.get('selectedCustomizationDetails').toJS();
   const addonOptions = state.$$customizationState.get('addons').get('addonOptions').toJS();
-
   return {
     // APP
     auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
@@ -53,7 +55,10 @@ function stateToProps(state) {
     colorCentsTotal: selectedColor.get('centsTotal'),
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
     isActive: state.$$productState.get('isActive'),
-    selectedAddonOptions: addonOptions.filter(a => selectedStyleCustomizations.indexOf(a.id) > -1),
+    selectedAddonOptions: retrieveSelectedAddonOptions(
+      addonOptions,
+      selectedStyleCustomizations,
+    ),
     heightValue: state.$$customizationState.get('temporaryHeightValue'),
     sizeValue: state.$$customizationState.get('selectedDressSize'),
     expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),

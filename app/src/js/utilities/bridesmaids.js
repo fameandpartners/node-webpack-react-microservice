@@ -1,4 +1,7 @@
-import { uniq } from 'lodash';
+import { find, uniq } from 'lodash';
+import querystring from 'query-string';
+
+import win from '../polyfills/windowPolyfill';
 import { lengthNames } from '../constants/BDCustomizationConstants';
 import { formatCents } from './accounting';
 import { EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
@@ -102,16 +105,52 @@ export function generateCustomizationImage({
   return `${BASE_URL}/${SKU}/${IMG_SIZE}/${CODE_NAME}-${LENGTH}-${SIDE}-${COLOR_CODE}.png`;
 }
 
+export function extractAndWhitelistQueryStringBDCustomizations(colors, lengths) {
+  const queryStringCustomizations = {
+    color: colors[0],
+    length: [],
+  };
+
+  if (!win.isMockWindow && win.location.search) {
+    const lengthKeys = Object.keys(lengths);
+    const parsed = querystring.parse(win.location.search);
+    // COLOR
+    const { presentation } = find(colors, { presentation: parsed.color });
+
+    // Length
+    const foundLengthKey = lengthKeys.find(k => lengths[k] === parsed.length);
+    const length = lengths[foundLengthKey] || lengths[lengthKeys[0]];
+
+    return {
+      color: presentation,
+      length,
+    };
+  }
+
+  return queryStringCustomizations;
+}
+
+export function pushFiltersToUrl({ color, id, length }) {
+  const query = querystring.stringify({
+    color,
+    length,
+  });
+  // win.location.search = query;
+  win.history.replaceState(null, '', `${id}?${query}`);
+}
+
 export function bdAccumulateCustomizationSelections({
   $$bdCustomizationState,
   $$customizationState,
   $$productState,
 }) {
+  const defaultColors = $$productState.get('productDefaultColors').toJS();
   const productId = $$productState.get('productId');
   const productTitle = $$productState.get('productTitle');
   // const productImage = $$productState.get('productImages').get(0).get('bigImg');
   const productCentsBasePrice = $$productState.get('productCentsBasePrice');
-  const color = $$customizationState.get('selectedColor').toJS();
+  const colorPresentation = $$bdCustomizationState.get('selectedBDCustomizationColor');
+  const color = defaultColors.find(c => c.presentation === colorPresentation);
   const selectedCustomizationDetails = $$bdCustomizationState.get('selectedCustomizationDetails').toJS();
   const addonOptions = $$customizationState.get('addons').get('addonOptions').toJS();
   const addons = filterSelectedAddons(addonOptions, selectedCustomizationDetails);
@@ -142,6 +181,8 @@ export function bdAccumulateCustomizationSelections({
 
 export default {
   calculateBDSubTotal,
+  extractAndWhitelistQueryStringBDCustomizations,
   bdAccumulateCustomizationSelections,
+  pushFiltersToUrl,
   retrieveBDSelectedAddonOptions,
 };

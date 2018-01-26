@@ -6,6 +6,7 @@ import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+import { formatCents } from '../../utilities/accounting';
 
 // Services
 import BDService from '../../services/BDService';
@@ -38,6 +39,7 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     sku: $$productState.get('sku'),
     productId: $$productState.get('productId'),
     incompatabilities: $$bdCustomizationState.get('incompatabilities'),
+    incompatabilitiesLoading: $$bdCustomizationState.get('incompatabilitiesLoading'),
     $$temporaryCustomizationDetails,
     temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
     productDefaultColors: $$productState.get('productDefaultColors').toJS(),
@@ -52,6 +54,7 @@ function dispatchToProps(dispatch) {
     setBDTemporaryColor,
     setBDTemporaryLength,
     setBDIncompatabilities,
+    setBDIncompatabilitiesLoading,
   } = bindActionCreators(BDActions, dispatch);
 
   return {
@@ -59,6 +62,7 @@ function dispatchToProps(dispatch) {
     setBDTemporaryColor,
     setBDTemporaryLength,
     setBDIncompatabilities,
+    setBDIncompatabilitiesLoading,
   };
 }
 
@@ -77,15 +81,28 @@ class BDCustomizationDetailsSelect extends Component {
       temporaryBDCustomizationLength,
       $$temporaryCustomizationDetails,
       setBDIncompatabilities,
+      setBDIncompatabilitiesLoading,
     } = this.props;
     const sanitizedCustomizationIds = customizationIds || $$temporaryCustomizationDetails.toJS();
 
+    setBDIncompatabilitiesLoading({ isLoading: true });
     BDService.getBridesmaidsIncompatabilities({
       length: length || temporaryBDCustomizationLength,
       customizationIds: removeLengthIdsFromCustomizationIds(sanitizedCustomizationIds),
       productId,
-    }).then((res) => {
-      setBDIncompatabilities({ incompatabilities: res.body.incompatible_ids });
+    }).then(({ body, error }) => {
+      if (error) {
+        console.log('perform some error handling');
+      }
+
+      setBDIncompatabilities({
+        temporaryCustomizationCombinationId: body.id,
+        incompatabilities: body.incompatible_ids,
+      });
+      setBDIncompatabilitiesLoading({ isLoading: false });
+    })
+    .catch(() => {
+      setBDIncompatabilitiesLoading({ isLoading: false });
     });
     // const length
     // params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
@@ -203,12 +220,22 @@ class BDCustomizationDetailsSelect extends Component {
     });
   }
 
+  generateCustomizationPrice(priceInCents) {
+    return formatCents(
+      priceInCents,
+      0,
+      '$');
+  }
+
+
   generateGenericDetailOptions() {
     const {
       addonOptions,
       groupName,
       incompatabilities,
+      incompatabilitiesLoading,
       $$temporaryCustomizationDetails,
+
     } = this.props;
 
     return addonOptions
@@ -223,11 +250,12 @@ class BDCustomizationDetailsSelect extends Component {
           <img
             className={classnames({
               'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
+              'BDCustomizationDetailsSelect--loading': incompatabilitiesLoading,
             })}
             alt={item.id}
             src={this.generateImageNameForCustomizationId(item.id)}
           />
-          <div className="BDCustomizationDetailsSelect__description">{item.description}</div>
+          <div className="BDCustomizationDetailsSelect__description"><p>{item.description}</p><p>{this.generateCustomizationPrice(item.centsTotal)}</p></div>
         </div>
       </div>
     ));
@@ -269,16 +297,17 @@ class BDCustomizationDetailsSelect extends Component {
 /* eslint-disable react/forbid-prop-types */
 BDCustomizationDetailsSelect.propTypes = {
   $$temporaryCustomizationDetails: ImmutablePropTypes.list.isRequired,
-  addonOptions: PropTypes.arrayOf({
+  addonOptions: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     description: PropTypes.string,
     position: PropTypes.number,
     price: PropTypes.object,
     centsTotal: PropTypes.number,
     img: PropTypes.string,
-  }),
+  })),
   groupName: PropTypes.string,
-  incompatabilities: PropTypes.arrayOf(PropTypes.string),
+  incompatabilities: PropTypes.object,
+  incompatabilitiesLoading: PropTypes.bool,
   productId: PropTypes.number.isRequired,
   productDefaultColors: PropTypes.array.isRequired,
   temporaryBDCustomizationColor: PropTypes.string.isRequired,
@@ -290,6 +319,7 @@ BDCustomizationDetailsSelect.propTypes = {
   setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
   setBDTemporaryLength: PropTypes.func.isRequired,
   setBDIncompatabilities: PropTypes.func.isRequired,
+  setBDIncompatabilitiesLoading: PropTypes.func.isRequired,
 };
 
 BDCustomizationDetailsSelect.defaultProps = {
@@ -297,6 +327,7 @@ BDCustomizationDetailsSelect.defaultProps = {
   addonOptions: [],
   groupName: null,
   incompatabilities: [],
+  incompatabilitiesLoading: false,
   temporaryBDCustomizationLength: null,
 };
 

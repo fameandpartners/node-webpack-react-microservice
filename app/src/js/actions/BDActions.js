@@ -24,6 +24,13 @@ export function setBDTemporaryColor({ temporaryBDCustomizationColor }) {
   };
 }
 
+export function setBDColor({ selectedBDCustomizationColor }) {
+  return {
+    type: BDCustomizationConstants.SET_BD_COLOR,
+    selectedBDCustomizationColor,
+  };
+}
+
 export function setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails }) {
   return {
     type: BDCustomizationConstants.SET_BD_TEMPORARY_CUSTOMIZATION_DETAILS,
@@ -38,6 +45,13 @@ export function setBDTemporaryLength({ temporaryBDCustomizationLength }) {
   };
 }
 
+export function setBDLength({ selectedBDCustomizationLength }) {
+  return {
+    type: BDCustomizationConstants.SET_BD_LENGTH,
+    selectedBDCustomizationLength,
+  };
+}
+
 export function setBDCustomizationSection({ sectionId }) {
   return {
     type: BDCustomizationConstants.SET_BD_CUSTOMIZATION_SECTION,
@@ -45,10 +59,11 @@ export function setBDCustomizationSection({ sectionId }) {
   };
 }
 
-export function setBDIncompatabilities({ incompatabilities }) {
+export function setBDIncompatabilities({ incompatabilities, temporaryCustomizationCombinationId }) {
   return {
     type: BDCustomizationConstants.SET_BD_INCOMPATABILITIES,
     incompatabilities,
+    temporaryCustomizationCombinationId,
   };
 }
 
