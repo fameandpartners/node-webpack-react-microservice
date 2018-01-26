@@ -144,11 +144,13 @@ export function bdAccumulateCustomizationSelections({
   $$customizationState,
   $$productState,
 }) {
+  const defaultColors = $$productState.get('productDefaultColors').toJS();
   const productId = $$productState.get('productId');
   const productTitle = $$productState.get('productTitle');
   // const productImage = $$productState.get('productImages').get(0).get('bigImg');
   const productCentsBasePrice = $$productState.get('productCentsBasePrice');
-  const color = $$customizationState.get('selectedColor').toJS();
+  const colorPresentation = $$bdCustomizationState.get('selectedBDCustomizationColor');
+  const color = defaultColors.find(c => c.presentation === colorPresentation);
   const selectedCustomizationDetails = $$bdCustomizationState.get('selectedCustomizationDetails').toJS();
   const addonOptions = $$customizationState.get('addons').get('addonOptions').toJS();
   const addons = filterSelectedAddons(addonOptions, selectedCustomizationDetails);

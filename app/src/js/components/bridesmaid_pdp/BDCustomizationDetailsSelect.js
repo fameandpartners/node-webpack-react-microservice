@@ -100,6 +100,9 @@ class BDCustomizationDetailsSelect extends Component {
         incompatabilities: body.incompatible_ids,
       });
       setBDIncompatabilitiesLoading({ isLoading: false });
+    })
+    .catch(() => {
+      setBDIncompatabilitiesLoading({ isLoading: false });
     });
     // const length
     // params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)

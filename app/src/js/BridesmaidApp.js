@@ -119,7 +119,8 @@ class BridesmaidApp extends Component {
       length,
       customizationIds: removeLengthIdsFromCustomizationIds(customizationIds),
       productId,
-    }).then(({ body, error }) => {
+    })
+    .then(({ body, error }) => {
       if (error) {
         console.log('perform some error handling');
       }
@@ -127,6 +128,9 @@ class BridesmaidApp extends Component {
         temporaryCustomizationCombinationId: body.id,
         incompatabilities: body.incompatible_ids,
       });
+      setBDIncompatabilitiesLoading({ isLoading: false });
+    })
+    .catch(() => {
       setBDIncompatabilitiesLoading({ isLoading: false });
     });
   }
