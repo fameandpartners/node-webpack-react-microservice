@@ -7,9 +7,6 @@ import { connect } from 'react-redux';
 import autobind from 'react-autobind';
 import { find } from 'lodash';
 
-// polyfills
-import win from '../../polyfills/windowPolyfill';
-
 // Components
 import ModalContainer from '../modal/ModalContainer';
 import Modal from '../modal/Modal';
