@@ -6,6 +6,7 @@ import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+import { formatCents } from '../../utilities/accounting';
 
 // Services
 import BDService from '../../services/BDService';
@@ -203,12 +204,21 @@ class BDCustomizationDetailsSelect extends Component {
     });
   }
 
+  generateCustomizationPrice(priceInCents) {
+    return formatCents(
+      priceInCents,
+      0,
+      '$');
+  }
+
+
   generateGenericDetailOptions() {
     const {
       addonOptions,
       groupName,
       incompatabilities,
       $$temporaryCustomizationDetails,
+
     } = this.props;
 
     return addonOptions
@@ -227,7 +237,7 @@ class BDCustomizationDetailsSelect extends Component {
             alt={item.id}
             src={this.generateImageNameForCustomizationId(item.id)}
           />
-          <div className="BDCustomizationDetailsSelect__description">{item.description}</div>
+          <div className="BDCustomizationDetailsSelect__description"><p>{item.description}</p><p>{this.generateCustomizationPrice(item.centsTotal)}</p></div>
         </div>
       </div>
     ));
