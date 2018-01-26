@@ -39,6 +39,7 @@ if (win.SuperCollectionData) {
   $$superCollectionState = {
     $$orderedSections: win.SuperCollectionData.data.sections,
     $$header: win.SuperCollectionData.data.header,
+    $$footer: win.SuperCollectionData.data.footer,
   };
 }
 

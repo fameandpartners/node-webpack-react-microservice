@@ -12,6 +12,7 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 // Components
 import Header from './Header';
 import BodySection from './BodySection';
+import Footer from './Footer';
 
 // Actions
 // import * as AppActions from '../../actions/AppActions';
@@ -59,6 +60,7 @@ class SuperCollectionAppMain extends Component {
             />
           ),
         )}
+        <Footer />
       </div>
     );
   }
