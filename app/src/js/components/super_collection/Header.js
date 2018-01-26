@@ -23,11 +23,15 @@ class Header extends Component {
     const { header } = this.props;
 
     return (
-      <img
-        src={header.img}
-        alt="Buy custom bridesmaid dresses"
-        className="SuperCollection-Header--img"
-      />
+      <div className="grid-noGutter">
+        <div className="col-12">
+          <img
+            src={header.img}
+            alt="Buy custom bridesmaid dresses"
+            className="SuperCollection-Header--img"
+          />
+        </div>
+      </div>
     );
   }
 }
