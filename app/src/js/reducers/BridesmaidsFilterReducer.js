@@ -83,7 +83,7 @@ export default function BridesmaidsFilterReducer($$state = $$initialState, actio
 
     // SILHOUETTE
     case BridesmaidsFilterConstants.SELECT_FILTER_SILHOUETTE: {
-      if (action.selectedSilhoutte) {
+      if (action.selectedSilhouette) {
         return $$state.merge({ selectedSilhouette: action.selectedSilhouette });
       }
 
