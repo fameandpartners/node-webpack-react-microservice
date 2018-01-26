@@ -9,9 +9,7 @@
   text-align: left;
 }
 
-.BodySection--section-grid {
-  display: grid;
-  grid-gap: 0;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
+img {
+  width: 100%;
+  height: auto;
 }

@@ -28,15 +28,17 @@ class BodySection extends Component {
     return (
       <div className="BodySection--section-container u-mt-big u-mb-big">
         <h2 className="BodySection--section-title u-mb-small">Shop by {data.title}</h2>
-        <div className="BodySection--section-grid">
+        <div className={data.grid_class}>
           {data.sections.map(
             (item, key) => (
-              <div key={key} className="BodySection--section-wrapper">
-                <img
-                  src={item.img}
-                  alt={`Shop by ${data.title}`}
-                  className="SuperCollection-BodySection--img"
-                />
+              <div key={key} className="col">
+                <a href={item.url}>
+                  <img
+                    src={item.img}
+                    alt={`Shop by ${data.title}: ${item.name}`}
+                    className="SuperCollection-BodySection--img"
+                  />
+                </a>
               </div>
             ),
           )}
