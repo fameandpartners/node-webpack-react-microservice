@@ -56,8 +56,8 @@ const navigationLinks = {
         type: 'divider',
       },
       {
-        text: 'The Wedding App',
-        url: '/wedding-atelier',
+        text: 'Custom Dress Collections',
+        url: '/coming-soon-custom-bridesmaid-dresses',
       },
       {
         text: 'Bridal Style Guides',
@@ -137,11 +137,6 @@ const navigationLinks = {
         text: 'Made in 48 Hours',
         url: '/getitquick',
       },
-      {
-        text: 'Sample Sale',
-        url: '/sample-sale',
-        shouldHide: siteVersionAU(),
-      },
     ],
     COLLECTIONS: [
       {
@@ -176,10 +171,6 @@ const navigationLinks = {
       },
     ],
     COMMUNITY: [
-      {
-        text: 'Win an Internship',
-        url: '/it-girl',
-      },
       {
         text: 'Read the Fame Files',
         url: 'http://blog.fameandpartners.com/',

@@ -4,12 +4,8 @@ import autobind from 'react-autobind';
 import Resize from '../../../decorators/Resize';
 import PDPBreakpoints from '../../../libs/PDPBreakpoints';
 
-// Polyfills
-import win from '../../../polyfills/windowPolyfill';
-
 // Assets
-import fallWeddings from '../../../../img/fall-weddings.jpg';
-import sampleSale from '../../../../img/SampleSale-ShopAllTile.jpg';
+import fallWeddings from '../../../../img/ShopAll-Tile.jpg';
 import '../../../../css/components/ShopAllNavigationDesktop.scss';
 
 // Constants
@@ -23,10 +19,6 @@ class ShopAllNavigationDesktop extends PureComponent {
   constructor(props) {
     super(props);
     autobind(this);
-
-    this.state = {
-      auSite: win.ApplicationStateData ? win.ApplicationStateData.auSite : false,
-    };
   }
 
   render() {
@@ -35,43 +27,20 @@ class ShopAllNavigationDesktop extends PureComponent {
       childRef,
     } = this.props;
 
-    const {
-      auSite,
-    } = this.state;
-
-    let headerAd;
-
-    if (auSite) {
-      headerAd = (
-        <div className="HeaderNavigationDesktop__ad">
-          <a href="/dresses/wedding-guests">
-            <img
-              alt="Fall Weddings Ad"
-              className="u-width--full"
-              src={fallWeddings}
-            />
-          </a>
-          <a href="/dresses/wedding-guests" className="link">
-            <span>Shop Wedding Guests</span>
-          </a>
-        </div>
-      );
-    } else {
-      headerAd = (
-        <div className="HeaderNavigationDesktop__ad">
-          <a href="/sample-sale">
-            <img
-              alt="Sample Sale Ad"
-              className="u-width--full"
-              src={sampleSale}
-            />
-          </a>
-          <a href="/sample-sale" className="link">
-            <span>Shop up to 40% OFF SAMPLE SALE</span>
-          </a>
-        </div>
-      );
-    }
+    const headerAd = (
+      <div className="HeaderNavigationDesktop__ad">
+        <a href="/coming-soon-custom-bridesmaid-dresses">
+          <img
+            alt="Custom Bridesmaid Dresses Ad"
+            className="u-width--full"
+            src={fallWeddings}
+          />
+        </a>
+        <a href="/coming-soon-custom-bridesmaid-dresses" className="link">
+          <span>Get 20&#37; Off CUSTOM BRIDESMAID DRESSES</span>
+        </a>
+      </div>
+    );
 
     return (
       <div

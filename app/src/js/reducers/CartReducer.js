@@ -27,6 +27,14 @@ export const $$initialState = Immutable.fromJS({
   lineItems: [],
 });
 
+// hack to allow fabric swatch images
+function pluckCorrectImage(lineItem) {
+  if (lineItem.name.includes('Fabric Swatch')) {
+    return lineItem.color.image_file_name;
+  }
+  return lineItem.image.original;
+}
+
 function transformCartDataLineItems(lineItems) {
   return lineItems
     .filter(li => li.name !== 'RETURN_INSURANCE')
@@ -34,14 +42,14 @@ function transformCartDataLineItems(lineItems) {
       id: li.line_item_id,
       isFlashSaleItem: !!li.old_price,
       productCentsBasePrice: parseInt(li.price.money.money.fractional, 10),
-      productImage: li.image.original,
+      productImage: pluckCorrectImage(li),
       productTitle: li.name,
       heightUnit: li.height_unit,
       heightValue: li.height_value,
       height: li.height ? li.height : null,
-      sizePresentationAU: li.size.presentation_au,
-      sizePresentationUS: formatSizePresentationUS(li.size.presentation_us),
-      sizeNumber: li.size.sort_key,
+      sizePresentationAU: li.size ? li.size.presentation_au : null,
+      sizePresentationUS: li.size ? formatSizePresentationUS(li.size.presentation_us) : null,
+      sizeNumber: li.size ? li.size.sort_key : null,
       color: {
         id: li.color.id,
         centsTotal: li.color.custom_color ? 1600 : 0,

@@ -69,6 +69,7 @@ module.exports = {
   flashIndexJs: resolveApp('src/js/flash-sale.js'),
   bridesmaidIndexJs: resolveApp('src/js/bridesmaid-index.js'),
   bridesmaidsFilterJs: resolveApp('src/js/bridesmaids-filter.js'),
+  swatchIndexJs: resolveApp('src/js/buy-swatch.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   cssSrc: resolveApp('src/css/global'),
