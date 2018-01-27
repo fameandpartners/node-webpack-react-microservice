@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 
+
+// Constants
+import BDCustomizationConstants from '../../constants/BDCustomizationConstants';
+
 // Utilities
 import win from '../../polyfills/windowPolyfill';
 // import { formatSizePresentationUS } from '../../utilities/helpers';
+import { generateCustomizationImage } from '../../utilities/bridesmaids';
 
 // CSS
 import '../../../css/components/FlashSaleProductGrid.scss';
@@ -21,10 +26,37 @@ class BridesmaidsProductGrid extends Component {
     return `$${newPrice}`;
   }
 
-  goToImageHref(href) {
+  goToImageHref(dress) {
     return () => {
+      const colorName = dress.image_urls[0].color;
+      const href = win.encodeURI(`/bridesmaid-dresses/${dress.id}?color=${colorName}`);
       win.location = href;
     };
+  }
+
+  generateImage(
+    {
+      style_number: styleNumber,
+      customization_ids: customizationIds,
+    },
+    side,
+  ) {
+    const {
+      selectedColor,
+      selectedLength,
+    } = this.props;
+
+    const { colorNames } = BDCustomizationConstants;
+    const imageStr = generateCustomizationImage({
+      side,
+      sku: styleNumber.toLowerCase(),
+      customizationIds,
+      imgSizeStr: '800x800',
+      length: selectedLength.name.replace('-', '_'),
+      colorCode: colorNames[selectedColor.presentation],
+    });
+
+    return imageStr;
   }
 
   render() {
@@ -39,20 +71,19 @@ class BridesmaidsProductGrid extends Component {
             // eslint-disable-next-line
             key={index}
             className="FlashSaleProduct__container col-4_sm-6"
-            onClick={this.goToImageHref(`/bridesmaid-dresses/${dress.id}`)}
+            onClick={this.goToImageHref(dress)}
           >
             <a className="FlashSaleProduct__image-wrapper u-cursor--pointer">
               <img
                 className="FlashSaleProduct__image--original"
                 alt={dress.product_name}
-                src="http://via.placeholder.com/200x350"
-                // src={dress.image_urls[0]}
+                src={this.generateImage(dress, 'front')}
               />
-              {/* <img
+              <img
                 className="FlashSaleProduct__image--hover"
                 alt={dress.name}
-                src={dress.image_urls[dress.images.length - 2]}
-              /> */}
+                src={this.generateImage(dress, 'back')}
+              />
             </a>
             <div className="FlashSaleProduct__info grid-12">
               <div className="col-8">
@@ -76,6 +107,7 @@ class BridesmaidsProductGrid extends Component {
   }
 }
 
+/* eslint-disable react/forbid-prop-types */
 BridesmaidsProductGrid.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
     // id: PropTypes.number,
@@ -87,6 +119,8 @@ BridesmaidsProductGrid.propTypes = {
     // color: PropTypes.string,
     // permalink: PropTypes.string,
   })).isRequired,
+  selectedColor: PropTypes.object.isRequired,
+  selectedLength: PropTypes.object.isRequired,
 };
 
 export default BridesmaidsProductGrid;
