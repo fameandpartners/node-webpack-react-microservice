@@ -202,7 +202,7 @@ class Cart extends Component {
           <div className="col-5 u-mr--small">
             <img className="u-width--full" alt="dress1" src={productImage} />
           </div>
-          <div className="col-7 u-text-align--left">
+          <div className="u-text-align--left">
             <span className="Cart__line-description u-bold">
               <span>{productTitle}</span>&nbsp;<span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>
@@ -226,7 +226,7 @@ class Cart extends Component {
 
     return (
       <div className="Cart u-flex u-flex--1">
-        <div className="Cart__contents Cart__layout-container u-flex--col">
+        <div className="Cart__contents Cart__layout-container u-flex--col u-width--full">
 
           <div>
             <div className="Cart__subtotal u-text-align--center grid-12 u-mt-small">
@@ -246,7 +246,7 @@ class Cart extends Component {
 
 
           <div className="u-flex u-flex--1">
-            <div className="u-overflow-y--scroll">
+            <div className="u-overflow-y--scroll u-width--full">
               <div className="Cart__line-item-wrapper u-overflow-x--hidden">
                 { this.generateLineItems() }
               </div>
