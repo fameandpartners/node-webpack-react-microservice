@@ -64,8 +64,12 @@ import '../css/components/BridesmaidsFilterResultsApp.scss';
 
 function stateToProps({ $$bridesmaidsFilterState, $$modalState }) {
   const modalOpen = $$modalState.get('shouldAppear');
+  const $$selectedLength = $$bridesmaidsFilterState.get('selectedLength');
+  const $$selectedColor = $$bridesmaidsFilterState.get('selectedColor');
   return {
     lockBody: modalOpen,
+    selectedColor: $$selectedColor ? $$selectedColor.toJS() : {},
+    selectedLength: $$selectedLength ? $$selectedLength.toJS() : {},
     shouldChangeFilterPage: $$bridesmaidsFilterState.get('shouldChangeFilterPage'),
     bridesmaidsFilterObj: $$bridesmaidsFilterState.toJS(),
   };
@@ -131,6 +135,8 @@ class BridesmaidsFilterResultsApp extends Component {
     const {
       activateModal,
       lockBody,
+      selectedColor,
+      selectedLength,
     } = this.props;
 
     return (
@@ -142,7 +148,11 @@ class BridesmaidsFilterResultsApp extends Component {
           <BridesmaidsFilterHeader />
           <div className="grid-12-noGutter layout-container">
             <div className="col-12">
-              <BridesmaidsProductGrid products={filteredDresses} />
+              <BridesmaidsProductGrid
+                products={filteredDresses}
+                selectedColor={selectedColor}
+                selectedLength={selectedLength}
+              />
             </div>
           </div>
         </div>
@@ -162,6 +172,8 @@ BridesmaidsFilterResultsApp.propTypes = {
   bridesmaidsFilterObj: PropTypes.object.isRequired,
   lockBody: PropTypes.bool.isRequired,
   hydrateFiltersFromURL: PropTypes.func.isRequired,
+  selectedColor: PropTypes.object.isRequired,
+  selectedLength: PropTypes.object.isRequired,
 };
 
 // eslint-disable-next-line
