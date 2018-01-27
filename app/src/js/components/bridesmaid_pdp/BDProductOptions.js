@@ -126,23 +126,18 @@ class BDProductOptions extends Component {
 
   generateImageNameForSelections() {
     const {
-      availableLengths,
       selectedCustomizationDetails,
       selectedBDCustomizationColor,
+      selectedBDCustomizationLength,
       sku,
     } = this.props;
-
-    const lengthKeys = Object.keys(availableLengths);
-    const foundLengthId = selectedCustomizationDetails.find(
-      id => lengthKeys.indexOf(id) > -1,
-    );
 
     const { colorNames } = BDCustomizationConstants;
     const imageStr = generateCustomizationImage({
       sku: sku.toLowerCase(),
       customizationIds: selectedCustomizationDetails,
       imgSizeStr: '800x800',
-      length: availableLengths[foundLengthId].replace('-', '_'),
+      length: selectedBDCustomizationLength,
       colorCode: colorNames[selectedBDCustomizationColor],
     });
     return imageStr;
