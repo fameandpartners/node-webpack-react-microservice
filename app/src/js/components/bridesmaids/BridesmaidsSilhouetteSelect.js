@@ -16,10 +16,11 @@ import '../../../css/components/BridesmaidsSilhouetteSelect.scss';
 function stateToProps({ $$bridesmaidsFilterState }) {
   const selectedSilhouette = $$bridesmaidsFilterState.get('selectedSilhouette');
   const bridesmaidsFilterSilhouttes = $$bridesmaidsFilterState.get('$$bridesmaidsFilterSilhouettes').toJS();
-
+  const selectedLength = $$bridesmaidsFilterState.get('selectedLength');
   return {
     bridesmaidsFilterSilhouettes: bridesmaidsFilterSilhouttes || [],
     selectedSilhouetteId: selectedSilhouette ? selectedSilhouette.get('id') : null,
+    selectedLengthLowerCase: (selectedLength && selectedLength.size > 0) ? selectedLength.get('name').toLowerCase().split('-')[0] : 'mini',
   };
 }
 
@@ -52,10 +53,12 @@ class BridesmaidsSilhouetteSelect extends Component {
     const {
       bridesmaidsFilterSilhouettes,
       selectedSilhouetteId,
+      selectedLengthLowerCase,
     } = this.props;
-
+    console.log('props', this.props);
     return bridesmaidsFilterSilhouettes
       .map((item, index) => (
+
         <div className="col-4" key={item.image + index}>
           <div
             onClick={() => this.handleSilhouetteClick(item)}
@@ -66,7 +69,7 @@ class BridesmaidsSilhouetteSelect extends Component {
               }
             ])}
           >
-            <img className="u-width--full u-height--full" alt={item.name} src={item.image} />
+            <img className="u-width--full u-height--full" alt={item.name} src={`/images/bridesmaids_builder/length_${item.name.toLowerCase().replace('-','').split(' ')[0]}_${selectedLengthLowerCase}_148.jpg`} />
           </div>
           <p>{item.name}</p>
           <p>{item.description}</p>
