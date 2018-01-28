@@ -39,7 +39,7 @@ class FabricSwatchProduct extends PureComponent {
     const { swatch, isOrdered } = this.props;
 
     return (
-      <div className="FabricSwatchProductCell u-mb-normal">
+      <div className="FabricSwatchProductCell u-mb--normal">
         <div
           className={classnames('FabricSwatchProductWrapper',
             {

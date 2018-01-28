@@ -177,7 +177,7 @@ class BridesmaidsFilterApp extends Component {
   }
 
   handleScrollToElement(ref) {
-    window.scrollTo(0, ref.offsetTop - 40); // 40 px for header bar
+    window.scrollTo(0, ref.offsetTop - 200); // 200 px for header bar
   }
 
   handleSelection() {
@@ -217,70 +217,89 @@ class BridesmaidsFilterApp extends Component {
             }
           </div>
           <div className="grid-12-noGutter layout-container">
-            <h3 className="h3 u-mb--small u-center" ref={c => this.colorFilter = c}>
-              Choose your color
-            </h3>
-            <div className="col-12 u-mb--normal">
+
+            <div className="u-center">
+              <h3 className="h4 u-mt--huge" ref={c => this.colorFilter = c}>
+                Choose your color
+              </h3>
               <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedColorId}
                 message="Please select a dress color."
               />
+            </div>
+            <div className="col-12 u-mt--big u-mb--normal">
               <BridesmaidsColorSelect
                 handleSelection={this.handleSelection}
               />
             </div>
-            <h3 className="h3 u-mb--small u-center" ref={c => this.silhouetteFilter = c}>
-              Choose your silhouette
-            </h3>
-            <div className="col-12 u-mb--normal">
+
+            <div className="u-center">
+              <h3 className="h4 u-mt--huge" ref={c => this.silhouetteFilter = c}>
+                Choose your silhouette
+              </h3>
               <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedSilhouetteId}
                 message="Please select a dress silhouette."
               />
+            </div>
+            <div className="col-12 u-mt--big u-mb--normal">
               <BridesmaidsSilhouetteSelect
                 handleSelection={this.handleSelection}
               />
             </div>
-            <h3 className="h3 u-mb--small u-center" ref={c => this.lengthFilter = c}>
-              Choose your length
-            </h3>
-            <div className="col-12 u-mb--normal">
+
+            <div className="u-center">
+              <h3 className="h4 u-mt--huge" ref={c => this.lengthFilter = c}>
+                Choose your length
+              </h3>
               <ErrorMessage
                 displayCondition={attemptedFormSubmit && !selectedLengthId}
                 message="Please select a dress length."
               />
+            </div>
+            <div className="col-12 u-mt--big u-mb--normal">
               <BridesmaidsLengthSelect
                 handleSelection={this.handleSelection}
               />
             </div>
-            <h3 className="h3 u-mb--small u-center" ref={c => this.topDetailsFilter = c}>
-              Choose the top details you like
-            </h3>
-            <div className="col-12">
+
+            <div className="u-center">
+              <h3 className="h4 u-mt--huge" ref={c => this.topDetailsFilter = c}>
+                Choose the top details you like
+              </h3>
               <ErrorMessage
                 displayCondition={attemptedFormSubmit && (selectedTopDetails.length < 1)}
                 message="Please select at least one dress top detail."
               />
-              <BridesmaidsTopDetailSelect />
+            </div>
+            <div className="col-12 u-mt--big">
+              <BridesmaidsTopDetailSelect
+                gridLength={4}
+              />
             </div>
           </div>
+
           <div className="grid-12">
-            <div className="BridesmaidsFilterAppEmailCapture__wrapper col-12">
-              <h2>
-                <em>Your Collection</em> is waiting.
-                <br />
-                Enter your email to get access.
-              </h2>
-              <EmailCapture
-                className="u-text-align--left"
-                service="bronto"
-              />
-              <a
-                onClick={() => this.handleFilterSelectionSubmit()}
-                className="u-cursor--pointer"
-              >
-                Just take me to my Tailor-Made Market
-              </a>
+            <div className="BridesmaidsFilterAppEmailCapture__wrapper col-12 grid-middle u-mt--big">
+              <div className="u-width--full">
+                <h2 className="h4 u-mb--normal">
+                  <em>Your Collection</em> is waiting.
+                  <br />
+                  Enter your email to get access.
+                </h2>
+                <EmailCapture
+                  className="u-text-align--left u-center u-mt--normal"
+                  service="bronto"
+                />
+                <p className="u-mt--big">
+                  <a
+                    onClick={() => this.handleFilterSelectionSubmit()}
+                    className="u-cursor--pointer u-text-decoration--underline"
+                  >
+                    Just take me to my Tailor-Made Market
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
         </div>

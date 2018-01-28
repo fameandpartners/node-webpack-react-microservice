@@ -179,7 +179,7 @@ class FlashSaleListApp extends Component {
               }
             </div>
 
-            <div className="col-9_sm-12_lg-9 u-mt-normal layout-container">
+            <div className="col-9_sm-12_lg-9 u-mt--normal layout-container">
               <div className="grid-12">
                 <div className="col-12">
                   { breakpoint === 'mobile' || breakpoint === 'tablet'
@@ -217,7 +217,7 @@ class FlashSaleListApp extends Component {
               { pageDresses.length < 96 ?
                 <div className="grid-12">
                   <div className="col-12">
-                    <div className="FlashSaleProduct__footerMessageWrapper u-mt-normal">
+                    <div className="FlashSaleProduct__footerMessageWrapper u-mt--normal">
                       <span className="FlashSaleProduct__footerMessage">
                         Didn't find what you are looking for?
                         <br />

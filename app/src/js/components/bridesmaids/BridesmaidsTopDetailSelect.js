@@ -84,7 +84,7 @@ class BridesmaidsTopDetailSelect extends Component {
 
     return bridesmaidsFilterTopDetails
       .map((item, index) => (
-        <div className="col-1" key={item.image + index}>
+        <div className="col" key={item.image + index}>
           <div
             onClick={() => this.handleDetailClick(item)}
             className={classnames(
@@ -107,15 +107,15 @@ class BridesmaidsTopDetailSelect extends Component {
   }
 
   render() {
-    const { bridesmaidsFilterTopDetails } = this.props;
-    const gridLength = bridesmaidsFilterTopDetails.length;
+    const { bridesmaidsFilterTopDetails, gridLength } = this.props;
+    const grid = gridLength || bridesmaidsFilterTopDetails.length;
 
     return (
-      <div className="BridesmaidsTopDetailSelect">
+      <div className="BridesmaidsTopDetailSelect u-center">
         <div
           className={classnames(
             'BridesmaidsTopDetailSelect__content u-center',
-            `grid-${gridLength}`
+            `grid-${grid}`
           )}
         >
           {this.getFilterTopDetails()}

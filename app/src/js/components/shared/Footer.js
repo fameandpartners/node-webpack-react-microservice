@@ -152,7 +152,7 @@ class Footer extends PureComponent {
               </p>
             </li>
           </ul>
-          <div className="col-6_sm-12 Footer__sign-up u-mb-big">
+          <div className="col-6_sm-12 Footer__sign-up u-mb--big">
             <p className="Footer__copy u-mb-small u-text-align--left">
               Are you on the list?
             </p>
@@ -165,13 +165,13 @@ class Footer extends PureComponent {
               service="bronto"
             />
 
-            <div className="Footer__social-icon-row u-mt-normal">
+            <div className="Footer__social-icon-row u-mt--normal">
               <SocialLinks />
             </div>
           </div>
         </div>
         <div className="layout-container grid-noGutter">
-          <div className="col-12 Footer__site-version-container u-mt-normal">
+          <div className="col-12 Footer__site-version-container u-mt--normal">
             <form onChange={this.changeSiteVersion}>
               <p className="u-user-select--none">Country: &nbsp;
               <span
@@ -187,7 +187,7 @@ class Footer extends PureComponent {
           </div>
         </div>
 
-        <p className="u-mt-normal u-mb-big">
+        <p className="u-mt--normal u-mb--big">
           © 2017 Fame and Partners. All rights reserved.
         </p>
       </footer>

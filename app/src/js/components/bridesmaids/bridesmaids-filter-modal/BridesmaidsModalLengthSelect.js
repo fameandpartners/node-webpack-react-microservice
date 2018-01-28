@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 
 // CSS
-// import '../../../css/components/BridesmaidsLengthSelect.scss';
+import '../../../../css/components/BridesmaidsLengthSelect.scss';
 
 // Actions
 import BridesmaidsFilterActions from '../../../actions/BridesmaidsFilterActions';

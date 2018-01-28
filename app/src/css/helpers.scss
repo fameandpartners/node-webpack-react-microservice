@@ -92,11 +92,11 @@
   margin-bottom: 15px;
 }
 
-.u-mb-normal {
+.u-mb--normal {
   margin-bottom: 30px;
 }
 
-.u-mb-big {
+.u-mb--big {
   margin-bottom: 50px;
 }
 
@@ -112,24 +112,28 @@
   margin-right: 30px;
 }
 
+.u-mt--xs {
+  margin-top: 6px;
+}
+
 .u-mt-small {
   margin-top: 15px;
 }
 
-.u-paddingBottom--small {
-  padding-bottom: 10px;
-}
-
-.u-mt-normal {
+.u-mt--normal {
   margin-top: 30px;
 }
 
-.u-mt-big {
+.u-mt--big {
   margin-top: 50px;
 }
 
-.u-mt-huge {
+.u-mt--huge {
   margin-top: 150px;
+}
+
+.u-paddingBottom--small {
+  padding-bottom: 10px;
 }
 
 .u-paddingLeft--small {
@@ -231,6 +235,12 @@
 
 .u-flex--1 {
   flex: 1;
+}
+
+.u-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 // Colors

@@ -27,7 +27,7 @@ class ShopAllNavigationMobile extends PureComponent {
         <div className="ShopAllNavigationMobile__link-container u-center u-flex--col">
           <div
             onClick={handleReturnClick}
-            className="ShopAllNavigationMobile__heading u-cursor--pointer u-mb-normal"
+            className="ShopAllNavigationMobile__heading u-cursor--pointer u-mb--normal"
           >
             <span className="u-position--relative u-display--inline u-mr--small">
               <Caret

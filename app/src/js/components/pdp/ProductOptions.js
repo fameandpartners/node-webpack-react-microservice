@@ -299,7 +299,7 @@ class ProductOptions extends Component {
             </div>
 
             {isActive ?
-              <div className="ProductOptions__additional-info u-mt-small u-mb-normal">
+              <div className="ProductOptions__additional-info u-mt-small u-mb--normal">
 
                 <CliqueCallout />
 

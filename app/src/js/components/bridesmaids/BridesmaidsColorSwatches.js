@@ -31,7 +31,7 @@ class BridesmaidsColorSwatches extends PureComponent {
       <div
         key={color.id}
         className={classnames(
-          `${colClass} u-mb-big`,
+          `${colClass} u-mb--big BridesmaidColorSwatches__wrapper-squeeze`,
         )}
       >
         <div
@@ -57,10 +57,7 @@ class BridesmaidsColorSwatches extends PureComponent {
             />
           </div>
           <span
-            className={classnames(
-            'BridesmaidColorSwatches__touch-display-text',
-            'u-width--full u-left',
-          )}
+            className="BridesmaidColorSwatches__touch-display-text u-ellipsis u-width--full u-left"
           >
             <h6 className="BridesmaidColorSwatches__text">
               {color.presentation}
@@ -78,7 +75,7 @@ class BridesmaidsColorSwatches extends PureComponent {
     } = this.props;
 
     return (
-      <div className="BridesmaidColorSwatches layout-container u-mt-normal u-text-align-left">
+      <div className="BridesmaidColorSwatches u-center u-mt--normal u-text-align-left">
         <div className={`${gridClass}`}>
           { productDefaultColors.map(c => this.generateColorSwatch(c, 0))}
         </div>
@@ -102,7 +99,7 @@ BridesmaidsColorSwatches.propTypes = {
 };
 
 BridesmaidsColorSwatches.defaultProps = {
-  gridClass: 'grid-9',
+  gridClass: 'grid-6',
   colClass: 'col',
   selectedColorId: null,
 };
