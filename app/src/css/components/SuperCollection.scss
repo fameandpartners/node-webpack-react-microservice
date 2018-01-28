@@ -1,11 +1,12 @@
 .BodySection--section-container {
   max-width: 1270px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 80px auto 0;
+  padding: 0 3rem;
 }
 
 .BodySection--section-title {
   font-size: 1.5em;
+  font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
   text-align: left;
 }
 
@@ -14,10 +15,67 @@ img {
   height: auto;
 }
 
+// CTAs
+.SuperCollection-BodySection--ctaCaption {
+  padding: 40px;
+  font-size: 1.5rem;
+}
+
+.SuperCollection-BodySection--ctaShop {
+  padding-left: 10px;
+  text-decoration: underline;
+}
+
+// Footer
 .SuperCollection-Footer {
-  margin-bottom: 60px;
+  margin: 60px 0;
 }
 
 .SuperCollection-Footer--cta {
   color: $c-white;
+}
+
+.SuperCollection-Footer--ctaHeading,
+.SuperCollection-Footer--ctaSubheading {
+  font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
+}
+
+.SuperCollection-Footer--ctaHeading {
+  font-size: 5.5rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.SuperCollection-Footer--ctaSubheading {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.SuperCollection-Footer--ctaCopy {
+  text-decoration: underline;
+  font-size: 1.7rem;
+}
+
+// Responsive
+@media (min-width: 64em) {
+  .BodySection--section-container--Color {
+    .SuperCollection-BodySection--column {
+      padding: 0 3rem 4rem;
+    }
+
+    .SuperCollection-BodySection--grid {
+      margin: 0 -3rem;
+    }
+  }
+
+  .SuperCollection-mobileOnly {
+    display: none;
+  }
+}
+
+@media (max-width: 64em - 1em) {
+  .SuperCollection-desktopOnly {
+    display: none;
+  }
 }
