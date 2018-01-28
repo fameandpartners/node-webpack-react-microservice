@@ -95,7 +95,7 @@ class BridesmaidsTopDetailSelect extends Component {
               }
             )}
           >
-            <img className="u-width--full" alt={item.name} src={item.image} />
+            <img className="u-width--full" alt={item.name} src={`/images/bridesmaids_builder/top_${item.name.replace(' ','').toLowerCase()}_200.jpg`} />
           </div>
           <p>{item.name}</p>
         </div>
