@@ -255,6 +255,7 @@
 }
 
 .u-overlay-area__caption {
+  display: flex;
   position: absolute;
   overflow: hidden;
   left: 0;
@@ -267,7 +268,6 @@
 
 .u-overlay-area__caption--center {
   height: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
