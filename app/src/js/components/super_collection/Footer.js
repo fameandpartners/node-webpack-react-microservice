@@ -31,9 +31,10 @@ class Footer extends Component {
         />
         <div className="SuperCollection-Footer--ctaWrapper u-overlay-area__overlay">
           <div className="u-overlay-area__caption u-overlay-area__caption--center">
-            <a href="#" className="SuperCollection-Footer--cta">
-              <h2 className="SuperCollection-Footer--ctaHeading">Lorem ipsum</h2>
-              <p className="SuperCollection-Footer--ctaCopy">Lorem ipsum lorem</p>
+            <a href="/" className="SuperCollection-Footer--cta">
+              <h2 className="SuperCollection-Footer--ctaHeading">Dress Filter</h2>
+              <h3 className="SuperCollection-Footer--ctaSubheading">Create your own dress collection</h3>
+              <p className="SuperCollection-Footer--ctaCopy">Get started</p>
             </a>
           </div>
         </div>
