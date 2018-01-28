@@ -26,12 +26,48 @@ class BodySection extends Component {
     const data = this.normalizedData();
     console.log(data);
     return (
-      <div className="BodySection--section-container u-mt-big u-mb-big">
-        <h2 className="BodySection--section-title u-mb-small">Shop by {data.title}</h2>
-        <div className={data.grid_class}>
-          {data.sections.map(
-            (item, key) => (
-              <div key={key} className="col">
+      <div className={`BodySection--section-container BodySection--section-container--${data.title} u-mt-big u-mb-big`}>
+        <div className="grid-1">
+          <div className="col">
+            <h2 className="BodySection--section-title u-mb-small">Shop by {data.title}</h2>
+          </div>
+        </div>
+        {(data.title.toLowerCase() !== 'color') ? (
+          <div className={`${data.grid_class} SuperCollection-BodySection--grid`}>
+            {data.sections.map((item, key) => (
+              <div key={key} className="col SuperCollection-BodySection--column">
+                <div className="u-overlay-area">
+                  <a href={item.url}>
+                    <img
+                      src={item.img}
+                      alt={`Shop by ${data.title}: ${item.name}`}
+                      className="SuperCollection-BodySection--img SuperCollection-desktopOnly u-overlay-area__media"
+                    />
+                    <img
+                      src={item.img_mobile}
+                      alt={`Shop by ${data.title}: ${item.name}`}
+                      className="SuperCollection-BodySection--img SuperCollection-mobileOnly u-overlay-area__media"
+                    />
+                    <div
+                      className="SuperCollection-BodySection--ctaWrapper u-overlay-area__overlay"
+                    >
+                      <div
+                        className="SuperCollection-BodySection--ctaCaption u-overlay-area__caption"
+                      >
+                        <h2 className="SuperCollection-BodySection--ctaName">{item.name}.</h2>
+                        <p className="SuperCollection-BodySection--ctaShop">Shop</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              ),
+            )}
+          </div>
+        ) : (
+          <div className={`${data.grid_class} SuperCollection-BodySection--grid`}>
+            {data.sections.map((item, key) => (
+              <div key={key} className="col SuperCollection-BodySection--column">
                 <a href={item.url}>
                   <img
                     src={item.img}
@@ -40,9 +76,10 @@ class BodySection extends Component {
                   />
                 </a>
               </div>
-            ),
-          )}
-        </div>
+              ),
+            )}
+          </div>
+        )}
       </div>
     );
   }
@@ -55,6 +92,7 @@ BodySection.propTypes = {
     sections: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
       img: PropTypes.string,
+      img_mobile: PropTypes.string,
       url: PropTypes.string,
     })),
   }).isRequired,
