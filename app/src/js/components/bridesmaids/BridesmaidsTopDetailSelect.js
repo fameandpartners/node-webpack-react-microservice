@@ -102,6 +102,12 @@ class BridesmaidsTopDetailSelect extends Component {
       ));
   }
 
+  componentDidUpdate() {
+    if (win && win.fixBody) {
+      win.fixBody(this.props.lockBody);
+    }
+  }
+
   componentDidMount() {
     console.log(this.props.selectedTopDetails);
   }

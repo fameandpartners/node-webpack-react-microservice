@@ -241,7 +241,7 @@ class BDProductOptions extends Component {
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
-            <div className="ProductOptions__content u-mb-small typography">
+            <div className="ProductOptions__content u-mb--small typography">
               <ProductOptionsRow
                 heading
                 leftNode={<h1 className="u-display--inline h4">{productTitle}</h1>}

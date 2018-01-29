@@ -1,10 +1,9 @@
-/* eslint-disable */
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { find } from 'lodash';
 import classnames from 'classnames';
 
 // Actions
@@ -16,10 +15,14 @@ import '../../../../css/components/BridesmaidsSilhouetteSelect.scss';
 function stateToProps({ $$bridesmaidsFilterState }) {
   const temporarySilhouette = $$bridesmaidsFilterState.get('temporarySilhouette');
   const bridesmaidsFilterSilhouttes = $$bridesmaidsFilterState.get('$$bridesmaidsFilterSilhouettes').toJS();
+  const selectedLength = $$bridesmaidsFilterState.get('selectedLength');
 
   return {
     bridesmaidsFilterSilhouettes: bridesmaidsFilterSilhouttes || [],
     temporarySilhouetteId: temporarySilhouette ? temporarySilhouette.get('id') : null,
+    selectedLengthLowerCase: (selectedLength && selectedLength.size > 0)
+      ? selectedLength.get('name').toLowerCase().split('-')[0]
+      : 'maxi',
   };
 }
 
@@ -47,6 +50,11 @@ class BridesmaidsSilhouetteSelect extends Component {
     selectFilterSilhouette({ temporarySilhouette });
   }
 
+  generateSilhouetteImage(item) {
+    const { selectedLengthLowerCase } = this.props;
+    return `/images/bridesmaids_builder/length_${item.name.toLowerCase().replace('-', '').split(' ')[0]}_${selectedLengthLowerCase}_148.jpg`;
+  }
+
   getFilterSilhouettes() {
     const {
       bridesmaidsFilterSilhouettes,
@@ -57,18 +65,18 @@ class BridesmaidsSilhouetteSelect extends Component {
       .map((item, index) => (
         <div className="grid-12 col" key={item.image + index}>
           <div
-            className="col-5"
             onClick={() => this.handleSilhouetteClick(item)}
             className={classnames([
+              'col-5',
               'BridesmaidsSilhouetteSelect--image-wrapper u-cursor--pointer u-center',
               {
-                'BridesmaidsSilhouetteSelect--selected': item.id == temporarySilhouetteId
-              }
+                'BridesmaidsSilhouetteSelect--selected': item.id === temporarySilhouetteId,
+              },
             ])}
           >
-            <img className="u-width--full u-height--full" alt={item.name} src={item.image} />
+            <img className="u-width--full u-height--full" alt={item.name} src={this.generateSilhouetteImage(item)} />
           </div>
-          <div className="col-7">
+          <div className="col-7 grid-middle-center">
             <h4 className="h4">{item.name}</h4>
             <p>{item.description}</p>
           </div>
@@ -95,8 +103,9 @@ BridesmaidsSilhouetteSelect.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string,
   })).isRequired,
+  selectedLengthLowerCase: PropTypes.string.isRequired,
   temporarySilhouetteId: PropTypes.number,
-  // selectFilterSilhouette: PropTypes.func.isRequired,
+  selectFilterSilhouette: PropTypes.func.isRequired,
 };
 
 BridesmaidsSilhouetteSelect.defaultProps = {

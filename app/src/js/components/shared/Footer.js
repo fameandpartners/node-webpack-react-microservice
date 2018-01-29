@@ -153,10 +153,10 @@ class Footer extends PureComponent {
             </li>
           </ul>
           <div className="col-6_sm-12 Footer__sign-up u-mb--big">
-            <p className="Footer__copy u-mb-small u-text-align--left">
+            <p className="Footer__copy u-mb--small u-text-align--left">
               Are you on the list?
             </p>
-            <p className="u-text-align--left u-mb-small">
+            <p className="u-text-align--left u-mb--small">
               Join for an instant $25 off your first order, exclusive access to
               new arrivals, and more.
             </p>

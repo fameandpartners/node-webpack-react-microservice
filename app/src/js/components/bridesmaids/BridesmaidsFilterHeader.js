@@ -116,7 +116,7 @@ class BridesmaidsFilterHeader extends Component {
           backgroundColor: selectedColor.hexValue,
         }}
       >
-        <ReactHoverObserver hoverOffDelayInMs={1000000}>
+        <ReactHoverObserver hoverOffDelayInMs={100}>
           {
             breakpoint === 'mobile' || breakpoint === 'tablet'
             ? (

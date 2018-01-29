@@ -55,7 +55,7 @@ class CliqueCallout extends Component {
     return (
       <div className="grid-center-spaceAround CliqueCallout__content">
         <div className="col-10 u-text-align-left u-paddingBottom--small">
-          <p className="CliqueCallout__content--headline u-mb-small">
+          <p className="CliqueCallout__content--headline u-mb--small">
             Want up to 25% off?
           </p>
           <p className="CliqueCallout__content--subHeadline">
@@ -75,7 +75,7 @@ class CliqueCallout extends Component {
 
   render() {
     return (
-      <div className="js-clique-callout CliqueCallout u-mb-small">
+      <div className="js-clique-callout CliqueCallout u-mb--small">
         { this.generateCliqueCallout() }
       </div>
     );

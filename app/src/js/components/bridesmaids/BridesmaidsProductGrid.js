@@ -26,12 +26,8 @@ class BridesmaidsProductGrid extends Component {
     return `$${newPrice}`;
   }
 
-  goToImageHref(dress) {
-    return () => {
-      const colorName = dress.image_urls[0].color;
-      const href = win.encodeURI(`/bridesmaid-dresses/${dress.id}?color=${colorName}`);
-      win.location = href;
-    };
+  generateImageUrl(dressId, colorName) {
+    return win.encodeURI(`/bridesmaid-dresses/${dressId}?color=${colorName}`);
   }
 
   generateImage(
@@ -71,9 +67,11 @@ class BridesmaidsProductGrid extends Component {
             // eslint-disable-next-line
             key={index}
             className="FlashSaleProduct__container col-4_sm-6"
-            onClick={this.goToImageHref(dress)}
           >
-            <a className="FlashSaleProduct__image-wrapper u-cursor--pointer">
+            <a
+              className="FlashSaleProduct__image-wrapper u-cursor--pointer"
+              href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
+            >
               <img
                 className="FlashSaleProduct__image--original"
                 alt={dress.product_name}
@@ -85,20 +83,19 @@ class BridesmaidsProductGrid extends Component {
                 src={this.generateImage(dress, 'back')}
               />
             </a>
-            <div className="FlashSaleProduct__info grid-12">
-              <div className="col-8">
-                <a href={`/bridesmaid-dresses/${dress.id}`}>
-                  {dress.product_name}
-                </a>
+            <div className="grid-12">
+              <div className="col-9">
+                <p className="u-text-align--left">
+                  <a
+                    href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
+                  >
+                    {dress.product_name}
+                  </a>
+                </p>
               </div>
-              <div className="col-4 FlashSaleProduct__current-price">
+              <div className="col-3 FlashSaleProduct__current-price">
                 {this.formatPrice(dress.price.amount)}
               </div>
-              {/* <div className="col-8 FlashSaleProductLine">
-                {dress.color}, {formatSizePresentationUS(dress.size)}, {dress.height}&nbsp;
-                {HEIGHT_VALS[dress.height.toLowerCase()]}
-              </div>
-            */}
             </div>
           </div>
         ))}
