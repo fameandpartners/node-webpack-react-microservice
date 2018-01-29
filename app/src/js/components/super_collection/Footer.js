@@ -44,12 +44,11 @@ class Footer extends Component {
 
 Footer.propTypes = {
   footer: PropTypes.shape({
+    url: PropTypes.string,
     img: PropTypes.string,
+    img_tablet: PropTypes.string,
+    img_mobile: PropTypes.string,
   }).isRequired,
-};
-
-Footer.defaultProps = {
-  footer: {},
 };
 
 export default connect(stateToProps, dispatchToProps)(Footer);

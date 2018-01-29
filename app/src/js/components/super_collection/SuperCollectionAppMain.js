@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
@@ -68,17 +69,7 @@ class SuperCollectionAppMain extends Component {
 
 SuperCollectionAppMain.propTypes = {
   breakpoint: PropTypes.string.isRequired,
-  orderedSections: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.string,
-    title: PropTypes.string,
-    sections: PropTypes.arrayOf(PropTypes.shape({
-      img: PropTypes.string,
-    })),
-  })).isRequired,
-};
-
-SuperCollectionAppMain.defaultProps = {
-  orderedSections: [],
+  orderedSections: PropTypes.object.isRequired,
 };
 
 export default Resize(PDPBreakpoints)(

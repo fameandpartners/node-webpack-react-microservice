@@ -50,8 +50,4 @@ Header.propTypes = {
   }).isRequired,
 };
 
-Header.defaultProps = {
-  header: {},
-};
-
 export default connect(stateToProps, dispatchToProps)(Header);

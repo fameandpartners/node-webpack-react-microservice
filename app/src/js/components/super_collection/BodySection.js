@@ -3,11 +3,15 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// Utilities
+import objnoop from '../../libs/objnoop';
+
 function stateToProps() {
+  return objnoop;
 }
 
 function dispatchToProps() {
-  return {};
+  return objnoop;
 }
 
 class BodySection extends Component {
@@ -92,19 +96,10 @@ class BodySection extends Component {
 
 BodySection.propTypes = {
   data: PropTypes.shape({
-    type: PropTypes.string,
-    title: PropTypes.string,
-    sections: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      img: PropTypes.string,
-      img_mobile: PropTypes.string,
-      url: PropTypes.string,
-    })),
+    type: PropTypes.object,
+    title: PropTypes.object,
+    sections: PropTypes.object,
   }).isRequired,
-};
-
-BodySection.defaultProps = {
-  data: {},
 };
 
 export default connect(stateToProps, dispatchToProps)(BodySection);
