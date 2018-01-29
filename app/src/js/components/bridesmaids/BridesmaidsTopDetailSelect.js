@@ -84,7 +84,14 @@ class BridesmaidsTopDetailSelect extends Component {
 
     return bridesmaidsFilterTopDetails
       .map((item, index) => (
-        <div className="col" key={item.image + index}>
+        <div
+          className="col"
+          className={classnames(
+            "col",
+            {"u-mb--big": (index === 0)}
+          )}
+          key={item.image + index}
+        >
           <div
             onClick={() => this.handleDetailClick(item)}
             className={classnames(
@@ -97,7 +104,7 @@ class BridesmaidsTopDetailSelect extends Component {
           >
             <img className="u-width--full" alt={item.name} src={`/images/bridesmaids_builder/top_${item.name.replace(' ','').toLowerCase()}_200.jpg`} />
           </div>
-          <p>{item.name}</p>
+          <p className="u-mt--normal">{item.name}</p>
         </div>
       ));
   }
@@ -114,7 +121,7 @@ class BridesmaidsTopDetailSelect extends Component {
       <div className="BridesmaidsTopDetailSelect u-center">
         <div
           className={classnames(
-            'BridesmaidsTopDetailSelect__content u-center',
+            'BridesmaidsTopDetailSelect__content',
             `grid-${grid}`
           )}
         >

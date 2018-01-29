@@ -137,7 +137,7 @@ class BDProductOptions extends Component {
       sku: sku.toLowerCase(),
       customizationIds: selectedCustomizationDetails,
       imgSizeStr: '800x800',
-      length: selectedBDCustomizationLength,
+      length: selectedBDCustomizationLength.replace('-', '_'),
       colorCode: colorNames[selectedBDCustomizationColor],
     });
     return imageStr;

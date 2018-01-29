@@ -17,9 +17,9 @@ class ErrorMessage extends PureComponent {
 
     if (displayCondition) {
       utilSpace = (
-        <div className="ErrorMessage__wrapper">
+        <p className="ErrorMessage__wrapper">
           {message}
-        </div>
+        </p>
       );
     }
 

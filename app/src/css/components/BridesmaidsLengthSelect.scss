@@ -1,7 +1,10 @@
 .BridesmaidsLengthSelect--image-wrapper {
-  min-height: 238px;
   opacity: 0.33;
   transition: $fast-transition-time opacity ease-in-out;
+}
+
+.BridesmaidsLengthSelect--min-height-img {
+  min-height: 238px;
 }
 
 .BridesmaidsLengthSelect--selected {

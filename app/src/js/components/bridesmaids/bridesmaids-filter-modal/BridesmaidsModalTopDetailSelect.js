@@ -102,7 +102,7 @@ class BridesmaidsModalTopDetailSelect extends Component {
           >
             <img className="u-width--full" alt={item.name} src={this.generateTopDetailImage(item)} />
           </div>
-          <p>{item.name}</p>
+          <p className="u-mt--normal">{item.name}</p>
         </div>
       ));
   }
