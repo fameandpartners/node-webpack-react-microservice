@@ -120,7 +120,7 @@ class BDCustomizationDetailsSelect extends Component {
     return $$temporaryCustomizationDetails.push(detailGuid); // Add
   }
 
-  generateImageNameForCustomizationId(customizationId) {
+  generateImageNameForCustomizationId(customizationId, isIncompatible = false) {
     const {
       temporaryBDCustomizationColor,
       $$temporaryCustomizationDetails,
@@ -128,9 +128,14 @@ class BDCustomizationDetailsSelect extends Component {
       sku,
     } = this.props;
     const { colorNames } = BDCustomizationConstants;
+    const customizationIds = isIncompatible
+      ? [customizationId]
+      : $$temporaryCustomizationDetails.toJS().concat(customizationId);
+
+
     const imageStr = generateCustomizationImage({
       sku: sku.toLowerCase(),
-      customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
+      customizationIds,
       imgSizeStr: '142x142',
       length: temporaryBDCustomizationLength.replace('-', '_'),
       colorCode: colorNames[temporaryBDCustomizationColor],
@@ -156,14 +161,16 @@ class BDCustomizationDetailsSelect extends Component {
     return imageStr;
   }
 
-  handleCustomizationSelection(item) {
+  handleCustomizationSelection(item, isIncompatible) {
+    if (isIncompatible) return null;
     const { setBDTemporaryCustomizationDetails } = this.props;
     const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id.toLowerCase());
     setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: $$newTemporaryDetails });
     this.checkForIncompatabilities({
       customizationIds: $$newTemporaryDetails.toJS(),
     });
-    // 3: Create new url naming structure to be shared in shareable link
+
+    return null;
   }
 
   handleLengthSelection(item) {
@@ -240,25 +247,30 @@ class BDCustomizationDetailsSelect extends Component {
 
     return addonOptions
     .filter(ao => ao.group === groupName)
-    .filter(item => !(incompatabilities.indexOf(item.id) > -1))
-    .map(item => (
-      <div className="u-display--inline-block u-mr--normal" key={item.id}>
-        <div
-          onClick={() => this.handleCustomizationSelection(item)}
-          className="BDCustomizationDetailsSelect__image-wrapper u-cursor--pointer"
-        >
-          <img
-            className={classnames({
-              'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
-              'BDCustomizationDetailsSelect--loading': incompatabilitiesLoading,
-            })}
-            alt={item.id}
-            src={this.generateImageNameForCustomizationId(item.id)}
-          />
-          <div className="BDCustomizationDetailsSelect__description"><p>{item.description}</p><p>{this.generateCustomizationPrice(item.centsTotal)}</p></div>
+    .map((item) => {
+      const isIncompatible = incompatabilities.indexOf(item.id) > -1;
+      return (
+        <div className="u-display--inline-block u-mr--normal" key={item.id}>
+          <div
+            onClick={() => this.handleCustomizationSelection(item, isIncompatible)}
+            className="BDCustomizationDetailsSelect__image-wrapper u-cursor--pointer"
+          >
+            <img
+              className={classnames({
+                'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
+                'BDCustomizationDetailsSelect--loading': incompatabilitiesLoading,
+                'BDCustomizationDetailsSelect--incompatible': isIncompatible,
+              })}
+              alt={item.id}
+              src={this.generateImageNameForCustomizationId(item.id, isIncompatible)}
+            />
+            <div className="BDCustomizationDetailsSelect__description"><p>{item.description}</p><p>{this.generateCustomizationPrice(item.centsTotal)}</p></div>
+          </div>
         </div>
-      </div>
-    ));
+      );
+    },
+
+  );
   }
 
   getAddonDetailOptions() {

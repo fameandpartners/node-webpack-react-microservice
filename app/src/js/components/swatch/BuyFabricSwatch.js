@@ -103,7 +103,7 @@ class BuyFabricSwatch extends PureComponent {
     return (
       <div>
         <h3 className="FabricSwatchSelectionTitle u-capitalize u-mt--normal u-mb--normal">
-          Choose your heavy georgette swatch
+          Choose Your Fabric Swatch
         </h3>
 
         <div className="FabricSwatchListWrapper u-mb--normal">

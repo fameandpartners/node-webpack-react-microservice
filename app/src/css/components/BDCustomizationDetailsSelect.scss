@@ -22,3 +22,8 @@
 .BDCustomizationDetailsSelect--loading {
   opacity: 0.4;
 }
+
+.BDCustomizationDetailsSelect--incompatible {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
