@@ -25,11 +25,17 @@ class Header extends Component {
     return (
       <div className="grid-noGutter">
         <div className="col-12">
-          <img
-            src={header.img}
-            alt="Buy custom bridesmaid dresses"
-            className="SuperCollection-Header--img"
-          />
+          <picture>
+            <source srcSet={header.img} media="(min-width: 1200px)" />
+            <source srcSet={header.img_tablet} media="(min-width: 768px) and (max-width: 1199px)" />
+            <source srcSet={header.img_mobile} media="(max-width: 767px)" />
+            <img
+              src={header.img}
+              srcSet={header.img}
+              alt="Buy custom bridesmaid dresses"
+              className="SuperCollection-Header--img"
+            />
+          </picture>
         </div>
       </div>
     );
@@ -39,6 +45,8 @@ class Header extends Component {
 Header.propTypes = {
   header: PropTypes.shape({
     img: PropTypes.string,
+    img_tablet: PropTypes.string,
+    img_mobile: PropTypes.string,
   }).isRequired,
 };
 

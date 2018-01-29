@@ -256,6 +256,7 @@
 
 .u-overlay-area__caption {
   display: flex;
+  flex-wrap: wrap;
   position: absolute;
   overflow: hidden;
   left: 0;

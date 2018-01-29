@@ -23,21 +23,20 @@ class Footer extends Component {
     const { footer } = this.props;
 
     return (
-      <div className="SuperCollection-Footer u-overlay-area">
-        <img
-          src={footer.img}
-          alt="Buy custom bridesmaid dresses"
-          className="SuperCollection-Footer--img u-overlay-area__media"
-        />
-        <div className="SuperCollection-Footer--ctaWrapper u-overlay-area__overlay">
-          <div className="u-overlay-area__caption u-overlay-area__caption--center">
-            <a href="/" className="SuperCollection-Footer--cta">
-              <h2 className="SuperCollection-Footer--ctaHeading">Dress Filter</h2>
-              <h3 className="SuperCollection-Footer--ctaSubheading">Create your own dress collection</h3>
-              <p className="SuperCollection-Footer--ctaCopy">Get started</p>
-            </a>
-          </div>
-        </div>
+      <div className="SuperCollection-Footer">
+        <a href={footer.url}>
+          <picture>
+            <source srcSet={footer.img} media="(min-width: 1200px)" />
+            <source srcSet={footer.img_tablet} media="(min-width: 768px) and (max-width: 1199px)" />
+            <source srcSet={footer.img_mobile} media="(max-width: 767px)" />
+            <img
+              src={footer.img}
+              srcSet={footer.img}
+              alt="Buy custom bridesmaid dresses"
+              className="SuperCollection-Footer--img"
+            />
+          </picture>
+        </a>
       </div>
     );
   }

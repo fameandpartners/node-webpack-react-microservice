@@ -38,16 +38,16 @@ class BodySection extends Component {
               <div key={key} className="col SuperCollection-BodySection--column">
                 <div className="u-overlay-area">
                   <a href={item.url}>
-                    <img
-                      src={item.img}
-                      alt={`Shop by ${data.title}: ${item.name}`}
-                      className="SuperCollection-BodySection--img SuperCollection-desktopOnly u-overlay-area__media"
-                    />
-                    <img
-                      src={item.img_mobile}
-                      alt={`Shop by ${data.title}: ${item.name}`}
-                      className="SuperCollection-BodySection--img SuperCollection-mobileOnly u-overlay-area__media"
-                    />
+                    <picture>
+                      <source srcSet={item.img} media="(min-width: 768px)" />
+                      <source srcSet={item.img_mobile} media="(max-width: 767px)" />
+                      <img
+                        src={item.img}
+                        srcSet={item.img}
+                        alt={`Shop by ${data.title}: ${item.name}`}
+                        className="SuperCollection-BodySection--img u-overlay-area__media"
+                      />
+                    </picture>
                     <div
                       className="SuperCollection-BodySection--ctaWrapper u-overlay-area__overlay"
                     >
@@ -69,11 +69,16 @@ class BodySection extends Component {
             {data.sections.map((item, key) => (
               <div key={key} className="col SuperCollection-BodySection--column">
                 <a href={item.url}>
-                  <img
-                    src={item.img}
-                    alt={`Shop by ${data.title}: ${item.name}`}
-                    className="SuperCollection-BodySection--img"
-                  />
+                  <picture>
+                      <source srcSet={item.img} media="(min-width: 768px)" />
+                      <source srcSet={item.img_mobile} media="(max-width: 767px)" />
+                      <img
+                        src={item.img}
+                        srcSet={item.img}
+                        alt={`Shop by ${data.title}: ${item.name}`}
+                        className="SuperCollection-BodySection--img"
+                      />
+                    </picture>
                 </a>
               </div>
               ),
