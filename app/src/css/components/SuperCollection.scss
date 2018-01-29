@@ -16,8 +16,12 @@ img {
 }
 
 // CTAs
+.SuperCollection-BodySection--ctaWrapper {
+  text-align: left;
+}
+
 .SuperCollection-BodySection--ctaCaption {
-  padding: 40px;
+  padding: 30px;
   font-size: 1.5rem;
 }
 
@@ -58,27 +62,17 @@ img {
 }
 
 // Responsive
-@media (max-width: 767px) {
-  .SuperCollection-mobileHidden {
-    display: none;
-  }
-
+@media (max-width: 1100px) {
   .SuperCollection-BodySection--ctaCaption {
     padding: 20px;
+    width: 49%;
   }
 
   .SuperCollection-BodySection--ctaShop {
     padding-left: 0;
     flex: 0 0 100%;
-    text-align: left;
   }
 
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1199px) {
-  .SuperCollection-tabletHidden {
-    display: none;
-  }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -90,9 +84,5 @@ img {
     .SuperCollection-BodySection--grid {
       margin: 0 -3rem;
     }
-  }
-
-  .SuperCollection-desktopHidden {
-    display: none;
   }
 }
