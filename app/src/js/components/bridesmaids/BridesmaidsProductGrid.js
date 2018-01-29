@@ -64,6 +64,21 @@ class BridesmaidsProductGrid extends Component {
 
     return (
       <div className="BridesmaidsProductGrid__wrapper grid-12">
+        {
+          (products && products.length === 0) ?
+            (
+              <div className="u-mt--huge u-center">
+                <h1 className="BridesmaidsProductGrid__wrapper-heading font-family-secondary">Sorry we're not finding anything</h1>
+                <div className="BridesmaidsProductGrid__wrapper-text">
+                  <p>
+                    Try using different filters to broaden your results, or browse our<br />
+                    <a href="" className="u-text-decoration--underline">Bridesmaids Collection</a>
+                  </p>
+                </div>
+              </div>
+            ) :
+            null
+        }
         { products.map((dress, index) => (
           <div
             // eslint-disable-next-line
