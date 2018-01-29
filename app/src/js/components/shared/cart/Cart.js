@@ -100,6 +100,24 @@ class Cart extends Component {
     return nameStr;
   }
 
+  generateTitle(lineItem, productTitle) {
+    let ret = productTitle;
+    if (lineItem.isFlashSaleItem) {
+      const parts = productTitle.split('-');
+      ret = (
+        <span>
+          <span className="Cart__line-description u-bold">{parts[0]}</span>
+          <span>{parts[1]}</span>
+        </span>
+      );
+    } else {
+      ret = (
+        <span>{productTitle}</span>
+      );
+    }
+    return ret;
+  }
+
   generateAddonSummary(addons) {
     return (
       <ul>
@@ -204,7 +222,8 @@ class Cart extends Component {
           </div>
           <div className="u-text-align--left">
             <span className="Cart__line-description u-bold">
-              <span>{productTitle}</span>&nbsp;<span>{formatCents(productCentsBasePrice, 2)}</span>
+              {this.generateTitle(lineItem, productTitle)}&nbsp;
+              <span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>
             <span className="Cart__line-description">
               {this.generateColorSelectionNode(lineItem)}
