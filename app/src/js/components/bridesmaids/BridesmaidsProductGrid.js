@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 
-
 // Constants
 import BDCustomizationConstants from '../../constants/BDCustomizationConstants';
 
@@ -11,6 +10,9 @@ import BDCustomizationConstants from '../../constants/BDCustomizationConstants';
 import win from '../../polyfills/windowPolyfill';
 // import { formatSizePresentationUS } from '../../utilities/helpers';
 import { generateCustomizationImage } from '../../utilities/bridesmaids';
+
+// Components
+import FadeIn from '../generic/FadeIn';
 
 // CSS
 import '../../../css/components/FlashSaleProductGrid.scss';
@@ -28,8 +30,8 @@ class BridesmaidsProductGrid extends Component {
     return `$${newPrice}`;
   }
 
-  generateImageUrl(dressId, colorName) {
-    return win.encodeURI(`/bridesmaid-dresses/${dressId}?color=${colorName}`);
+  generateImageUrl(dressId, colorName, length) {
+    return win.encodeURI(`/bridesmaid-dresses/${dressId}?color=${colorName}&length=${length}`);
   }
 
   generateImage(
@@ -67,15 +69,17 @@ class BridesmaidsProductGrid extends Component {
         {
           (products && products.length === 0) ?
             (
-              <div className="u-mt--huge u-center">
-                <h1 className="BridesmaidsProductGrid__wrapper-heading font-family-secondary">Sorry we're not finding anything</h1>
-                <div className="BridesmaidsProductGrid__wrapper-text">
-                  <p>
-                    Try using different filters to broaden your results, or browse our<br />
-                    <a href="" className="u-text-decoration--underline">Bridesmaids Collection</a>
-                  </p>
+              <FadeIn className="u-center">
+                <div className="u-mt--huge u-center">
+                  <h1 className="BridesmaidsProductGrid__wrapper-heading font-family-secondary">Sorry we're not finding anything</h1>
+                  <div className="BridesmaidsProductGrid__wrapper-text">
+                    <p>
+                      Try using different filters to broaden your results, or browse our<br />
+                      <a href="" className="u-text-decoration--underline">Bridesmaids Collection</a>
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </FadeIn>
             ) :
             null
         }
@@ -87,15 +91,15 @@ class BridesmaidsProductGrid extends Component {
           >
             <a
               className="BridesmaidsProduct__image-wrapper FlashSaleProduct__image-wrapper u-cursor--pointer"
-              href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
+              href={this.generateImageUrl(dress.id, dress.image_urls[0].color, dress.length)}
             >
               <img
-                className="FlashSaleProduct__image--original"
+                className="FlashSaleProduct__image--original u-vertical-align--top"
                 alt={dress.product_name}
                 src={this.generateImage(dress, 'front')}
               />
               <img
-                className="FlashSaleProduct__image--hover"
+                className="FlashSaleProduct__image--hover u-vertical-align--top"
                 alt={dress.name}
                 src={this.generateImage(dress, 'back')}
               />
@@ -104,7 +108,7 @@ class BridesmaidsProductGrid extends Component {
               <div className="col-9">
                 <p className="u-text-align--left u-mt-small">
                   <a
-                    href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
+                    href={this.generateImageUrl(dress.id, dress.image_urls[0].color, dress.length)}
                   >
                     {dress.product_name}
                   </a>

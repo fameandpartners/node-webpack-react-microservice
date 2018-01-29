@@ -23,10 +23,12 @@ class FadeIn extends Component {
   }
 
   render() {
+    const { className } = this.props;
     return (
       <div
         className={classnames(
           'FadeIn',
+          className,
           { 'FadeIn--fade-in': this.state.fadeIn },
         )}
       >
@@ -37,7 +39,12 @@ class FadeIn extends Component {
 }
 
 FadeIn.propTypes = {
+  className: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+};
+
+FadeIn.defaultProps = {
+  className: '',
 };
 
 export default FadeIn;
