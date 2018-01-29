@@ -13,6 +13,7 @@ import { generateCustomizationImage } from '../../utilities/bridesmaids';
 
 // CSS
 import '../../../css/components/FlashSaleProductGrid.scss';
+import '../../../css/components/BridesmaidsProductGrid.scss';
 
 class BridesmaidsProductGrid extends Component {
   constructor(props) {
