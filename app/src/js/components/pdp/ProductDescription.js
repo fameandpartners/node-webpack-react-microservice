@@ -90,7 +90,7 @@ class ProductDescription extends Component {
         { auSite && (breakpoint === 'mobile' || breakpoint === 'tablet') ?
           (
             <p
-              className="AfterPay__message u-mb-small ProductDescription__copy"
+              className="AfterPay__message u-mb--small ProductDescription__copy"
             >
               4 easy payments of {this.calculateInstallment(4, '$')} with <br />
               <img

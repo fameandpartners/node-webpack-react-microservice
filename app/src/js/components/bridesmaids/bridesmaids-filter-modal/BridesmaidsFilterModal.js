@@ -75,7 +75,7 @@ class BridesmaidsFilterModal extends PureComponent {
           modalWrapperClassName="u-flex--col"
         >
           <div className="BridesmaidsFilterModal__layout-container">
-            <h3 className="BridesmaidsFilterModal__heading h4 u-text-align--left u-text-align--left">
+            <h3 className="BridesmaidsFilterModal__heading h4 u-text-align--left u-text-align--left u-mb--small">
               Color
             </h3>
 
@@ -84,7 +84,7 @@ class BridesmaidsFilterModal extends PureComponent {
           </div>
 
           <div className="BridesmaidsFilterModal__layout-container">
-            <h3 className="BridesmaidsFilterModal__heading h4 u-text-align--left">
+            <h3 className="BridesmaidsFilterModal__heading h4 u-text-align--left u-mb--small">
               Silhouettes
             </h3>
 
@@ -93,7 +93,7 @@ class BridesmaidsFilterModal extends PureComponent {
           </div>
 
           <div className="BridesmaidsFilterModal__layout-container">
-            <h3 className="BridesmaidsFilterModal__heading h4 u-text-align--left">
+            <h3 className="BridesmaidsFilterModal__heading h4 u-text-align--left u-mb--small">
               Lengths
             </h3>
 
@@ -102,7 +102,7 @@ class BridesmaidsFilterModal extends PureComponent {
           </div>
 
           <div className="BridesmaidsFilterModal__layout-container u-mb--huge">
-            <h3 className="BridesmaidsFilterModal__heading h4 u-text-align--left">
+            <h3 className="BridesmaidsFilterModal__heading h4 u-text-align--left u-mb--small">
               Top Styles
             </h3>
 
