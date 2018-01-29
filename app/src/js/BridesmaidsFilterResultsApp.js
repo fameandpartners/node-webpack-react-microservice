@@ -94,9 +94,16 @@ class BridesmaidsFilterResultsApp extends Component {
     };
   }
 
+
   componentWillUpdate(nextProps) {
     if (nextProps.shouldChangeFilterPage) {
       loadFilteredResultsPage(nextProps.bridesmaidsFilterObj);
+    }
+  }
+
+  componentDidUpdate() {
+    if (win && win.fixBody) {
+      win.fixBody(this.props.lockBody);
     }
   }
 

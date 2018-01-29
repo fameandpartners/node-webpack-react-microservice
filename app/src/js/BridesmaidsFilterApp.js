@@ -1,4 +1,5 @@
 /* global window */
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
@@ -229,7 +230,8 @@ class BridesmaidsFilterApp extends Component {
             </div>
             <div className="col-12 u-mt--big u-mb--normal">
               <BridesmaidsColorSelect
-                gridClass="grid-6-center"
+                colClass="col-2_sm-4_md-2"
+                gridClass="grid-12"
                 handleSelection={this.handleSelection}
               />
             </div>
@@ -245,6 +247,7 @@ class BridesmaidsFilterApp extends Component {
             </div>
             <div className="col-12 u-mt--big u-mb--normal">
               <BridesmaidsSilhouetteSelect
+                breakpoint={breakpoint}
                 handleSelection={this.handleSelection}
               />
             </div>
@@ -260,6 +263,7 @@ class BridesmaidsFilterApp extends Component {
             </div>
             <div className="col-12 u-mt--big u-mb--normal">
               <BridesmaidsLengthSelect
+                breakpoint={breakpoint}
                 handleSelection={this.handleSelection}
               />
             </div>
@@ -273,7 +277,7 @@ class BridesmaidsFilterApp extends Component {
                 message="Please select at least one dress top detail."
               />
             </div>
-            <div className="col-12 u-mt--big">
+            <div className="col-12 u-mt--big u-mb--huge">
               <BridesmaidsTopDetailSelect
                 gridLength={4}
               />
@@ -281,7 +285,7 @@ class BridesmaidsFilterApp extends Component {
           </div>
 
           <div className="grid-12">
-            <div className="BridesmaidsFilterAppEmailCapture__wrapper col-12 grid-middle u-mt--big">
+            <div className="BridesmaidsFilterAppEmailCapture__wrapper col-12 grid-middle-noGutter u-mt--big layout-container">
               <div className="u-width--full">
                 <h2 className="h4 u-mb--normal">
                   <em>Your Collection</em> is waiting.

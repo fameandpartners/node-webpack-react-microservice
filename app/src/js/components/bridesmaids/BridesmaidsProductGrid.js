@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
@@ -13,6 +14,7 @@ import { generateCustomizationImage } from '../../utilities/bridesmaids';
 
 // CSS
 import '../../../css/components/FlashSaleProductGrid.scss';
+import '../../../css/components/BridesmaidsProductGrid.scss';
 
 class BridesmaidsProductGrid extends Component {
   constructor(props) {
@@ -26,12 +28,8 @@ class BridesmaidsProductGrid extends Component {
     return `$${newPrice}`;
   }
 
-  goToImageHref(dress) {
-    return () => {
-      const colorName = dress.image_urls[0].color;
-      const href = win.encodeURI(`/bridesmaid-dresses/${dress.id}?color=${colorName}`);
-      win.location = href;
-    };
+  generateImageUrl(dressId, colorName) {
+    return win.encodeURI(`/bridesmaid-dresses/${dressId}?color=${colorName}`);
   }
 
   generateImage(
@@ -66,14 +64,31 @@ class BridesmaidsProductGrid extends Component {
 
     return (
       <div className="BridesmaidsProductGrid__wrapper grid-12">
+        {
+          (products && products.length === 0) ?
+            (
+              <div className="u-mt--huge u-center">
+                <h1 className="BridesmaidsProductGrid__wrapper-heading font-family-secondary">Sorry we're not finding anything</h1>
+                <div className="BridesmaidsProductGrid__wrapper-text">
+                  <p>
+                    Try using different filters to broaden your results, or browse our<br />
+                    <a href="" className="u-text-decoration--underline">Bridesmaids Collection</a>
+                  </p>
+                </div>
+              </div>
+            ) :
+            null
+        }
         { products.map((dress, index) => (
           <div
             // eslint-disable-next-line
             key={index}
             className="FlashSaleProduct__container col-4_sm-6"
-            onClick={this.goToImageHref(dress)}
           >
-            <a className="FlashSaleProduct__image-wrapper u-cursor--pointer">
+            <a
+              className="BridesmaidsProduct__image-wrapper FlashSaleProduct__image-wrapper u-cursor--pointer"
+              href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
+            >
               <img
                 className="FlashSaleProduct__image--original"
                 alt={dress.product_name}
@@ -85,20 +100,19 @@ class BridesmaidsProductGrid extends Component {
                 src={this.generateImage(dress, 'back')}
               />
             </a>
-            <div className="FlashSaleProduct__info grid-12">
-              <div className="col-8">
-                <a href={`/bridesmaid-dresses/${dress.id}`}>
-                  {dress.product_name}
-                </a>
+            <div className="grid-12">
+              <div className="col-9">
+                <p className="u-text-align--left u-mt-small">
+                  <a
+                    href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
+                  >
+                    {dress.product_name}
+                  </a>
+                </p>
               </div>
-              <div className="col-4 FlashSaleProduct__current-price">
+              <div className="col-3 FlashSaleProduct__current-price u-mt-small">
                 {this.formatPrice(dress.price.amount)}
               </div>
-              {/* <div className="col-8 FlashSaleProductLine">
-                {dress.color}, {formatSizePresentationUS(dress.size)}, {dress.height}&nbsp;
-                {HEIGHT_VALS[dress.height.toLowerCase()]}
-              </div>
-            */}
             </div>
           </div>
         ))}

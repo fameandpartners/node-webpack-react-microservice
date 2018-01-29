@@ -1,4 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
@@ -76,14 +77,19 @@ class BridesmaidsModalTopDetailSelect extends Component {
     return null;
   }
 
+  generateTopDetailImage(item) {
+    return `/images/bridesmaids_builder/top_${item.name.replace(' ', '').toLowerCase()}_200.jpg`;
+  }
+
   getFilterTopDetails() {
     const {
       bridesmaidsFilterTopDetails,
     } = this.props;
 
+
     return bridesmaidsFilterTopDetails
       .map((item, index) => (
-        <div className="col-6" key={item.image + index}>
+        <div className="col-6_sm-6_md-4" key={item.image + index}>
           <div
             onClick={() => this.handleDetailClick(item)}
             className={classnames(
@@ -94,9 +100,9 @@ class BridesmaidsModalTopDetailSelect extends Component {
               },
             )}
           >
-            <img className="u-width--full" alt={item.name} src={item.image} />
+            <img className="u-width--full" alt={item.name} src={this.generateTopDetailImage(item)} />
           </div>
-          <p>{item.name}</p>
+          <p className="u-mt--normal">{item.name}</p>
         </div>
       ));
   }

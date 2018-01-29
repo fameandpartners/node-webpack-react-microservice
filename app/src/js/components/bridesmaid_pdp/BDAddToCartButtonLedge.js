@@ -99,7 +99,7 @@ class BDAddToCartButtonLedge extends Component {
           rightNode={(<BDAddToCartButton />)}
           handleLeftButtonClick={this.leftNodeSizeClick()}
         />
-        <p className="u-mb-small">
+        <p className="u-mb--small">
           {
             selectedStyleCustomizations.length === 0
             ? 'Shipping and returns are free.'

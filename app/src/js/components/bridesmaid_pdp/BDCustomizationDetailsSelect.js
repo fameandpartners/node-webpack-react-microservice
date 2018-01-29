@@ -132,7 +132,7 @@ class BDCustomizationDetailsSelect extends Component {
       sku: sku.toLowerCase(),
       customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
       imgSizeStr: '142x142',
-      length: temporaryBDCustomizationLength,
+      length: temporaryBDCustomizationLength.replace('-', '_'),
       colorCode: colorNames[temporaryBDCustomizationColor],
     });
     return imageStr;
@@ -150,7 +150,7 @@ class BDCustomizationDetailsSelect extends Component {
       sku: sku.toLowerCase(),
       customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
       imgSizeStr: '142x142',
-      length: availableLengths[customizationId],
+      length: availableLengths[customizationId].replace('-', '_'),
       colorCode: colorNames[temporaryBDCustomizationColor],
     });
     return imageStr;

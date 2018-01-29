@@ -116,7 +116,7 @@ class BridesmaidsFilterHeader extends Component {
           backgroundColor: selectedColor.hexValue,
         }}
       >
-        <ReactHoverObserver hoverOffDelayInMs={1000000}>
+        <ReactHoverObserver hoverOffDelayInMs={100}>
           {
             breakpoint === 'mobile' || breakpoint === 'tablet'
             ? (
@@ -140,7 +140,8 @@ class BridesmaidsFilterHeader extends Component {
                     heading: `Color: ${selectedColor.presentation}`,
                     content: (
                       <BridesmaidsColorSelect
-                        gridClass="grid-8"
+                        colClass="col"
+                        gridClass="grid-9"
                         handleSelection={this.changeFilterPage}
                       />
                   ),
@@ -150,6 +151,7 @@ class BridesmaidsFilterHeader extends Component {
                     heading: `Silhouette: ${selectedSilhouette.name}`,
                     content: (
                       <BridesmaidsSilhouetteSelect
+                        needsMinHeight
                         handleSelection={this.changeFilterPage}
                       />
                   ),
@@ -159,6 +161,7 @@ class BridesmaidsFilterHeader extends Component {
                     heading: `Length: ${selectedLength.name}`,
                     content: (
                       <BridesmaidsLengthSelect
+                        needsMinHeight
                         handleSelection={this.changeFilterPage}
                       />
                   ),

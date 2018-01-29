@@ -246,7 +246,7 @@ class ProductCustomizationStyle extends PureComponent {
       >
         <div className="ProductCustomizationSize__layout-container u-mt--normal u-mb--huge">
           <div className="u-mb--big">
-            <h3 className="h4 u-mb-small">
+            <h3 className="h4 u-mb--small">
               Let’s make it fit.
             </h3>
             <p className="h6 ProductCustomizationSize__sub-heading">
@@ -320,7 +320,7 @@ class ProductCustomizationStyle extends PureComponent {
             </div>
             { sizeError ?
               <div className="ProductCustomizationSize__size-error-text">
-                <p className="p u-color-red u-text-align-left u-mb-small u-mt-small">
+                <p className="p u-color-red u-text-align-left u-mb--small u-mt-small">
                   Please select a size
                 </p>
               </div>

@@ -79,7 +79,7 @@ class FlashProductOptions extends Component {
           </div>
         </div>
         <div className="FlashProductOptions__col grid-middle col-6 u-center">
-          <div className="FlashProductOptions__ctas grid-1 u-mb-small">
+          <div className="FlashProductOptions__ctas grid-1 u-mb--small">
             <div className="col-12">
               <FlashProductDescription
                 lineItem={lineItem}

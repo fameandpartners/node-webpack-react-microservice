@@ -139,7 +139,7 @@ class ProductCustomizationStyle extends Component {
           role="button"
           key={`addon-option-${a.id}`}
         >
-          <div className="u-mb-small">
+          <div className="u-mb--small">
             <ButtonCol
               tall
               className="u-width--full"
@@ -256,7 +256,7 @@ class ProductCustomizationStyle extends Component {
       /* eslint-disable max-len */
       <div className="ProductCustomizationStyle__cad-layer--legacy grid-middle-center u-width--full">
         <div>
-          <h3 className="h4 u-mb-small">Design Customizations</h3>
+          <h3 className="h4 u-mb--small">Design Customizations</h3>
           <h6>Make it your own</h6>
         </div>
       </div>
@@ -383,7 +383,7 @@ class ProductCustomizationStyle extends Component {
           </div>
 
           <div className="ProductCustomizationStyle__addon-options">
-            <div className="u-text-align--right float--right u-width--full u-mb-small">
+            <div className="u-text-align--right float--right u-width--full u-mb--small">
               { clearAll ?
                 (
                   <span

@@ -51,7 +51,9 @@ class BridesmaidsSilhouetteSelect extends Component {
 
   getFilterSilhouettes() {
     const {
+      breakpoint,
       bridesmaidsFilterSilhouettes,
+      needsMinHeight,
       selectedSilhouetteId,
       selectedLengthLowerCase,
     } = this.props;
@@ -64,6 +66,7 @@ class BridesmaidsSilhouetteSelect extends Component {
             className={classnames([
               'BridesmaidsSilhouetteSelect--image-wrapper u-cursor--pointer u-center',
               {
+                'BridesmaidsSilhouetteSelect--min-height-img': needsMinHeight,
                 'BridesmaidsSilhouetteSelect--selected': item.id === selectedSilhouetteId,
               },
             ])}
@@ -75,7 +78,12 @@ class BridesmaidsSilhouetteSelect extends Component {
             />
           </div>
           <p>{item.name}</p>
-          <p className="u-mt--xs">{item.description}</p>
+          {
+            breakpoint === 'mobile' ? null : (
+              <p className="u-mt--xs">{item.description}</p>
+            )
+          }
+
         </div>
       ));
   }
@@ -93,6 +101,10 @@ class BridesmaidsSilhouetteSelect extends Component {
 }
 
 BridesmaidsSilhouetteSelect.propTypes = {
+  // Passed Props
+  breakpoint: PropTypes.string,
+  needsMinHeight: PropTypes.bool,
+  // Redux Props
   bridesmaidsFilterSilhouettes: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -107,6 +119,8 @@ BridesmaidsSilhouetteSelect.propTypes = {
 };
 
 BridesmaidsSilhouetteSelect.defaultProps = {
+  breakpoint: null,
+  needsMinHeight: false,
   selectedSilhouetteId: null,
 };
 
