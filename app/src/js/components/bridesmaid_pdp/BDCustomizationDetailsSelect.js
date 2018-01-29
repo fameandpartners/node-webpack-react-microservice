@@ -264,7 +264,9 @@ class BDCustomizationDetailsSelect extends Component {
               alt={item.id}
               src={this.generateImageNameForCustomizationId(item.id, isIncompatible)}
             />
-            <div className="BDCustomizationDetailsSelect__description"><p>{item.description}</p><p>{this.generateCustomizationPrice(item.centsTotal)}</p></div>
+            <div className="BDCustomizationDetailsSelect__description">
+              <p>{item.description} {this.generateCustomizationPrice(item.centsTotal)}</p>
+            </div>
           </div>
         </div>
       );
