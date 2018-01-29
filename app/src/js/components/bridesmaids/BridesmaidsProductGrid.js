@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
@@ -70,7 +71,7 @@ class BridesmaidsProductGrid extends Component {
             className="FlashSaleProduct__container col-4_sm-6"
           >
             <a
-              className="FlashSaleProduct__image-wrapper u-cursor--pointer"
+              className="BridesmaidsProduct__image-wrapper FlashSaleProduct__image-wrapper u-cursor--pointer"
               href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
             >
               <img
@@ -86,7 +87,7 @@ class BridesmaidsProductGrid extends Component {
             </a>
             <div className="grid-12">
               <div className="col-9">
-                <p className="u-text-align--left">
+                <p className="u-text-align--left u-mt-small">
                   <a
                     href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
                   >
@@ -94,7 +95,7 @@ class BridesmaidsProductGrid extends Component {
                   </a>
                 </p>
               </div>
-              <div className="col-3 FlashSaleProduct__current-price">
+              <div className="col-3 FlashSaleProduct__current-price u-mt-small">
                 {this.formatPrice(dress.price.amount)}
               </div>
             </div>

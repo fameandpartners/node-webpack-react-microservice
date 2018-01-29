@@ -74,10 +74,12 @@ class BridesmaidsSilhouetteSelect extends Component {
               },
             ])}
           >
-            <img className="u-width--full u-height--full" alt={item.name} src={this.generateSilhouetteImage(item)} />
+            <img className="u-width--full" alt={item.name} src={this.generateSilhouetteImage(item)} />
           </div>
           <div className="col-7 grid-middle-center">
-            <h4 className="h4">{item.name}</h4>
+            <div className="u-width--full">
+              <h4 className="h4">{item.name}</h4>
+            </div>
             <p>{item.description}</p>
           </div>
         </div>
