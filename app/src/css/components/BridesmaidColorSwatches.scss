@@ -1,3 +1,7 @@
+.BridesmaidColorSwatches {
+  max-width: 900px;
+}
+
 .BridesmaidColorSwatches__swatch::after {
   padding-top: 100%;
   float: left;
@@ -16,6 +20,14 @@
 
 .BridesmaidColorSwatches__swatch--dark {
   color: $c-white;
+}
+
+.BridesmaidColorSwatches__wrapper-squeeze {
+  padding: 5px;
+
+  @include md {
+    padding: 20px;
+  }
 }
 
 .BridesmaidColorSwatches__wrapper {

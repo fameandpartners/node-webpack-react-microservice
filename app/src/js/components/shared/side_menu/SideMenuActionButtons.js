@@ -63,7 +63,7 @@ class SideMenuActionButtons extends Component {
         <div className="SideMenuActionButtons__body u-position--relative">
           <ul>
             { firstName ?
-              <li className="u-mb-big u-ml-xs">
+              <li className="u-mb--big u-ml-xs">
                 <a
                   className="link link--static link--no-underline"
                   href="/profile"
@@ -116,7 +116,7 @@ class SideMenuActionButtons extends Component {
               </li> : null
             }
             { firstName ?
-              <li className="u-mb-normal">
+              <li className="u-mb--normal">
                 <a className="link link--static link--no-underline" href="/view-orders">Orders</a>
               </li> : null
             }

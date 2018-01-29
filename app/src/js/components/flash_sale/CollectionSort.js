@@ -93,7 +93,7 @@ class CollectionFilterSort extends React.Component {
   buildMobileCollectionSort(options) {
     return (
       <div className="grid-middle">
-        <ul className="u-center u-mt-normal">
+        <ul className="u-center u-mt--normal">
           {options.map(opt => (
             <Button
               className="u-mt-small"

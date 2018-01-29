@@ -1,6 +1,15 @@
-.BridesmaidsSilhoutteSelect--image-wrapper {
-  height: 300px;
-  width: 175px;
+.BridesmaidsLengthSelect--image-wrapper {
+  min-height: 238px;
+  opacity: 0.33;
+  transition: $fast-transition-time opacity ease-in-out;
+}
+
+.BridesmaidsLengthSelect--selected {
+  opacity: 1;
+}
+
+.BridesmaidsLengthSelect__contents {
+  max-width: 800px;
 }
 
 .DressFilterLength {
@@ -11,8 +20,4 @@
 .DressFilterLength--selected {
   opacity: 1;
   font-weight: bold;
-}
-
-.BridesmaidsLengthSelect__contents {
-  max-width: 800px;
 }

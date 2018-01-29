@@ -237,7 +237,7 @@ class Cart extends Component {
             </div>
             <Button
               tall
-              className="u-mb-normal"
+              className="u-mb--normal"
               url="/checkout"
               text="Checkout"
               handleClick={noop}

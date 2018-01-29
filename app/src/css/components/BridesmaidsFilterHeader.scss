@@ -1,7 +1,3 @@
-.BridesmaidsFilterHeader__wrapper {
-  color: $c-white;
-}
-
 .BridesmaidsFilterHeader__wrapper .HeaderNavigation {
   padding: 20px;
 }
@@ -10,7 +6,13 @@
   z-index: 1;
 }
 
-.BridesmaidsFilterHeader__wrapper--light {
+.BridesmaidsFilterHeader__wrapper .Bridesmaids_SizeGuideTabs__heading,
+.BridesmaidsFilterHeader__wrapper .BridesmaidsFilterHeader__header {
+  color: $c-white;
+}
+
+.BridesmaidsFilterHeader__wrapper--light .Bridesmaids_SizeGuideTabs__heading,
+.BridesmaidsFilterHeader__wrapper--light .BridesmaidsFilterHeader__header {
   color: $c-black;
 }
 

@@ -58,7 +58,7 @@ class BridesmaidsLengthSelect extends Component {
 
     return bridesmaidsFilterLengths
       .map((item, index) => (
-        <div className="col-2" key={item.image + index}>
+        <div className="col-2_sm-4_md-2" key={item.image + index}>
           <div
             onClick={() => this.handleLengthClick(item)}
             className={classnames(

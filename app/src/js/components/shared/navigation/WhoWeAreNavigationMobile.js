@@ -27,7 +27,7 @@ class WhoWeAreNavigationMobile extends PureComponent {
       <div className="ShopAllNavigationMobile u-width--full typography">
         <div className="ShopAllNavigationMobile__link-container u-center grid-noGutter">
           <div
-            className="ShopAllNavigationMobile__heading u-cursor--pointer u-mb-normal"
+            className="ShopAllNavigationMobile__heading u-cursor--pointer u-mb--normal"
             onClick={this.props.handleReturnClick}
           >
             <span className="u-position--relative u-display--inline u-mr--small">

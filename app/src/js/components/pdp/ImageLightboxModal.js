@@ -163,7 +163,7 @@ class ImageLightboxModal extends Component {
           handleCloseModal={this.handleCloseModal}
           onMouseMove={this.handleImageMouseover}
         >
-          <p className="ImageLightboxModal__pagination h4 u-mb-normal u-user-select--none">
+          <p className="ImageLightboxModal__pagination h4 u-mb--normal u-user-select--none">
             {gallerySlideActiveIndex + 1} of {sliderImages.length}
           </p>
           <Slider

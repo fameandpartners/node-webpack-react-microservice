@@ -72,7 +72,7 @@ class FlashAppMain extends Component {
            breakpoint === 'mobile' || breakpoint === 'tablet'
             ? null
             : (
-              <div className="u-gray-border--top u-mb-normal">
+              <div className="u-gray-border--top u-mb--normal">
                 <FlashProductGrid />
               </div>
             )

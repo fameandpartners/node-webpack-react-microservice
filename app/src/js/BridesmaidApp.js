@@ -175,7 +175,7 @@ class BridesmaidApp extends Component {
     const { lockBody } = this.props;
     return (
       <div className="__react_root__">
-        <div className={`BridesmaidApp Root__wrapper ${lockBody ? 'BridesmaidApp--scroll-lock' : ''}`}>
+        <div className={`BridesmaidApp Root__wrapper ${lockBody ? 'u-scroll-lock' : ''}`}>
           <BDCustomizationDrawer />
           <BDAppMain />
           <OnboardingModal />

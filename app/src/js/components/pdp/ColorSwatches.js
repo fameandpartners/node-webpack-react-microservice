@@ -31,7 +31,7 @@ class ColorSwatches extends PureComponent {
     return (
       <div
         key={color.id}
-        className="col-4 u-mb-big"
+        className="col-4 u-mb--big"
       >
         <div
           onClick={this.handleColorSelection(color)}
@@ -80,7 +80,7 @@ class ColorSwatches extends PureComponent {
 
     return (
       <div
-        className="ColorSwatches u-mt-normal u-text-align-left"
+        className="ColorSwatches u-mt--normal u-text-align-left"
       >
         <h5 className="u-mb-small u-text-align--left">
           Fame Recommends
@@ -95,7 +95,7 @@ class ColorSwatches extends PureComponent {
               <h5 className="u-mb-small textAlign--left">
                 Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
               </h5>
-              <div className="u-mb-normal grid-12">
+              <div className="u-mb--normal grid-12">
                 { productSecondaryColors.map(c =>
                   this.generateColorSwatch(c, productSecondaryColorsCentsPrice))
                 }
