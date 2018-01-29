@@ -24,7 +24,7 @@ class BodySection extends Component {
 
   render() {
     const data = this.normalizedData();
-    console.log(data);
+
     return (
       <div className={`BodySection--section-container BodySection--section-container--${data.title} u-mt-big u-mb-big`}>
         <div className="grid-1">
@@ -70,15 +70,15 @@ class BodySection extends Component {
               <div key={key} className="col SuperCollection-BodySection--column">
                 <a href={item.url}>
                   <picture>
-                      <source srcSet={item.img} media="(min-width: 768px)" />
-                      <source srcSet={item.img_mobile} media="(max-width: 767px)" />
-                      <img
-                        src={item.img}
-                        srcSet={item.img}
-                        alt={`Shop by ${data.title}: ${item.name}`}
-                        className="SuperCollection-BodySection--img"
-                      />
-                    </picture>
+                    <source srcSet={item.img} media="(min-width: 768px)" />
+                    <source srcSet={item.img_mobile} media="(max-width: 767px)" />
+                    <img
+                      src={item.img}
+                      srcSet={item.img}
+                      alt={`Shop by ${data.title}: ${item.name}`}
+                      className="SuperCollection-BodySection--img"
+                    />
+                  </picture>
                 </a>
               </div>
               ),
