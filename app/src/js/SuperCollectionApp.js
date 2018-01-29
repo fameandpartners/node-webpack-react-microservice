@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 
@@ -12,7 +11,7 @@ import SuperCollectionAppMain from './components/super_collection/SuperCollectio
 // Global Styles
 import '../css/global/variables.scss';
 import '../css/reset.scss';
-import '../css/gridlex.scss';
+import '../css/vendor/gridlex/gridlex.scss';
 import '../css/helpers.scss';
 import '../css/typography.scss';
 import '../css/layout.scss';
@@ -26,9 +25,7 @@ Raven
 
 
 function stateToProps() {
-  return {
-    lockBody: false,
-  };
+  return {};
 }
 
 function dispatchToProps() {
@@ -43,19 +40,14 @@ class SuperCollection extends Component {
   }
 
   render() {
-    const { lockBody } = this.props;
     return (
       <div className="__react_root__">
-        <div className={`SuperCollection Root__wrapper ${lockBody ? 'SuperCollection--scroll-lock' : ''}`}>
+        <div className="SuperCollection Root__wrapper">
           <SuperCollectionAppMain />
         </div>
       </div>
     );
   }
 }
-
-SuperCollection.propTypes = {
-  lockBody: PropTypes.bool.isRequired,
-};
 
 export default connect(stateToProps, dispatchToProps)(SuperCollection);
