@@ -229,6 +229,7 @@ class BridesmaidsFilterApp extends Component {
             </div>
             <div className="col-12 u-mt--big u-mb--normal">
               <BridesmaidsColorSelect
+                gridClass="grid-6"
                 handleSelection={this.handleSelection}
               />
             </div>

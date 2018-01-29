@@ -1,9 +1,9 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { find } from 'lodash';
 import classnames from 'classnames';
 import ReactHoverObserver from 'react-hover-observer';
 
@@ -20,10 +20,11 @@ import BridesmaidsColorSelect from '../../components/bridesmaids/BridesmaidsColo
 import BridesmaidsSilhouetteSelect from '../../components/bridesmaids/BridesmaidsSilhouetteSelect';
 import BridesmaidsLengthSelect from '../../components/bridesmaids/BridesmaidsLengthSelect';
 import BridesmaidsTopDetailSelect from '../../components/bridesmaids/BridesmaidsTopDetailSelect';
+import Caret from '../generic/Caret';
 
 
 // Utilities
-import { isExtremeLightLuminance } from '../../utilities/color';
+import { isNormalLightLuminance } from '../../utilities/color';
 
 // Actions
 import BridesmaidsFilterActions from '../../actions/BridesmaidsFilterActions';
@@ -102,7 +103,7 @@ class BridesmaidsFilterHeader extends Component {
       selectedSilhouette,
       selectedLength,
     } = this.props;
-    const isLight = isExtremeLightLuminance({ hexValue: selectedColor.hexValue });
+    const isLight = isNormalLightLuminance({ hexValue: selectedColor.hexValue });
 
     return (
       <div
@@ -115,16 +116,19 @@ class BridesmaidsFilterHeader extends Component {
           backgroundColor: selectedColor.hexValue,
         }}
       >
-        <ReactHoverObserver hoverOffDelayInMs={100}>
+        <ReactHoverObserver hoverOffDelayInMs={1000000}>
           {
             breakpoint === 'mobile' || breakpoint === 'tablet'
             ? (
-              <div className="u-display--inline u-cursor--pointer">
+              <div className="layout-container">
                 <div
-                  className="Tabs__list grid-middle"
+                  className="BridesmaidsFilterHeader__header u-cursor--pointer Tabs__list grid-middle"
                   onClick={this.handleOpenFilterModalClick}
                 >
-                  Filter
+                  <span className="u-mr--small">Filters</span>
+                  <span className="BridesmaidsTabs__caret-wrapper">
+                    <Caret height="20px" width="12px" />
+                  </span>
                 </div>
               </div>
             )
@@ -136,6 +140,7 @@ class BridesmaidsFilterHeader extends Component {
                     heading: `Color: ${selectedColor.presentation}`,
                     content: (
                       <BridesmaidsColorSelect
+                        gridClass="grid-8"
                         handleSelection={this.changeFilterPage}
                       />
                   ),

@@ -21,6 +21,10 @@ export function isExtremeLightLuminance({ hexValue }) {
   return luminanceFromHex(hexValue) > 240;
 }
 
+export function isNormalLightLuminance({ hexValue }) {
+  return luminanceFromHex(hexValue) > 200;
+}
+
 export function separateHexColorsInString(hexStr = '') {
   const hexStringClean = (hexStr === null) ? '' : hexStr;
   const rexi = /#(\w+)(?!\w)/g;
@@ -49,6 +53,7 @@ export default {
   luminanceFromHex,
   isDarkLuminance,
   isExtremeLightLuminance,
+  isNormalLightLuminance,
   generateBackgroundValueFromColor,
   separateHexColorsInString,
 };

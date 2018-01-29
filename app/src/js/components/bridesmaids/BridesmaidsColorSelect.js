@@ -60,11 +60,13 @@ class BridesmaidsColorSelect extends PureComponent {
   render() {
     const {
       filterColors,
+      gridClass,
       selectedColorId,
     } = this.props;
 
     return (
       <BridesmaidsColorSwatches
+        gridClass={gridClass}
         productDefaultColors={filterColors}
         selectedColorId={selectedColorId}
         handleColorSelection={this.handleColorSelection}
@@ -74,6 +76,8 @@ class BridesmaidsColorSelect extends PureComponent {
 }
 
 BridesmaidsColorSelect.propTypes = {
+  // Passed Props
+  gridClass: PropTypes.string,
   // Redux Props
   filterColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
@@ -89,6 +93,7 @@ BridesmaidsColorSelect.propTypes = {
 };
 
 BridesmaidsColorSelect.defaultProps = {
+  gridClass: 'grid-6',
   selectedColorId: null,
   setExpressMakingStatus: noop,
 };
