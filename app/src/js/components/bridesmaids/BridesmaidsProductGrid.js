@@ -30,8 +30,8 @@ class BridesmaidsProductGrid extends Component {
     return `$${newPrice}`;
   }
 
-  generateImageUrl(dressId, colorName) {
-    return win.encodeURI(`/bridesmaid-dresses/${dressId}?color=${colorName}`);
+  generateImageUrl(dressId, colorName, length) {
+    return win.encodeURI(`/bridesmaid-dresses/${dressId}?color=${colorName}&length=${length}`);
   }
 
   generateImage(
@@ -91,7 +91,7 @@ class BridesmaidsProductGrid extends Component {
           >
             <a
               className="BridesmaidsProduct__image-wrapper FlashSaleProduct__image-wrapper u-cursor--pointer"
-              href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
+              href={this.generateImageUrl(dress.id, dress.image_urls[0].color, dress.length)}
             >
               <img
                 className="FlashSaleProduct__image--original u-vertical-align--top"
@@ -108,7 +108,7 @@ class BridesmaidsProductGrid extends Component {
               <div className="col-9">
                 <p className="u-text-align--left u-mt-small">
                   <a
-                    href={this.generateImageUrl(dress.id, dress.image_urls[0].color)}
+                    href={this.generateImageUrl(dress.id, dress.image_urls[0].color, dress.length)}
                   >
                     {dress.product_name}
                   </a>
