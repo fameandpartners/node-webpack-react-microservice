@@ -69,7 +69,7 @@ class BridesmaidsProductGrid extends Component {
         {
           (products && products.length === 0) ?
             (
-              <FadeIn>
+              <FadeIn className="u-center">
                 <div className="u-mt--huge u-center">
                   <h1 className="BridesmaidsProductGrid__wrapper-heading font-family-secondary">Sorry we're not finding anything</h1>
                   <div className="BridesmaidsProductGrid__wrapper-text">
