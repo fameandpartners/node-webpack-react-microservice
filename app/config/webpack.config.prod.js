@@ -51,6 +51,7 @@ module.exports = {
     superCollection: [
       require.resolve('./polyfills'),
       paths.superCollectionIndexJs,
+    ],
     bridesmaidsFilter: [
       require.resolve('./polyfills'),
       paths.bridesmaidsFilterJs,

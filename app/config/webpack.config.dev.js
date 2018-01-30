@@ -70,7 +70,7 @@ module.exports = {
     superCollection: [
       ...standardEntries,
       paths.superCollectionJs,
-   ],
+    ],
     bridesmaidsFilter: [
       ...standardEntries,
       paths.bridesmaidsFilterJs,
