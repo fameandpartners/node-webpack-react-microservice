@@ -86,9 +86,9 @@ class FlashProductDisplayOptionsTouch extends Component {
 
         <FlashProductImageSlider />
 
-        <div className="FlashProductDisplayOptionsTouch__options u-mb-normal u-mt-normal" />
+        <div className="FlashProductDisplayOptionsTouch__options u-mb--normal u-mt--normal" />
 
-        <div className="u-mb-huge">
+        <div className="u-mb--huge">
           <FlashProductDescription lineItem={lineItem} />
         </div>
       </div>

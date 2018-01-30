@@ -13,12 +13,12 @@ class CartEmpty extends PureComponent {
       <div className="CartEmpty grid-middle u-flex u-flex--1">
         <div className="CartEmpty__contents u-center">
           <ShoppingBagIcon
-            className="u-mb-small"
+            className="u-mb--small"
             width="18px"
             height="26px"
             opacity="0.5"
           />
-          <p className="h5 u-mb-small">Your bag is empty</p>
+          <p className="h5 u-mb--small">Your bag is empty</p>
           <p
             onClick={this.props.closeCartDrawer}
             className="link link__static"

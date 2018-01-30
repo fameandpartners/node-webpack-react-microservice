@@ -87,7 +87,7 @@ class ProductDisplayOptionsTouch extends Component {
 
         <ProductImageSlider />
 
-        <div className="ProductDisplayOptionsTouch__options u-mb-normal u-mt-normal">
+        <div className="ProductDisplayOptionsTouch__options u-mb--normal u-mt--normal">
           <div
             onClick={this.handleOpenModalClick(ModalConstants.COLOR_SELECTION_MODAL)}
             className={classnames(

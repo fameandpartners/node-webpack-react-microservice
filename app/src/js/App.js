@@ -26,9 +26,6 @@ import ShoppingSpree from '../shopping-spree/js/ShoppingSpree';
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
 
-// Services
-import { getUserCart } from './services/UserService';
-
 // Actions
 import * as AppActions from './actions/AppActions';
 import * as CustomizationActions from './actions/CustomizationActions';
@@ -123,13 +120,6 @@ class App extends Component {
     if (win && win.fixBody) {
       win.fixBody(this.props.lockBody);
     }
-  }
-
-  componentDidMount() {
-    getUserCart().end((err, res) => {
-      console.log('res', res);
-      // Do something
-    });
   }
 
   componentDidMount(){

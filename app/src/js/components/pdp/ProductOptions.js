@@ -258,7 +258,7 @@ class ProductOptions extends Component {
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
           <div className="ProductOptions__container">
-            <div className="ProductOptions__content u-mb-small typography">
+            <div className="ProductOptions__content u-mb--small typography">
               <ProductOptionsRow
                 heading
                 leftNode={<h1 className="u-display--inline h4">{productTitle}</h1>}
@@ -294,12 +294,12 @@ class ProductOptions extends Component {
 
             <ExpressMaking />
 
-            <div className="ProductOptions__ctas grid-1 u-mb-small">
+            <div className="ProductOptions__ctas grid-1 u-mb--small">
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
 
             {isActive ?
-              <div className="ProductOptions__additional-info u-mt-small u-mb-normal">
+              <div className="ProductOptions__additional-info u-mt-small u-mb--normal">
 
                 <CliqueCallout />
 
@@ -321,7 +321,7 @@ class ProductOptions extends Component {
                     </p>
                   ) : null
                 }
-                <p className="u-mb-small">
+                <p className="u-mb--small">
                   {
                     selectedStyleCustomizations.length === 0
                     ? 'Shipping and returns are free.'

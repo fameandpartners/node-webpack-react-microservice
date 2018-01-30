@@ -100,6 +100,24 @@ class Cart extends Component {
     return nameStr;
   }
 
+  generateTitle(lineItem, productTitle) {
+    let ret = productTitle;
+    if (lineItem.isFlashSaleItem) {
+      const parts = productTitle.split('-');
+      ret = (
+        <span>
+          <span className="Cart__line-description u-bold">{parts[0]}</span>
+          <span>{parts[1]}</span>
+        </span>
+      );
+    } else {
+      ret = (
+        <span>{productTitle}</span>
+      );
+    }
+    return ret;
+  }
+
   generateAddonSummary(addons) {
     return (
       <ul>
@@ -202,9 +220,10 @@ class Cart extends Component {
           <div className="col-5 u-mr--small">
             <img className="u-width--full" alt="dress1" src={productImage} />
           </div>
-          <div className="col-7 u-text-align--left">
+          <div className="u-text-align--left">
             <span className="Cart__line-description u-bold">
-              <span>{productTitle}</span>&nbsp;<span>{formatCents(productCentsBasePrice, 2)}</span>
+              {this.generateTitle(lineItem, productTitle)}&nbsp;
+              <span>{formatCents(productCentsBasePrice, 2)}</span>
             </span>
             <span className="Cart__line-description">
               {this.generateColorSelectionNode(lineItem)}
@@ -226,7 +245,7 @@ class Cart extends Component {
 
     return (
       <div className="Cart u-flex u-flex--1">
-        <div className="Cart__contents Cart__layout-container u-flex--col">
+        <div className="Cart__contents Cart__layout-container u-flex--col u-width--full">
 
           <div>
             <div className="Cart__subtotal u-text-align--center grid-12 u-mt-small">
@@ -237,7 +256,7 @@ class Cart extends Component {
             </div>
             <Button
               tall
-              className="u-mb-normal"
+              className="u-mb--normal"
               url="/checkout"
               text="Checkout"
               handleClick={noop}
@@ -246,7 +265,7 @@ class Cart extends Component {
 
 
           <div className="u-flex u-flex--1">
-            <div className="u-overflow-y--scroll">
+            <div className="u-overflow-y--scroll u-width--full">
               <div className="Cart__line-item-wrapper u-overflow-x--hidden">
                 { this.generateLineItems() }
               </div>

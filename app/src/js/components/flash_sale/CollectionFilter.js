@@ -301,7 +301,7 @@ class CollectionFilterSort extends React.Component {
     } = this.props;
 
     return (
-      <div className="CollectionFilterSort u-mt-big">
+      <div className="CollectionFilterSort u-mt--big">
         <div className="FilterSort">
           <div className="ExpandablePanel--wrapper">
             <div className="ExpandablePanel__heading">
