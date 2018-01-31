@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Raven from 'raven-js';
 
 // Components
-// import SuperCollectionAppMain from './components/super_collection/SuperCollectionAppMain';
+import BridesmaidsProductGrid from './components/bridesmaids/BridesmaidsProductGrid';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -43,7 +43,55 @@ class SuperCollection extends Component {
     return (
       <div className="__react_root__">
         <div className="SuperCollectionPageApp Root__wrapper">
-          This is the page for Souper collection results
+          <BridesmaidsProductGrid
+            selectedLength={{ name: 'knee' }}
+            products={[
+              {
+                id: 78000,
+                product_name: 'Knee Length Fit and Flare Dress with Strappy Neckline',
+                color_count: 19,
+                customization_count: 28,
+                style_number: 'fp-dr1002-102',
+                customization_ids: [
+                  't6',
+                ],
+                length: 'Knee',
+                price: {
+                  id: 80994,
+                  variant_id: 50010,
+                  amount: '169.0',
+                  currency: 'USD',
+                },
+                image_urls: [
+                  {
+                    color: 'Ivory',
+                  },
+                ],
+              },
+              {
+                id: 78030,
+                product_name: 'Knee Length Fit and Flare Dress with Arm Coverage Neckline',
+                color_count: 19,
+                customization_count: 28,
+                style_number: 'fp-dr1002-102',
+                customization_ids: [
+                  't31',
+                ],
+                length: 'Knee',
+                price: {
+                  id: 80994,
+                  variant_id: 50010,
+                  amount: '169.0',
+                  currency: 'USD',
+                },
+                image_urls: [
+                  {
+                    color: 'Ivory',
+                  },
+                ],
+              },
+            ]}
+          />
         </div>
       </div>
     );
