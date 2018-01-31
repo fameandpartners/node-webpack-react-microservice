@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Raven from 'raven-js';
 
 // Components
-import SuperCollectionAppMain from './components/super_collection/SuperCollectionAppMain';
+// import SuperCollectionAppMain from './components/super_collection/SuperCollectionAppMain';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -42,8 +42,8 @@ class SuperCollection extends Component {
   render() {
     return (
       <div className="__react_root__">
-        <div className="SuperCollection Root__wrapper">
-          <SuperCollectionAppMain />
+        <div className="SuperCollectionPageApp Root__wrapper">
+          This is the page for Souper collection results
         </div>
       </div>
     );
