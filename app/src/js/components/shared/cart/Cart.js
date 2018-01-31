@@ -130,7 +130,6 @@ class Cart extends Component {
 
   generateColorSelectionNode(lineItem) {
     const { color, isFlashSaleItem } = lineItem;
-
     const {
       centsTotal,
       presentation,
@@ -141,7 +140,6 @@ class Cart extends Component {
       hexValue,
       patternUrl,
     });
-
     return (
       <span>
         <span>{presentation}</span>&nbsp;

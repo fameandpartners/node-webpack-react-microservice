@@ -35,6 +35,13 @@ function pluckCorrectImage(lineItem) {
   return lineItem.image.original;
 }
 
+function pluckCorrectColorImage(lineItem) {
+  if (!lineItem.name.includes('Fabric Swatch')) {
+    return null;
+  }
+  return lineItem.color.image;
+}
+
 function transformCartDataLineItems(lineItems) {
   return lineItems
     .filter(li => li.name !== 'RETURN_INSURANCE')
@@ -56,7 +63,7 @@ function transformCartDataLineItems(lineItems) {
         name: li.color.name,
         presentation: li.color.presentation,
         hexValue: li.color.value,
-        patternUrl: li.color.image,
+        patternUrl: pluckCorrectColorImage(li),
       },
       addons: li.customizations,
     }));
