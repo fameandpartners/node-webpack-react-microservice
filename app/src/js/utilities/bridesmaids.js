@@ -6,6 +6,7 @@ import { lengthNames } from '../constants/BDCustomizationConstants';
 import { formatCents } from './accounting';
 import { EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
 
+// Array of customizationIds
 export function removeLengthIdsFromCustomizationIds(customizationIds = []) {
   const lengthNameKeys = Object.keys(lengthNames);
   return customizationIds.filter(
@@ -13,6 +14,7 @@ export function removeLengthIdsFromCustomizationIds(customizationIds = []) {
   );
 }
 
+// Array of Customization Objects
 export function removeLengthFromAddons(addons) {
   const lengthNameKeys = Object.keys(lengthNames);
   return addons.filter(
