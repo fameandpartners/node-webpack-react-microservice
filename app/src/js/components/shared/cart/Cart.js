@@ -125,7 +125,7 @@ class Cart extends Component {
     return (
       <ul>
         { addons.map(a => (
-          <li key={a.name}>{this.addonNamePresenter(a.name)}</li>
+          <li key={a.name}>- {this.addonNamePresenter(a.name)}</li>
         ))}
       </ul>
     );
@@ -240,7 +240,7 @@ class Cart extends Component {
       return (
         <div
           key={id}
-          className="Cart__single-product-description grid-12"
+          className="Cart__single-product-description"
         >
           <span
             onClick={() => this.handleRemoveFromCartClick(id)}
@@ -248,32 +248,35 @@ class Cart extends Component {
           >
             <CancelOut />
           </span>
-          <div
-            className={classnames(
-            'col-5 u-mr--small',
-            { 'Cart__bridesmaid-image': isBridesmaidItem },
-          )}
-          >
-            <img
-              className="u-width--full"
-              alt="dress1"
-              src={this.determineProductImage(lineItem)}
-            />
-          </div>
-          <div className="u-text-align--left">
-            <span className="Cart__line-description u-bold">
-              {this.generateTitle(lineItem, productTitle)}&nbsp;
-              <span>{formatCents(productCentsBasePrice, 2)}</span>
-            </span>
-            <span className="Cart__line-description">
-              {this.generateColorSelectionNode(lineItem)}
-            </span>
-            <span className="Cart__line-description">
-              {this.generateAddonSummary(lineItem.addons)}
-            </span>
-            <span className="Cart__line-description">
-              {this.generateSizeSummary(lineItem)}
-            </span>
+          <div className="grid-12">
+            <div
+              className={classnames(
+              'col-5 u-mr--small',
+              { 'Cart__bridesmaid-image': isBridesmaidItem },
+            )}
+            >
+              <img
+                className="u-width--full"
+                alt="dress1"
+                src={this.determineProductImage(lineItem)}
+              />
+            </div>
+            <div className="u-text-align--left col-6">
+              <span className="Cart__line-description u-bold">
+                {this.generateTitle(lineItem, productTitle)}&nbsp;
+                <span>{formatCents(productCentsBasePrice, 2)}</span>
+              </span>
+              <span className="Cart__line-description">
+                {this.generateColorSelectionNode(lineItem)}
+              </span>
+              <span className="Cart__line-description">
+                {this.generateAddonSummary(lineItem.addons)}
+              </span>
+              <span className="Cart__line-description">
+                {this.generateSizeSummary(lineItem)}
+              </span>
+            </div>
+
           </div>
         </div>
       );
