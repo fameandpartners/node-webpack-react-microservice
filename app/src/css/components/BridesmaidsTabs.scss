@@ -1,0 +1,18 @@
+.BridesmaidsTabs__link {
+  display: inline;
+  cursor: pointer;
+}
+
+.BridesmaidsTabs__caret-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.BridesmaidsTabs__navigation-container {
+  width: 100%;
+  left: 0;
+}
+
+.BridesmaidsTabs__navigation-container .HeaderNavigation > div {
+  padding-bottom: 30px;
+}

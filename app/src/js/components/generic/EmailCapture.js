@@ -84,10 +84,12 @@ class EmailCapture extends PureComponent {
 
   render() {
     const {
-      className,
       signupError,
       signupSuccess,
     } = this.state;
+    const {
+      className,
+    } = this.props;
 
     return (
       <div
@@ -140,6 +142,7 @@ class EmailCapture extends PureComponent {
 }
 
 EmailCapture.propTypes = {
+  className: PropTypes.string,
   // pseudo enum
   service: PropTypes.oneOf([
     'bronto',

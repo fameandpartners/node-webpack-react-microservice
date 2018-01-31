@@ -18,7 +18,7 @@ class ProductFabricInfo extends PureComponent {
           className,
         ])}
       >
-        <div className="u-mb-normal">
+        <div className="u-mb--normal">
           <h4 className="u-mb-xs">Fabric</h4>
           {fabric.description.split('\n').map(
             (item, key) =>

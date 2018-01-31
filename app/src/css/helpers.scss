@@ -88,23 +88,23 @@
   border-top: 1px solid $c-light-gray;
 }
 
-.u-mb-small {
+.u-mb--small {
   margin-bottom: 15px;
 }
 
-.u-mb-normal {
+.u-mb--normal {
   margin-bottom: 30px;
 }
 
-.u-mb-big {
+.u-mb--big {
   margin-bottom: 50px;
 }
 
-.u-mb-huge {
+.u-mb--huge {
   margin-bottom: 150px;
 }
 
-.u-mr-small {
+.u-mr--small {
   margin-right: 15px;
 }
 
@@ -112,24 +112,28 @@
   margin-right: 30px;
 }
 
+.u-mt--xs {
+  margin-top: 6px;
+}
+
 .u-mt-small {
   margin-top: 15px;
 }
 
-.u-paddingBottom--small {
-  padding-bottom: 10px;
-}
-
-.u-mt-normal {
+.u-mt--normal {
   margin-top: 30px;
 }
 
-.u-mt-big {
+.u-mt--big {
   margin-top: 50px;
 }
 
-.u-mt-huge {
+.u-mt--huge {
   margin-top: 150px;
+}
+
+.u-paddingBottom--small {
+  padding-bottom: 10px;
 }
 
 .u-paddingLeft--small {
@@ -156,17 +160,34 @@
   text-align: right;
 }
 
+.u-vertical-align--top {
+  vertical-align: top;
+}
+
 .u-vertical-align--middle {
   vertical-align: middle;
+}
+
+.u-vertical-align--sub {
+  vertical-align: sub;
 }
 
 .u-overflow-x--hidden {
   overflow-x: hidden;
 }
 
+.u-overflow-x--scroll {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
 .u-overflow-y--scroll {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+}
+
+.u-scroll-lock {
+  overflow-y: hidden;
 }
 
 .u-uppercase {
@@ -197,6 +218,10 @@
   width: 100%;
 }
 
+.u-white-space--nowrap {
+  white-space: nowrap;
+}
+
 // Flex Helpers
 .u-flex {
   display: flex;
@@ -214,6 +239,12 @@
 
 .u-flex--1 {
   flex: 1;
+}
+
+.u-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 // Colors

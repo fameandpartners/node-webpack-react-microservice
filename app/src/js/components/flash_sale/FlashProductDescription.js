@@ -127,7 +127,7 @@ class FlashProductDescription extends Component {
           </div>
         </div>
 
-        <p className="FlashProductDescription__description u-mt-normal">
+        <p className="FlashProductDescription__description u-mt--normal">
           {lineItem.description}
         </p>
 

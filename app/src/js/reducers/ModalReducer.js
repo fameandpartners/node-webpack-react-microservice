@@ -14,6 +14,7 @@ export default function ModalReducer($$state = $$initialState, action = null) {
         // Do not wipe modalId, if one is not provided
         modalId: action.modalId ? action.modalId : $$state.get('modalId'),
         shouldAppear: action.shouldAppear,
+        // This makes me upset, dirty pollution v
         activeSlideIndex: action.activeSlideIndex ? action.activeSlideIndex : 0,
       });
     }

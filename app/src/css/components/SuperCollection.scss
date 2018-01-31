@@ -4,9 +4,14 @@
   padding: 0 3rem;
 }
 
+.BodySection--section-title,
+.SuperCollection-Footer--ctaHeading,
+.SuperCollection-Footer--ctaSubheading {
+  font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
+}
+
 .BodySection--section-title {
   font-size: 1.5em;
-  font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
   text-align: left;
 }
 
@@ -41,24 +46,21 @@ img {
 
 .SuperCollection-Footer--ctaHeading,
 .SuperCollection-Footer--ctaSubheading {
-  font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  margin: 30px 0;
 }
 
 .SuperCollection-Footer--ctaHeading {
-  font-size: 5.5rem;
-  font-weight: 300;
-  margin-bottom: 30px;
+  font-size: 6.2rem;
 }
 
 .SuperCollection-Footer--ctaSubheading {
-  font-size: 2.5rem;
-  font-weight: 300;
-  margin-bottom: 30px;
+  font-size: 2.8rem;
 }
 
 .SuperCollection-Footer--ctaCopy {
   text-decoration: underline;
-  font-size: 1.7rem;
+  font-size: 2.7rem;
 }
 
 // Responsive

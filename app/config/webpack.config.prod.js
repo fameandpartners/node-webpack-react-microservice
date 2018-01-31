@@ -52,6 +52,18 @@ module.exports = {
       require.resolve('./polyfills'),
       paths.superCollectionIndexJs,
     ],
+    bridesmaidsFilter: [
+      require.resolve('./polyfills'),
+      paths.bridesmaidsFilterJs,
+    ],
+     bridesmaid: [
+      require.resolve('./polyfills'),
+      paths.bridesmaidIndexJs,
+    ],
+    swatch: [
+      require.resolve('./polyfills'),
+      paths.swatchIndexJs,
+    ],
   },
   output: {
     // The build folder.

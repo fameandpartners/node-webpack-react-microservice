@@ -6,14 +6,6 @@ import classnames from 'classnames';
 import noop from '../../../libs/noop';
 
 // Constants
-import { NAVIGATION_CONTAINERS } from '../../../constants/AppConstants';
-
-// Components
-import FadeIn from '../../generic/FadeIn';
-import ShopAllNavigation from '../navigation/ShopAllNavigationDesktop';
-import WhoWeAreNavigation from '../navigation/WhoWeAreNavigationDesktop';
-
-// Constants
 import * as modalAnimations from '../../../utilities/modal-animation';
 
 // CSS
@@ -25,6 +17,7 @@ class HeaderNavigation extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+    this.containerHeight = 0;
   }
 
   defaultStyles() {
@@ -44,45 +37,20 @@ class HeaderNavigation extends Component {
     return modalAnimations.STANDARD_WILL_LEAVE;
   }
 
-  generateHeaderNavigationContents() {
-    const { openNavItem } = this.props;
-    switch (openNavItem) {
-      case NAVIGATION_CONTAINERS.SHOP_ALL:
-        return (
-          <FadeIn key={NAVIGATION_CONTAINERS.SHOP_ALL}>
-            <ShopAllNavigation
-              childRef={el => this.childElement = el}
-            />
-          </FadeIn>
-        );
-      case NAVIGATION_CONTAINERS.WHO_WE_ARE:
-        return (
-          <FadeIn key={NAVIGATION_CONTAINERS.WHO_WE_ARE}>
-            <WhoWeAreNavigation
-              childRef={el => this.childElement = el}
-            />
-          </FadeIn>
-        );
-      default:
-        return null;
-    }
-  }
-
   setToChildHeight() {
     if (this.childElement) {
       this.containerHeight = `${this.childElement.clientHeight + 30}px`;
     }
   }
 
-  componentDidMount() {
-    this.setToChildHeight();
-    this.forceUpdate();
-  }
-
   componentDidUpdate(lastProps) {
     if (lastProps.openNavItem !== this.props.openNavItem) {
-      this.setToChildHeight();
-      this.forceUpdate();
+      setTimeout(() => {
+        this.forceUpdate(); // A little ugly, but the ref needs an additional rendering pass
+        // ... because it inconsistently attaches
+        this.setToChildHeight();
+        this.forceUpdate();
+      });
     }
   }
 
@@ -109,7 +77,9 @@ class HeaderNavigation extends Component {
                   opacity: style.opacity,
                 }}
               >
-                {this.generateHeaderNavigationContents()}
+                <div ref={c => this.childElement = c}>
+                  {this.props.generateHeaderNavigationContents()}
+                </div>
               </div>
             );
           }
@@ -123,7 +93,9 @@ class HeaderNavigation extends Component {
 HeaderNavigation.propTypes = {
   isActive: PropTypes.bool.isRequired,
   openNavItem: PropTypes.string,
+  // Funcs
   handleAnimationEnd: PropTypes.func,
+  generateHeaderNavigationContents: PropTypes.func.isRequired,
 };
 
 HeaderNavigation.defaultProps = {

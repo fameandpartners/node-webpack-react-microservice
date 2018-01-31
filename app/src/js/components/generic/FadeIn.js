@@ -17,14 +17,18 @@ class FadeIn extends Component {
 
   /* eslint-disable react/no-did-mount-set-state */
   componentDidMount() {
-    this.setState({ fadeIn: true });
+    setTimeout(() => {
+      this.setState({ fadeIn: true });
+    });
   }
 
   render() {
+    const { className } = this.props;
     return (
       <div
         className={classnames(
           'FadeIn',
+          className,
           { 'FadeIn--fade-in': this.state.fadeIn },
         )}
       >
@@ -35,7 +39,12 @@ class FadeIn extends Component {
 }
 
 FadeIn.propTypes = {
+  className: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+};
+
+FadeIn.defaultProps = {
+  className: '',
 };
 
 export default FadeIn;
