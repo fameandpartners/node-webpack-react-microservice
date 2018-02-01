@@ -26,9 +26,9 @@ class Footer extends Component {
       <div className="SuperCollection-Footer u-overlay-area">
         <a href={footer.url}>
           <picture>
-            <source srcSet={footer.img} media="(min-width: 1200px)" />
-            <source srcSet={footer.img_tablet} media="(min-width: 768px) and (max-width: 1199px)" />
-            <source srcSet={footer.img_mobile} media="(max-width: 767px)" />
+            <source srcSet={footer.img} media="(min-width: 1025px)" />
+            <source srcSet={footer.img_tablet} media="(min-width: 577px) and (max-width: 1024px)" />
+            <source srcSet={footer.img_mobile} media="(max-width: 576px)" />
             <img
               src={footer.img}
               srcSet={footer.img}
@@ -37,16 +37,21 @@ class Footer extends Component {
             />
           </picture>
           <div className="SuperCollection-Footer--ctaWrapper u-overlay-area__overlay">
-            <div className="u-overlay-area__caption u-overlay-area__caption--center">
-              <span className="SuperCollection-Footer--cta">
-                <h2 className="SuperCollection-Footer--ctaHeading">The Dress Filter</h2>
-                <h3
-                  className="SuperCollection-Footer--ctaSubheading"
-                >
-                  Create your own dress collection
-                </h3>
-                <p className="SuperCollection-Footer--ctaCopy">Get started</p>
-              </span>
+            <div className="grid grid-noGutter grid-center SuperCollection-Footer--grid">
+              <div className="col-12_md-7_sm-9_xs-11">
+                <span className="SuperCollection-Footer--cta">
+                  <h2 className="SuperCollection-Footer--ctaHeading">
+                    Create Your <br className="u-lg-hidden" />Custom Collection
+                  </h2>
+                  <h3
+                    className="SuperCollection-Footer--ctaSubheading"
+                  >
+                    Filter based on your wedding colors, <br className="u-lg-hidden" />
+                    preferred silhouette, and more.
+                  </h3>
+                  <p className="SuperCollection-Footer--ctaCopy">Get started</p>
+                </span>
+              </div>
             </div>
           </div>
         </a>

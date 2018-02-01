@@ -40,6 +40,10 @@ img {
   margin: 60px 0;
 }
 
+.SuperCollection-Footer--grid {
+  height: 100%;
+}
+
 .SuperCollection-Footer--cta {
   color: $c-white;
 }
@@ -47,6 +51,7 @@ img {
 .SuperCollection-Footer--ctaHeading,
 .SuperCollection-Footer--ctaSubheading {
   font-weight: 300;
+  line-height: 100%;
   margin: 30px 0;
 }
 
@@ -64,7 +69,32 @@ img {
 }
 
 // Responsive
-@media (max-width: 1100px) {
+@media (max-width: 576px) {
+  .SuperCollection-Footer--grid {
+    padding-bottom: 10%;
+  }
+
+  .SuperCollection-Footer--ctaHeading {
+    font-size: 4rem;
+  }
+
+  .SuperCollection-Footer--ctaSubheading {
+    font-size: 2rem;
+  }
+
+  .SuperCollection-Footer--ctaCopy {
+    text-decoration: underline;
+    font-size: 1.7rem;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 1024px) {
+  .SuperCollection-Footer--grid {
+    padding-bottom: 40%;
+  }
+}
+
+@media (max-width: 1024px) {
   .SuperCollection-BodySection--ctaCaption {
     padding: 20px;
     width: 49%;
@@ -75,9 +105,15 @@ img {
     flex: 0 0 100%;
   }
 
+  .SuperCollection-Footer--grid {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+  }
+
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1025px) {
   .BodySection--section-container--Color {
     .SuperCollection-BodySection--column {
       padding: 0 3rem 4rem;
@@ -86,5 +122,17 @@ img {
     .SuperCollection-BodySection--grid {
       margin: 0 -3rem;
     }
+  }
+
+  .SuperCollection-Footer--grid {
+    padding-top: 20%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  // If needed elsewhere we can move this to a separate stylesheet
+  .u-lg-hidden {
+    display: none;
   }
 }
