@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
-// Utilities
-import objnoop from '../../libs/objnoop';
-
-function stateToProps() {
-  return objnoop;
-}
-
-function dispatchToProps() {
-  return objnoop;
-}
 
 class BodySection extends Component {
   constructor(props) {
@@ -102,4 +90,4 @@ BodySection.propTypes = {
   }).isRequired,
 };
 
-export default connect(stateToProps, dispatchToProps)(BodySection);
+export default BodySection;
