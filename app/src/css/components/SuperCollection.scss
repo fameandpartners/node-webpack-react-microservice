@@ -93,12 +93,26 @@ img {
     font-size: 4.2rem;
   }
 
-  .SuperCollection-Footer--grid {
-    padding-bottom: 10%;
+  .SuperCollection-Footer {
+    background: #f9ddd8;
+  }
+
+  .SuperCollection-Footer--img {
+    display: none;
+  }
+
+  .SuperCollection-Footer--ctaWrapper {
+    position: relative;
+    padding: 230px 0;
+  }
+
+  .SuperCollection-Footer--cta {
+    color: $c-black;
   }
 
   .SuperCollection-Footer--ctaHeading {
     font-size: 4rem;
+    margin: 0;
   }
 
   .SuperCollection-Footer--ctaSubheading {
