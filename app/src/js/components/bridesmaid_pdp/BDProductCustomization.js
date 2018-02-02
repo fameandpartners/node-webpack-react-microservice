@@ -83,8 +83,12 @@ class BDProductCustomization extends PureComponent {
   }
 
   filterColorForMobileTablet(headlineKey) {
+    const { breakpointTypes } = PDPBreakpoints;
     const { breakpoint } = this.props;
-    const removeColorConditionMet = ((breakpoint === 'mobile' || breakpoint === 'tablet') && headlineKey === COLOR_CUSTOMIZE);
+    const removeColorConditionMet = (
+      (breakpoint === breakpointTypes.mobile || breakpoint === breakpointTypes.tablet)
+      && headlineKey === COLOR_CUSTOMIZE
+    );
     return !removeColorConditionMet;
   }
 
