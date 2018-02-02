@@ -28,7 +28,6 @@ class Footer extends Component {
           <picture>
             <source srcSet={footer.img} media="(min-width: 1025px)" />
             <source srcSet={footer.img_tablet} media="(min-width: 577px) and (max-width: 1024px)" />
-            <source srcSet={footer.img_mobile} media="(max-width: 576px)" />
             <img
               src={footer.img}
               srcSet={footer.img}
@@ -65,7 +64,6 @@ Footer.propTypes = {
     url: PropTypes.string,
     img: PropTypes.string,
     img_tablet: PropTypes.string,
-    img_mobile: PropTypes.string,
   }).isRequired,
 };
 
