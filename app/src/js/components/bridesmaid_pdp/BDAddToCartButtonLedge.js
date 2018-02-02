@@ -90,7 +90,7 @@ class BDAddToCartButtonLedge extends Component {
   }
 
   render() {
-    const { deliveryCopy, selectedStyleCustomizations } = this.props;
+    const { breakpoint, deliveryCopy, selectedStyleCustomizations } = this.props;
     return (
       <div className="BDAddToCartButtonLedge">
         <ButtonLedge
@@ -99,27 +99,32 @@ class BDAddToCartButtonLedge extends Component {
           rightNode={(<BDAddToCartButton />)}
           handleLeftButtonClick={this.leftNodeSizeClick()}
         />
-        <p className="u-mb--small">
-          {
-            selectedStyleCustomizations.length === 0
-            ? 'Shipping and returns are free.'
-            : 'Shipping is free on your customized item.'
-          }&nbsp;
-          <a
-            className="link link--static"
-            href="/faqs#collapse-returns-policy"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-          Learn&nbsp;more
-          </a>&nbsp;
-          {
-            deliveryCopy
-            ? `Estimated delivery ${this.generateDeliveryCopy()}.`
-            : null
-          }
-          <br />
-        </p>
+        {
+          breakpoint === 'mobile' || breakpoint === 'tablet' ? null :
+          (
+            <p className="u-mb--small">
+              {
+              selectedStyleCustomizations.length === 0
+              ? 'Shipping and returns are free.'
+              : 'Shipping is free on your customized item.'
+            }&nbsp;
+              <a
+                className="link link--static"
+                href="/faqs#collapse-returns-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+            Learn&nbsp;more
+            </a>&nbsp;
+              {
+              deliveryCopy
+              ? `Estimated delivery ${this.generateDeliveryCopy()}.`
+              : null
+            }
+              <br />
+            </p>
+        )
+      }
       </div>
     );
   }
@@ -127,7 +132,7 @@ class BDAddToCartButtonLedge extends Component {
 
 BDAddToCartButtonLedge.propTypes = {
   // Decorator Props
-  // breakpoint: PropTypes.string.isRequired,
+  breakpoint: PropTypes.string.isRequired,
   // Redux Props
   auSite: PropTypes.bool.isRequired,
   deliveryCopy: PropTypes.string,

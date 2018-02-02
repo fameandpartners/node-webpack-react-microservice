@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // // Sentry Error Tracking
-// import Raven from 'raven-js';
+import Raven from 'raven-js';
 
 // Libraries
 import Resize from './decorators/Resize';
@@ -18,7 +18,9 @@ import PDPBreakpoints from './libs/PDPBreakpoints';
 import * as BridesmaidsFilterActions from './actions/BridesmaidsFilterActions';
 
 // Assets
-// ???
+import MobileHero from '../img/bridesmaids/FilterPageHero_750x814.jpg';
+import DesktopHero from '../img/bridesmaids/FilterPageHero_1538x540.jpg';
+import HugeDesktopHero from '../img/bridesmaids/FilterPageHero_2880x1260.jpg';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -56,9 +58,9 @@ import '../css/components/BridesmaidsFilterApp.scss';
 
 
 // // Configure Error Tracking
-// Raven
-//   .config('https://bc3111a59f064fbba31becef25d2fb7c@sentry.io/88252')
-//   .install();
+Raven
+  .config('https://bc3111a59f064fbba31becef25d2fb7c@sentry.io/88252')
+  .install();
 
 
 function stateToProps({ $$bridesmaidsFilterState }) {
@@ -181,6 +183,28 @@ class BridesmaidsFilterApp extends Component {
     window.scrollTo(0, ref.offsetTop - 200); // 200 px for header bar
   }
 
+  generateBackgroundImages() {
+    const { breakpoint } = this.props;
+    if (breakpoint === 'mobile' || breakpoint === 'tablet') {
+      return {
+        backgroundImage: `url(${MobileHero})`,
+        height: '300px',
+      };
+    }
+
+    if (breakpoint === 'desktop-xl') {
+      return {
+        backgroundImage: `url(${HugeDesktopHero})`,
+        height: '600px',
+      };
+    }
+
+    return {
+      backgroundImage: `url(${DesktopHero})`,
+      height: '350px  ',
+    };
+  }
+
   handleSelection() {
   }
 
@@ -203,20 +227,7 @@ class BridesmaidsFilterApp extends Component {
     return (
       <div className="__react_root__">
         <div className={`FlashSaleListApp Root__wrapper ${lockBody ? 'u-scroll-lock' : ''}`}>
-          <div className="FlashSaleBanner__wrapper">
-            { breakpoint === 'mobile' || breakpoint === 'tablet'
-              ? (
-                <h1>
-                  Find the <em>Perfect</em> Dress
-                </h1>
-              )
-              : (
-                <h1>
-                  Create Your Own Custom Dress Collection
-                </h1>
-              )
-            }
-          </div>
+          <div className="BridesmaidsFilterApp__banner-wrapper FlashSaleBanner__wrapper" style={this.generateBackgroundImages()} />
           <div className="grid-12-noGutter layout-container">
 
             <div className="u-center">

@@ -81,10 +81,10 @@ class BDProductImageSlider extends Component {
 
   calculateSliderHeight() {
     const { breakpoint, winHeight } = this.props;
-    const MOBILE_HEIGHT_ELEMS = 355; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER + 45 LOCALE
-    const TABLET_HEIGHT_ELEMS = 355; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER + 45 LOCALE
+    const MOBILE_HEIGHT_ELEMS = 315; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER + 45 LOCALE
+    const TABLET_HEIGHT_ELEMS = 315; // 56 BUTTON + 185 PRODUCT OPTIONS + 60 HEADER + 45 LOCALE
     const MAX_HEIGHT = 740;
-    const MIN_HEIGHT = 350;
+    const MIN_HEIGHT = 330;
     let sliderHeight = MIN_HEIGHT;
 
     if (breakpoint === 'tablet') {

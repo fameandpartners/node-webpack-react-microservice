@@ -15,6 +15,9 @@ export default {
     if (win.innerWidth >= 1024) {
       breakpoint = 'desktop';
     }
+    if (win.innerWidth >= 2000) {
+      breakpoint = 'desktop-xl';
+    }
     if (win.innerWidth < 768) {
       breakpoint = 'mobile';
     }

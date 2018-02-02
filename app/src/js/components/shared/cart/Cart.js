@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 import win from '../../../polyfills/windowPolyfill';
 
+// Utilities
+import { generateCustomizationImage, removeLengthFromAddons } from '../../../utilities/bridesmaids';
 import { formatCents } from '../../../utilities/accounting';
 import noop from '../../../libs/noop';
 
@@ -16,6 +18,7 @@ import CancelOut from '../CancelOut';
 
 // Constants
 import { UNITS } from '../../../constants/ProductConstants';
+import BDCustomizationConstants from '../../../constants/BDCustomizationConstants';
 
 // Actions
 import * as CartActions from '../../../actions/CartActions';
@@ -122,7 +125,7 @@ class Cart extends Component {
     return (
       <ul>
         { addons.map(a => (
-          <li key={a.name}>{this.addonNamePresenter(a.name)}</li>
+          <li key={a.name}>- {this.addonNamePresenter(a.name)}</li>
         ))}
       </ul>
     );
@@ -195,6 +198,34 @@ class Cart extends Component {
     return sizingInformation;
   }
 
+  generateImageNameForSelections({ addons, colorPresentation, sku, length }) {
+    const cleanAddons = removeLengthFromAddons(addons);
+    const { colorNames } = BDCustomizationConstants;
+    const imageStr = generateCustomizationImage({
+      sku: sku.toLowerCase(),
+      customizationIds: cleanAddons.map(a => a.id),
+      imgSizeStr: '800x800',
+      length: length.replace('-', '_'),
+      colorCode: colorNames[colorPresentation],
+    });
+    return imageStr;
+  }
+
+  determineProductImage({ addons, color, isBridesmaidItem, length, productImage, sku }) {
+    if (isBridesmaidItem) {
+      return this.generateImageNameForSelections(
+        {
+          addons,
+          colorPresentation: color.presentation,
+          sku,
+          length,
+        },
+      );
+    }
+
+    return productImage;
+  }
+
 
   generateLineItems() {
     const { lineItems } = this.props;
@@ -202,14 +233,14 @@ class Cart extends Component {
     return lineItems.map((lineItem) => {
       const {
         id,
+        isBridesmaidItem,
         productCentsBasePrice,
-        productImage,
         productTitle,
       } = lineItem;
       return (
         <div
           key={id}
-          className="Cart__single-product-description grid-12"
+          className="Cart__single-product-description"
         >
           <span
             onClick={() => this.handleRemoveFromCartClick(id)}
@@ -217,23 +248,35 @@ class Cart extends Component {
           >
             <CancelOut />
           </span>
-          <div className="col-5 u-mr--small">
-            <img className="u-width--full" alt="dress1" src={productImage} />
-          </div>
-          <div className="u-text-align--left">
-            <span className="Cart__line-description u-bold">
-              {this.generateTitle(lineItem, productTitle)}&nbsp;
-              <span>{formatCents(productCentsBasePrice, 2)}</span>
-            </span>
-            <span className="Cart__line-description">
-              {this.generateColorSelectionNode(lineItem)}
-            </span>
-            <span className="Cart__line-description">
-              {this.generateAddonSummary(lineItem.addons)}
-            </span>
-            <span className="Cart__line-description">
-              {this.generateSizeSummary(lineItem)}
-            </span>
+          <div className="grid-12">
+            <div
+              className={classnames(
+              'col-5 u-mr--small',
+              { 'Cart__bridesmaid-image': isBridesmaidItem },
+            )}
+            >
+              <img
+                className="u-width--full"
+                alt="dress1"
+                src={this.determineProductImage(lineItem)}
+              />
+            </div>
+            <div className="u-text-align--left col-6">
+              <span className="Cart__line-description u-bold">
+                {this.generateTitle(lineItem, productTitle)}&nbsp;
+                <span>{formatCents(productCentsBasePrice, 2)}</span>
+              </span>
+              <span className="Cart__line-description">
+                {this.generateColorSelectionNode(lineItem)}
+              </span>
+              <span className="Cart__line-description">
+                {this.generateAddonSummary(lineItem.addons)}
+              </span>
+              <span className="Cart__line-description">
+                {this.generateSizeSummary(lineItem)}
+              </span>
+            </div>
+
           </div>
         </div>
       );
