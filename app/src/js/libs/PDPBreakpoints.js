@@ -1,3 +1,5 @@
+import mirrorCreator from 'mirror-creator';
+
 export default {
   debounce: 500,
   onResize(win) {
@@ -23,9 +25,18 @@ export default {
     }
     return { breakpoint, winHeight, winWidth };
   },
+
   breakpoints: {
     mobile: 768,
     desktopSmall: 840,
     desktop: 1024,
   },
+
+  breakpointTypes: mirrorCreator([
+    'mobile',
+    'tablet',
+    'desktop-sm',
+    'desktop',
+    'desktop-xl',
+  ]),
 };
