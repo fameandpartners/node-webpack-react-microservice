@@ -1,0 +1,189 @@
+.BodySection--section-container {
+  max-width: 1270px;
+  margin: 80px auto 0;
+  padding: 0 3rem;
+}
+
+.BodySection--section-title,
+.SuperCollection-Header--ctaHeading,
+.SuperCollection-Footer--ctaHeading,
+.SuperCollection-Footer--ctaSubheading {
+  font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
+}
+
+.BodySection--section-title {
+  font-size: 1.5em;
+  text-align: left;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+// CTAs
+.SuperCollection-BodySection--ctaWrapper {
+  text-align: left;
+}
+
+.SuperCollection-BodySection--ctaCaption {
+  padding: 30px;
+  font-size: 1.5rem;
+}
+
+.SuperCollection-BodySection--ctaShop {
+  padding-left: 10px;
+  text-decoration: underline;
+}
+
+// Footer
+.SuperCollection-Footer {
+  margin: 60px 0;
+}
+
+.SuperCollection-Header--grid,
+.SuperCollection-Footer--grid {
+  height: 100%;
+}
+
+.SuperCollection-Header--cta,
+.SuperCollection-Footer--cta {
+  color: $c-white;
+}
+
+.SuperCollection-Header--ctaHeading,
+.SuperCollection-Footer--ctaHeading,
+.SuperCollection-Footer--ctaSubheading {
+  font-weight: 300;
+  line-height: 100%;
+}
+
+.SuperCollection-Footer--ctaHeading,
+.SuperCollection-Footer--ctaSubheading {
+  margin: 30px 0;
+}
+
+.SuperCollection-Footer--ctaHeading {
+  font-size: 6.2rem;
+}
+
+.SuperCollection-Header--ctaHeading {
+  font-size: 5.5rem;
+}
+
+.SuperCollection-Footer--ctaSubheading {
+  font-size: 2.8rem;
+}
+
+.SuperCollection-Footer--ctaCopy {
+  text-decoration: underline;
+  font-size: 2.7rem;
+}
+
+// Responsive
+@media (max-width: 576px) {
+  .SuperCollection-Header--grid {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    padding-bottom: 30%;
+  }
+
+  .SuperCollection-Header--ctaHeading {
+    font-size: 4.2rem;
+  }
+
+  .SuperCollection-Footer {
+    background: #f9ddd8;
+  }
+
+  .SuperCollection-Footer--img {
+    display: none;
+  }
+
+  .SuperCollection-Footer--ctaWrapper {
+    position: relative;
+    padding: 230px 0;
+  }
+
+  .SuperCollection-Footer--cta {
+    color: $c-black;
+  }
+
+  .SuperCollection-Footer--ctaHeading {
+    font-size: 4rem;
+    margin: 0;
+  }
+
+  .SuperCollection-Footer--ctaSubheading {
+    font-size: 2rem;
+  }
+
+  .SuperCollection-Footer--ctaCopy {
+    text-decoration: underline;
+    font-size: 1.7rem;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 1024px) {
+  .SuperCollection-Header--grid {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .SuperCollection-Header--ctaHeading {
+    font-size: 6rem;
+  }
+
+  .SuperCollection-Footer--grid {
+    padding-bottom: 40%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .SuperCollection-BodySection--ctaCaption {
+    padding: 20px;
+    width: 49%;
+  }
+
+  .SuperCollection-BodySection--ctaShop {
+    padding-left: 0;
+    flex: 0 0 100%;
+  }
+
+  .SuperCollection-Footer--grid {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+  }
+
+}
+
+@media only screen and (min-width: 1025px) {
+  .BodySection--section-container--Color {
+    .SuperCollection-BodySection--column {
+      padding: 0 3rem 4rem;
+    }
+
+    .SuperCollection-BodySection--grid {
+      margin: 0 -3rem;
+    }
+  }
+
+  .SuperCollection-Footer--grid {
+    padding-top: 20%;
+  }
+
+  .SuperCollection-Header--grid,
+  .SuperCollection-Footer--grid {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  // If needed elsewhere we can move this to a separate stylesheet
+  .u-lg-hidden {
+    display: none;
+  }
+}

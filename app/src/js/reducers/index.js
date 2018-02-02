@@ -6,6 +6,7 @@ import CartReducer, { $$initialState as $$cartState } from './CartReducer';
 import CustomizationReducer, { $$initialState as $$customizationState } from './CustomizationReducer';
 import CollectionFilterSortReducer, { $$initialState as $$collectionFilterSortState } from './CollectionFilterSortReducer';
 import FlashSaleReducer, { $$initialState as $$flashSaleState } from './FlashSaleReducer';
+import SuperCollectionReducer, { $$initialState as $$superCollectionState } from './SuperCollectionReducer';
 import BridesmaidsFilterReducer, { $$initialState as $$bridesmaidsFilterState } from './BridesmaidsFilterReducer';
 import FabricSwatchReducer, { $$initialState as $$fabricSwatchState } from './FabricSwatchReducer';
 
@@ -18,6 +19,7 @@ export default {
   $$collectionFilterSortState: CollectionFilterSortReducer,
   $$customizationState: CustomizationReducer,
   $$flashSaleState: FlashSaleReducer,
+  $$superCollectionState: SuperCollectionReducer,
   $$bridesmaidsFilterState: BridesmaidsFilterReducer,
   $$fabricSwatchState: FabricSwatchReducer,
 };
@@ -31,6 +33,7 @@ export const initialStates = {
   $$collectionFilterSortState,
   $$customizationState,
   $$flashSaleState,
+  $$superCollectionState,
   $$bridesmaidsFilterState,
   $$fabricSwatchState,
 };
