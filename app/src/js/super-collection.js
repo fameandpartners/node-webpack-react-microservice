@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* global document */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,6 +8,7 @@ import win from './polyfills/windowPolyfill';
 
 // Components
 import SuperCollectionApp from './SuperCollectionApp';
+import SuperCollectionPageApp from './SuperCollectionPageApp';
 
 // Standard Components that will be included in old site
 import BlanketOverlay from './components/generic/BlanketOverlay';
@@ -51,6 +53,9 @@ const store = AppStore(cleanData);
 const SuperCollectionAppComponent = <Provider store={store}><SuperCollectionApp /></Provider>;
 renderComponent(SuperCollectionAppComponent, 'super-collection-root');
 
+const SuperCollectionPageAppComponent = <Provider store={store}><SuperCollectionPageApp /></Provider>;
+renderComponent(SuperCollectionPageAppComponent, 'super-collection-page-root');
+
 // BLANKET
 const BlanketComponent = <Provider store={store}><BlanketOverlay /></Provider>;
 renderComponent(BlanketComponent, 'react-blanket');
@@ -76,6 +81,6 @@ if (module.hot) {
     /* eslint-disable global-require */
     const NextRootContainer = require('./SuperCollectionApp.js');
     const AppNode = (<Provider store={store}><NextRootContainer /></Provider>);
-    renderComponent(AppNode, 'react-super-collection');
+    renderComponent(AppNode, 'super-collection-root');
   });
 }
