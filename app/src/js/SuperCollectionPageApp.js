@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 
@@ -24,8 +25,10 @@ Raven
   .install();
 
 
-function stateToProps() {
-  return {};
+function stateToProps({ $$themeState }) {
+  return {
+    products: $$themeState.get('collection').toJS(),
+  };
 }
 
 function dispatchToProps() {
@@ -45,57 +48,16 @@ class SuperCollection extends Component {
         <div className="SuperCollectionPageApp Root__wrapper">
           <BridesmaidsProductGrid
             selectedLength={{ name: 'knee' }}
-            products={[
-              {
-                id: 78000,
-                product_name: 'Knee Length Fit and Flare Dress with Strappy Neckline',
-                color_count: 19,
-                customization_count: 28,
-                style_number: 'fp-dr1002-102',
-                customization_ids: [
-                  't6',
-                ],
-                length: 'Knee',
-                price: {
-                  id: 80994,
-                  variant_id: 50010,
-                  amount: '169.0',
-                  currency: 'USD',
-                },
-                image_urls: [
-                  {
-                    color: 'Ivory',
-                  },
-                ],
-              },
-              {
-                id: 78030,
-                product_name: 'Knee Length Fit and Flare Dress with Arm Coverage Neckline',
-                color_count: 19,
-                customization_count: 28,
-                style_number: 'fp-dr1002-102',
-                customization_ids: [
-                  't31',
-                ],
-                length: 'Knee',
-                price: {
-                  id: 80994,
-                  variant_id: 50010,
-                  amount: '169.0',
-                  currency: 'USD',
-                },
-                image_urls: [
-                  {
-                    color: 'Ivory',
-                  },
-                ],
-              },
-            ]}
+            products={this.props.products}
           />
         </div>
       </div>
     );
   }
 }
+
+SuperCollection.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default connect(stateToProps, dispatchToProps)(SuperCollection);

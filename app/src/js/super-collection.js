@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+/* eslint-disable no-underscore-dangle */
 /* global document */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -16,6 +17,9 @@ import HeaderWrapper from './components/shared/header/HeaderWrapper';
 import SideMenu from './components/shared/side_menu/SideMenu';
 import CartDrawer from './components/shared/cart/CartDrawer';
 import Footer from './components/shared/Footer';
+
+// Transforms
+import { transformThemeCollection } from './transforms/theme';
 
 // CSS
 import '../css/index.scss';
@@ -35,7 +39,9 @@ function renderComponent(Component, idSelectorStr) {
 
 // eslint-disable-next-line
 let cleanData = win.__data || {};
+let $$appState = {};
 let $$superCollectionState = {};
+let $$themeState = {};
 
 if (win.SuperCollectionData) {
   $$superCollectionState = {
@@ -45,8 +51,22 @@ if (win.SuperCollectionData) {
   };
 }
 
+if (win.ApplicationStateData) {
+  $$appState = win.ApplicationStateData;
+}
+
+if (win.__themeData__) {
+  const { collection } = transformThemeCollection(win.__themeData__, $$appState.currentSiteVersion);
+  $$themeState = {
+    collection,
+  };
+}
+
+
 cleanData = assign({}, cleanData, {
+  $$appState,
   $$superCollectionState,
+  $$themeState,
 });
 
 const store = AppStore(cleanData);
