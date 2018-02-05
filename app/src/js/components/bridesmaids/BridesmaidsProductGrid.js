@@ -36,13 +36,13 @@ class BridesmaidsProductGrid extends Component {
 
   generateImage(
     {
+      image_urls: imageUrls,
       style_number: styleNumber,
       customization_ids: customizationIds,
     },
     side,
   ) {
     const {
-      selectedColor,
       selectedLength,
     } = this.props;
 
@@ -53,7 +53,7 @@ class BridesmaidsProductGrid extends Component {
       customizationIds,
       imgSizeStr: '800x800',
       length: selectedLength.name.replace('-', '_'),
-      colorCode: colorNames[selectedColor.presentation],
+      colorCode: colorNames[imageUrls[0].color],
     });
 
     return imageStr;
@@ -137,7 +137,6 @@ BridesmaidsProductGrid.propTypes = {
     // color: PropTypes.string,
     // permalink: PropTypes.string,
   })).isRequired,
-  selectedColor: PropTypes.object.isRequired,
   selectedLength: PropTypes.object.isRequired,
 };
 

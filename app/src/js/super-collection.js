@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-underscore-dangle */
 /* global document */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,6 +9,7 @@ import win from './polyfills/windowPolyfill';
 
 // Components
 import SuperCollectionApp from './SuperCollectionApp';
+import SuperCollectionPageApp from './SuperCollectionPageApp';
 
 // Standard Components that will be included in old site
 import BlanketOverlay from './components/generic/BlanketOverlay';
@@ -14,6 +17,9 @@ import HeaderWrapper from './components/shared/header/HeaderWrapper';
 import SideMenu from './components/shared/side_menu/SideMenu';
 import CartDrawer from './components/shared/cart/CartDrawer';
 import Footer from './components/shared/Footer';
+
+// Transforms
+import { transformThemeCollection } from './transforms/theme';
 
 // CSS
 import '../css/index.scss';
@@ -33,7 +39,9 @@ function renderComponent(Component, idSelectorStr) {
 
 // eslint-disable-next-line
 let cleanData = win.__data || {};
+let $$appState = {};
 let $$superCollectionState = {};
+let $$themeState = {};
 
 if (win.SuperCollectionData) {
   $$superCollectionState = {
@@ -43,13 +51,30 @@ if (win.SuperCollectionData) {
   };
 }
 
+if (win.ApplicationStateData) {
+  $$appState = win.ApplicationStateData;
+}
+
+if (win.__themeData__) {
+  const { collection } = transformThemeCollection(win.__themeData__, $$appState.currentSiteVersion);
+  $$themeState = {
+    collection,
+  };
+}
+
+
 cleanData = assign({}, cleanData, {
+  $$appState,
   $$superCollectionState,
+  $$themeState,
 });
 
 const store = AppStore(cleanData);
 const SuperCollectionAppComponent = <Provider store={store}><SuperCollectionApp /></Provider>;
 renderComponent(SuperCollectionAppComponent, 'super-collection-root');
+
+const SuperCollectionPageAppComponent = <Provider store={store}><SuperCollectionPageApp /></Provider>;
+renderComponent(SuperCollectionPageAppComponent, 'super-collection-page-root');
 
 // BLANKET
 const BlanketComponent = <Provider store={store}><BlanketOverlay /></Provider>;
@@ -76,6 +101,6 @@ if (module.hot) {
     /* eslint-disable global-require */
     const NextRootContainer = require('./SuperCollectionApp.js');
     const AppNode = (<Provider store={store}><NextRootContainer /></Provider>);
-    renderComponent(AppNode, 'react-super-collection');
+    renderComponent(AppNode, 'super-collection-root');
   });
 }
