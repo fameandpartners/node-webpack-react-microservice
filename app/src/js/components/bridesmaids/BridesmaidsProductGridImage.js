@@ -16,18 +16,17 @@ import {
 // import { formatSizePresentationUS } from '../../utilities/helpers';
 import { generateCustomizationImage } from '../../utilities/bridesmaids';
 
-// Components
-import FadeIn from '../generic/FadeIn';
-import BridesmaidsProductGridImage from './BridesmaidsProductGridImage';
-
 // CSS
 import '../../../css/components/FlashSaleProductGrid.scss';
 import '../../../css/components/BridesmaidsProductGrid.scss';
 
-class BridesmaidsProductGrid extends Component {
+class BridesmaidsProductGridImage extends Component {
   constructor(props) {
     super(props);
     autobind(this);
+    this.state = {
+      isHoveringDetails: false,
+    };
   }
 
   formatPrice(str) {
@@ -91,53 +90,91 @@ class BridesmaidsProductGrid extends Component {
     return imageStr;
   }
 
+  handleMouseEnterDetails() {
+    this.setState({
+      isHoveringDetails: true,
+    });
+  }
+
+  handleMouseLeaveDetails() {
+    this.setState({
+      isHoveringDetails: false,
+    });
+  }
+
   render() {
     const {
-      bridesmaidsColors,
-      products,
-      selectedLength,
+      dress,
     } = this.props;
+    const {
+      isHoveringDetails,
+    } = this.state;
 
     return (
-      <div className="BridesmaidsProductGrid__wrapper grid-12 layout-container">
-        {
-          (products && products.length === 0) ?
-            (
-              <FadeIn className="u-center">
-                <div className="u-mt--huge u-center">
-                  <h1 className="BridesmaidsProductGrid__wrapper-heading font-family-secondary">Sorry we're not finding&nbsp;anything</h1>
-                  <div className="BridesmaidsProductGrid__wrapper-text">
-                    <p>
-                      Try using different filters to broaden your results, or browse our&nbsp;
-                      <a href="" className="u-text-decoration--underline">Bridesmaids Collection</a>
-                    </p>
-                  </div>
-                </div>
-              </FadeIn>
-            ) :
-            null
-        }
-        { products.map(dress => (
-          <BridesmaidsProductGridImage
-            bridesmaidsColors={bridesmaidsColors}
-            dress={dress}
-            selectedLength={selectedLength}
+      <div
+        key={dress.id}
+        className="FlashSaleProduct__container col-4_sm-6"
+      >
+        <a
+          className="BridesmaidsProduct__image-wrapper FlashSaleProduct__image-wrapper u-cursor--pointer"
+          href={this.generateImageUrl(dress.id, dress.image_urls[0].color, dress.length)}
+        >
+          <img
+            className="FlashSaleProduct__image--original u-vertical-align--top"
+            alt={dress.product_name}
+            src={this.generateImage(dress, 'front')}
           />
-        ))}
+          <img
+            className="FlashSaleProduct__image--hover u-vertical-align--top"
+            alt={dress.name}
+            src={this.generateImage(dress, 'back')}
+          />
+        </a>
+        <div
+          className="grid-12 BridesmaidsProductGrid__details u-position--relative"
+          onMouseEnter={this.handleMouseEnterDetails}
+          onMouseLeave={this.handleMouseLeaveDetails}
+        >
+          <div
+            className={classnames(
+                'BridesmaidsProductGrid__color-selection u-position--absolute u-width--full grid-9',
+                { 'BridesmaidsProductGrid__color-selection--active': isHoveringDetails },
+              )}
+          >
+            {this.generateBridesmaidsColorOptions()}
+          </div>
+          <div
+            className={classnames(
+                'col-9 BridesmaidsProductGrid__product-text',
+                { 'BridesmaidsProductGrid__product-text--active': !isHoveringDetails },
+              )}
+          >
+            <p className="u-text-align--left u-mt-small">
+              <a
+                href={this.generateImageUrl(dress.id, dress.image_urls[0].color, dress.length)}
+              >
+                {dress.product_name}
+              </a>
+            </p>
+          </div>
+          <div className="col-3 FlashSaleProduct__current-price u-mt-small">
+            {this.formatPrice(dress.price.amount)}
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 /* eslint-disable react/forbid-prop-types */
-BridesmaidsProductGrid.propTypes = {
+BridesmaidsProductGridImage.propTypes = {
   bridesmaidsColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     presentation: PropTypes.string,
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
-  })),
-  products: PropTypes.arrayOf(PropTypes.shape({
+  })).isRequired,
+  dress: PropTypes.shape({
     // id: PropTypes.number,
     product_name: PropTypes.string,
     // images: PropTypes.array,
@@ -146,12 +183,8 @@ BridesmaidsProductGrid.propTypes = {
     // size: PropTypes.string,
     // color: PropTypes.string,
     // permalink: PropTypes.string,
-  })).isRequired,
+  }).isRequired,
   selectedLength: PropTypes.object.isRequired,
 };
 
-BridesmaidsProductGrid.defaultProps = {
-  bridesmaidsColors: [],
-};
-
-export default BridesmaidsProductGrid;
+export default BridesmaidsProductGridImage;
