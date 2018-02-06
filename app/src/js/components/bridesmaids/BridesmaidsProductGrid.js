@@ -64,7 +64,6 @@ class BridesmaidsProductGrid extends Component {
       products,
       selectedLength,
     } = this.props;
-    console.log('products', products);
 
     return (
       <div className="BridesmaidsProductGrid__wrapper grid-12 layout-container">
