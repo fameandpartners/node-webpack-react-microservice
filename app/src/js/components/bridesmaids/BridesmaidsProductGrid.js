@@ -4,17 +4,12 @@ import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import classnames from 'classnames';
 
-// Constants
-import BDCustomizationConstants from '../../constants/BDCustomizationConstants';
-
 // Utilities
-import win from '../../polyfills/windowPolyfill';
 import {
   isExtremeLightLuminance,
   generateBackgroundValueFromColor,
 } from '../../utilities/color';
 // import { formatSizePresentationUS } from '../../utilities/helpers';
-import { generateCustomizationImage } from '../../utilities/bridesmaids';
 
 // Components
 import FadeIn from '../generic/FadeIn';
@@ -60,35 +55,6 @@ class BridesmaidsProductGrid extends Component {
         </div>
       );
     });
-  }
-
-  generateImageUrl(dressId, colorName, length) {
-    return win.encodeURI(`/bridesmaid-dresses/${dressId}?color=${colorName}&length=${length}`);
-  }
-
-  generateImage(
-    {
-      image_urls: imageUrls,
-      style_number: styleNumber,
-      customization_ids: customizationIds,
-    },
-    side,
-  ) {
-    const {
-      selectedLength,
-    } = this.props;
-
-    const { colorNames } = BDCustomizationConstants;
-    const imageStr = generateCustomizationImage({
-      side,
-      sku: styleNumber.toLowerCase(),
-      customizationIds,
-      imgSizeStr: '800x800',
-      length: selectedLength.name.replace('-', '_'),
-      colorCode: colorNames[imageUrls[0].color],
-    });
-
-    return imageStr;
   }
 
   render() {

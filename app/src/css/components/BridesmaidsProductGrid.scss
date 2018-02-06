@@ -1,5 +1,6 @@
 .BridesmaidsProductGrid__wrapper {
   min-height: 800px;
+  margin: 0;
 }
 
 .BridesmaidsProductGrid__wrapper-heading {
@@ -9,16 +10,17 @@
   margin-bottom: 30px;
 }
 
-.BridesmaidsProductGrid__color-selection {
+.BridesmaidsProductGrid__wrapper .BridesmaidsProductGrid__color-selection {
   top: 0;
   left: 0;
+  margin-top: 10px;
   max-width: 270px;
   opacity: 0;
   transition: 330ms opacity ease-in-out;
   pointer-events: none;
 }
 
-.BridesmaidsProductGrid__color-selection--active {
+.BridesmaidsProductGrid__wrapper .BridesmaidsProductGrid__color-selection--active {
   pointer-events: visible;
   opacity: 1;
 }
@@ -43,14 +45,17 @@
 }
 
 .BridesmaidsProductGrid__color-swatch {
+  cursor: pointer;
   height: 18px;
   width: 18px;
   border-radius: 50%;
   vertical-align: middle;
-  margin-left: 10px;
-  margin-top: -4px;
 }
 
 .BridesmaidsProductGrid__color-swatch--extreme-light {
   border: 1px solid $c-neutral-4;
+}
+
+.BridesmaidsProductGrid__color-swatch--is-active {
+  border: 2px solid $c-black;
 }

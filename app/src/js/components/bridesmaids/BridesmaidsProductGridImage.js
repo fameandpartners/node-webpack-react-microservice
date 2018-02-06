@@ -24,8 +24,10 @@ class BridesmaidsProductGridImage extends Component {
   constructor(props) {
     super(props);
     autobind(this);
+    const { colorNames } = BDCustomizationConstants;
     this.state = {
       isHoveringDetails: false,
+      selectedColorCode: colorNames[props.dress.image_urls[0].color],
     };
   }
 
@@ -35,9 +37,20 @@ class BridesmaidsProductGridImage extends Component {
     return `$${newPrice}`;
   }
 
+  handleSwatchColorSelection(colorCode) {
+    return () => {
+      this.setState({
+        selectedColorCode: colorCode,
+      });
+    };
+  }
+
   generateBridesmaidsColorOptions() {
     const { bridesmaidsColors } = this.props;
+    const { selectedColorCode } = this.state;
+
     return bridesmaidsColors.map((color) => {
+      const currentColorCode = BDCustomizationConstants.colorNames[color.presentation];
       const {
         hexValue,
         patternUrl,
@@ -50,10 +63,14 @@ class BridesmaidsProductGridImage extends Component {
       return (
         <div className="col" key={hexValue}>
           <span
+            onClick={this.handleSwatchColorSelection(currentColorCode)}
             style={{ background }}
             className={classnames(
             'BridesmaidsProductGrid__color-swatch u-display--inline-block',
-            { 'BridesmaidsProductGrid__color-swatch--extreme-light': isExtremeLightLuminance({ hexValue }) },
+              {
+                'BridesmaidsProductGrid__color-swatch--extreme-light': isExtremeLightLuminance({ hexValue }),
+                'BridesmaidsProductGrid__color-swatch--is-active': currentColorCode === selectedColorCode,
+              },
           )}
           />
         </div>
@@ -61,8 +78,11 @@ class BridesmaidsProductGridImage extends Component {
     });
   }
 
-  generateImageUrl(dressId, colorName, length) {
-    return win.encodeURI(`/bridesmaid-dresses/${dressId}?color=${colorName}&length=${length}`);
+  generateImageUrl(dressId, selectedColorCode, length) {
+    const { colorNames } = BDCustomizationConstants;
+    const colorKeyNames = Object.keys(colorNames);
+    const color = colorKeyNames.find(colorKey => colorNames[colorKey] === selectedColorCode);
+    return win.encodeURI(`/bridesmaid-dresses/${dressId}?color=${color}&length=${length}`);
   }
 
   generateImage(
@@ -73,18 +93,16 @@ class BridesmaidsProductGridImage extends Component {
     },
     side,
   ) {
-    const {
-      selectedLength,
-    } = this.props;
+    const { selectedLength } = this.props;
+    const { selectedColorCode } = this.state;
 
-    const { colorNames } = BDCustomizationConstants;
     const imageStr = generateCustomizationImage({
       side,
       sku: styleNumber.toLowerCase(),
       customizationIds,
       imgSizeStr: '800x800',
       length: selectedLength.name.replace('-', '_'),
-      colorCode: colorNames[imageUrls[0].color],
+      colorCode: selectedColorCode,
     });
 
     return imageStr;
@@ -108,6 +126,7 @@ class BridesmaidsProductGridImage extends Component {
     } = this.props;
     const {
       isHoveringDetails,
+      selectedColorCode,
     } = this.state;
 
     return (
@@ -117,7 +136,7 @@ class BridesmaidsProductGridImage extends Component {
       >
         <a
           className="BridesmaidsProduct__image-wrapper FlashSaleProduct__image-wrapper u-cursor--pointer"
-          href={this.generateImageUrl(dress.id, dress.image_urls[0].color, dress.length)}
+          href={this.generateImageUrl(dress.id, selectedColorCode, dress.length)}
         >
           <img
             className="FlashSaleProduct__image--original u-vertical-align--top"
@@ -137,7 +156,7 @@ class BridesmaidsProductGridImage extends Component {
         >
           <div
             className={classnames(
-                'BridesmaidsProductGrid__color-selection u-position--absolute u-width--full grid-9',
+                'BridesmaidsProductGrid__color-selection u-position--absolute u-width--full grid-9-noGutter',
                 { 'BridesmaidsProductGrid__color-selection--active': isHoveringDetails },
               )}
           >
@@ -177,6 +196,11 @@ BridesmaidsProductGridImage.propTypes = {
   dress: PropTypes.shape({
     // id: PropTypes.number,
     product_name: PropTypes.string,
+    image_urls: PropTypes.arrayOf(
+      PropTypes.shape({
+        color: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
     // images: PropTypes.array,
     // original_price: PropTypes.number,
     // current_price: PropTypes.number,
