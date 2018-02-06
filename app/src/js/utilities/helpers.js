@@ -37,6 +37,6 @@ export function siteVersionAU() {
   return (win.ApplicationStateData ? win.ApplicationStateData.auSite : false);
 }
 
-export function featureFlagIsActive(featureFlagName) {
-  return (win.ApplicationStateData ? win.ApplicationStateData[featureFlagName] : false);
+export function featureFlagSampleSale() {
+  return (win.ApplicationStateData ? win.ApplicationStateData.featureFlagSampleSale : false);
 }
