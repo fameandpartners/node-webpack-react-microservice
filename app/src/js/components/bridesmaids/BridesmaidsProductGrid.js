@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
@@ -33,7 +34,7 @@ class BridesmaidsProductGrid extends Component {
 
   generateBridesmaidsColorOptions() {
     const { bridesmaidsColors } = this.props;
-    return bridesmaidsColors.map((color) => {
+    return bridesmaidsColors.map((color, i) => {
       const {
         hexValue,
         patternUrl,
@@ -44,7 +45,7 @@ class BridesmaidsProductGrid extends Component {
       });
 
       return (
-        <div className="col" key={hexValue}>
+        <div className="col" key={`${i}-${hexValue}`}>
           <span
             style={{ background }}
             className={classnames(
@@ -63,6 +64,7 @@ class BridesmaidsProductGrid extends Component {
       products,
       selectedLength,
     } = this.props;
+    console.log('products', products);
 
     return (
       <div className="BridesmaidsProductGrid__wrapper grid-12 layout-container">
@@ -85,6 +87,7 @@ class BridesmaidsProductGrid extends Component {
         }
         { products.map(dress => (
           <BridesmaidsProductGridImage
+            key={dress.id + dress.color}
             bridesmaidsColors={bridesmaidsColors}
             dress={dress}
             selectedLength={selectedLength}
