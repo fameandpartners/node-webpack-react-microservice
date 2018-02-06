@@ -2,7 +2,7 @@ import { assign } from 'lodash';
 import mirrorCreator from 'mirror-creator';
 
 // Utilities
-import { siteVersionAU, featureFlagSampleSale } from '../utilities/helpers';
+import { siteVersionAU, featureFlagIsActive } from '../utilities/helpers';
 
 const actionTypes = assign({},
   mirrorCreator([
@@ -137,7 +137,7 @@ const navigationLinks = {
         text: 'Sample Sale',
         url: '/sample-sale',
         // This item should be hidden if the "sample_sale" feature flag is *DISABLED*.
-        shouldHide: !featureFlagSampleSale(),
+        shouldHide: !featureFlagIsActive('featureFlagSampleSale'),
       },
     ],
     COLLECTIONS: [
