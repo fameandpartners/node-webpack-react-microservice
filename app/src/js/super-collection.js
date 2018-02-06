@@ -20,6 +20,7 @@ import Footer from './components/shared/Footer';
 
 // Transforms
 import { transformThemeCollection } from './transforms/theme';
+import { transformBridesmaidColors } from './transforms/bridesmaid';
 
 // CSS
 import '../css/index.scss';
@@ -40,6 +41,7 @@ function renderComponent(Component, idSelectorStr) {
 // eslint-disable-next-line
 let cleanData = win.__data || {};
 let $$appState = {};
+let $$bridesmaidsFilterState = {};
 let $$superCollectionState = {};
 let $$themeState = {};
 
@@ -62,9 +64,16 @@ if (win.__themeData__) {
   };
 }
 
+if (win.BridesmaidsFilterData) {
+  $$bridesmaidsFilterState = {
+    $$bridesmaidsFilterColors: transformBridesmaidColors(win.BridesmaidsFilterData.colors),
+  };
+}
+
 
 cleanData = assign({}, cleanData, {
   $$appState,
+  $$bridesmaidsFilterState,
   $$superCollectionState,
   $$themeState,
 });

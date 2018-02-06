@@ -331,7 +331,7 @@ Cart.propTypes = {
   // })).isRequired,
   lineItems: PropTypes.arrayOf(PropTypes.shape({
     addons: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       description: PropTypes.string,
       centsTotal: PropTypes.number,
     })),
