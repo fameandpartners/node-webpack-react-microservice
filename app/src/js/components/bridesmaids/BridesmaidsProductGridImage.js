@@ -156,11 +156,13 @@ class BridesmaidsProductGridImage extends Component {
         >
           <div
             className={classnames(
-                'BridesmaidsProductGrid__color-selection u-position--absolute u-width--full grid-9-noGutter',
+                'BridesmaidsProductGrid__color-selection u-position--absolute u-width--full grid-12-noGutter',
                 { 'BridesmaidsProductGrid__color-selection--active': isHoveringDetails },
               )}
           >
-            {this.generateBridesmaidsColorOptions()}
+            <div className="col-10 grid-9-noGutter">
+              {this.generateBridesmaidsColorOptions()}
+            </div>
           </div>
           <div
             className={classnames(
