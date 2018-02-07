@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 
+// Libraries
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
+
+// Assets
+import AlertIcon from '../../../svg/i-alert.svg';
+
 import {
   generateCustomizationImage,
 } from '../../utilities/bridesmaids';
@@ -101,6 +108,7 @@ class BDProductCustomization extends PureComponent {
 
   render() {
     const {
+      breakpoint,
       children,
       // hasNavItems,
       onCustomizationHeadingGroupClick,
@@ -110,9 +118,32 @@ class BDProductCustomization extends PureComponent {
       <div className="BDProductCustomization u-height--full u-flex u-flex--col">
 
         <div className="grid-center-bottom u-flex u-flex--1">
+          {
+            (breakpoint === 'mobile' || breakpoint === 'tablet')
+            ? (
+              <div className="BDProductCustomization__customization-undo u-position--fixed">
+                <AlertIcon
+                  width="20px"
+                  height="20px"
+                />
+              </div>
+            ) : null
+          }
           <a className="BDProductCustomization__main-image-wrapper">
             <img className="u-height--full" src={this.generateImageNameForSelections()} alt="dress customization combinations" />
           </a>
+
+          {
+            (breakpoint === 'mobile' || breakpoint === 'tablet')
+            ? null : (
+              <div className="BDProductCustomization__customization-undo-desktop u-position--absolute">
+                <AlertIcon
+                  width="20px"
+                  height="20px"
+                />
+              </div>
+            )
+          }
         </div>
 
         { onCustomizationHeadingGroupClick ?
@@ -135,6 +166,8 @@ class BDProductCustomization extends PureComponent {
 }
 
 BDProductCustomization.propTypes = {
+  // Decorator Props
+  breakpoint: PropTypes.string.isRequired,
   // Passed Props
   children: PropTypes.isRequired,
   activeHeading: PropTypes.string,
@@ -160,4 +193,4 @@ BDProductCustomization.defaultProps = {
 };
 
 
-export default connect(stateToProps)(BDProductCustomization);
+export default Resize(PDPBreakpoints)(connect(stateToProps)(BDProductCustomization));

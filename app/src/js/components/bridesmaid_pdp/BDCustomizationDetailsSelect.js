@@ -259,7 +259,6 @@ class BDCustomizationDetailsSelect extends Component {
               className={classnames({
                 'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
                 'BDCustomizationDetailsSelect--loading': incompatabilitiesLoading,
-                'BDCustomizationDetailsSelect--incompatible': isIncompatible,
               })}
               alt={item.id}
               src={this.generateImageNameForCustomizationId(item.id, isIncompatible)}
@@ -282,6 +281,7 @@ class BDCustomizationDetailsSelect extends Component {
       temporaryBDCustomizationColor,
     } = this.props;
 
+    // Three Options
     if (groupName === BDCustomizationConstants.groupNames.LENGTH_CUSTOMIZE) {
       return this.generateLengthDetailOptions();
     }
