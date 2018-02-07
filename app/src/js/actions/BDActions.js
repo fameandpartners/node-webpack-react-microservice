@@ -74,6 +74,14 @@ export function setBDIncompatabilitiesLoading({ isLoading }) {
   };
 }
 
+// UNDO ACTIONS
+export function undoBDTemporaryCustomizationDetails({ undoArray }) {
+  return {
+    type: BDCustomizationConstants.UNDO_BD_TEMPORARY_CUSTOMIZATION_DETAILS,
+    undoArray,
+  };
+}
+
 
 export default {
   bdActivateCustomizationDrawer,
@@ -83,4 +91,5 @@ export default {
   setBDCustomizationSection,
   setBDIncompatabilities,
   setBDIncompatabilitiesLoading,
+  undoBDTemporaryCustomizationDetails,
 };

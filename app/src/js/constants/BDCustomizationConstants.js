@@ -26,6 +26,9 @@ const actionTypes = assign({},
 
     // Color selection Screen
     'SELECT_PRODUCT_COLOR',
+
+    // Undo Actions
+    'UNDO_BD_TEMPORARY_CUSTOMIZATION_DETAILS',
   ]),
 );
 

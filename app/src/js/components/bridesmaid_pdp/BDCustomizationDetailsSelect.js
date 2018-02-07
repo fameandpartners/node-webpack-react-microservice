@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+import { includes, intersection, without } from 'lodash';
 import { formatCents } from '../../utilities/accounting';
 
 // Services
@@ -39,8 +39,9 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     sku: $$productState.get('sku'),
     productId: $$productState.get('productId'),
     incompatabilities: $$bdCustomizationState.get('incompatabilities'),
+    singleCustomizationIncompatabilities: $$bdCustomizationState.get('singleCustomizationIncompatabilities').toJS(),
     incompatabilitiesLoading: $$bdCustomizationState.get('incompatabilitiesLoading'),
-    $$temporaryCustomizationDetails,
+    temporaryCustomizationDetails: $$temporaryCustomizationDetails.toJS(),
     temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
     productDefaultColors: $$productState.get('productDefaultColors').toJS(),
     temporaryBDCustomizationColor: $$bdCustomizationState.get('temporaryBDCustomizationColor'),
@@ -55,6 +56,7 @@ function dispatchToProps(dispatch) {
     setBDTemporaryLength,
     setBDIncompatabilities,
     setBDIncompatabilitiesLoading,
+    undoBDTemporaryCustomizationDetails,
   } = bindActionCreators(BDActions, dispatch);
 
   return {
@@ -63,6 +65,7 @@ function dispatchToProps(dispatch) {
     setBDTemporaryLength,
     setBDIncompatabilities,
     setBDIncompatabilitiesLoading,
+    undoBDTemporaryCustomizationDetails,
   };
 }
 
@@ -79,11 +82,11 @@ class BDCustomizationDetailsSelect extends Component {
     const {
       productId,
       temporaryBDCustomizationLength,
-      $$temporaryCustomizationDetails,
+      temporaryCustomizationDetails,
       setBDIncompatabilities,
       setBDIncompatabilitiesLoading,
     } = this.props;
-    const sanitizedCustomizationIds = customizationIds || $$temporaryCustomizationDetails.toJS();
+    const sanitizedCustomizationIds = customizationIds || temporaryCustomizationDetails;
 
     setBDIncompatabilitiesLoading({ isLoading: true });
     BDService.getBridesmaidsIncompatabilities({
@@ -109,28 +112,27 @@ class BDCustomizationDetailsSelect extends Component {
     // customization_ids].sort.join(','), params[:length], params[:silhouette], params[:neckline], params[:product_id]
   }
 
-  createNewTemporaryFilters(detailGuid) {
-    const { $$temporaryCustomizationDetails } = this.props;
-    const optionAlreadySelected = $$temporaryCustomizationDetails.includes(detailGuid);
+  createNewTemporaryFilters(detailGuid, currentTemporaryCustomizationDetails) {
+    const optionAlreadySelected = includes(currentTemporaryCustomizationDetails, detailGuid);
 
     if (optionAlreadySelected) { // Removal
-      return $$temporaryCustomizationDetails.filterNot(t => t === detailGuid);
+      return without(currentTemporaryCustomizationDetails, detailGuid);
     }
 
-    return $$temporaryCustomizationDetails.push(detailGuid); // Add
+    return currentTemporaryCustomizationDetails.concat(detailGuid); // Add
   }
 
   generateImageNameForCustomizationId(customizationId, isIncompatible = false) {
     const {
       temporaryBDCustomizationColor,
-      $$temporaryCustomizationDetails,
+      temporaryCustomizationDetails,
       temporaryBDCustomizationLength,
       sku,
     } = this.props;
     const { colorNames } = BDCustomizationConstants;
     const customizationIds = isIncompatible
       ? [customizationId]
-      : $$temporaryCustomizationDetails.toJS().concat(customizationId);
+      : temporaryCustomizationDetails.concat(customizationId);
 
 
     const imageStr = generateCustomizationImage({
@@ -147,13 +149,13 @@ class BDCustomizationDetailsSelect extends Component {
     const {
       availableLengths,
       temporaryBDCustomizationColor,
-      $$temporaryCustomizationDetails,
+      temporaryCustomizationDetails,
       sku,
     } = this.props;
     const { colorNames } = BDCustomizationConstants;
     const imageStr = generateCustomizationImage({
       sku: sku.toLowerCase(),
-      customizationIds: $$temporaryCustomizationDetails.toJS().concat(customizationId),
+      customizationIds: temporaryCustomizationDetails.concat(customizationId),
       imgSizeStr: '142x142',
       length: availableLengths[customizationId].replace('-', '_'),
       colorCode: colorNames[temporaryBDCustomizationColor],
@@ -161,16 +163,44 @@ class BDCustomizationDetailsSelect extends Component {
     return imageStr;
   }
 
-  handleCustomizationSelection(item, isIncompatible) {
-    if (isIncompatible) return null;
-    const { setBDTemporaryCustomizationDetails } = this.props;
-    const $$newTemporaryDetails = this.createNewTemporaryFilters(item.id.toLowerCase());
-    setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: $$newTemporaryDetails });
-    this.checkForIncompatabilities({
-      customizationIds: $$newTemporaryDetails.toJS(),
-    });
+  handleIncompatibleSelection(item) {
+    const {
+      singleCustomizationIncompatabilities,
+      temporaryCustomizationDetails,
+      temporaryBDCustomizationLength,
+      setBDTemporaryCustomizationDetails,
+    } = this.props;
 
-    return null;
+    const incompatabilities = singleCustomizationIncompatabilities[item.id][temporaryBDCustomizationLength];
+    const undoArray = intersection(temporaryCustomizationDetails, incompatabilities);
+    const difference = without(temporaryCustomizationDetails, ...undoArray);
+    const newTemporaryCustomizationDetails = this.createNewTemporaryFilters(item.id.toLowerCase(), difference);
+
+    setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: newTemporaryCustomizationDetails });
+    this.checkForIncompatabilities({
+      customizationIds: newTemporaryCustomizationDetails,
+    });
+  }
+
+  handleCompatibleSelection(item) {
+    const {
+      temporaryCustomizationDetails,
+      setBDTemporaryCustomizationDetails,
+    } = this.props;
+    const newTemporaryCustomizationDetails = this.createNewTemporaryFilters(item.id.toLowerCase(), temporaryCustomizationDetails);
+
+    setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: newTemporaryCustomizationDetails });
+    this.checkForIncompatabilities({
+      customizationIds: newTemporaryCustomizationDetails,
+    });
+  }
+
+  handleCustomizationSelection(item, isIncompatible) {
+    if (isIncompatible) {
+      return this.handleIncompatibleSelection(item);
+    }
+
+    return this.handleCompatibleSelection(item);
   }
 
   handleLengthSelection(item) {
@@ -241,7 +271,7 @@ class BDCustomizationDetailsSelect extends Component {
       groupName,
       incompatabilities,
       incompatabilitiesLoading,
-      $$temporaryCustomizationDetails,
+      temporaryCustomizationDetails,
 
     } = this.props;
 
@@ -257,7 +287,7 @@ class BDCustomizationDetailsSelect extends Component {
           >
             <img
               className={classnames({
-                'BDCustomizationDetailsSelect--selected': $$temporaryCustomizationDetails.includes(item.id.toLowerCase()),
+                'BDCustomizationDetailsSelect--selected': includes(temporaryCustomizationDetails, item.id.toLowerCase()),
                 'BDCustomizationDetailsSelect--loading': incompatabilitiesLoading,
               })}
               alt={item.id}
@@ -310,7 +340,7 @@ class BDCustomizationDetailsSelect extends Component {
 
 /* eslint-disable react/forbid-prop-types */
 BDCustomizationDetailsSelect.propTypes = {
-  $$temporaryCustomizationDetails: ImmutablePropTypes.list.isRequired,
+  temporaryCustomizationDetails: PropTypes.array.isRequired,
   addonOptions: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     description: PropTypes.string,
@@ -324,8 +354,9 @@ BDCustomizationDetailsSelect.propTypes = {
   incompatabilitiesLoading: PropTypes.bool,
   productId: PropTypes.number.isRequired,
   productDefaultColors: PropTypes.array.isRequired,
-  temporaryBDCustomizationColor: PropTypes.string.isRequired,
+  singleCustomizationIncompatabilities: PropTypes.object.isRequired,
   sku: PropTypes.string.isRequired,
+  temporaryBDCustomizationColor: PropTypes.string.isRequired,
   temporaryBDCustomizationLength: PropTypes.string,
   availableLengths: PropTypes.object,
   // Redux Funcs
@@ -334,6 +365,7 @@ BDCustomizationDetailsSelect.propTypes = {
   setBDTemporaryLength: PropTypes.func.isRequired,
   setBDIncompatabilities: PropTypes.func.isRequired,
   setBDIncompatabilitiesLoading: PropTypes.func.isRequired,
+  undoBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
 };
 
 BDCustomizationDetailsSelect.defaultProps = {
