@@ -117,39 +117,6 @@ class BridesmaidsFilterApp extends Component {
     autobind(this);
   }
 
-  // componentWillMount() {
-  //   /**
-  //    * NOTE:
-  //    *   Do we still need something like this for the
-  //    *   bridesmaids filter?
-  //    */
-
-  //   const queryParams = win.location.search;
-  //   const parsedQueryObj = qs.parse(queryParams.slice(1));
-
-  //   this.setState({
-  //     productsCurrentPage: Number(parsedQueryObj.page) || this.props.page,
-  //   eslint-disable-next-line
-  //     totalPages: this.props.pageDresses.length ? Number(this.props.pageDresses[0].total_pages) : this.props.page,
-  //   });
-  // }
-
-  // componentDidMount() {
-  //   const queryParams = win.location.search;
-  //   const hasSearchQueryParams = !!queryParams;
-
-  //   if (hasSearchQueryParams) {
-  //     const parsedQueryObj = qs.parse(queryParams.slice(1));
-  //     this.props.hydrateFiltersFromURL({
-  //       page: parsedQueryObj.page,
-  //       sort: parsedQueryObj.sort || 'asc',
-  //       selectedColors: parsedQueryObj.color || [],
-  //       selectedSizes: parsedQueryObj.size,
-  //       selectedDressLengths: parsedQueryObj.length || [],
-  //     });
-  //   }
-  // }
-
   handleFilterSelectionSubmit() {
     const {
       /* eslint-disable react/prop-types */

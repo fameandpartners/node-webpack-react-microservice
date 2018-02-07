@@ -133,7 +133,7 @@ CartDrawer.propTypes = {
       hexValue: PropTypes.string,
     }),
     addons: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       description: PropTypes.string,
       centsTotal: PropTypes.number,
     })),
