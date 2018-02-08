@@ -66,32 +66,48 @@ class BridesmaidsProductGrid extends Component {
     } = this.props;
 
     return (
-      <div className="BridesmaidsProductGrid__wrapper grid-12 layout-container">
-        {
-          (products && products.length === 0) ?
-            (
-              <FadeIn className="u-center">
-                <div className="u-mt--huge u-center">
-                  <h1 className="BridesmaidsProductGrid__wrapper-heading font-family-secondary">Sorry we're not finding&nbsp;anything</h1>
-                  <div className="BridesmaidsProductGrid__wrapper-text">
-                    <p>
-                      Try using different filters to broaden your results, or browse our&nbsp;
-                      <a href="" className="u-text-decoration--underline">Bridesmaids Collection</a>
-                    </p>
+      <div className="BridesmaidsProductGrid">
+        { /* TO-DO: add real images */ }
+        <div className="BridesmaidsProductGrid__heroTile u-overlay-area">
+          <picture>
+            <source srcSet="http://fakeimg.pl/2025x1025/" media="(min-width: 1025px)" />
+            <source srcSet="http://fakeimg.pl/577x500/" media="(min-width: 577px) and (max-width: 1024px)" />
+            <source srcSet="http://fakeimg.pl/576x576/" media="(max-width: 576px)" />
+            <img
+              src="http://fakeimg.pl/1025x1025/"
+              srcSet="http://fakeimg.pl/1025x1025/"
+              alt="Buy custom bridesmaid dresses"
+              className="BridesmaidsProductGrid__heroTileImg"
+            />
+          </picture>
+        </div>
+        <div className="BridesmaidsProductGrid__wrapper grid-12 layout-container">
+          {
+            (products && products.length === 0) ?
+              (
+                <FadeIn className="u-center">
+                  <div className="u-mt--huge u-center">
+                    <h1 className="BridesmaidsProductGrid__wrapper-heading font-family-secondary">Sorry we're not finding&nbsp;anything</h1>
+                    <div className="BridesmaidsProductGrid__wrapper-text">
+                      <p>
+                        Try using different filters to broaden your results, or browse our&nbsp;
+                        <a href="" className="u-text-decoration--underline">Bridesmaids Collection</a>
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </FadeIn>
-            ) :
-            null
-        }
-        { products.map(dress => (
-          <BridesmaidsProductGridImage
-            key={dress.id + dress.color}
-            bridesmaidsColors={bridesmaidsColors}
-            dress={dress}
-            selectedLength={selectedLength}
-          />
-        ))}
+                </FadeIn>
+              ) :
+              null
+          }
+          { products.map(dress => (
+            <BridesmaidsProductGridImage
+              key={dress.id + dress.color}
+              bridesmaidsColors={bridesmaidsColors}
+              dress={dress}
+              selectedLength={selectedLength}
+            />
+          ))}
+        </div>
       </div>
     );
   }
