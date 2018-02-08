@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { includes, without } from 'lodash';
+import { includes } from 'lodash';
 import Immutable from 'immutable';
 import BDCustomizationConstants from '../constants/BDCustomizationConstants';
 
@@ -161,19 +161,12 @@ export default function CartReducer($$state = $$initialState, action = null) {
 
     case BDCustomizationConstants.UNDO_BD_TEMPORARY_CUSTOMIZATION_DETAILS: {
       const { undoArray } = action;
-      // REMOVE TEMPORARY
-      const temporaryDetails = $$state.get('temporaryCustomizationDetails').toJS();
-      const difference = without(temporaryDetails, ...undoArray);
-      if (includes(difference, ...['l1', 'l2', 'l3', 'l4', 'l5'])) {
+      if (includes(undoArray, ...['l1', 'l2', 'l3', 'l4', 'l5'])) {
         console.error('LENGTH SELECTED');
         // edge case, does it contain a length???? Need logic for length selection
       }
 
-      console.log('temporaryDetails', temporaryDetails);
-      console.log('undoArray', undoArray);
-      console.log('difference', difference);
       return $$state.merge({
-        temporaryCustomizationDetails: difference,
         lastUndoTemporaryCustomizationDetails: undoArray,
       });
       // return $$state.merge({ // Addition

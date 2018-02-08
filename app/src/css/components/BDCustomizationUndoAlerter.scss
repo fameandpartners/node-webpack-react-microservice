@@ -1,0 +1,8 @@
+.BDCustomizationUndoAlerter {
+  transition: 330ms all ease-in-out;
+  opacity: 0;
+}
+
+.BDCustomizationUndoAlerter--active {
+  opacity: 1;
+}

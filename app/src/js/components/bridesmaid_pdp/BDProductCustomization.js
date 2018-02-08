@@ -9,7 +9,7 @@ import Resize from '../../decorators/Resize';
 import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // Assets
-import AlertIcon from '../../../svg/i-alert.svg';
+import BDCustomizationUndoAlerter from './BDCustomizationUndoAlerter';
 
 import {
   generateCustomizationImage,
@@ -46,6 +46,7 @@ function stateToProps(state) {
   return {
     activeBDCustomizationHeading: state.$$bdCustomizationState.get('activeBDCustomizationHeading'),
     bdProductCustomizationDrawer: state.$$bdCustomizationState.get('bdProductCustomizationDrawer'),
+    lastUndoTemporaryCustomizationDetails: state.$$bdCustomizationState.get('lastUndoTemporaryCustomizationDetails'),
     temporaryCustomizationDetails: state.$$bdCustomizationState.get('temporaryCustomizationDetails').toJS(),
     temporaryBDCustomizationLength: state.$$bdCustomizationState.get('temporaryBDCustomizationLength'),
     temporaryBDCustomizationColor: state.$$bdCustomizationState.get('temporaryBDCustomizationColor'),
@@ -110,7 +111,7 @@ class BDProductCustomization extends PureComponent {
     const {
       breakpoint,
       children,
-      // hasNavItems,
+      lastUndoTemporaryCustomizationDetails,
       onCustomizationHeadingGroupClick,
     } = this.props;
 
@@ -121,12 +122,10 @@ class BDProductCustomization extends PureComponent {
           {
             (breakpoint === 'mobile' || breakpoint === 'tablet')
             ? (
-              <div className="BDProductCustomization__customization-undo u-position--fixed">
-                <AlertIcon
-                  width="20px"
-                  height="20px"
-                />
-              </div>
+              <BDCustomizationUndoAlerter
+                className="BDProductCustomization__customization-undo u-position--fixed"
+                lastUndoTemporaryCustomizationDetails={lastUndoTemporaryCustomizationDetails}
+              />
             ) : null
           }
           <a className="BDProductCustomization__main-image-wrapper">
@@ -136,12 +135,10 @@ class BDProductCustomization extends PureComponent {
           {
             (breakpoint === 'mobile' || breakpoint === 'tablet')
             ? null : (
-              <div className="BDProductCustomization__customization-undo-desktop u-position--absolute">
-                <AlertIcon
-                  width="20px"
-                  height="20px"
-                />
-              </div>
+              <BDCustomizationUndoAlerter
+                className="BDProductCustomization__customization-undo-desktop u-position--absolute"
+                lastUndoTemporaryCustomizationDetails={lastUndoTemporaryCustomizationDetails}
+              />
             )
           }
         </div>
@@ -165,13 +162,15 @@ class BDProductCustomization extends PureComponent {
   }
 }
 
+/* eslint-disable react/forbid-prop-types */
 BDProductCustomization.propTypes = {
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
   // Passed Props
-  children: PropTypes.isRequired,
   activeHeading: PropTypes.string,
+  children: PropTypes.isRequired,
   // Redux Props
+  lastUndoTemporaryCustomizationDetails: PropTypes.array,
   temporaryCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
   temporaryBDCustomizationLength: PropTypes.string.isRequired,
   temporaryBDCustomizationColor: PropTypes.string.isRequired,
@@ -184,9 +183,10 @@ BDProductCustomization.propTypes = {
 };
 
 BDProductCustomization.defaultProps = {
-  children: null,
   activeHeading: null,
+  children: null,
   hasNavItems: true,
+  lastUndoTemporaryCustomizationDetails: [],
   showCustomizationGroups: false,
   onCustomizationHeadingGroupClick: null,
   // productCustomizationDrawer: null,

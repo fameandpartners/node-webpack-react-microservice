@@ -39,11 +39,11 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     sku: $$productState.get('sku'),
     productId: $$productState.get('productId'),
     incompatabilities: $$bdCustomizationState.get('incompatabilities'),
-    singleCustomizationIncompatabilities: $$bdCustomizationState.get('singleCustomizationIncompatabilities').toJS(),
     incompatabilitiesLoading: $$bdCustomizationState.get('incompatabilitiesLoading'),
+    productDefaultColors: $$productState.get('productDefaultColors').toJS(),
+    singleCustomizationIncompatabilities: $$bdCustomizationState.get('singleCustomizationIncompatabilities').toJS(),
     temporaryCustomizationDetails: $$temporaryCustomizationDetails.toJS(),
     temporaryBDCustomizationLength: $$bdCustomizationState.get('temporaryBDCustomizationLength'),
-    productDefaultColors: $$productState.get('productDefaultColors').toJS(),
     temporaryBDCustomizationColor: $$bdCustomizationState.get('temporaryBDCustomizationColor'),
     availableLengths: $$bdCustomizationState.get('availableBDCustomizationLengths').toJS(),
   };
@@ -169,6 +169,7 @@ class BDCustomizationDetailsSelect extends Component {
       temporaryCustomizationDetails,
       temporaryBDCustomizationLength,
       setBDTemporaryCustomizationDetails,
+      undoBDTemporaryCustomizationDetails,
     } = this.props;
 
     const incompatabilities = singleCustomizationIncompatabilities[item.id][temporaryBDCustomizationLength];
@@ -176,6 +177,7 @@ class BDCustomizationDetailsSelect extends Component {
     const difference = without(temporaryCustomizationDetails, ...undoArray);
     const newTemporaryCustomizationDetails = this.createNewTemporaryFilters(item.id.toLowerCase(), difference);
 
+    undoBDTemporaryCustomizationDetails({ undoArray });
     setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: newTemporaryCustomizationDetails });
     this.checkForIncompatabilities({
       customizationIds: newTemporaryCustomizationDetails,
@@ -186,9 +188,11 @@ class BDCustomizationDetailsSelect extends Component {
     const {
       temporaryCustomizationDetails,
       setBDTemporaryCustomizationDetails,
+      undoBDTemporaryCustomizationDetails,
     } = this.props;
     const newTemporaryCustomizationDetails = this.createNewTemporaryFilters(item.id.toLowerCase(), temporaryCustomizationDetails);
 
+    undoBDTemporaryCustomizationDetails({ undoArray: [] });
     setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: newTemporaryCustomizationDetails });
     this.checkForIncompatabilities({
       customizationIds: newTemporaryCustomizationDetails,

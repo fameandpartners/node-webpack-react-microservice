@@ -82,7 +82,6 @@ export function undoBDTemporaryCustomizationDetails({ undoArray }) {
   };
 }
 
-
 export default {
   bdActivateCustomizationDrawer,
   setBDTemporaryColor,
