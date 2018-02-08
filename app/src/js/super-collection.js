@@ -58,9 +58,10 @@ if (win.ApplicationStateData) {
 }
 
 if (win.__themeData__) {
-  const { collection } = transformThemeCollection(win.__themeData__, $$appState.currentSiteVersion);
+  const { collection, name, presentation } = transformThemeCollection(win.__themeData__, $$appState.currentSiteVersion);
   $$themeState = {
     collection,
+    name,
   };
 }
 

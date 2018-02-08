@@ -8,6 +8,7 @@ import Raven from 'raven-js';
 
 // Components
 import BridesmaidsProductGrid from './components/bridesmaids/BridesmaidsProductGrid';
+import BridesmaidsThemeHeader from './components/bridesmaids/BridesmaidsThemeHeader';
 
 // Global Styles
 import '../css/global/variables.scss';
@@ -29,6 +30,7 @@ function stateToProps({ $$bridesmaidsFilterState, $$themeState }) {
   return {
     bridesmaidsColors: $$bridesmaidsFilterState.get('$$bridesmaidsFilterColors').toJS(),
     products: $$themeState.get('collection').toJS(),
+    themeName: $$themeState.get('name'),
   };
 }
 
@@ -44,10 +46,11 @@ class SuperCollection extends Component {
   }
 
   render() {
-    const { bridesmaidsColors, products } = this.props;
+    const { bridesmaidsColors, products, themeName } = this.props;
     return (
       <div className="__react_root__">
         <div className="SuperCollectionPageApp Root__wrapper">
+          <BridesmaidsThemeHeader themeName={themeName} />
           <BridesmaidsProductGrid
             bridesmaidsColors={bridesmaidsColors}
             selectedLength={{ name: 'knee' }}
@@ -67,6 +70,7 @@ SuperCollection.propTypes = {
     patternUrl: PropTypes.string,
   })),
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  themeName: PropTypes.string.isRequired,
 };
 
 SuperCollection.defaultProps = {
