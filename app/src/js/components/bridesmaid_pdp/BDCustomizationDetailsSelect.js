@@ -176,12 +176,12 @@ class BDCustomizationDetailsSelect extends Component {
     const undoArray = intersection(temporaryCustomizationDetails, incompatabilities);
     const difference = without(temporaryCustomizationDetails, ...undoArray);
     const newTemporaryCustomizationDetails = this.createNewTemporaryFilters(item.id.toLowerCase(), difference);
-    //console.log('temporaryCustomizationDetails', temporaryCustomizationDetails);
-    //console.log('incompatabilities', incompatabilities);
-    //console.log('undoArray', undoArray);
-    //console.log('difference', difference);
-    //console.log('newTemporaryCustomizationDetails', newTemporaryCustomizationDetails);
-    //console.log('');
+    // console.log('temporaryCustomizationDetails', temporaryCustomizationDetails);
+    // console.log('incompatabilities', incompatabilities);
+    // console.log('undoArray', undoArray);
+    // console.log('difference', difference);
+    // console.log('newTemporaryCustomizationDetails', newTemporaryCustomizationDetails);
+    // console.log('');
 
     undoBDTemporaryCustomizationDetails({
       undoArray,
