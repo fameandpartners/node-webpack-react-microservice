@@ -7,7 +7,7 @@
 }
 
 .u-bold {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .display--block {
@@ -84,6 +84,14 @@
   margin-left: 6px;
 }
 
+.u-ml--small {
+  margin-left: 15px;
+}
+
+.u-ml--normal {
+  margin-left: 30px;
+}
+
 .u-gray-border--top {
   border-top: 1px solid $c-light-gray;
 }
@@ -116,7 +124,7 @@
   margin-top: 6px;
 }
 
-.u-mt-small {
+.u-mt--small {
   margin-top: 15px;
 }
 
@@ -158,6 +166,10 @@
 
 .u-text-align-right {
   text-align: right;
+}
+
+.u-vertical-align--bottom {
+  vertical-align: bottom;
 }
 
 .u-vertical-align--top {

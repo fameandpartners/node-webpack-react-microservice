@@ -75,10 +75,17 @@ export function setBDIncompatabilitiesLoading({ isLoading }) {
 }
 
 // UNDO ACTIONS
-export function undoBDTemporaryCustomizationDetails({ undoArray }) {
+export function undoBDTemporaryCustomizationDetails({ undoArray, lastTemporaryItemSelection }) {
   return {
     type: BDCustomizationConstants.UNDO_BD_TEMPORARY_CUSTOMIZATION_DETAILS,
     undoArray,
+    lastTemporaryItemSelection,
+  };
+}
+
+export function redoBDTemporaryCustomizationDetails() {
+  return {
+    type: BDCustomizationConstants.REDO_BD_TEMPORARY_CUSTOMIZATION_DETAILS,
   };
 }
 

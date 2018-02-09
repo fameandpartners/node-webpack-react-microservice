@@ -3,6 +3,8 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { without } from 'lodash';
 
 // Libraries
 import Resize from '../../decorators/Resize';
@@ -11,9 +13,16 @@ import PDPBreakpoints from '../../libs/PDPBreakpoints';
 // Assets
 import BDCustomizationUndoAlerter from './BDCustomizationUndoAlerter';
 
+// Actions
+import BDActions from '../../actions/BDActions';
+
+// Services
+import BDService from '../../services/BDService';
+
 import {
   generateCustomizationImage,
-} from '../../utilities/bridesmaids';
+  removeLengthIdsFromCustomizationIds,
+  } from '../../utilities/bridesmaids';
 
 // CSS
 import '../../../css/components/BDProductCustomization.scss';
@@ -45,12 +54,31 @@ const customizationHeadings = [
 function stateToProps(state) {
   return {
     activeBDCustomizationHeading: state.$$bdCustomizationState.get('activeBDCustomizationHeading'),
+    addonOptions: state.$$customizationState.get('addons').toJS().addonOptions,
     bdProductCustomizationDrawer: state.$$bdCustomizationState.get('bdProductCustomizationDrawer'),
-    lastUndoTemporaryCustomizationDetails: state.$$bdCustomizationState.get('lastUndoTemporaryCustomizationDetails'),
+    lastTemporaryItemSelection: state.$$bdCustomizationState.get('lastTemporaryItemSelection'),
+    $$lastUndoTemporaryCustomizationDetails: state.$$bdCustomizationState.get('lastUndoTemporaryCustomizationDetails'),
     temporaryCustomizationDetails: state.$$bdCustomizationState.get('temporaryCustomizationDetails').toJS(),
     temporaryBDCustomizationLength: state.$$bdCustomizationState.get('temporaryBDCustomizationLength'),
     temporaryBDCustomizationColor: state.$$bdCustomizationState.get('temporaryBDCustomizationColor'),
+    productId: state.$$productState.get('productId'),
     sku: state.$$productState.get('sku'),
+  };
+}
+
+function dispatchToProps(dispatch) {
+  const {
+    setBDIncompatabilities,
+    setBDIncompatabilitiesLoading,
+    setBDTemporaryCustomizationDetails,
+    redoBDTemporaryCustomizationDetails,
+  } = bindActionCreators(BDActions, dispatch);
+
+  return {
+    setBDIncompatabilities,
+    setBDIncompatabilitiesLoading,
+    setBDTemporaryCustomizationDetails,
+    redoBDTemporaryCustomizationDetails,
   };
 }
 
@@ -66,6 +94,60 @@ class BDProductCustomization extends PureComponent {
       const { onCustomizationHeadingGroupClick } = this.props;
       onCustomizationHeadingGroupClick(groupName);
     };
+  }
+
+  checkForIncompatabilities({
+    customizationIds,
+    length,
+  }) {
+    const {
+      productId,
+      temporaryBDCustomizationLength,
+      temporaryCustomizationDetails,
+      setBDIncompatabilities,
+      setBDIncompatabilitiesLoading,
+    } = this.props;
+    const sanitizedCustomizationIds = customizationIds || temporaryCustomizationDetails;
+
+    setBDIncompatabilitiesLoading({ isLoading: true });
+    BDService.getBridesmaidsIncompatabilities({
+      length: length || temporaryBDCustomizationLength,
+      customizationIds: removeLengthIdsFromCustomizationIds(sanitizedCustomizationIds),
+      productId,
+    }).then(({ body, error }) => {
+      if (error) {
+        console.log('perform some error handling');
+      }
+
+      setBDIncompatabilities({
+        temporaryCustomizationCombinationId: body.id,
+        incompatabilities: body.incompatible_ids,
+      });
+      setBDIncompatabilitiesLoading({ isLoading: false });
+    })
+    .catch(() => {
+      setBDIncompatabilitiesLoading({ isLoading: false });
+    });
+  }
+
+  handleUndoClick() {
+    const {
+      lastTemporaryItemSelection,
+      $$lastUndoTemporaryCustomizationDetails,
+      temporaryCustomizationDetails,
+      setBDTemporaryCustomizationDetails,
+    } = this.props;
+    const newTemporaryCustomizationDetails = without(
+      temporaryCustomizationDetails,
+      lastTemporaryItemSelection,
+    ).concat($$lastUndoTemporaryCustomizationDetails.toJS());
+
+    setBDTemporaryCustomizationDetails({
+      temporaryCustomizationDetails: newTemporaryCustomizationDetails,
+    });
+    this.checkForIncompatabilities({
+      customizationIds: newTemporaryCustomizationDetails,
+    });
   }
 
   generateImageNameForSelections() {
@@ -109,9 +191,10 @@ class BDProductCustomization extends PureComponent {
 
   render() {
     const {
+      addonOptions,
       breakpoint,
       children,
-      lastUndoTemporaryCustomizationDetails,
+      $$lastUndoTemporaryCustomizationDetails,
       onCustomizationHeadingGroupClick,
     } = this.props;
 
@@ -123,8 +206,10 @@ class BDProductCustomization extends PureComponent {
             (breakpoint === 'mobile' || breakpoint === 'tablet')
             ? (
               <BDCustomizationUndoAlerter
+                addonOptions={addonOptions}
                 className="BDProductCustomization__customization-undo u-position--fixed"
-                lastUndoTemporaryCustomizationDetails={lastUndoTemporaryCustomizationDetails}
+                $$lastUndoTemporaryCustomizationDetails={$$lastUndoTemporaryCustomizationDetails}
+                onUndoClick={this.handleUndoClick}
               />
             ) : null
           }
@@ -136,8 +221,10 @@ class BDProductCustomization extends PureComponent {
             (breakpoint === 'mobile' || breakpoint === 'tablet')
             ? null : (
               <BDCustomizationUndoAlerter
+                addonOptions={addonOptions}
                 className="BDProductCustomization__customization-undo-desktop u-position--absolute"
-                lastUndoTemporaryCustomizationDetails={lastUndoTemporaryCustomizationDetails}
+                $$lastUndoTemporaryCustomizationDetails={$$lastUndoTemporaryCustomizationDetails}
+                onUndoClick={this.handleUndoClick}
               />
             )
           }
@@ -170,11 +257,19 @@ BDProductCustomization.propTypes = {
   activeHeading: PropTypes.string,
   children: PropTypes.isRequired,
   // Redux Props
-  lastUndoTemporaryCustomizationDetails: PropTypes.array,
+  addonOptions: PropTypes.array.isRequired,
+  lastTemporaryItemSelection: PropTypes.string,
+  $$lastUndoTemporaryCustomizationDetails: PropTypes.array,
+  productId: PropTypes.number.isRequired,
   temporaryCustomizationDetails: PropTypes.arrayOf(PropTypes.string).isRequired,
   temporaryBDCustomizationLength: PropTypes.string.isRequired,
   temporaryBDCustomizationColor: PropTypes.string.isRequired,
   sku: PropTypes.string.isRequired,
+  // Redux Funcs
+  setBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
+  setBDIncompatabilities: PropTypes.func.isRequired,
+  setBDIncompatabilitiesLoading: PropTypes.func.isRequired,
+  // redoBDTemporaryCustomizationDetails: PropTypes.func.isRequired,
   // Func Props
   onCustomizationHeadingGroupClick: PropTypes.func,
   // hasNavItems: PropTypes.bool,
@@ -186,11 +281,12 @@ BDProductCustomization.defaultProps = {
   activeHeading: null,
   children: null,
   hasNavItems: true,
-  lastUndoTemporaryCustomizationDetails: [],
+  lastTemporaryItemSelection: null,
+  $$lastUndoTemporaryCustomizationDetails: [],
   showCustomizationGroups: false,
   onCustomizationHeadingGroupClick: null,
   // productCustomizationDrawer: null,
 };
 
 
-export default Resize(PDPBreakpoints)(connect(stateToProps)(BDProductCustomization));
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(BDProductCustomization));

@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { find } from 'lodash';
 
 // Polyfills
 import win from '../../polyfills/windowPolyfill';
@@ -19,12 +20,51 @@ class BDCustomizationUndoAlerter extends PureComponent {
     autoBind(this);
     this.state = {
       isActive: false,
+      isOpen: false,
     };
   }
 
+  handleAlertClick() {
+    this.setState({
+      isOpen: true,
+    });
+    win.clearTimeout(fadeoutTimeoutId);
+  }
+
+  translateCustomziationCode(detailCode) {
+    const { addonOptions } = this.props;
+    const foundCustomization = find(addonOptions, { id: detailCode });
+
+    return `- ${foundCustomization.description}`;
+  }
+
+  generateCustomizationMessages() {
+    const { $$lastUndoTemporaryCustomizationDetails } = this.props;
+    return $$lastUndoTemporaryCustomizationDetails.map(detailCode => (
+      <p className="BDCustomizationUndoAlerter__undo-item">
+        {this.translateCustomziationCode(detailCode)}
+      </p>
+    ));
+  }
+
+  removeAlert() {
+    this.setState({
+      isActive: false,
+      isOpen: false,
+    });
+    win.clearTimeout(fadeoutTimeoutId);
+  }
+
+  handleUndoClick() {
+    this.removeAlert();
+    this.props.onUndoClick();
+  }
+
   componentWillReceiveProps(nextProps) {
-    if (this.props.lastUndoTemporaryCustomizationDetails !== nextProps.lastUndoTemporaryCustomizationDetails) {
-      console.log('there was a change');
+    if (
+      nextProps.$$lastUndoTemporaryCustomizationDetails.count() > 0 &&
+      this.props.$$lastUndoTemporaryCustomizationDetails !== nextProps.$$lastUndoTemporaryCustomizationDetails
+    ) {
       win.clearTimeout(fadeoutTimeoutId);
       this.setState({
         isActive: true,
@@ -32,8 +72,11 @@ class BDCustomizationUndoAlerter extends PureComponent {
       fadeoutTimeoutId = win.setTimeout(() => {
         this.setState({
           isActive: false,
+          isOpen: false,
         });
-      }, 5000);
+      }, 3000);
+    } else if (nextProps.$$lastUndoTemporaryCustomizationDetails.count() === 0) {
+      this.removeAlert();
     }
   }
 
@@ -44,22 +87,59 @@ class BDCustomizationUndoAlerter extends PureComponent {
 
     const {
       isActive,
+      isOpen,
     } = this.state;
 
     return (
       <div
         className={
-        classnames(
-          'BDCustomizationUndoAlerter',
-          className,
-          { 'BDCustomizationUndoAlerter--active': isActive },
-        )
-      }
+          classnames(
+            'BDCustomizationUndoAlerter',
+            className,
+          )
+        }
       >
-        <AlertIcon
-          width="20px"
-          height="20px"
-        />
+        {isOpen
+          ? (
+            <div className="BDCustomizationUndoAlerter__message-wrapper">
+              <div className="BDCustomizationUndoAlerter__message u-text-align--left">
+                <div className="BDCustomizationUndoAlerter__message-alert">
+                  <AlertIcon
+                    className="u-vertical-align--bottom"
+                    width="20px"
+                    height="20px"
+                  />
+                  <span className="u-bold u-uppercase u-ml--small u-mb--small">Removed</span>
+                </div>
+                <div className="BDCustomizationUndoAlerter__message-container">
+                  {this.generateCustomizationMessages()}
+                  <span
+                    className="link u-mt--small"
+                    onClick={this.handleUndoClick}
+                  >
+                    Undo
+                  </span>
+                </div>
+              </div>
+            </div>
+          ) : null
+        }
+        <div
+          onClick={this.handleAlertClick}
+          className={
+            classnames(
+              'BDCustomizationUndoAlerter__icon-wrapper',
+              {
+                'BDCustomizationUndoAlerter__icon-wrapper--active': isActive,
+              },
+            )
+          }
+        >
+          <AlertIcon
+            width="20px"
+            height="20px"
+          />
+        </div>
       </div>
     );
   }
@@ -67,13 +147,16 @@ class BDCustomizationUndoAlerter extends PureComponent {
 
 /* eslint-disable react/forbid-prop-types */
 BDCustomizationUndoAlerter.propTypes = {
+  addonOptions: PropTypes.array.isRequired,
   className: PropTypes.string,
-  lastUndoTemporaryCustomizationDetails: PropTypes.array,
+  $$lastUndoTemporaryCustomizationDetails: PropTypes.array,
+  // Funcs
+  onUndoClick: PropTypes.func.isRequired,
 };
 
 BDCustomizationUndoAlerter.defaultProps = {
   className: '',
-  lastUndoTemporaryCustomizationDetails: [],
+  $$lastUndoTemporaryCustomizationDetails: [],
 };
 
 

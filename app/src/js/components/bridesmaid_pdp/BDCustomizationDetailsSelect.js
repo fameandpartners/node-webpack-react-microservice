@@ -38,7 +38,7 @@ function stateToProps({ $$bdCustomizationState, $$customizationState, $$productS
     addonOptions,
     sku: $$productState.get('sku'),
     productId: $$productState.get('productId'),
-    incompatabilities: $$bdCustomizationState.get('incompatabilities'),
+    incompatabilities: $$bdCustomizationState.get('incompatabilities').toJS(),
     incompatabilitiesLoading: $$bdCustomizationState.get('incompatabilitiesLoading'),
     productDefaultColors: $$productState.get('productDefaultColors').toJS(),
     singleCustomizationIncompatabilities: $$bdCustomizationState.get('singleCustomizationIncompatabilities').toJS(),
@@ -176,8 +176,17 @@ class BDCustomizationDetailsSelect extends Component {
     const undoArray = intersection(temporaryCustomizationDetails, incompatabilities);
     const difference = without(temporaryCustomizationDetails, ...undoArray);
     const newTemporaryCustomizationDetails = this.createNewTemporaryFilters(item.id.toLowerCase(), difference);
+    //console.log('temporaryCustomizationDetails', temporaryCustomizationDetails);
+    //console.log('incompatabilities', incompatabilities);
+    //console.log('undoArray', undoArray);
+    //console.log('difference', difference);
+    //console.log('newTemporaryCustomizationDetails', newTemporaryCustomizationDetails);
+    //console.log('');
 
-    undoBDTemporaryCustomizationDetails({ undoArray });
+    undoBDTemporaryCustomizationDetails({
+      undoArray,
+      lastTemporaryItemSelection: item.id,
+    });
     setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: newTemporaryCustomizationDetails });
     this.checkForIncompatabilities({
       customizationIds: newTemporaryCustomizationDetails,
@@ -192,18 +201,23 @@ class BDCustomizationDetailsSelect extends Component {
     } = this.props;
     const newTemporaryCustomizationDetails = this.createNewTemporaryFilters(item.id.toLowerCase(), temporaryCustomizationDetails);
 
-    undoBDTemporaryCustomizationDetails({ undoArray: [] });
+    undoBDTemporaryCustomizationDetails({
+      undoArray: [],
+      lastTemporaryItemSelection: item.id,
+    });
     setBDTemporaryCustomizationDetails({ temporaryCustomizationDetails: newTemporaryCustomizationDetails });
     this.checkForIncompatabilities({
       customizationIds: newTemporaryCustomizationDetails,
     });
   }
 
-  handleCustomizationSelection(item, isIncompatible) {
-    if (isIncompatible) {
+  handleCustomizationSelection(item, isIncompatible, isSelected) {
+    if (isIncompatible && !isSelected) {
+      console.log('INCOMPATIBLE SELECTION');
       return this.handleIncompatibleSelection(item);
     }
 
+    console.log('compatible SELECTION');
     return this.handleCompatibleSelection(item);
   }
 
@@ -282,16 +296,17 @@ class BDCustomizationDetailsSelect extends Component {
     return addonOptions
     .filter(ao => ao.group === groupName)
     .map((item) => {
+      const isSelected = includes(temporaryCustomizationDetails, item.id.toLowerCase());
       const isIncompatible = incompatabilities.indexOf(item.id) > -1;
       return (
         <div className="u-display--inline-block u-mr--normal" key={item.id}>
           <div
-            onClick={() => this.handleCustomizationSelection(item, isIncompatible)}
+            onClick={() => this.handleCustomizationSelection(item, isIncompatible, isSelected)}
             className="BDCustomizationDetailsSelect__image-wrapper u-cursor--pointer"
           >
             <img
               className={classnames({
-                'BDCustomizationDetailsSelect--selected': includes(temporaryCustomizationDetails, item.id.toLowerCase()),
+                'BDCustomizationDetailsSelect--selected': isSelected,
                 'BDCustomizationDetailsSelect--loading': incompatabilitiesLoading,
               })}
               alt={item.id}
