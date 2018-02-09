@@ -24,10 +24,6 @@ import {
   removeLengthIdsFromCustomizationIds,
   } from '../../utilities/bridesmaids';
 
-// Libraries
-import Resize from '../../decorators/Resize';
-import PDPBreakpoints from '../../libs/PDPBreakpoints';
-
 // CSS
 import '../../../css/components/BDProductCustomization.scss';
 import '../../../css/components/BDCustomizationSelections.scss';
