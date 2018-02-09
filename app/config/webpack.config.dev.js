@@ -67,6 +67,10 @@ module.exports = {
       ...standardEntries,
       paths.flashIndexJs,
     ], // Flash Sale + Flash Sale Filtering
+    superCollection: [
+      ...standardEntries,
+      paths.superCollectionJs,
+    ],
     bridesmaidsFilter: [
       ...standardEntries,
       paths.bridesmaidsFilterJs,

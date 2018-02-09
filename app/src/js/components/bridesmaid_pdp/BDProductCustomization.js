@@ -24,6 +24,10 @@ import {
   removeLengthIdsFromCustomizationIds,
   } from '../../utilities/bridesmaids';
 
+// Libraries
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
+
 // CSS
 import '../../../css/components/BDProductCustomization.scss';
 import '../../../css/components/BDCustomizationSelections.scss';
@@ -168,22 +172,34 @@ class BDProductCustomization extends PureComponent {
     return imageStr;
   }
 
+  filterColorForMobileTablet(headlineKey) {
+    const { breakpointTypes } = PDPBreakpoints;
+    const { breakpoint } = this.props;
+    const removeColorConditionMet = (
+      (breakpoint === breakpointTypes.mobile || breakpoint === breakpointTypes.tablet)
+      && headlineKey === COLOR_CUSTOMIZE
+    );
+    return !removeColorConditionMet;
+  }
+
   /* eslint-disable max-len */
   generateGroupNameHeadings() {
     const { activeHeading } = this.props;
     return (
       <ul>
-        {customizationHeadings.map(g => (
-          <li
-            key={g}
-            className={classnames(
+        {customizationHeadings
+          .filter(this.filterColorForMobileTablet)
+          .map(g => (
+            <li
+              key={g}
+              className={classnames(
               'BDCustomizationSelections__group-name u-display--inline-block',
               { 'BDCustomizationSelections__group-name--active': activeHeading === g },
             )}
-            onClick={this.handleHeadingClick(g)}
-          >
-            {headlines[g]}
-          </li>
+              onClick={this.handleHeadingClick(g)}
+            >
+              {headlines[g]}
+            </li>
         ))}
       </ul>
     );
@@ -243,7 +259,7 @@ class BDProductCustomization extends PureComponent {
             { children }
           </div>
         </div>
-        <div className="ButtonLedge--height __fake__" />
+        <div className="ButtonLedge--height ButtonLedge--height--fake" />
       </div>
     );
   }
@@ -287,6 +303,5 @@ BDProductCustomization.defaultProps = {
   onCustomizationHeadingGroupClick: null,
   // productCustomizationDrawer: null,
 };
-
 
 export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(BDProductCustomization));
