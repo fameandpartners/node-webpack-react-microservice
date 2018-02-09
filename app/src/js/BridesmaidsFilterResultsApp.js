@@ -67,6 +67,7 @@ function stateToProps({ $$bridesmaidsFilterState, $$modalState }) {
   const $$selectedLength = $$bridesmaidsFilterState.get('selectedLength');
   const $$selectedColor = $$bridesmaidsFilterState.get('selectedColor');
   return {
+    bridesmaidsColors: $$bridesmaidsFilterState.get('$$bridesmaidsFilterColors').toJS(),
     lockBody: modalOpen,
     selectedColor: $$selectedColor ? $$selectedColor.toJS() : {},
     selectedLength: $$selectedLength ? $$selectedLength.toJS() : {},
@@ -92,19 +93,6 @@ class BridesmaidsFilterResultsApp extends Component {
     this.state = {
       filteredDresses: [],
     };
-  }
-
-
-  componentWillUpdate(nextProps) {
-    if (nextProps.shouldChangeFilterPage) {
-      loadFilteredResultsPage(nextProps.bridesmaidsFilterObj);
-    }
-  }
-
-  componentDidUpdate() {
-    if (win && win.fixBody) {
-      win.fixBody(this.props.lockBody);
-    }
   }
 
   componentDidMount() {
@@ -134,6 +122,18 @@ class BridesmaidsFilterResultsApp extends Component {
     }
   }
 
+  componentWillUpdate(nextProps) {
+    if (nextProps.shouldChangeFilterPage) {
+      loadFilteredResultsPage(nextProps.bridesmaidsFilterObj);
+    }
+  }
+
+  componentDidUpdate() {
+    if (win && win.fixBody) {
+      win.fixBody(this.props.lockBody);
+    }
+  }
+
   render() {
     const {
       filteredDresses,
@@ -141,6 +141,7 @@ class BridesmaidsFilterResultsApp extends Component {
 
     const {
       activateModal,
+      bridesmaidsColors,
       lockBody,
       selectedColor,
       selectedLength,
@@ -156,6 +157,7 @@ class BridesmaidsFilterResultsApp extends Component {
           <div className="grid-12-noGutter layout-container">
             <div className="col-12">
               <BridesmaidsProductGrid
+                bridesmaidsColors={bridesmaidsColors}
                 products={filteredDresses}
                 selectedColor={selectedColor}
                 selectedLength={selectedLength}
@@ -176,6 +178,12 @@ class BridesmaidsFilterResultsApp extends Component {
 BridesmaidsFilterResultsApp.propTypes = {
   // Redux
   activateModal: PropTypes.func.isRequired,
+  bridesmaidsColors: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    presentation: PropTypes.string,
+    hexValue: PropTypes.string,
+    patternUrl: PropTypes.string,
+  })).isRequired,
   bridesmaidsFilterObj: PropTypes.object.isRequired,
   lockBody: PropTypes.bool.isRequired,
   hydrateFiltersFromURL: PropTypes.func.isRequired,

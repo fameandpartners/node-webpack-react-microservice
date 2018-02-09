@@ -9,10 +9,14 @@ import noop from '../../libs/noop';
 // Actions
 import * as FabricSwatchActions from '../../actions/FabricSwatchActions';
 import { addToCart } from '../../utilities/cart-helper';
+import * as CartActions from '../../actions/CartActions';
 
 // UI Components
 import Button from '../generic/Button';
 import FabricSwatchProduct from './FabricSwatchProduct';
+
+// Utilities
+import win from '../../polyfills/windowPolyfill';
 
 function stateToProps(state) {
   const swatchOrder = state.$$fabricSwatchState.get('swatchOrder');
@@ -26,7 +30,17 @@ function stateToProps(state) {
 
 function dispatchToProps(dispatch) {
   const { updateFabricSwatchOrder } = bindActionCreators(FabricSwatchActions, dispatch);
-  return { updateFabricSwatchOrder };
+  const {
+    activateCartDrawer,
+    addItemToCart,
+    setCartContents,
+  } = bindActionCreators(CartActions, dispatch);
+  return {
+    updateFabricSwatchOrder,
+    activateCartDrawer,
+    addItemToCart,
+    setCartContents,
+  };
 }
 
 class BuyFabricSwatch extends PureComponent {
@@ -35,11 +49,33 @@ class BuyFabricSwatch extends PureComponent {
     autoBind(this);
   }
 
+  handleAddToBagCallback(req) {
+    const {
+      activateCartDrawer,
+      setCartContents,
+    } = this.props;
+    req.end((err, res) => {
+      if (err) {
+        // eslint-disable-next-line
+        return console.warn('error adding something to the cart', err);
+      }
+
+      // eslint-disable-next-line
+      if (win && win.__data) { // we are in old PDP, this needs to be removed ASAP
+        win.location = '/checkout';
+      }
+
+      setCartContents({ cart: res.body });
+      activateCartDrawer({ cartDrawerOpen: true });
+      return null;
+    });
+  }
+
   handleAddToCartClick() {
     console.log(this.currentOrderToJS());
 
     this.currentOrderToJS().forEach((swatch) => {
-      addToCart(swatch, '').end();
+      this.handleAddToBagCallback(addToCart(swatch, ''));
     });
   }
 
@@ -142,6 +178,7 @@ class BuyFabricSwatch extends PureComponent {
 
 BuyFabricSwatch.propTypes = {
   // Redux Properties
+  activateCartDrawer: PropTypes.func.isRequired,
   availableSwatches: PropTypes.arrayOf(
     PropTypes.shape({
       variant_id: PropTypes.number,
@@ -167,6 +204,7 @@ BuyFabricSwatch.propTypes = {
     }),
   ),
   updateFabricSwatchOrder: PropTypes.func.isRequired,
+  setCartContents: PropTypes.func.isRequired,
   isMobileDisplay: PropTypes.bool,
 };
 

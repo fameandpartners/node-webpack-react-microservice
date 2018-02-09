@@ -40,7 +40,9 @@ function transformCartDataLineItems(lineItems) {
     .filter(li => li.name !== 'RETURN_INSURANCE')
     .map(li => ({
       id: li.line_item_id,
+      isBridesmaidItem: !!li.brides_maid,
       isFlashSaleItem: !!li.old_price,
+      length: li.length,
       productCentsBasePrice: parseInt(li.price.money.money.fractional, 10),
       productImage: pluckCorrectImage(li),
       productTitle: li.name,
@@ -50,6 +52,7 @@ function transformCartDataLineItems(lineItems) {
       sizePresentationAU: li.size ? li.size.presentation_au : null,
       sizePresentationUS: li.size ? formatSizePresentationUS(li.size.presentation_us) : null,
       sizeNumber: li.size ? li.size.sort_key : null,
+      sku: li.sku,
       color: {
         id: li.color.id,
         centsTotal: li.color.custom_color ? 1600 : 0,

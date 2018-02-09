@@ -67,6 +67,7 @@ module.exports = {
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/js/index.js'),
   flashIndexJs: resolveApp('src/js/flash-sale.js'),
+  superCollectionJs: resolveApp('src/js/super-collection.js'),
   bridesmaidIndexJs: resolveApp('src/js/bridesmaid-index.js'),
   bridesmaidsFilterJs: resolveApp('src/js/bridesmaids-filter.js'),
   swatchIndexJs: resolveApp('src/js/buy-swatch.js'),
