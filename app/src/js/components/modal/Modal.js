@@ -43,7 +43,10 @@ class Modal extends PureComponent {
              'CancelOut__wrapper',
            )}
           >
-            <CancelOut onClick={handleCloseModal} />
+            {handleCloseModal
+              ? <CancelOut onClick={handleCloseModal} />
+              : null
+            }
           </div>
           <h3 className="h6">{headline}</h3>
         </div>
@@ -80,7 +83,7 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   headline: null,
-  handleCloseModal: noop,
+  handleCloseModal: null,
   modalClassName: '',
   modalContentClassName: '',
   modalWrapperClassName: '',

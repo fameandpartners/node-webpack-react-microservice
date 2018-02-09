@@ -52,7 +52,6 @@ class ProductFabricModal extends PureComponent {
       >
         <Modal
           headline={BDCustomizationConstants.LENGTH_HEADLINE}
-          handleCloseModal={this.handleCloseModal}
           modalClassName="u-flex u-flex--1"
           modalContentClassName="u-width--full"
           modalWrapperClassName="u-flex--col"

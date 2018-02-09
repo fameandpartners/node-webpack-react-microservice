@@ -62,6 +62,7 @@ if (untransformedData && untransformedData.selectedCustomizations) {
   const length = determineSelectedLengthStr(untransformedData.selectedCustomizations);
   $$bdCustomizationState = {
     incompatabilities: transformBridesmaidIncompatabilities(untransformedData.product),
+    singleCustomizationIncompatabilities: untransformedData.singleCustomizationIncompatabilities,
     temporaryCustomizationDetails: untransformedData.selectedCustomizations,
     selectedCustomizationDetails: untransformedData.selectedCustomizations,
     temporaryBDCustomizationLength: length,
