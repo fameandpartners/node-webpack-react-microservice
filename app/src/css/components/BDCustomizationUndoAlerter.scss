@@ -1,3 +1,7 @@
+.BDCustomizationUndoAlerter {
+  right: 30px;
+}
+
 .BDCustomizationUndoAlerter__message-container {
   padding: 0 30px;
 }
@@ -21,8 +25,10 @@
 .BDCustomizationUndoAlerter__icon-wrapper {
   transition: 330ms all ease-in-out;
   opacity: 0;
+  pointer-events: none;
 }
 
 .BDCustomizationUndoAlerter__icon-wrapper--active {
   opacity: 1;
+  pointer-events: all;
 }

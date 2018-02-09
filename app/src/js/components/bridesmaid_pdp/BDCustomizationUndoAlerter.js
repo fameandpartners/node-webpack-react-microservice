@@ -35,7 +35,7 @@ class BDCustomizationUndoAlerter extends PureComponent {
     const { addonOptions } = this.props;
     const foundCustomization = find(addonOptions, { id: detailCode });
 
-    return `- ${foundCustomization.description}`;
+    return foundCustomization.description;
   }
 
   generateCustomizationMessages() {
@@ -125,7 +125,6 @@ class BDCustomizationUndoAlerter extends PureComponent {
           ) : null
         }
         <div
-          onClick={this.handleAlertClick}
           className={
             classnames(
               'BDCustomizationUndoAlerter__icon-wrapper',
@@ -136,9 +135,17 @@ class BDCustomizationUndoAlerter extends PureComponent {
           }
         >
           <AlertIcon
+            className="u-vertical-align--bottom"
+            onClick={this.handleAlertClick}
             width="20px"
             height="20px"
           />
+          <span
+            className="link u-display--inline-block u-ml--small"
+            onClick={this.handleUndoClick}
+          >
+            Undo
+          </span>
         </div>
       </div>
     );
