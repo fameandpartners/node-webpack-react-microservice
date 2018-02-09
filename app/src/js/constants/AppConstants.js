@@ -181,7 +181,7 @@ const navigationLinks = {
       },
       {
         text: 'Get $25 Off',
-        url: '/invite?nav',
+        url: '/invite?traffic_source=nav',
       },
       {
         text: 'Shop With Friends',
