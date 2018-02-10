@@ -40,6 +40,7 @@ export function transformThemeCollection(themeData, siteVersion) {
   return {
     collection: transformProductItems(JSON.parse(themeData.data.theme.collection, siteVersion)),
     name: themeData.data.theme.name,
+    presentation: themeData.data.theme.presentation,
   };
 }
 

@@ -62,6 +62,7 @@ if (win.__themeData__) {
   $$themeState = {
     collection,
     name,
+    presentation,
   };
 }
 
