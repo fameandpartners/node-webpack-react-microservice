@@ -4,6 +4,15 @@
   transition: 300ms opacity ease-in-out;
 }
 
+.BDCustomizationDetailsSelect .TrackVisibility {
+  display: inline-block;
+}
+
+.BDCustomizationDetailsSelect .TrackVisibility--is-visible {
+  display: inherit;
+  text-align: center;
+}
+
 .BDCustomizationDetailsSelect__image-wrapper {
   max-width: 142px;
 }

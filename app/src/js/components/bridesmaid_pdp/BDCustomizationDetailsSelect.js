@@ -11,6 +11,9 @@ import { formatCents } from '../../utilities/accounting';
 // Services
 import BDService from '../../services/BDService';
 
+// Decorators
+import TrackVisibility from '../../decorators/TrackVisibility';
+
 // Utilities
 import {
   generateCustomizationImage,
@@ -323,7 +326,7 @@ class BDCustomizationDetailsSelect extends Component {
   );
   }
 
-  getAddonDetailOptions() {
+  getAddonDetailOptions(isVisible) {
     const {
       groupName,
       productDefaultColors,
@@ -344,6 +347,14 @@ class BDCustomizationDetailsSelect extends Component {
       );
     }
 
+    if (isVisible) {
+      return (
+        <div className="isVisible--center">
+          {this.generateGenericDetailOptions()}
+        </div>
+      );
+    }
+
     return this.generateGenericDetailOptions();
   }
 
@@ -351,7 +362,14 @@ class BDCustomizationDetailsSelect extends Component {
   render() {
     return (
       <div className="BDCustomizationDetailsSelect u-white-space--nowrap u-text-align-left u-height--full u-overflow-x--scroll">
-        {this.getAddonDetailOptions()}
+        <TrackVisibility>
+          {(isVisible) => {
+            console.log('');
+            return (
+              this.getAddonDetailOptions(isVisible)
+            );
+          }}
+        </TrackVisibility>
       </div>
     );
   }
