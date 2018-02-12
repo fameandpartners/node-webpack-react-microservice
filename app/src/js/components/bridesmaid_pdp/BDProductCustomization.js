@@ -244,7 +244,7 @@ class BDProductCustomization extends PureComponent {
 
         { onCustomizationHeadingGroupClick ?
           (
-            <div className="BDCustomizationSelections__groups grid">
+            <div className="BDCustomizationSelections__groups grid-center">
               {this.generateGroupNameHeadings()}
             </div>
           ) : null
