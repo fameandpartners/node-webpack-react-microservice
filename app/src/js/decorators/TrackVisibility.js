@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { throttle } from 'lodash';
+import { debounce, throttle } from 'lodash';
 import autobind from 'react-autobind';
 import classnames from 'classnames';
 
@@ -18,6 +18,11 @@ export default class TrackVisibility extends Component {
       this.isComponentVisible,
       this.props.throttleInterval,
     );
+    this.debounceCb = debounce(
+      this.isComponentVisible,
+      this.props.throttleInterval,
+    );
+    autobind(this);
 
     if (props.nodeRef) {
       this.setNodeRef(props.nodeRef);
@@ -68,10 +73,8 @@ export default class TrackVisibility extends Component {
   }
 
   isComponentVisible() {
-    console.log('this.props', this.props);
     const html = win.document.documentElement;
     const { once } = this.props;
-    console.log('this.nodeRef', this.nodeRef);
     const boundingClientRect = this.nodeRef.getBoundingClientRect();
     const windowWidth = win.innerWidth || html.clientWidth;
     const windowHeight = win.innerHeight || html.clientHeight;
@@ -82,7 +85,9 @@ export default class TrackVisibility extends Component {
       this.removeListener();
     }
 
-    this.setState({ isVisible });
+    if (isVisible !== this.state.isVisible) {
+      this.setState({ isVisible });
+    }
   }
 
   setNodeRef(ref) {
@@ -107,7 +112,11 @@ export default class TrackVisibility extends Component {
 
   componentDidMount() {
     this.attachListener();
-    setTimeout(() => this.isComponentVisible(), 150);
+    this.debounceCb();
+  }
+
+  componentDidUpdate() {
+    this.debounceCb();
   }
 
   componentWillUnmount() {

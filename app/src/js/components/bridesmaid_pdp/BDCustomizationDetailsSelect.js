@@ -263,9 +263,10 @@ class BDCustomizationDetailsSelect extends Component {
             className="BDCustomizationDetailsSelect__image-wrapper u-cursor--pointer"
           >
             <img
-              className={classnames({
-                'BDCustomizationDetailsSelect--selected': temporaryBDCustomizationLength === lengthStr,
-              })}
+              className={classnames(
+                'BDCustomizationDetailsSelect__image',
+                { 'BDCustomizationDetailsSelect--selected': temporaryBDCustomizationLength === lengthStr },
+              )}
               alt={item.id}
               src={this.generateImageNameForLengthCustomizationId(item.id)}
             />
