@@ -11,6 +11,9 @@ import { formatCents } from '../../utilities/accounting';
 // Services
 import BDService from '../../services/BDService';
 
+// Decorators
+import TrackVisibility from '../../decorators/TrackVisibility';
+
 // Utilities
 import {
   generateCustomizationImage,
@@ -122,6 +125,14 @@ class BDCustomizationDetailsSelect extends Component {
     return currentTemporaryCustomizationDetails.concat(detailGuid); // Add
   }
 
+  filterIncompatibleIds(id, selectedDetails) {
+    const { singleCustomizationIncompatabilities, temporaryBDCustomizationLength } = this.props;
+    const individualIncompatibilities = singleCustomizationIncompatabilities[id][temporaryBDCustomizationLength];
+
+    // Filter out incompatible details
+    return selectedDetails.filter(d => individualIncompatibilities.indexOf(d) === -1).concat(id);
+  }
+
   generateImageNameForCustomizationId(customizationId, isIncompatible = false) {
     const {
       temporaryBDCustomizationColor,
@@ -131,9 +142,8 @@ class BDCustomizationDetailsSelect extends Component {
     } = this.props;
     const { colorNames } = BDCustomizationConstants;
     const customizationIds = isIncompatible
-      ? [customizationId]
+      ? this.filterIncompatibleIds(customizationId, temporaryCustomizationDetails)
       : temporaryCustomizationDetails.concat(customizationId);
-
 
     const imageStr = generateCustomizationImage({
       sku: sku.toLowerCase(),
@@ -176,12 +186,6 @@ class BDCustomizationDetailsSelect extends Component {
     const undoArray = intersection(temporaryCustomizationDetails, incompatabilities);
     const difference = without(temporaryCustomizationDetails, ...undoArray);
     const newTemporaryCustomizationDetails = this.createNewTemporaryFilters(item.id.toLowerCase(), difference);
-    // console.log('temporaryCustomizationDetails', temporaryCustomizationDetails);
-    // console.log('incompatabilities', incompatabilities);
-    // console.log('undoArray', undoArray);
-    // console.log('difference', difference);
-    // console.log('newTemporaryCustomizationDetails', newTemporaryCustomizationDetails);
-    // console.log('');
 
     undoBDTemporaryCustomizationDetails({
       undoArray,
@@ -260,9 +264,10 @@ class BDCustomizationDetailsSelect extends Component {
             className="BDCustomizationDetailsSelect__image-wrapper u-cursor--pointer"
           >
             <img
-              className={classnames({
-                'BDCustomizationDetailsSelect--selected': temporaryBDCustomizationLength === lengthStr,
-              })}
+              className={classnames(
+                'BDCustomizationDetailsSelect__image',
+                { 'BDCustomizationDetailsSelect--selected': temporaryBDCustomizationLength === lengthStr },
+              )}
               alt={item.id}
               src={this.generateImageNameForLengthCustomizationId(item.id)}
             />
@@ -290,11 +295,15 @@ class BDCustomizationDetailsSelect extends Component {
       incompatabilities,
       incompatabilitiesLoading,
       temporaryCustomizationDetails,
-
     } = this.props;
 
     return addonOptions
     .filter(ao => ao.group === groupName)
+    .filter((item) => {
+      // Filter out if incompatible with this length
+      const { singleCustomizationIncompatabilities, temporaryBDCustomizationLength } = this.props;
+      return !!(singleCustomizationIncompatabilities[item.id][temporaryBDCustomizationLength]);
+    })
     .map((item) => {
       const isSelected = includes(temporaryCustomizationDetails, item.id.toLowerCase());
       const isIncompatible = incompatabilities.indexOf(item.id) > -1;
@@ -323,7 +332,7 @@ class BDCustomizationDetailsSelect extends Component {
   );
   }
 
-  getAddonDetailOptions() {
+  getAddonDetailOptions(isVisible) {
     const {
       groupName,
       productDefaultColors,
@@ -344,6 +353,14 @@ class BDCustomizationDetailsSelect extends Component {
       );
     }
 
+    if (isVisible) {
+      return (
+        <div className="isVisible--center">
+          {this.generateGenericDetailOptions()}
+        </div>
+      );
+    }
+
     return this.generateGenericDetailOptions();
   }
 
@@ -351,7 +368,11 @@ class BDCustomizationDetailsSelect extends Component {
   render() {
     return (
       <div className="BDCustomizationDetailsSelect u-white-space--nowrap u-text-align-left u-height--full u-overflow-x--scroll">
-        {this.getAddonDetailOptions()}
+        <TrackVisibility>
+          {isVisible => (
+            this.getAddonDetailOptions(isVisible)
+          )}
+        </TrackVisibility>
       </div>
     );
   }
