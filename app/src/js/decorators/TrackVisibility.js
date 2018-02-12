@@ -107,7 +107,7 @@ export default class TrackVisibility extends Component {
 
   componentDidMount() {
     this.attachListener();
-    setTimeout(() => this.isComponentVisible(), 0);
+    setTimeout(() => this.isComponentVisible(), 150);
   }
 
   componentWillUnmount() {

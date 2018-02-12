@@ -363,12 +363,9 @@ class BDCustomizationDetailsSelect extends Component {
     return (
       <div className="BDCustomizationDetailsSelect u-white-space--nowrap u-text-align-left u-height--full u-overflow-x--scroll">
         <TrackVisibility>
-          {(isVisible) => {
-            console.log('');
-            return (
-              this.getAddonDetailOptions(isVisible)
-            );
-          }}
+          {isVisible => (
+            this.getAddonDetailOptions(isVisible)
+          )}
         </TrackVisibility>
       </div>
     );
