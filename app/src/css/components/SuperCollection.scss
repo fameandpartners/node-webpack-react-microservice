@@ -7,7 +7,10 @@
 .BodySection--section-title,
 .SuperCollection-Header--ctaHeading,
 .SuperCollection-Footer--ctaHeading,
-.SuperCollection-Footer--ctaSubheading {
+.SuperCollection-Footer--ctaSubheading,
+.BridesmaidsHeader__heading,
+.BridesmaidsHeader__subheading,
+.BridesmaidsHeader__headingTitle {
   font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
 }
 
@@ -42,7 +45,8 @@ img {
 }
 
 .SuperCollection-Header--grid,
-.SuperCollection-Footer--grid {
+.SuperCollection-Footer--grid,
+.BridesmaidsHeader__grid {
   height: 100%;
 }
 
@@ -53,7 +57,9 @@ img {
 
 .SuperCollection-Header--ctaHeading,
 .SuperCollection-Footer--ctaHeading,
-.SuperCollection-Footer--ctaSubheading {
+.SuperCollection-Footer--ctaSubheading,
+.BridesmaidsHeader__heading,
+.BridesmaidsHeader__subheading {
   font-weight: 300;
   line-height: 100%;
 }
@@ -61,6 +67,31 @@ img {
 .SuperCollection-Footer--ctaHeading,
 .SuperCollection-Footer--ctaSubheading {
   margin: 30px 0;
+}
+
+.BridesmaidsHeader {
+  position: relative;
+}
+
+.BridesmaidsHeader__heading,
+.BridesmaidsHeader__subheading {
+  margin-bottom: 20px;
+}
+
+.BridesmaidsHeader__heading {
+  font-size: 5.6rem;
+}
+
+.BridesmaidsHeader__subheading {
+  font-size: 4rem;
+}
+
+.BridesmaidsHeader__heading--filterResult {
+  font-size: 6.2rem;
+}
+
+.BridesmaidsHeader__subheading--filterResult {
+  font-size: 3.2rem;
 }
 
 .SuperCollection-Footer--ctaHeading {
@@ -82,11 +113,31 @@ img {
 
 // Responsive
 @media (max-width: 576px) {
-  .SuperCollection-Header--grid {
+  .SuperCollection-Header--grid,
+  .BridesmaidsHeader__grid {
     -webkit-box-align: end;
     -ms-flex-align: end;
     align-items: flex-end;
-    padding-bottom: 30%;
+  }
+
+  .SuperCollection-Header--grid {
+    padding-bottom: 30px;
+  }
+
+  .BridesmaidsHeader__grid {
+    padding-bottom: 10%;
+  }
+
+  .BridesmaidsHeader__heading {
+    font-size: 4rem;
+  }
+
+  .BridesmaidsHeader__subheading {
+    font-size: 2.5rem;
+  }
+
+  .BridesmaidsHeader__headingTitle {
+    display: block;
   }
 
   .SuperCollection-Header--ctaHeading {
@@ -94,7 +145,7 @@ img {
   }
 
   .SuperCollection-Footer {
-    background: #f9ddd8;
+    background: #F9DDD8;
   }
 
   .SuperCollection-Footer--img {
@@ -126,10 +177,24 @@ img {
 }
 
 @media (min-width: 577px) and (max-width: 1024px) {
-  .SuperCollection-Header--grid {
+  .SuperCollection-Header--grid,
+  .BridesmaidsHeader__grid {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+  }
+
+  .BridesmaidsHeader__heading,
+  .BridesmaidsHeader__subheading {
+    margin-bottom: 0;
+  }
+
+  .BridesmaidsHeader__heading {
+    font-size: 3.5rem;
+  }
+
+  .BridesmaidsHeader__subheading {
+    font-size: 2.5rem;
   }
 
   .SuperCollection-Header--ctaHeading {
@@ -176,7 +241,8 @@ img {
   }
 
   .SuperCollection-Header--grid,
-  .SuperCollection-Footer--grid {
+  .SuperCollection-Footer--grid,
+  .BridesmaidsHeader__grid {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
