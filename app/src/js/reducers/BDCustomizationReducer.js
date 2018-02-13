@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { includes } from 'lodash';
 import Immutable from 'immutable';
 import BDCustomizationConstants from '../constants/BDCustomizationConstants';
 
@@ -30,52 +31,13 @@ export const $$initialState = Immutable.fromJS({
   // Details
   temporaryCustomizationDetails: [],
   selectedCustomizationDetails: [],
+  lastTemporaryItemSelection: null,
+  lastUndoTemporaryCustomizationDetails: [],
 
   incompatabilities: [],
   incompatabilitiesLoading: false,
   temporaryCustomizationCombinationId: null,
 
-  // // String ['cm', 'inch']
-  // temporaryMeasurementMetric: UNITS.INCH,
-  // selectedMeasurementMetric: UNITS.INCH,
-  //
-  // // Number
-  // temporaryHeightValue: null,
-  // selectedHeightValue: null,
-  //
-  //
-  // // ObjectOf({
-  // //   id: Number,
-  // //   name: String,
-  // //   centsTotal: Number,
-  // //   hexValue: String,
-  // //   patternUrl,
-  // // })
-  // temporaryColor: null,
-  // selectedColor: null,
-  //
-  // // Number
-  // temporaryDressSize: null,
-  // selectedDressSize: null,
-  //
-  // // ArrayOf(Number)
-  // temporaryStyleCustomizations: [],
-  // selectedStyleCustomizations: [],
-  //
-  // // TODO: V2 This data structure could use some clean up and
-  // // is a legacy carry over from previous pdp implementation
-  // // ArrayOf({
-  // //   addonLayerImages: Array|Null,
-  // //   selectedAddonImageLayers: Array,
-  // //   addonOptions: Array,
-  // //   baseImages: Array|Null,
-  // //   isLegacyCADCustomizations: Boolean,
-  // //   baseSelected: Object,
-  // //   addonsLayersComputed: Array,
-  // //   addonsBasesComputed: Array,
-  // // })
-  // addons: null,
-  // expressMakingSelected: false,
 });
 
 export default function CartReducer($$state = $$initialState, action = null) {
@@ -155,6 +117,22 @@ export default function CartReducer($$state = $$initialState, action = null) {
       return $$state.merge({ // Addition
         incompatabilitiesLoading: action.isLoading,
       });
+    }
+
+    case BDCustomizationConstants.UNDO_BD_TEMPORARY_CUSTOMIZATION_DETAILS: {
+      const { lastTemporaryItemSelection, undoArray } = action;
+      if (includes(undoArray, ...['l1', 'l2', 'l3', 'l4', 'l5'])) {
+        console.error('LENGTH SELECTED');
+        // edge case, does it contain a length???? Need logic for length selection
+      }
+
+      return $$state.merge({
+        lastUndoTemporaryCustomizationDetails: undoArray,
+        lastTemporaryItemSelection,
+      });
+      // return $$state.merge({ // Addition
+      //   incompatabilitiesLoading: action.isLoading,
+      // });
     }
 
     default: {
