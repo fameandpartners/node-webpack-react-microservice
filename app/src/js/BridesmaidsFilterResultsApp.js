@@ -149,10 +149,10 @@ class BridesmaidsFilterResultsApp extends Component {
       selectedLength,
     } = this.props;
 
-    const heroImagePath = 'https://s3.amazonaws.com/fandp-web-production-marketing/custom-dresses/bridesmaid/hero-tiles/hero-filter-result';
-    const imagePathDesktop = `${heroImagePath}.jpg`;
-    const imagePathTablet = `${heroImagePath}--tablet.jpg`;
-    const imagePathMobile = `${heroImagePath}--mobile.jpg`;
+    const heroImagePathBase = 'https://s3.amazonaws.com/fandp-web-production-marketing/custom-dresses/bridesmaid/hero-tiles/hero-filter-result';
+    const heroImagePathDesktop = `${heroImagePathBase}.jpg`;
+    const heroImagePathTablet = `${heroImagePathBase}--tablet.jpg`;
+    const heroImagePathMobile = `${heroImagePathBase}--mobile.jpg`;
 
     return (
       <div className="__react_root__">
@@ -160,12 +160,12 @@ class BridesmaidsFilterResultsApp extends Component {
           <div className="BridesmaidsHeader">
             <div className="BridesmaidsHeader__heroTile u-overlay-area">
               <picture>
-                <source srcSet={imagePathDesktop} media="(min-width: 1025px)" />
-                <source srcSet={imagePathTablet} media="(min-width: 577px) and (max-width: 1024px)" />
-                <source srcSet={imagePathMobile} media="(max-width: 576px)" />
+                <source srcSet={heroImagePathDesktop} media="(min-width: 1025px)" />
+                <source srcSet={heroImagePathTablet} media="(min-width: 577px) and (max-width: 1024px)" />
+                <source srcSet={heroImagePathMobile} media="(max-width: 576px)" />
                 <img
-                  src={imagePathDesktop}
-                  srcSet={imagePathDesktop}
+                  src={heroImagePathDesktop}
+                  srcSet={heroImagePathDesktop}
                   alt="Buy custom bridesmaid dresses"
                   className="BridesmaidsHeader__heroTileImg u-overlay-area__media"
                 />

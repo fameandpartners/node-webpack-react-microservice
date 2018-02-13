@@ -11,21 +11,23 @@ class BridesmaidsThemeHeader extends Component {
 
   render() {
     const { themeName, themePresentation } = this.props;
-    const heroImagePath = 'https://s3.amazonaws.com/fandp-web-production-marketing/custom-dresses/bridesmaid/hero-tiles/hero-';
-    const imagePathDesktop = `${heroImagePath}${themeName}.jpg`;
-    const imagePathTablet = `${heroImagePath}${themeName}--tablet.jpg`;
-    const imagePathMobile = `${heroImagePath}${themeName}--mobile.jpg`;
+
+    // Load images through our S3 bucket
+    const heroImagePathBase = 'https://s3.amazonaws.com/fandp-web-production-marketing/custom-dresses/bridesmaid/hero-tiles/hero-';
+    const heroImagePathDesktop = `${heroImagePathBase}${themeName}.jpg`;
+    const heroImagePathTablet = `${heroImagePathBase}${themeName}--tablet.jpg`;
+    const heroImagePathMobile = `${heroImagePathBase}${themeName}--mobile.jpg`;
 
     return (
       <div className="BridesmaidsHeader">
         <div className="BridesmaidsHeader__heroTile u-overlay-area">
           <picture>
-            <source srcSet={imagePathDesktop} media="(min-width: 1025px)" />
-            <source srcSet={imagePathTablet} media="(min-width: 577px) and (max-width: 1024px)" />
-            <source srcSet={imagePathMobile} media="(max-width: 576px)" />
+            <source srcSet={heroImagePathDesktop} media="(min-width: 1025px)" />
+            <source srcSet={heroImagePathTablet} media="(min-width: 577px) and (max-width: 1024px)" />
+            <source srcSet={heroImagePathMobile} media="(max-width: 576px)" />
             <img
-              src={imagePathDesktop}
-              srcSet={imagePathDesktop}
+              src={heroImagePathDesktop}
+              srcSet={heroImagePathDesktop}
               alt="Buy custom bridesmaid dresses"
               className="BridesmaidsHeader__heroTileImg u-overlay-area__media"
             />
