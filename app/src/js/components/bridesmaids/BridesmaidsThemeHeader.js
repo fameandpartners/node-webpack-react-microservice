@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 
-class Header extends Component {
+class BridesmaidsThemeHeader extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -50,9 +50,9 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
+BridesmaidsThemeHeader.propTypes = {
   themeName: PropTypes.string.isRequired,
   themePresentation: PropTypes.string.isRequired,
 };
 
-export default Header;
+export default BridesmaidsThemeHeader;
