@@ -236,7 +236,6 @@ class BDProductOptions extends Component {
               backgroundImage: `url(${this.generateImageNameForSelections()})`,
               backgroundSize: 'contain',
             }}
-            onClick={this.showImageLightboxModal}
           />
         </div>
         <div className="ProductOptions__col grid-middle col-6 u-center">
