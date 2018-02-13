@@ -30,7 +30,8 @@ function stateToProps({ $$bridesmaidsFilterState, $$themeState }) {
   return {
     bridesmaidsColors: $$bridesmaidsFilterState.get('$$bridesmaidsFilterColors').toJS(),
     products: $$themeState.get('collection').toJS(),
-    themeName: $$themeState.get('name'),
+    // Get only the page slug and remove the '-wedding-bridesmaid-dresses' part
+    themeName: $$themeState.get('name').replace('-wedding-bridesmaid-dresses', ''),
     themePresentation: $$themeState.get('presentation'),
   };
 }
