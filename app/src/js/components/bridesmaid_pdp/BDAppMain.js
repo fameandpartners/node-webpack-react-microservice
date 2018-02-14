@@ -21,6 +21,7 @@ import BDCustomizationButtonLedge from '../bridesmaid_pdp/BDCustomizationButtonL
 import ProductDescription from '../pdp/ProductDescription';
 import BDProductDisplayOptionsTouch from './BDProductDisplayOptionsTouch';
 import BDProductOptions from '../bridesmaid_pdp/BDProductOptions';
+import ImageLightboxModal from '../bridesmaid_pdp/ImageLightboxModal';
 // import ProductGrid from '../pdp/ProductGrid';
 // import ProductFabricInfo from '../pdp/ProductFabricInfo';
 
@@ -72,9 +73,10 @@ class BDAppMain extends Component {
 
     return (
       <div className="BDAppMain__wrapper">
-        <div
-          className="BDAppMain u-height--full"
-        >
+        <div className="BDAppMain u-height--full">
+          <div>
+            <ImageLightboxModal />
+          </div>
           { breakpoint === 'mobile' || breakpoint === 'tablet'
             ? <BDProductDisplayOptionsTouch breakpoint={breakpoint} />
             : (

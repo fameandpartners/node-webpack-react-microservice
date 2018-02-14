@@ -25,7 +25,7 @@ import {
 
 // Constants
 import BDCustomizationConstants from '../../constants/BDCustomizationConstants';
-import ModalConstants from '../../constants/ModalConstants';
+import ModalConstants from '../../constants/BDModalConstants';
 
 // UI components
 import ProductOptionsRow from '../pdp/ProductOptionsRow';
