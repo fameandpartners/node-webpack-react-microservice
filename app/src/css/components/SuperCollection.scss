@@ -1,3 +1,4 @@
+/* stylelint-disable color-no-hex */
 .BodySection--section-container {
   max-width: 1270px;
   margin: 80px auto 0;
@@ -106,9 +107,16 @@ img {
   font-size: 2.8rem;
 }
 
-.SuperCollection-Footer--ctaCopy {
-  text-decoration: underline;
-  font-size: 2.7rem;
+// If this is reused anywhere we should move it to a separate stylesheet
+.CtaSlimBorder {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 7px 15px;
+  font-weight: 600;
+  background: $c-white;
+  color: #3d4379;
+  border: 1px solid #3d4379;
+  text-transform: uppercase;
 }
 
 // Responsive

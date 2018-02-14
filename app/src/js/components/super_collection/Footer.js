@@ -48,7 +48,7 @@ class Footer extends Component {
                     Filter based on your wedding colors, <br className="u-lg-hidden" />
                     preferred silhouette, and more.
                   </h3>
-                  <p className="SuperCollection-Footer--ctaCopy">Get started</p>
+                  <p className="CtaSlimBorder">Get started</p>
                 </span>
               </div>
             </div>
