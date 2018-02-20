@@ -150,7 +150,7 @@ class BDProductCustomization extends PureComponent {
     });
   }
 
-  generateImageNameForSelections() {
+  generateImageNameForSelections(side) {
     const {
       temporaryBDCustomizationColor,
       temporaryCustomizationDetails,
@@ -164,6 +164,7 @@ class BDProductCustomization extends PureComponent {
       imgSizeStr: '800x800',
       length: temporaryBDCustomizationLength,
       colorCode: colorNames[temporaryBDCustomizationColor],
+      side,
     });
     return imageStr;
   }
@@ -210,12 +211,14 @@ class BDProductCustomization extends PureComponent {
       onCustomizationHeadingGroupClick,
     } = this.props;
 
+    const isMobile = (breakpoint === 'mobile' || breakpoint === 'tablet');
+
     return (
       <div className="BDProductCustomization u-height--full u-flex u-flex--col">
 
         <div className="grid-center-bottom u-flex u-flex--1">
           {
-            (breakpoint === 'mobile' || breakpoint === 'tablet')
+            isMobile
             ? (
               <BDCustomizationUndoAlerter
                 addonOptions={addonOptions}
@@ -225,12 +228,47 @@ class BDProductCustomization extends PureComponent {
               />
             ) : null
           }
-          <a className="BDProductCustomization__main-image-wrapper">
-            <img className="u-height--full" src={this.generateImageNameForSelections()} alt="dress customization combinations" />
-          </a>
+          <div className="BDProductCustomization__main-image-wrapper BDProductCustomization__main-image-grid">
+            <div
+              className={classnames(
+                { 'bdp-grid-image-one': isMobile === false },
+              )}
+            >
+              <img
+                className={classnames(
+                  'u-height--full',
+                  {
+                    'standard-image-grid': isMobile === false,
+                    'mobile-image-grid': isMobile,
+                  },
+                )}
+                src={this.generateImageNameForSelections('front')}
+                alt="dress customization combinations"
+              />
+            </div>
+            {
+              isMobile
+              ? null :
+              (
+                <div className="bdp-grid-image-two">
+                  <img
+                    className={classnames(
+                      'u-height--full',
+                      {
+                        'standard-image-grid': isMobile === false,
+                        'mobile-image-grid': isMobile,
+                      },
+                    )}
+                    src={this.generateImageNameForSelections('back')}
+                    alt="dress customization combinations"
+                  />
+                </div>
+              )
+            }
+          </div>
 
           {
-            (breakpoint === 'mobile' || breakpoint === 'tablet')
+            isMobile
             ? null : (
               <BDCustomizationUndoAlerter
                 addonOptions={addonOptions}

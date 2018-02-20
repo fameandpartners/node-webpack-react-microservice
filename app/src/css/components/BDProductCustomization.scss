@@ -7,9 +7,36 @@
 }
 
 .BDProductCustomization__main-image-wrapper {
-  max-height: 800px;
-  max-width: 800px;
+  max-height: 616px;
+  max-width: 380px;
   width: 150%;
   height: 100%;
   min-height: 400px;
+}
+
+.BDProductCustomization__main-image-grid {
+  display: flex;
+  flex: 1;
+}
+
+.bdp-grid-image-one {
+  max-width: 200px;
+}
+
+.standard-image-grid {
+  max-width: 200px;
+  height: 616px;
+  object-fit: cover;
+  margin-left: 5px;
+}
+
+.mobile-image-grid {
+  max-width: 100%;
+  height: 616px;
+  object-fit: cover;
+  margin-left: 10px;
+}
+
+.bdp-grid-image-two {
+  max-width: 200px;
 }
