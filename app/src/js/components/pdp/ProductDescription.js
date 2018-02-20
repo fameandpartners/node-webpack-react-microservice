@@ -51,7 +51,7 @@ class ProductDescription extends Component {
 
   generateDeliveryCopy() {
     const { deliveryCopy, expressMakingSelected } = this.props;
-    return expressMakingSelected ? '2 - 3 weeks' : deliveryCopy;
+    return expressMakingSelected ? '2-3 weeks' : deliveryCopy;
   }
 
   calculateSubTotal(currencySymbol) {
