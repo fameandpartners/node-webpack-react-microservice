@@ -318,6 +318,7 @@ export function transformProductFabric({ fabric }) {
 }
 
 export function transformProductFabricGroups({ fabrics }) {
+  if (!fabrics) return [];
   return fabrics.reduce((accum, currVal) => {
     if (accum.indexOf(currVal.fabric.material) === -1) {
       return accum.concat(currVal.fabric.material);
@@ -327,6 +328,7 @@ export function transformProductFabricGroups({ fabrics }) {
 }
 
 export function transformProductFabricList({ fabrics }) {
+  if (!fabrics) return [];
   return fabrics.map((f) => {
     const fabricDetails = f.fabric;
     return {

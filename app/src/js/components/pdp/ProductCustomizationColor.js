@@ -14,7 +14,10 @@ import ColorSwatches from './ColorSwatches';
 import ProductCustomization from './ProductCustomization';
 
 function stateToProps(state) {
+  const fabrics = state.$$productState.get('fabrics').toJS();
   return {
+    fabrics,
+    hasFabrics: fabrics && fabrics.length > 0,
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
     productSecondaryColorsCentsPrice: state.$$productState.get('productSecondaryColorsCentsPrice'),
@@ -70,6 +73,7 @@ class ProductCustomizationColor extends PureComponent {
 
   render() {
     const {
+      hasFabrics,
       hasNavItems,
       productCustomizationDrawer,
       productDefaultColors,
@@ -84,13 +88,20 @@ class ProductCustomizationColor extends PureComponent {
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        <ColorSwatches
-          productDefaultColors={productDefaultColors}
-          productSecondaryColors={productSecondaryColors}
-          productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
-          temporaryColorId={temporaryColorId}
-          handleColorSelection={this.handleColorSelection}
-        />
+        { hasFabrics
+          ? (
+            <div>Fabric Selection Modal</div>
+          )
+          : (
+            <ColorSwatches
+              productDefaultColors={productDefaultColors}
+              productSecondaryColors={productSecondaryColors}
+              productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
+              temporaryColorId={temporaryColorId}
+              handleColorSelection={this.handleColorSelection}
+            />
+          )
+        }
       </ProductCustomization>
     );
   }
@@ -98,6 +109,7 @@ class ProductCustomizationColor extends PureComponent {
 
 ProductCustomizationColor.propTypes = {
   // Normal Props
+  hasFabrics: PropTypes.bool,
   hasNavItems: PropTypes.bool,
   // Redux Props
   productCustomizationDrawer: PropTypes.string,
@@ -123,6 +135,7 @@ ProductCustomizationColor.propTypes = {
 };
 
 ProductCustomizationColor.defaultProps = {
+  hasFabrics: true,
   hasNavItems: true,
   productCustomizationDrawer: null,
   productSecondaryColorsCentsPrice: 0,
