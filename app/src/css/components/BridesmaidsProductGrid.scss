@@ -1,4 +1,5 @@
 .BridesmaidsProductGrid__wrapper {
+  max-width: 1240px;
   min-height: 800px;
   margin: 0;
 }
@@ -26,6 +27,7 @@
 }
 
 .BridesmaidsProductGrid__product-text {
+  margin-top: 10px;
   opacity: 0;
   pointer-events: none;
   transition: 170ms opacity ease-out;
@@ -34,6 +36,10 @@
 .BridesmaidsProductGrid__product-text--active {
   opacity: 1;
   pointer-events: visible;
+}
+
+.BridesmaidsProductGrid__current-price {
+  margin-top: 10px;
 }
 
 .BridesmaidsProductGrid__wrapper-text {

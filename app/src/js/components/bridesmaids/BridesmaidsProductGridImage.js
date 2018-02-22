@@ -178,7 +178,7 @@ class BridesmaidsProductGridImage extends Component {
               </a>
             </p>
           </div>
-          <div className="col-3 FlashSaleProduct__current-price u-mt-small">
+          <div className="col-3 BridesmaidsProductGrid__current-price FlashSaleProduct__current-price u-mt-small">
             {this.formatPrice(dress.price.amount)}
           </div>
         </div>

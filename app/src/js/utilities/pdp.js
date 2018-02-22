@@ -313,7 +313,12 @@ export function transformProductFabric({ fabric }) {
     id: 'does-not-exist-yet',
     img: 'does-not-exist-yet.png',
     name: 'does-not-exist-yet',
-    description: fabric,
+    description: fabric || (
+      '<p>Main: 100% polyester heavy georgette</p>' +
+      '<p>Contrast: 97% polyester, 3% spandex matte stretch satin</p>' +
+      '<p>Lining: 100% polyester heavy georgette</p>' +
+      '<p> Due to dyeing process, product hue may look slightly different from image.</p>'
+    ),
   };
 }
 
