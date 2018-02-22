@@ -317,6 +317,28 @@ export function transformProductFabric({ fabric }) {
   };
 }
 
+export function transformProductFabricGroups({ fabrics }) {
+  return fabrics.reduce((accum, currVal) => {
+    if (accum.indexOf(currVal.fabric.material) === -1) {
+      return accum.concat(currVal.fabric.material);
+    }
+    return accum;
+  }, []);
+}
+
+export function transformProductFabricList({ fabrics }) {
+  return fabrics.map((f) => {
+    const fabricDetails = f.fabric;
+    return {
+      id: fabricDetails.id,
+      material: fabricDetails.material,
+      presentation: fabricDetails.presentation,
+      audPrice: fabricDetails.price_aud,
+      usdPrice: fabricDetails.price_usd,
+    };
+  });
+}
+
 export function transformProductGarmentInformation() {
   //   "garment_care": null, // CURRENTLY NOT PASSED
   //   ****** into ******
@@ -461,6 +483,8 @@ export function transformProductJSON(productJSON) {
         complementaryProducts: transformProductComplementaryProducts(productJSON.product),
         deliveryCopy: transformDeliveryCopy(productJSON.product),
         fabric: transformProductFabric(productJSON.product),
+        fabricGroups: transformProductFabricGroups(productJSON.product),
+        fabrics: transformProductFabricList(productJSON.product),
         fastMaking: transformProductFastMaking(productJSON.product),
         garmentCareInformation: transformProductGarmentInformation(),
         preCustomizations: transformProductPreCustomizations(),
@@ -529,6 +553,7 @@ export default {
   transformProductDescription,
   transformProductSecondaryColorsCentsPrice,
   transformProductFabric,
+  transformProductFabricList,
   transformProductGarmentInformation,
   transformProductId,
   transformProductImages,
