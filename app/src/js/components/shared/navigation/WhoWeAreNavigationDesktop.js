@@ -34,14 +34,14 @@ class WhoWeAreNavigation extends PureComponent {
           />
           { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
           <div className="WhoWeAreNavigation__ad">
-            <a href="/invite?img">
+            <a href="/invite?traffic_source=navimg">
               <img
                 alt="Invite Friends Ad"
                 className="WhoWeAreNavigation__image u-width--full"
                 src={invitefriendsImg}
               />
             </a>
-            <a href="/invite?img" className="link">
+            <a href="/invite?traffic_source=navimg" className="link">
               <span>Tell your friends, GET $25 OFF</span>
             </a>
           </div>
