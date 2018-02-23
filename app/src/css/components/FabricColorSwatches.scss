@@ -1,0 +1,74 @@
+/* stylelint-disable */
+.FabricColorSwatches__filter-section-wrapper {
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid $c-light-gray;
+}
+
+.FabricColorSwatches__fabric-option {
+  background: $c-light-gray;
+  padding: 0px 15px;
+}
+
+.FabricColorSwatches__mini-swatch {
+  height: 17px;
+  width: 17px;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+}
+
+.FabricColorSwatches__mini-swatch--purple {
+  background-color: #48217f;
+}
+
+.FabricColorSwatches__mini-swatch--blue {
+  background-color: #0000ff;
+}
+
+.FabricColorSwatches__mini-swatch--green {
+  background-color: #10a522;
+}
+
+.FabricColorSwatches__mini-swatch--black {
+  background-color: #000000;
+}
+
+.FabricColorSwatches__mini-swatch--pink {
+  background-color: #f458a6;
+}
+
+.FabricColorSwatches__mini-swatch--red {
+  background-color: #e01b1b;
+}
+
+.FabricColorSwatches__mini-swatch--pastel {
+  background-color: #CBF6EB;
+}
+
+.FabricColorSwatches__mini-swatch--grey {
+  background-color: #7e7e7f;
+}
+
+.FabricColorSwatches__mini-swatch--metallic {
+  background-color: #ACA8A2;
+}
+
+.FabricColorSwatches__mini-swatch--nude, .FabricColorSwatches__mini-swatch--nude-tan {
+  background-color: #E6D4C0;
+}
+
+.FabricColorSwatches__mini-swatch--white-ivory {
+  background-color: #ffffff;
+}
+
+.color-print {
+  background: "url(product-color-images/Cheetah.png)";
+  background-size: cover;
+  background-size: 700%;
+}
+
+.FabricColorSwatches__filter-color-fabric {
+  padding: 20px 0;
+}

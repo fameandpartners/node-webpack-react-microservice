@@ -287,6 +287,15 @@ export function transformProductColors(data, key) {
   });
 }
 
+export function transformProductColorGroup(colorGroup) {
+  return colorGroup.map(cg => ({
+    id: cg.id,
+    name: cg.name,
+    colorIds: cg.colorIds,
+    presentation: cg.presentation,
+  }));
+}
+
 export function transformProductSecondaryColorsCentsPrice({ colors = {} }) {
   const extraPrice = colors.table.default_extra_price.price || {};
   // amount: String,
@@ -318,8 +327,8 @@ export function transformProductFabric({ fabric }) {
 }
 
 export function transformProductFabricGroups({ fabrics }) {
-  if (!fabrics) return [];
-  return fabrics.reduce((accum, currVal) => {
+  if (!fabrics.table.default) return [];
+  return fabrics.table.default.reduce((accum, currVal) => {
     if (accum.indexOf(currVal.fabric.material) === -1) {
       return accum.concat(currVal.fabric.material);
     }
@@ -328,8 +337,8 @@ export function transformProductFabricGroups({ fabrics }) {
 }
 
 export function transformProductFabricList({ fabrics }) {
-  if (!fabrics) return [];
-  return fabrics.map((f) => {
+  if (!fabrics.table.default) return [];
+  return fabrics.table.default.map((f) => {
     const fabricDetails = f.fabric;
     return {
       id: fabricDetails.id,
@@ -493,6 +502,7 @@ export function transformProductJSON(productJSON) {
         productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
         productDescription: transformProductDescription(productJSON.product),
         productDefaultColors: transformProductColors(productJSON, 'default'),
+        productGroupColors: transformProductColorGroup(productJSON.colorGroups),
         productSecondaryColors: transformProductColors(productJSON, 'extra'),
         productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
         productId: transformProductId(productJSON.product),

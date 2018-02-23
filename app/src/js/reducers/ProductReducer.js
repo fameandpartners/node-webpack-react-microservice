@@ -75,6 +75,15 @@ export const $$initialState = Immutable.fromJS({
   //   hexValue: String,
   //   patternUrl: String,
   // })
+  productGroupColors: [],
+
+  // ArrayOf({
+  //   id: String,
+  //   name: String,
+  //   presentation: String,
+  //   hexValue: String,
+  //   patternUrl: String,
+  // })
   productSecondaryColors: [],
 
   // Number
