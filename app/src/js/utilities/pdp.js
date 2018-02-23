@@ -288,10 +288,11 @@ export function transformProductColors(data, key) {
 }
 
 export function transformProductColorGroup(colorGroup) {
+  if (!colorGroup) return [];
   return colorGroup.map(cg => ({
     id: cg.id,
     name: cg.name,
-    colorIds: cg.colorIds,
+    colorIds: cg.color_ids,
     presentation: cg.presentation,
   }));
 }

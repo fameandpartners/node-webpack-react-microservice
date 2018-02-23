@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import CustomizationConstants from '../constants/CustomizationConstants';
+import ProductConstants from '../constants/ProductConstants';
 
 export const $$initialState = Immutable.fromJS({
 
@@ -37,6 +38,9 @@ export const $$initialState = Immutable.fromJS({
   //   usdPrice: String,
   // })
   fabrics: [],
+
+  // ArrayOf(Number)
+  fabricColorGroupSelections: [],
 
   // ArrayOf(String)
   fabricGroups: [],
@@ -292,6 +296,22 @@ export default function ProductReducer($$state = $$initialState, action = null) 
       return $$state.merge({
         productCustomizationDrawer: CustomizationConstants.COLOR_CUSTOMIZE,
         productCustomizationDrawerOpen: action.isActive,
+      });
+    }
+    case ProductConstants.SELECT_FABRIC_COLOR_GROUP: {
+      const { id: colorId } = action;
+      const $$fabricColorGroupSelections = $$state.get('fabricColorGroupSelections');
+
+      // If Present, remove from selections
+      if ($$fabricColorGroupSelections.includes(colorId)) {
+        return $$state.merge({
+          fabricColorGroupSelections: $$fabricColorGroupSelections.filter(id => id !== colorId),
+        });
+      }
+
+      // Else, add from selections
+      return $$state.merge({
+        fabricColorGroupSelections: $$fabricColorGroupSelections.concat(colorId),
       });
     }
     default: {

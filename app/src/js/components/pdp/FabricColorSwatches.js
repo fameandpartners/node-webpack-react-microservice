@@ -3,6 +3,11 @@ import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+// Actions
+import ProductActions from '../../actions/ProductActions';
 
 // Utilities
 import { formatCents } from '../../utilities/accounting';
@@ -15,14 +20,55 @@ import {
 import '../../../css/components/ColorSwatches.scss';
 import '../../../css/components/FabricColorSwatches.scss';
 
-class ColorSwatches extends PureComponent {
+function stateToProps({ $$productState }) {
+  return {
+    fabricColorGroupSelections: $$productState.get('fabricColorGroupSelections').toJS(),
+  };
+}
+
+function dispatchToProps(dispatch) {
+  const {
+    selectFabricColorGroup,
+  } = bindActionCreators(ProductActions, dispatch);
+
+  return {
+    selectFabricColorGroup,
+  };
+}
+
+class FabricColorSwatches extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
   }
 
+  handleColorGroupClick(c) {
+    return () => {
+      this.props.selectFabricColorGroup(c);
+    };
+  }
+
   handleColorSelection(color) {
     return () => { this.props.handleColorSelection(color); };
+  }
+
+  generateFabricColorGroupSelections() {
+    const { fabricColorGroupSelections, productGroupColors } = this.props;
+    return productGroupColors.map(c => (
+      <div
+        className="col-2_sm-3 FabricColorSwatches__color-group-option u-cursor--pointer"
+        onClick={this.handleColorGroupClick(c)}
+      >
+        <span
+          className={classnames(
+            'FabricColorSwatches__mini-swatch',
+            `FabricColorSwatches__mini-swatch--${c.name}`,
+            { 'FabricColorSwatches__mini-swatch--selected': fabricColorGroupSelections.includes(c.id) },
+          )}
+        />
+        <span className="link link--no-underline">{c.presentation}</span>
+      </div>
+    ));
   }
 
   generateColorSwatch(color, price = 0) {
@@ -77,7 +123,6 @@ class ColorSwatches extends PureComponent {
     const {
       fabricGroups,
       productDefaultColors,
-      productGroupColors,
       productSecondaryColors,
       productSecondaryColorsCentsPrice,
     } = this.props;
@@ -88,24 +133,14 @@ class ColorSwatches extends PureComponent {
       >
         <div className="grid-12-center FabricColorSwatches__filter-section-wrapper u-width--full u-position--fixed">
           <div className="col-6_sm-10 FabricColorSwatches__filter-section">
-            <div className="FabricColorSwatches__filter-color-family">
-              <p>Filter by Color Family:</p>
+            <div className="FabricColorSwatches__filter-color-family u-mt--normal">
+              <p className="u-mb--small u-bold">Filter by Color Family:</p>
               <div className="grid-12">
-                {productGroupColors.map(c => (
-                  <div className="col-2_sm-3 FabricColorSwatches__color-group-option">
-                    <span
-                      className={classnames(
-                        'FabricColorSwatches__mini-swatch',
-                        `FabricColorSwatches__mini-swatch--${c.name}`,
-                      )}
-                    />
-                    <span>{c.presentation}</span>
-                  </div>
-                ))}
+                {this.generateFabricColorGroupSelections()}
               </div>
             </div>
-            <div className="FabricColorSwatches__filter-color-fabric u-mb--big">
-              <p>Filter by Fabric:</p>
+            <div className="FabricColorSwatches__filter-color-fabric u-mb--normal">
+              <p className="u-mb--small u-bold">Filter by Fabric:</p>
               {fabricGroups.map(fabricName => (
                 <span className="FabricColorSwatches__fabric-option u-mr--normal">
                   {fabricName}
@@ -138,7 +173,11 @@ class ColorSwatches extends PureComponent {
   }
 }
 
-ColorSwatches.propTypes = {
+FabricColorSwatches.propTypes = {
+  // Redux Props
+  fabricColorGroupSelections: PropTypes.arrayOf(PropTypes.number).isRequired,
+  // Redux Actions
+  selectFabricColorGroup: PropTypes.func.isRequired,
   // Passed Props
   fabricGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
   productGroupColors: PropTypes.arrayOf(PropTypes.shape({
@@ -162,7 +201,7 @@ ColorSwatches.propTypes = {
   handleColorSelection: PropTypes.func.isRequired,
 };
 
-ColorSwatches.defaultProps = {};
+FabricColorSwatches.defaultProps = {};
 
 
-export default ColorSwatches;
+export default connect(stateToProps, dispatchToProps)(FabricColorSwatches);

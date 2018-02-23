@@ -3,6 +3,8 @@
   top: 0;
   left: 0;
   border-bottom: 1px solid $c-light-gray;
+  z-index: 1;
+  background: white;
 }
 
 .FabricColorSwatches__fabric-option {
@@ -17,6 +19,10 @@
   display: inline-block;
   position: relative;
   top: 2px;
+}
+
+.FabricColorSwatches__mini-swatch--selected {
+  outline: 2px solid black;
 }
 
 .FabricColorSwatches__mini-swatch--purple {

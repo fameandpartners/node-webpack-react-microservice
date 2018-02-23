@@ -1,4 +1,5 @@
 import CustomizationConstants from '../constants/CustomizationConstants';
+import ProductConstants from '../constants/ProductConstants';
 
 export function activateColorDrawer({ isActive }) {
   return {
@@ -7,6 +8,14 @@ export function activateColorDrawer({ isActive }) {
   };
 }
 
+export function selectFabricColorGroup({ id }) {
+  return {
+    type: ProductConstants.SELECT_FABRIC_COLOR_GROUP,
+    id,
+  };
+}
+
 export default {
   activateColorDrawer,
+  selectFabricColorGroup,
 };
