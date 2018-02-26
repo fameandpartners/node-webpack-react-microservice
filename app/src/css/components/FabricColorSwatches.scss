@@ -4,6 +4,14 @@
   left: 0;
   z-index: 1;
   background: white;
+  position: relative;
+  display: block;
+
+
+  @include sm {
+    position: fixed;
+    display: inherit;
+  }
 }
 
 .FabricColorSwatches__filter-section {
@@ -35,13 +43,16 @@
 }
 
 .FabricColorSwatches__color-swatch-results {
-  margin-top: 230px;
+  margin-top: 50px;
 
+  @include sm {
+    margin-top: 200px;
+  }
   @include md {
     margin-top: 170px;
   }
   @include lg {
-    margin-top: 150px;
+    margin-top: 180px;
   }
 }
 

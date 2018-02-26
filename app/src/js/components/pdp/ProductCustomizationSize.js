@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
@@ -244,7 +245,7 @@ class ProductCustomizationStyle extends PureComponent {
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        <div className="ProductCustomizationSize__layout-container u-mt--normal u-mb--huge">
+        <div className="ProductCustomizationSize__layout-container u-center u-mt--normal u-mb--huge">
           <div className="u-mb--big">
             <h3 className="h4 u-mb--small">
               Let’s make it fit.

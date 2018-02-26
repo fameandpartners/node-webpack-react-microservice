@@ -287,9 +287,16 @@ export function transformProductColors(data, key) {
   });
 }
 
-export function transformProductColorGroup(colorGroup) {
+export function transformProductColorGroup(colorGroup, fabrics) {
   if (!colorGroup) return [];
-  return colorGroup.map(cg => ({
+
+  const availableFabricColors = fabrics.table.default
+    .concat(fabrics.table.extra)
+    .reduce((accum, currVal) => accum.concat(currVal.color_groups), []);
+
+  return colorGroup
+  .filter(cg => availableFabricColors.indexOf(cg.presentation) > -1)
+  .map(cg => ({
     id: cg.id,
     name: cg.name,
     colorIds: cg.color_ids,
@@ -507,7 +514,7 @@ export function transformProductJSON(productJSON) {
         productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
         productDescription: transformProductDescription(productJSON.product),
         productDefaultColors: transformProductColors(productJSON, 'default'),
-        productGroupColors: transformProductColorGroup(productJSON.colorGroups),
+        productGroupColors: transformProductColorGroup(productJSON.colorGroups, productJSON.product.fabrics),
         productSecondaryColors: transformProductColors(productJSON, 'extra'),
         productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
         productId: transformProductId(productJSON.product),
