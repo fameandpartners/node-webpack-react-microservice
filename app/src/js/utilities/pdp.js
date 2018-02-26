@@ -287,6 +287,23 @@ export function transformProductColors(data, key) {
   });
 }
 
+export function transformProductColorGroup(colorGroup, fabrics) {
+  if (!colorGroup) return [];
+
+  const availableFabricColors = fabrics.table.default
+    .concat(fabrics.table.extra)
+    .reduce((accum, currVal) => accum.concat(currVal.color_groups), []);
+
+  return colorGroup
+  .filter(cg => availableFabricColors.indexOf(cg.presentation) > -1)
+  .map(cg => ({
+    id: cg.id,
+    name: cg.name,
+    colorIds: cg.color_ids,
+    presentation: cg.presentation,
+  }));
+}
+
 export function transformProductSecondaryColorsCentsPrice({ colors = {} }) {
   const extraPrice = colors.table.default_extra_price.price || {};
   // amount: String,
@@ -299,7 +316,7 @@ export function transformProductSecondaryColorsCentsPrice({ colors = {} }) {
   return productSecondaryColorsCentsPrice;
 }
 
-export function transformProductFabric({ fabric }) {
+export function transformProductFabricDescription({ fabric }) {
   console.warn('NEED BACKEND FABRIC IMG');
   //   "fabric": String,
   //   ****** into ******
@@ -315,6 +332,34 @@ export function transformProductFabric({ fabric }) {
     name: 'does-not-exist-yet',
     description: fabric,
   };
+}
+
+export function transformProductFabricGroups({ fabrics }) {
+  if ((!fabrics.table.default && !fabrics.table.extra)) return [];
+
+  const combinedFabrics = fabrics.table.default.concat(fabrics.table.extra);
+  return combinedFabrics.reduce((accum, currVal) => {
+    if (accum.indexOf(currVal.fabric.material) === -1) {
+      return accum.concat(currVal.fabric.material);
+    }
+    return accum;
+  }, []);
+}
+
+export function transformProductFabricColor(fabricList) {
+  if (!fabricList) return [];
+  return fabricList.map((f) => {
+    const fabricDetails = f.fabric;
+    return {
+      id: fabricDetails.id,
+      belongsToColorGroups: f.color_groups,
+      patternUrl: fabricDetails.image_url,
+      audPrice: fabricDetails.price_aud,
+      material: fabricDetails.material,
+      presentation: fabricDetails.presentation,
+      usdPrice: fabricDetails.price_usd,
+    };
+  });
 }
 
 export function transformProductGarmentInformation() {
@@ -460,13 +505,17 @@ export function transformProductJSON(productJSON) {
         currency: transformProductCurrency(productJSON.product),
         complementaryProducts: transformProductComplementaryProducts(productJSON.product),
         deliveryCopy: transformDeliveryCopy(productJSON.product),
-        fabric: transformProductFabric(productJSON.product),
+        fabric: transformProductFabricDescription(productJSON.product),
+        fabricGroups: transformProductFabricGroups(productJSON.product),
+        productDefaultFabrics: transformProductFabricColor(productJSON.product.fabrics.table.default),
+        productSecondaryFabrics: transformProductFabricColor(productJSON.product.fabrics.table.extra),
         fastMaking: transformProductFastMaking(productJSON.product),
         garmentCareInformation: transformProductGarmentInformation(),
         preCustomizations: transformProductPreCustomizations(),
         productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
         productDescription: transformProductDescription(productJSON.product),
         productDefaultColors: transformProductColors(productJSON, 'default'),
+        productGroupColors: transformProductColorGroup(productJSON.colorGroups, productJSON.product.fabrics),
         productSecondaryColors: transformProductColors(productJSON, 'extra'),
         productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
         productId: transformProductId(productJSON.product),
@@ -528,7 +577,8 @@ export default {
   transformProductColors,
   transformProductDescription,
   transformProductSecondaryColorsCentsPrice,
-  transformProductFabric,
+  transformProductFabricDescription,
+  transformProductFabricColor,
   transformProductGarmentInformation,
   transformProductId,
   transformProductImages,

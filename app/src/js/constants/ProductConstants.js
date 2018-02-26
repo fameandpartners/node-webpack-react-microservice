@@ -1,4 +1,5 @@
 import { assign } from 'lodash';
+import mirrorCreator from 'mirror-creator';
 
 function generateInchesSizing() {
   const sizes = [];
@@ -35,6 +36,11 @@ const constants = assign({},
     },
     EXPRESS_MAKING_PRICE_CENTS: 1800,
   },
+
+  mirrorCreator([
+    'SELECT_FABRIC_COLOR_GROUP',
+    'SELECT_FABRIC_GROUP',
+  ]),
 );
 
 export default constants;

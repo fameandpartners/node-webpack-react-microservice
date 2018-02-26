@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import CustomizationConstants from '../constants/CustomizationConstants';
+import ProductConstants from '../constants/ProductConstants';
 
 export const $$initialState = Immutable.fromJS({
 
@@ -29,6 +30,25 @@ export const $$initialState = Immutable.fromJS({
   // })
   fabric: null,
 
+  // ArrayOf({
+  //   id: Number,
+  //   audPrice: String,
+  //   belongsToColorGroups: ArrayOf(String),
+  //   material: String,
+  //   presentation: String,
+  //   usdPrice: String,
+  // })
+  productDefaultFabrics: [],
+  productSecondaryFabrics: [],
+
+  // ArrayOf(Number)
+  fabricColorGroupSelections: [],
+  // ArrayOf(Number)
+  fabricGroupSelections: [],
+
+  // ArrayOf(String)
+  fabricGroups: [],
+
   // String
   garmentCareInformation: null,
 
@@ -55,6 +75,7 @@ export const $$initialState = Immutable.fromJS({
   //   patternUrl: String,
   // })
   productDefaultColors: [],
+  productSecondaryColors: [],
 
   // ArrayOf({
   //   id: String,
@@ -63,7 +84,8 @@ export const $$initialState = Immutable.fromJS({
   //   hexValue: String,
   //   patternUrl: String,
   // })
-  productSecondaryColors: [],
+  productGroupColors: [],
+
 
   // Number
   productSecondaryColorsCentsPrice: null,
@@ -273,6 +295,41 @@ export default function ProductReducer($$state = $$initialState, action = null) 
         productCustomizationDrawerOpen: action.isActive,
       });
     }
+
+    case ProductConstants.SELECT_FABRIC_COLOR_GROUP: {
+      const { presentation: name } = action;
+      const $$fabricColorGroupSelections = $$state.get('fabricColorGroupSelections');
+
+      // If Present, remove from selections
+      if ($$fabricColorGroupSelections.includes(name)) {
+        return $$state.merge({
+          fabricColorGroupSelections: $$fabricColorGroupSelections.filter(id => id !== name),
+        });
+      }
+
+      // Else, add from selections
+      return $$state.merge({
+        fabricColorGroupSelections: $$fabricColorGroupSelections.concat(name),
+      });
+    }
+
+    case ProductConstants.SELECT_FABRIC_GROUP: {
+      const { name } = action;
+      const $$fabricGroupSelections = $$state.get('fabricGroupSelections');
+
+      // If Present, remove from selections
+      if ($$fabricGroupSelections.includes(name)) {
+        return $$state.merge({
+          fabricGroupSelections: $$fabricGroupSelections.filter(fName => fName !== name),
+        });
+      }
+
+      // Else, add from selections
+      return $$state.merge({
+        fabricGroupSelections: $$fabricGroupSelections.concat(name),
+      });
+    }
+
     default: {
       return $$state;
     }

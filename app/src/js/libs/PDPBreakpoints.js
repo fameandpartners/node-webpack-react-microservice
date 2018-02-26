@@ -6,10 +6,10 @@ export default {
       innerHeight: winHeight,
     } = win;
     let breakpoint = 'desktop';
-    if (win.innerWidth >= 768) {
+    if (win.innerWidth >= 568) {
       breakpoint = 'tablet';
     }
-    if (win.innerWidth >= 840) {
+    if (win.innerWidth >= 860) {
       breakpoint = 'desktop-sm';
     }
     if (win.innerWidth >= 1024) {
@@ -21,8 +21,8 @@ export default {
     return { breakpoint, winHeight, winWidth };
   },
   breakpoints: {
-    mobile: 768,
-    desktopSmall: 840,
+    tablet: 568,
+    desktopSmall: 860,
     desktop: 1024,
   },
 };
