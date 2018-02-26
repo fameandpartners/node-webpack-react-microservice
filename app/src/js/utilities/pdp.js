@@ -353,6 +353,7 @@ export function transformProductFabricColor(fabricList) {
     return {
       id: fabricDetails.id,
       belongsToColorGroups: f.color_groups,
+      patternUrl: fabricDetails.image_url,
       audPrice: fabricDetails.price_aud,
       material: fabricDetails.material,
       presentation: fabricDetails.presentation,

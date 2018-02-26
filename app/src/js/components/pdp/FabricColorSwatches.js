@@ -196,13 +196,13 @@ class FabricColorSwatches extends PureComponent {
         <div className="grid-12-center FabricColorSwatches__filter-section-wrapper u-width--full">
           <div className="col-6_sm-12_md-6 FabricColorSwatches__filter-section u-center">
             <div className="FabricColorSwatches__filter-color-family u-mt--normal">
-              <p className="u-mb--xs u-bold">Filter by Color Family:</p>
+              <p className="u-mb--small u-bold">Filter by Color Family:</p>
               <div className="grid-12">
                 {this.generateFabricColorGroupSelections()}
               </div>
             </div>
             <div className="FabricColorSwatches__filter-color-fabric u-mt--normal u-mb--normal">
-              <p className="u-mb--xs u-bold">Filter by Fabric:</p>
+              <p className="u-mb--small u-bold">Filter by Fabric:</p>
               {this.generateFabricGroupSelections()}
             </div>
           </div>
