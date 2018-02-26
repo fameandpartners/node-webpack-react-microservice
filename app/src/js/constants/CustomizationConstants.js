@@ -28,6 +28,7 @@ const productCustomizationDrawers = assign({},
 
 const productCustomizationHeadlines = {
   COLOR_HEADLINE: 'Choose your Color',
+  FABRIC_COLOR_HEADLINE: 'Choose your Fabric&nbsp;+&nbsp;Color',
   STYLE_HEADLINE: 'Customize the Design',
   SIZE_HEADLINE: 'Select your Size',
 };

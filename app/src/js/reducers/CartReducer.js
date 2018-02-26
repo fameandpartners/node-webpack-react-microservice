@@ -38,7 +38,7 @@ function pluckCorrectImage(lineItem) {
 function createColor(color, fabric) {
   if (fabric) {
     return {
-      id: fabric,
+      id: fabric.id,
       centsTotal: fabric.amount || 0,
       name: fabric.name,
       presentation: fabric.name,

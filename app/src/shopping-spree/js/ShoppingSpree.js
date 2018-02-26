@@ -46,7 +46,6 @@ export default class ShoppingSpree extends FirebaseComponent {
     super.connectToFirebase();
     const { firebaseNodeId } = this.state;
     const spreeFirebase = firebase.apps[0].database();
-    console.log("firebaseNodeId", firebaseNodeId);
     this.chatsDB = spreeFirebase.ref(firebaseNodeId + "/chats");
     this.cartDB = spreeFirebase.ref(firebaseNodeId + "/cart");
 
@@ -57,9 +56,7 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   handleCartValueChanges(data) {
-    console.log("cartVal Changes", data.val());
     if (data && data.val) {
-      console.log("setting cart values", data);
       this.setState({ myItems: data.val() });
     }
   }

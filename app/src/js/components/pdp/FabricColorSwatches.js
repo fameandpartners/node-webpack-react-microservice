@@ -103,10 +103,12 @@ class FabricColorSwatches extends PureComponent {
       fabricColorGroupSelections,
       productGroupColors,
     } = this.props;
+
     return productGroupColors.map(c => (
       <div
         className="col-2_xs-2_sm-2_md-3_lg-2 FabricColorSwatches__color-group-option u-cursor--pointer"
         onClick={this.handleColorGroupClick(c)}
+        key={`pgc-${c.id}`}
       >
         <span
           className={classnames(
@@ -145,7 +147,7 @@ class FabricColorSwatches extends PureComponent {
 
     return (
       <div
-        key={color.id}
+        key={color.id || color.presentation}
         className="col-4 u-mb--big"
       >
         <div
@@ -188,6 +190,7 @@ class FabricColorSwatches extends PureComponent {
   render() {
     const { productSecondaryColorsCentsPrice } = this.props;
     const { filteredDefaultFabrics, filteredSecondaryFabrics } = this.filterFabrics();
+    const fabricGroupSelections = this.generateFabricGroupSelections();
 
     return (
       <div
@@ -201,10 +204,16 @@ class FabricColorSwatches extends PureComponent {
                 {this.generateFabricColorGroupSelections()}
               </div>
             </div>
-            <div className="FabricColorSwatches__filter-color-fabric u-mt--normal u-mb--normal">
-              <p className="u-mb--small u-bold">Filter by Fabric:</p>
-              {this.generateFabricGroupSelections()}
-            </div>
+            { fabricGroupSelections.length > 1
+              ? (
+                <div className="FabricColorSwatches__filter-color-fabric u-mt--normal u-mb--normal">
+                  <p className="u-mb--small u-bold">Filter by Fabric:</p>
+                  {fabricGroupSelections}
+                </div>
+              )
+              : null
+            }
+
           </div>
 
         </div>
