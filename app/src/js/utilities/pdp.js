@@ -346,20 +346,23 @@ export function transformProductFabricGroups({ fabrics }) {
   }, []);
 }
 
-export function transformProductFabricColor(fabricList) {
+function transformProductFabricColor(fabricMeta) {
+  const fabricDetails = fabricMeta.fabric;
+  return {
+    id: fabricDetails.id,
+    belongsToColorGroups: fabricMeta.color_groups,
+    patternUrl: fabricDetails.image_url,
+    audPrice: fabricDetails.price_aud,
+    material: fabricDetails.material,
+    presentation: fabricDetails.presentation,
+    usdPrice: fabricDetails.price_usd,
+  };
+}
+
+
+export function transformProductColorList(fabricList) {
   if (!fabricList) return [];
-  return fabricList.map((f) => {
-    const fabricDetails = f.fabric;
-    return {
-      id: fabricDetails.id,
-      belongsToColorGroups: f.color_groups,
-      patternUrl: fabricDetails.image_url,
-      audPrice: fabricDetails.price_aud,
-      material: fabricDetails.material,
-      presentation: fabricDetails.presentation,
-      usdPrice: fabricDetails.price_usd,
-    };
-  });
+  return fabricList.map(fabricMeta => transformProductFabricColor(fabricMeta));
 }
 
 export function transformProductGarmentInformation() {
@@ -484,8 +487,12 @@ function selectMeasurementMetric({ siteVersion = 'usa' }) {
   return measurementMetric;
 }
 
-function selectDefaultColor({ color_id: colorId, color_name: colorName }, colors) {
-  const foundColor = find(colors, { id: colorId });
+function selectDefaultColor({ color_id: colorId, color_name: colorName }, colors, fabrics) {
+  let foundColor = find(colors, { id: colorId });
+  if (fabrics && fabrics.length > 0) {
+    foundColor = fabrics[0];
+  }
+
   return foundColor || colors[0];
 }
 
@@ -507,8 +514,8 @@ export function transformProductJSON(productJSON) {
         deliveryCopy: transformDeliveryCopy(productJSON.product),
         fabric: transformProductFabricDescription(productJSON.product),
         fabricGroups: transformProductFabricGroups(productJSON.product),
-        productDefaultFabrics: transformProductFabricColor(productJSON.product.fabrics.table.default),
-        productSecondaryFabrics: transformProductFabricColor(productJSON.product.fabrics.table.extra),
+        productDefaultFabrics: transformProductColorList(productJSON.product.fabrics.table.default),
+        productSecondaryFabrics: transformProductColorList(productJSON.product.fabrics.table.extra),
         fastMaking: transformProductFastMaking(productJSON.product),
         garmentCareInformation: transformProductGarmentInformation(),
         preCustomizations: transformProductPreCustomizations(),
@@ -539,7 +546,7 @@ export function transformProductJSON(productJSON) {
   try {
     if (productJSON.product) {
       const measurementMetric = selectMeasurementMetric(productJSON);
-      const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors);
+      const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors, productState.productDefaultFabrics);
       customizationState = {
         addons: transformAddons(productJSON),
         selectedColor,
@@ -578,7 +585,7 @@ export default {
   transformProductDescription,
   transformProductSecondaryColorsCentsPrice,
   transformProductFabricDescription,
-  transformProductFabricColor,
+  transformProductColorList,
   transformProductGarmentInformation,
   transformProductId,
   transformProductImages,
