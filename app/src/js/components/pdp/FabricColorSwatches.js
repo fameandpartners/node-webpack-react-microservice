@@ -6,6 +6,10 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+// Libraries
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
+
 // Actions
 import ProductActions from '../../actions/ProductActions';
 
@@ -89,11 +93,19 @@ class FabricColorSwatches extends PureComponent {
     };
   }
 
+  takeFirstWord(str) {
+    return str.split(' ')[0];
+  }
+
   generateFabricColorGroupSelections() {
-    const { fabricColorGroupSelections, productGroupColors } = this.props;
+    const {
+      breakpoint,
+      fabricColorGroupSelections,
+      productGroupColors,
+    } = this.props;
     return productGroupColors.map(c => (
       <div
-        className="col-2_sm-3_md-4 FabricColorSwatches__color-group-option u-cursor--pointer"
+        className="col-2_xs-2_sm-2_md-3_lg-2 FabricColorSwatches__color-group-option u-cursor--pointer"
         onClick={this.handleColorGroupClick(c)}
       >
         <span
@@ -103,7 +115,10 @@ class FabricColorSwatches extends PureComponent {
             { 'FabricColorSwatches__mini-swatch--selected': fabricColorGroupSelections.includes(c.presentation) },
           )}
         />
-        <span className="link link--no-underline">{c.presentation}</span>
+        { breakpoint === 'mobile' || breakpoint === 'tablet'
+          ? null
+          : <span className="link link--no-underline">{this.takeFirstWord(c.presentation)}</span>
+        }
       </div>
     ));
   }
@@ -230,6 +245,8 @@ class FabricColorSwatches extends PureComponent {
 }
 
 FabricColorSwatches.propTypes = {
+  // Decorator Props
+  breakpoint: PropTypes.string.isRequired,
   // Redux Props
   fabricColorGroupSelections: PropTypes.arrayOf(PropTypes.number).isRequired,
   fabricGroupSelections: PropTypes.arrayOf(PropTypes.number).isRequired,
@@ -263,4 +280,4 @@ FabricColorSwatches.propTypes = {
 FabricColorSwatches.defaultProps = {};
 
 
-export default connect(stateToProps, dispatchToProps)(FabricColorSwatches);
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(FabricColorSwatches));

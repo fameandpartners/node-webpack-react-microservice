@@ -2,9 +2,12 @@
 .FabricColorSwatches__filter-section-wrapper {
   top: 0;
   left: 0;
-  border-bottom: 1px solid $c-light-gray;
   z-index: 1;
   background: white;
+}
+
+.FabricColorSwatches__filter-section {
+  border-bottom: 1px solid $c-light-gray;
 }
 
 .FabricColorSwatches__fabric-option {
@@ -12,17 +15,23 @@
   padding: 0px 15px;
 }
 
+
 .FabricColorSwatches__fabric-option--selected {
   outline: 2px solid $c-black;
 }
 
 .FabricColorSwatches__mini-swatch {
-  height: 17px;
-  width: 17px;
+  height: 30px;
+  width: 30px;
   margin-right: 10px;
   display: inline-block;
   position: relative;
   top: 2px;
+
+  @include sm {
+    height: 17px;
+    width: 17px;
+  }
 }
 
 .FabricColorSwatches__color-swatch-results {
