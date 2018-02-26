@@ -8,14 +8,22 @@ export function activateColorDrawer({ isActive }) {
   };
 }
 
-export function selectFabricColorGroup({ id }) {
+export function selectFabricColorGroup({ presentation }) {
   return {
     type: ProductConstants.SELECT_FABRIC_COLOR_GROUP,
-    id,
+    presentation,
+  };
+}
+
+export function selectFabricGroup(name) {
+  return {
+    type: ProductConstants.SELECT_FABRIC_GROUP,
+    name,
   };
 }
 
 export default {
   activateColorDrawer,
   selectFabricColorGroup,
+  selectFabricGroup,
 };

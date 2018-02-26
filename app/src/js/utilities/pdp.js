@@ -309,7 +309,7 @@ export function transformProductSecondaryColorsCentsPrice({ colors = {} }) {
   return productSecondaryColorsCentsPrice;
 }
 
-export function transformProductFabric({ fabric }) {
+export function transformProductFabricDescription({ fabric }) {
   console.warn('NEED BACKEND FABRIC IMG');
   //   "fabric": String,
   //   ****** into ******
@@ -328,8 +328,10 @@ export function transformProductFabric({ fabric }) {
 }
 
 export function transformProductFabricGroups({ fabrics }) {
-  if (!fabrics.table.default) return [];
-  return fabrics.table.default.reduce((accum, currVal) => {
+  if ((!fabrics.table.default && !fabrics.table.extra)) return [];
+
+  const combinedFabrics = fabrics.table.default.concat(fabrics.table.extra);
+  return combinedFabrics.reduce((accum, currVal) => {
     if (accum.indexOf(currVal.fabric.material) === -1) {
       return accum.concat(currVal.fabric.material);
     }
@@ -337,15 +339,16 @@ export function transformProductFabricGroups({ fabrics }) {
   }, []);
 }
 
-export function transformProductFabricList({ fabrics }) {
-  if (!fabrics.table.default) return [];
-  return fabrics.table.default.map((f) => {
+export function transformProductFabricColor(fabricList) {
+  if (!fabricList) return [];
+  return fabricList.map((f) => {
     const fabricDetails = f.fabric;
     return {
       id: fabricDetails.id,
+      belongsToColorGroups: f.color_groups,
+      audPrice: fabricDetails.price_aud,
       material: fabricDetails.material,
       presentation: fabricDetails.presentation,
-      audPrice: fabricDetails.price_aud,
       usdPrice: fabricDetails.price_usd,
     };
   });
@@ -494,9 +497,10 @@ export function transformProductJSON(productJSON) {
         currency: transformProductCurrency(productJSON.product),
         complementaryProducts: transformProductComplementaryProducts(productJSON.product),
         deliveryCopy: transformDeliveryCopy(productJSON.product),
-        fabric: transformProductFabric(productJSON.product),
+        fabric: transformProductFabricDescription(productJSON.product),
         fabricGroups: transformProductFabricGroups(productJSON.product),
-        fabrics: transformProductFabricList(productJSON.product),
+        productDefaultFabrics: transformProductFabricColor(productJSON.product.fabrics.table.default),
+        productSecondaryFabrics: transformProductFabricColor(productJSON.product.fabrics.table.extra),
         fastMaking: transformProductFastMaking(productJSON.product),
         garmentCareInformation: transformProductGarmentInformation(),
         preCustomizations: transformProductPreCustomizations(),
@@ -565,8 +569,8 @@ export default {
   transformProductColors,
   transformProductDescription,
   transformProductSecondaryColorsCentsPrice,
-  transformProductFabric,
-  transformProductFabricList,
+  transformProductFabricDescription,
+  transformProductFabricColor,
   transformProductGarmentInformation,
   transformProductId,
   transformProductImages,

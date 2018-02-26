@@ -12,6 +12,10 @@
   padding: 0px 15px;
 }
 
+.FabricColorSwatches__fabric-option--selected {
+  outline: 2px solid $c-black;
+}
+
 .FabricColorSwatches__mini-swatch {
   height: 17px;
   width: 17px;
@@ -21,8 +25,20 @@
   top: 2px;
 }
 
+.FabricColorSwatches__color-swatch-results {
+  margin-top: 230px;
+
+  @include md {
+    margin-top: 170px;
+  }
+  @include lg {
+    margin-top: 150px;
+  }
+}
+
 .FabricColorSwatches__mini-swatch--selected {
   outline: 2px solid black;
+  outline-offset: 1px;
 }
 
 .FabricColorSwatches__mini-swatch--purple {
@@ -73,8 +89,4 @@
   background: "url(product-color-images/Cheetah.png)";
   background-size: cover;
   background-size: 700%;
-}
-
-.FabricColorSwatches__filter-color-fabric {
-  padding: 20px 0;
 }

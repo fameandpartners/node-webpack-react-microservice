@@ -15,11 +15,11 @@ import FabricColorSwatches from './FabricColorSwatches';
 import ProductCustomization from './ProductCustomization';
 
 function stateToProps(state) {
-  const fabrics = state.$$productState.get('fabrics').toJS();
+  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
+  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
   return {
-    fabrics,
     fabricGroups: state.$$productState.get('fabricGroups').toJS(),
-    hasFabrics: fabrics && fabrics.length > 0,
+    hasFabrics: !productDefaultFabrics.isEmpty() || !productSecondaryFabrics.isEmpty(),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     productGroupColors: state.$$productState.get('productGroupColors').toJS(),
     productSecondaryColors: state.$$productState.get('productSecondaryColors').toJS(),
@@ -82,6 +82,8 @@ class ProductCustomizationColor extends PureComponent {
       hasNavItems,
       productCustomizationDrawer,
       productDefaultColors,
+      productDefaultFabrics,
+      productSecondaryFabrics,
       productGroupColors,
       productSecondaryColors,
       productSecondaryColorsCentsPrice,
@@ -99,9 +101,9 @@ class ProductCustomizationColor extends PureComponent {
             <FabricColorSwatches
               fabrics={fabrics}
               fabricGroups={fabricGroups}
-              productDefaultColors={productDefaultColors}
               productGroupColors={productGroupColors}
-              productSecondaryColors={productSecondaryColors}
+              productDefaultFabrics={productDefaultFabrics}
+              productSecondaryFabrics={productSecondaryFabrics}
               productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
               temporaryColorId={temporaryColorId}
               handleColorSelection={this.handleColorSelection}
@@ -140,6 +142,13 @@ ProductCustomizationColor.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
+  productDefaultFabrics: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    material: PropTypes.string,
+    presentation: PropTypes.string,
+    audPrice: PropTypes.string,
+    usdPrice: PropTypes.string,
+  })).isRequired,
   productGroupColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
   })).isRequired,
@@ -148,6 +157,13 @@ ProductCustomizationColor.propTypes = {
     name: PropTypes.string,
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
+  })).isRequired,
+  productSecondaryFabrics: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    material: PropTypes.string,
+    presentation: PropTypes.string,
+    audPrice: PropTypes.string,
+    usdPrice: PropTypes.string,
   })).isRequired,
   productSecondaryColorsCentsPrice: PropTypes.number,
   temporaryColorId: PropTypes.number,
