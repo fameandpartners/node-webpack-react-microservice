@@ -330,7 +330,7 @@ export function transformProductFabricDescription({ fabric }) {
     id: 'does-not-exist-yet',
     img: 'does-not-exist-yet.png',
     name: 'does-not-exist-yet',
-    description: fabric,
+    description: fabric || '',
   };
 }
 

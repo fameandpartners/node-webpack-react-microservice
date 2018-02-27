@@ -8,11 +8,19 @@ import { QUERY_PARAMS } from '../constants/AppConstants';
 // polyfills
 import win from '../polyfills/windowPolyfill';
 
-export function extractAndWhitelistQueryStringCustomizations(defaultColor, colors, addonOptions) {
+export function extractAndWhitelistQueryStringCustomizations(
+  defaultColor,
+  colors,
+  addonOptions,
+  fabrics,
+) {
   const queryStringCustomizations = {
     color: defaultColor || colors[0],
     customizations: [],
   };
+
+  console.log('fabrics', fabrics);
+  console.log('win.location.search', win.location.search);
 
   if (!win.isMockWindow && win.location.search) {
     const parsed = queryString.parse(win.location.search);
@@ -22,7 +30,10 @@ export function extractAndWhitelistQueryStringCustomizations(defaultColor, color
     if (parsed[QUERY_PARAMS.legacyColor]) { // LEGACY COLOR SYSTEM
       foundColor = find(colors, { name: parsed[QUERY_PARAMS.legacyColor] });
     } else if (parsed[QUERY_PARAMS.color]) { // NEW COLOR SYSTEM
-      foundColor = find(colors, { id: parseInt(parsed[QUERY_PARAMS.color], 10) });
+      const id = parseInt(parsed[QUERY_PARAMS.color], 10);
+      foundColor = fabrics && fabrics.length > 0
+        ? find(fabrics, { id })
+        : find(colors, { id });
     }
     queryStringCustomizations.color = foundColor || defaultColor || colors[0];
 

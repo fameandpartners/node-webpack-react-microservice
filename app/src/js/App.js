@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
@@ -54,8 +53,11 @@ function stateToProps(state) {
   const modalOpen = state.$$modalState.get('shouldAppear');
   const cartDrawerOpen = state.$$cartState.get('cartDrawerOpen');
   const customizationDrawerOpen = state.$$customizationState.get('productCustomizationDrawerOpen');
+  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics').toJS();
+  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics').toJS();
 
   return {
+    fabrics: productDefaultFabrics.concat(productSecondaryFabrics),
     selectedColor: state.$$customizationState.get('selectedColor'),
     $$productDefaultColors: state.$$productState.get('productDefaultColors'),
     $$productSecondaryColors: state.$$productState.get('productSecondaryColors'),
@@ -93,6 +95,7 @@ class App extends Component {
       $$addonOptions,
       $$productDefaultColors,
       $$productSecondaryColors,
+      fabrics,
       selectedColor,
       selectProductColor,
       setShareableQueryParams,
@@ -102,8 +105,10 @@ class App extends Component {
         selectedColor,
         $$productDefaultColors.toJS().concat($$productSecondaryColors.toJS()),
         $$addonOptions.toJS(),
+        fabrics,
       );
 
+      // If we have a color att
       if (color && color.id) {
         selectProductColor({ selectedColor: color });
       }
@@ -122,17 +127,17 @@ class App extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // IF SHOPPING SPREE IS AVAILBLE, BUILD IT
-    if( win.ShoppingSpreeData ) {
+    if (win.ShoppingSpreeData) {
       render(
-          <ShoppingSpree
-            firebaseAPI={window.ShoppingSpreeData.firebaseAPI}
-            firebaseDatabase={window.ShoppingSpreeData.firebaseDatabase}
-            isPDP
-          />,
+        <ShoppingSpree
+          firebaseAPI={win.ShoppingSpreeData.firebaseAPI}
+          firebaseDatabase={win.ShoppingSpreeData.firebaseDatabase}
+          isPDP
+        />,
 
-          document.getElementById( 'shopping-spree' )
+          win.document.getElementById('shopping-spree'),
       );
     }
   }
@@ -164,6 +169,7 @@ App.propTypes = {
   $$addonOptions: ImmutablePropTypes.list.isRequired,
   $$productDefaultColors: ImmutablePropTypes.list.isRequired,
   $$productSecondaryColors: ImmutablePropTypes.list.isRequired,
+  fabrics: PropTypes.array.isRequired,
   selectedColor: PropTypes.object.isRequired,
   selectProductColor: PropTypes.func.isRequired,
   setShareableQueryParams: PropTypes.func.isRequired,
