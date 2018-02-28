@@ -54,12 +54,15 @@ function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   const selectedColor = state.$$customizationState.get('selectedColor');
   const addons = state.$$customizationState.get('addons');
+  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
+  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
 
   return {
     // APP
     auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
 
     // PRODUCT
+    hasFabrics: !productDefaultFabrics.isEmpty() || !productSecondaryFabrics.isEmpty(),
     deliveryCopy: state.$$productState.get('deliveryCopy'),
     productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
@@ -238,6 +241,7 @@ class ProductOptions extends Component {
     const {
       auSite,
       deliveryCopy,
+      hasFabrics,
       productTitle,
       isActive,
       selectedStyleCustomizations,
@@ -269,7 +273,15 @@ class ProductOptions extends Component {
                 }
               />
               <ProductOptionsRow
-                leftNode={<span>{CustomizationConstants.COLOR_HEADLINE}</span>}
+                leftNode={(
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: hasFabrics
+                        ? CustomizationConstants.FABRIC_COLOR_HEADLINE
+                        : CustomizationConstants.COLOR_HEADLINE,
+                    }}
+                  />)
+                }
                 leftNodeClassName="u-uppercase"
                 optionIsSelected
                 rightNode={this.generateColorSelectionNode()}
@@ -365,6 +377,7 @@ ProductOptions.propTypes = {
     width: PropTypes.number,
     position: PropTypes.number,
   })).isRequired,
+  hasFabrics: PropTypes.bool.isRequired,
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,

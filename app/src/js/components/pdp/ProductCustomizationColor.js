@@ -76,14 +76,11 @@ class ProductCustomizationColor extends PureComponent {
 
   render() {
     const {
-      fabrics,
       fabricGroups,
       hasFabrics,
       hasNavItems,
       productCustomizationDrawer,
       productDefaultColors,
-      productDefaultFabrics,
-      productSecondaryFabrics,
       productGroupColors,
       productSecondaryColors,
       productSecondaryColorsCentsPrice,
@@ -99,11 +96,8 @@ class ProductCustomizationColor extends PureComponent {
         { hasFabrics
           ?
             <FabricColorSwatches
-              fabrics={fabrics}
               fabricGroups={fabricGroups}
               productGroupColors={productGroupColors}
-              productDefaultFabrics={productDefaultFabrics}
-              productSecondaryFabrics={productSecondaryFabrics}
               productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
               temporaryColorId={temporaryColorId}
               handleColorSelection={this.handleColorSelection}
@@ -126,13 +120,6 @@ ProductCustomizationColor.propTypes = {
   // Normal Props
   hasNavItems: PropTypes.bool,
   // Redux Props
-  fabrics: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    material: PropTypes.string,
-    presentation: PropTypes.string,
-    audPrice: PropTypes.string,
-    usdPrice: PropTypes.string,
-  })).isRequired,
   fabricGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
   hasFabrics: PropTypes.bool,
   productCustomizationDrawer: PropTypes.string,
@@ -142,13 +129,6 @@ ProductCustomizationColor.propTypes = {
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
   })).isRequired,
-  productDefaultFabrics: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    material: PropTypes.string,
-    presentation: PropTypes.string,
-    audPrice: PropTypes.string,
-    usdPrice: PropTypes.string,
-  })).isRequired,
   productGroupColors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
   })).isRequired,
@@ -157,13 +137,6 @@ ProductCustomizationColor.propTypes = {
     name: PropTypes.string,
     hexValue: PropTypes.string,
     patternUrl: PropTypes.string,
-  })).isRequired,
-  productSecondaryFabrics: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    material: PropTypes.string,
-    presentation: PropTypes.string,
-    audPrice: PropTypes.string,
-    usdPrice: PropTypes.string,
   })).isRequired,
   productSecondaryColorsCentsPrice: PropTypes.number,
   temporaryColorId: PropTypes.number,

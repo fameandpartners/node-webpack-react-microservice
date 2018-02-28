@@ -71,7 +71,6 @@ class CartDrawer extends Component {
   render() {
     const {
       cartDrawerOpen,
-      // complementaryProducts,
       lineItems,
     } = this.props;
 
