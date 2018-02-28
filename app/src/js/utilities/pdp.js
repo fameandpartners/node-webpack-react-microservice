@@ -397,6 +397,7 @@ export function transformProductImages(images) {
   //   position: Number
   return images.map(i => ({
     id: i.id,
+    fabricId: i.fabric_id,
     colorId: i.color_id,
     smallImg: i.url_product,
     bigImg: i.url,
