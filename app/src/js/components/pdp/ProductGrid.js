@@ -51,7 +51,7 @@ class ProductGrid extends Component {
   getProductImages() {
     const { selectedColorId: id, $$productImages } = this.props;
     const productImages = $$productImages.toJS();
-    const colorMatch = find(productImages, { colorId: selectedColorId });
+    const colorMatch = find(productImages, { colorId: id });
     const firstColorId = productImages[0].colorId;
 
     return productImages
