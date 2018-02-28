@@ -121,8 +121,8 @@ class ProductImageSlider extends Component {
   getSliderImages() {
     const { productImages, hasFabrics, selectedColorId: id } = this.props;
     const colorMatch = hasFabrics
-      ? find(productImages, { colorId: id })
-      : find(productImages, { fabricId: id });
+      ? find(productImages, { fabricId: id })
+      : find(productImages, { colorId: id });
     const firstColorId = productImages[0].colorId;
     return productImages
       .filter(img => (this.doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId })))

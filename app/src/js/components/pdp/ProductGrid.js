@@ -36,14 +36,26 @@ class ProductGrid extends Component {
     autoBind(this);
   }
 
+  doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId }) {
+    const { hasFabrics } = this.props;
+    if (colorMatch) {
+      return hasFabrics
+        ? img.fabricId === id
+        : img.colorId === id;
+    }
+    return hasFabrics
+        ? img.fabricId === firstColorId
+        : img.colorId === firstColorId;
+  }
+
   getProductImages() {
-    const { selectedColorId, $$productImages } = this.props;
+    const { selectedColorId: id, $$productImages } = this.props;
     const productImages = $$productImages.toJS();
     const colorMatch = find(productImages, { colorId: selectedColorId });
     const firstColorId = productImages[0].colorId;
 
     return productImages
-      .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
+      .filter(img => (this.doesImageHaveColorIdMatch({img, id, colorMatch, firstColorId})))
       .filter((img, i) => i !== 0) // slice off first image
       .map((img, idx) => (
         <div className="col-6" key={img.id}>
