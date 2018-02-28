@@ -380,6 +380,8 @@ export function transformProductId({ id = 'dress-id' }) {
 }
 
 export function transformProductImages(images) {
+  // eslint-disable-next-line
+  debugger;
   //   "id": Number,
   //   "url": String,
   //   "url_product": String,
