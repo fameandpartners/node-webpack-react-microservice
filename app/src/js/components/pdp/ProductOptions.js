@@ -229,8 +229,8 @@ class ProductOptions extends Component {
     const { $$productImages, hasFabrics, colorId: id } = this.props;
     const productImages = $$productImages.toJS();
     const hasMatch = hasFabrics
-      ? find(productImages, { colorId: id })
-      : find(productImages, { fabricId: id });
+      ? find(productImages, { fabricId: id })
+      : find(productImages, { colorId: id });
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
   }
 
