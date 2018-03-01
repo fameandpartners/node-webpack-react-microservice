@@ -217,10 +217,10 @@ class Cart extends Component {
           >
             <CancelOut />
           </span>
-          <div className="col-5 u-mr--small">
+          <div className="col-5">
             <img className="u-width--full" alt="dress1" src={productImage} />
           </div>
-          <div className="u-text-align--left">
+          <div className="col-7 u-text-align--left">
             <span className="Cart__line-description u-bold">
               {this.generateTitle(lineItem, productTitle)}&nbsp;
               <span>{formatCents(productCentsBasePrice, 2)}</span>
