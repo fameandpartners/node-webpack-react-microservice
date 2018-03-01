@@ -351,6 +351,7 @@ function transformProductFabricColor(fabricMeta) {
   return {
     id: fabricDetails.id,
     belongsToColorGroups: fabricMeta.color_groups,
+    description: fabricDetails.description || '',
     patternUrl: fabricDetails.image_url,
     audPrice: fabricDetails.price_aud,
     material: fabricDetails.material,

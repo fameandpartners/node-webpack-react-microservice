@@ -145,7 +145,7 @@ class FabricColorSwatches extends PureComponent {
     const { hasFabrics, temporaryColorId } = this.props;
     const isActive = temporaryColorId === color.id;
     const background = generateBackgroundValueFromColor(color);
-    const centsPrice = hasFabrics ? parseInt(color.usdPrice, 10) : price;
+    const centsPrice = hasFabrics ? color.usdPrice : formatCents(price, 0);
 
     return (
       <div
@@ -181,7 +181,7 @@ class FabricColorSwatches extends PureComponent {
           >
             <h6 className="ColorSwatches__text">
               {color.presentation}
-              {centsPrice ? <span>&nbsp;{formatCents(centsPrice, 0)}</span> : null }
+              {centsPrice ? <span>&nbsp;{centsPrice}</span> : null }
             </h6>
           </span>
         </div>
