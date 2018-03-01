@@ -29,7 +29,7 @@ class ProductCustomizationNavigation extends PureComponent {
   }
 
   render() {
-    const { productCustomizationDrawer } = this.props;
+    const { colorHeadline, productCustomizationDrawer } = this.props;
     return (
       <div className="ProductCustomizationNavigation__nav">
         <div className="grid-middle u-height--full u-position--absolute">
@@ -43,9 +43,8 @@ class ProductCustomizationNavigation extends PureComponent {
                   'ProductCustomizationNavigation__nav-item-text',
                 { 'ProductCustomizationNavigation__nav-item-text--active': productCustomizationDrawer === COLOR_CUSTOMIZE },
               )}
-              >
-                {COLOR_HEADLINE}
-              </span>
+                dangerouslySetInnerHTML={{ __html: colorHeadline }}
+              />
             </li>
             <li
               onClick={this.handleDrawerSelection(STYLE_CUSTOMIZE)}
@@ -77,11 +76,14 @@ class ProductCustomizationNavigation extends PureComponent {
 }
 
 ProductCustomizationNavigation.propTypes = {
+  colorHeadline: PropTypes.string,
   productCustomizationDrawer: PropTypes.string.isRequired,
   handleDrawerSelection: PropTypes.func.isRequired,
 };
 
-ProductCustomizationNavigation.defaultProps = {};
+ProductCustomizationNavigation.defaultProps = {
+  colorHeadline: COLOR_HEADLINE,
+};
 
 
 export default ProductCustomizationNavigation;
