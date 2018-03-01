@@ -99,6 +99,7 @@ export const $$initialState = Immutable.fromJS({
   // ArrayOf({
   //   id: Number,
   //   colorId: Number,
+  //   fabricId: Number,
   //   smallImg: String,
   //   bigImg: String
   //   height: Number
