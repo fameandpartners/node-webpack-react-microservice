@@ -17,10 +17,14 @@ import '../../../css/components/ExpressMaking.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   const selectedColor = state.$$customizationState.get('selectedColor');
+  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
+  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
 
   return {
     // PRODUCT
     expressMakingAvailable: state.$$productState.get('fastMaking'),
+    hasFabrics: !productDefaultFabrics.isEmpty() || !productSecondaryFabrics.isEmpty(),
+    productDefaultFabrics: productDefaultFabrics.toJS(),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     isActive: state.$$productState.get('isActive'),
 
@@ -51,6 +55,11 @@ class ExpressMaking extends Component {
   }
 
   isExpressEligible(colorId, defaultColors) {
+    const { hasFabrics, productDefaultFabrics } = this.props;
+    if (hasFabrics) {
+      return productDefaultFabrics.filter(color => color.id === colorId).length > 0;
+    }
+
     return defaultColors.filter(color => color.id === colorId).length > 0;
   }
 
@@ -74,6 +83,8 @@ class ExpressMaking extends Component {
       isActive,
       mobile,
     } = this.props;
+    // PRODUCT
+
     if (expressMakingAvailable && isActive) {
       return (
         <div className="grid-center-spaceAround ExpressMaking__content u-mb--small js-express-make">
@@ -141,7 +152,9 @@ ExpressMaking.propTypes = {
   setExpressMakingStatus: PropTypes.func,
   expressMakingStatus: PropTypes.bool,
   expressMakingAvailable: PropTypes.bool,
+  hasFabrics: PropTypes.bool.isRequired,
   productDefaultColors: PropTypes.arrayOf(PropTypes.object),
+  productDefaultFabrics: PropTypes.arrayOf(PropTypes.object),
   isActive: PropTypes.bool.isRequired,
   colorId: PropTypes.number,
   mobile: PropTypes.bool,
@@ -152,6 +165,7 @@ ExpressMaking.defaultProps = {
   expressMakingStatus: false,
   expressMakingAvailable: false,
   productDefaultColors: [],
+  productDefaultFabrics: [],
   colorId: null,
   mobile: false,
 };

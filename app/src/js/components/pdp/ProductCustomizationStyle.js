@@ -22,6 +22,8 @@ import '../../../css/components/ProductCustomizationStyle.scss';
 
 function stateToProps(state) {
   const addons = state.$$customizationState.get('addons').toJS();
+  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
+  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
   return {
     addonLayerImages: addons.addonLayerImages,
     addonOptions: addons.addonOptions,
@@ -29,6 +31,7 @@ function stateToProps(state) {
     addonsBasesComputed: addons.addonsBasesComputed,
     baseImages: addons.baseImages,
     baseSelected: addons.baseSelected,
+    hasFabrics: !productDefaultFabrics.isEmpty() || !productSecondaryFabrics.isEmpty(),
     isLegacyCADCustomizations: addons.isLegacyCADCustomizations,
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     selectedAddonImageLayers: addons.selectedAddonImageLayers,
@@ -362,6 +365,7 @@ class ProductCustomizationStyle extends Component {
   render() {
     const {
       clearAll,
+      hasFabrics,
       hasNavItems,
       isLegacyCADCustomizations,
       productCustomizationDrawer,
@@ -369,6 +373,7 @@ class ProductCustomizationStyle extends Component {
 
     return (
       <ProductCustomization
+        hasFabrics={hasFabrics}
         hasNavItems={hasNavItems}
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
@@ -417,6 +422,7 @@ ProductCustomizationStyle.propTypes = {
   baseImages: PropTypes.array,
   baseSelected: PropTypes.number,
   isLegacyCADCustomizations: PropTypes.bool.isRequired,
+  hasFabrics: PropTypes.bool.isRequired,
   productCustomizationDrawer: PropTypes.string,
   selectedAddonImageLayers: PropTypes.array,
   temporaryStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
@@ -436,6 +442,7 @@ ProductCustomizationStyle.defaultProps = {
   addonsBasesComputed: null,
   baseImages: null,
   baseSelected: null,
+  hasFabrics: false,
   hasNavItems: true,
   selectedAddonImageLayers: [],
   selectedColorId: '',

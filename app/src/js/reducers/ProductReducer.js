@@ -40,6 +40,7 @@ export const $$initialState = Immutable.fromJS({
   // })
   productDefaultFabrics: [],
   productSecondaryFabrics: [],
+  hasFabrics: false,
 
   // ArrayOf(Number)
   fabricColorGroupSelections: [],
@@ -99,6 +100,7 @@ export const $$initialState = Immutable.fromJS({
   // ArrayOf({
   //   id: Number,
   //   colorId: Number,
+  //   fabricId: Number,
   //   smallImg: String,
   //   bigImg: String
   //   height: Number

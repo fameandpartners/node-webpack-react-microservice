@@ -351,6 +351,7 @@ function transformProductFabricColor(fabricMeta) {
   return {
     id: fabricDetails.id,
     belongsToColorGroups: fabricMeta.color_groups,
+    description: fabricDetails.description || '',
     patternUrl: fabricDetails.image_url,
     audPrice: fabricDetails.price_aud,
     material: fabricDetails.material,
@@ -537,6 +538,7 @@ export function transformProductJSON(productJSON) {
         sizeChart: transformProductSizeChart(productJSON),
         sku: transformSKU(productJSON.product),
       };
+      productState.hasFabrics = productState.productDefaultFabrics.length > 0 || productState.productSecondaryFabrics.length > 0;
     } else {
       productState = {};
     }

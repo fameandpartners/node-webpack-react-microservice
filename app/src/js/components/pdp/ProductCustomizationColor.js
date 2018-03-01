@@ -89,6 +89,7 @@ class ProductCustomizationColor extends PureComponent {
 
     return (
       <ProductCustomization
+        hasFabrics={hasFabrics}
         hasNavItems={hasNavItems}
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}

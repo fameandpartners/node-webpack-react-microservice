@@ -24,6 +24,13 @@ export const $$initialState = Immutable.fromJS({
   //   centsTotal: Number,
   //   hexValue: String,
   //   patternUrl,
+  //   Optional:
+  //    description: String
+  //    belongsToColorGroups: ArrayOf(String),
+  //    audPrice: String,
+  //    material: String,
+  //    presentation: String,
+  //    usdPrice: string,
   // })
   temporaryColor: null,
   selectedColor: null,

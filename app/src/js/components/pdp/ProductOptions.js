@@ -54,15 +54,13 @@ function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   const selectedColor = state.$$customizationState.get('selectedColor');
   const addons = state.$$customizationState.get('addons');
-  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
-  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
 
   return {
     // APP
     auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
 
     // PRODUCT
-    hasFabrics: !productDefaultFabrics.isEmpty() || !productSecondaryFabrics.isEmpty(),
+    hasFabrics: state.$$productState.get('hasFabrics'),
     deliveryCopy: state.$$productState.get('deliveryCopy'),
     productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
@@ -76,6 +74,7 @@ function stateToProps(state) {
     colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
+    colorPrice: selectedColor.get('usdPrice'),
     patternUrl: selectedColor.get('patternUrl'),
     expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
 
@@ -111,18 +110,21 @@ class ProductOptions extends Component {
       colorCentsTotal,
       colorName,
       colorHexValue,
+      colorPrice,
+      hasFabrics,
       patternUrl,
     } = this.props;
     const background = generateBackgroundValueFromColor({
       hexValue: colorHexValue,
       patternUrl,
     });
+    const price = hasFabrics ? colorPrice : formatCents(colorCentsTotal, 0);
 
     return (
       <span>
         <span>{colorName}</span>&nbsp;
-        { colorCentsTotal
-          ? <span>+{formatCents(colorCentsTotal, 0)}</span>
+        { price && price !== '$0'
+          ? <span>+{price}</span>
           : null
         }
         <span
@@ -388,6 +390,7 @@ ProductOptions.propTypes = {
   colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
+  colorPrice: PropTypes.number,
   patternUrl: PropTypes.string.isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
@@ -411,6 +414,7 @@ ProductOptions.propTypes = {
 ProductOptions.defaultProps = {
   addonOptions: [],
   colorCentsTotal: 0,
+  colorPrice: 0,
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
