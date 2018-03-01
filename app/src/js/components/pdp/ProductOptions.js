@@ -123,7 +123,7 @@ class ProductOptions extends Component {
     return (
       <span>
         <span>{colorName}</span>&nbsp;
-        { price
+        { price && price !== '$0'
           ? <span>+{price}</span>
           : null
         }
