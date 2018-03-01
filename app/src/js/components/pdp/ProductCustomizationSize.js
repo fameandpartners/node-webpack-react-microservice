@@ -34,11 +34,9 @@ import Button from '../generic/Button';
 import '../../../css/components/ProductCustomizationSize.scss';
 
 function stateToProps(state) {
-  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
-  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
   return {
     isUSSiteVersion: state.$$appState.get('siteVersion').toLowerCase() === 'usa',
-    hasFabrics: !productDefaultFabrics.isEmpty() || !productSecondaryFabrics.isEmpty(),
+    hasFabrics: state.$$productState.get('hasFabrics'),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),

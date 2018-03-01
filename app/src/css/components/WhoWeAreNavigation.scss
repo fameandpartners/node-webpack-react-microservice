@@ -1,6 +1,7 @@
 .WhoWeAreNavigation__link-container {
   padding-top: 15px;
   max-width: 450px;
+  margin: 0 auto;
 
   @include md {
     max-width: 750px;

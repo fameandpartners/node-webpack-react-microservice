@@ -40,6 +40,7 @@ export const $$initialState = Immutable.fromJS({
   // })
   productDefaultFabrics: [],
   productSecondaryFabrics: [],
+  hasFabrics: false,
 
   // ArrayOf(Number)
   fabricColorGroupSelections: [],

@@ -25,6 +25,7 @@ import '../../../css/components/FabricColorSwatches.scss';
 
 function stateToProps({ $$productState }) {
   return {
+    hasFabrics: $$productState.get('hasFabrics'),
     productDefaultFabrics: $$productState.get('productDefaultFabrics').toJS(),
     productSecondaryFabrics: $$productState.get('productSecondaryFabrics').toJS(),
     fabricColorGroupSelections: $$productState.get('fabricColorGroupSelections').toJS(),
@@ -141,9 +142,10 @@ class FabricColorSwatches extends PureComponent {
   }
 
   generateFabricSwatch(color, price = 0) {
-    const { temporaryColorId } = this.props;
+    const { hasFabrics, temporaryColorId } = this.props;
     const isActive = temporaryColorId === color.id;
     const background = generateBackgroundValueFromColor(color);
+    const centsPrice = hasFabrics ? parseInt(color.usdPrice, 10) : price;
 
     return (
       <div
@@ -179,7 +181,7 @@ class FabricColorSwatches extends PureComponent {
           >
             <h6 className="ColorSwatches__text">
               {color.presentation}
-              {price ? <span>&nbsp;{formatCents(price, 0)}</span> : null }
+              {centsPrice ? <span>&nbsp;{formatCents(centsPrice, 0)}</span> : null }
             </h6>
           </span>
         </div>
@@ -223,7 +225,7 @@ class FabricColorSwatches extends PureComponent {
             ? (
               <div>
                 <p className="u-mb--small textAlign--left u-bold">
-                  Recommended Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
+                  Recommended Colors
                 </p>
                 <div className="grid-12">
                   { filteredDefaultFabrics.map(c => this.generateFabricSwatch(c, 0))}
@@ -236,7 +238,7 @@ class FabricColorSwatches extends PureComponent {
             ? (
               <div>
                 <p className="u-mb--small textAlign--left u-bold">
-                  Additional Colors +{formatCents(productSecondaryColorsCentsPrice, 0)}
+                  Additional Colors
                 </p>
                 <div className="u-mb--normal grid-12">
                   { filteredSecondaryFabrics.map(c =>
@@ -257,6 +259,7 @@ FabricColorSwatches.propTypes = {
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
   // Redux Props
+  hasFabrics: PropTypes.bool.isRequired,
   fabricColorGroupSelections: PropTypes.arrayOf(PropTypes.number).isRequired,
   fabricGroupSelections: PropTypes.arrayOf(PropTypes.number).isRequired,
   // Redux Actions
