@@ -355,6 +355,7 @@ function transformProductFabricColor(fabricMeta) {
     patternUrl: fabricDetails.image_url,
     audPrice: fabricDetails.price_aud,
     material: fabricDetails.material,
+    name: fabricDetails.name,
     presentation: fabricDetails.presentation,
     usdPrice: fabricDetails.price_usd,
   };
