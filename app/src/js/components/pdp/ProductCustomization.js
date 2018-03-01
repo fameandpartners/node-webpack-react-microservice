@@ -34,7 +34,7 @@ class ProductCustomization extends PureComponent {
               <div className="grid-12">
                 <div className="col-1">
                   <ProductCustomizationNavigation
-                    colorHeadline={hasFabrics ? FABRIC_COLOR_HEADLINE : null}
+                    colorHeadline={hasFabrics ? FABRIC_COLOR_HEADLINE : undefined}
                     handleDrawerSelection={handleDrawerSelection}
                     productCustomizationDrawer={productCustomizationDrawer}
                   />
