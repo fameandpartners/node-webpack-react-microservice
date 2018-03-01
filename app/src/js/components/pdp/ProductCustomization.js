@@ -3,6 +3,11 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+// Constants
+import {
+  FABRIC_COLOR_HEADLINE,
+} from '../../constants/CustomizationConstants';
+
 // UI Components
 import ProductCustomizationNavigation from './ProductCustomizationNavigation';
 
@@ -15,6 +20,7 @@ class ProductCustomization extends PureComponent {
   render() {
     const {
       children,
+      hasFabrics,
       hasNavItems,
       handleDrawerSelection,
       productCustomizationDrawer,
@@ -28,6 +34,7 @@ class ProductCustomization extends PureComponent {
               <div className="grid-12">
                 <div className="col-1">
                   <ProductCustomizationNavigation
+                    colorHeadline={hasFabrics ? FABRIC_COLOR_HEADLINE : null}
                     handleDrawerSelection={handleDrawerSelection}
                     productCustomizationDrawer={productCustomizationDrawer}
                   />
@@ -64,12 +71,14 @@ class ProductCustomization extends PureComponent {
 ProductCustomization.propTypes = {
   // Normal Props
   children: PropTypes.node.isRequired,
+  hasFabrics: PropTypes.bool,
   hasNavItems: PropTypes.bool,
   productCustomizationDrawer: PropTypes.string,
   handleDrawerSelection: PropTypes.func.isRequired,
 };
 
 ProductCustomization.defaultProps = {
+  hasFabrics: false,
   hasNavItems: true,
   productCustomizationDrawer: null,
   selectedColorId: '',
