@@ -28,7 +28,10 @@ export function extractAndWhitelistQueryStringCustomizations(
     // COLOR
     let foundColor = null;
     if (parsed[QUERY_PARAMS.legacyColor]) { // LEGACY COLOR SYSTEM
-      foundColor = find(colors, { name: parsed[QUERY_PARAMS.legacyColor] });
+      debugger;
+      foundColor = fabrics && fabrics.length > 0
+        ? find(fabrics, { name: parsed[QUERY_PARAMS.legacyColor] })
+        : find(colors, { name: parsed[QUERY_PARAMS.legacyColor] });
     } else if (parsed[QUERY_PARAMS.color]) { // NEW COLOR SYSTEM
       const id = parseInt(parsed[QUERY_PARAMS.color], 10);
       foundColor = fabrics && fabrics.length > 0
