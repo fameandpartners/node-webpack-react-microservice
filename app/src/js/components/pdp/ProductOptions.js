@@ -118,7 +118,9 @@ class ProductOptions extends Component {
       hexValue: colorHexValue,
       patternUrl,
     });
-    const price = hasFabrics ? colorPrice : formatCents(colorCentsTotal, 0);
+    const price = hasFabrics
+      ? formatCents(parseInt(colorPrice, 10) * 100, 0)
+      : formatCents(colorCentsTotal, 0);
 
     return (
       <span>
