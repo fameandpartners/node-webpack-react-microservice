@@ -43,11 +43,15 @@ import '../css/layout.scss';
 import '../css/animations.scss';
 import '../css/components/App.scss';
 
-// Configure Error Tracking
-Raven
+try {
+  // Configure Error Tracking
+  Raven
   .config('https://bc3111a59f064fbba31becef25d2fb7c@sentry.io/88252')
   .install();
-
+} catch (e) {
+  console.log('Raven configuration is busted');
+  console.log(e);
+}
 
 function stateToProps(state) {
   const sideMenuOpen = state.$$appState.get('sideMenuOpen');
