@@ -87,10 +87,10 @@ class ExpressMaking extends Component {
           </div>
           <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
             <p className="ExpressMaking__content--headline">
-              Make it Express + $30
+              Make it Express + $18
             </p>
             <p className="ExpressMaking__content--subHeadline">
-              Get it in 4-6 business days
+              Get it in 2-3 weeks
             </p>
             <p
               className={classnames(

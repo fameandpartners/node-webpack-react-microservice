@@ -60,7 +60,7 @@ class BDAddToCartButtonLedge extends Component {
 
   generateDeliveryCopy() {
     const { deliveryCopy, expressMakingSelected } = this.props;
-    return expressMakingSelected ? '4-6 business days' : deliveryCopy;
+    return expressMakingSelected ? '2-3 weeks' : deliveryCopy;
   }
 
   generateSizingButtonText() {
