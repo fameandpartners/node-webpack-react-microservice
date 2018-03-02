@@ -88,7 +88,7 @@
     "qs": "^6.5.1",
     "query-string": "^5.0.0",
     "raf": "^3.3.2",
-    "raven-js": "^3.17.0",
+    "raven-js": "3.6",
     "react": "^16.0.0",
     "react-autobind": "^1.0.6",
     "react-dom": "^16.0.0",
