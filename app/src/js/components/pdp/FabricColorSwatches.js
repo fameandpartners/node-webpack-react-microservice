@@ -146,9 +146,7 @@ class FabricColorSwatches extends PureComponent {
     const isActive = temporaryColorId === color.id;
     const background = generateBackgroundValueFromColor(color);
 
-    const displayPrice = hasFabrics
-      ? formatCents(parseInt(price, 10) * 100, 0)
-      : formatCents(price, 0);
+    const displayPrice = formatCents(price, 0);
 
     return (
       <div
