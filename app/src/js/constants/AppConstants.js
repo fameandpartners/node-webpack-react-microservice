@@ -2,7 +2,7 @@ import { assign } from 'lodash';
 import mirrorCreator from 'mirror-creator';
 
 // Utilities
-import { siteVersionAU } from '../utilities/helpers';
+// import { siteVersionAU } from '../utilities/helpers';
 
 const actionTypes = assign({},
   mirrorCreator([
