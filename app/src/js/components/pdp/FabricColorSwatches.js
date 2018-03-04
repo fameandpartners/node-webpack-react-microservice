@@ -141,14 +141,11 @@ class FabricColorSwatches extends PureComponent {
     ));
   }
 
-  generateFabricSwatch(color, price = 0) {
-    const { hasFabrics, temporaryColorId } = this.props;
+  generateFabricSwatch(color) {
+    const { temporaryColorId } = this.props;
     const isActive = temporaryColorId === color.id;
     const background = generateBackgroundValueFromColor(color);
-
-    const displayPrice = hasFabrics
-      ? formatCents(parseInt(price, 10), 0)
-      : formatCents(price, 0);
+    const displayPrice = formatCents(parseInt(color.usdPrice, 10) * 100, 0);
 
     return (
       <div
@@ -196,7 +193,6 @@ class FabricColorSwatches extends PureComponent {
   }
 
   render() {
-    const { productSecondaryColorsCentsPrice } = this.props;
     const { filteredDefaultFabrics, filteredSecondaryFabrics } = this.filterFabrics();
     const fabricGroupSelections = this.generateFabricGroupSelections();
 
@@ -248,7 +244,7 @@ class FabricColorSwatches extends PureComponent {
                 </p>
                 <div className="u-mb--normal grid-12">
                   { filteredSecondaryFabrics.map(c =>
-                    this.generateFabricSwatch(c, productSecondaryColorsCentsPrice))
+                    this.generateFabricSwatch(c, c.usdPrice))
                   }
                 </div>
               </div>
@@ -265,7 +261,6 @@ FabricColorSwatches.propTypes = {
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,
   // Redux Props
-  hasFabrics: PropTypes.bool.isRequired,
   fabricColorGroupSelections: PropTypes.arrayOf(PropTypes.number).isRequired,
   fabricGroupSelections: PropTypes.arrayOf(PropTypes.number).isRequired,
   // Redux Actions
@@ -290,7 +285,6 @@ FabricColorSwatches.propTypes = {
     audPrice: PropTypes.string,
     usdPrice: PropTypes.string,
   })).isRequired,
-  productSecondaryColorsCentsPrice: PropTypes.number.isRequired,
   temporaryColorId: PropTypes.number.isRequired,
   handleColorSelection: PropTypes.func.isRequired,
 };

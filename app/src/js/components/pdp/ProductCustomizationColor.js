@@ -99,7 +99,6 @@ class ProductCustomizationColor extends PureComponent {
             <FabricColorSwatches
               fabricGroups={fabricGroups}
               productGroupColors={productGroupColors}
-              productSecondaryColorsCentsPrice={productSecondaryColorsCentsPrice}
               temporaryColorId={temporaryColorId}
               handleColorSelection={this.handleColorSelection}
             />
