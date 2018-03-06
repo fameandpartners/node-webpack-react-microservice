@@ -109,12 +109,6 @@ class Footer extends PureComponent {
           </ul>
           <ul className="col-2_sm-4_xs-0 Footer__category-list">
             <li><p className="Footer__category-title">Shop By</p></li>
-// commenting out Best Sellers per Tania's request because we can't merchandise it right now due to changes in color+fabric info
-//            <li>
-//              <p>
-//                <a className="link--static" href="/dresses/best-sellers">Best Sellers</a>
-//              </p>
-//            </li>
             <li>
               <p>
                 <a className="link--static" href="/dresses?order=newest">New Arrivals</a>

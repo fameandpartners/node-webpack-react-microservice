@@ -125,11 +125,6 @@ const navigationLinks = {
       },
     ],
     FEATURED: [
-// commenting out Best Sellers per Tania's request because we can't merchandise it right now due to changes in color+fabric info 
-//      {
-//        text: 'Best Sellers',
-//        url: '/dresses/best-sellers',
-//      },
       {
         text: 'New Arrivals',
         url: '/dresses/new-this-week',
