@@ -1,0 +1,9 @@
+.SizeProfile__button {
+  background: $c-background-gray;
+  color: $c-black;
+  border: 1px solid $c-medium-gray;
+
+  &:hover {
+    background-color: $c-border-gray;
+  }
+}

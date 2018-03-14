@@ -10,7 +10,6 @@ import classnames from 'classnames';
 // Utilities
 import noop from '../../libs/noop';
 import { formatCents } from '../../utilities/accounting';
-import { sizeProfilePresence } from '../../utilities/pdpValidations';
 import {
   isExtremeLightLuminance,
   generateBackgroundValueFromColor,
@@ -50,6 +49,7 @@ import afterpayImage from '../../../img/test/afterpay.png';
 
 // UI Components
 import AddToCartButton from './AddToCartButton';
+import SizeProfileButton from './SizeProfileButton';
 
 
 function stateToProps(state) {
@@ -224,7 +224,7 @@ class ProductOptions extends Component {
     });
   }
 
-  showSelectSizeProfileModal() {
+  showSizeProfileModal() {
     this.props.jumpToStep({
       activeStepId: WizardConstants.SELECT_SIZE_PROFILE_STEP,
       shouldAppear: true,
@@ -237,13 +237,9 @@ class ProductOptions extends Component {
    */
   handleProductOptionClick(drawer) {
     return () => {
-      if (drawer === CustomizationConstants.SIZE_CUSTOMIZE) {
-        this.showSelectSizeProfileModal();
-      } else {
-        this.props.activateCustomizationDrawer({
-          productCustomizationDrawer: drawer,
-        });
-      }
+      this.props.activateCustomizationDrawer({
+        productCustomizationDrawer: drawer,
+      });
     };
   }
 
@@ -274,13 +270,10 @@ class ProductOptions extends Component {
   render() {
     const {
       auSite,
-      deliveryCopy,
-      hasFabrics,
       productTitle,
       isActive,
+      hasFabrics,
       selectedStyleCustomizations,
-      selectedDressSize,
-      selectedHeightValue,
     } = this.props;
 
     return (
@@ -328,22 +321,10 @@ class ProductOptions extends Component {
                 rightNode={this.generateAddonSelectionNode()}
                 handleClick={this.handleProductOptionClick(CustomizationConstants.STYLE_CUSTOMIZE)}
               />
-              <ProductOptionsRow
-                leftNode={<span>{CustomizationConstants.SIZE_HEADLINE}</span>}
-                leftNodeClassName="u-uppercase"
-                optionIsSelected={sizeProfilePresence(selectedDressSize, selectedHeightValue)}
-                rightNode={this.generateSizingNode()}
-                handleClick={this.handleProductOptionClick(CustomizationConstants.SIZE_CUSTOMIZE)}
-              />
             </div>
 
 
             <ExpressMaking />
-
-            <div className="ProductOptions__ctas grid-1 u-mb--small">
-              <AddToCartButton showTotal={false} shouldActivateCartDrawer />
-            </div>
-
             {isActive ?
               <div className="ProductOptions__additional-info u-mt-small u-mb--normal">
 
@@ -393,6 +374,35 @@ class ProductOptions extends Component {
             }
           </div>
         </div>
+        <div className="ProductOptions__action-buttons u-mt--normal col-8 u-center">
+          <div className="grid-12-noGutter">
+            <div className="ProductOptions__ctas u-mb--small col-6">
+              <SizeProfileButton
+                handleClick={this.showSizeProfileModal}
+              />
+            </div>
+            <div className="ProductOptions__ctas u-mb--small col-6">
+              <AddToCartButton showTotal={false} shouldActivateCartDrawer />
+            </div>
+            <div className="col-12">
+              <p className="u-mb--small">
+                {
+                  selectedStyleCustomizations.length === 0
+                  ? 'Shipping and returns are free.'
+                  : 'Shipping is free on your customized item.'
+                } &nbsp;
+                <a
+                  className="link link--static"
+                  href="/faqs#collapse-returns-policy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                Learn&nbsp;more
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -437,7 +447,6 @@ ProductOptions.propTypes = {
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
   jumpToStep: PropTypes.func,
-  deliveryCopy: PropTypes.string,
   expressMakingSelected: PropTypes.bool,
   superExpressMakingSelected: PropTypes.bool,
 
@@ -451,7 +460,6 @@ ProductOptions.defaultProps = {
   selectedHeightValue: null,
   activateModal: noop,
   jumpToStep: noop,
-  deliveryCopy: '',
   expressMakingSelected: false,
   superExpressMakingSelected: false,
 };
