@@ -22,6 +22,9 @@ import * as CartActions from '../../actions/CartActions';
 import * as CustomizationActions from '../../actions/CustomizationActions';
 import * as ModalActions from '../../actions/ModalActions';
 
+// Libs
+import { trackEvent } from '../../libs/GATracking';
+
 // UI
 import Button from '../generic/Button';
 
@@ -29,6 +32,7 @@ import Button from '../generic/Button';
 import { LOADING_IDS } from '../../constants/AppConstants';
 import CustomizationConstants from '../../constants/CustomizationConstants';
 import ModalConstants from '../../constants/ModalConstants';
+import { STANDARD_EVENTS } from '../../constants/GAEvents';
 
 // temp. helpers (for Rails merge)
 import { addToCart } from '../../utilities/cart-helper';
@@ -169,6 +173,10 @@ class AddToCartButton extends Component {
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
       setAppLoadingState({ loadingId: LOADING_IDS.ADD_TO_CART_LOADING });
+      trackEvent(
+        STANDARD_EVENTS.ADD_TO_CART_PDP,
+        { value: lineItem.productId },
+      );
       this.handleAddToBagCallback(addToCart(lineItem, auSite));
     }
   }
