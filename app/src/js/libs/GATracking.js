@@ -19,7 +19,6 @@ const defaultData = {
   nonInteraction: false,
 };
 
-/* eslint-disable no-param-reassign */
 export function trackEvent(eventData, dynamicData) {
   // ONLY FOR TESTING
   // attachGAForTesting();
