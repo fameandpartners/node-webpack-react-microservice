@@ -37,12 +37,16 @@ function stateToProps({ $$productState }) {
 function dispatchToProps(dispatch) {
   const {
     selectFabricColorGroup,
+    resetFabricColorGroup,
     selectFabricGroup,
+    resetFabricGroup,
   } = bindActionCreators(ProductActions, dispatch);
 
   return {
     selectFabricColorGroup,
+    resetFabricColorGroup,
     selectFabricGroup,
+    resetFabricGroup,
   };
 }
 
@@ -212,7 +216,13 @@ class FabricColorSwatches extends PureComponent {
 
   render() {
     const { filteredDefaultFabrics, filteredSecondaryFabrics } = this.filterFabrics();
-    const fabricGroupSelections = this.generateFabricGroupSelections();
+    const {
+      fabricColorGroupSelections,
+      resetFabricColorGroup,
+      fabricGroups,
+      fabricGroupSelections,
+      resetFabricGroup,
+    } = this.props;
 
     return (
       <div
@@ -224,16 +234,36 @@ class FabricColorSwatches extends PureComponent {
         >
           <div className="col-6_sm-12_md-6 FabricColorSwatches__filter-section u-center">
             <div className="FabricColorSwatches__filter-color-family u-mt--normal">
-              <p className="u-mb--small u-bold">Filter by Color Family:</p>
+              <p className="u-mb--small u-bold">
+                Filter by Color Family:{' '}
+                { fabricColorGroupSelections.length > 0 && (
+                  <span
+                    className="FabricColorSwatches__reset-selection u-cursor--pointer"
+                    onClick={resetFabricColorGroup}
+                  >
+                    Clear
+                  </span>
+                ) }
+              </p>
               <div className="grid-12">
                 {this.generateFabricColorGroupSelections()}
               </div>
             </div>
-            { fabricGroupSelections.length > 1
+            { fabricGroups.length > 1
               ? (
                 <div className="FabricColorSwatches__filter-color-fabric u-mt--normal u-mb--normal">
-                  <p className="u-mb--small u-bold">Filter by Fabric:</p>
-                  {fabricGroupSelections}
+                  <p className="u-mb--small u-bold">
+                    Filter by Fabric:{' '}
+                    { fabricGroupSelections.length > 0 && (
+                      <span
+                        className="FabricColorSwatches__reset-selection u-cursor--pointer"
+                        onClick={resetFabricGroup}
+                      >
+                        Clear
+                      </span>
+                    ) }
+                  </p>
+                  {this.generateFabricGroupSelections()}
                 </div>
               )
               : null
@@ -286,7 +316,9 @@ FabricColorSwatches.propTypes = {
   fabricGroupSelections: PropTypes.arrayOf(PropTypes.number).isRequired,
   // Redux Actions
   selectFabricColorGroup: PropTypes.func.isRequired,
+  resetFabricColorGroup: PropTypes.func.isRequired,
   selectFabricGroup: PropTypes.func.isRequired,
+  resetFabricGroup: PropTypes.func.isRequired,
   // Passed Props
   fabricGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
   productGroupColors: PropTypes.arrayOf(PropTypes.shape({
