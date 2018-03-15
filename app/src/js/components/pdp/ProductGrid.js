@@ -68,7 +68,6 @@ class ProductGrid extends Component {
   }
 
   showImageLightboxModal(idx) {
-    console.log('show lightbox', idx);
     const { activateModal, setGallerySlideActiveIndex } = this.props;
     setGallerySlideActiveIndex({
       index: idx + 1,
