@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import get from 'lodash/get';
 
 // Libraries
 import Resize from '../../decorators/Resize';
@@ -49,6 +50,9 @@ class FabricColorSwatches extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+    this.state = {
+      marginTop: null,
+    };
   }
 
   handleColorGroupClick(c) {
@@ -192,6 +196,20 @@ class FabricColorSwatches extends PureComponent {
     );
   }
 
+  setHeight(breakpoint) {
+    const filterHeight = get(this.fabricFilter, 'clientHeight');
+    if (breakpoint === 'mobile' || breakpoint === 'tablet') this.setState({ marginTop: 30 });
+    else if (filterHeight) this.setState({ marginTop: filterHeight - 65 });
+  }
+
+  componentDidMount() {
+    this.setHeight(this.props.breakpoint);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setHeight(nextProps.breakpoint);
+  }
+
   render() {
     const { filteredDefaultFabrics, filteredSecondaryFabrics } = this.filterFabrics();
     const fabricGroupSelections = this.generateFabricGroupSelections();
@@ -200,7 +218,10 @@ class FabricColorSwatches extends PureComponent {
       <div
         className="FabricColorSwatches ColorSwatches u-mt--normal u-text-align-left"
       >
-        <div className="grid-12-center FabricColorSwatches__filter-section-wrapper u-width--full">
+        <div
+          className="grid-12-center FabricColorSwatches__filter-section-wrapper u-width--full"
+          ref={(el) => { this.fabricFilter = el; }}
+        >
           <div className="col-6_sm-12_md-6 FabricColorSwatches__filter-section u-center">
             <div className="FabricColorSwatches__filter-color-family u-mt--normal">
               <p className="u-mb--small u-bold">Filter by Color Family:</p>
@@ -222,7 +243,7 @@ class FabricColorSwatches extends PureComponent {
 
         </div>
 
-        <div className="FabricColorSwatches__color-swatch-results">
+        <div className="FabricColorSwatches__color-swatch-results" style={{ marginTop: this.state.marginTop }}>
           { filteredDefaultFabrics.length
             ? (
               <div>

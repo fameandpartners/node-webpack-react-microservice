@@ -21,6 +21,7 @@
 .FabricColorSwatches__fabric-option {
   background: $c-light-gray;
   padding: 4px 20px;
+  display: inline-block;
 }
 
 
@@ -95,6 +96,14 @@
 
 .FabricColorSwatches__mini-swatch--metallic {
   background-color: #ACA8A2;
+}
+
+.FabricColorSwatches__mini-swatch--orange {
+  background-color: #E58B0C;
+}
+
+.FabricColorSwatches__mini-swatch--yellow {
+  background-color: #E9DE0A;
 }
 
 .FabricColorSwatches__mini-swatch--nude, .FabricColorSwatches__mini-swatch--nude-tan {
