@@ -14,21 +14,5 @@ require('whatwg-fetch');
 // It will use the native implementation if it's present and isn't buggy.
 Object.assign = require('object-assign');
 
-if (!String.prototype.includes) {
-  String.prototype.includes = function(search, start) {
-    console.log('using polyfill');
-    'use strict';
-    if (typeof start !== 'number') {
-      start = 0;
-    }
-
-    if (start + search.length > this.length) {
-      return false;
-    } else {
-      return this.indexOf(search, start) !== -1;
-    }
-  };
-}
-
 // require babel polyfill to make up for Array.prototype.includes
-// require('babel-polyfill');
+require('babel-polyfill');
