@@ -54,7 +54,7 @@ class ProductGrid extends Component {
       ? find(productImages, { fabricId: id })
       : find(productImages, { colorId: id });
     const firstColorId = productImages[0].colorId;
-    console.log('product images', productImages);
+
     return productImages
       .filter(img => (this.doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId })))
       .filter((img, i) => i !== 0) // slice off first image
