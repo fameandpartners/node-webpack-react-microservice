@@ -235,7 +235,7 @@ class FabricColorSwatches extends PureComponent {
           <div className="col-6_sm-12_md-6 FabricColorSwatches__filter-section u-center">
             <div className="FabricColorSwatches__filter-color-family u-mt--normal">
               <p className="u-mb--small u-bold">
-                Filter by Color Family:{' '}
+                Filter by Color Family:&nbsp;
                 { fabricColorGroupSelections.length > 0 && (
                   <span
                     className="FabricColorSwatches__reset-selection u-cursor--pointer"
@@ -253,7 +253,7 @@ class FabricColorSwatches extends PureComponent {
               ? (
                 <div className="FabricColorSwatches__filter-color-fabric u-mt--normal u-mb--normal">
                   <p className="u-mb--small u-bold">
-                    Filter by Fabric:{' '}
+                    Filter by Fabric:&nbsp;
                     { fabricGroupSelections.length > 0 && (
                       <span
                         className="FabricColorSwatches__reset-selection u-cursor--pointer"
