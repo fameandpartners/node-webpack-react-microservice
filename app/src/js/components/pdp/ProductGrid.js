@@ -14,7 +14,10 @@ import * as AppActions from '../../actions/AppActions';
 import ModalConstants from '../../constants/ModalConstants';
 
 function stateToProps(state) {
+  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
+  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
   return {
+    hasFabrics: !productDefaultFabrics.isEmpty() || !productSecondaryFabrics.isEmpty(),
     selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
     $$productImages: state.$$productState.get('productImages'),
   };
@@ -53,7 +56,7 @@ class ProductGrid extends Component {
     const colorMatch = hasFabrics
       ? find(productImages, { fabricId: id })
       : find(productImages, { colorId: id });
-    const firstColorId = productImages[0].colorId;
+    const firstColorId = productImages[0].fabricId || productImages[0].colorId;
 
     return productImages
       .filter(img => (this.doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId })))

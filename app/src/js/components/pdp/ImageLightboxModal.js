@@ -90,16 +90,14 @@ class ImageLightboxModal extends Component {
 
   getProductImages() {
     const { selectedColorId: id, hasFabrics, $$productImages } = this.props;
-    let productImages = $$productImages.toJS();
+    const productImages = $$productImages.toJS();
     const colorMatch = hasFabrics
       ? find(productImages, { fabricId: id })
       : find(productImages, { colorId: id });
     const firstColorId = productImages[0].fabricId || productImages[0].colorId;
-    productImages = productImages
-      .filter(img => (this.doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId })))
-      .map(img => img);
 
-    return productImages;
+    return productImages
+      .filter(img => this.doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId }));
   }
 
   handlePrev() {
