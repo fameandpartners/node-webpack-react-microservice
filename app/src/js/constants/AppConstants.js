@@ -104,10 +104,6 @@ const navigationLinks = {
     DRESSES_PATH: '',
     SEPARATES: [
       {
-        text: 'Tops',
-        url: '/tops',
-      },
-      {
         text: 'Skirts',
         url: '/skirts',
       },
