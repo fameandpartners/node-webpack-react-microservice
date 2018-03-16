@@ -66,6 +66,7 @@ module.exports = {
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/js/index.js'),
+  isomorphicIndexJs: resolveApp('src/js/isomorphic-index.js'),
   flashIndexJs: resolveApp('src/js/flash-sale.js'),
   bridesmaidIndexJs: resolveApp('src/js/bridesmaid-index.js'),
   bridesmaidsFilterJs: resolveApp('src/js/bridesmaids-filter.js'),

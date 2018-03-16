@@ -28,6 +28,7 @@ const { transformProductJSON } = require('./src/js/utilities/pdp');
 
 // Components
 const App = require('./src/js/App');
+const IsomorphicStarter = require('./src/js/IsomorphicStarter');
 const mockJSON = require('./src/mock/product.json');
 const request = require('superagent');
 
@@ -86,6 +87,27 @@ app.get('/client', (req, res) => {
     pathB: 'someBS',
   }
   res.send(asset_paths);
+});
+
+app.get('/isomorphic', (req, res) => {
+  res.header('Content-Type', 'text/html');
+  const store = AppStore({});
+  const ReactRoot = ReactDOMServer.renderToString(
+    React.createElement(Provider, { store }, React.createElement(IsomorphicStarter))
+  );
+
+  console.log('ReactRoot', ReactRoot);
+  console.log('store.getState()', store.getState());
+  const html = template({
+    root: ReactRoot,
+    initialState: store.getState(),
+    jsBundle: clientAssets['isomorphic.js'],
+    cssBundle: clientAssets['isomorphic.css']
+  });
+
+  console.log('html', html);
+
+  res.send(html);
 });
 
 app.get('/pdp', (req, res) => {
