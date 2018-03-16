@@ -238,7 +238,7 @@ class FabricColorSwatches extends PureComponent {
                 Filter by Color Family:&nbsp;
                 { fabricColorGroupSelections.length > 0 && (
                   <span
-                    className="FabricColorSwatches__reset-selection u-cursor--pointer"
+                    className="FabricColorSwatches__reset-selection link u-cursor--pointer"
                     onClick={resetFabricColorGroup}
                   >
                     Clear
@@ -256,7 +256,7 @@ class FabricColorSwatches extends PureComponent {
                     Filter by Fabric:&nbsp;
                     { fabricGroupSelections.length > 0 && (
                       <span
-                        className="FabricColorSwatches__reset-selection u-cursor--pointer"
+                        className="FabricColorSwatches__reset-selection link u-cursor--pointer"
                         onClick={resetFabricGroup}
                       >
                         Clear
