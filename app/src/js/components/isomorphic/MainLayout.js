@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Components
+
 import HeaderWrapper from '../shared/header/HeaderWrapper';
 import Footer from '../shared/Footer';
+import CartDrawer from '../shared/cart/CartDrawer';
 
 // Decorators
 import Resize from '../../decorators/Resize';
@@ -59,6 +61,7 @@ class MainLayout extends Component {
     return (
       <div className="AppMain__wrapper">
         <HeaderWrapper />
+        <CartDrawer />
         <Footer />
       </div>
     );
