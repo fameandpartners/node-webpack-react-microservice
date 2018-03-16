@@ -62,6 +62,7 @@ class MainLayout extends Component {
       <div className="AppMain__wrapper">
         <HeaderWrapper />
         <CartDrawer />
+          View Source in Chrome: [view-source:http://localhost:8001/isomorphic]
         <Footer />
       </div>
     );

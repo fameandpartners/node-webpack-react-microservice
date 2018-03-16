@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 
 // Components
 import MainLayout from './components/isomorphic/MainLayout';
+import SideMenu from './components/shared/side_menu/SideMenu';
+import BlanketOverlay from './components/generic/BlanketOverlay';
 
 // Actions
 import * as AppActions from './actions/AppActions';
@@ -63,6 +65,8 @@ class IsomorphicStarter extends Component {
     return (
       <div className="__react_root__">
         <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
+          <SideMenu />
+          <BlanketOverlay />
           <MainLayout />
         </div>
       </div>
