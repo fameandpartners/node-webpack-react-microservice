@@ -24,7 +24,7 @@ import '../css/helpers.scss';
 import '../css/typography.scss';
 import '../css/layout.scss';
 import '../css/animations.scss';
-import '../css/components/App.scss';
+import '../css/components/IsomorphicStarter.scss';
 
 
 function stateToProps() {
@@ -64,7 +64,7 @@ class IsomorphicStarter extends Component {
     const { lockBody } = this.props;
     return (
       <div className="__react_root__">
-        <div className={`App Root__wrapper ${lockBody ? 'App--scroll-lock' : ''}`}>
+        <div className={`IsomoprhicStarter Root__wrapper ${lockBody ? 'IsomoprhicStarter--scroll-lock' : ''}`}>
           <SideMenu />
           <BlanketOverlay />
           <MainLayout />

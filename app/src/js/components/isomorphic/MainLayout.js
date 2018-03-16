@@ -59,7 +59,7 @@ class MainLayout extends Component {
     console.log('breakpoint', breakpoint);
 
     return (
-      <div className="AppMain__wrapper">
+      <div className="MainLayout__wrapper">
         <HeaderWrapper />
         <CartDrawer />
           View Source in Chrome: [view-source:http://localhost:8001/isomorphic]
