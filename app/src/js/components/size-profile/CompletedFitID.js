@@ -79,17 +79,17 @@ class CompletedFitID extends Component {
       <WizardStep
         handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
-        modalClassName="full-padding-big u-flex u-flex--1 u-vh-big"
+        modalClassName="full-padding-big u-flex u-flex--1 u-vh--big"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
         <div className="CompletedFitID">
-          <h3 className="CompletedFitID__title u-mb-small u-mt-small">
+          <h3 className="CompletedFitID__title u-mb--small u-mt--small">
             <span className="bolder-heading">Emily,</span><br />
             Your fit I.D. size is a <span className="bolder-heading">6</span>
           </h3>
 
-          <h5 className="CompletedFitID__description u-mb-big">
+          <h5 className="CompletedFitID__description u-mb--big">
             Our algorithm has created your unique fit I.D. Overtime we'll use
             it to create an even better fit for you.
           </h5>
@@ -142,9 +142,9 @@ class CompletedFitID extends Component {
                 </ul>
               </div>
 
-              <div className="ButtonBox--medium-width u-mt-small">
+              <div className="ButtonBox--medium-width u-mt--small">
                 <Button
-                  className="EditFitID__button button-height-big"
+                  className="EditFitID__button button-height--big"
                   text="Edit"
                   handleClick={this.handlePreviousStep}
                 />
@@ -156,9 +156,9 @@ class CompletedFitID extends Component {
             </div>
           </div>
 
-          <div className="ButtonBox ButtonBox--center u-mt-big">
+          <div className="ButtonBox ButtonBox--center u-mt--big">
             <Button
-              className="FitIDOverview__button button-height-big"
+              className="FitIDOverview__button button-height--big"
               text="Add size 6 to bag"
               handleClick={this.handleAddToCart}
             />

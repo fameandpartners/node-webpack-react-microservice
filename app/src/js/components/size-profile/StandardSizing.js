@@ -52,21 +52,27 @@ class StandardSizing extends Component {
         handleCloseWizard={this.handleCloseWizard}
         handlePreviousStep={this.handlePreviousStep}
         modalClassName="full-padding-big u-flex u-flex--1"
-        modalContentClassName="u-width--full u-overflow-y--scroll u-height-normal"
+        modalContentClassName="u-width--full u-overflow-y--scroll u-height--normal"
         modalWrapperClassName="u-flex--col"
       >
         <StandardSizeForm
           displaySaveButton
-          containerClassNames="u-mt-normal u-mb-big"
+          containerClassNames="u-mt--big u-mb--big"
           validationHandler={ref => (this.sizeForm = ref)}
         />
 
         <div className="ButtonBox--center">
           <Button
-            className="SelectSizeProfile__button button-height-big"
+            className="SelectSizeProfile__button button-height--big"
             text="Save"
             handleClick={this.handleSaveSelection}
           />
+        </div>
+        <div>
+          <p className="u-mb--normal">
+            Want a better fit?&nbsp;&nbsp;
+            <a href="">Get your Fit I.D.</a>
+          </p>
         </div>
       </WizardStep>
     );

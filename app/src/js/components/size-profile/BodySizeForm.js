@@ -280,11 +280,11 @@ class BodySizeForm extends PureComponent {
           containerClassNames,
         )}
       >
-        <div className="BodySizeForm__height u-mb-normal">
+        <div className="BodySizeForm__height u-mb--normal">
           <div className="grid-noGutter align-items--flex-end">
             <p
               className={classnames(
-                'h6 u-mb-xs u-text-align--left col-8',
+                'h6 u-mb--xs u-text-align--left col-8',
                 {
                   'u-color-red': heightError,
                 },
@@ -329,10 +329,10 @@ class BodySizeForm extends PureComponent {
           </div>
         </div>
 
-        <div className="BodySizeForm__height u-mb-normal">
+        <div className="BodySizeForm__height u-mb--normal">
           <p
             className={classnames(
-              'h6 u-mb-xs u-text-align--left',
+              'h6 u-mb--xs u-text-align--left',
               {
                 'u-color-red': weightError,
               },
@@ -354,7 +354,7 @@ class BodySizeForm extends PureComponent {
           </div>
         </div>
 
-        <div className="BodySizeForm__height u-mb-normal">
+        <div className="BodySizeForm__height u-mb--normal">
           <p
             className={classnames(
               'h6 u-mb-xs u-text-align--left',
@@ -405,7 +405,7 @@ BodySizeForm.propTypes = {
 };
 
 BodySizeForm.defaultProps = {
-  containerClassNames: 'u-mt-normal u-mb-huge',
+  containerClassNames: 'u-mt--normal u-mb--huge',
   selectedColorId: '',
   temporaryMeasurementMetric: null,
   temporaryHeightValue: null,

@@ -64,7 +64,7 @@ class CalculateFitID extends Component {
   render() {
     return (
       <div className="CalculateFitID">
-        <h3 className="Calc__title u-mb-normal u-mt-big">
+        <h3 className="Calc__title u-mb--normal u-mt--big">
           Calculating your personalized fit I.D.
         </h3>
         <ul className="Calc__list">

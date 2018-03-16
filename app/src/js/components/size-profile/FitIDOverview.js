@@ -120,13 +120,13 @@ class FitIDOverview extends Component {
       <WizardStep
         handlePreviousStep={this.handlePreviousStep}
         handleCloseWizard={this.handleCloseWizard}
-        modalClassName="u-flex u-flex--1 u-vh-big"
+        modalClassName="u-flex u-flex--1 u-vh--big"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
         <div className="FitIDOverview">
 
-          <h3 className="WizardStep__title u-mb-normal u-mt-big">
+          <h3 className="WizardStep__title">
             Let&rsquo;s make sure we <br /> got this correct.
           </h3>
 
@@ -212,7 +212,7 @@ class FitIDOverview extends Component {
 
           <div className="ButtonBox ButtonBox--center">
             <Button
-              className="FitIDOverview__button button-height-big"
+              className="FitIDOverview__button button-height--big"
               text="Save your Fit I.D. to your Profile"
               handleClick={this.saveFitID}
             />

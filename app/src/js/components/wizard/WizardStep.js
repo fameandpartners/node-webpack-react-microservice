@@ -111,7 +111,7 @@ WizardStep.defaultProps = {
   handleCloseWizard: noop,
   handlePreviousStep: null,
   modalClassName: '',
-  modalContentClassName: 'u-height-normal',
+  modalContentClassName: 'u-height--normal',
   modalWrapperClassName: '',
   onMouseMove: noop,
   currentStep: null,

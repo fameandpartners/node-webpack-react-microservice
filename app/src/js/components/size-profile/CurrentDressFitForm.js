@@ -148,13 +148,13 @@ class CurrentDressFitForm extends PureComponent {
           containerClassNames,
         )}
       >
-        <h4 className="u-text-align-left u-mb-normal">
+        <h4 className="u-text-align--left u-mb--normal">
           How do fitted dresses in <br />
           <span className="title__emphasize">your size</span> tend to fit?
         </h4>
         <div
           className={classnames(
-            'CurrentDressFitForm__height u-mb-normal',
+            'CurrentDressFitForm__height u-mb--normal',
             {
               'u-display-none': editSectionId && editSectionId !== 'bust',
             },
@@ -188,7 +188,7 @@ class CurrentDressFitForm extends PureComponent {
 
         <div
           className={classnames(
-            'CurrentDressFitForm__height u-mb-normal',
+            'CurrentDressFitForm__height u-mb--normal',
             {
               'u-display-none': editSectionId && editSectionId !== 'waist',
             },
@@ -222,7 +222,7 @@ class CurrentDressFitForm extends PureComponent {
 
         <div
           className={classnames(
-            'CurrentDressFitForm__height u-mb-normal',
+            'CurrentDressFitForm__height u-mb--normal',
             {
               'u-display-none': editSectionId && editSectionId !== 'hip',
             },
@@ -279,7 +279,7 @@ CurrentDressFitForm.propTypes = {
 };
 
 CurrentDressFitForm.defaultProps = {
-  containerClassNames: 'u-mt-normal u-mb-huge',
+  containerClassNames: 'u-mt--normal u-mb--huge',
   editSectionId: null,
   temporaryBustValue: null,
   temporaryWaistValue: null,

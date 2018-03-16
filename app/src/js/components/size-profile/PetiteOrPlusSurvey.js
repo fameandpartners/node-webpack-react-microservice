@@ -74,11 +74,11 @@ class PetiteOrPlusSurvey extends Component {
         handlePreviousStep={this.handlePreviousStep}
         currentStep={2}
         totalSteps={3}
-        modalClassName="full-padding-big u-flex u-flex--1 u-vh-normal"
+        modalClassName="full-padding-big u-flex u-flex--1 u-vh--normal"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
-        <div className="u-mb-big u-mt-big">
+        <div className="u-mb--big u-mt--big">
           <h4 className="WizardStep__title">
             Do you ever buy clothing in {isPlus ? 'Plus' : 'Petite'} sizes? (This can be on rare occasions)
           </h4>
@@ -90,7 +90,7 @@ class PetiteOrPlusSurvey extends Component {
               text="Yes"
               handleClick={this.handleYesSelection}
               className={classnames(
-                'Survey__button u-mr-small',
+                'Survey__button u-mr--small',
                 {
                   'button__value-selected': temporaryBuysStandardSizing === false,
                 },
@@ -100,7 +100,7 @@ class PetiteOrPlusSurvey extends Component {
               text="No"
               handleClick={this.handleNoSelection}
               className={classnames(
-                'Survey__button u-mr-small',
+                'Survey__button u-mr--small',
                 {
                   'button__value-selected': temporaryBuysStandardSizing === true,
                 },

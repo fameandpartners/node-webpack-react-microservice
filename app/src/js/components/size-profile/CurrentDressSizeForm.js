@@ -82,7 +82,7 @@ class CurrentDressSizeForm extends PureComponent {
         )}
       >
         <div>
-          <h4 className="u-text-align-left u-mb-big">
+          <h4 className="u-text-align--left u-mb--big">
             In <span className="title__emphasize">US sizes</span>,
             what fitted dress size do you typically wear?
           </h4>
@@ -101,7 +101,7 @@ class CurrentDressSizeForm extends PureComponent {
           </div>
           { dressSizeError ?
             <div className="CurrentDressSizeForm__size-error-text">
-              <p className="p u-color-red u-text-align-left u-mb-small u-mt-small">
+              <p className="p u-color-red u-text-align--left u-mb--small u-mt--small">
                 Please select a size
               </p>
             </div>
@@ -126,7 +126,7 @@ CurrentDressSizeForm.propTypes = {
 };
 
 CurrentDressSizeForm.defaultProps = {
-  containerClassNames: 'u-mt-normal u-mb-huge',
+  containerClassNames: 'u-mt--normal u-mb--huge',
   temporaryFittedDressSize: null,
   dressSizeError: false,
 };

@@ -125,10 +125,10 @@ class ClothingSizeForm extends PureComponent {
           containerClassNames,
         )}
       >
-        <div className="ClothingSizeForm__height u-mb-normal">
+        <div className="ClothingSizeForm__height u-mb--normal">
           <p
             className={classnames(
-              'h6 u-mb-xs u-text-align--left',
+              'h6 u-mb--xs u-text-align--left',
               {
                 'u-color-red': braSizeError,
               },
@@ -150,10 +150,10 @@ class ClothingSizeForm extends PureComponent {
           </div>
         </div>
 
-        <div className="ClothingSizeForm__height u-mb-normal">
+        <div className="ClothingSizeForm__height u-mb--normal">
           <p
             className={classnames(
-              'h6 u-mb-xs u-text-align--left',
+              'h6 u-mb--xs u-text-align--left',
               {
                 'u-color-red': jeanSizeError,
               },
@@ -196,7 +196,7 @@ ClothingSizeForm.propTypes = {
 };
 
 ClothingSizeForm.defaultProps = {
-  containerClassNames: 'u-mt-normal u-mb-huge',
+  containerClassNames: 'u-mt--normal u-mb--huge',
   temporaryJeanSize: null,
   temporaryBraSize: null,
   braSizeError: false,

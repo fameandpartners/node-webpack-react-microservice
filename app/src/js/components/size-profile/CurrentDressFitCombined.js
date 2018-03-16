@@ -86,7 +86,7 @@ class CurrentDressFitCombined extends Component {
         handlePreviousStep={this.handlePreviousStep}
         currentStep={isEditingStep ? null : 3}
         totalSteps={isEditingStep ? null : 3}
-        modalClassName="u-padding-big u-flex u-flex--1 u-vh-normal"
+        modalClassName="u-padding-big u-flex u-flex--1 u-vh--normal"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
         headline={isEditingStep ? `Edit ${editSectionId} Info` : null}
@@ -96,17 +96,17 @@ class CurrentDressFitCombined extends Component {
           className="CurrentDressFitCombined__header-image"
           src="https://d1msb7dh8kb0o9.cloudfront.net/spree/products/31545/original/fp2006-pale_blue-1.jpg?1471292831"
         />
-        <div className="grid-12-noGutter">
+        <div className="grid u-ml--big">
           <div className="col-6">
             <CurrentDressSizeForm
-              containerClassNames="u-mt-normal u-mb-big"
+              containerClassNames="u-mt--normal u-mb--big"
               validationHandler={ref => (this.dressSizeForm = ref)}
             />
           </div>
 
           <div className="col-6">
             <CurrentDressFitForm
-              containerClassNames="u-mt-normal u-mb-big"
+              containerClassNames="u-mt--normal u-mb--big"
               validationHandler={ref => (this.dressFitForm = ref)}
               editSectionId={editSectionId}
             />
@@ -115,7 +115,7 @@ class CurrentDressFitCombined extends Component {
 
         <div className="ButtonBox--center">
           <Button
-            className="SelectSizeProfile__button button-height-big"
+            className="SelectSizeProfile__button button-height--big"
             text={isEditingStep ? 'Save' : 'Next'}
             handleClick={this.handleNextSelection}
           />

@@ -79,7 +79,7 @@ class AboutYouCombined extends Component {
     if (this.props.isEditingStep) {
       return (
         <div>
-          <h5 className="WizardStep__description u-mb-normal">
+          <h5 className="WizardStep__description u-mb--normal">
             These questions will contribute to refining your overall fit.
           </h5>
         </div>
@@ -88,11 +88,11 @@ class AboutYouCombined extends Component {
 
     return (
       <div>
-        <h5 className="WizardStep__description u-mb-normal">
+        <h5 className="WizardStep__description u-mb--normal">
           These first set of questions will contribute to refining your overall fit.
         </h5>
-        <h5 className="WizardStep__description u-mb-normal">
-          Already have a Fit I.D.?
+        <h5 className="WizardStep__description u-mb--normal">
+          Already have a Fit I.D.?&nbsp;&nbsp;
           <a href="">Log in</a>
         </h5>
       </div>
@@ -108,12 +108,12 @@ class AboutYouCombined extends Component {
         handlePreviousStep={this.handlePreviousStep}
         currentStep={isEditingStep ? null : 1}
         totalSteps={isEditingStep ? null : 3}
-        modalClassName="full-padding-big u-flex u-flex--1 u-vh-normal"
+        modalClassName="full-padding-big u-flex u-flex--1 u-vh--normal"
         modalContentClassName="u-width--full u-overflow-y--scroll"
         modalWrapperClassName="u-flex--col"
       >
         <div>
-          <h3 className="WizardStep__title u-mb-small">
+          <h3 className="WizardStep__title u-mb--normal">
             { isEditingStep
               ? 'Edit About You'
               : 'Let’s get started'
@@ -122,17 +122,17 @@ class AboutYouCombined extends Component {
           { this.wizardDescription() }
         </div>
 
-        <div className="grid-12-noGutter">
+        <div className="grid u-ml--big">
           <div className="col-6">
             <BodySizeForm
-              containerClassNames="u-mt-normal u-mb-big"
+              containerClassNames="u-mt--normal u-mb--big"
               validationHandler={ref => (this.bodyForm = ref)}
             />
           </div>
 
           <div className="col-6">
             <ClothingSizeForm
-              containerClassNames="u-mt-normal u-mb-big"
+              containerClassNames="u-mt--normal u-mb--big"
               validationHandler={ref => (this.clothingForm = ref)}
             />
           </div>
@@ -140,7 +140,7 @@ class AboutYouCombined extends Component {
 
         <div className="ButtonBox--center">
           <Button
-            className="SelectSizeProfile__button button-height-big"
+            className="SelectSizeProfile__button button-height--big"
             text={isEditingStep ? 'Save' : 'Next'}
             handleClick={this.handleNextSelection}
           />

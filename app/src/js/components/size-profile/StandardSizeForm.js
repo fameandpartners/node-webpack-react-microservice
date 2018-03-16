@@ -251,8 +251,8 @@ class StandardSizeForm extends PureComponent {
           containerClassNames,
         )}
       >
-        <div className="u-mb-big">
-          <h3 className="h4 u-mb-small">
+        <div className="u-mb--big">
+          <h3 className="h4 u-mb--small">
             Let’s make it fit.
           </h3>
           <p className="h6 StandardSizeForm__sub-heading">
@@ -260,10 +260,10 @@ class StandardSizeForm extends PureComponent {
           </p>
         </div>
 
-        <div className="StandardSizeForm__height u-mb-normal">
+        <div className="StandardSizeForm__height u-mb--normal">
           <p
             className={classnames(
-              'h6 u-mb-xs u-text-align--left',
+              'h6 u-mb--xs u-text-align--left',
               {
                 'u-color-red': standardHeightError,
               },
@@ -310,7 +310,7 @@ class StandardSizeForm extends PureComponent {
         </div>
 
         <div>
-          <p className="h6 u-text-align-left u-mb-xs">What&apos;s your size?</p>
+          <p className="h6 u-text-align--left u-mb--xs">What&apos;s your size?</p>
           <div className="StandardSizeForm__size grid-12-spaceBetween">
             { SIZES.map(s => (
               <div key={s} className="col-3">
@@ -326,7 +326,7 @@ class StandardSizeForm extends PureComponent {
           </div>
           { standardSizeError &&
             <div className="StandardSizeForm__size-error-text">
-              <p className="p u-color-red u-text-align-left u-mb-small u-mt-small">
+              <p className="p u-color--red u-text-align--left u-mb--small u-mt--small">
                 Please select a size
               </p>
             </div>
@@ -335,7 +335,7 @@ class StandardSizeForm extends PureComponent {
           <div className="grid-noGutter">
             <div className="col-12">
               <p
-                className="link link--static u-text-align-left"
+                className="link link--static u-text-align--left"
                 onClick={this.handleViewSizeGuideClick}
               >
                 View Size Guide
@@ -368,7 +368,7 @@ StandardSizeForm.propTypes = {
 };
 
 StandardSizeForm.defaultProps = {
-  containerClassNames: 'u-mt-normal u-mb-huge',
+  containerClassNames: 'u-mt--big u-mb--huge',
   selectedColorId: '',
   temporaryDressSize: null,
   temporaryMeasurementMetric: null,
