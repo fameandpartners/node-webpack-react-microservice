@@ -315,6 +315,10 @@ export default function ProductReducer($$state = $$initialState, action = null) 
       });
     }
 
+    case ProductConstants.RESET_FABRIC_COLOR_GROUP: {
+      return $$state.set('fabricColorGroupSelections', Immutable.List());
+    }
+
     case ProductConstants.SELECT_FABRIC_GROUP: {
       const { name } = action;
       const $$fabricGroupSelections = $$state.get('fabricGroupSelections');
@@ -330,6 +334,10 @@ export default function ProductReducer($$state = $$initialState, action = null) 
       return $$state.merge({
         fabricGroupSelections: $$fabricGroupSelections.concat(name),
       });
+    }
+
+    case ProductConstants.RESET_FABRIC_GROUP: {
+      return $$state.set('fabricGroupSelections', Immutable.List());
     }
 
     default: {

@@ -15,6 +15,12 @@ export function selectFabricColorGroup({ presentation }) {
   };
 }
 
+export function resetFabricColorGroup() {
+  return {
+    type: ProductConstants.RESET_FABRIC_COLOR_GROUP,
+  };
+}
+
 export function selectFabricGroup(name) {
   return {
     type: ProductConstants.SELECT_FABRIC_GROUP,
@@ -22,8 +28,16 @@ export function selectFabricGroup(name) {
   };
 }
 
+export function resetFabricGroup() {
+  return {
+    type: ProductConstants.RESET_FABRIC_GROUP,
+  };
+}
+
 export default {
   activateColorDrawer,
   selectFabricColorGroup,
+  resetFabricColorGroup,
   selectFabricGroup,
+  resetFabricGroup,
 };

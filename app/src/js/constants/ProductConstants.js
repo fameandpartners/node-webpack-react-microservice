@@ -39,7 +39,9 @@ const constants = assign({},
 
   mirrorCreator([
     'SELECT_FABRIC_COLOR_GROUP',
+    'RESET_FABRIC_COLOR_GROUP',
     'SELECT_FABRIC_GROUP',
+    'RESET_FABRIC_GROUP',
   ]),
 );
 

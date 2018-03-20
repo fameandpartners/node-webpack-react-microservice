@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import get from 'lodash/get';
 
 // Libraries
 import Resize from '../../decorators/Resize';
@@ -36,12 +37,16 @@ function stateToProps({ $$productState }) {
 function dispatchToProps(dispatch) {
   const {
     selectFabricColorGroup,
+    resetFabricColorGroup,
     selectFabricGroup,
+    resetFabricGroup,
   } = bindActionCreators(ProductActions, dispatch);
 
   return {
     selectFabricColorGroup,
+    resetFabricColorGroup,
     selectFabricGroup,
+    resetFabricGroup,
   };
 }
 
@@ -49,6 +54,9 @@ class FabricColorSwatches extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+    this.state = {
+      marginTop: null,
+    };
   }
 
   handleColorGroupClick(c) {
@@ -192,27 +200,70 @@ class FabricColorSwatches extends PureComponent {
     );
   }
 
+  setHeight(breakpoint) {
+    const filterHeight = get(this.fabricFilter, 'clientHeight');
+    if (breakpoint === 'mobile' || breakpoint === 'tablet') this.setState({ marginTop: 30 });
+    else if (filterHeight) this.setState({ marginTop: filterHeight - 65 });
+  }
+
+  componentDidMount() {
+    this.setHeight(this.props.breakpoint);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setHeight(nextProps.breakpoint);
+  }
+
   render() {
     const { filteredDefaultFabrics, filteredSecondaryFabrics } = this.filterFabrics();
-    const fabricGroupSelections = this.generateFabricGroupSelections();
+    const {
+      fabricColorGroupSelections,
+      resetFabricColorGroup,
+      fabricGroups,
+      fabricGroupSelections,
+      resetFabricGroup,
+    } = this.props;
 
     return (
       <div
         className="FabricColorSwatches ColorSwatches u-mt--normal u-text-align-left"
       >
-        <div className="grid-12-center FabricColorSwatches__filter-section-wrapper u-width--full">
+        <div
+          className="grid-12-center FabricColorSwatches__filter-section-wrapper u-width--full"
+          ref={(el) => { this.fabricFilter = el; }}
+        >
           <div className="col-6_sm-12_md-6 FabricColorSwatches__filter-section u-center">
             <div className="FabricColorSwatches__filter-color-family u-mt--normal">
-              <p className="u-mb--small u-bold">Filter by Color Family:</p>
+              <p className="u-mb--small u-bold">
+                Filter by Color Family:&nbsp;
+                { fabricColorGroupSelections.length > 0 && (
+                  <span
+                    className="FabricColorSwatches__reset-selection link u-cursor--pointer"
+                    onClick={resetFabricColorGroup}
+                  >
+                    Clear
+                  </span>
+                ) }
+              </p>
               <div className="grid-12">
                 {this.generateFabricColorGroupSelections()}
               </div>
             </div>
-            { fabricGroupSelections.length > 1
+            { fabricGroups.length > 1
               ? (
                 <div className="FabricColorSwatches__filter-color-fabric u-mt--normal u-mb--normal">
-                  <p className="u-mb--small u-bold">Filter by Fabric:</p>
-                  {fabricGroupSelections}
+                  <p className="u-mb--small u-bold">
+                    Filter by Fabric:&nbsp;
+                    { fabricGroupSelections.length > 0 && (
+                      <span
+                        className="FabricColorSwatches__reset-selection link u-cursor--pointer"
+                        onClick={resetFabricGroup}
+                      >
+                        Clear
+                      </span>
+                    ) }
+                  </p>
+                  {this.generateFabricGroupSelections()}
                 </div>
               )
               : null
@@ -222,7 +273,7 @@ class FabricColorSwatches extends PureComponent {
 
         </div>
 
-        <div className="FabricColorSwatches__color-swatch-results">
+        <div className="FabricColorSwatches__color-swatch-results" style={{ marginTop: this.state.marginTop }}>
           { filteredDefaultFabrics.length
             ? (
               <div>
@@ -265,7 +316,9 @@ FabricColorSwatches.propTypes = {
   fabricGroupSelections: PropTypes.arrayOf(PropTypes.number).isRequired,
   // Redux Actions
   selectFabricColorGroup: PropTypes.func.isRequired,
+  resetFabricColorGroup: PropTypes.func.isRequired,
   selectFabricGroup: PropTypes.func.isRequired,
+  resetFabricGroup: PropTypes.func.isRequired,
   // Passed Props
   fabricGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
   productGroupColors: PropTypes.arrayOf(PropTypes.shape({

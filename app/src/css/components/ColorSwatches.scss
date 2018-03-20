@@ -38,10 +38,15 @@
   border: 1px solid $c-neutral-4;
 }
 
-.ColorSwatches__wrapper.ColorSwatches__wrapper--active {
-  // Necessary double class for IE Bug which doesn't respect specificity
-  outline: 3px solid $c-hover-gray;
-  outline-offset: 3px;
+.ColorSwatches__wrapper.ColorSwatches__wrapper--active::before {
+  content: '';
+  position: absolute;
+  border: 3px solid $c-hover-gray;
+  top: -7px;
+  right: -7px;
+  bottom: -7px;
+  left: -7px;
+  z-index: -1;
 }
 
 .ColorSwatches__swatch {
