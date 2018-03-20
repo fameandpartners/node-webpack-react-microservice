@@ -139,7 +139,7 @@ class FabricColorSwatches extends PureComponent {
     return fabricGroups.map(fabricName => (
       <span
         className={classnames(
-          'FabricColorSwatches__fabric-option u-mr--normal u-cursor--pointer',
+          'FabricColorSwatches__fabric-option u-mr--normal u-cursor--pointer u-mb--xs',
           { 'FabricColorSwatches__fabric-option--selected': fabricGroupSelections.includes(fabricName) },
         )}
         onClick={this.handleGroupClick(fabricName)}
