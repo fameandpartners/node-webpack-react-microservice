@@ -116,6 +116,8 @@ export const $$initialState = Immutable.fromJS({
   // String
   modelDescription: null,
 
+  availableMakingOptions: [],
+
   // ArrayOf({})
   sizeChart: [
     {

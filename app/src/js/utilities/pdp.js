@@ -4,6 +4,7 @@ import { assign, find } from 'lodash';
 import { formatCents } from './accounting';
 import { UNITS, EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
 import { sizeProfilePresence } from './pdpValidations';
+import win from '../polyfills/windowPolyfill';
 
 export function calculateSubTotal({
   colorCentsTotal = 0,
@@ -78,6 +79,8 @@ export function addonSelectionDisplayText({ selectedAddonOptions }) {
 }
 
 export function accumulateCustomizationSelections({ $$customizationState, $$productState }) {
+  const availableMakingOptions = $$productState.get('availableMakingOptions').toJS();
+  console.log('availableMakingOptions', availableMakingOptions);
   const productId = $$productState.get('productId');
   const productTitle = $$productState.get('productTitle');
   const productImage = $$productState.get('productImages').get(0).get('bigImg');
@@ -92,7 +95,15 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
 
   const expressMaking = $$customizationState.get('expressMakingSelected');
   let expressMakingID = null;
-  if (expressMaking) {
+  // eslint-disable-next-line
+  console.log('window', win.__vwo_test__);
+  // eslint-disable-next-line
+  if (win.__vwo_test__ && win.__vwo_test__ === 'free_fast_making') {
+    const foundFastMakingOption = find(availableMakingOptions, { type: 'free_fast_making' });
+    if (foundFastMakingOption) { // is free_fast_making available in our availableProductMakingOptions
+      expressMakingID = foundFastMakingOption.id;
+    }
+  } else if (expressMaking) {
     expressMakingID = $$productState.get('makingOptionId');
   }
 
@@ -469,6 +480,18 @@ export function transformProductMakingOptionId({ making_option_id: making }) {
   return making;
 }
 
+export function transformAvailableProductMakingOptionId({ available_options: availableOptions }) {
+  const untransformedMakingOptions = availableOptions.table.making_options;
+  if (Array.isArray(untransformedMakingOptions)) {
+    return untransformedMakingOptions.map(mo => ({
+      id: mo.product_making_option.id,
+      type: mo.product_making_option.option_type,
+    }));
+  }
+
+  return null;
+}
+
 export function transformProductFastMaking({ fast_making: fastMaking }) {
   return fastMaking;
 }
@@ -533,11 +556,13 @@ export function transformProductJSON(productJSON) {
         productTitle: transformProductTitle(productJSON.product),
         isActive: productJSON.product.is_active,
         makingOptionId: transformProductMakingOptionId(productJSON.product),
+        availableMakingOptions: transformAvailableProductMakingOptionId(productJSON.product),
         modelDescription: transformProductModelDescription(productJSON),
         siteVersion: transformProductSiteVersion(productJSON),
         sizeChart: transformProductSizeChart(productJSON),
         sku: transformSKU(productJSON.product),
       };
+      console.log('productState', productState);
       productState.hasFabrics = productState.productDefaultFabrics.length > 0 || productState.productSecondaryFabrics.length > 0;
     } else {
       productState = {};
