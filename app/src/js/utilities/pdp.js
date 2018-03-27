@@ -80,7 +80,6 @@ export function addonSelectionDisplayText({ selectedAddonOptions }) {
 
 export function accumulateCustomizationSelections({ $$customizationState, $$productState }) {
   const availableMakingOptions = $$productState.get('availableMakingOptions').toJS();
-  console.log('availableMakingOptions', availableMakingOptions);
   const productId = $$productState.get('productId');
   const productTitle = $$productState.get('productTitle');
   const productImage = $$productState.get('productImages').get(0).get('bigImg');
@@ -95,8 +94,6 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
 
   const expressMaking = $$customizationState.get('expressMakingSelected');
   let expressMakingID = null;
-  // eslint-disable-next-line
-  console.log('window', win.__vwo_test__);
   // eslint-disable-next-line
   if (win.__vwo_test__ && win.__vwo_test__ === 'free_fast_making') {
     const foundFastMakingOption = find(availableMakingOptions, { type: 'free_fast_making' });
