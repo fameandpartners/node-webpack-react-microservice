@@ -559,7 +559,6 @@ export function transformProductJSON(productJSON) {
         sizeChart: transformProductSizeChart(productJSON),
         sku: transformSKU(productJSON.product),
       };
-      console.log('productState', productState);
       productState.hasFabrics = productState.productDefaultFabrics.length > 0 || productState.productSecondaryFabrics.length > 0;
     } else {
       productState = {};
