@@ -4,6 +4,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+import { find } from 'lodash';
 import win from '../../../polyfills/windowPolyfill';
 
 import { formatCents } from '../../../utilities/accounting';
@@ -13,6 +14,9 @@ import noop from '../../../libs/noop';
 import Button from '../../generic/Button';
 import CancelOut from '../CancelOut';
 // import ProductCrossSell from '../../pdp/ProductCrossSell';
+
+// Utilities
+import Analytics from '../../../utilities/analytics';
 
 // Constants
 import { UNITS } from '../../../constants/ProductConstants';
@@ -74,6 +78,12 @@ class Cart extends Component {
 
   handleRemoveFromCartClick(id) {
     this.handleRemoveFromCartCallback(removeFromCart(id));
+    // Analytics Tracking
+    const { lineItems } = this.props;
+    const product = find(lineItems, { id });
+    if (product) {
+      Analytics.removeFromCart(product);
+    }
   }
 
   handleRemoveFromCartCallback(req) {

@@ -10,6 +10,7 @@ export const $$initialState = Immutable.fromJS({
   //   productCentsBasePrice: Number,
   //   productImage: String,
   //   productTitle: String,
+  //   productVariantId: Number,
   //   color: ObjectOf({
   //     id: String,
   //     centsTotal: Number,
@@ -70,6 +71,7 @@ function transformCartDataLineItems(lineItems) {
       productCentsBasePrice: parseInt(li.price.money.money.fractional, 10),
       productImage: pluckCorrectImage(li),
       productTitle: li.name,
+      productVariantId: li.variant_id,
       heightUnit: li.height_unit,
       heightValue: li.height_value,
       height: li.height ? li.height : null,
