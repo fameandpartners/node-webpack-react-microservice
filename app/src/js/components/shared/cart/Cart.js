@@ -7,7 +7,6 @@ import classnames from 'classnames';
 import { find } from 'lodash';
 
 import { formatCents } from '../../../utilities/accounting';
-import noop from '../../../libs/noop';
 
 // UI Components
 import Button from '../../generic/Button';
@@ -250,6 +249,15 @@ class Cart extends Component {
     });
   }
 
+  handleCheckout() {
+    const { lineItems } = this.props;
+    Analytics.initiateCheckout(lineItems);
+    // Ugly, but gets the job done
+    setTimeout(() => {
+      win.location = '/checkout';
+    }, 50);
+  }
+
   render() {
     // const { complementaryProducts } = this.props;
 
@@ -267,9 +275,8 @@ class Cart extends Component {
             <Button
               tall
               className="u-mb--normal"
-              url="/checkout"
               text="Checkout"
-              handleClick={noop}
+              handleClick={this.handleCheckout}
             />
           </div>
 
