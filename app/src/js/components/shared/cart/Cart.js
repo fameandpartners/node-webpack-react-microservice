@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 import { find } from 'lodash';
-import win from '../../../polyfills/windowPolyfill';
 
 import { formatCents } from '../../../utilities/accounting';
 import noop from '../../../libs/noop';
@@ -16,6 +15,7 @@ import CancelOut from '../CancelOut';
 // import ProductCrossSell from '../../pdp/ProductCrossSell';
 
 // Utilities
+import win from '../../../polyfills/windowPolyfill';
 import Analytics from '../../../utilities/analytics';
 
 // Constants

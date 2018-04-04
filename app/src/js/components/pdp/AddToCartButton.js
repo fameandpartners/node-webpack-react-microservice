@@ -11,6 +11,7 @@ import { accumulateCustomizationSelections, calculateSubTotal } from '../../util
 import { sizeProfilePresence } from '../../utilities/pdpValidations';
 import noop from '../../libs/noop';
 import win from '../../polyfills/windowPolyfill';
+import Analytics from '../../utilities/analytics';
 
 // Breakpoint Decoration
 import Resize from '../../decorators/Resize';
@@ -173,11 +174,15 @@ class AddToCartButton extends Component {
     } else {
       const lineItem = accumulateCustomizationSelections({ $$customizationState, $$productState });
       setAppLoadingState({ loadingId: LOADING_IDS.ADD_TO_CART_LOADING });
+      this.handleAddToBagCallback(addToCart(lineItem, auSite));
+      // GA Tracking
+      Analytics.addToCart($$productState.toJS());
+
+      // Event Tracking
       trackEvent(
         STANDARD_EVENTS.ADD_TO_CART_PDP,
         { value: lineItem.productId },
       );
-      this.handleAddToBagCallback(addToCart(lineItem, auSite));
     }
   }
 
