@@ -43,14 +43,23 @@ class WizardContainer extends Component {
   }
 
   defaultStyles() {
+    if (this.props.slideUp) {
+      return modalAnimations.SLIDE_UP_DEFAULT_STYLES;
+    }
     return modalAnimations.STANDARD_DEFAULT_STYLES;
   }
 
   willEnter() {
+    if (this.props.slideUp) {
+      return modalAnimations.SLIDE_UP_WILL_ENTER;
+    }
     return modalAnimations.STANDARD_WILL_ENTER;
   }
 
   willLeave() {
+    if (this.props.slideUp) {
+      return modalAnimations.SLIDE_UP_WILL_LEAVE;
+    }
     return modalAnimations.STANDARD_WILL_LEAVE;
   }
 
@@ -95,6 +104,7 @@ class WizardContainer extends Component {
       fullScreen,
       fullWidth,
       flexWidth,
+      slideUp,
     } = this.props;
 
     return (
@@ -116,7 +126,7 @@ class WizardContainer extends Component {
             'WizardContainer__content-wrapper u-center col',
             wizardWrapperClass,
             {
-              WizardContainer__fullScreen: fullScreen,
+              WizardContainer__fullScreen: fullScreen || slideUp,
               'u-width--full': fullWidth,
               WizardContainer__flexWidth: flexWidth,
             },
@@ -173,6 +183,7 @@ WizardContainer.propTypes = {
   wizardContainerClass: PropTypes.string,
   wizardWrapperClass: PropTypes.string,
   fullScreen: PropTypes.bool,
+  slideUp: PropTypes.bool,
   flexWidth: PropTypes.bool,
   fullWidth: PropTypes.bool,
   zIndex: PropTypes.number,
@@ -189,6 +200,7 @@ WizardContainer.defaultProps = {
   closeOnBackgroundClick: true,
   closeOnEscapeKey: true,
   dimBackground: true,
+  slideUp: false,
   children: null,
   fullScreen: false,
   flexWidth: false,

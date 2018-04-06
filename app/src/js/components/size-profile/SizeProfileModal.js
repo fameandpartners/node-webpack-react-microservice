@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
-import { string } from 'prop-types';
 
 // Components
 import WizardContainer from '../wizard/WizardContainer';
@@ -16,6 +16,10 @@ import CalculateFitID from './CalculateFitID';
 
 // Constants
 import WizardConstants from '../../constants/WizardConstants';
+
+// Breakpoint Decoration
+import Resize from '../../decorators/Resize';
+import PDPBreakpoints from '../../libs/PDPBreakpoints';
 
 // CSS
 import '../../../css/components/SizeProfile.scss';
@@ -62,14 +66,15 @@ class SizeProfileModal extends Component {
   }
 
   containerClassName() {
-    const { activeStepId } = this.props;
+    const { activeStepId, breakpoint } = this.props;
+    const isMobile = (breakpoint === 'tablet' || breakpoint === 'mobile');
     switch (activeStepId) {
       case WizardConstants.STANDARD_SIZING_STEP:
         return 'SizeProfileModal__fixed-width-small';
       case WizardConstants.CALCULATE_FIT_ID_STEP:
         return 'SizeProfileModal__fixed-width-small_square';
       default:
-        return 'SizeProfileModal__fixed-width-big u-height-big';
+        return isMobile ? '' : 'SizeProfileModal__fixed-width-big u-height-big';
     }
   }
 
@@ -84,6 +89,9 @@ class SizeProfileModal extends Component {
   }
 
   render() {
+    const { breakpoint } = this.props;
+    const isMobile = (breakpoint === 'tablet' || breakpoint === 'mobile');
+
     return (
       <WizardContainer
         wizardContainerClass="SizeProfileWizardContainer grid-middle"
@@ -99,6 +107,9 @@ class SizeProfileModal extends Component {
           WizardConstants.COMPLETED_FIT_ID_STEP,
         ]}
         flexWidth
+        slideUp={isMobile}
+        fullScreen={isMobile}
+        dimBackground={!isMobile}
       >
         <div className={this.containerClassName()} >
           {this.injectWizardStep()}
@@ -109,7 +120,8 @@ class SizeProfileModal extends Component {
 }
 
 SizeProfileModal.propTypes = {
-  activeStepId: string,
+  breakpoint: PropTypes.string.isRequired,
+  activeStepId: PropTypes.string,
 };
 
 SizeProfileModal.defaultProps = {
@@ -118,4 +130,4 @@ SizeProfileModal.defaultProps = {
 };
 
 
-export default connect(stateToProps, dispatchToProps)(SizeProfileModal);
+export default Resize(PDPBreakpoints)(connect(stateToProps, dispatchToProps)(SizeProfileModal));

@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import * as ModalActions from '../../actions/ModalActions';
+import WizardActions from '../../actions/WizardActions';
 
 // Constants
-import ModalConstants from '../../constants/ModalConstants';
+import WizardConstants from '../../constants/WizardConstants';
 import CustomizationConstants from '../../constants/CustomizationConstants';
 
 // Breakpoint Decoration
@@ -36,8 +36,10 @@ function stateToProps(state) {
 }
 
 function dispatchToProps(dispatch) {
-  const modalActions = bindActionCreators(ModalActions, dispatch);
-  return { activateModal: modalActions.activateModal };
+  const { jumpToStep } = bindActionCreators(WizardActions, dispatch);
+  return {
+    jumpToStep,
+  };
 }
 
 class AddToCartButtonLedgeMobile extends Component {
@@ -47,7 +49,10 @@ class AddToCartButtonLedgeMobile extends Component {
   }
 
   handleSizeClick() {
-    this.props.activateModal({ modalId: ModalConstants.SIZE_SELECTION_MODAL });
+    this.props.jumpToStep({
+      activeStepId: WizardConstants.SELECT_SIZE_PROFILE_STEP,
+      shouldAppear: true,
+    });
   }
 
   generateSizingButtonText() {
@@ -102,10 +107,11 @@ AddToCartButtonLedgeMobile.propTypes = {
   selectedMeasurementMetric: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   // Redux Actions
-  activateModal: PropTypes.func.isRequired,
+  jumpToStep: PropTypes.func,
 };
 
 AddToCartButtonLedgeMobile.defaultProps = {
+  jumpToStep: null,
   selectedDressSize: null,
   selectedHeightValue: null,
 };
