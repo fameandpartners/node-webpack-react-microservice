@@ -128,20 +128,12 @@ const navigationLinks = {
     ],
     COLLECTIONS: [
       {
-        text: 'Holiday Party',
-        url: '/holiday-party-survival-kit',
+        text: 'Summer Parties',
+        url: '/weddings-and-parties',
       },
       {
-        text: 'High Contrast',
-        url: '/high-contrast',
-      },
-      {
-        text: 'Evening Shop',
+        text: 'Evening 2018',
         url: '/the-evening-shop',
-      },
-      {
-        text: 'Anti-Fast Fashion Shop',
-        url: '/the-anti-fast-fashion-shop',
       },
     ],
     ABOUT: [
