@@ -29,15 +29,15 @@ class ShopAllNavigationDesktop extends PureComponent {
 
     const headerAd = (
       <div className="HeaderNavigationDesktop__ad">
-        <a href="/dresses/dress-the-zyra-dress-1657?clr=2">
+        <a href="/weddings-and-parties">
           <img
-            alt="Shop the Zyra Dress"
+            alt="Summer Parties - Say Lou Lou x F&P"
             className="u-width--full"
             src={fallWeddings}
           />
         </a>
-        <a href="/dresses/dress-the-zyra-dress-1657?clr=2" className="link">
-          <span>SHOP THE ZYRA DRESS</span>
+        <a href="/weddings-and-parties" className="link">
+          <span>SUMMER PARTIES - SAY LOU LOU x F&P</span>
         </a>
       </div>
     );
