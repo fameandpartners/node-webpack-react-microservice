@@ -271,6 +271,7 @@ class BodySizeForm extends PureComponent {
       containerClassNames,
       temporaryWeightValue,
       temporaryAgeValue,
+      isMobile,
     } = this.props;
 
     return (
@@ -292,7 +293,11 @@ class BodySizeForm extends PureComponent {
             >
               What's your height?
             </p>
-            <div className="">
+            <div
+              className={classnames({
+                'col-4 u-text-align--right': isMobile,
+              })}
+            >
               <RadioToggle
                 id="metric"
                 value={temporaryMeasurementMetric}
@@ -305,7 +310,12 @@ class BodySizeForm extends PureComponent {
             </div>
           </div>
           <div className="grid-noGutter">
-            <div className="col-10">
+            <div
+              className={classnames({
+                'col-12': isMobile,
+                'col-10': !isMobile,
+              })}
+            >
               { temporaryMeasurementMetric === UNITS.INCH ?
                 <Select
                   id="height-option-in"
@@ -341,7 +351,12 @@ class BodySizeForm extends PureComponent {
             What's your weight? (pounds)
           </p>
           <div className="grid-noGutter">
-            <div className="col-10">
+            <div
+              className={classnames({
+                'col-12': isMobile,
+                'col-10': !isMobile,
+              })}
+            >
               <Input
                 id="height-option-cm"
                 type="number"
@@ -366,7 +381,12 @@ class BodySizeForm extends PureComponent {
             How old are you?
           </p>
           <div className="grid-noGutter">
-            <div className="col-10">
+            <div
+              className={classnames({
+                'col-12': isMobile,
+                'col-10': !isMobile,
+              })}
+            >
               <Input
                 id="height-option-cm"
                 type="number"
@@ -388,6 +408,7 @@ BodySizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
   validationHandler: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool,
   // Redux Props
   temporaryMeasurementMetric: PropTypes.string,
   temporaryHeightValue: PropTypes.number,
@@ -414,6 +435,7 @@ BodySizeForm.defaultProps = {
   ageError: false,
   temporaryWeightValue: null,
   temporaryAgeValue: null,
+  isMobile: false,
 };
 
 

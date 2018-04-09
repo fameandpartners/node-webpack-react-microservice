@@ -8,7 +8,9 @@ import WizardContainer from '../wizard/WizardContainer';
 import SelectSizeProfile from './SelectSizeProfile';
 import StandardSizing from './StandardSizing';
 import AboutYouCombined from './AboutYouCombined';
+import AboutYouMobile from './AboutYouMobile';
 import PetiteOrPlusSurvey from './PetiteOrPlusSurvey';
+import PetiteOrPlusMobile from './PetiteOrPlusMobile';
 import CurrentDressFitCombined from './CurrentDressFitCombined';
 import FitIDOverview from './FitIDOverview';
 import CompletedFitID from './CompletedFitID';
@@ -42,16 +44,18 @@ class SizeProfileModal extends Component {
   }
 
   injectWizardStep() {
-    const { activeStepId } = this.props;
+    const { activeStepId, breakpoint } = this.props;
+    const isMobile = (breakpoint === 'tablet' || breakpoint === 'mobile');
+
     switch (activeStepId) {
       case WizardConstants.SELECT_SIZE_PROFILE_STEP:
         return <SelectSizeProfile />;
       case WizardConstants.STANDARD_SIZING_STEP:
         return <StandardSizing />;
       case WizardConstants.OVERALL_FIT_STEP:
-        return <AboutYouCombined />;
+        return isMobile ? <AboutYouMobile /> : <AboutYouCombined />;
       case WizardConstants.PETITE_PLUS_SURVEY_STEP:
-        return <PetiteOrPlusSurvey />;
+        return isMobile ? <PetiteOrPlusMobile /> : <PetiteOrPlusSurvey />;
       case WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP:
         return <CurrentDressFitCombined />;
       case WizardConstants.FIT_ID_OVERVIEW_STEP:
@@ -68,9 +72,10 @@ class SizeProfileModal extends Component {
   containerClassName() {
     const { activeStepId, breakpoint } = this.props;
     const isMobile = (breakpoint === 'tablet' || breakpoint === 'mobile');
+
     switch (activeStepId) {
       case WizardConstants.STANDARD_SIZING_STEP:
-        return 'SizeProfileModal__fixed-width-small';
+        return isMobile ? '' : 'SizeProfileModal__fixed-width-small';
       case WizardConstants.CALCULATE_FIT_ID_STEP:
         return 'SizeProfileModal__fixed-width-small_square';
       default:
@@ -106,7 +111,7 @@ class SizeProfileModal extends Component {
           WizardConstants.CALCULATE_FIT_ID_STEP,
           WizardConstants.COMPLETED_FIT_ID_STEP,
         ]}
-        flexWidth
+        flexWidth={!isMobile}
         slideUp={isMobile}
         fullScreen={isMobile}
         dimBackground={!isMobile}

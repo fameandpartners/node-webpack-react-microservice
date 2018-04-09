@@ -116,6 +116,7 @@ class ClothingSizeForm extends PureComponent {
       temporaryBraSize,
       braSizeError,
       jeanSizeError,
+      isMobile,
     } = this.props;
 
     return (
@@ -137,7 +138,12 @@ class ClothingSizeForm extends PureComponent {
             What's your current everyday bra size?
           </p>
           <div className="grid-noGutter">
-            <div className="col-10">
+            <div
+              className={classnames({
+                'col-12': isMobile,
+                'col-10': !isMobile,
+              })}
+            >
               <Input
                 id="height-option-cm"
                 type="text"
@@ -162,7 +168,12 @@ class ClothingSizeForm extends PureComponent {
             What&rsquo;s your jeans waist size (inches)
           </p>
           <div className="grid-noGutter">
-            <div className="col-10">
+            <div
+              className={classnames({
+                'col-12': isMobile,
+                'col-10': !isMobile,
+              })}
+            >
               <Select
                 id="jean-option-in"
                 className="sort-options"
@@ -184,6 +195,7 @@ ClothingSizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
   validationHandler: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool,
   // Redux Props
   temporaryJeanSize: PropTypes.number,
   temporaryBraSize: PropTypes.string,
@@ -201,6 +213,7 @@ ClothingSizeForm.defaultProps = {
   temporaryBraSize: null,
   braSizeError: false,
   jeanSizeError: false,
+  isMobile: false,
 };
 
 

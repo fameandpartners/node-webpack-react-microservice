@@ -75,7 +75,7 @@ class AboutYouCombined extends Component {
     }
   }
 
-  wizardDescription() {
+  headerDescription() {
     if (this.props.isEditingStep) {
       return (
         <div>
@@ -119,7 +119,7 @@ class AboutYouCombined extends Component {
               : 'Let’s get started'
             }
           </h3>
-          { this.wizardDescription() }
+          { this.headerDescription() }
         </div>
 
         <div className="grid u-ml--big">
