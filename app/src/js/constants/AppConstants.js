@@ -133,7 +133,7 @@ const navigationLinks = {
       },
       {
         text: 'Evening 2018',
-        url: '/evening-collecton-campaign',
+        url: '/evening-collection-campaign',
       },
     ],
     ABOUT: [
