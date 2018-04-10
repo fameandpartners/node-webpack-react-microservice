@@ -129,11 +129,11 @@ const navigationLinks = {
     COLLECTIONS: [
       {
         text: 'Summer Parties',
-        url: '/weddings-and-parties',
+        url: '/evening-collection-say-lou-lou',
       },
       {
         text: 'Evening 2018',
-        url: '/the-evening-shop',
+        url: '/evening-collecton-campaign',
       },
     ],
     ABOUT: [
