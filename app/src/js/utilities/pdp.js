@@ -96,6 +96,7 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const selectedMeasurementMetric = $$customizationState.get('selectedMeasurementMetric');
 
   const expressMaking = $$customizationState.get('expressMakingSelected');
+  const superExpressMaking = $$customizationState.get('superExpressMakingSelected');
   let expressMakingID = null;
   // eslint-disable-next-line
   if (win.__vwo_test__ && win.__vwo_test__ === 'free_fast_making') {
@@ -105,6 +106,8 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
     }
   } else if (expressMaking) {
     expressMakingID = $$productState.get('makingOptionId');
+  } else if (superExpressMaking) {
+    expressMakingID = $$productState.get('superFastMakingOptionId');
   }
 
   return {
@@ -479,6 +482,9 @@ export function transformProductSizeChart({ sizeChart }) {
 export function transformProductMakingOptionId({ making_option_id: making }) {
   return making;
 }
+export function transformProductSuperFastMakingOptionId({ super_fast_making_option_id: making }) {
+  return making;
+}
 
 export function transformAvailableProductMakingOptionId({ available_options: availableOptions }) {
   const untransformedMakingOptions = availableOptions.table.making_options;
@@ -561,6 +567,7 @@ export function transformProductJSON(productJSON) {
         productTitle: transformProductTitle(productJSON.product),
         isActive: productJSON.product.is_active,
         makingOptionId: transformProductMakingOptionId(productJSON.product),
+        superFastMakingOptionId: transformProductSuperFastMakingOptionId(productJSON.product),
         availableMakingOptions: transformAvailableProductMakingOptionId(productJSON.product),
         modelDescription: transformProductModelDescription(productJSON),
         siteVersion: transformProductSiteVersion(productJSON),

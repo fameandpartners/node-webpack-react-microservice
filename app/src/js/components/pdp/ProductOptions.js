@@ -82,7 +82,7 @@ function stateToProps(state) {
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
     expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
     superExpressMakingSelected: state.$$customizationState.get('superExpressMakingSelected'),
-    
+
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
@@ -196,7 +196,7 @@ class ProductOptions extends Component {
         productCentsBasePrice,
         selectedAddonOptions,
         expressMakingSelected,
-        superExpressMakingSelected
+        superExpressMakingSelected,
       },
       currencySymbol,
     );
