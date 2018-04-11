@@ -81,6 +81,8 @@ function stateToProps(state) {
     // SELECTIONS
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
     expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
+    superExpressMakingSelected: state.$$customizationState.get('superExpressMakingSelected'),
+    
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
@@ -181,6 +183,7 @@ class ProductOptions extends Component {
       productCentsBasePrice,
       colorCentsTotal,
       expressMakingSelected,
+      superExpressMakingSelected,
       addonOptions,
       selectedStyleCustomizations,
     } = this.props;
@@ -189,7 +192,12 @@ class ProductOptions extends Component {
       selectedStyleCustomizations,
     );
     return calculateSubTotal(
-      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions, expressMakingSelected },
+      { colorCentsTotal,
+        productCentsBasePrice,
+        selectedAddonOptions,
+        expressMakingSelected,
+        superExpressMakingSelected
+      },
       currencySymbol,
     );
   }
@@ -410,6 +418,7 @@ ProductOptions.propTypes = {
   activateModal: PropTypes.func,
   deliveryCopy: PropTypes.string,
   expressMakingSelected: PropTypes.bool,
+  superExpressMakingSelected: PropTypes.bool,
 
 };
 
@@ -422,7 +431,7 @@ ProductOptions.defaultProps = {
   activateModal: noop,
   deliveryCopy: '',
   expressMakingSelected: false,
-
+  superExpressMakingSelected: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

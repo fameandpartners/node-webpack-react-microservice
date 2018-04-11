@@ -2,7 +2,7 @@
 /* eslint-disable no-throw-literal */
 import { assign, find } from 'lodash';
 import { formatCents } from './accounting';
-import { UNITS, EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
+import { UNITS, EXPRESS_MAKING_PRICE_CENTS, SUPER_EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
 import { sizeProfilePresence } from './pdpValidations';
 import win from '../polyfills/windowPolyfill';
 
@@ -11,13 +11,16 @@ export function calculateSubTotal({
   productCentsBasePrice = 0,
   selectedAddonOptions = [],
   expressMakingSelected = false,
+  superExpressMakingSelected = false,
 }, currencySymbol = '$') {
   const expressMakingCharge = expressMakingSelected ? EXPRESS_MAKING_PRICE_CENTS : 0;
+  const superExpressMakingCharge = superExpressMakingSelected ? SUPER_EXPRESS_MAKING_PRICE_CENTS : 0;
+
   const customizationStyleCents = selectedAddonOptions
     .reduce((prev, curr) => prev + parseInt(curr.centsTotal, 10), 0);
 
   return formatCents(
-    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice + expressMakingCharge),
+    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice + expressMakingCharge + superExpressMakingCharge),
     0,
     (currencySymbol || ''),
   );
