@@ -19,7 +19,8 @@ function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
   const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
   const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
-
+  console.log( 'Super fast making' );
+  console.log( state.$$productState.get('superFastMaking'), );
   return {
     // PRODUCT
     expressMakingAvailable: state.$$productState.get('fastMaking'),
@@ -33,6 +34,7 @@ function stateToProps(state) {
 
     // SELECTIONS
     expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
+    superExpressMakingStatus: state.$$customizationState.get('superExpressMakingSelected')
   };
 }
 
@@ -79,6 +81,7 @@ class ExpressMaking extends Component {
       expressMakingAvailable,
       colorId,
       expressMakingStatus,
+      superExpressMakingStatus,
       productDefaultColors,
       isActive,
       mobile,
@@ -87,62 +90,109 @@ class ExpressMaking extends Component {
 
     if (expressMakingAvailable && isActive) {
       return (
-        <div className="grid-center-spaceAround ExpressMaking__content u-mb--small js-express-make">
-          <div className="col-1">
-            <Checkbox
-              id="express_making"
-              onChange={this.setExpressStatus}
-              showChecked={expressMakingStatus}
-              disabled={!this.isExpressEligible(colorId, productDefaultColors)}
-            />
-          </div>
-          <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
-            <p className="ExpressMaking__content--headline">
-              Make it Express + $18
-            </p>
-            <p className="ExpressMaking__content--subHeadline">
-              Get it in 2-3 weeks
-            </p>
-            <p
-              className={classnames(
-                'ExpressMaking__content--subHeadline',
-                {
-                  'ExpressMaking__content--error': colorId && !this.isExpressEligible(colorId, productDefaultColors),
-                },
-            )}
-            >
-              Only available for Recommended Colors
-            </p>
-            {
-            mobile ?
-              <p>
-                <a
-                  href="/faqs#collapse-what-express-making"
-                  className="u-text-decoration--underline link link--static"
-                  target="noopener noreferrer"
-                >
-                  Learn More
-                </a>
+        <div>
+          <div className="grid-center-spaceAround ExpressMaking__content u-mb--small js-express-make">
+            <div className="col-1">
+              <Checkbox
+                id="super_express_making"
+                onChange={this.setSuperExpressStatus}
+                showChecked={superExpressMakingStatus}
+                />
+            </div>
+            <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
+              <p className="ExpressMaking__content--headline">
+                Super Express + $28
               </p>
-              : null
-            }
+              <p className="ExpressMaking__content--subHeadline">
+                Cut, Sewn and Shipped in 1.5 weeks
+              </p>
+              {
+                mobile ?
+                  <p>
+                      <a
+                          href="/faqs#collapse-what-express-making"
+                          className="u-text-decoration--underline link link--static"
+                          target="noopener noreferrer"
+                          >
+                          Learn More
+                        </a>
+                    </p>
+                    : null
+                  }
 
+            </div>
+            <div className="col-3_sm-9 u-text-align--right">
+              {
+                !mobile ?
+                <div>
+                    <a
+                        href="/faqs#collapse-what-express-making"
+                        className="link link--static u-text-decoration--underline"
+                        >
+                        Learn More
+                      </a>
+                  </div>
+                  : null
+                }
+            </div>
           </div>
-          <div className="col-3_sm-9 u-text-align--right">
-            {
-            !mobile ?
-              <div>
-                <a
-                  href="/faqs#collapse-what-express-making"
-                  className="link link--static u-text-decoration--underline"
+          <div className="grid-center-spaceAround ExpressMaking__content u-mb--small js-express-make">
+            <div className="col-1">
+              <Checkbox
+                id="express_making"
+                onChange={this.setExpressStatus}
+                showChecked={expressMakingStatus}
+                disabled={!this.isExpressEligible(colorId, productDefaultColors)}
+                />
+            </div>
+            <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
+              <p className="ExpressMaking__content--headline">
+                Express + $18
+              </p>
+              <p className="ExpressMaking__content--subHeadline">
+                Cut, Sewn and Shipped in 2-3 weeks
+              </p>
+              <p
+                className={classnames(
+                  'ExpressMaking__content--subHeadline',
+                  {
+                    'ExpressMaking__content--error': colorId && !this.isExpressEligible(colorId, productDefaultColors),
+                  },
+                )}
                 >
-                  Learn More
-                </a>
-              </div>
-              : null
-          }
+                Only available for Recommended Colors
+              </p>
+              {
+                mobile ?
+                  <p>
+                      <a
+                          href="/faqs#collapse-what-express-making"
+                          className="u-text-decoration--underline link link--static"
+                          target="noopener noreferrer"
+                          >
+                          Learn More
+                        </a>
+                    </p>
+                    : null
+                  }
+
+            </div>
+            <div className="col-3_sm-9 u-text-align--right">
+              {
+                !mobile ?
+                <div>
+                    <a
+                        href="/faqs#collapse-what-express-making"
+                        className="link link--static u-text-decoration--underline"
+                        >
+                        Learn More
+                      </a>
+                  </div>
+                  : null
+                }
+            </div>
           </div>
-        </div>
+        </div>        
       );
     }
     return <div />;
@@ -151,6 +201,7 @@ class ExpressMaking extends Component {
 ExpressMaking.propTypes = {
   setExpressMakingStatus: PropTypes.func,
   expressMakingStatus: PropTypes.bool,
+  superExpressMakingStatus: PropTypes.bool,
   expressMakingAvailable: PropTypes.bool,
   hasFabrics: PropTypes.bool.isRequired,
   productDefaultColors: PropTypes.arrayOf(PropTypes.object),
@@ -163,6 +214,7 @@ ExpressMaking.propTypes = {
 ExpressMaking.defaultProps = {
   setExpressMakingStatus: noop,
   expressMakingStatus: false,
+  superExpressMakingStatus: false,
   expressMakingAvailable: false,
   productDefaultColors: [],
   productDefaultFabrics: [],

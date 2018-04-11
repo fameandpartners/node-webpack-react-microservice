@@ -493,6 +493,10 @@ export function transformProductFastMaking({ fast_making: fastMaking }) {
   return fastMaking;
 }
 
+export function transformProductSuperFastMaking({ super_fast_making: superFastMaking }) {
+  return superFastMaking || false;
+}
+
 export function transformDeliveryCopy({ delivery_period: deliveryPeriod }) {
   return deliveryPeriod;
 }
@@ -540,6 +544,7 @@ export function transformProductJSON(productJSON) {
         productDefaultFabrics: transformProductColorList(productJSON.product.fabrics.table.default),
         productSecondaryFabrics: transformProductColorList(productJSON.product.fabrics.table.extra),
         fastMaking: transformProductFastMaking(productJSON.product),
+        superFastMaking: transformProductSuperFastMaking(productJSON.product),
         garmentCareInformation: transformProductGarmentInformation(),
         preCustomizations: transformProductPreCustomizations(),
         productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
