@@ -19,8 +19,6 @@ function stateToProps(state) {
   const selectedColor = state.$$customizationState.get('selectedColor');
   const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
   const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
-  console.log( 'Super fast making' );
-  console.log( state.$$productState.get('superFastMaking'), );
   return {
     // PRODUCT
     expressMakingAvailable: state.$$productState.get('fastMaking'),
@@ -35,7 +33,7 @@ function stateToProps(state) {
 
     // SELECTIONS
     expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
-    superExpressMakingStatus: state.$$customizationState.get('superExpressMakingSelected')
+    superExpressMakingStatus: state.$$customizationState.get('superExpressMakingSelected'),
   };
 }
 
@@ -44,10 +42,12 @@ function dispatchToProps(dispatch) {
   const {
     activateCustomizationDrawer,
     setExpressMakingStatus,
+    setSuperExpressMakingStatus,
   } = bindActionCreators(CustomizationActions, dispatch);
   return {
     activateCustomizationDrawer,
     setExpressMakingStatus,
+    setSuperExpressMakingStatus,
   };
 }
 
@@ -77,6 +77,12 @@ class ExpressMaking extends Component {
     }
   }
 
+  setSuperExpressStatus() {
+    const {
+      superExpressMakingStatus,
+    } = this.props;
+    this.props.setSuperExpressMakingStatus(!superExpressMakingStatus);
+  }
   render() {
     const {
       expressMakingAvailable,
@@ -95,114 +101,115 @@ class ExpressMaking extends Component {
         <div>
           {
             superExpressMakingAvailable ?
-            <div className="grid-center-spaceAround ExpressMaking__content u-mb--small js-express-make">
+              /* eslint-disable max-len */
+              <div className="grid-center-spaceAround ExpressMaking__content u-mb--small js-express-make">
                 <div className="col-1">
-                    <Checkbox
-                        id="super_express_making"
-                        onChange={this.setSuperExpressStatus}
-                        showChecked={superExpressMakingStatus}
-                        />
-                  </div>
-                  <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
-                      <p className="ExpressMaking__content--headline">
-                          Super Express + $28
+                  <Checkbox
+                    id="super_express_making"
+                    onChange={this.setSuperExpressStatus}
+                    showChecked={superExpressMakingStatus}
+                  />
+                </div>
+                <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
+                  <p className="ExpressMaking__content--headline">
+                        Super Express + $28
+                  </p>
+                  <p className="ExpressMaking__content--subHeadline">
+                      Cut, Sewn and Shipped in 1.5 weeks
+                  </p>
+                  {
+                      mobile ?
+                        <p>
+                          <a
+                            href="/faqs#collapse-what-express-making"
+                            className="u-text-decoration--underline link link--static"
+                            target="noopener noreferrer"
+                          >
+                              Learn More
+                          </a>
                         </p>
-                        <p className="ExpressMaking__content--subHeadline">
-                            Cut, Sewn and Shipped in 1.5 weeks
-                          </p>
-                          {
-                            mobile ?
-                              <p>
-                                  <a
-                                      href="/faqs#collapse-what-express-making"
-                                      className="u-text-decoration--underline link link--static"
-                                      target="noopener noreferrer"
-                                      >
-                                      Learn More
-                                    </a>
-                                </p>
-                                : null
-                                }
+                          : null
+                    }
 
-                    </div>
-                    <div className="col-3_sm-9 u-text-align--right">
-                        {
+                </div>
+                <div className="col-3_sm-9 u-text-align--right">
+                  {
                           !mobile ?
-                          <div>
+                            <div>
                               <a
-                                  href="/faqs#collapse-what-express-making"
-                                  className="link link--static u-text-decoration--underline"
-                                  >
+                                href="/faqs#collapse-what-express-making"
+                                className="link link--static u-text-decoration--underline"
+                              >
                                   Learn More
-                                </a>
+                              </a>
                             </div>
                             : null
                             }
-                      </div>
+                </div>
               </div>
               : null
             }
-            {
+          {
               expressMakingAvailable ?
                 <div className="grid-center-spaceAround ExpressMaking__content u-mb--small js-express-make">
-                    <div className="col-1">
-                        <Checkbox
-                            id="express_making"
-                            onChange={this.setExpressStatus}
-                            showChecked={expressMakingStatus}
-                            disabled={!this.isExpressEligible(colorId, productDefaultColors)}
-                            />
-                      </div>
-                      <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
-                          <p className="ExpressMaking__content--headline">
+                  <div className="col-1">
+                    <Checkbox
+                      id="express_making"
+                      onChange={this.setExpressStatus}
+                      showChecked={expressMakingStatus}
+                      disabled={!this.isExpressEligible(colorId, productDefaultColors)}
+                    />
+                  </div>
+                  <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
+                    <p className="ExpressMaking__content--headline">
                               Express + $18
-                            </p>
-                            <p className="ExpressMaking__content--subHeadline">
-                                Cut, Sewn and Shipped in 2-3 weeks
-                              </p>
-                              <p
-                                  className={classnames(
+                    </p>
+                    <p className="ExpressMaking__content--subHeadline">
+                        Cut, Sewn and Shipped in 2-3 weeks
+                    </p>
+                    <p
+                      className={classnames(
                                     'ExpressMaking__content--subHeadline',
-                                    {
-                                      'ExpressMaking__content--error': colorId && !this.isExpressEligible(colorId, productDefaultColors),
-                                    },
-                                  )}
-                                  >
-                                  Only available for Recommended Colors
-                                </p>
-                                {
+                        {
+                          'ExpressMaking__content--error': colorId && !this.isExpressEligible(colorId, productDefaultColors),
+                        },
+                            )}
+                    >
+                        Only available for Recommended Colors
+                    </p>
+                    {
                                   mobile ?
                                     <p>
-                                        <a
-                                            href="/faqs#collapse-what-express-making"
-                                            className="u-text-decoration--underline link link--static"
-                                            target="noopener noreferrer"
-                                            >
-                                            Learn More
-                                          </a>
-                                      </p>
+                                      <a
+                                        href="/faqs#collapse-what-express-making"
+                                        className="u-text-decoration--underline link link--static"
+                                        target="noopener noreferrer"
+                                      >
+                                          Learn More
+                                      </a>
+                                    </p>
                                       : null
                                       }
 
-                        </div>
-                        <div className="col-3_sm-9 u-text-align--right">
-                            {
+                  </div>
+                  <div className="col-3_sm-9 u-text-align--right">
+                    {
                               !mobile ?
-                              <div>
+                                <div>
                                   <a
-                                      href="/faqs#collapse-what-express-making"
-                                      className="link link--static u-text-decoration--underline"
-                                      >
+                                    href="/faqs#collapse-what-express-making"
+                                    className="link link--static u-text-decoration--underline"
+                                  >
                                       Learn More
-                                    </a>
+                                  </a>
                                 </div>
                                 : null
                                 }
-                          </div>
                   </div>
+                </div>
                   : null
                 }
-        </div>        
+        </div>
       );
     }
     return <div />;
@@ -210,6 +217,7 @@ class ExpressMaking extends Component {
 }
 ExpressMaking.propTypes = {
   setExpressMakingStatus: PropTypes.func,
+  setSuperExpressMakingStatus: PropTypes.func,
   expressMakingStatus: PropTypes.bool,
   superExpressMakingStatus: PropTypes.bool,
   expressMakingAvailable: PropTypes.bool,
@@ -224,6 +232,7 @@ ExpressMaking.propTypes = {
 
 ExpressMaking.defaultProps = {
   setExpressMakingStatus: noop,
+  setSuperExpressMakingStatus: noop,
   expressMakingStatus: false,
   superExpressMakingStatus: false,
   expressMakingAvailable: false,
