@@ -74,6 +74,7 @@ class ExpressMaking extends Component {
     } = this.props;
     if (this.isExpressEligible(colorId, productDefaultColors)) {
       this.props.setExpressMakingStatus(!expressMakingStatus);
+      this.props.setSuperExpressMakingStatus(false);
     }
   }
 
@@ -82,6 +83,7 @@ class ExpressMaking extends Component {
       superExpressMakingStatus,
     } = this.props;
     this.props.setSuperExpressMakingStatus(!superExpressMakingStatus);
+    this.props.setExpressMakingStatus(false);    
   }
   render() {
     const {
