@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import classnames from 'classnames';
 
 import noop from '../../libs/noop';
 
@@ -57,25 +56,12 @@ class ExpressMaking extends Component {
     autoBind(this);
   }
 
-  isExpressEligible(colorId, defaultColors) {
-    const { hasFabrics, productDefaultFabrics } = this.props;
-    if (hasFabrics) {
-      return productDefaultFabrics.filter(color => color.id === colorId).length > 0;
-    }
-
-    return defaultColors.filter(color => color.id === colorId).length > 0;
-  }
-
   setExpressStatus() {
     const {
       expressMakingStatus,
-      colorId,
-      productDefaultColors,
     } = this.props;
-    if (this.isExpressEligible(colorId, productDefaultColors)) {
-      this.props.setExpressMakingStatus(!expressMakingStatus);
-      this.props.setSuperExpressMakingStatus(false);
-    }
+    this.props.setExpressMakingStatus(!expressMakingStatus);
+    this.props.setSuperExpressMakingStatus(false);
   }
 
   setSuperExpressStatus() {
@@ -89,10 +75,8 @@ class ExpressMaking extends Component {
     const {
       expressMakingAvailable,
       superExpressMakingAvailable,
-      colorId,
       expressMakingStatus,
       superExpressMakingStatus,
-      productDefaultColors,
       isActive,
       mobile,
     } = this.props;
@@ -159,7 +143,6 @@ class ExpressMaking extends Component {
                       id="express_making"
                       onChange={this.setExpressStatus}
                       showChecked={expressMakingStatus}
-                      disabled={!this.isExpressEligible(colorId, productDefaultColors)}
                     />
                   </div>
                   <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
@@ -168,16 +151,6 @@ class ExpressMaking extends Component {
                     </p>
                     <p className="ExpressMaking__content--subHeadline">
                         Cut, Sewn and Shipped in 2-3 weeks
-                    </p>
-                    <p
-                      className={classnames(
-                                    'ExpressMaking__content--subHeadline',
-                        {
-                          'ExpressMaking__content--error': colorId && !this.isExpressEligible(colorId, productDefaultColors),
-                        },
-                            )}
-                    >
-                        Only available for Recommended Colors
                     </p>
                     {
                                   mobile ?
@@ -224,11 +197,7 @@ ExpressMaking.propTypes = {
   superExpressMakingStatus: PropTypes.bool,
   expressMakingAvailable: PropTypes.bool,
   superExpressMakingAvailable: PropTypes.bool,
-  hasFabrics: PropTypes.bool.isRequired,
-  productDefaultColors: PropTypes.arrayOf(PropTypes.object),
-  productDefaultFabrics: PropTypes.arrayOf(PropTypes.object),
   isActive: PropTypes.bool.isRequired,
-  colorId: PropTypes.number,
   mobile: PropTypes.bool,
 };
 
