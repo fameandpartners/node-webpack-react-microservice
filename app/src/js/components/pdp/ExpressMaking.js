@@ -83,7 +83,7 @@ class ExpressMaking extends Component {
       superExpressMakingStatus,
     } = this.props;
     this.props.setSuperExpressMakingStatus(!superExpressMakingStatus);
-    this.props.setExpressMakingStatus(false);    
+    this.props.setExpressMakingStatus(false);
   }
   render() {
     const {
