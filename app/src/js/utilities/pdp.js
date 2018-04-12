@@ -2,7 +2,7 @@
 /* eslint-disable no-throw-literal */
 import { assign, find } from 'lodash';
 import { formatCents } from './accounting';
-import { UNITS, EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
+import { UNITS, EXPRESS_MAKING_PRICE_CENTS, SUPER_EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
 import { sizeProfilePresence } from './pdpValidations';
 import win from '../polyfills/windowPolyfill';
 
@@ -11,13 +11,16 @@ export function calculateSubTotal({
   productCentsBasePrice = 0,
   selectedAddonOptions = [],
   expressMakingSelected = false,
+  superExpressMakingSelected = false,
 }, currencySymbol = '$') {
   const expressMakingCharge = expressMakingSelected ? EXPRESS_MAKING_PRICE_CENTS : 0;
+  const superExpressMakingCharge = superExpressMakingSelected ? SUPER_EXPRESS_MAKING_PRICE_CENTS : 0;
+
   const customizationStyleCents = selectedAddonOptions
     .reduce((prev, curr) => prev + parseInt(curr.centsTotal, 10), 0);
 
   return formatCents(
-    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice + expressMakingCharge),
+    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice + expressMakingCharge + superExpressMakingCharge),
     0,
     (currencySymbol || ''),
   );
@@ -93,6 +96,7 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const selectedMeasurementMetric = $$customizationState.get('selectedMeasurementMetric');
 
   const expressMaking = $$customizationState.get('expressMakingSelected');
+  const superExpressMaking = $$customizationState.get('superExpressMakingSelected');
   let expressMakingID = null;
   // eslint-disable-next-line
   if (win.__vwo_test__ && win.__vwo_test__ === 'free_fast_making') {
@@ -102,6 +106,8 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
     }
   } else if (expressMaking) {
     expressMakingID = $$productState.get('makingOptionId');
+  } else if (superExpressMaking) {
+    expressMakingID = $$productState.get('superFastMakingOptionId');
   }
 
   return {
@@ -476,6 +482,9 @@ export function transformProductSizeChart({ sizeChart }) {
 export function transformProductMakingOptionId({ making_option_id: making }) {
   return making;
 }
+export function transformProductSuperFastMakingOptionId({ super_fast_making_option_id: making }) {
+  return making;
+}
 
 export function transformAvailableProductMakingOptionId({ available_options: availableOptions }) {
   const untransformedMakingOptions = availableOptions.table.making_options;
@@ -491,6 +500,10 @@ export function transformAvailableProductMakingOptionId({ available_options: ava
 
 export function transformProductFastMaking({ fast_making: fastMaking }) {
   return fastMaking;
+}
+
+export function transformProductSuperFastMaking({ super_fast_making: superFastMaking }) {
+  return superFastMaking || false;
 }
 
 export function transformDeliveryCopy({ delivery_period: deliveryPeriod }) {
@@ -540,6 +553,7 @@ export function transformProductJSON(productJSON) {
         productDefaultFabrics: transformProductColorList(productJSON.product.fabrics.table.default),
         productSecondaryFabrics: transformProductColorList(productJSON.product.fabrics.table.extra),
         fastMaking: transformProductFastMaking(productJSON.product),
+        superFastMaking: transformProductSuperFastMaking(productJSON.product),
         garmentCareInformation: transformProductGarmentInformation(),
         preCustomizations: transformProductPreCustomizations(),
         productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
@@ -553,6 +567,7 @@ export function transformProductJSON(productJSON) {
         productTitle: transformProductTitle(productJSON.product),
         isActive: productJSON.product.is_active,
         makingOptionId: transformProductMakingOptionId(productJSON.product),
+        superFastMakingOptionId: transformProductSuperFastMakingOptionId(productJSON.product),
         availableMakingOptions: transformAvailableProductMakingOptionId(productJSON.product),
         modelDescription: transformProductModelDescription(productJSON),
         siteVersion: transformProductSiteVersion(productJSON),

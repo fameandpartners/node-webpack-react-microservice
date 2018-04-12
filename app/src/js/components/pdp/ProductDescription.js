@@ -33,6 +33,7 @@ function stateToProps(state) {
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
     deliveryCopy: state.$$productState.get('deliveryCopy'),
     expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
+    superExpressMakingSelected: state.$$customizationState.get('superExpressMakingSelected'),
     selectedStyleCustomizations: state.$$customizationState.get('selectedStyleCustomizations').toJS(),
     // PRODUCT
     productCentsBasePrice: state.$$productState.get('productCentsBasePrice'),
@@ -50,8 +51,13 @@ class ProductDescription extends Component {
   }
 
   generateDeliveryCopy() {
-    const { deliveryCopy, expressMakingSelected } = this.props;
-    return expressMakingSelected ? '2-3 weeks' : deliveryCopy;
+    const { deliveryCopy, expressMakingSelected, superExpressMakingSelected } = this.props;
+    if (expressMakingSelected) {
+      return '2-3 weeks';
+    } else if (superExpressMakingSelected) {
+      return '1.5 weeks';
+    }
+    return deliveryCopy;
   }
 
   calculateSubTotal(currencySymbol) {
@@ -59,6 +65,7 @@ class ProductDescription extends Component {
       productCentsBasePrice,
       colorCentsTotal,
       expressMakingSelected,
+      superExpressMakingSelected,
       addonOptions,
       selectedStyleCustomizations,
     } = this.props;
@@ -67,7 +74,11 @@ class ProductDescription extends Component {
       selectedStyleCustomizations,
     );
     return calculateSubTotal(
-      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions, expressMakingSelected },
+      { colorCentsTotal,
+        productCentsBasePrice,
+        selectedAddonOptions,
+        expressMakingSelected,
+        superExpressMakingSelected },
       currencySymbol,
     );
   }
@@ -160,6 +171,7 @@ ProductDescription.propTypes = {
   modelDescription: PropTypes.string.isRequired,
   deliveryCopy: PropTypes.string,
   expressMakingSelected: PropTypes.bool.isRequired,
+  superExpressMakingSelected: PropTypes.bool,
   breakpoint: PropTypes.string,
   auSite: PropTypes.bool.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
@@ -170,6 +182,7 @@ ProductDescription.propTypes = {
 ProductDescription.defaultProps = {
   deliveryCopy: null,
   expressMakingSelected: false,
+  superExpressMakingSelected: false,
   colorCentsTotal: 0,
   breakpoint: '',
   addonOptions: [],
