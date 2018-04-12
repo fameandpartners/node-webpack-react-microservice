@@ -140,7 +140,7 @@ class ProductDescription extends Component {
              &nbsp; Estimated <br /> delivery {this.generateDeliveryCopy()}.
              &nbsp;
              <a
-               href="/faqs#collapse-what-express-making"
+               href="/faqs#collapse-delivery-how-long"
                target="_blank"
                className="link link--static"
                rel="noopener noreferrer"

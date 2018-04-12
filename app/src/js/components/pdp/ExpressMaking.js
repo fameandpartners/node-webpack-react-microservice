@@ -74,7 +74,6 @@ class ExpressMaking extends Component {
     } = this.props;
     if (this.isExpressEligible(colorId, productDefaultColors)) {
       this.props.setExpressMakingStatus(!expressMakingStatus);
-      this.props.setSuperExpressMakingStatus(false);
     }
   }
 
@@ -83,7 +82,6 @@ class ExpressMaking extends Component {
       superExpressMakingStatus,
     } = this.props;
     this.props.setSuperExpressMakingStatus(!superExpressMakingStatus);
-    this.props.setExpressMakingStatus(false);
   }
   render() {
     const {
@@ -123,7 +121,7 @@ class ExpressMaking extends Component {
                       mobile ?
                         <p>
                           <a
-                            href="/faqs#collapse-what-express-making"
+                            href="/faqs#collapse-delivery-how-long"
                             className="u-text-decoration--underline link link--static"
                             target="noopener noreferrer"
                           >
@@ -139,7 +137,7 @@ class ExpressMaking extends Component {
                           !mobile ?
                             <div>
                               <a
-                                href="/faqs#collapse-what-express-making"
+                                href="/faqs#collapse-delivery-how-long"
                                 className="link link--static u-text-decoration--underline"
                               >
                                   Learn More
@@ -183,7 +181,7 @@ class ExpressMaking extends Component {
                                   mobile ?
                                     <p>
                                       <a
-                                        href="/faqs#collapse-what-express-making"
+                                        href="/faqs#collapse-delivery-how-long"
                                         className="u-text-decoration--underline link link--static"
                                         target="noopener noreferrer"
                                       >
@@ -199,7 +197,7 @@ class ExpressMaking extends Component {
                               !mobile ?
                                 <div>
                                   <a
-                                    href="/faqs#collapse-what-express-making"
+                                    href="/faqs#collapse-delivery-how-long"
                                     className="link link--static u-text-decoration--underline"
                                   >
                                       Learn More
