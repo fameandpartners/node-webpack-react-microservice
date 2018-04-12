@@ -247,8 +247,13 @@ class ProductOptions extends Component {
   }
 
   generateDeliveryCopy() {
-    const { deliveryCopy, expressMakingSelected } = this.props;
-    return expressMakingSelected ? '2-3 weeks' : deliveryCopy;
+    const { deliveryCopy, expressMakingSelected, superExpressMakingSelected } = this.props;
+    if (expressMakingSelected) {
+      return '2-3 weeks';
+    } else if (superExpressMakingSelected) {
+      return '1.5 weeks';
+    }
+    return deliveryCopy;
   }
 
   render() {
@@ -350,7 +355,7 @@ class ProductOptions extends Component {
                 <p className="u-mb--small">
                   {
                     selectedStyleCustomizations.length === 0
-                    ? 'Shipping and returns are free.'
+                    ? 'All orders ship free.'
                     : 'Shipping is free on your customized item.'
                   } &nbsp;
                   <a
