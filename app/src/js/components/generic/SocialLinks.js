@@ -7,7 +7,6 @@ import FacebookIcon from '../../../svg/i-facebook.svg';
 import TwitterIcon from '../../../svg/i-twitter.svg';
 import PinterestIcon from '../../../svg/i-pinterest.svg';
 import TumblrIcon from '../../../svg/i-tumblr.svg';
-import PolyvoreIcon from '../../../svg/i-polyvore.svg';
 
 // CSS
 import '../../../css/components/SocialLinks.scss';
@@ -48,12 +47,6 @@ class SocialLinks extends Component {
         <div className="icon">
           <a target="_blank" rel="noopener noreferrer" href="http://fameandpartners.tumblr.com/">
             <TumblrIcon height="28" width="28" />
-          </a>
-        </div>
-
-        <div className="icon">
-          <a target="_blank" rel="noopener noreferrer" href="http://fameandpartners.polyvore.com/">
-            <PolyvoreIcon height="28" width="28" />
           </a>
         </div>
       </div>
