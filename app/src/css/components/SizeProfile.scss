@@ -38,6 +38,10 @@
   height: 275px;
 }
 
+.SizeProfileWizardContainer.mobile-version {
+  background: $c-white;
+}
+
 .Survey__button {
   background: $c-white;
   color: $c-black;
@@ -62,6 +66,10 @@
   min-height: 80%;
 }
 
+.u-mt--small {
+  margin-top: 15px;
+}
+
 .full-padding-big {
   padding: 50px;
 }
@@ -76,6 +84,18 @@
 
 .u-padding-big {
   padding: 0 50px 50px;
+}
+
+.u-padding--sides {
+  padding: 0 30px;
+}
+
+.u-padding--wizard {
+  padding: 30px 0 0;
+}
+
+.u-ml--small {
+  margin-left: 10px;
 }
 
 .title__emphasize {

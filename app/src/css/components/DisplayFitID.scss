@@ -142,13 +142,13 @@
 }
 
 .CompletedFitID__description {
-  max-width: 370px;
+  max-width: 340px;
   margin-left: auto;
   margin-right: auto;
   line-height: 30px;
 }
 
-.CompletedFitID__title {
+.CompletedFitID__title .CompletedFitIDMobile__title {
   max-width: 340px;
   margin-left: auto;
   margin-right: auto;
@@ -211,3 +211,91 @@
   font-weight: bolder;
 }
 
+//
+//** MOBILE **//
+//
+
+.FitIDOverviewMobile__body-fit-list {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.GetResultsMobile--link {
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+.FitIDOverviewMobile__body-fit-wrapper {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  background-color: $c-background-gray;
+}
+
+.CompletedFitIDMobile__body-fit-list {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.CompletedFitIDMobile__labels-wrapper {
+  border: solid $c-super-light-gray;
+  border-width: 2px 0;
+  padding: 20px 0;
+}
+
+.CompletedFitIDMobile__description {
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 30px;
+  padding: 0 30px;
+}
+
+.CompletedFitIDMobile__body-fit__list {
+  float: left;
+  width: 50%;
+
+  li {
+    margin: 20px 0;
+  }
+}
+
+.CompletedFitIDMobile__dress-image {
+  height: 320px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.BodyFit-label {
+  text-align: left;
+}
+
+.BodyFit-value {
+  text-align: right;
+}
+
+.BodyFit-wrapper {
+  width: 100%;
+  margin: 20px 0;
+
+  td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.FitIDOverviewMobile--Button {
+  background: transparent;
+  border: solid $c-border-gray;
+  border-width: 2px;
+  color: $c-black;
+
+  &:hover {
+    background-color: $c-super-light-gray;
+  }
+}
+
+.button-padding {
+  padding: 0 30px;
+}

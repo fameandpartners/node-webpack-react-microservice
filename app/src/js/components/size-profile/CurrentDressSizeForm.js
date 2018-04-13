@@ -72,20 +72,26 @@ class CurrentDressSizeForm extends PureComponent {
       temporaryFittedDressSize,
       dressSizeError,
       containerClassNames,
+      isMobile,
     } = this.props;
 
     return (
       <div
         className={classnames(
-          'CurrentDressSizeForm__layout-container',
           containerClassNames,
+          {
+            'CurrentDressSizeForm__layout-container': !isMobile,
+          },
         )}
       >
         <div>
-          <h4 className="u-text-align--left u-mb--big">
-            In <span className="title__emphasize">US sizes</span>,
-            what fitted dress size do you typically wear?
-          </h4>
+          {
+            isMobile ? null :
+            <h4 className="u-text-align--left u-mb--big">
+              In <span className="title__emphasize">US sizes</span>,
+              what fitted dress size do you typically wear?
+            </h4>
+          }
           <div className="CurrentDressSizeForm__size grid-12-spaceBetween">
             { US_SIZES.map(s => (
               <div key={s} className="col-3">
@@ -117,6 +123,7 @@ CurrentDressSizeForm.propTypes = {
   // Passed Props
   containerClassNames: PropTypes.string,
   validationHandler: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool,
   // Redux Props
   temporaryFittedDressSize: PropTypes.number,
   dressSizeError: PropTypes.bool,
@@ -129,6 +136,7 @@ CurrentDressSizeForm.defaultProps = {
   containerClassNames: 'u-mt--normal u-mb--huge',
   temporaryFittedDressSize: null,
   dressSizeError: false,
+  isMobile: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(CurrentDressSizeForm);

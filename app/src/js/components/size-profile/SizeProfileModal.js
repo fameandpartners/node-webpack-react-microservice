@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 
 // Components
 import WizardContainer from '../wizard/WizardContainer';
@@ -12,8 +13,11 @@ import AboutYouMobile from './AboutYouMobile';
 import PetiteOrPlusSurvey from './PetiteOrPlusSurvey';
 import PetiteOrPlusMobile from './PetiteOrPlusMobile';
 import CurrentDressFitCombined from './CurrentDressFitCombined';
+import CurrentDressFitMobile from './CurrentDressFitMobile';
 import FitIDOverview from './FitIDOverview';
+import FitIDOverviewMobile from './FitIDOverviewMobile';
 import CompletedFitID from './CompletedFitID';
+import CompletedFitIDMobile from './CompletedFitIDMobile';
 import CalculateFitID from './CalculateFitID';
 
 // Constants
@@ -57,19 +61,19 @@ class SizeProfileModal extends Component {
       case WizardConstants.PETITE_PLUS_SURVEY_STEP:
         return isMobile ? <PetiteOrPlusMobile /> : <PetiteOrPlusSurvey />;
       case WizardConstants.CURRENT_DRESS_FIT_COMBINED_STEP:
-        return <CurrentDressFitCombined />;
+        return isMobile ? <CurrentDressFitMobile /> : <CurrentDressFitCombined />;
       case WizardConstants.FIT_ID_OVERVIEW_STEP:
-        return <FitIDOverview />;
+        return isMobile ? <FitIDOverviewMobile /> : <FitIDOverview />;
       case WizardConstants.CALCULATE_FIT_ID_STEP:
         return <CalculateFitID />;
       case WizardConstants.COMPLETED_FIT_ID_STEP:
-        return <CompletedFitID />;
+        return isMobile ? <CompletedFitIDMobile /> : <CompletedFitID />;
       default:
         return null;
     }
   }
 
-  containerClassName() {
+  stepClassName() {
     const { activeStepId, breakpoint } = this.props;
     const isMobile = (breakpoint === 'tablet' || breakpoint === 'mobile');
 
@@ -77,7 +81,7 @@ class SizeProfileModal extends Component {
       case WizardConstants.STANDARD_SIZING_STEP:
         return isMobile ? '' : 'SizeProfileModal__fixed-width-small';
       case WizardConstants.CALCULATE_FIT_ID_STEP:
-        return 'SizeProfileModal__fixed-width-small_square';
+        return isMobile ? 'u-mt--huge' : 'SizeProfileModal__fixed-width-small_square';
       default:
         return isMobile ? '' : 'SizeProfileModal__fixed-width-big u-height-big';
     }
@@ -99,7 +103,12 @@ class SizeProfileModal extends Component {
 
     return (
       <WizardContainer
-        wizardContainerClass="SizeProfileWizardContainer grid-middle"
+        wizardContainerClass={classnames(
+          'SizeProfileWizardContainer grid-middle',
+          {
+            'mobile-version': isMobile,
+          },
+        )}
         wizardWrapperClass={this.wrapperClassName()}
         stepIds={[
           WizardConstants.SELECT_SIZE_PROFILE_STEP,
@@ -116,7 +125,7 @@ class SizeProfileModal extends Component {
         fullScreen={isMobile}
         dimBackground={!isMobile}
       >
-        <div className={this.containerClassName()} >
+        <div className={this.stepClassName()} >
           {this.injectWizardStep()}
         </div>
       </WizardContainer>

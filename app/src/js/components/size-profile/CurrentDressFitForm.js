@@ -139,6 +139,7 @@ class CurrentDressFitForm extends PureComponent {
       waistFitError,
       hipsFitError,
       editSectionId,
+      isMobile,
     } = this.props;
 
     return (
@@ -148,10 +149,13 @@ class CurrentDressFitForm extends PureComponent {
           containerClassNames,
         )}
       >
-        <h4 className="u-text-align--left u-mb--normal">
-          How do fitted dresses in <br />
-          <span className="title__emphasize">your size</span> tend to fit?
-        </h4>
+        {
+          isMobile ? null :
+          <h4 className="u-text-align--left u-mb--normal">
+            How do fitted dresses in <br />
+            <span className="title__emphasize">your size</span> tend to fit?
+          </h4>
+        }
         <div
           className={classnames(
             'CurrentDressFitForm__height u-mb--normal',
@@ -172,7 +176,12 @@ class CurrentDressFitForm extends PureComponent {
             Your <span className="title__emphasize">Bust</span>
           </h4>
           <div className="grid-noGutter">
-            <div className="col-10">
+            <div
+              className={classnames({
+                'col-12': isMobile,
+                'col-10': !isMobile,
+              })}
+            >
               <Select
                 id="bust-fit-issue"
                 className="sort-options"
@@ -206,7 +215,12 @@ class CurrentDressFitForm extends PureComponent {
             Your <span className="title__emphasize">Waist</span>
           </h4>
           <div className="grid-noGutter">
-            <div className="col-10">
+            <div
+              className={classnames({
+                'col-12': isMobile,
+                'col-10': !isMobile,
+              })}
+            >
               <Select
                 id="bust-fit-issue"
                 className="sort-options"
@@ -240,7 +254,12 @@ class CurrentDressFitForm extends PureComponent {
             Your <span className="title__emphasize">Hips</span>
           </h4>
           <div className="grid-noGutter">
-            <div className="col-10">
+            <div
+              className={classnames({
+                'col-12': isMobile,
+                'col-10': !isMobile,
+              })}
+            >
               <Select
                 id="bust-fit-issue"
                 className="sort-options"
@@ -264,6 +283,7 @@ CurrentDressFitForm.propTypes = {
   containerClassNames: PropTypes.string,
   validationHandler: PropTypes.func.isRequired,
   editSectionId: PropTypes.string,
+  isMobile: PropTypes.bool,
   // Redux Props
   temporaryBustValue: PropTypes.string,
   temporaryWaistValue: PropTypes.string,
@@ -287,6 +307,7 @@ CurrentDressFitForm.defaultProps = {
   bustFitError: false,
   waistFitError: false,
   hipsFitError: false,
+  isMobile: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(CurrentDressFitForm);

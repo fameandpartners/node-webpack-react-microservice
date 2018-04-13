@@ -99,7 +99,7 @@ class CurrentDressFitCombined extends Component {
         <div className="grid u-ml--big">
           <div className="col-6">
             <CurrentDressSizeForm
-              containerClassNames="u-mt--normal u-mb--big"
+              containerClassNames="u-mt--normal u-mb--big u-ml--small"
               validationHandler={ref => (this.dressSizeForm = ref)}
             />
           </div>

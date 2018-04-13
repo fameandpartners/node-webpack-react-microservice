@@ -3,6 +3,7 @@ import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classnames from 'classnames';
 
 // Actions
 import WizardActions from '../../actions/WizardActions';
@@ -63,7 +64,9 @@ class CalculateFitID extends Component {
 
   render() {
     return (
-      <div className="CalculateFitID">
+      <div
+        className={classnames('CalculateFitID')}
+      >
         <h3 className="Calc__title u-mb--normal u-mt--big">
           Calculating your personalized fit I.D.
         </h3>
