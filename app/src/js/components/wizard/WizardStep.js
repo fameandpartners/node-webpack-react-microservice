@@ -82,7 +82,7 @@ class WizardStep extends PureComponent {
         >
           <Container
             className={classnames([
-              'WizardStep__content',
+              'WizardStep__content u-no-x-scroll',
               modalContentClassName,
             ])}
           >

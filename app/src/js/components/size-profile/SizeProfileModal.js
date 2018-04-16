@@ -104,9 +104,10 @@ class SizeProfileModal extends Component {
     return (
       <WizardContainer
         wizardContainerClass={classnames(
-          'SizeProfileWizardContainer grid-middle',
+          'SizeProfileWizardContainer',
           {
             'mobile-version': isMobile,
+            'grid-middle': !isMobile,
           },
         )}
         wizardWrapperClass={this.wrapperClassName()}
