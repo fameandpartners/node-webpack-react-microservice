@@ -274,6 +274,7 @@ class ProductOptions extends Component {
       isActive,
       hasFabrics,
       selectedStyleCustomizations,
+      deliveryCopy,
     } = this.props;
 
     return (
@@ -447,6 +448,7 @@ ProductOptions.propTypes = {
   activateCustomizationDrawer: PropTypes.func.isRequired,
   activateModal: PropTypes.func,
   jumpToStep: PropTypes.func,
+  deliveryCopy: PropTypes.string,
   expressMakingSelected: PropTypes.bool,
   superExpressMakingSelected: PropTypes.bool,
 
@@ -460,6 +462,7 @@ ProductOptions.defaultProps = {
   selectedHeightValue: null,
   activateModal: noop,
   jumpToStep: noop,
+  deliveryCopy: '',
   expressMakingSelected: false,
   superExpressMakingSelected: false,
 };

@@ -231,15 +231,7 @@ module.exports = {
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
-      chunks: ['hotReloadClient', 'hotReloadServer', 'hotReloadUtils', 'polyfills', 'pdp'],
-      template: paths.appPdpHtml,
-    }),
-    // Generates an `size-profile.html` file with the <script> injected.
-    new HtmlWebpackPlugin({
-      inject: true,
-      filename: 'size-profile.html',
-      chunks: ['hotReloadClient', 'hotReloadServer', 'hotReloadUtils', 'polyfills', 'sizeProfile'],
-      template: paths.appSizeProfileHtml,
+      template: paths.appHtml,
     }),
     new webpack.NamedModulesPlugin(),
     // Makes some environment variables available to the JS code, for example:

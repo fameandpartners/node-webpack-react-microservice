@@ -388,7 +388,6 @@ ProductCustomizationStyle.propTypes = {
 };
 
 ProductCustomizationStyle.defaultProps = {
-  containerClassNames: '',
   hasNavItems: true,
   containerClassNames: 'u-mt-normal u-mb-huge',
   selectedColorId: '',
