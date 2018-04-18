@@ -128,6 +128,10 @@ const navigationLinks = {
     ],
     COLLECTIONS: [
       {
+        text: 'Summer Collection',
+        url: '/fresh-for-summer-collection',
+      },
+      {
         text: 'Summer Parties',
         url: '/evening-collection-say-lou-lou',
       },
