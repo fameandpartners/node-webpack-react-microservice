@@ -5,7 +5,7 @@ import Resize from '../../../decorators/Resize';
 import PDPBreakpoints from '../../../libs/PDPBreakpoints';
 
 // Assets
-import fallWeddings from '../../../../img/ShopAll-Tile.jpg';
+import summerWeddings from '../../../../img/SummerMenu.jpg';
 import '../../../../css/components/ShopAllNavigationDesktop.scss';
 
 // Constants
@@ -31,13 +31,13 @@ class ShopAllNavigationDesktop extends PureComponent {
       <div className="HeaderNavigationDesktop__ad">
         <a href="/weddings-and-parties">
           <img
-            alt="Summer Parties - Say Lou Lou x F&P"
+            alt="Summer essentials, now customizable"
             className="u-width--full"
-            src={fallWeddings}
+            src={summerWeddings}
           />
         </a>
-        <a href="/weddings-and-parties" className="link">
-          <span>SUMMER PARTIES - SAY LOU LOU x F&P</span>
+        <a href="/fresh-for-summer-collection" className="link">
+          <span>Summer essentials, now customizable</span>
         </a>
       </div>
     );
