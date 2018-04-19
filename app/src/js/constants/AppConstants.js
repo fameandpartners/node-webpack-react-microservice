@@ -82,6 +82,10 @@ const navigationLinks = {
         url: '/navigation-night-out',
       },
       {
+        text: 'Vacation',
+        url: '/navigation-vacation',
+      },
+      {
         text: 'Evening',
         url: '/dresses/evening',
       },
