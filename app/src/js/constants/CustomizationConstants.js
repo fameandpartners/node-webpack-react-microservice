@@ -11,6 +11,7 @@ const actionTypes = assign({},
     'SET_ADDON_BASE_LAYER',
     'SET_SIZE_PROFILE_ERROR',
     'SET_EXPRESS_MAKING_STATUS',
+    'SET_SUPER_EXPRESS_MAKING_STATUS',
     'UPDATE_CUSTOMIZATION_STYLE_SELECTION',
     'UPDATE_DRESS_SIZE_SELECTION',
     'UPDATE_MEASUREMENT_METRIC',
@@ -28,6 +29,7 @@ const productCustomizationDrawers = assign({},
 
 const productCustomizationHeadlines = {
   COLOR_HEADLINE: 'Choose your Color',
+  FABRIC_COLOR_HEADLINE: 'Choose your Fabric&nbsp;+&nbsp;Color',
   STYLE_HEADLINE: 'Customize the Design',
   SIZE_HEADLINE: 'Select your Size',
 };

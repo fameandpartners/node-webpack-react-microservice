@@ -4,15 +4,18 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
-import win from '../../../polyfills/windowPolyfill';
+import { find } from 'lodash';
 
 import { formatCents } from '../../../utilities/accounting';
-import noop from '../../../libs/noop';
 
 // UI Components
 import Button from '../../generic/Button';
 import CancelOut from '../CancelOut';
 // import ProductCrossSell from '../../pdp/ProductCrossSell';
+
+// Utilities
+import win from '../../../polyfills/windowPolyfill';
+import Analytics from '../../../utilities/analytics';
 
 // Constants
 import { UNITS } from '../../../constants/ProductConstants';
@@ -74,6 +77,12 @@ class Cart extends Component {
 
   handleRemoveFromCartClick(id) {
     this.handleRemoveFromCartCallback(removeFromCart(id));
+    // Analytics Tracking
+    const { lineItems } = this.props;
+    const product = find(lineItems, { id });
+    if (product) {
+      Analytics.removeFromCart(product);
+    }
   }
 
   handleRemoveFromCartCallback(req) {
@@ -217,10 +226,10 @@ class Cart extends Component {
           >
             <CancelOut />
           </span>
-          <div className="col-5 u-mr--small">
+          <div className="col-5">
             <img className="u-width--full" alt="dress1" src={productImage} />
           </div>
-          <div className="u-text-align--left">
+          <div className="col-7 u-text-align--left">
             <span className="Cart__line-description u-bold">
               {this.generateTitle(lineItem, productTitle)}&nbsp;
               <span>{formatCents(productCentsBasePrice, 2)}</span>
@@ -240,6 +249,15 @@ class Cart extends Component {
     });
   }
 
+  handleCheckout() {
+    const { lineItems } = this.props;
+    Analytics.initiateCheckout(lineItems);
+    // Ugly, but gets the job done
+    setTimeout(() => {
+      win.location = '/checkout';
+    }, 50);
+  }
+
   render() {
     // const { complementaryProducts } = this.props;
 
@@ -257,9 +275,8 @@ class Cart extends Component {
             <Button
               tall
               className="u-mb--normal"
-              url="/checkout"
               text="Checkout"
-              handleClick={noop}
+              handleClick={this.handleCheckout}
             />
           </div>
 

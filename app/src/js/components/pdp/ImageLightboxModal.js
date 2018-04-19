@@ -30,7 +30,10 @@ import win from '../../polyfills/windowPolyfill';
 import '../../../css/components/ImageLightboxModal.scss';
 
 function stateToProps(state) {
+  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
+  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
   return {
+    hasFabrics: !productDefaultFabrics.isEmpty() || !productSecondaryFabrics.isEmpty(),
     selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
     $$productImages: state.$$productState.get('productImages'),
     gallerySlideActiveIndex: state.$$appState.get('gallerySlideActiveIndex'),
@@ -73,15 +76,28 @@ class ImageLightboxModal extends Component {
     });
   }
 
+  doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId }) {
+    const { hasFabrics } = this.props;
+    if (colorMatch) {
+      return hasFabrics
+        ? img.fabricId === id
+        : img.colorId === id;
+    }
+    return hasFabrics
+        ? img.fabricId === firstColorId
+        : img.colorId === firstColorId;
+  }
+
   getProductImages() {
-    const { selectedColorId, $$productImages } = this.props;
-    let productImages = $$productImages.toJS();
-    const colorMatch = find(productImages, { colorId: selectedColorId });
-    const firstColorId = productImages[0].colorId;
-    productImages = productImages
-      .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
-      .map(img => img);
-    return productImages;
+    const { selectedColorId: id, hasFabrics, $$productImages } = this.props;
+    const productImages = $$productImages.toJS();
+    const colorMatch = hasFabrics
+      ? find(productImages, { fabricId: id })
+      : find(productImages, { colorId: id });
+    const firstColorId = productImages[0].fabricId || productImages[0].colorId;
+
+    return productImages
+      .filter(img => this.doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId }));
   }
 
   handlePrev() {
@@ -218,6 +234,7 @@ ImageLightboxModal.propTypes = {
     width: PropTypes.number,
     position: PropTypes.number,
   })).isRequired,
+  hasFabrics: PropTypes.bool.isRequired,
   selectedColorId: PropTypes.number,
   gallerySlideActiveIndex: PropTypes.number,
   // Redux Actions

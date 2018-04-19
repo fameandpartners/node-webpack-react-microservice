@@ -9,10 +9,6 @@ export default class FirebaseComponent extends React.Component {
     this.setFirebaseNodeId(this.props.firebaseNodeId);
   }
 
-  componentWillMount() {
-    console.log(firebase);
-  }
-
   setFirebaseNodeId(nodeId) {
     this.firebaseNodeId = nodeId;
   }

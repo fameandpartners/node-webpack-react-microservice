@@ -2,7 +2,7 @@ import { assign } from 'lodash';
 import mirrorCreator from 'mirror-creator';
 
 // Utilities
-import { siteVersionAU } from '../utilities/helpers';
+// import { siteVersionAU } from '../utilities/helpers';
 
 const actionTypes = assign({},
   mirrorCreator([
@@ -104,10 +104,6 @@ const navigationLinks = {
     DRESSES_PATH: '',
     SEPARATES: [
       {
-        text: 'Tops',
-        url: '/tops',
-      },
-      {
         text: 'Skirts',
         url: '/skirts',
       },
@@ -126,30 +122,18 @@ const navigationLinks = {
     ],
     FEATURED: [
       {
-        text: 'Best Sellers',
-        url: '/dresses/best-sellers',
-      },
-      {
         text: 'New Arrivals',
         url: '/dresses/new-this-week',
       },
     ],
     COLLECTIONS: [
       {
-        text: 'Holiday Party',
-        url: '/holiday-party-survival-kit',
+        text: 'Summer Parties',
+        url: '/evening-collection-say-lou-lou',
       },
       {
-        text: 'High Contrast',
-        url: '/high-contrast',
-      },
-      {
-        text: 'Evening Shop',
-        url: '/the-evening-shop',
-      },
-      {
-        text: 'Anti-Fast Fashion Shop',
-        url: '/the-anti-fast-fashion-shop',
+        text: 'Evening 2018',
+        url: '/evening-collection-campaign',
       },
     ],
     ABOUT: [
@@ -181,14 +165,14 @@ const navigationLinks = {
       },
       {
         text: 'Get $25 Off',
-        url: '/invite?nav',
+        url: '/invite?traffic_source=nav',
       },
-      {
-        text: 'Shop With Friends',
-        url: '#',
-        customClass: 'js-shop-with-friends',
-        shouldHide: siteVersionAU(),
-      },
+      // {
+      //   text: 'Shop With Friends',
+      //   url: '#',
+      //   customClass: 'js-shop-with-friends',
+      //   shouldHide: siteVersionAU(),
+      // },
     ],
   },
 };

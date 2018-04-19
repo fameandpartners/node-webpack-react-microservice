@@ -24,6 +24,13 @@ export const $$initialState = Immutable.fromJS({
   //   centsTotal: Number,
   //   hexValue: String,
   //   patternUrl,
+  //   Optional:
+  //    description: String
+  //    belongsToColorGroups: ArrayOf(String),
+  //    audPrice: String,
+  //    material: String,
+  //    presentation: String,
+  //    usdPrice: string,
   // })
   temporaryColor: null,
   selectedColor: null,
@@ -142,6 +149,11 @@ export default function CartReducer($$state = $$initialState, action = null) {
     case CustomizationConstants.SET_EXPRESS_MAKING_STATUS: {
       return $$state.merge({
         expressMakingSelected: action.status,
+      });
+    }
+    case CustomizationConstants.SET_SUPER_EXPRESS_MAKING_STATUS: {
+      return $$state.merge({
+        superExpressMakingSelected: action.status,
       });
     }
     default: {

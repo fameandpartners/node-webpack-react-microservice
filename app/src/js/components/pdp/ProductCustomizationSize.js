@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { PureComponent } from 'react';
 import autoBind from 'react-autobind';
 import PropTypes from 'prop-types';
@@ -35,6 +36,7 @@ import '../../../css/components/ProductCustomizationSize.scss';
 function stateToProps(state) {
   return {
     isUSSiteVersion: state.$$appState.get('siteVersion').toLowerCase() === 'usa',
+    hasFabrics: state.$$productState.get('hasFabrics'),
     productCustomizationDrawer: state.$$customizationState.get('productCustomizationDrawer'),
     temporaryMeasurementMetric: state.$$customizationState.get('temporaryMeasurementMetric'),
     temporaryHeightValue: state.$$customizationState.get('temporaryHeightValue'),
@@ -227,6 +229,7 @@ class ProductCustomizationStyle extends PureComponent {
 
   render() {
     const {
+      hasFabrics,
       hasNavItems,
       productCustomizationDrawer,
       isUSSiteVersion,
@@ -240,11 +243,12 @@ class ProductCustomizationStyle extends PureComponent {
 
     return (
       <ProductCustomization
+        hasFabrics={hasFabrics}
         hasNavItems={hasNavItems}
         handleDrawerSelection={this.handleDrawerSelection}
         productCustomizationDrawer={productCustomizationDrawer}
       >
-        <div className="ProductCustomizationSize__layout-container u-mt--normal u-mb--huge">
+        <div className="ProductCustomizationSize__layout-container u-center u-mt--normal u-mb--huge">
           <div className="u-mb--big">
             <h3 className="h4 u-mb--small">
               Let’s make it fit.
@@ -348,6 +352,7 @@ ProductCustomizationStyle.propTypes = {
   hasNavItems: PropTypes.bool.isRequired,
   // Redux Props
   activateModal: PropTypes.func.isRequired,
+  hasFabrics: PropTypes.bool.isRequired,
   productCustomizationDrawer: PropTypes.string.isRequired,
   isUSSiteVersion: PropTypes.bool.isRequired,
   temporaryDressSize: PropTypes.number,
