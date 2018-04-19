@@ -48,7 +48,7 @@ class FabricSwatchProduct extends PureComponent {
           )}
         >
           <div
-            className="FabricSwatchProduct"
+            className="FabricSwatchProduct u-cursor--pointer"
             style={{ backgroundColor: swatch.color_hex }}
             onClick={this.handleOnClick}
           >
