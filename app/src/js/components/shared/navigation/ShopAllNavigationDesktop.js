@@ -52,10 +52,6 @@ class ShopAllNavigationDesktop extends PureComponent {
             className="ShopAllNavigationDesktop__link-container u-center grid"
           >
             <NavLinkCol
-              colTitle="Weddings"
-              links={NAVIGATION_LINKS.WEDDINGS}
-            />
-            <NavLinkCol
               colTitle="Dresses"
               headerLink={NAVIGATION_LINKS.DRESSES_PATH}
               links={NAVIGATION_LINKS.DRESSES}
@@ -65,12 +61,15 @@ class ShopAllNavigationDesktop extends PureComponent {
               links={NAVIGATION_LINKS.SEPARATES}
             />
             <NavLinkCol
-              colTitle="Featured"
-              links={NAVIGATION_LINKS.FEATURED}
+              colTitle="Weddings"
+              links={NAVIGATION_LINKS.WEDDINGS}
             />
             <NavLinkCol
-              colTitle="Collections"
-              links={NAVIGATION_LINKS.COLLECTIONS}
+              colClass="col_sm-6_md-2"
+            />
+            <NavLinkCol
+              colTitle="Featured"
+              links={NAVIGATION_LINKS.FEATURED}
             />
             { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
               headerAd
