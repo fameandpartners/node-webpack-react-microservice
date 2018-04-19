@@ -44,7 +44,7 @@ class NavLinkCol extends Component {
           : null
         }
         <ul>
-          { links.map((l, i) => {
+          { links && links.map((l, i) => {
             if (l.type === 'divider') {
               return (
                 <li key={`divider-${i}`}>-</li>
@@ -64,17 +64,19 @@ class NavLinkCol extends Component {
                       'u-width--full',
                     )}
                   >
-                    <a
-                      className={classnames(
-                        l.customClass,
-                        'link',
-                        'link--static',
-                        'link--no-underline',
-                      )}
-                      href={l.url}
-                    >
-                      {l.text}
-                    </a>
+                    <span className="NavLinkCol__li-wrap">
+                      <a
+                        className={classnames(
+                          l.customClass,
+                          'link',
+                          'link--static',
+                          'link--no-underline',
+                        )}
+                        href={l.url}
+                      >
+                        {l.text}
+                      </a>
+                    </span>
                   </li>
                 )
             );

@@ -41,12 +41,12 @@ const navigationLinks = {
   NAVIGATION_LINKS: {
     WEDDINGS: [
       {
-        text: 'Brides',
-        url: '/bespoke-bridal-collection',
-      },
-      {
         text: 'Bridesmaids',
         url: '/modern-bridesmaid-dresses',
+      },
+      {
+        text: 'Bridal',
+        url: '/navigation-bridal',
       },
       {
         text: 'Wedding Guests',
@@ -56,34 +56,30 @@ const navigationLinks = {
         type: 'divider',
       },
       {
-        text: 'Custom Dress Collections',
-        url: '/coming-soon-custom-bridesmaid-dresses',
-      },
-      {
-        text: 'Bridal Style Guides',
-        url: '/get-the-look',
+        text: 'New Bridesmaid 20% Off',
+        url: '/dresses/wedding-guests',
       },
     ],
     DRESSES: [
       {
-        text: 'Maxi Dresses',
-        url: '/dresses/long',
+        text: 'Day',
+        url: '/navigation-day',
       },
       {
-        text: 'Midi Dresses',
-        url: '/dresses/midi',
+        text: 'Work',
+        url: '/navigation-work',
       },
       {
-        text: 'Mini Dresses',
-        url: '/dresses/mini',
+        text: 'Weddings',
+        url: '/weddings-and-parties',
       },
       {
         text: 'Cocktail',
         url: '/dresses/cocktail',
       },
       {
-        text: 'Casual',
-        url: '/dresses/casual',
+        text: 'Night Out',
+        url: '/navigation-night-out',
       },
       {
         text: 'Evening',
@@ -108,31 +104,43 @@ const navigationLinks = {
         url: '/skirts',
       },
       {
-        text: 'Pants',
-        url: '/pants',
-      },
-      {
         text: 'Jumpsuits',
         url: '/dresses/jumpsuit',
+      },
+      {
+        text: 'Pants',
+        url: '/pants',
       },
       {
         text: 'Outerwear',
         url: '/outerwear',
       },
+      { type: 'divider' },
+      {
+        text: 'View All',
+        url: '/navigation-all-separates',
+      },
     ],
     FEATURED: [
       {
-        text: 'New Arrivals',
+        text: 'Just In',
         url: '/dresses/new-this-week',
       },
-    ],
-    COLLECTIONS: [
       {
-        text: 'Summer Parties',
-        url: '/evening-collection-say-lou-lou',
+        text: 'Under $200',
+        url: '/navigation-under-200',
+      },
+      { type: 'divider' },
+      {
+        text: 'Summer \'18',
+        url: '/fresh-for-summer-collection',
       },
       {
-        text: 'Evening 2018',
+        text: 'Weddings & Parties',
+        url: '/weddings-and-parties',
+      },
+      {
+        text: 'Evening \'18',
         url: '/evening-collection-campaign',
       },
     ],
