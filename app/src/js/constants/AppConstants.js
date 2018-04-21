@@ -57,7 +57,7 @@ const navigationLinks = {
       },
       {
         text: 'New Bridesmaid 20% Off',
-        url: '/dresses/wedding-guests',
+        url: '/coming-soon-custom-bridesmaid-dresses',
       },
     ],
     DRESSES: [
