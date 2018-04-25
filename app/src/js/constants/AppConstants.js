@@ -134,6 +134,10 @@ const navigationLinks = {
         text: 'Under $200',
         url: '/navigation-under-200',
       },
+      {
+        text: 'Best Sellers',
+        url: '/dresses/best-sellers',
+      },
       { type: 'divider' },
       {
         text: 'Summer \'18',
