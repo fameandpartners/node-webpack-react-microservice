@@ -282,7 +282,7 @@ class Cart extends Component {
 
 
           <div className="u-flex u-flex--1">
-            <div className="u-overflow-y--scroll u-width--full">
+            <div className="u-overflow-y--scroll u-overflow-scrolling--touch u-width--full">
               <div className="Cart__line-item-wrapper u-overflow-x--hidden">
                 { this.generateLineItems() }
               </div>
