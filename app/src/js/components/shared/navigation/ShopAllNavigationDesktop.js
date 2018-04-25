@@ -29,7 +29,7 @@ class ShopAllNavigationDesktop extends PureComponent {
 
     const headerAd = (
       <div className="HeaderNavigationDesktop__ad">
-        <a href="/weddings-and-parties">
+        <a href="/fresh-for-summer-collection">
           <img
             alt="Summer essentials, now customizable"
             className="u-width--full"

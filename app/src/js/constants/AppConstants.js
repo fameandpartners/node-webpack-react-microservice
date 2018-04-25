@@ -141,7 +141,7 @@ const navigationLinks = {
       },
       {
         text: 'Weddings & Parties',
-        url: '/weddings-and-parties',
+        url: '/weddings-parties-say-lou-lou',
       },
       {
         text: 'Evening \'18',
