@@ -64,7 +64,7 @@ class StyleSelectionModal extends PureComponent {
           handleCloseModal={this.handleCloseModal}
           headline={CustomizationConstants.STYLE_HEADLINE}
           modalClassName="u-flex u-flex--1"
-          modalContentClassName="u-width--full u-overflow-y--scroll"
+          modalContentClassName="u-width--full u-overflow-y--scroll u-overflow-scrolling--touch"
           modalWrapperClassName="u-flex--col"
         >
           <ProductCustomizationStyle hasNavItems={false} clearAll={false} />
