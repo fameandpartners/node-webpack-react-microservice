@@ -20,6 +20,9 @@ import '../css/index.scss';
 // Store
 import AppStore from './stores/AppStore';
 
+// Mock : Leave in for testing purposes
+// import mockUntransformedData from '../mock/product.json';
+
 // Utilities
 import { transformProductJSON } from './utilities/pdp';
 

@@ -74,7 +74,6 @@ function stateToProps(state) {
     colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
-    colorPrice: selectedColor.get('usdPrice'),
     patternUrl: selectedColor.get('patternUrl'),
     expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
 
@@ -112,17 +111,13 @@ class ProductOptions extends Component {
       colorCentsTotal,
       colorName,
       colorHexValue,
-      colorPrice,
-      hasFabrics,
       patternUrl,
     } = this.props;
     const background = generateBackgroundValueFromColor({
       hexValue: colorHexValue,
       patternUrl,
     });
-    const price = hasFabrics
-      ? formatCents(parseInt(colorPrice, 10) * 100, 0)
-      : formatCents(colorCentsTotal, 0);
+    const price = formatCents(colorCentsTotal, 0);
 
     return (
       <span>
@@ -405,7 +400,6 @@ ProductOptions.propTypes = {
   colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
-  colorPrice: PropTypes.number,
   patternUrl: PropTypes.string.isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
@@ -430,7 +424,6 @@ ProductOptions.propTypes = {
 ProductOptions.defaultProps = {
   addonOptions: [],
   colorCentsTotal: 0,
-  colorPrice: 0,
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,

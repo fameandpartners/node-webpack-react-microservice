@@ -5,6 +5,7 @@ import { formatCents } from './accounting';
 import { UNITS, EXPRESS_MAKING_PRICE_CENTS, SUPER_EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
 import { sizeProfilePresence } from './pdpValidations';
 import win from '../polyfills/windowPolyfill';
+import { siteVersionAU } from './helpers';
 
 export function calculateSubTotal({
   colorCentsTotal = 0,
@@ -364,6 +365,9 @@ function transformProductFabricColor(fabricMeta) {
   const fabricDetails = fabricMeta.fabric;
   return {
     id: fabricDetails.id,
+    centsTotal: siteVersionAU()
+      ? (parseInt(fabricDetails.price_aud, 10) * 100)
+      : (parseInt(fabricDetails.price_usd, 10) * 100),
     belongsToColorGroups: fabricMeta.color_groups,
     description: fabricDetails.description || '',
     patternUrl: fabricDetails.image_url,
