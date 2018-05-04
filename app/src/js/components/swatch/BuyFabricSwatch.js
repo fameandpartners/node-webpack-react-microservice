@@ -119,9 +119,9 @@ class BuyFabricSwatch extends PureComponent {
     const colors = currentOrder.map(item => (item.color_name));
     const colorsText = colors.join(', ');
     if (colors.length > 1) {
-      return `${colorsText} Georgette's`;
+      return `${colorsText} Heavy Georgette's`;
     }
-    return `${colorsText} Georgette`;
+    return `${colorsText} Heavy Georgette`;
   }
 
   currentOrderToJS() {
