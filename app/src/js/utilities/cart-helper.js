@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import request from 'superagent';
+import { assign } from 'lodash';
 
 // polyfills
 import win from '../polyfills/windowPolyfill';
@@ -67,19 +68,26 @@ function transformLineItem(lineItem, auSite) {
     };
   } else {
     const sizeId = mapSizeIdFromSortKey(lineItem.selectedDressSize, auSite);
-    transformed = {
-      color_id: lineItem.color.id,
-      customizations_ids: lineItem.addons.map(a => a.id),
-      dress_variant_id: getDressVariantId(
-        win.PdpDataFull.product.available_options.table.variants,
-        lineItem.color.id,
-        sizeId),
-      height_unit: lineItem.selectedMeasurementMetric,
-      height_value: lineItem.selectedHeightValue,
-      making_options_ids: [lineItem.expressMakingID || 0],
-      size_id: sizeId,
-      variant_id: win ? win.PdpDataFull.product.master_id : null,
-    };
+
+    const colorFabric = lineItem.color.material
+      ? { fabric_id: lineItem.color.id }
+      : { color_id: lineItem.color.id };
+
+    transformed = assign({},
+      {
+        customizations_ids: lineItem.addons.map(a => a.id),
+        dress_variant_id: getDressVariantId(
+          win.PdpDataFull.product.available_options.table.variants,
+          lineItem.color.id,
+          sizeId),
+        height_unit: lineItem.selectedMeasurementMetric,
+        height_value: lineItem.selectedHeightValue,
+        making_options_ids: [lineItem.expressMakingID || 0],
+        size_id: sizeId,
+        variant_id: win ? win.PdpDataFull.product.master_id : null,
+      },
+      colorFabric,
+  );
   }
   return transformed;
 }

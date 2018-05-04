@@ -10,6 +10,7 @@ export const $$initialState = Immutable.fromJS({
   //   productCentsBasePrice: Number,
   //   productImage: String,
   //   productTitle: String,
+  //   productVariantId: Number,
   //   color: ObjectOf({
   //     id: String,
   //     centsTotal: Number,
@@ -35,6 +36,32 @@ function pluckCorrectImage(lineItem) {
   return lineItem.image.original;
 }
 
+function createColor(color, fabric) {
+  if (fabric) {
+    return {
+      id: fabric.id,
+      centsTotal: fabric.amount || 0,
+      name: fabric.name,
+      presentation: fabric.name,
+      hexValue: color.value,
+      patternUrl: '',
+    };
+  }
+
+  if (color) {
+    return {
+      id: color.id,
+      centsTotal: color.custom_color ? 1600 : 0,
+      name: color.name,
+      presentation: color.presentation,
+      hexValue: color.value,
+      patternUrl: color.image,
+    };
+  }
+
+  return {};
+}
+
 function transformCartDataLineItems(lineItems) {
   return lineItems
     .filter(li => li.name !== 'RETURN_INSURANCE')
@@ -44,20 +71,14 @@ function transformCartDataLineItems(lineItems) {
       productCentsBasePrice: parseInt(li.price.money.money.fractional, 10),
       productImage: pluckCorrectImage(li),
       productTitle: li.name,
+      productVariantId: li.variant_id,
       heightUnit: li.height_unit,
       heightValue: li.height_value,
       height: li.height ? li.height : null,
       sizePresentationAU: li.size ? li.size.presentation_au : null,
       sizePresentationUS: li.size ? formatSizePresentationUS(li.size.presentation_us) : null,
       sizeNumber: li.size ? li.size.sort_key : null,
-      color: {
-        id: li.color.id,
-        centsTotal: li.color.custom_color ? 1600 : 0,
-        name: li.color.name,
-        presentation: li.color.presentation,
-        hexValue: li.color.value,
-        patternUrl: li.color.image,
-      },
+      color: createColor(li.color, li.fabric),
       addons: li.customizations,
     }));
 }

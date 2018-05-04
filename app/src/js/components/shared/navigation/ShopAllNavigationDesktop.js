@@ -5,7 +5,7 @@ import Resize from '../../../decorators/Resize';
 import PDPBreakpoints from '../../../libs/PDPBreakpoints';
 
 // Assets
-import fallWeddings from '../../../../img/ShopAll-Tile.jpg';
+import summerWeddings from '../../../../img/SummerMenu.jpg';
 import '../../../../css/components/ShopAllNavigationDesktop.scss';
 
 // Constants
@@ -29,15 +29,15 @@ class ShopAllNavigationDesktop extends PureComponent {
 
     const headerAd = (
       <div className="HeaderNavigationDesktop__ad">
-        <a href="/dresses/dress-cici-jumpsuit-1111?clr=25">
+        <a href="/fresh-for-summer-collection">
           <img
-            alt="Shop the Cici Jumpsuit"
+            alt="Summer essentials, now customizable"
             className="u-width--full"
-            src={fallWeddings}
+            src={summerWeddings}
           />
         </a>
-        <a href="/dresses/dress-cici-jumpsuit-1111?clr=25" className="link">
-          <span>SHOP THE CICI JUMPSUIT</span>
+        <a href="/fresh-for-summer-collection" className="link">
+          <span>Summer essentials, now customizable</span>
         </a>
       </div>
     );
@@ -52,10 +52,6 @@ class ShopAllNavigationDesktop extends PureComponent {
             className="ShopAllNavigationDesktop__link-container u-center grid"
           >
             <NavLinkCol
-              colTitle="Weddings"
-              links={NAVIGATION_LINKS.WEDDINGS}
-            />
-            <NavLinkCol
               colTitle="Dresses"
               headerLink={NAVIGATION_LINKS.DRESSES_PATH}
               links={NAVIGATION_LINKS.DRESSES}
@@ -65,12 +61,15 @@ class ShopAllNavigationDesktop extends PureComponent {
               links={NAVIGATION_LINKS.SEPARATES}
             />
             <NavLinkCol
-              colTitle="Featured"
-              links={NAVIGATION_LINKS.FEATURED}
+              colTitle="Weddings"
+              links={NAVIGATION_LINKS.WEDDINGS}
             />
             <NavLinkCol
-              colTitle="Collections"
-              links={NAVIGATION_LINKS.COLLECTIONS}
+              colClass="col_sm-6_md-2"
+            />
+            <NavLinkCol
+              colTitle="Featured"
+              links={NAVIGATION_LINKS.FEATURED}
             />
             { (breakpoint === 'mobile' || breakpoint === 'tablet' || breakpoint === 'desktop-sm') ? null :
               headerAd

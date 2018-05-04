@@ -30,11 +30,14 @@ import '../../../css/components/ProductDisplayOptionsTouch.scss';
 
 
 function stateToProps(state) {
+  const productDefaultFabrics = state.$$productState.get('productDefaultFabrics');
+  const productSecondaryFabrics = state.$$productState.get('productSecondaryFabrics');
   // Which part of the Redux global state does our component want to receive as props?
   return {
     addonOptions: state.$$customizationState.get('addons').get('addonOptions').toJS(),
     fabric: state.$$productState.get('fabric').toJS(),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
+    hasFabrics: !productDefaultFabrics.isEmpty() || !productSecondaryFabrics.isEmpty(),
     productImages: state.$$productState.get('productImages').toJS(),
     selectedColor: state.$$customizationState.get('selectedColor').toJS(),
     selectedColorId: state.$$customizationState.get('selectedColor').get('id'),
@@ -103,12 +106,26 @@ class ProductImageSlider extends Component {
     return `${sliderHeight}px`;
   }
 
+  doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId }) {
+    const { hasFabrics } = this.props;
+    if (colorMatch) {
+      return hasFabrics
+        ? img.fabricId === id
+        : img.colorId === id;
+    }
+    return hasFabrics
+        ? img.fabricId === firstColorId
+        : img.colorId === firstColorId;
+  }
+
   getSliderImages() {
-    const { productImages, selectedColorId } = this.props;
-    const colorMatch = find(productImages, { colorId: selectedColorId });
-    const firstColorId = productImages[0].colorId;
+    const { productImages, hasFabrics, selectedColorId: id } = this.props;
+    const colorMatch = hasFabrics
+      ? find(productImages, { fabricId: id })
+      : find(productImages, { colorId: id });
+    const firstColorId = productImages[0].fabricId || productImages[0].colorId;
     return productImages
-      .filter(img => (colorMatch ? img.colorId === selectedColorId : img.colorId === firstColorId))
+      .filter(img => (this.doesImageHaveColorIdMatch({ img, id, colorMatch, firstColorId })))
       .map(img => img);
   }
 
@@ -166,6 +183,7 @@ ProductImageSlider.propTypes = {
   //   description: PropTypes.string,
   // }).isRequired,
   // garmentCareInformation: PropTypes.string,
+  hasFabrics: PropTypes.bool.isRequired,
   productImages: PropTypes.array.isRequired,
   selectedStyleCustomizations: PropTypes.arrayOf(PropTypes.number),
   // Redux Actions

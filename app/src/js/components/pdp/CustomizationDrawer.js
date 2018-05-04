@@ -73,6 +73,7 @@ class CustomizationDrawer extends PureComponent {
 
   render() {
     const {
+      productCustomizationDrawer,
       productCustomizationDrawerOpen,
     } = this.props;
 
@@ -90,6 +91,7 @@ class CustomizationDrawer extends PureComponent {
                 key={key}
                 className={classnames(
                   'CustomizationDrawer__wrapper u-height--full u-width--full typography',
+                  `CustomizationDrawer__wrapper-${productCustomizationDrawer}`,
                   { 'u-pointerEvents--none': !productCustomizationDrawerOpen },
                 )}
                 style={{

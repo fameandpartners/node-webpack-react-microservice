@@ -2,7 +2,7 @@ import { assign } from 'lodash';
 import mirrorCreator from 'mirror-creator';
 
 // Utilities
-import { siteVersionAU } from '../utilities/helpers';
+// import { siteVersionAU } from '../utilities/helpers';
 
 const actionTypes = assign({},
   mirrorCreator([
@@ -41,12 +41,12 @@ const navigationLinks = {
   NAVIGATION_LINKS: {
     WEDDINGS: [
       {
-        text: 'Brides',
-        url: '/bespoke-bridal-collection',
-      },
-      {
         text: 'Bridesmaids',
         url: '/modern-bridesmaid-dresses',
+      },
+      {
+        text: 'Bridal',
+        url: '/navigation-bridal',
       },
       {
         text: 'Wedding Guests',
@@ -56,34 +56,34 @@ const navigationLinks = {
         type: 'divider',
       },
       {
-        text: 'Custom Dress Collections',
+        text: 'New Bridesmaid 20% Off',
         url: '/coming-soon-custom-bridesmaid-dresses',
-      },
-      {
-        text: 'Bridal Style Guides',
-        url: '/get-the-look',
       },
     ],
     DRESSES: [
       {
-        text: 'Maxi Dresses',
-        url: '/dresses/long',
+        text: 'Day',
+        url: '/navigation-day',
       },
       {
-        text: 'Midi Dresses',
-        url: '/dresses/midi',
+        text: 'Work',
+        url: '/navigation-work',
       },
       {
-        text: 'Mini Dresses',
-        url: '/dresses/mini',
+        text: 'Weddings',
+        url: '/weddings-and-parties',
       },
       {
         text: 'Cocktail',
         url: '/dresses/cocktail',
       },
       {
-        text: 'Casual',
-        url: '/dresses/casual',
+        text: 'Night Out',
+        url: '/navigation-night-out',
+      },
+      {
+        text: 'Vacation',
+        url: '/navigation-vacation',
       },
       {
         text: 'Evening',
@@ -104,52 +104,52 @@ const navigationLinks = {
     DRESSES_PATH: '',
     SEPARATES: [
       {
-        text: 'Tops',
-        url: '/tops',
-      },
-      {
         text: 'Skirts',
         url: '/skirts',
-      },
-      {
-        text: 'Pants',
-        url: '/pants',
       },
       {
         text: 'Jumpsuits',
         url: '/dresses/jumpsuit',
       },
       {
+        text: 'Pants',
+        url: '/pants',
+      },
+      {
         text: 'Outerwear',
         url: '/outerwear',
+      },
+      { type: 'divider' },
+      {
+        text: 'View All',
+        url: '/navigation-all-separates',
       },
     ],
     FEATURED: [
       {
+        text: 'Just In',
+        url: '/dresses/new-this-week',
+      },
+      {
+        text: 'Under $200',
+        url: '/navigation-under-200',
+      },
+      {
         text: 'Best Sellers',
         url: '/dresses/best-sellers',
       },
+      { type: 'divider' },
       {
-        text: 'New Arrivals',
-        url: '/dresses/new-this-week',
-      },
-    ],
-    COLLECTIONS: [
-      {
-        text: 'Holiday Party',
-        url: '/holiday-party-survival-kit',
+        text: 'Summer \'18',
+        url: '/fresh-for-summer-collection',
       },
       {
-        text: 'High Contrast',
-        url: '/high-contrast',
+        text: 'Weddings & Parties',
+        url: '/weddings-parties-say-lou-lou',
       },
       {
-        text: 'Evening Shop',
-        url: '/the-evening-shop',
-      },
-      {
-        text: 'Anti-Fast Fashion Shop',
-        url: '/the-anti-fast-fashion-shop',
+        text: 'Evening \'18',
+        url: '/evening-collection-campaign',
       },
     ],
     ABOUT: [
@@ -181,14 +181,14 @@ const navigationLinks = {
       },
       {
         text: 'Get $25 Off',
-        url: '/invite?nav',
+        url: '/invite?traffic_source=nav',
       },
-      {
-        text: 'Shop With Friends',
-        url: '#',
-        customClass: 'js-shop-with-friends',
-        shouldHide: siteVersionAU(),
-      },
+      // {
+      //   text: 'Shop With Friends',
+      //   url: '#',
+      //   customClass: 'js-shop-with-friends',
+      //   shouldHide: siteVersionAU(),
+      // },
     ],
   },
 };

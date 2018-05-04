@@ -111,11 +111,6 @@ class Footer extends PureComponent {
             <li><p className="Footer__category-title">Shop By</p></li>
             <li>
               <p>
-                <a className="link--static" href="/dresses/best-sellers">Best Sellers</a>
-              </p>
-            </li>
-            <li>
-              <p>
                 <a className="link--static" href="/dresses?order=newest">New Arrivals</a>
               </p>
             </li>

@@ -60,6 +60,7 @@ function stateToProps(state) {
     auSite: state.$$appState.get('siteVersion').toLowerCase() === 'australia',
 
     // PRODUCT
+    hasFabrics: state.$$productState.get('hasFabrics'),
     deliveryCopy: state.$$productState.get('deliveryCopy'),
     productId: state.$$productState.get('productId'),
     productTitle: state.$$productState.get('productTitle'),
@@ -73,12 +74,15 @@ function stateToProps(state) {
     colorName: selectedColor.get('presentation'),
     colorCentsTotal: selectedColor.get('centsTotal'),
     colorHexValue: selectedColor.get('hexValue'),
+    colorPrice: selectedColor.get('usdPrice'),
     patternUrl: selectedColor.get('patternUrl'),
     expressMakingStatus: state.$$customizationState.get('expressMakingSelected'),
 
     // SELECTIONS
     addonOptions: addons ? addons.get('addonOptions').toJS() : null,
     expressMakingSelected: state.$$customizationState.get('expressMakingSelected'),
+    superExpressMakingSelected: state.$$customizationState.get('superExpressMakingSelected'),
+
     selectedDressSize: state.$$customizationState.get('selectedDressSize'),
     selectedHeightValue: state.$$customizationState.get('selectedHeightValue'),
     selectedMeasurementMetric: state.$$customizationState.get('selectedMeasurementMetric'),
@@ -108,18 +112,23 @@ class ProductOptions extends Component {
       colorCentsTotal,
       colorName,
       colorHexValue,
+      colorPrice,
+      hasFabrics,
       patternUrl,
     } = this.props;
     const background = generateBackgroundValueFromColor({
       hexValue: colorHexValue,
       patternUrl,
     });
+    const price = hasFabrics
+      ? formatCents(parseInt(colorPrice, 10) * 100, 0)
+      : formatCents(colorCentsTotal, 0);
 
     return (
       <span>
         <span>{colorName}</span>&nbsp;
-        { colorCentsTotal
-          ? <span>+{formatCents(colorCentsTotal, 0)}</span>
+        { price && price !== '$0'
+          ? <span>+{price}</span>
           : null
         }
         <span
@@ -174,6 +183,7 @@ class ProductOptions extends Component {
       productCentsBasePrice,
       colorCentsTotal,
       expressMakingSelected,
+      superExpressMakingSelected,
       addonOptions,
       selectedStyleCustomizations,
     } = this.props;
@@ -182,7 +192,12 @@ class ProductOptions extends Component {
       selectedStyleCustomizations,
     );
     return calculateSubTotal(
-      { colorCentsTotal, productCentsBasePrice, selectedAddonOptions, expressMakingSelected },
+      { colorCentsTotal,
+        productCentsBasePrice,
+        selectedAddonOptions,
+        expressMakingSelected,
+        superExpressMakingSelected,
+      },
       currencySymbol,
     );
   }
@@ -223,21 +238,29 @@ class ProductOptions extends Component {
    * @return {String} imageUrl
    */
   findColorSpecificFirstImageUrl() {
-    const { $$productImages, colorId } = this.props;
+    const { $$productImages, hasFabrics, colorId: id } = this.props;
     const productImages = $$productImages.toJS();
-    const hasMatch = find(productImages, { colorId });
+    const hasMatch = hasFabrics
+      ? find(productImages, { fabricId: id })
+      : find(productImages, { colorId: id });
     return hasMatch ? hasMatch.bigImg : productImages[0].bigImg;
   }
 
   generateDeliveryCopy() {
-    const { deliveryCopy, expressMakingSelected } = this.props;
-    return expressMakingSelected ? '4-6 business days' : deliveryCopy;
+    const { deliveryCopy, expressMakingSelected, superExpressMakingSelected } = this.props;
+    if (expressMakingSelected) {
+      return '2-3 weeks';
+    } else if (superExpressMakingSelected) {
+      return '1.5 weeks';
+    }
+    return deliveryCopy;
   }
 
   render() {
     const {
       auSite,
       deliveryCopy,
+      hasFabrics,
       productTitle,
       isActive,
       selectedStyleCustomizations,
@@ -269,7 +292,15 @@ class ProductOptions extends Component {
                 }
               />
               <ProductOptionsRow
-                leftNode={<span>{CustomizationConstants.COLOR_HEADLINE}</span>}
+                leftNode={(
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: hasFabrics
+                        ? CustomizationConstants.FABRIC_COLOR_HEADLINE
+                        : CustomizationConstants.COLOR_HEADLINE,
+                    }}
+                  />)
+                }
                 leftNodeClassName="u-uppercase"
                 optionIsSelected
                 rightNode={this.generateColorSelectionNode()}
@@ -324,7 +355,7 @@ class ProductOptions extends Component {
                 <p className="u-mb--small">
                   {
                     selectedStyleCustomizations.length === 0
-                    ? 'Shipping and returns are free.'
+                    ? 'All orders ship free.'
                     : 'Shipping is free on your customized item.'
                   } &nbsp;
                   <a
@@ -365,6 +396,7 @@ ProductOptions.propTypes = {
     width: PropTypes.number,
     position: PropTypes.number,
   })).isRequired,
+  hasFabrics: PropTypes.bool.isRequired,
   productTitle: PropTypes.string.isRequired,
   productCentsBasePrice: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
@@ -373,6 +405,7 @@ ProductOptions.propTypes = {
   colorCentsTotal: PropTypes.number,
   colorName: PropTypes.string.isRequired,
   colorHexValue: PropTypes.string.isRequired,
+  colorPrice: PropTypes.number,
   patternUrl: PropTypes.string.isRequired,
   // ADDONS
   addonOptions: PropTypes.arrayOf(
@@ -390,18 +423,20 @@ ProductOptions.propTypes = {
   activateModal: PropTypes.func,
   deliveryCopy: PropTypes.string,
   expressMakingSelected: PropTypes.bool,
+  superExpressMakingSelected: PropTypes.bool,
 
 };
 
 ProductOptions.defaultProps = {
   addonOptions: [],
   colorCentsTotal: 0,
+  colorPrice: 0,
   selectedDressSize: null,
   selectedHeightValue: null,
   activateModal: noop,
   deliveryCopy: '',
   expressMakingSelected: false,
-
+  superExpressMakingSelected: false,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);

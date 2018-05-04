@@ -2,21 +2,25 @@
 /* eslint-disable no-throw-literal */
 import { assign, find } from 'lodash';
 import { formatCents } from './accounting';
-import { UNITS, EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
+import { UNITS, EXPRESS_MAKING_PRICE_CENTS, SUPER_EXPRESS_MAKING_PRICE_CENTS } from '../constants/ProductConstants';
 import { sizeProfilePresence } from './pdpValidations';
+import win from '../polyfills/windowPolyfill';
 
 export function calculateSubTotal({
   colorCentsTotal = 0,
   productCentsBasePrice = 0,
   selectedAddonOptions = [],
   expressMakingSelected = false,
+  superExpressMakingSelected = false,
 }, currencySymbol = '$') {
   const expressMakingCharge = expressMakingSelected ? EXPRESS_MAKING_PRICE_CENTS : 0;
+  const superExpressMakingCharge = superExpressMakingSelected ? SUPER_EXPRESS_MAKING_PRICE_CENTS : 0;
+
   const customizationStyleCents = selectedAddonOptions
     .reduce((prev, curr) => prev + parseInt(curr.centsTotal, 10), 0);
 
   return formatCents(
-    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice + expressMakingCharge),
+    (parseInt(colorCentsTotal, 10) + customizationStyleCents + productCentsBasePrice + expressMakingCharge + superExpressMakingCharge),
     0,
     (currencySymbol || ''),
   );
@@ -78,6 +82,7 @@ export function addonSelectionDisplayText({ selectedAddonOptions }) {
 }
 
 export function accumulateCustomizationSelections({ $$customizationState, $$productState }) {
+  const availableMakingOptions = $$productState.get('availableMakingOptions').toJS();
   const productId = $$productState.get('productId');
   const productTitle = $$productState.get('productTitle');
   const productImage = $$productState.get('productImages').get(0).get('bigImg');
@@ -91,9 +96,18 @@ export function accumulateCustomizationSelections({ $$customizationState, $$prod
   const selectedMeasurementMetric = $$customizationState.get('selectedMeasurementMetric');
 
   const expressMaking = $$customizationState.get('expressMakingSelected');
+  const superExpressMaking = $$customizationState.get('superExpressMakingSelected');
   let expressMakingID = null;
-  if (expressMaking) {
+  // eslint-disable-next-line
+  if (win.__vwo_test__ && win.__vwo_test__ === 'free_fast_making') {
+    const foundFastMakingOption = find(availableMakingOptions, { type: 'free_fast_making' });
+    if (foundFastMakingOption) { // is free_fast_making available in our availableProductMakingOptions
+      expressMakingID = foundFastMakingOption.id;
+    }
+  } else if (expressMaking) {
     expressMakingID = $$productState.get('makingOptionId');
+  } else if (superExpressMaking) {
+    expressMakingID = $$productState.get('superFastMakingOptionId');
   }
 
   return {
@@ -287,6 +301,23 @@ export function transformProductColors(data, key) {
   });
 }
 
+export function transformProductColorGroup(colorGroup, fabrics) {
+  if (!colorGroup) return [];
+
+  const availableFabricColors = fabrics.table.default
+    .concat(fabrics.table.extra)
+    .reduce((accum, currVal) => accum.concat(currVal.color_groups), []);
+
+  return colorGroup
+  .filter(cg => availableFabricColors.indexOf(cg.presentation) > -1)
+  .map(cg => ({
+    id: cg.id,
+    name: cg.name,
+    colorIds: cg.color_ids,
+    presentation: cg.presentation,
+  }));
+}
+
 export function transformProductSecondaryColorsCentsPrice({ colors = {} }) {
   const extraPrice = colors.table.default_extra_price.price || {};
   // amount: String,
@@ -299,7 +330,7 @@ export function transformProductSecondaryColorsCentsPrice({ colors = {} }) {
   return productSecondaryColorsCentsPrice;
 }
 
-export function transformProductFabric({ fabric }) {
+export function transformProductFabricDescription({ fabric }) {
   console.warn('NEED BACKEND FABRIC IMG');
   //   "fabric": String,
   //   ****** into ******
@@ -313,8 +344,41 @@ export function transformProductFabric({ fabric }) {
     id: 'does-not-exist-yet',
     img: 'does-not-exist-yet.png',
     name: 'does-not-exist-yet',
-    description: fabric,
+    description: fabric || '',
   };
+}
+
+export function transformProductFabricGroups({ fabrics }) {
+  if ((!fabrics.table.default && !fabrics.table.extra)) return [];
+
+  const combinedFabrics = fabrics.table.default.concat(fabrics.table.extra);
+  return combinedFabrics.reduce((accum, currVal) => {
+    if (accum.indexOf(currVal.fabric.material) === -1) {
+      return accum.concat(currVal.fabric.material);
+    }
+    return accum;
+  }, []);
+}
+
+function transformProductFabricColor(fabricMeta) {
+  const fabricDetails = fabricMeta.fabric;
+  return {
+    id: fabricDetails.id,
+    belongsToColorGroups: fabricMeta.color_groups,
+    description: fabricDetails.description || '',
+    patternUrl: fabricDetails.image_url,
+    audPrice: fabricDetails.price_aud,
+    material: fabricDetails.material,
+    name: fabricDetails.name,
+    presentation: fabricDetails.presentation,
+    usdPrice: fabricDetails.price_usd,
+  };
+}
+
+
+export function transformProductColorList(fabricList) {
+  if (!fabricList) return [];
+  return fabricList.map(fabricMeta => transformProductFabricColor(fabricMeta));
 }
 
 export function transformProductGarmentInformation() {
@@ -349,6 +413,7 @@ export function transformProductImages(images) {
   //   position: Number
   return images.map(i => ({
     id: i.id,
+    fabricId: i.fabric_id,
     colorId: i.color_id,
     smallImg: i.url_product,
     bigImg: i.url,
@@ -417,9 +482,28 @@ export function transformProductSizeChart({ sizeChart }) {
 export function transformProductMakingOptionId({ making_option_id: making }) {
   return making;
 }
+export function transformProductSuperFastMakingOptionId({ super_fast_making_option_id: making }) {
+  return making;
+}
+
+export function transformAvailableProductMakingOptionId({ available_options: availableOptions }) {
+  const untransformedMakingOptions = availableOptions.table.making_options;
+  if (Array.isArray(untransformedMakingOptions)) {
+    return untransformedMakingOptions.map(mo => ({
+      id: mo.product_making_option.id,
+      type: mo.product_making_option.option_type,
+    }));
+  }
+
+  return null;
+}
 
 export function transformProductFastMaking({ fast_making: fastMaking }) {
   return fastMaking;
+}
+
+export function transformProductSuperFastMaking({ super_fast_making: superFastMaking }) {
+  return superFastMaking || false;
 }
 
 export function transformDeliveryCopy({ delivery_period: deliveryPeriod }) {
@@ -439,8 +523,12 @@ function selectMeasurementMetric({ siteVersion = 'usa' }) {
   return measurementMetric;
 }
 
-function selectDefaultColor({ color_id: colorId, color_name: colorName }, colors) {
-  const foundColor = find(colors, { id: colorId });
+function selectDefaultColor({ color_id: colorId, color_name: colorName }, colors, fabrics) {
+  let foundColor = find(colors, { id: colorId });
+  if (fabrics && fabrics.length > 0) {
+    foundColor = fabrics[0];
+  }
+
   return foundColor || colors[0];
 }
 
@@ -460,13 +548,18 @@ export function transformProductJSON(productJSON) {
         currency: transformProductCurrency(productJSON.product),
         complementaryProducts: transformProductComplementaryProducts(productJSON.product),
         deliveryCopy: transformDeliveryCopy(productJSON.product),
-        fabric: transformProductFabric(productJSON.product),
+        fabric: transformProductFabricDescription(productJSON.product),
+        fabricGroups: transformProductFabricGroups(productJSON.product),
+        productDefaultFabrics: transformProductColorList(productJSON.product.fabrics.table.default),
+        productSecondaryFabrics: transformProductColorList(productJSON.product.fabrics.table.extra),
         fastMaking: transformProductFastMaking(productJSON.product),
+        superFastMaking: transformProductSuperFastMaking(productJSON.product),
         garmentCareInformation: transformProductGarmentInformation(),
         preCustomizations: transformProductPreCustomizations(),
         productCentsBasePrice: transformProductCentsBasePrice(productJSON.product),
         productDescription: transformProductDescription(productJSON.product),
         productDefaultColors: transformProductColors(productJSON, 'default'),
+        productGroupColors: transformProductColorGroup(productJSON.colorGroups, productJSON.product.fabrics),
         productSecondaryColors: transformProductColors(productJSON, 'extra'),
         productSecondaryColorsCentsPrice: transformProductSecondaryColorsCentsPrice(productJSON.product),
         productId: transformProductId(productJSON.product),
@@ -474,11 +567,14 @@ export function transformProductJSON(productJSON) {
         productTitle: transformProductTitle(productJSON.product),
         isActive: productJSON.product.is_active,
         makingOptionId: transformProductMakingOptionId(productJSON.product),
+        superFastMakingOptionId: transformProductSuperFastMakingOptionId(productJSON.product),
+        availableMakingOptions: transformAvailableProductMakingOptionId(productJSON.product),
         modelDescription: transformProductModelDescription(productJSON),
         siteVersion: transformProductSiteVersion(productJSON),
         sizeChart: transformProductSizeChart(productJSON),
         sku: transformSKU(productJSON.product),
       };
+      productState.hasFabrics = productState.productDefaultFabrics.length > 0 || productState.productSecondaryFabrics.length > 0;
     } else {
       productState = {};
     }
@@ -490,7 +586,7 @@ export function transformProductJSON(productJSON) {
   try {
     if (productJSON.product) {
       const measurementMetric = selectMeasurementMetric(productJSON);
-      const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors);
+      const selectedColor = selectDefaultColor(productJSON.product, productState.productDefaultColors, productState.productDefaultFabrics);
       customizationState = {
         addons: transformAddons(productJSON),
         selectedColor,
@@ -528,7 +624,8 @@ export default {
   transformProductColors,
   transformProductDescription,
   transformProductSecondaryColorsCentsPrice,
-  transformProductFabric,
+  transformProductFabricDescription,
+  transformProductColorList,
   transformProductGarmentInformation,
   transformProductId,
   transformProductImages,

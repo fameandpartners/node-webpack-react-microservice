@@ -43,11 +43,6 @@ class ShopAllNavigationMobile extends PureComponent {
               <div className="grid-center-noGutter">
                 <NavLinkCol
                   colClass="col_sm-6_md-2"
-                  colTitle="Weddings"
-                  links={NAVIGATION_LINKS.WEDDINGS}
-                />
-                <NavLinkCol
-                  colClass="col_sm-6_md-2"
                   colTitle="Dresses"
                   links={NAVIGATION_LINKS.DRESSES}
                   headerLink={NAVIGATION_LINKS.DRESSES_PATH}
@@ -59,15 +54,14 @@ class ShopAllNavigationMobile extends PureComponent {
                 />
                 <NavLinkCol
                   colClass="col_sm-6_md-2"
-                  colTitle="Featured"
-                  links={NAVIGATION_LINKS.FEATURED}
+                  colTitle="Weddings"
+                  links={NAVIGATION_LINKS.WEDDINGS}
                 />
                 <NavLinkCol
                   colClass="col_sm-6_md-2"
-                  colTitle="Collections"
-                  links={NAVIGATION_LINKS.COLLECTIONS}
+                  colTitle="Featured"
+                  links={NAVIGATION_LINKS.FEATURED}
                 />
-
               </div>
             </div>
           </div>

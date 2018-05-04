@@ -33,7 +33,9 @@ function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
     cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
-    fabric: state.$$productState.get('fabric').toJS(),
+    selectedColor: state.$$customizationState.get('selectedColor').toJS(),
+    defaultFabric: state.$$productState.get('fabric').toJS(),
+    hasFabrics: state.$$productState.get('hasFabrics'),
     garmentCareInformation: state.$$productState.get('garmentCareInformation'),
     sku: state.$$productState.get('sku'),
   };
@@ -65,11 +67,12 @@ class AppMain extends Component {
   render() {
     const {
       breakpoint,
-      fabric,
+      defaultFabric,
       garmentCareInformation,
+      hasFabrics,
+      selectedColor,
       sku,
     } = this.props;
-    console.log('are we in render');
 
     return (
       <div className="AppMain__wrapper">
@@ -93,7 +96,7 @@ class AppMain extends Component {
               <div className="col grid-middle">
                 <ProductFabricInfo
                   className="u-center"
-                  fabric={fabric}
+                  fabric={hasFabrics ? selectedColor : defaultFabric}
                   garmentCareInformation={garmentCareInformation}
                 />
               </div>
@@ -130,13 +133,18 @@ class AppMain extends Component {
 AppMain.propTypes = {
   // Redux Props
   activateModal: PropTypes.func.isRequired,
-  fabric: PropTypes.shape({
+  defaultFabric: PropTypes.shape({
     id: PropTypes.string,
     smallImg: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
   }).isRequired,
   garmentCareInformation: PropTypes.string.isRequired,
+  hasFabrics: PropTypes.bool.isRequired,
+  selectedColor: PropTypes.shape({
+    id: PropTypes.string,
+    description: PropTypes.string,
+  }).isRequired,
   sku: PropTypes.string,
 
   // Decorator Props

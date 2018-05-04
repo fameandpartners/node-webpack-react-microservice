@@ -88,6 +88,10 @@ export function setExpressMakingStatus(status) {
   return { type: CustomizationConstants.SET_EXPRESS_MAKING_STATUS, status };
 }
 
+export function setSuperExpressMakingStatus(status) {
+  return { type: CustomizationConstants.SET_SUPER_EXPRESS_MAKING_STATUS, status };
+}
+
 export default {
   activateCustomizationDrawer,
   changeCustomizationDrawer,
