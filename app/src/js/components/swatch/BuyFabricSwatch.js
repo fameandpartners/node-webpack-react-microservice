@@ -15,9 +15,6 @@ import * as CartActions from '../../actions/CartActions';
 import Button from '../generic/Button';
 import FabricSwatchProduct from './FabricSwatchProduct';
 
-// Utilities
-import win from '../../polyfills/windowPolyfill';
-
 function stateToProps(state) {
   const swatchOrder = state.$$fabricSwatchState.get('swatchOrder');
   const availableSwatches = state.$$fabricSwatchState.get('$$availableSwatches').toJS();
@@ -58,11 +55,6 @@ class BuyFabricSwatch extends PureComponent {
       if (err) {
         // eslint-disable-next-line
         return console.warn('error adding something to the cart', err);
-      }
-
-      // eslint-disable-next-line
-      if (win && win.__data) { // we are in old PDP, this needs to be removed ASAP
-        win.location = '/checkout';
       }
 
       setCartContents({ cart: res.body });
