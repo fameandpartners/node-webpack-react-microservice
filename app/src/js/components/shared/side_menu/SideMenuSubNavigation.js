@@ -69,7 +69,7 @@ class SideMenu extends Component {
 
   render() {
     return (
-      <div className="u-overflow-y--scroll u-height--full">
+      <div className="u-overflow-y--scroll u-overflow-scrolling--touch u-height--full">
         {this.generateSideMenuSubNavigationContents()}
       </div>
     );

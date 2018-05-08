@@ -70,7 +70,7 @@ class BridesmaidsFilterModal extends PureComponent {
         <Modal
           headline="Filters"
           handleCloseModal={this.handleCloseModal}
-          modalClassName="u-flex u-flex--1 u-overflow-y--scroll"
+          modalClassName="u-flex u-flex--1 u-overflow-y--scroll u-overflow-scrolling--touch"
           modalContentClassName="u-width--full"
           modalWrapperClassName="u-flex--col"
         >
