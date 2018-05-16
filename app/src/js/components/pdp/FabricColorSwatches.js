@@ -274,33 +274,38 @@ class FabricColorSwatches extends PureComponent {
         </div>
 
         <div className="FabricColorSwatches__color-swatch-results" style={{ marginTop: this.state.marginTop }}>
-          { filteredDefaultFabrics.length
-            ? (
-              <div>
-                <p className="u-mb--small textAlign--left u-bold">
-                  Recommended Colors
-                </p>
-                <div className="grid-12">
-                  { filteredDefaultFabrics.map(c => this.generateFabricSwatch(c, 0))}
-                </div>
-              </div>
-            ) : null
-          }
 
-          { filteredSecondaryFabrics.length
-            ? (
-              <div>
-                <p className="u-mb--small textAlign--left u-bold">
-                  Additional Colors
-                </p>
-                <div className="u-mb--normal grid-12">
-                  { filteredSecondaryFabrics.map(c =>
-                    this.generateFabricSwatch(c, c.usdPrice))
-                  }
+          <div>
+            { filteredDefaultFabrics.length
+              ? (
+                <div key="fd">
+                  <p className="u-mb--small textAlign--left u-bold">
+                    Recommended Colors
+                  </p>
+                  <div className="grid-12">
+                    { filteredDefaultFabrics.map(c => this.generateFabricSwatch(c, 0))}
+                  </div>
                 </div>
-              </div>
-            ) : null
-          }
+              ) : <div key="fd" />
+            }
+          </div>
+
+          <div>
+            { filteredSecondaryFabrics.length
+              ? (
+                <div key="fs">
+                  <p className="u-mb--small textAlign--left u-bold">
+                    Additional Colors
+                  </p>
+                  <div className="u-mb--normal grid-12">
+                    { filteredSecondaryFabrics.map(c =>
+                      this.generateFabricSwatch(c, c.usdPrice))
+                    }
+                  </div>
+                </div>
+              ) : <div key="fs" />
+            }
+          </div>
 
         </div>
       </div>

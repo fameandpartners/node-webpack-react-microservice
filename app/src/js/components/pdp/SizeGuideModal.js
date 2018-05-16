@@ -66,7 +66,7 @@ class SizeGuideModal extends PureComponent {
             this.handleCloseModal
         }
         modalClassName="u-flex u-flex--1"
-        modalContentClassName="u-width--full u-overflow-y--scroll"
+        modalContentClassName="u-width--full u-overflow-y--scroll u-overflow-scrolling--touch"
         modalWrapperClassName="u-flex--col"
       >
         <Tabs

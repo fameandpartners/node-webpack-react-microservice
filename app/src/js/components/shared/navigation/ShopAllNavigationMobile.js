@@ -39,7 +39,7 @@ class ShopAllNavigationMobile extends PureComponent {
             <h3 className="h5 u-display--inline u-ml-small">Shop All</h3>
           </div>
           <div className="ShopAllNavigationMobile__links u-flex--1">
-            <div className="u-overflow-y--scroll">
+            <div className="u-overflow-y--scroll u-overflow-scrolling--touch">
               <div className="grid-center-noGutter">
                 <NavLinkCol
                   colClass="col_sm-6_md-2"
