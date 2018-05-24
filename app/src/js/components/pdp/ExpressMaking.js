@@ -98,7 +98,7 @@ class ExpressMaking extends Component {
                 </div>
                 <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
                   <p className="ExpressMaking__content--headline">
-                        Super Express + $28
+                        Super Express + $19
                   </p>
                   <p className="ExpressMaking__content--subHeadline">
                       Cut, Sewn and Shipped in 1.5 weeks
@@ -147,7 +147,7 @@ class ExpressMaking extends Component {
                   </div>
                   <div className="col-8_sm-10 u-text-align-left u-paddingBottom--small">
                     <p className="ExpressMaking__content--headline">
-                              Express + $18
+                              Express + $4
                     </p>
                     <p className="ExpressMaking__content--subHeadline">
                         Cut, Sewn and Shipped in 2-3 weeks
