@@ -34,8 +34,8 @@ const constants = assign({},
       INCH: 'inch',
       CM: 'cm',
     },
-    EXPRESS_MAKING_PRICE_CENTS: 1800,
-    SUPER_EXPRESS_MAKING_PRICE_CENTS: 2800,
+    EXPRESS_MAKING_PRICE_CENTS: 400,
+    SUPER_EXPRESS_MAKING_PRICE_CENTS: 1900,
   },
 
   mirrorCreator([
