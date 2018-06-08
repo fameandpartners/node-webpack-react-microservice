@@ -26,6 +26,7 @@ function stateToProps(state) {
     productDefaultFabrics: productDefaultFabrics.toJS(),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     isActive: state.$$productState.get('isActive'),
+    showShippingInfoPDP: false,
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -78,11 +79,12 @@ class ExpressMaking extends Component {
       expressMakingStatus,
       superExpressMakingStatus,
       isActive,
+      showShippingInfoPDP,
       mobile,
     } = this.props;
     // PRODUCT
 
-    if (isActive) {
+    if (isActive && showShippingInfoPDP) {
       return (
         <div>
           {
@@ -198,6 +200,7 @@ ExpressMaking.propTypes = {
   expressMakingAvailable: PropTypes.bool,
   superExpressMakingAvailable: PropTypes.bool,
   isActive: PropTypes.bool.isRequired,
+  showShippingInfoPDP: PropTypes.bool,
   mobile: PropTypes.bool,
 };
 
@@ -210,6 +213,7 @@ ExpressMaking.defaultProps = {
   superExpressMakingAvailable: false,
   productDefaultColors: [],
   productDefaultFabrics: [],
+  showShippingInfoPDP: true,
   colorId: null,
   mobile: false,
 };
