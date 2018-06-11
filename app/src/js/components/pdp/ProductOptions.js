@@ -331,7 +331,7 @@ class ProductOptions extends Component {
               <AddToCartButton showTotal={false} shouldActivateCartDrawer />
             </div>
 
-            {isActive && showShippingInfoPDP ?
+            {isActive ?
               <div className="ProductOptions__additional-info u-mt-small u-mb--normal">
 
                 <CliqueCallout />
@@ -369,7 +369,7 @@ class ProductOptions extends Component {
                   Learn&nbsp;more
                   </a> <br />
                   {
-                    deliveryCopy
+                    deliveryCopy && showShippingInfoPDP
                     ? `Estimated delivery ${this.generateDeliveryCopy()}.`
                     : null
                   }
