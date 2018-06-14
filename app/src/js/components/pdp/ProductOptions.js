@@ -68,6 +68,7 @@ function stateToProps(state) {
     $$productImages: state.$$productState.get('productImages'),
     productDefaultColors: state.$$productState.get('productDefaultColors').toJS(),
     isActive: state.$$productState.get('isActive'),
+    showShippingInfoPDP: false,
 
     // COLOR
     colorId: selectedColor.get('id'),
@@ -263,6 +264,7 @@ class ProductOptions extends Component {
       hasFabrics,
       productTitle,
       isActive,
+      showShippingInfoPDP,
       selectedStyleCustomizations,
       selectedDressSize,
       selectedHeightValue,
@@ -367,7 +369,7 @@ class ProductOptions extends Component {
                   Learn&nbsp;more
                   </a> <br />
                   {
-                    deliveryCopy
+                    deliveryCopy && showShippingInfoPDP
                     ? `Estimated delivery ${this.generateDeliveryCopy()}.`
                     : null
                   }
@@ -424,7 +426,7 @@ ProductOptions.propTypes = {
   deliveryCopy: PropTypes.string,
   expressMakingSelected: PropTypes.bool,
   superExpressMakingSelected: PropTypes.bool,
-
+  showShippingInfoPDP: PropTypes.bool,
 };
 
 ProductOptions.defaultProps = {
@@ -437,6 +439,7 @@ ProductOptions.defaultProps = {
   deliveryCopy: '',
   expressMakingSelected: false,
   superExpressMakingSelected: false,
+  showShippingInfoPDP: true,
 };
 
 export default connect(stateToProps, dispatchToProps)(ProductOptions);
