@@ -125,6 +125,7 @@ module.exports = {
           loader: 'eslint-loader',
         }],
         include: paths.appSrc,
+        exclude: /node_modules/,
       },
 
       // ** ADDING/UPDATING LOADERS **
@@ -153,6 +154,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           // This is a feature of `babel-loader` for webpack (not Babel itself).

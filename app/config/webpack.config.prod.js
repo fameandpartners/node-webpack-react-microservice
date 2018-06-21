@@ -102,6 +102,7 @@ module.exports = {
           loader: 'eslint-loader',
         }],
         include: paths.appSrc,
+        exclude: /node_modules/,
       },
       // ** ADDING/UPDATING LOADERS **
       // The "url" loader handles all assets unless explicitly excluded.
@@ -131,6 +132,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel-loader',
+        exclude: /node_modules/,
       },
 
       // The notation here is somewhat confusing.
