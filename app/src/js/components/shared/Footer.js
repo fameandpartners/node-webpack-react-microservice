@@ -40,7 +40,9 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a className="link--static" href="/faqs#collapse-what-is-our-returns-policy">Returns Policy</a>
+                <a className="link--static" href="/faqs#collapse-what-is-our-returns-policy">
+                  Returns Policy
+                </a>
               </p>
             </li>
             <li>
@@ -60,7 +62,9 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a className="link--static" href="/faqs#collapse-how-can-i-track-my-order">Track My Order</a>
+                <a className="link--static" href="/faqs#collapse-how-can-i-track-my-order">
+                  Track My Order
+                </a>
               </p>
             </li>
             <li>
