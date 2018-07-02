@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactHoverObserver from 'react-hover-observer';
 
-// Utilities
-import win from '../../../polyfills/windowPolyfill';
-
 // Decorators
 import Resize from '../../../decorators/Resize';
 import PDPBreakpoints from '../../../libs/PDPBreakpoints';
@@ -73,12 +70,6 @@ class HeaderWrapper extends Component {
     this.props.activateModal({ modalId: ModalConstants.SIGN_UP_MODAL });
   }
 
-  componentDidMount() {
-    if (win.ApplicationStateData.UserData) {
-      this.props.setAppUser({ user: win.ApplicationStateData.UserData.user });
-    }
-  }
-
   render() {
     const {
       breakpoint,
@@ -115,7 +106,6 @@ HeaderWrapper.propTypes = {
   // Redux Actions
   activateCartDrawer: PropTypes.func.isRequired,
   activateSideMenu: PropTypes.func.isRequired,
-  setAppUser: PropTypes.func.isRequired,
 
   // Decorator Props
   breakpoint: PropTypes.string.isRequired,

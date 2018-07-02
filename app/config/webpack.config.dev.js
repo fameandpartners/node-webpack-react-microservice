@@ -59,6 +59,10 @@ module.exports = {
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: {
+    isomorphic: [
+      ...standardEntries,
+      paths.isomorphicIndexJs,
+    ],
     pdp: [
       ...standardEntries,
       paths.appIndexJs,
