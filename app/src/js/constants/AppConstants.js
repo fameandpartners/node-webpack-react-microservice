@@ -176,10 +176,6 @@ const navigationLinks = {
         url: '/fame-society-application',
       },
       {
-        text: 'Meet the CEO',
-        url: '/from-our-ceo',
-      },
-      {
         text: 'Get $25 Off',
         url: '/invite?traffic_source=nav',
       },
