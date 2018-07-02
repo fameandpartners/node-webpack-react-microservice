@@ -92,11 +92,6 @@ class Footer extends PureComponent {
             </li>
             <li>
               <p>
-                <a className="link--static" href="/from-our-ceo">From Our CEO</a>
-              </p>
-            </li>
-            <li>
-              <p>
                 <a className="link--static" href="/wholesale">Wholesale Inquiries</a>
               </p>
             </li>
