@@ -7,6 +7,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const path = require('path');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -28,6 +29,10 @@ const extractSass = new ExtractTextPlugin({
   filename: 'webpack/static/[name].[contenthash].css',
   disable: process.env.NODE_ENV === 'development',
 });
+
+function webclientSrcPath(subdir) {
+  return path.join(__dirname, "../node_modules/webclient/src", subdir);
+}
 
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
@@ -71,11 +76,22 @@ module.exports = {
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
     // https://github.com/facebookincubator/create-react-app/issues/290
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.js', '.json', '.jsx', '.ts', '.tsx'],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
+      '@containers': webclientSrcPath('common/containers'),
+      '@common': webclientSrcPath('common'),
+      '@components': webclientSrcPath('common/components'),
+      '@constants': webclientSrcPath('common/constants'),
+      '@services': webclientSrcPath('common/services'),
+      '@svg': webclientSrcPath('common/assets/svg'),
+      '@scss': webclientSrcPath('common/assets/scss'),
+      '@transforms': webclientSrcPath('common/transforms'),
+      '@translations': webclientSrcPath('common/translations'),
+      '@typings': webclientSrcPath('typings'),
+      '@utils': webclientSrcPath('utils')
     },
   },
   module: {
@@ -91,6 +107,20 @@ module.exports = {
         }],
         include: paths.appSrc,
       },
+
+      // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+      { test: /\.(ts|tsx)$/,
+        
+        use: [ 
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: "ts-loader", options: {transpileOnly: true}
+          }
+        ],
+      },
+
       // ** ADDING/UPDATING LOADERS **
       // The "url" loader handles all assets unless explicitly excluded.
       // The `exclude` list *must* be updated with every change to loader extensions.
@@ -103,6 +133,7 @@ module.exports = {
         exclude: [
           /\.html$/,
           /\.(js|jsx)$/,
+          /\.(ts|tsx)$/,
           /\.scss$/,
           /\.json$/,
           /\.svg$/,
@@ -135,7 +166,45 @@ module.exports = {
       // use the "style" loader inside the async code so CSS from them won't be
       // in the main CSS file.
       {
-        test: /\.scss$/,
+        test: /\.relaunch\.scss$/,
+        use: extractSass.extract({
+          use: [
+            { loader: 'css-loader' },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                plugins() {
+                  return [
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                    }),
+                  ];
+                },
+              },
+            },
+            {
+              loader: 'css-wrap-loader?selector=.__react_root_relaunch__',
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                data: '@import "variables";',
+                includePaths: [paths.cssSrc],
+              },
+            },
+          ],
+                // use style-loader in development
+          fallback: 'style-loader',
+        }),
+      },
+      {
+        test: /^(?!.*relaunch).*\.scss$/,
         use: extractSass.extract({
           use: [
             { loader: 'css-loader' },
@@ -180,6 +249,12 @@ module.exports = {
           {
             loader: 'babel-loader',
           },
+          {
+            loader: 'svg-sprite-loader',
+            options: { 
+                runtimeGenerator: require.resolve('./svg-to-icon-component-runtime-generator')
+            }
+          }
         ],
       },
       // ** STOP ** Are you adding a new loader?

@@ -1,95 +1,15 @@
+/* eslint-disable import/no-unresolved, import/no-extraneous-dependencies */
+
 import Immutable from 'immutable';
+import cartResponseToCart from '@common/transforms/cartResponseToCart.ts';
 import CartConstants from '../constants/CartConstants';
 
-// Utilities
-import { formatSizePresentationUS } from '../utilities/helpers';
 
 export const $$initialState = Immutable.fromJS({
   cartDrawerOpen: false,
-  // ArrayOf({
-  //   productCentsBasePrice: Number,
-  //   productImage: String,
-  //   productTitle: String,
-  //   productVariantId: Number,
-  //   color: ObjectOf({
-  //     id: String,
-  //     centsTotal: Number,
-  //     name: String,
-  //     presentation: String,
-  //     hexValue: String,
-  //     patternUrl: String,
-  //   }),
-  //   addons: ObjectOf({
-  //     id: String,
-  //     description: String,
-  //     centsTotal: Number,
-  //   },
-  // })
-  lineItems: [],
+  items: [],
 });
 
-// hack to allow fabric swatch images
-function pluckCorrectImage(lineItem) {
-  if (lineItem.name.includes('Fabric Swatch')) {
-    return lineItem.color.image_file_name;
-  }
-  return lineItem.image.original;
-}
-
-function createColor(color, fabric) {
-  if (fabric) {
-    return {
-      id: fabric.id,
-      centsTotal: fabric.amount || 0,
-      name: fabric.name,
-      presentation: fabric.name,
-      hexValue: color.value,
-      patternUrl: '',
-    };
-  }
-
-  if (color) {
-    return {
-      id: color.id,
-      centsTotal: color.custom_color ? 1600 : 0,
-      name: color.name,
-      presentation: color.presentation,
-      hexValue: color.value,
-      patternUrl: color.image,
-    };
-  }
-
-  return {};
-}
-
-function transformCartDataLineItems(lineItems) {
-  return lineItems
-    .filter(li => li.name !== 'RETURN_INSURANCE')
-    .map(li => ({
-      id: li.line_item_id,
-      isFlashSaleItem: !!li.old_price,
-      productCentsBasePrice: parseInt(li.price.money.money.fractional, 10),
-      productImage: pluckCorrectImage(li),
-      productTitle: li.name,
-      productVariantId: li.variant_id,
-      heightUnit: li.height_unit,
-      heightValue: li.height_value,
-      height: li.height ? li.height : null,
-      sizePresentationAU: li.size ? li.size.presentation_au : null,
-      sizePresentationUS: li.size ? formatSizePresentationUS(li.size.presentation_us) : null,
-      sizeNumber: li.size ? li.size.sort_key : null,
-      color: createColor(li.color, li.fabric),
-      addons: li.customizations,
-    }));
-}
-
-function transformCartData(cart) {
-  return {
-    displayTotal: cart.display_total,
-    itemCount: cart.item_count,
-    lineItems: transformCartDataLineItems(cart.products),
-  };
-}
 
 export default function CartReducer($$state = $$initialState, action = null) {
   switch (action.type) {
@@ -100,18 +20,12 @@ export default function CartReducer($$state = $$initialState, action = null) {
     }
     // TODO: REMOVE
     case CartConstants.ADD_ITEM_TO_CART: {
-      const cart = transformCartData(action.cart);
-      return $$state.merge({
-        displayTotal: cart.displayTotal,
-        lineItems: cart.lineItems,
-      });
+      const cart = cartResponseToCart(action.cart);
+      return $$state.merge(cart);
     }
     case CartConstants.SET_CART_CONTENTS: {
-      const cart = transformCartData(action.cart);
-      return $$state.merge({
-        displayTotal: cart.displayTotal,
-        lineItems: cart.lineItems,
-      });
+      const cart = cartResponseToCart(action.cart);
+      return $$state.merge(cart);
     }
     default: {
       return $$state;
