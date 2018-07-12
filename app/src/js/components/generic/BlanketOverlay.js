@@ -76,7 +76,7 @@ class BlanketOverlay extends PureComponent {
       <Motion
         style={{
           opacity: spring(
-              sideMenuOpen || cartDrawerOpen ? 25 : 0, AppConstants.ANIMATION_CONFIGURATION,
+              sideMenuOpen || cartDrawerOpen ? 50 : 0, AppConstants.ANIMATION_CONFIGURATION,
           ),
         }}
       >

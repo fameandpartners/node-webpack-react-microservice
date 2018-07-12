@@ -604,7 +604,7 @@ export function transformProductJSON(productJSON) {
   console.log('SUCCESSFULLY transformed data and is now hydrating app');
   return {
     $$appState: {
-      siteVersion: productJSON.siteVersion,
+      siteVersion: win.ApplicationStateData.currentSiteVersion,
     },
     $$productState: productState,
     $$customizationState: customizationState,
