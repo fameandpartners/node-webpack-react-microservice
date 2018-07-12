@@ -1,10 +1,17 @@
 FROM node:8.11 as build-env
+ARG GITHUB_AT
 WORKDIR /app
 COPY package.json package-lock.json ./
+RUN mkdir /root/.ssh/
+RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+RUN sed -i "s/git+ssh:\\/\\/git/git+https:\\/\\/$GITHUB_AT:/g" package.json
+RUN sed -i "s/git+ssh:\\/\\/git/git+https:\\/\\/$GITHUB_AT:/g" package-lock.json
 RUN npm install
 
 COPY . .
 RUN npm run build
+RUN sed -i "s/git+ssh:\\/\\/git/git+https:\\/\\/$GITHUB_AT:/g" package.json
+RUN sed -i "s/git+ssh:\\/\\/git/git+https:\\/\\/$GITHUB_AT:/g" package-lock.json
 RUN npm install --production
 
 
