@@ -7,7 +7,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom --notify",
     "test:once": "CI=true node test -- --coverage",
-    "server_test": "NODE_ENV='production' mocha --compilers js:babel-register --require ./src/lib/testNullCompiler.js && jest --coverage",
+    "server_test": "NODE_ENV='production' mocha --require ./src/lib/testNullCompiler.js && jest --coverage",
     "production": "node server.js",
     "local_production": "node scripts/build.js && nodemon server.js"
   },
@@ -63,7 +63,6 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-app": "^2.2.0",
     "babel-preset-stage-0": "^6.22.0",
-    "babel-register": "^6.24.1",
     "babel-runtime": "^6.20.0",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
@@ -76,7 +75,6 @@
     "express": "^4.15.2",
     "firebase": "^4.5.2",
     "glamor": "^2.20.40",
-    "helmet": "^3.6.1",
     "ignore-styles": "^5.0.1",
     "immutable": "^3.8.1",
     "lodash": "^4.17.4",
@@ -156,6 +154,7 @@
     "whatwg-fetch": "2.0.2"
   },
   "engines": {
-    "node": ">=7.6.0"
+    "node": ">=7.6.0",
+    "yarn": "use npm instead of yarn"
   }
 }
