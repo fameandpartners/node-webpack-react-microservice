@@ -129,21 +129,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    // IF SHOPPING SPREE IS AVAILBLE, BUILD IT
-    if (win.ShoppingSpreeData) {
-      render(
-        <ShoppingSpree
-          firebaseAPI={win.ShoppingSpreeData.firebaseAPI}
-          firebaseDatabase={win.ShoppingSpreeData.firebaseDatabase}
-          isPDP
-        />,
-
-          win.document.getElementById('shopping-spree'),
-      );
-    }
-  }
-
   render() {
     const { lockBody } = this.props;
     return (

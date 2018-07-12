@@ -31,17 +31,12 @@ import ProductOptionsRow from './ProductOptionsRow';
 import ProductSecondaryActions from './ProductSecondaryActions';
 import ExpressMaking from './ExpressMaking';
 
-// REMOVE Component
-import CliqueCallout from './CliqueCallout';
-
 // Actions
 import * as CustomizationActions from '../../actions/CustomizationActions';
 import ModalActions from '../../actions/ModalActions';
 
 // CSS
 import '../../../css/components/ProductOptions.scss';
-// CSS REMOVE
-import '../../../css/components/ShoppingSpree.scss';
 
 // Assets
 import afterpayImage from '../../../img/test/afterpay.png';
@@ -333,8 +328,6 @@ class ProductOptions extends Component {
 
             {isActive ?
               <div className="ProductOptions__additional-info u-mt-small u-mb--normal">
-
-                <CliqueCallout />
 
                 { auSite ?
                   (
