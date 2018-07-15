@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { render } from 'react-dom';
 
 // Sentry Error Tracking
 import Raven from 'raven-js';
@@ -20,7 +19,6 @@ import ImageLightboxModal from './components/pdp/ImageLightboxModal';
 import StyleSelectionModal from './components/pdp/StyleSelectionModal';
 import SizeModals from './components/pdp/SizeModals';
 import AfterpayModal from './components/pdp/AfterpayModal';
-import ShoppingSpree from '../shopping-spree/js/ShoppingSpree';
 
 // Utilities
 import { extractAndWhitelistQueryStringCustomizations } from './utilities/BOM';
@@ -128,21 +126,6 @@ class App extends Component {
   componentDidUpdate() {
     if (win && win.fixBody) {
       win.fixBody(this.props.lockBody);
-    }
-  }
-
-  componentDidMount() {
-    // IF SHOPPING SPREE IS AVAILBLE, BUILD IT
-    if (win.ShoppingSpreeData) {
-      render(
-        <ShoppingSpree
-          firebaseAPI={win.ShoppingSpreeData.firebaseAPI}
-          firebaseDatabase={win.ShoppingSpreeData.firebaseDatabase}
-          isPDP
-        />,
-
-          win.document.getElementById('shopping-spree'),
-      );
     }
   }
 
