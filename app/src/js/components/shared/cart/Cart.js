@@ -101,14 +101,6 @@ class Cart extends Component {
     });
   }
 
-  addonNamePresenter(nameStr) {
-    const strParts = nameStr.split('-');
-    if (strParts.length > 1) {
-      return strParts.map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(' ');
-    }
-    return nameStr;
-  }
-
   generateTitle(lineItem, productTitle) {
     let ret = productTitle;
     if (lineItem.isFlashSaleItem) {
@@ -131,7 +123,7 @@ class Cart extends Component {
     return (
       <ul>
         { addons.map(a => (
-          <li key={a.name}>{this.addonNamePresenter(a.name)}</li>
+          <li key={a.name}>{a.presentation}</li>
         ))}
       </ul>
     );

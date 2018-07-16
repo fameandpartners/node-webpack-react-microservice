@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
 import ReactHoverObserver from 'react-hover-observer';
-import Cookies from 'universal-cookie';
 
 import win from '../../../polyfills/windowPolyfill';
 
@@ -44,7 +43,6 @@ class Header extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
-    this.cookies = new Cookies();
 
     this.state = {
       revealProfileActions: false,
@@ -59,15 +57,7 @@ class Header extends Component {
       cartDrawerOpen,
     } = this.props;
 
-    const inShoppingSpree = this.cookies.get('shopping_spree_id') != null;
-
-    if (inShoppingSpree) {
-      // eslint-disable-next-line
-      console.warn('OPENING SHOPPING SPREE CART...');
-      win.openShoppingSpreeCart();
-    } else {
-      activateCartDrawer({ cartDrawerOpen: !cartDrawerOpen });
-    }
+    activateCartDrawer({ cartDrawerOpen: !cartDrawerOpen });
   }
 
   handleSearchBarClose() {
