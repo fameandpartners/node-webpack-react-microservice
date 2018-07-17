@@ -120,7 +120,7 @@ class ProductDescription extends Component {
           : null
         }
         <p className="ProductDescription__copy">
-          $5 of each sale is donated to UN Women and Plan International&nbsp;
+          $1 of each sale is donated to UN Women and Plan International&nbsp;
           <a
             className="link link--static"
             href="/iequalchange"
