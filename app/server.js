@@ -1,5 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
+const expressStaticGzip = require('express-static-gzip');
+
 
 // Set up Express + Redis
 // *****************************************************************************
@@ -17,6 +19,15 @@ const app = express();
 
 // Middleware
 // *****************************************************************************
+app.use(
+  '/webpack/static',
+  expressStaticGzip('./build/webpack/static', {
+    enableBrotli: false,
+    fallthrough: true,
+    maxAge: '1y',
+    immutable: true,
+  }),
+);
 app.use(express.static('./build'));
 app.use(logger('dev'));
 
