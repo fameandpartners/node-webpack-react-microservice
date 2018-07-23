@@ -7,6 +7,8 @@ function clearRailsCache() {
   var server_urls = process.env.RAIL_SERVERS.split(',');
   var https = require('https');
 
+  console.log('Clearing cache');
+
   server_urls.forEach(function(url) {
     var options = {
       host: url,

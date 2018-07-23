@@ -1,0 +1,50 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11
+
+    working_directory: ~/repo/app
+
+    steps:
+      - checkout:
+          path: ~/repo
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+        
+      - run: npm test
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 17.09.0-ce
+
+      - run: |
+          VERSION=${CIRCLE_BRANCH/\//-}.$CIRCLE_BUILD_NUM
+
+          sudo apt-get update -qq
+          sudo apt-get install -qq python python-pip libpython-dev
+          sudo pip install awscli
+          
+          ../.circleci/build-docker.sh $VERSION
+          
+          if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Nodey-QA1" --version-label $VERSION
+          elif [[ $CIRCLE_BRANCH =~ ^release2 ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Nodey-QA2" --version-label $VERSION
+          elif [[ $CIRCLE_BRANCH =~ ^release3 ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Nodey-QA3" --version-label $VERSION
+          elif [[ $CIRCLE_BRANCH =~ ^develop$ ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Nodey-QA4" --version-label $VERSION
+          elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Nodey-Prod" --version-label $VERSION
+          fi
