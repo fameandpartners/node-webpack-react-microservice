@@ -68,6 +68,7 @@
     "classnames": "^2.2.5",
     "clipboard": "^1.7.1",
     "compression-webpack-plugin": "^1.1.11",
+    "concurrently": "^3.6.1",
     "css-wrap-loader": "^1.0.0",
     "custom-event": "^1.0.1",
     "express": "^4.15.2",
@@ -141,10 +142,10 @@
     "svg-sprite-loader": "^3.0.5",
     "url-loader": "0.5.7",
     "webpack": "^3.6.0",
+    "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-manifest-plugin": "1.1.0",
-    "whatwg-fetch": "2.0.2",
-    "webpack-dev-middleware": "^1.12.0"
+    "whatwg-fetch": "2.0.2"
   },
   "engines": {
     "node": ">=7.6.0",
