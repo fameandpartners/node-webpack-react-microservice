@@ -6,6 +6,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const paths = require('./paths');
+const CompressionPlugin = require('compression-webpack-plugin');
 const getClientEnvironment = require('./env');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -240,6 +241,14 @@ module.exports = {
     // having to parse `index.html`.
     new ManifestPlugin({
       fileName: 'webpack/asset-manifest.json',
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html|\.svg|\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+      threshold: 10240,
+      minRatio: 0.8,
+      quality: 9
     }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
