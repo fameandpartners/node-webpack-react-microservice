@@ -172,8 +172,8 @@ const navigationLinks = {
         url: '/fame-society-application',
       },
       {
-        text: 'Get $25 Off',
-        url: '/invite?traffic_source=nav',
+        text: 'Shop Instagram',
+        url: '/shop-social?traffic_source=nav',
       },
       // {
       //   text: 'Shop With Friends',
