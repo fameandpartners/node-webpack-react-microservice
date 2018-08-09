@@ -164,7 +164,7 @@ const navigationLinks = {
     ],
     COMMUNITY: [
       {
-        text: 'Read the Fame Files',
+        text: 'Read the Files',
         url: 'http://blog.fameandpartners.com/',
       },
       {
