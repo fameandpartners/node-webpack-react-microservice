@@ -91,6 +91,7 @@
     "classnames": "^2.2.5",
     "clipboard": "^1.7.1",
     "compression-webpack-plugin": "^1.1.11",
+    "concurrently": "^3.6.1",
     "css-wrap-loader": "^1.0.0",
     "custom-event": "^1.0.1",
     "express": "^4.15.2",
