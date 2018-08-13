@@ -32,10 +32,10 @@ class CartContainer extends React.Component {
     // Analytics Tracking
     if (item) {
       analytics.removeFromCart({
-        id: item.cartLineId,
-        productCentsBasePrice: item.productCentsBasePrice,
+        id: item.product.id,
+        productCentsBasePrice: item.price / 100.0,
         productTitle: item.product.title,
-        productVariantId: item.product.id,
+        productVariantId: '',
       });
     }
   }

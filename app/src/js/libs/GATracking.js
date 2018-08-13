@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import { assign } from 'lodash';
 import win from '../polyfills/windowPolyfill';
 
@@ -24,12 +26,9 @@ export function trackEvent(eventData, dynamicData) {
   // attachGAForTesting();
   if (isGAAvailable()) {
     const event = assign({}, defaultData, eventData, dynamicData);
-    win.ga('send', 'event', {
-      eventCategory: event.category,
-      eventAction: event.action,
-      eventLabel: event.label,
-      eventValue: event.value,
-      nonInteraction: event.nonInteraction,
+    window.dataLayer.push({
+      event: event.action,
+      eventDetail: { category: event.category, label: event.label },
     });
   }
 }
