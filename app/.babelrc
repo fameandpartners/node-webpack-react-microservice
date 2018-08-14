@@ -6,7 +6,6 @@
     "env"
   ],
   "plugins": [
-    "inline-react-svg",
     "add-module-exports"
   ]
 }

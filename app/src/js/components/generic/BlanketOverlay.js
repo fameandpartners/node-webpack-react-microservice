@@ -21,7 +21,6 @@ import '../../../css/components/BlanketOverlay.scss';
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   return {
-    cartDrawerOpen: state.$$cartState.get('cartDrawerOpen'),
     sideMenuOpen: state.$$appState.get('sideMenuOpen'),
   };
 }
@@ -47,28 +46,24 @@ class BlanketOverlay extends PureComponent {
     const {
       activateCartDrawer,
       activateSideMenu,
-      cartDrawerOpen,
       sideMenuOpen,
     } = this.props;
 
     activateCartDrawer({ sideMenuOpen: false });
     if (sideMenuOpen) activateSideMenu({ sideMenuOpen: false });
-    else if (cartDrawerOpen) activateCartDrawer({ sideMenuOpen: false });
   }
 
   componentDidUpdate() {
     const {
-      cartDrawerOpen,
       sideMenuOpen,
     } = this.props;
     if (win.fixBody) {
-      win.fixBody(sideMenuOpen || cartDrawerOpen);
+      win.fixBody(sideMenuOpen);
     }
   }
 
   render() {
     const {
-      cartDrawerOpen,
       sideMenuOpen,
     } = this.props;
 
@@ -76,7 +71,7 @@ class BlanketOverlay extends PureComponent {
       <Motion
         style={{
           opacity: spring(
-              sideMenuOpen || cartDrawerOpen ? 25 : 0, AppConstants.ANIMATION_CONFIGURATION,
+              sideMenuOpen ? 50 : 0, AppConstants.ANIMATION_CONFIGURATION,
           ),
         }}
       >
@@ -98,12 +93,10 @@ class BlanketOverlay extends PureComponent {
 BlanketOverlay.propTypes = {
   activateCartDrawer: PropTypes.func.isRequired,
   activateSideMenu: PropTypes.func.isRequired,
-  cartDrawerOpen: PropTypes.bool,
   sideMenuOpen: PropTypes.bool,
 };
 
 BlanketOverlay.defaultProps = {
-  cartDrawerOpen: false,
   sideMenuOpen: false,
 };
 
