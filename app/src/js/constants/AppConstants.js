@@ -147,10 +147,6 @@ const navigationLinks = {
         text: 'Weddings & Parties',
         url: '/weddings-parties-say-lou-lou',
       },
-      {
-        text: 'Evening \'18',
-        url: '/evening-collection-campaign',
-      },
     ],
     ABOUT: [
       {
@@ -168,7 +164,7 @@ const navigationLinks = {
     ],
     COMMUNITY: [
       {
-        text: 'Read the Fame Files',
+        text: 'Read the Files',
         url: 'http://blog.fameandpartners.com/',
       },
       {
@@ -176,8 +172,8 @@ const navigationLinks = {
         url: '/fame-society-application',
       },
       {
-        text: 'Get $25 Off',
-        url: '/invite?traffic_source=nav',
+        text: 'Shop Instagram',
+        url: '/shop-social?traffic_source=nav',
       },
       // {
       //   text: 'Shop With Friends',

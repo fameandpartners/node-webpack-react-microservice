@@ -38,12 +38,6 @@ app.get('/webpack/asset-manifest', (req, res) => {
     cssBundle: clientAssets['pdp.css'],
     flashJsBundle: clientAssets['flash.js'],
     flashCssBundle: clientAssets['flash.css'],
-    superCollectionJsBundle: clientAssets['superCollection.js'],
-    superCollectionCssBundle: clientAssets['superCollection.css'],
-    bridesmaidJSBundle: clientAssets['bridesmaid.js'],
-    bridesmaidCssBundle: clientAssets['bridesmaid.css'],
-    bridesmaidsFilterJsBundle: clientAssets['bridesmaidsFilter.js'],
-    bridesmaidsFilterCssBundle: clientAssets['bridesmaidsFilter.css'],
     swatchJsBundle: clientAssets['swatch.js'],
     swatchCssBundle: clientAssets['swatch.css'],
   };
