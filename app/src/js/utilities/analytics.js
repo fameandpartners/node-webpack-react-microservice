@@ -5,7 +5,7 @@ function addToCart({ id, productCentsBasePrice, productTitle, productVariantId }
 
   return win.dataLayer.push({
     event: 'Cart - Product Added',
-    eventDetails: {
+    eventDetail: {
       product: {
         id,
         sku: productVariantId,
@@ -23,7 +23,7 @@ function removeFromCart({ id, productCentsBasePrice, productTitle, productVarian
 
   return win.dataLayer.push({
     event: 'Cart - Product Removed',
-    eventDetails: {
+    eventDetail: {
       product: {
         id,
         sku: productVariantId,
