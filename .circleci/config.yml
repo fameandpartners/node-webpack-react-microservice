@@ -47,6 +47,6 @@ jobs:
             aws elasticbeanstalk update-environment --environment-name "Nodey-QA4" --version-label $VERSION
           elif [[ $CIRCLE_BRANCH =~ ^staging$ ]]; then
             aws elasticbeanstalk update-environment --environment-name "Nodey-Staging" --version-label $VERSION
-          fielif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
+          elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
             aws elasticbeanstalk update-environment --environment-name "Nodey-Prod" --version-label $VERSION
           fi
