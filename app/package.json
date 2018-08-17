@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"webpack --config config/webpack.config.dev.js -w\" \"node server.js\"",
+    "dev": "NODE_ENV=development concurrently \"webpack --config config/webpack.config.dev.js -w\" \"node server.js\"",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom --notify",
     "test:once": "CI=true node test -- --coverage",
