@@ -117,7 +117,7 @@ class ProductCustomizationStyle extends PureComponent {
     const { heightError, updateHeightSelection } = this.props;
     const numVal = parseInt(value, 10);
 
-    if (typeof numVal === 'number' && !Number.isNaN(numVal)) {
+    if (typeof numVal === 'number' && !isNaN(numVal)) {
       if (heightError) { // Only validate if there is an error
         this.validateSizeSelection({
           temporaryHeightValue: numVal,
