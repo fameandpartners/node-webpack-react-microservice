@@ -1,9 +1,12 @@
+/* eslint-disable import/no-unresolved, import/extensions, import/no-extraneous-dependencies, max-len */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+// import { formatCustomizationIds } from '@common/utils/render-url-helper';
 
 // Utilities
 import { accumulateCustomizationSelections, calculateSubTotal } from '../../utilities/pdp';
@@ -165,11 +168,24 @@ class AddToCartButton extends Component {
       setAppLoadingState({ loadingId: LOADING_IDS.ADD_TO_CART_LOADING });
       this.handleAddToBagCallback(addToCart(lineItem, auSite));
       // GA Tracking
+
+      const productId = $$productState.get('sku').toLowerCase();
+      const colorOrFabric = $$customizationState.get('selectedColor').get('name');
+
+      // const customizations = $$customizationState.get('addons').get('addonOptions').toJS();
+      // const selectedCustomizationsIds = $$customizationState.get('selectedStyleCustomizations').toArray();
+      // const selectedCustomizations = customizations.filter(c => selectedCustomizationsIds.indexOf(c.id) > -1);
+      // spree doesn't return the name
+      // const customizationNames = selectedCustomizations.map(c => c.name);
+
+      // const pidPart = formatCustomizationIds([...customizationNames, colorOrFabric]);
+
+
       Analytics.addToCart({
-        id: $$productState.get('sku'),
+        id: productId,
         productCentsBasePrice: lineItem.productCentsBasePrice / 100,
         productTitle: lineItem.productTitle,
-        productVariantId: '',
+        productVariantId: `${productId}~${colorOrFabric}`,
       });
     }
   }

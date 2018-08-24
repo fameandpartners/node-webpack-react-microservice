@@ -5,6 +5,7 @@ import React from 'react';
 import Cart from '@components/layout/Cart/Cart';
 import Curtain from '@components/base/Curtain';
 import SlideInOutTransition from '@components/animation/SlideInOutTransition';
+import { formatProductId } from '@common/utils/render-url-helper';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -35,7 +36,7 @@ class CartContainer extends React.Component {
         id: item.product.id,
         productCentsBasePrice: item.price / 100.0,
         productTitle: item.product.title,
-        productVariantId: '',
+        productVariantId: formatProductId(item),
       });
     }
   }
