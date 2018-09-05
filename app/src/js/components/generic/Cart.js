@@ -34,7 +34,7 @@ class CartContainer extends React.Component {
     if (item) {
       analytics.removeFromCart({
         id: item.product.id,
-        productCentsBasePrice: item.price / 100.0,
+        productCentsBasePrice: item.price,
         productTitle: item.product.title,
         productVariantId: formatProductId(item),
       });

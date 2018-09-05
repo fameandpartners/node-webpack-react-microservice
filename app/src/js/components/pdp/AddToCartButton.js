@@ -183,7 +183,7 @@ class AddToCartButton extends Component {
 
       Analytics.addToCart({
         id: productId,
-        productCentsBasePrice: lineItem.productCentsBasePrice / 100,
+        productCentsBasePrice: lineItem.productCentsBasePrice,
         productTitle: lineItem.productTitle,
         productVariantId: `${productId}~${colorOrFabric}`,
       });
